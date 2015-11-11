@@ -8,10 +8,24 @@
 
 import Foundation
 
-//disable NSLog all over the codes
+//disable NSLog all over the codes in release builds
 #if !DEBUG
     func NSLog(format: String, _ args: CVarArgType...) {}
 #endif
 
-//Globle Const Variables
-let LYRICS_ATTRIBUTES_CHANGED:String="LYRICS_ATTRIBUTES_CHANGED"
+//Notifications
+let LyricsAttributesChangedNotification:String="LyricsAttributesChanged"
+
+//User Defaults
+let LyricsQuitWithITunes:String="LyricsQuitWithITunes"
+let LyricsDisabledWhenPaused:String="LyricsDisabledWhenPaused"
+let LyricsDisabledWhenSreenShot:String="LyricsDisabledWhenSreenShot"
+let LyricsTextColor:String="LyricsTextColor"
+let LyricsBackgroundColor:String="LyricsBackgroundColor"
+let LyricsShadowColor:String="LyricsShadowColor"
+let LyricsShadowRadius:String="LyricsShadowRadius"
+let LyricsShadowModeEnable:String="LyricsShadowModeEnable"
+let LyricsTwoLineMode:String="LyricsTwoLineMode"
+let LyricsDisplayInAllSpaces:String="LyricsDisplayInAllSpaces"
+let LyricsAutoAdjustWithDock:String="LyricsAutoAdjustWithDock"
+let LyricsHeightFromDockToLyrics:String="LyricsHeightFromDockToLyrics"
