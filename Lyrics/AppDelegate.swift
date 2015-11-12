@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import ScriptingBridge
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
