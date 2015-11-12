@@ -12,7 +12,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Lyrics" customModuleProvider="target">
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LyricsX" customModuleProvider="target">
             <connections>
                 <outlet property="lyricsDelayView" destination="BJg-OA-9xg" id="N07-Wy-FeC"/>
                 <outlet property="statusBarMenu" destination="Gac-5o-ivf" id="Oe7-xC-MVm"/>

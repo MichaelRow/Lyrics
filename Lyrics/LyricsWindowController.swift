@@ -60,7 +60,7 @@ class LyricsWindowController: NSWindowController {
         setAttributes()
         setScreenResolution()
         
-        displayLyrics("Lyrics", secondLyrics: nil)
+        displayLyrics("LyricsX", secondLyrics: nil)
         
         let nc:NSNotificationCenter=NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: Selector("setAttributes"), name: LyricsAttributesChangedNotification, object: nil)

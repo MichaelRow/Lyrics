@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "General－2（被拖移）.png",
+      "filename" : "Font_icon@x2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "General.png",
       "scale" : "2x"
     },
     {
