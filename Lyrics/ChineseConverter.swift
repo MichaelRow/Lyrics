@@ -28,7 +28,7 @@ func convertToTC_HK(input:NSString) ->NSString {
     return convertToChineseUsingProfile(profilePath,inputStr: input)
 }
 
-func convertToChineseUsingProfile(profile:NSString, inputStr:NSString) ->NSString {
+private func convertToChineseUsingProfile(profile:NSString, inputStr:NSString) ->NSString {
     let cc:opencc_t=opencc_open(profile.UTF8String)
     let cInput:UnsafePointer<Int8>=inputStr.UTF8String
     let cOutputStr:UnsafeMutablePointer<Int8>=opencc_convert_utf8(cc, cInput, Int(strlen(cInput)))
