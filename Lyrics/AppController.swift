@@ -18,11 +18,12 @@ class AppController: NSObject {
     var isTrackingRunning:Bool = false
     var lyricsWindow:LyricsWindowController!
     var statusBarItem:NSStatusItem!
-    var lyrics:NSMutableArray!
+    var lyrics:[LyricsLineModel]!
     var operationQueue:NSOperationQueue!
     var iTunesSBA:SBApplication!
     var iTunes:iTunesApplication!
     var iTunesCurrentTrack:NSString!
+    var timeDly:Float!
     
     override init() {
         
@@ -30,7 +31,7 @@ class AppController: NSObject {
         
         iTunesSBA = SBApplication(bundleIdentifier: "com.apple.iTunes")
         iTunes = iTunesSBA as iTunesApplication
-        lyrics = NSMutableArray()
+        lyrics = Array()
         
         NSBundle(forClass: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
         setupStatusItem()
@@ -144,8 +145,80 @@ class AppController: NSObject {
 
 // MARK: - Lrc Methods
     
-    func parsingLrc() {
+    func parsingLrc(songTitle: NSString, artist: NSString) {
+        lyrics.removeAll()
+        let defaultPath: NSString = "/volumes/ramsik"
+        let lrcFilePath: String = defaultPath.stringByAppendingPathComponent("\(songTitle)-\(artist)")
+        let lrcExists: Bool = NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath)
+        if !lrcExists {
+            return
+        }
+        let lrcFileContents: NSString
+        do {
+            lrcFileContents = try NSString(contentsOfFile: lrcFilePath, encoding: NSUTF8StringEncoding)
+        } catch let theError as NSError {
+            NSLog("%@", theError.localizedDescription)
+            return
+        }
         
+        let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
+        let lrcParagraphs: NSArray = lrcFileContents.componentsSeparatedByCharactersInSet(newLineCharSet)
+        
+        let regexForTimeTag: NSRegularExpression
+        let regexForIDTag: NSRegularExpression
+        do {
+            regexForTimeTag = try NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+.[0-9]+\\]|\\[[0-9]+:[0-9]+\\]", options: [.CaseInsensitive])
+        } catch let theError as NSError {
+            NSLog("%@", theError.localizedDescription)
+            return
+        }
+        
+        do {
+            regexForIDTag = try NSRegularExpression(pattern: "\\[.*:.*\\]", options: [.CaseInsensitive])
+        } catch let theError as NSError {
+            NSLog("%@", theError.localizedDescription)
+            return
+        }
+        
+        for str in lrcParagraphs {
+            let timeTagsMatched: NSArray = regexForTimeTag.matchesInString(str as! String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
+            
+            if timeTagsMatched.count > 0 {
+                let index: Int = (timeTagsMatched.lastObject?.range.location)! + (timeTagsMatched.lastObject?.range.length)!
+                let lyricsSentenceRange: NSRange = NSMakeRange(index, str.length-index)
+                let lyricsSentence: NSString = str.substringWithRange(lyricsSentenceRange)
+                for result in timeTagsMatched {
+                    let matched:NSRange = result.range
+                    let lrcLine: LyricsLineModel = LyricsLineModel()
+                    lrcLine.lyricsSentence = lyricsSentence
+                    lrcLine.timeTag = str.substringWithRange(matched)
+                    var currentCount: Int = lyrics.count
+                    var j: Int = 0
+                    for j; j<currentCount; ++j {
+                        if lrcLine.msecPosition < lyrics[j].msecPosition {
+                            lyrics.insert(lrcLine, atIndex: j)
+                            break
+                        }
+                    }
+                    if j == currentCount {
+                        lyrics.append(lrcLine)
+                    }
+                }
+            }
+            else {
+                let theMatchedRange: NSRange = regexForIDTag.rangeOfFirstMatchInString(str as! String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
+                let theIDTag: NSString = str.substringWithRange(theMatchedRange)
+                let colonRange: NSRange = theIDTag.rangeOfString(":")
+                let idStr: NSString = theIDTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
+                if idStr != "offset" {
+                    continue
+                }
+                else {
+                    let delayStr: NSString=theIDTag.substringWithRange(NSMakeRange(colonRange.location+1, theIDTag.length-colonRange.length-colonRange.location-1))
+                    timeDly = delayStr.floatValue
+                }
+            }
+        }
     }
     
     func getLrc() {
