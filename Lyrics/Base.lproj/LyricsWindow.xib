@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="LyricsWindowController" customModule="Lyrics" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="LyricsWindowController" customModule="LyricsX" customModuleProvider="target">
             <connections>
                 <outlet property="window" destination="EGY-bP-YfS" id="rKq-DQ-PpB"/>
             </connections>

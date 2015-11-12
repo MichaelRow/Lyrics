@@ -31,11 +31,11 @@ class LyricsWindowController: NSWindowController {
         self.window?.backgroundColor=NSColor.clearColor()
         self.window?.opaque=false
         self.window?.hasShadow=false
-//        self.window?.ignoresMouseEvents=true
+        self.window?.ignoresMouseEvents=true
         self.window?.level=Int(CGWindowLevelForKey(.FloatingWindowLevelKey))
         self.window?.contentView?.layer=CALayer()
         self.window?.contentView?.wantsLayer=true
-//        self.window?.sharingType=NSWindowSharingType.None
+        self.window?.sharingType=NSWindowSharingType.None
         self.window?.collectionBehavior=NSWindowCollectionBehavior.CanJoinAllSpaces
         
         baseLayer=CALayer()
@@ -63,8 +63,8 @@ class LyricsWindowController: NSWindowController {
         displayLyrics("LyricsX", secondLyrics: nil)
         
         let nc:NSNotificationCenter=NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: Selector("setAttributes"), name: LyricsAttributesChangedNotification, object: nil)
-        nc.addObserver(self, selector: Selector("setScreenResolution"), name: NSApplicationDidChangeScreenParametersNotification, object: nil)
+        nc.addObserver(self, selector: "setAttributes", name: LyricsAttributesChangedNotification, object: nil)
+        nc.addObserver(self, selector: "setScreenResolution", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
 
     }
 

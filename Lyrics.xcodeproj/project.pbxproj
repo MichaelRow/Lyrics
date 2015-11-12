@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */; };
+		7642B9041BF4709300D68FE9 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7642B9021BF4709300D68FE9 /* StatusMenu.xib */; };
 		7660C5001BF0537E002E3204 /* LyricsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7660C4FE1BF0537E002E3204 /* LyricsWindow.xib */; };
 		7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660C5011BF05471002E3204 /* LyricsWindowController.swift */; };
 		768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
@@ -52,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsLineModel.swift; sourceTree = "<group>"; };
+		7642B9031BF4709300D68FE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusMenu.xib; sourceTree = "<group>"; };
 		7660C4FF1BF0537E002E3204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LyricsWindow.xib; sourceTree = "<group>"; };
 		7660C5011BF05471002E3204 /* LyricsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsWindowController.swift; sourceTree = "<group>"; };
 		768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
@@ -98,10 +102,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */,
+				76FF43791BEF9BAB00D2B14F /* QuartzCore.framework in Frameworks */,
 				768BCB231BF1C62000D6F5EB /* libopencc.dylib in Frameworks */,
 				768BCB211BF1C62000D6F5EB /* libopencc.1.0.0.dylib in Frameworks */,
 				768BCB221BF1C62000D6F5EB /* libopencc.2.dylib in Frameworks */,
-				76FF43791BEF9BAB00D2B14F /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,9 +141,10 @@
 		765FC4A41BEE50A000BF3706 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				76C511601BEC6F8F0095F510 /* MainMenu.xib */,
+				7642B9021BF4709300D68FE9 /* StatusMenu.xib */,
 				76C046D11BF21876005053AC /* Preferences.xib */,
 				7660C4FE1BF0537E002E3204 /* LyricsWindow.xib */,
+				76C511601BEC6F8F0095F510 /* MainMenu.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 		768BCB411BF1C81200D6F5EB /* Other Source */ = {
 			isa = PBXGroup;
 			children = (
+				7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */,
 				768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */,
 				76C511771BEC6FD50095F510 /* Macros.swift */,
 			);
@@ -331,6 +337,7 @@
 				768BCB241BF1C64200D6F5EB /* libopencc.1.0.0.dylib in Resources */,
 				768BCB251BF1C64600D6F5EB /* libopencc.2.dylib in Resources */,
 				768BCB361BF1C74400D6F5EB /* HKVariantsPhrases.ocd in Resources */,
+				7642B9041BF4709300D68FE9 /* StatusMenu.xib in Resources */,
 				768BCB3A1BF1C74400D6F5EB /* STCharacters.ocd in Resources */,
 				768BCB381BF1C74400D6F5EB /* s2t.json in Resources */,
 				768BCB261BF1C64900D6F5EB /* libopencc.dylib in Resources */,
@@ -371,6 +378,7 @@
 				768BCAF51BF1BCA400D6F5EB /* iTunes.swift in Sources */,
 				76C0471A1BF2E335005053AC /* DBPrefsWindowController.m in Sources */,
 				76C046D01BF2178B005053AC /* AppController.swift in Sources */,
+				7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +401,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7642B9021BF4709300D68FE9 /* StatusMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7642B9031BF4709300D68FE9 /* Base */,
+			);
+			name = StatusMenu.xib;
+			sourceTree = "<group>";
+		};
 		7660C4FE1BF0537E002E3204 /* LyricsWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
