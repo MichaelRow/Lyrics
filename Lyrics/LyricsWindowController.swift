@@ -6,6 +6,11 @@
 //  Copyright © 2015年 Eru. All rights reserved.
 //
 
+
+/************************ IMPORTANT ************************/
+/*     LyricsWindowController Must Run in Main Thread      */
+
+
 import Cocoa
 
 class LyricsWindowController: NSWindowController {
@@ -59,7 +64,7 @@ class LyricsWindowController: NSWindowController {
         baseLayer.addSublayer(secondlyricsLayer)
         setAttributes()
         setScreenResolution()
-        
+        baseLayer.speed=1.1
         displayLyrics("LyricsX", secondLyrics: nil)
         
         let nc:NSNotificationCenter=NSNotificationCenter.defaultCenter()
@@ -72,15 +77,23 @@ class LyricsWindowController: NSWindowController {
         
         if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
             // first Lyrics empty means it's instrument time
+            baseLayer.speed=0.2
+            baseLayer.frame = NSMakeRect(baseLayer.frame.origin.x+baseLayer.frame.size.width/2, 0, 0, 0)
+            firstLyricsLayer.string = ""
+            secondlyricsLayer.string = ""
             firstLyricsLayer.hidden=true
             secondlyricsLayer.hidden=true
             baseLayer.hidden=true
         }
         else if (secondLyrics==nil) || (secondLyrics?.isEqualToString(""))! {
             // One-Line Mode or sencond lyrics is instrument time
+            firstLyricsLayer.string = ""
+            secondlyricsLayer.string = ""
             firstLyricsLayer.hidden=false
             secondlyricsLayer.hidden=true
             baseLayer.hidden=false
+            
+            baseLayer.speed=1.1
             var size:NSSize=firstLyrics!.sizeWithAttributes(attrs)
             size.width=ceil(size.width+50)
             size.height=ceil(size.height)
@@ -89,16 +102,19 @@ class LyricsWindowController: NSWindowController {
             let x:CGFloat=visibleOrigin.x+(visibleSize.width-size.width)/2
             let y:CGFloat=visibleOrigin.y+20
             
-            self.window?.setFrame(CGRectMake(x, y, size.width, size.height), display: true)
-            baseLayer.frame=CGRectMake(0, 0, size.width, size.height)
+//            self.window?.setFrame(CGRectMake(x, y, size.width, size.height), display: true)
+            baseLayer.frame=CGRectMake(x, y, size.width, size.height)
             firstLyricsLayer.frame=CGRectMake(0, 0, size.width, size.height)
             firstLyricsLayer.string=firstLyrics
         }
         else {
             // Two-Line Mode
+            firstLyricsLayer.string = ""
+            secondlyricsLayer.string = ""
             firstLyricsLayer.hidden=false
             secondlyricsLayer.hidden=false
             baseLayer.hidden=false
+            baseLayer.speed=1.1
             var size2nd:NSSize=secondLyrics!.sizeWithAttributes(attrs)
             size2nd.width=ceil(size2nd.width+50)
             size2nd.height=ceil(size2nd.height*0.95)
@@ -124,8 +140,8 @@ class LyricsWindowController: NSWindowController {
             let x:CGFloat=visibleOrigin.x+(visibleSize.width-width)/2
             let y:CGFloat=visibleOrigin.y+20
             
-            self.window?.setFrame(CGRectMake(x, y, width, height), display: true)
-            baseLayer.frame=CGRectMake(0, 0, width, height)
+//            self.window?.setFrame(CGRectMake(x, y, width, height), display: true)
+            baseLayer.frame=CGRectMake(x, y, width, height)
             firstLyricsLayer.string=firstLyrics
             secondlyricsLayer.string=secondLyrics
         }
@@ -142,7 +158,7 @@ class LyricsWindowController: NSWindowController {
     
     func setAttributes() {
         let colorSpace:CGColorSpaceRef=CGColorSpaceCreateDeviceRGB()!
-        let bkColor:NSColor=NSColor.blackColor().colorWithAlphaComponent(0.2)
+        let bkColor:NSColor=NSColor.blackColor().colorWithAlphaComponent(0.5)
         let fontColor:NSColor=NSColor.redColor()
         let fontSize:CGFloat=36
         let cgfont:CGFontRef=CGFontCreateWithFontName("PingFangSC-Semibold")!
@@ -176,6 +192,7 @@ class LyricsWindowController: NSWindowController {
         let visibleFrame:NSRect=(NSScreen.mainScreen()?.visibleFrame)!
         visibleSize=visibleFrame.size
         visibleOrigin=visibleFrame.origin
+        self.window?.setFrame(CGRectMake(0, 0, visibleSize.width, visibleSize.height/3), display: true)
         firstLyricsLayer.contentsScale=(NSScreen.mainScreen()?.backingScaleFactor)!
         secondlyricsLayer.contentsScale=firstLyricsLayer.contentsScale
         NSLog("Screen Visible Res Changed to:(%f,%f) O:(%f,%f)", visibleSize.width,visibleSize.height,visibleOrigin.x,visibleOrigin.y)
