@@ -23,7 +23,7 @@ class AppController: NSObject {
     var iTunesSBA:SBApplication!
     var iTunes:iTunesApplication!
     var iTunesCurrentTrack:NSString!
-    var timeDly:Float!
+    var timeDly:Int!
     
     override init() {
         
@@ -46,6 +46,7 @@ class AppController: NSObject {
         }
         
         NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
+        parsingLrc("遥か彼方", artist: "Rita")
     }
     
     
@@ -147,10 +148,11 @@ class AppController: NSObject {
     
     func parsingLrc(songTitle: NSString, artist: NSString) {
         lyrics.removeAll()
-        let defaultPath: NSString = "/volumes/ramsik"
-        let lrcFilePath: String = defaultPath.stringByAppendingPathComponent("\(songTitle)-\(artist)")
+        let defaultPath: NSString = "/volumes/ramdisk"
+        let lrcFilePath: String = defaultPath.stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
         let lrcExists: Bool = NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath)
         if !lrcExists {
+            NSLog("lrc File doesn't exist")
             return
         }
         let lrcFileContents: NSString
@@ -160,10 +162,8 @@ class AppController: NSObject {
             NSLog("%@", theError.localizedDescription)
             return
         }
-        
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
         let lrcParagraphs: NSArray = lrcFileContents.componentsSeparatedByCharactersInSet(newLineCharSet)
-        
         let regexForTimeTag: NSRegularExpression
         let regexForIDTag: NSRegularExpression
         do {
@@ -182,7 +182,6 @@ class AppController: NSObject {
         
         for str in lrcParagraphs {
             let timeTagsMatched: NSArray = regexForTimeTag.matchesInString(str as! String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
-            
             if timeTagsMatched.count > 0 {
                 let index: Int = (timeTagsMatched.lastObject?.range.location)! + (timeTagsMatched.lastObject?.range.length)!
                 let lyricsSentenceRange: NSRange = NSMakeRange(index, str.length-index)
@@ -191,8 +190,9 @@ class AppController: NSObject {
                     let matched:NSRange = result.range
                     let lrcLine: LyricsLineModel = LyricsLineModel()
                     lrcLine.lyricsSentence = lyricsSentence
-                    lrcLine.timeTag = str.substringWithRange(matched)
-                    var currentCount: Int = lyrics.count
+                    lrcLine.setMsecPositionWithTimeTag(str.substringWithRange(matched))
+                    print(lrcLine.msecPosition)
+                    let currentCount: Int = lyrics.count
                     var j: Int = 0
                     for j; j<currentCount; ++j {
                         if lrcLine.msecPosition < lyrics[j].msecPosition {
@@ -207,6 +207,9 @@ class AppController: NSObject {
             }
             else {
                 let theMatchedRange: NSRange = regexForIDTag.rangeOfFirstMatchInString(str as! String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
+                if theMatchedRange.length == 0 {
+                    continue
+                }
                 let theIDTag: NSString = str.substringWithRange(theMatchedRange)
                 let colonRange: NSRange = theIDTag.rangeOfString(":")
                 let idStr: NSString = theIDTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
@@ -215,9 +218,10 @@ class AppController: NSObject {
                 }
                 else {
                     let delayStr: NSString=theIDTag.substringWithRange(NSMakeRange(colonRange.location+1, theIDTag.length-colonRange.length-colonRange.location-1))
-                    timeDly = delayStr.floatValue
+                    timeDly = delayStr.integerValue
                 }
             }
+            
         }
     }
     
