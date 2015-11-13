@@ -24,6 +24,9 @@ class AppController: NSObject {
     var iTunes:iTunesApplication!
     var iTunesCurrentTrack:NSString!
     var timeDly:Int!
+    var timer:NSTimer!
+    
+// MARK: - Init & deinit
     
     override init() {
         
@@ -47,6 +50,10 @@ class AppController: NSObject {
         
         NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
         parsingLrc("遥か彼方", artist: "Rita")
+        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+//            self.funcForTesting()
+//        }
     }
     
     
@@ -82,28 +89,26 @@ class AppController: NSObject {
 // MARK: - iTunes Events
     
     func iTunesTrackingThread() {
-        var playerPosition: NSNumber
-        // 坑爹的swift，撇开ScriptingBridge API没有swift版本不说，连Obj-C的iTunes.h在swift下都linker error
-        // 自己生成了一个iTunes.swift 问题就是iTunesApplication虽说是SBApplication的子类，然而却因为swift的强
-        // 类型，不能调用父类的方法，那就用两个变量吧。。。
+        var playerPosition: Int
         
         while true {
             if !iTunesSBA.running && NSUserDefaults.standardUserDefaults().boolForKey(LyricsQuitWithITunes) {
+                NSLog("Terminating")
                 NSApplication.sharedApplication().terminate(self)
             }
             if iTunes.playerState == iTunesEPlS.Playing {
-                playerPosition = NSNumber(integer: Int(iTunes.playerPosition! * 1000))
-                let dic:NSDictionary=NSDictionary(objects: ["iTunesPositionChanged", playerPosition], forKeys: ["Type", "CurrentPosition"])
+                playerPosition = Int(iTunes.playerPosition! * 1000)
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                    self.handlingThead(dic)
+                    self.handlingPositionChange(playerPosition)
                 })
             }
             else {
-                isTrackingRunning=false
+                //No need to track iTunes PlayerPosition when it's paused, just kill the thread.
                 NSLog("Kill iTunesTrackingThread")
+                isTrackingRunning=false
                 return
             }
-            NSThread.sleepForTimeInterval(0.15)
+            NSThread.sleepForTimeInterval(0.13)
         }
     }
     
@@ -115,11 +120,14 @@ class AppController: NSObject {
         }
         else {
             if userInfo!["Player State"] as! String == "Paused" {
-                lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                })
                 NSLog("iTunes Paused")
                 return
             }
             else if userInfo!["Player State"] as! String == "Playing" {
+                //iTunes is playing, we should create the tracking thread
                 if !isTrackingRunning {
                     NSLog("Create new iTunesTrackingThead")
                     isTrackingRunning = true
@@ -136,10 +144,9 @@ class AppController: NSObject {
             if iTunesCurrentTrack == iTunes.currentTrack?.persistentID {
                 return
             } else {
-                NSLog("Song Changed")
+                NSLog("Song Changed to: %@",(iTunes.currentTrack?.name)!)
                 iTunesCurrentTrack = (iTunes.currentTrack?.persistentID?.copy())! as! NSString
-                let dic:NSDictionary = NSDictionary(objects: ["iTunesTrackChanged"], forKeys: ["Type"])
-                self.handlingThead(dic)
+                handlingSongChang()
             }
         }
     }
@@ -147,6 +154,9 @@ class AppController: NSObject {
 // MARK: - Lrc Methods
     
     func parsingLrc(songTitle: NSString, artist: NSString) {
+        
+        // Parse lrc file to get lyrics, time-tags and time offset
+        NSLog("Start to Parse lrc")
         lyrics.removeAll()
         let defaultPath: NSString = "/volumes/ramdisk"
         let lrcFilePath: String = defaultPath.stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
@@ -191,7 +201,6 @@ class AppController: NSObject {
                     let lrcLine: LyricsLineModel = LyricsLineModel()
                     lrcLine.lyricsSentence = lyricsSentence
                     lrcLine.setMsecPositionWithTimeTag(str.substringWithRange(matched))
-                    print(lrcLine.msecPosition)
                     let currentCount: Int = lyrics.count
                     var j: Int = 0
                     for j; j<currentCount; ++j {
@@ -231,9 +240,48 @@ class AppController: NSObject {
 
 // MARK: - Handling Thead
     
-    func handlingThead(dic:NSDictionary) {
+    func handlingPositionChange (playerPosition: Int) {
+        if lyrics.count == 0 {
+            return
+        }
+        var index: Int
+        for index=0; index < lyrics.count; ++index {
+            if playerPosition < lyrics[index].msecPosition {
+                if index-1 == -1 {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                    })
+                    return
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.lyricsWindow.displayLyrics(self.lyrics[index-1].lyricsSentence, secondLyrics: nil)
+                    })
+                    return
+                }
+            }
+        }
+        if index == lyrics.count {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+            })
+            return
+        }
+    }
+    
+    func handlingSongChang () {
         
     }
+    
+//    func funcForTesting() {
+//        
+//        for theLrc in lyrics {
+//            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                self.lyricsWindow.displayLyrics(theLrc.lyricsSentence, secondLyrics: nil)
+//            })
+//            sleep(2)
+//        }
+//    }
     
 }
 
