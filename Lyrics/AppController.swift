@@ -18,13 +18,16 @@ class AppController: NSObject {
     var isTrackingRunning:Bool = false
     var lyricsWindow:LyricsWindowController!
     var statusBarItem:NSStatusItem!
-    var lyrics:[LyricsLineModel]!
+    var lyricsArray:[LyricsLineModel]!
+    var currentLyrics: NSString!
     var operationQueue:NSOperationQueue!
     var iTunesSBA:SBApplication!
     var iTunes:iTunesApplication!
-    var iTunesCurrentTrack:NSString!
+    var currentPersistentID:NSString!
+    var loadingTrackPersistentID:NSString!
+    var songList:[SongInfos]!
     var timeDly:Int!
-    var timer:NSTimer!
+    var qianqian:QianQianAPI!
     
 // MARK: - Init & deinit
     
@@ -34,30 +37,36 @@ class AppController: NSObject {
         
         iTunesSBA = SBApplication(bundleIdentifier: "com.apple.iTunes")
         iTunes = iTunesSBA as iTunesApplication
-        lyrics = Array()
+        lyricsArray = Array()
+        songList = Array()
+        qianqian = QianQianAPI()
         
         NSBundle(forClass: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
         setupStatusItem()
         
+        currentPersistentID = ""
+        currentLyrics = "LyricsX"
         if iTunesSBA.running == true && iTunes.playerState == iTunesEPlS.Playing {
+            currentPersistentID = (iTunes.currentTrack?.persistentID?.copy())! as! NSString
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+                self.loadingLyrics()
+            }
             NSLog("Create new iTunesTrackingThead")
             isTrackingRunning = true
-            iTunesCurrentTrack = (iTunes.currentTrack?.persistentID?.copy())! as! NSString
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
                 self.iTunesTrackingThread()
             }
         }
         
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: "qianqianLoadingCompleted", name: QianQianLrcLoadedNotification, object: nil)
         NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
-        parsingLrc("遥か彼方", artist: "Rita")
-        
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-//            self.funcForTesting()
-//        }
+
     }
     
     
     deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
     }
     
@@ -97,10 +106,12 @@ class AppController: NSObject {
                 NSApplication.sharedApplication().terminate(self)
             }
             if iTunes.playerState == iTunesEPlS.Playing {
-                playerPosition = Int(iTunes.playerPosition! * 1000)
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                    self.handlingPositionChange(playerPosition)
-                })
+                if lyricsArray.count != 0 {
+                    playerPosition = Int(iTunes.playerPosition! * 1000)
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                        self.handlingPositionChange(playerPosition)
+                    })
+                }
             }
             else {
                 //No need to track iTunes PlayerPosition when it's paused, just kill the thread.
@@ -137,16 +148,18 @@ class AppController: NSObject {
                 }
                 NSLog("iTunes Playing")
             }
-            if iTunesCurrentTrack == nil {
-                iTunesCurrentTrack = (iTunes.currentTrack?.persistentID?.copy())! as! NSString
+            if currentPersistentID == nil {
+                currentPersistentID = (iTunes.currentTrack?.persistentID?.copy())! as! NSString
                 return
             }
-            if iTunesCurrentTrack == iTunes.currentTrack?.persistentID {
+            if currentPersistentID == iTunes.currentTrack?.persistentID {
                 return
             } else {
                 NSLog("Song Changed to: %@",(iTunes.currentTrack?.name)!)
-                iTunesCurrentTrack = (iTunes.currentTrack?.persistentID?.copy())! as! NSString
-                handlingSongChang()
+                lyricsArray.removeAll()
+                currentPersistentID = (iTunes.currentTrack?.persistentID?.copy())! as! NSString
+                loadingTrackPersistentID = currentPersistentID.copy() as! NSString
+                loadingLyrics()
             }
         }
     }
@@ -157,8 +170,8 @@ class AppController: NSObject {
         
         // Parse lrc file to get lyrics, time-tags and time offset
         NSLog("Start to Parse lrc")
-        lyrics.removeAll()
-        let defaultPath: NSString = "/volumes/ramdisk"
+        lyricsArray.removeAll()
+        let defaultPath: NSString = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, [.UserDomainMask], true).first!
         let lrcFilePath: String = defaultPath.stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
         let lrcExists: Bool = NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath)
         if !lrcExists {
@@ -201,16 +214,16 @@ class AppController: NSObject {
                     let lrcLine: LyricsLineModel = LyricsLineModel()
                     lrcLine.lyricsSentence = lyricsSentence
                     lrcLine.setMsecPositionWithTimeTag(str.substringWithRange(matched))
-                    let currentCount: Int = lyrics.count
+                    let currentCount: Int = lyricsArray.count
                     var j: Int = 0
                     for j; j<currentCount; ++j {
-                        if lrcLine.msecPosition < lyrics[j].msecPosition {
-                            lyrics.insert(lrcLine, atIndex: j)
+                        if lrcLine.msecPosition < lyricsArray[j].msecPosition {
+                            lyricsArray.insert(lrcLine, atIndex: j)
                             break
                         }
                     }
                     if j == currentCount {
-                        lyrics.append(lrcLine)
+                        lyricsArray.append(lrcLine)
                     }
                 }
             }
@@ -234,54 +247,80 @@ class AppController: NSObject {
         }
     }
     
-    func getLrc() {
+    func loadingLyrics() {
+        let desktop:NSString = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, [.UserDomainMask], true).first!
+        let songTitle:String = (iTunes.currentTrack?.name)! as String
+        let artist:String = (iTunes.currentTrack?.artist)! as String
+        loadingTrackPersistentID = currentPersistentID.copy() as! NSString
+        if !NSFileManager.defaultManager().fileExistsAtPath("\(desktop)/\(songTitle) - \(artist).lrc") {
+            qianqian.getLyricsWithTitle(convertToSC(songTitle) as String, artist: convertToSC(artist) as String)
+        } else {
+            parsingLrc(songTitle, artist: artist)
+        }
         
     }
 
 // MARK: - Handling Thead
     
     func handlingPositionChange (playerPosition: Int) {
-        if lyrics.count == 0 {
-            return
-        }
         var index: Int
-        for index=0; index < lyrics.count; ++index {
-            if playerPosition < lyrics[index].msecPosition {
+        for index=0; index < lyricsArray.count; ++index {
+            if playerPosition < lyricsArray[index].msecPosition {
                 if index-1 == -1 {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                    })
+                    if currentLyrics != nil || currentLyrics != "" {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                        })
+                    }
                     return
                 }
                 else {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.lyricsWindow.displayLyrics(self.lyrics[index-1].lyricsSentence, secondLyrics: nil)
-                    })
+                    if currentLyrics != self.lyricsArray[index-1].lyricsSentence {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.lyricsWindow.displayLyrics(self.lyricsArray[index-1].lyricsSentence, secondLyrics: nil)
+                        })
+                    }
                     return
                 }
             }
         }
-        if index == lyrics.count {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-            })
+        if index == lyricsArray.count {
+            if currentLyrics != nil || currentLyrics != "" {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                })
+            }
             return
         }
     }
     
-    func handlingSongChang () {
+    func handlingLyrics () {
         
     }
     
-//    func funcForTesting() {
-//        
-//        for theLrc in lyrics {
-//            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                self.lyricsWindow.displayLyrics(theLrc.lyricsSentence, secondLyrics: nil)
-//            })
-//            sleep(2)
-//        }
-//    }
+//MARK - Lyrics Source Loading Completion
+    
+    func qianqianLoadingCompleted() {
+        NSLog("QianQian Lrc loaded")
+        if qianqian.songs.count > 0 {
+            let songTitle:String = (iTunes.currentTrack?.name)! as String
+            let artist:String = (iTunes.currentTrack?.artist)! as String
+            let url:String=qianqian.songs.objectAtIndex(0).lyricURL
+            let desktop:NSString = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, [.UserDomainMask], true).first!
+            let lyricsContents: NSString
+            do {
+                lyricsContents = try NSString(contentsOfURL: NSURL(string: url)!, encoding: NSUTF8StringEncoding)
+            } catch {
+                return
+            }
+            do {
+                try lyricsContents.writeToFile("\(desktop)/\(songTitle) - \(artist).lrc", atomically: false, encoding: NSUTF8StringEncoding)
+            } catch {
+                return
+            }
+            parsingLrc(songTitle, artist: artist)
+        }
+    }
     
 }
 

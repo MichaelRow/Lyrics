@@ -129,7 +129,7 @@
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h65-84-Dyu">
                     <rect key="frame" x="18" y="75" width="222" height="34"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Use auto layout  with height from dock to lyrics:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2Cd-JK-Ic6">
+                    <buttonCell key="cell" type="check" title="Use auto layout (beta) with height from dock to lyrics:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2Cd-JK-Ic6">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

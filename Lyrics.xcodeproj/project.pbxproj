@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */; };
 		7642B9041BF4709300D68FE9 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7642B9021BF4709300D68FE9 /* StatusMenu.xib */; };
+		76596BC21BF6219300DEEF62 /* SongInfos.m in Sources */ = {isa = PBXBuildFile; fileRef = 76596BBB1BF6219300DEEF62 /* SongInfos.m */; };
+		76596BC31BF6219300DEEF62 /* TTPodAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 76596BBD1BF6219300DEEF62 /* TTPodAPI.m */; };
+		76596BC41BF6219300DEEF62 /* QianQianAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 76596BBF1BF6219300DEEF62 /* QianQianAPI.m */; };
+		76596BC51BF6219300DEEF62 /* GeciMeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 76596BC11BF6219300DEEF62 /* GeciMeAPI.m */; };
 		7660C5001BF0537E002E3204 /* LyricsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7660C4FE1BF0537E002E3204 /* LyricsWindow.xib */; };
 		7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660C5011BF05471002E3204 /* LyricsWindowController.swift */; };
 		768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
@@ -57,6 +61,14 @@
 		7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsLineModel.swift; sourceTree = "<group>"; };
 		7642B9031BF4709300D68FE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusMenu.xib; sourceTree = "<group>"; };
 		7642B9061BF488AB00D68FE9 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
+		76596BBA1BF6219300DEEF62 /* SongInfos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongInfos.h; sourceTree = "<group>"; };
+		76596BBB1BF6219300DEEF62 /* SongInfos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongInfos.m; sourceTree = "<group>"; };
+		76596BBC1BF6219300DEEF62 /* TTPodAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPodAPI.h; sourceTree = "<group>"; };
+		76596BBD1BF6219300DEEF62 /* TTPodAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPodAPI.m; sourceTree = "<group>"; };
+		76596BBE1BF6219300DEEF62 /* QianQianAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QianQianAPI.h; sourceTree = "<group>"; };
+		76596BBF1BF6219300DEEF62 /* QianQianAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianQianAPI.m; sourceTree = "<group>"; };
+		76596BC01BF6219300DEEF62 /* GeciMeAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeciMeAPI.h; sourceTree = "<group>"; };
+		76596BC11BF6219300DEEF62 /* GeciMeAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeciMeAPI.m; sourceTree = "<group>"; };
 		7660C4FF1BF0537E002E3204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LyricsWindow.xib; sourceTree = "<group>"; };
 		7660C5011BF05471002E3204 /* LyricsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsWindowController.swift; sourceTree = "<group>"; };
 		768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
@@ -120,6 +132,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		76596BB91BF6216A00DEEF62 /* Lyrics Sources */ = {
+			isa = PBXGroup;
+			children = (
+				76596BBA1BF6219300DEEF62 /* SongInfos.h */,
+				76596BBB1BF6219300DEEF62 /* SongInfos.m */,
+				76596BBC1BF6219300DEEF62 /* TTPodAPI.h */,
+				76596BBD1BF6219300DEEF62 /* TTPodAPI.m */,
+				76596BBE1BF6219300DEEF62 /* QianQianAPI.h */,
+				76596BBF1BF6219300DEEF62 /* QianQianAPI.m */,
+				76596BC01BF6219300DEEF62 /* GeciMeAPI.h */,
+				76596BC11BF6219300DEEF62 /* GeciMeAPI.m */,
+			);
+			name = "Lyrics Sources";
+			sourceTree = "<group>";
+		};
 		765FC4A01BEE4F5800BF3706 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +266,7 @@
 				765FC4A41BEE50A000BF3706 /* UI */,
 				765FC4A31BEE508100BF3706 /* Wins & Views */,
 				768BCB411BF1C81200D6F5EB /* Other Source */,
+				76596BB91BF6216A00DEEF62 /* Lyrics Sources */,
 				765FC4A61BEE50DF00BF3706 /* Libraries & Frameworks */,
 				765FC4A01BEE4F5800BF3706 /* Support Files */,
 				765FC4A81BEE514400BF3706 /* Resources */,
@@ -372,12 +400,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76596BC51BF6219300DEEF62 /* GeciMeAPI.m in Sources */,
 				76C047261BF2F34C005053AC /* AppPrefsWindowController.swift in Sources */,
 				7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */,
+				76596BC21BF6219300DEEF62 /* SongInfos.m in Sources */,
 				76C511781BEC6FD50095F510 /* Macros.swift in Sources */,
 				768BCB431BF1C84B00D6F5EB /* ChineseConverter.swift in Sources */,
+				76596BC31BF6219300DEEF62 /* TTPodAPI.m in Sources */,
 				76C5115D1BEC6F8F0095F510 /* AppDelegate.swift in Sources */,
 				768BCAF51BF1BCA400D6F5EB /* iTunes.swift in Sources */,
+				76596BC41BF6219300DEEF62 /* QianQianAPI.m in Sources */,
 				76C0471A1BF2E335005053AC /* DBPrefsWindowController.m in Sources */,
 				76C046D01BF2178B005053AC /* AppController.swift in Sources */,
 				7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */,

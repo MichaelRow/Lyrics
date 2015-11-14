@@ -4,3 +4,8 @@
 
 #import "opencc.h"
 #import "DBPrefsWindowController.h"
+#import "SongInfos.h"
+//#import "XiamiAPI.h"
+#import "TTPodAPI.h"
+#import "QianQianAPI.h"
+#import "GeciMeAPI.h"
