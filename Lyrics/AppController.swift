@@ -119,7 +119,7 @@ class AppController: NSObject {
                 isTrackingRunning=false
                 return
             }
-            NSThread.sleepForTimeInterval(0.13)
+            NSThread.sleepForTimeInterval(0.15)
         }
     }
     
@@ -268,6 +268,7 @@ class AppController: NSObject {
             if playerPosition < lyricsArray[index].msecPosition {
                 if index-1 == -1 {
                     if currentLyrics != nil || currentLyrics != "" {
+                        currentLyrics = nil
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                         })
@@ -276,6 +277,7 @@ class AppController: NSObject {
                 }
                 else {
                     if currentLyrics != self.lyricsArray[index-1].lyricsSentence {
+                        currentLyrics = lyricsArray[index-1].lyricsSentence
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             self.lyricsWindow.displayLyrics(self.lyricsArray[index-1].lyricsSentence, secondLyrics: nil)
                         })
@@ -286,6 +288,7 @@ class AppController: NSObject {
         }
         if index == lyricsArray.count {
             if currentLyrics != nil || currentLyrics != "" {
+                currentLyrics = nil
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                 })
