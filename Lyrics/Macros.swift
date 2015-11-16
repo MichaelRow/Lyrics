@@ -17,15 +17,27 @@ import Foundation
 let LyricsAttributesChangedNotification:String="LyricsAttributesChanged"
 
 //User Defaults
+let LyricsSavingPathPopUpIndex:String="LyricsSavingPathPopUpIndex"
+let LyricsUserSavingPath:String="LyricsUserSavingPath"
 let LyricsQuitWithITunes:String="LyricsQuitWithITunes"
 let LyricsDisabledWhenPaused:String="LyricsDisabledWhenPaused"
 let LyricsDisabledWhenSreenShot:String="LyricsDisabledWhenSreenShot"
+
+let LyricsShadowModeEnable:String="LyricsShadowModeEnable"
+let LyricsTwoLineMode:String="LyricsTwoLineMode"
+let LyricsSearchForBetterLrc:String="LyricsSearchForBetterLrc"
+let LyricsDisplayInAllSpaces:String="LyricsDisplayInAllSpaces"
+let LyricsUseAutoLayout:String="LyricsUseAutoLayout"
+let LyricsHeightFromDockToLyrics:String="LyricsHeightFromDockToLyrics"
+let LyricsConstToLeft:String="LyricsConstToLeft"
+let LyricsConstToBottom:String="LyricsConstToBottom"
+let LyricsConstWidth:String="LyricsConstWidth"
+let LyricsConstHeight:String="LyricsConstHeight"
+
+let LyricsFontName:String="LyricsFontName"
+let LyricsFontSize:String="LyricsFontSize"
 let LyricsTextColor:String="LyricsTextColor"
 let LyricsBackgroundColor:String="LyricsBackgroundColor"
 let LyricsShadowColor:String="LyricsShadowColor"
 let LyricsShadowRadius:String="LyricsShadowRadius"
-let LyricsShadowModeEnable:String="LyricsShadowModeEnable"
-let LyricsTwoLineMode:String="LyricsTwoLineMode"
-let LyricsDisplayInAllSpaces:String="LyricsDisplayInAllSpaces"
-let LyricsAutoAdjustWithDock:String="LyricsAutoAdjustWithDock"
-let LyricsHeightFromDockToLyrics:String="LyricsHeightFromDockToLyrics"
+

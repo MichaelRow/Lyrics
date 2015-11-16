@@ -74,7 +74,6 @@ class LyricsWindowController: NSWindowController {
     }
 
     func displayLyrics(firstLyrics:NSString?, secondLyrics:NSString?) {
-        
         if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
             // first Lyrics empty means it's instrument time
             baseLayer.speed=0.2
@@ -98,11 +97,10 @@ class LyricsWindowController: NSWindowController {
             size.width=ceil(size.width+50)
             size.height=ceil(size.height)
             
-
+            
             let x:CGFloat=visibleOrigin.x+(visibleSize.width-size.width)/2
             let y:CGFloat=visibleOrigin.y+20
             
-//            self.window?.setFrame(CGRectMake(x, y, size.width, size.height), display: true)
             baseLayer.frame=CGRectMake(x, y, size.width, size.height)
             firstLyricsLayer.frame=CGRectMake(0, 0, size.width, size.height)
             firstLyricsLayer.string=firstLyrics
@@ -140,7 +138,6 @@ class LyricsWindowController: NSWindowController {
             let x:CGFloat=visibleOrigin.x+(visibleSize.width-width)/2
             let y:CGFloat=visibleOrigin.y+20
             
-//            self.window?.setFrame(CGRectMake(x, y, width, height), display: true)
             baseLayer.frame=CGRectMake(x, y, width, height)
             firstLyricsLayer.string=firstLyrics
             secondlyricsLayer.string=secondLyrics

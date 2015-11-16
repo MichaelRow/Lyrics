@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SongInfos.h"
 
-extern NSString *const TTPodLrcLoadedNotification;
-
 @interface TTPodAPI : NSObject
 
 @property SongInfos *songInfo;

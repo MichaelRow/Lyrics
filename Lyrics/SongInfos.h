@@ -8,17 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const ErrorOccuredNotification;
+extern NSString *const LrcLoadedNotification;
 
 @interface SongInfos : NSObject
 
 @property (nonatomic,copy) NSString *songTitle;
 @property (nonatomic,copy) NSString *artist;
 @property (nonatomic,copy) NSString *lyricURL;
-@property (nonatomic,copy) NSString *artWorkURL;
 @property (nonatomic,copy) NSString *songID;
 @property (nonatomic,copy) NSString *lyric;
-@property (nonatomic,copy) NSString *source;
 
 //-(void)setSongTitleWithUnicode:(NSString *) unicodeTitle artist:(NSString *) unicodeArtist;
 

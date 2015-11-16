@@ -8,8 +8,6 @@
 
 #import "QianQianAPI.h"
 
-NSString *const QianQianLrcLoadedNotification=@"QianQianLrcLoaded";
-
 @implementation QianQianAPI
 
 @synthesize songs;
@@ -36,7 +34,6 @@ NSString *const QianQianLrcLoadedNotification=@"QianQianLrcLoaded";
      
      
     NSString *urlString=[NSString stringWithFormat:@"http://ttlrccnc.qianqian.com/dll/lyricsvr.dll?sh?Artist=%@&Title=%@&Flags=0",setToHexString(artist),setToHexString(title)];
-    NSLog(@"QianQianAPI:The converted url is:%@",urlString);
     NSMutableURLRequest *req=[NSMutableURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:15];
     [req setHTTPMethod:@"GET"];
     [req addValue:@"text/xml" forHTTPHeaderField: @"Content-Type"];
@@ -45,23 +42,17 @@ NSString *const QianQianLrcLoadedNotification=@"QianQianLrcLoaded";
         NSHTTPURLResponse *httpResponse=(NSHTTPURLResponse *)response;
         int statusCode=(int)[httpResponse statusCode];
         if (!(statusCode>=200 && statusCode<300) || error || !data) {
-            NSString *errorStr=[NSString stringWithFormat:@"%@:%@",NSLocalizedString(@"QIANQIAN", nil),NSLocalizedString(@"NET_CONNECTION_ERROR", nil)];
-            NSDictionary *userInfo=[NSDictionary dictionaryWithObject:errorStr forKey:ErrorOccuredNotification];
-            [[NSNotificationCenter defaultCenter] postNotificationName:ErrorOccuredNotification object:nil userInfo:userInfo];
             return;
         }
         NSXMLParser *parser=[[NSXMLParser alloc]initWithData:data];
         [parser setDelegate:self];
         if ([parser parse]==NO) {
             NSLog(@"%@",[parser parserError]);
-            NSString *errorStr=[NSString stringWithFormat:@"%@:%@",NSLocalizedString(@"QIANQIAN", nil),NSLocalizedString(@"PARSE_ERROR", nil)];
-            NSDictionary *userInfo=[NSDictionary dictionaryWithObject:errorStr forKey:ErrorOccuredNotification];
-            [[NSNotificationCenter defaultCenter] postNotificationName:ErrorOccuredNotification object:nil userInfo:userInfo];
             return;
         }
         else {
-            NSNotificationCenter *nc=[NSNotificationCenter defaultCenter];
-            [nc postNotificationName:QianQianLrcLoadedNotification object:nil];
+            NSDictionary *userInfo=[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:1] forKey:@"source"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LrcLoadedNotification object:userInfo];
         }
     }];
     [dataTask resume];
@@ -75,11 +66,8 @@ NSString *const QianQianLrcLoadedNotification=@"QianQianLrcLoaded";
         info.songID=[attributeDict objectForKey:@"id"];
         info.artist=[attributeDict objectForKey:@"artist"];
         info.songTitle=[attributeDict objectForKey:@"title"];
-        info.source=NSLocalizedString(@"QIANQIAN", nil);
-        NSLog(@"QianQianAPI:%@,%@,%@",info.songID,info.songTitle,info.artist);
         NSString *accessCode=ttpCode(info.artist, info.songTitle, [info.songID intValue]);
         info.lyricURL=[NSString stringWithFormat:@"http://ttlrccnc.qianqian.com/dll/lyricsvr.dll?dl?Id=%@&Code=%@",info.songID,accessCode];
-        NSLog(@"QianQianAPI:Lrc link:%@",info.lyricURL);
         [songs addObject:info];
     }
 }

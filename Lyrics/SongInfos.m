@@ -10,15 +10,13 @@
 
 @implementation SongInfos
 
-NSString *const ErrorOccuredNotification=@"ErrorOccured";
+NSString *const LrcLoadedNotification=@"LrcLoaded";
 
 @synthesize songTitle;
 @synthesize artist;
 @synthesize lyricURL;
-@synthesize artWorkURL;
 @synthesize songID;
 @synthesize lyric;
-@synthesize source;
 
 
 //-(void)setSongTitleWithUnicode:(NSString *) unicodeTitle artist:(NSString *) unicodeArtist {

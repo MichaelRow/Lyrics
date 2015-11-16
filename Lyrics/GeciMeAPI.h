@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SongInfos.h"
 
-extern NSString *const GeciMeLrcLoadedNotification;
-
 @interface GeciMeAPI : NSObject
 
 @property NSMutableArray *songs; 

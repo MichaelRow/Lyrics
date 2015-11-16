@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SongInfos.h"
 
-extern NSString *const QianQianLrcLoadedNotification;
-
 @interface QianQianAPI : NSObject <NSXMLParserDelegate>
 
 @property NSMutableArray *songs;
