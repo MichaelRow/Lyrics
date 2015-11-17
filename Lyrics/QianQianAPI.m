@@ -52,7 +52,7 @@
         }
         else {
             NSDictionary *userInfo=[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:1] forKey:@"source"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:LrcLoadedNotification object:userInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LrcLoadedNotification object:self userInfo:userInfo];
         }
     }];
     [dataTask resume];

@@ -56,8 +56,8 @@
                 NSLog(@"XiamiAPI:Failed to get song IDs.No Internet access.");
                 ++parseNumber;
                 if (parseNumber==[songs count]) {
-                    NSNotificationCenter *nc=[NSNotificationCenter defaultCenter];
-                    [nc postNotificationName:LrcLoadedNotification object:nil];
+                    NSDictionary *userInfo=[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:2] forKey:@"source"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LrcLoadedNotification object:self userInfo:userInfo];
                 }
                 return;
             }
@@ -65,8 +65,8 @@
                 NSLog(@"%@",[error localizedDescription]);
                 ++parseNumber;
                 if (parseNumber==[songs count]) {
-                    NSNotificationCenter *nc=[NSNotificationCenter defaultCenter];
-                    [nc postNotificationName:LrcLoadedNotification object:nil];
+                    NSDictionary *userInfo=[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:2] forKey:@"source"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LrcLoadedNotification object:self userInfo:userInfo];
                 }
                 return;
             }
@@ -77,8 +77,8 @@
                     [[songs objectAtIndex:i] setLyricURL:[dictionary objectForKey:@"lyricURL"]];
                     ++parseNumber;
                     if (parseNumber==[songs count]) {
-                        NSNotificationCenter *nc=[NSNotificationCenter defaultCenter];
-                        [nc postNotificationName:LrcLoadedNotification object:nil];
+                        NSDictionary *userInfo=[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:2] forKey:@"source"];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:LrcLoadedNotification object:self userInfo:userInfo];
                     }
                 }
             }

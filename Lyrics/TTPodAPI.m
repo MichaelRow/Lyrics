@@ -40,7 +40,7 @@
             songInfo.artist=theArtist;
             songInfo.lyric=lyric;
             NSDictionary *userInfo=[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:3] forKey:@"source"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:LrcLoadedNotification object:userInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LrcLoadedNotification object:self userInfo:userInfo];
         }
     }];
     [dataTask resume];
