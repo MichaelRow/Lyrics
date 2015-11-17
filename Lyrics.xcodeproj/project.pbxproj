@@ -17,7 +17,6 @@
 		7660C5001BF0537E002E3204 /* LyricsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7660C4FE1BF0537E002E3204 /* LyricsWindow.xib */; };
 		7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660C5011BF05471002E3204 /* LyricsWindowController.swift */; };
 		768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
-		768BCAF51BF1BCA400D6F5EB /* iTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768BCAF41BF1BCA400D6F5EB /* iTunes.swift */; };
 		768BCB211BF1C62000D6F5EB /* libopencc.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */; };
 		768BCB221BF1C62000D6F5EB /* libopencc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1F1BF1C62000D6F5EB /* libopencc.2.dylib */; };
 		768BCB231BF1C62000D6F5EB /* libopencc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB201BF1C62000D6F5EB /* libopencc.dylib */; };
@@ -78,7 +77,6 @@
 		7660C5011BF05471002E3204 /* LyricsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsWindowController.swift; sourceTree = "<group>"; };
 		768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		768BCAE51BF1866400D6F5EB /* Lyrics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Bridging-Header.h"; sourceTree = "<group>"; };
-		768BCAF41BF1BCA400D6F5EB /* iTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunes.swift; sourceTree = "<group>"; };
 		768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.1.0.0.dylib; sourceTree = "<group>"; };
 		768BCB1F1BF1C62000D6F5EB /* libopencc.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.2.dylib; sourceTree = "<group>"; };
 		768BCB201BF1C62000D6F5EB /* libopencc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.dylib; sourceTree = "<group>"; };
@@ -206,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				7642B9061BF488AB00D68FE9 /* iTunes.h */,
-				768BCAF41BF1BCA400D6F5EB /* iTunes.swift */,
 				768BCB271BF1C69D00D6F5EB /* opencc.h */,
 				768BCB281BF1C6E700D6F5EB /* Export.hpp */,
 				768BCB291BF1C6E700D6F5EB /* SimpleConverter.hpp */,
@@ -424,7 +421,6 @@
 				768BCB431BF1C84B00D6F5EB /* ChineseConverter.swift in Sources */,
 				76596BC31BF6219300DEEF62 /* TTPodAPI.m in Sources */,
 				76C5115D1BEC6F8F0095F510 /* AppDelegate.swift in Sources */,
-				768BCAF51BF1BCA400D6F5EB /* iTunes.swift in Sources */,
 				76596BC41BF6219300DEEF62 /* QianQianAPI.m in Sources */,
 				76DD65C51BFA1386000882D3 /* XMLParserForXiami.m in Sources */,
 				76DD65C41BFA1386000882D3 /* XiamiAPI.m in Sources */,
