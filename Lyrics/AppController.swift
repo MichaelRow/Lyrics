@@ -59,7 +59,7 @@ class AppController: NSObject {
             let alert: NSAlert = NSAlert()
             alert.messageText = "An error occured"
             alert.informativeText = "The default path which used to save lrc files is not a directory.\nIn this case no lrc can be saved."
-            alert.addButtonWithTitle("Open Preferences and set")
+            alert.addButtonWithTitle("Open Preferences and Set")
             alert.addButtonWithTitle("Ignore")
             let response: NSModalResponse = alert.runModal()
             if response == NSAlertFirstButtonReturn {

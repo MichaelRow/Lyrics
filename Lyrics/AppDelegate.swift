@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsQuitWithITunes : NSNumber(bool: false),
             LyricsDisabledWhenPaused : NSNumber(bool: true),
             LyricsDisabledWhenSreenShot : NSNumber(bool: true),
-            LyricsShadowModeEnable : NSNumber(bool: true),
+            LyricsShadowModeEnable : NSNumber(bool: false),
             LyricsTwoLineMode : NSNumber(bool: false),
             LyricsSearchForBetterLrc : NSNumber(bool: true),
             LyricsDisplayInAllSpaces: NSNumber(bool: true),
@@ -34,17 +34,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsConstWidth : NSNumber(integer: 1000),
             LyricsConstHeight : NSNumber(integer: 100),
             LyricsFontName : "Helvetica",
-            LyricsFontSize : NSNumber(integer: 36),
+            LyricsFontSize : NSNumber(float: 36),
             LyricsTextColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.redColor()),
-            LyricsBackgroundColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.blackColor()),
+            LyricsBackgroundColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor(calibratedWhite: 0, alpha: 0.3)),
             LyricsShadowColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.yellowColor()),
-            LyricsShadowRadius : NSNumber(integer: 2)
+            LyricsShadowRadius : NSNumber(float: 2)
         ]
         
         NSUserDefaults.standardUserDefaults().registerDefaults(userDefaults)
         
-        applicationController = AppController()
+        NSColorPanel.sharedColorPanel().showsAlpha = true
         
+        applicationController = AppController()
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {

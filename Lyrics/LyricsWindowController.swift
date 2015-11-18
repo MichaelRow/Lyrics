@@ -78,7 +78,7 @@ class LyricsWindowController: NSWindowController {
         displayLyrics("LyricsX", secondLyrics: nil)
         
         let nc:NSNotificationCenter=NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: "setAttributes", name: LyricsAttributesChangedNotification, object: nil)
+        nc.addObserver(self, selector: "handleAttributesUpdate", name: LyricsAttributesChangedNotification, object: nil)
         nc.addObserver(self, selector: "setScreenResolution", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
 
     }
@@ -188,37 +188,43 @@ class LyricsWindowController: NSWindowController {
     }
     
     func setAttributes() {
-        let bkColor:NSColor=NSColor.blackColor().colorWithAlphaComponent(0)
-        let fontColor:NSColor=NSColor.redColor()
-        let fontSize:CGFloat=36
-        let cgfont:CGFontRef=CGFontCreateWithFontName("PingFangSC-Semibold")!
-        let font:NSFont=NSFont(name: "PingFangSC-Semibold", size: fontSize)!
-        let shadowColor:NSColor=NSColor.yellowColor()
-        let shadowRadius:CGFloat=2
+        let bkColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsBackgroundColor) as! NSData) as! NSColor
+        let textColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsTextColor) as! NSData) as! NSColor
+        let textSize:CGFloat = CGFloat(userDefaults.floatForKey(LyricsFontSize))
+        let font:NSFont = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: textSize)!
         
         attrs=[NSFontAttributeName:font]
         
-        baseLayer.backgroundColor=bkColor.CGColor
+        baseLayer.backgroundColor = bkColor.CGColor
         
-        firstLyricsLayer.foregroundColor = fontColor.CGColor
-        firstLyricsLayer.fontSize = fontSize
-        firstLyricsLayer.font = cgfont
-        firstLyricsLayer.shadowColor = shadowColor.CGColor
-        firstLyricsLayer.shadowRadius=shadowRadius
-        firstLyricsLayer.shadowOpacity=1
-        firstLyricsLayer.shadowOffset=CGSizeMake(0,0)
+        firstLyricsLayer.foregroundColor = textColor.CGColor
+        firstLyricsLayer.fontSize = textSize
+        firstLyricsLayer.font = font
         
+        secondlyricsLayer.foregroundColor = textColor.CGColor
+        secondlyricsLayer.fontSize = textSize
+        secondlyricsLayer.font = font
         
-        secondlyricsLayer.foregroundColor=fontColor.CGColor
-        secondlyricsLayer.fontSize=fontSize
-        secondlyricsLayer.font=cgfont
-        secondlyricsLayer.shadowColor=shadowColor.CGColor
-        secondlyricsLayer.shadowRadius=shadowRadius
-        secondlyricsLayer.shadowOpacity=1
-        secondlyricsLayer.shadowOffset=CGSizeMake(0,0)
+        if userDefaults.boolForKey(LyricsShadowModeEnable) {
+            let shadowColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsShadowColor) as! NSData) as! NSColor
+            let shadowRadius:CGFloat = CGFloat(userDefaults.floatForKey(LyricsShadowRadius))
+            firstLyricsLayer.shadowColor = shadowColor.CGColor
+            firstLyricsLayer.shadowRadius = shadowRadius
+            firstLyricsLayer.shadowOpacity = 1
+            firstLyricsLayer.shadowOffset = CGSizeMake(0,0)
+            
+            secondlyricsLayer.shadowColor = shadowColor.CGColor
+            secondlyricsLayer.shadowRadius = shadowRadius
+            secondlyricsLayer.shadowOpacity = 1
+            secondlyricsLayer.shadowOffset = CGSizeMake(0,0)
+        } else {
+            firstLyricsLayer.shadowOpacity = 0
+            secondlyricsLayer.shadowOpacity = 0
+        }
     }
     
     func setScreenResolution() {
+        // Only this method can run in background thread
         let visibleFrame:NSRect=(NSScreen.mainScreen()?.visibleFrame)!
         visibleSize=visibleFrame.size
         visibleOrigin=visibleFrame.origin
@@ -226,6 +232,12 @@ class LyricsWindowController: NSWindowController {
         firstLyricsLayer.contentsScale=(NSScreen.mainScreen()?.backingScaleFactor)!
         secondlyricsLayer.contentsScale=firstLyricsLayer.contentsScale
         NSLog("Screen Visible Res Changed to:(%f,%f) O:(%f,%f)", visibleSize.width,visibleSize.height,visibleOrigin.x,visibleOrigin.y)
+    }
+    
+    func handleAttributesUpdate() {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.setAttributes()
+        }
     }
 
 }

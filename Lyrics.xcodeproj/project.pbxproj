@@ -46,6 +46,7 @@
 		76C511781BEC6FD50095F510 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C511771BEC6FD50095F510 /* Macros.swift */; };
 		76DD65C41BFA1386000882D3 /* XiamiAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DD65C11BFA1386000882D3 /* XiamiAPI.m */; };
 		76DD65C51BFA1386000882D3 /* XMLParserForXiami.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DD65C31BFA1386000882D3 /* XMLParserForXiami.m */; };
+		76FE94411BFC223600A1AC27 /* TextPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FE94401BFC223600A1AC27 /* TextPreview.swift */; };
 		76FF43791BEF9BAB00D2B14F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +114,7 @@
 		76DD65C11BFA1386000882D3 /* XiamiAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiamiAPI.m; sourceTree = "<group>"; };
 		76DD65C21BFA1386000882D3 /* XMLParserForXiami.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserForXiami.h; sourceTree = "<group>"; };
 		76DD65C31BFA1386000882D3 /* XMLParserForXiami.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserForXiami.m; sourceTree = "<group>"; };
+		76FE94401BFC223600A1AC27 /* TextPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPreview.swift; sourceTree = "<group>"; };
 		76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				76C047251BF2F34C005053AC /* AppPrefsWindowController.swift */,
+				76FE94401BFC223600A1AC27 /* TextPreview.swift */,
 				76C047171BF2E335005053AC /* DBPrefsWindowController.h */,
 				76C047181BF2E335005053AC /* DBPrefsWindowController.m */,
 				7660C5011BF05471002E3204 /* LyricsWindowController.swift */,
@@ -415,6 +418,7 @@
 				76596BC51BF6219300DEEF62 /* GeciMeAPI.m in Sources */,
 				76C047261BF2F34C005053AC /* AppPrefsWindowController.swift in Sources */,
 				764334931BF95ECF00C4B740 /* iTunesBridge.m in Sources */,
+				76FE94411BFC223600A1AC27 /* TextPreview.swift in Sources */,
 				7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */,
 				76596BC21BF6219300DEEF62 /* SongInfos.m in Sources */,
 				76C511781BEC6FD50095F510 /* Macros.swift in Sources */,

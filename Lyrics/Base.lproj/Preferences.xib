@@ -7,20 +7,29 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AppPrefsWindowController" customModule="LyricsX" customModuleProvider="target">
             <connections>
+                <outlet property="applyButton" destination="2MS-Zm-Upl" id="Zim-6x-NY2"/>
+                <outlet property="bkColor" destination="EW0-Bd-p9N" id="fph-28-bHi"/>
                 <outlet property="donateView" destination="162-Ff-cWD" id="jzk-Ll-KB5"/>
+                <outlet property="fontDisplayText" destination="0FF-WL-2dH" id="aqe-Ki-ifH"/>
                 <outlet property="generalPrefsView" destination="hzc-UQ-83r" id="gn9-FJ-f9h"/>
                 <outlet property="lyricsPrefsView" destination="57y-D4-ovD" id="o8Q-xJ-sGp"/>
+                <outlet property="revertButton" destination="lBX-iN-a5e" id="9eh-RN-Oat"/>
                 <outlet property="savingPathPopUp" destination="zr6-Uo-3Au" id="e5E-dm-H7H"/>
+                <outlet property="shadowColor" destination="0vG-ps-ld4" id="YUl-nh-JWn"/>
+                <outlet property="shadowModeCheckbox" destination="vcw-CJ-Mdz" id="7Zr-oN-yXd"/>
+                <outlet property="shadowRadius" destination="EFR-xQ-6Lz" id="MjK-rx-KHZ"/>
+                <outlet property="textColor" destination="Bkr-05-QrQ" id="Edz-dd-qeK"/>
+                <outlet property="textPreview" destination="FdQ-wS-kv6" id="0UG-0D-gZw"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="hzc-UQ-83r" userLabel="General Prefs View">
-            <rect key="frame" x="0.0" y="0.0" width="386" height="320"/>
+            <rect key="frame" x="0.0" y="0.0" width="386" height="343"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zr6-Uo-3Au">
-                    <rect key="frame" x="183" y="276" width="153" height="26"/>
+                    <rect key="frame" x="183" y="299" width="153" height="26"/>
                     <animations/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="fWl-Xe-miF">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -46,7 +55,7 @@
                     </connections>
                 </popUpButton>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KNE-hz-sb3">
-                    <rect key="frame" x="350" y="280" width="16" height="16"/>
+                    <rect key="frame" x="350" y="303" width="16" height="16"/>
                     <animations/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="openDir_icon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="jsI-Sz-XAb">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -57,7 +66,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jJf-SX-8uR">
-                    <rect key="frame" x="18" y="279" width="149" height="17"/>
+                    <rect key="frame" x="18" y="302" width="149" height="17"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lrc files download path:" id="hr6-dW-Nap">
                         <font key="font" metaFont="system"/>
@@ -82,7 +91,7 @@
                     </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70D-Cz-LtQ">
-                    <rect key="frame" x="18" y="250" width="120" height="18"/>
+                    <rect key="frame" x="18" y="273" width="120" height="18"/>
                     <animations/>
                     <buttonCell key="cell" type="check" title="Quit with iTunes" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HlU-FW-E5p">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -158,13 +167,13 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="cDL-hk-TLE"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsHeightFromDockToLyrics" id="V8Y-qg-k9m">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
                         </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="cDL-hk-TLE"/>
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Sz-bb-rfm">
@@ -176,16 +185,16 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="uW8-Nk-2WJ">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToLeft" id="qL1-Bs-w3c">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="uW8-Nk-2WJ">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -195,16 +204,16 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="vND-dE-260"/>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="FuK-BO-oZ1">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToLeft" id="Ffa-R4-eDx">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="FuK-BO-oZ1">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -218,16 +227,16 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="ENO-oI-m6t">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToBottom" id="e7b-Dj-M8H">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="ENO-oI-m6t">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -237,16 +246,16 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="UkZ-uf-4Yu"/>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="nY6-bt-ozF">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToBottom" id="s1g-dU-mWP">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="nY6-bt-ozF">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -260,16 +269,16 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="w5f-Qj-Zf4">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstWidth" id="cQh-Pa-QzV">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="w5f-Qj-Zf4">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -279,16 +288,16 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="q6s-5O-VWm"/>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="7tP-CI-6fe">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstWidth" id="LNZ-32-MwP">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="7tP-CI-6fe">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -302,16 +311,16 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="tpv-WR-fU9">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstHeight" id="axy-vf-Bae">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="tpv-WR-fU9">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -321,16 +330,16 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="oNH-qP-SNA"/>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="lkS-hL-ZVg">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstHeight" id="7z3-HS-44l">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="lkS-hL-ZVg">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -353,58 +362,75 @@
                     </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oKj-ot-eCk">
-                    <rect key="frame" x="18" y="200" width="315" height="18"/>
+                    <rect key="frame" x="18" y="200" width="306" height="18"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Replace current lyrics when found a better lyrics" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ION-iq-BzH">
+                    <buttonCell key="cell" type="check" title="Replace current lyrics when found a better one" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ION-iq-BzH">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7F-jz-A7F">
+                    <rect key="frame" x="18" y="250" width="147" height="18"/>
+                    <animations/>
+                    <buttonCell key="cell" type="check" title="Use Two-Line mode " bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MG8-bW-VCk">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsTwoLineMode" id="g6m-Yi-ngN">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
             </subviews>
             <animations/>
-            <point key="canvasLocation" x="319" y="227"/>
+            <point key="canvasLocation" x="319" y="238.5"/>
         </customView>
         <customView id="57y-D4-ovD" userLabel="Lyrics Prefs View">
-            <rect key="frame" x="0.0" y="0.0" width="338" height="260"/>
+            <rect key="frame" x="0.0" y="0.0" width="368" height="275"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mRZ-GY-6eW">
-                    <rect key="frame" x="18" y="120" width="117" height="17"/>
+                    <rect key="frame" x="184" y="178" width="103" height="17"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Background Color:" id="ppy-d0-8h2">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Bkground Color:" id="ppy-d0-8h2">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EW0-Bd-p9N">
-                    <rect key="frame" x="144" y="120" width="52" height="23"/>
+                    <rect key="frame" x="296" y="175" width="52" height="23"/>
                     <animations/>
-                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="color" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsBackgroundColor" id="9sC-1a-CUM">
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsBackgroundColor" id="H1N-Tk-VbG">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
                                 <string key="NSValueTransformerName">NSKeyedUnarchiveFromData</string>
                             </dictionary>
                         </binding>
                     </connections>
                 </colorWell>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0FF-WL-2dH">
-                    <rect key="frame" x="75" y="218" width="189" height="22"/>
+                    <rect key="frame" x="69" y="233" width="198" height="22"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="DHh-rI-WhT">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="DHh-rI-WhT">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FdQ-wS-kv6" userLabel="Font Preview">
-                    <rect key="frame" x="218" y="66" width="100" height="100"/>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FdQ-wS-kv6" userLabel="Font Preview" customClass="TextPreview" customModule="LyricsX" customModuleProvider="target">
+                    <rect key="frame" x="20" y="43" width="328" height="90"/>
                     <animations/>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eTF-XY-b6N">
-                    <rect key="frame" x="18" y="218" width="35" height="17"/>
+                    <rect key="frame" x="18" y="233" width="35" height="17"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Font:" id="zh2-zj-mcJ">
                         <font key="font" metaFont="system"/>
@@ -413,7 +439,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eib-Ly-6Tm">
-                    <rect key="frame" x="18" y="155" width="70" height="17"/>
+                    <rect key="frame" x="18" y="175" width="70" height="17"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text Color:" id="dzy-7B-rAj">
                         <font key="font" metaFont="system"/>
@@ -422,7 +448,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FJt-iV-yN3">
-                    <rect key="frame" x="18" y="87" width="93" height="17"/>
+                    <rect key="frame" x="18" y="146" width="93" height="17"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Shadow Color:" id="R4p-PL-Qsu">
                         <font key="font" metaFont="system"/>
@@ -431,41 +457,40 @@
                     </textFieldCell>
                 </textField>
                 <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bkr-05-QrQ">
-                    <rect key="frame" x="144" y="155" width="52" height="23"/>
+                    <rect key="frame" x="117" y="175" width="52" height="23"/>
                     <animations/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsTextColor" id="czH-EL-H39">
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsTextColor" id="Zac-rs-auN">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
                                 <string key="NSValueTransformerName">NSKeyedUnarchiveFromData</string>
                             </dictionary>
                         </binding>
                     </connections>
                 </colorWell>
                 <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0vG-ps-ld4">
-                    <rect key="frame" x="144" y="85" width="52" height="23"/>
+                    <rect key="frame" x="117" y="144" width="52" height="23"/>
                     <animations/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsShadowColor" id="PHl-xR-OMb">
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsShadowModeEnable" id="Zau-5j-qCE">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsShadowColor" id="LoZ-2l-x2h">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
                                 <string key="NSValueTransformerName">NSKeyedUnarchiveFromData</string>
                             </dictionary>
                         </binding>
                     </connections>
                 </colorWell>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2MS-Zm-Upl">
-                    <rect key="frame" x="249" y="13" width="75" height="32"/>
-                    <animations/>
-                    <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kga-pK-E2E">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EFR-xQ-6Lz">
-                    <rect key="frame" x="144" y="53" width="52" height="22"/>
+                    <rect key="frame" x="296" y="146" width="52" height="20"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="3" drawsBackground="YES" id="0Fz-Vv-mno">
                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Ufw-dI-E9n"/>
@@ -474,15 +499,22 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsShadowRadius" id="HKN-I4-ypm">
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsShadowModeEnable" id="aMJ-D0-THN">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                             </dictionary>
                         </binding>
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsShadowRadius" id="YEb-gy-1R2">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <outlet property="delegate" destination="-2" id="EcN-by-IEw"/>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KjN-M2-O5n">
-                    <rect key="frame" x="18" y="56" width="101" height="17"/>
+                    <rect key="frame" x="184" y="146" width="101" height="17"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Shadow Radius:" id="q3A-xR-kMb">
                         <font key="font" metaFont="system"/>
@@ -490,58 +522,64 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7F-jz-A7F">
-                    <rect key="frame" x="173" y="189" width="147" height="18"/>
-                    <animations/>
-                    <buttonCell key="cell" type="check" title="Use Two-Line mode " bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MG8-bW-VCk">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsTwoLineMode" id="jF6-F0-AsI">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcw-CJ-Mdz">
-                    <rect key="frame" x="18" y="189" width="134" height="18"/>
+                    <rect key="frame" x="18" y="204" width="140" height="18"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Use shadow mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pmn-h8-cK0">
+                    <buttonCell key="cell" type="check" title="Enable text shadow" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pmn-h8-cK0">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsShadowModeEnable" id="3Sy-Lx-5go">
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsShadowModeEnable" id="HP7-ZE-anf">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
                         </binding>
                     </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DDA-IL-DE4">
-                    <rect key="frame" x="277" y="216" width="24" height="24"/>
+                    <rect key="frame" x="289" y="233" width="24" height="24"/>
                     <animations/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="font_icon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="8Uo-Cn-lYP">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="showFontPanel:" target="-2" id="PCd-GQ-3sW"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2MS-Zm-Upl">
+                    <rect key="frame" x="284" y="7" width="70" height="32"/>
+                    <animations/>
+                    <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kga-pK-E2E">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                    </buttonCell>
+                    <connections>
+                        <action selector="applyChanges:" target="-2" id="gLo-Rn-aun"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lBX-iN-a5e">
-                    <rect key="frame" x="166" y="13" width="78" height="32"/>
+                    <rect key="frame" x="208" y="7" width="70" height="32"/>
                     <animations/>
-                    <buttonCell key="cell" type="push" title="Restore" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wNt-Qo-6us">
+                    <buttonCell key="cell" type="push" title="Revert" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wNt-Qo-6us">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
 Gw
 </string>
                     </buttonCell>
+                    <connections>
+                        <action selector="restoreChanges:" target="-2" id="Fyc-aG-hhj"/>
+                    </connections>
                 </button>
             </subviews>
             <animations/>
-            <point key="canvasLocation" x="319" y="617"/>
+            <point key="canvasLocation" x="-195" y="233.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="UKb-ML-D6F"/>
         <customView id="162-Ff-cWD" userLabel="Donate View">
