@@ -26,32 +26,56 @@
                             <menuItem isSeparatorItem="YES" id="Kon-oS-t3B"/>
                             <menuItem title="Copy Lyrics to Pasteboafd" id="hA5-FO-Nk2">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="copyLyricsToPb:" target="-2" id="c3I-f4-Cof"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Copy Lyrics to Pasteboard(with Time-Tags)" id="Ej4-Uf-FPV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="copyLrcFileContentsToPb:" target="-2" id="nhH-hL-5f1"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Edit Lyrics" id="aHI-5b-EXH">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="editLyrics:" target="-2" id="1NM-fU-FWj"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="V78-Pj-41Z"/>
                             <menuItem title="Import Lrc File" id="M13-bN-2sa">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="importLrcFile:" target="-2" id="Sxg-UQ-GlJ"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Export Lrc File" id="gbo-B5-Rdc">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="exportLrcFile:" target="-2" id="OtZ-vi-by1"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="CM0-FN-R8L"/>
                             <menuItem title="Write Lyrics to iTunes" id="9IB-fJ-7CD">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="writeLyricsToiTunes:" target="-2" id="OzK-ZJ-pvP"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
                 </menuItem>
                 <menuItem title="Export Artwork From iTunes" id="Czc-V7-Kvq">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="exportArtwork:" target="-2" id="qL1-eT-eXl"/>
+                    </connections>
                 </menuItem>
                 <menuItem title="Search Lyrics &amp; Artworks..." id="a7O-Hu-mob">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="searchLyricsAndArtworks:" target="-2" id="6Uh-VR-sAm"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="jz7-1h-D1M"/>
                 <menuItem title="Preferences..." id="Hpk-pw-fAI">
@@ -65,6 +89,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="orderFrontStandardAboutPanel:" target="-1" id="UVr-pZ-Hc1"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Check For Update..." id="R96-lC-i2Q">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="checkForUpdate:" target="-2" id="J20-89-mLG"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Quit Lyrics" id="V6J-Hi-T0z">

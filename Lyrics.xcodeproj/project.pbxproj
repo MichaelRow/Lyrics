@@ -173,9 +173,9 @@
 			children = (
 				76C047251BF2F34C005053AC /* AppPrefsWindowController.swift */,
 				76FE94401BFC223600A1AC27 /* TextPreview.swift */,
+				7660C5011BF05471002E3204 /* LyricsWindowController.swift */,
 				76C047171BF2E335005053AC /* DBPrefsWindowController.h */,
 				76C047181BF2E335005053AC /* DBPrefsWindowController.m */,
-				7660C5011BF05471002E3204 /* LyricsWindowController.swift */,
 			);
 			name = "Wins & Views";
 			sourceTree = "<group>";

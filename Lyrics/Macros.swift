@@ -19,6 +19,8 @@ let LyricsAttributesChangedNotification:String="LyricsAttributesChanged"
 //User Defaults
 let LyricsSavingPathPopUpIndex:String="LyricsSavingPathPopUpIndex"
 let LyricsUserSavingPath:String="LyricsUserSavingPath"
+let LyricsAutoConvertChinese:String="LyricsAutoConvertChinese"
+let LyricsChineseTypeIndex:String="LyricsChineseTypeIndex"
 let LyricsQuitWithITunes:String="LyricsQuitWithITunes"
 let LyricsDisabledWhenPaused:String="LyricsDisabledWhenPaused"
 let LyricsDisabledWhenSreenShot:String="LyricsDisabledWhenSreenShot"

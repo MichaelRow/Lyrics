@@ -21,6 +21,10 @@ class TextPreview: NSView {
 
     override func drawRect(dirtyRect: NSRect) {
         drawStringInCenter()
+        
+        NSColor.grayColor().set()
+        NSBezierPath.setDefaultLineWidth(5)
+        NSBezierPath.strokeRect(self.bounds)
     }
     
     func setAttributs(font:NSFont, textColor:NSColor, bkColor:NSColor, enableShadow:Bool, shadowColor:NSColor, shadowRadius:CGFloat) {

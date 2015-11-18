@@ -142,17 +142,52 @@ class AppController: NSObject {
         NSApp.activateIgnoringOtherApps(true)
     }
     
+    @IBAction func checkForUpdate(sender: AnyObject) {
+        NSWorkspace.sharedWorkspace().openURL(NSURL(string: "https://github.com/MichaelRow/Lyrics/releases")!)
+    }
+    
+    @IBAction func exportArtwork(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func searchLyricsAndArtworks(sender: AnyObject) {
+    }
+    
+    @IBAction func copyLyricsToPb(sender: AnyObject) {
+    }
+    
+    @IBAction func copyLrcFileContentsToPb(sender: AnyObject) {
+    }
+    
+    @IBAction func editLyrics(sender: AnyObject) {
+    }
+    
+    @IBAction func importLrcFile(sender: AnyObject) {
+    }
+    
+    @IBAction func exportLrcFile(sender: AnyObject) {
+    }
+    
+    @IBAction func writeLyricsToiTunes(sender: AnyObject) {
+    }
+    
+    
 // MARK: - iTunes Events
     
     func iTunesTrackingThread() {
-        var playerPosition: Int
+        // side node: iTunes update playerPosition once per second.
+        var iTunesPosition: Int = 0
+        var currentPosition: Int = 0
         
         while true {
             if iTunes.playing() {
                 if lyricsArray.count != 0 {
-                    playerPosition = iTunes.playerPosition()
+                    iTunesPosition = iTunes.playerPosition()
+                    if ((currentPosition / 1000) != (iTunesPosition / 1000) && currentPosition % 1000 < 849) {
+                        currentPosition = iTunesPosition
+                    }
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                        self.handlingPositionChange(playerPosition)
+                        self.handlingPositionChange(iTunesPosition)
                     })
                 }
             }
@@ -163,6 +198,7 @@ class AppController: NSObject {
                 return
             }
             NSThread.sleepForTimeInterval(0.15)
+            currentPosition += 150
         }
     }
     
@@ -224,12 +260,29 @@ class AppController: NSObject {
     
 // MARK: - Lrc Methods
     
-    func parsingLrc(lrcContents:NSString) {
+    func parsingLrc(theLrcContents:NSString) {
         
         // Parse lrc file to get lyrics, time-tags and time offset
         NSLog("Start to Parse lrc")
         lyricsArray.removeAll()
-        
+        let lrcContents: NSString
+        if userDefaults.boolForKey(LyricsAutoConvertChinese) {
+            switch userDefaults.integerForKey(LyricsChineseTypeIndex) {
+            case 0:
+                lrcContents = convertToSC(theLrcContents)
+            case 1:
+                lrcContents = convertToTC(theLrcContents)
+            case 2:
+                lrcContents = convertToTC_Taiwan(theLrcContents)
+            case 3:
+                lrcContents = convertToTC_HK(theLrcContents)
+            default:
+                lrcContents = theLrcContents
+                break
+            }
+        } else {
+            lrcContents = theLrcContents
+        }
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
         let lrcParagraphs: NSArray = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
         let regexForTimeTag: NSRegularExpression
@@ -466,6 +519,7 @@ class AppController: NSObject {
         }
         if lyricsContents == nil || !testLrc(lyricsContents) {
             NSLog("better lrc not found or it's not lrc file,trying others")
+            betterLrc = nil
             for lrc in serverLrcs {
                 let theURL:NSURL = NSURL(string: lrc.lyricURL)!
                 do {
