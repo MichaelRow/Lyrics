@@ -1,19 +1,9 @@
-# Lyrics
+# LyricsX
 Swift-based iTunes plug-in to display lyrics on the desktop.
 
-###Still Developping Now
-Done:
-* Lyrics display Module
-* Preferences Module 
-* Chinese Convert Module
-* Swift Version iTunes API
-* Status Bar Module
+###Still Developping Now And Almost Done!
 
-To-Do:
-* iTunes Tracking Module
-* Lyrics and artworks search module (use the lrcseeker code,maybe convert to swift)
-* Lyrics Parsing module (use the lyrics-combine code,maybe convert to swift)
-
+You can compile the alpha version of LyricsX
 
 ###Special Thanks
 * [DynamicLyrics Project](https://github.com/MartianZ/DynamicLyrics)
