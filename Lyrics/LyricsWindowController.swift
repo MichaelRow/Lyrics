@@ -18,13 +18,14 @@ import Cocoa
 
 class LyricsWindowController: NSWindowController {
     
-    var baseLayer: CALayer!
+    var backgroundLayer: CALayer!
     var firstLyricsLayer: CATextLayer!
-    var secondlyricsLayer: CATextLayer!
+    var secondLyricsLayer: CATextLayer!
     var attrs: [String:AnyObject]!
     var visibleSize: NSSize!
     var visibleOrigin: NSPoint!
     var userDefaults: NSUserDefaults!
+    var flag: Bool = true
     
     convenience init() {
         self.init(windowNibName:"LyricsWindow")
@@ -53,55 +54,116 @@ class LyricsWindowController: NSWindowController {
             self.window?.collectionBehavior=NSWindowCollectionBehavior.CanJoinAllSpaces
         }
         
-        baseLayer=CALayer()
+        backgroundLayer=CALayer()
         firstLyricsLayer=CATextLayer()
-        secondlyricsLayer=CATextLayer()
+        secondLyricsLayer=CATextLayer()
         
-        baseLayer.anchorPoint=CGPointZero
-        baseLayer.position=CGPointMake(0, 0)
-        baseLayer.cornerRadius=20
+        backgroundLayer.anchorPoint=CGPointZero
+        backgroundLayer.position=CGPointMake(0, 0)
+        backgroundLayer.cornerRadius=20
         
         firstLyricsLayer.anchorPoint=CGPointZero
         firstLyricsLayer.position=CGPointMake(0, 0)
         firstLyricsLayer.alignmentMode=kCAAlignmentCenter
         
-        secondlyricsLayer.anchorPoint=CGPointZero
-        secondlyricsLayer.position=CGPointMake(0, 0)
-        secondlyricsLayer.alignmentMode=kCAAlignmentCenter
+        secondLyricsLayer.anchorPoint=CGPointZero
+        secondLyricsLayer.position=CGPointMake(0, 0)
+        secondLyricsLayer.alignmentMode=kCAAlignmentCenter
         
-        self.window?.contentView?.layer!.addSublayer(baseLayer)
-        baseLayer.addSublayer(firstLyricsLayer)
-        baseLayer.addSublayer(secondlyricsLayer)
+        self.window?.contentView?.layer!.addSublayer(backgroundLayer)
+        backgroundLayer.addSublayer(firstLyricsLayer)
+        backgroundLayer.addSublayer(secondLyricsLayer)
         setAttributes()
         setScreenResolution()
-        baseLayer.speed=1.1
+        backgroundLayer.speed=1.1
         displayLyrics("LyricsX", secondLyrics: nil)
         
         let nc:NSNotificationCenter=NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "handleAttributesUpdate", name: LyricsAttributesChangedNotification, object: nil)
-        nc.addObserver(self, selector: "setScreenResolution", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
+        nc.addObserver(self, selector: "handleScreenResolutionChange", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
 
     }
+    
+// MARK: - set lyrics properties
+    
+    func setAttributes() {
+        let bkColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsBackgroundColor) as! NSData) as! NSColor
+        let textColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsTextColor) as! NSData) as! NSColor
+        let textSize:CGFloat = CGFloat(userDefaults.floatForKey(LyricsFontSize))
+        let font:NSFont = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: textSize)!
+        
+        attrs=[NSFontAttributeName:font]
+        
+        backgroundLayer.backgroundColor = bkColor.CGColor
+        
+        firstLyricsLayer.foregroundColor = textColor.CGColor
+        firstLyricsLayer.fontSize = textSize
+        firstLyricsLayer.font = font
+        
+        secondLyricsLayer.foregroundColor = textColor.CGColor
+        secondLyricsLayer.fontSize = textSize
+        secondLyricsLayer.font = font
+        
+        if userDefaults.boolForKey(LyricsShadowModeEnable) {
+            let shadowColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsShadowColor) as! NSData) as! NSColor
+            let shadowRadius:CGFloat = CGFloat(userDefaults.floatForKey(LyricsShadowRadius))
+            firstLyricsLayer.shadowColor = shadowColor.CGColor
+            firstLyricsLayer.shadowRadius = shadowRadius
+            firstLyricsLayer.shadowOpacity = 1
+            firstLyricsLayer.shadowOffset = CGSizeMake(0,0)
+            
+            secondLyricsLayer.shadowColor = shadowColor.CGColor
+            secondLyricsLayer.shadowRadius = shadowRadius
+            secondLyricsLayer.shadowOpacity = 1
+            secondLyricsLayer.shadowOffset = CGSizeMake(0,0)
+        } else {
+            firstLyricsLayer.shadowOpacity = 0
+            secondLyricsLayer.shadowOpacity = 0
+        }
+    }
+    
+    func setScreenResolution() {
+        // Only this method can run in background thread
+        let visibleFrame:NSRect=(NSScreen.mainScreen()?.visibleFrame)!
+        visibleSize=visibleFrame.size
+        visibleOrigin=visibleFrame.origin
+        self.window?.setFrame(CGRectMake(0, 0, visibleSize.width, visibleSize.height), display: true)
+        firstLyricsLayer.contentsScale=(NSScreen.mainScreen()?.backingScaleFactor)!
+        secondLyricsLayer.contentsScale=firstLyricsLayer.contentsScale
+        NSLog("Screen Visible Res Changed to:(%f,%f) O:(%f,%f)", visibleSize.width,visibleSize.height,visibleOrigin.x,visibleOrigin.y)
+    }
 
+// MARK: - display lyrics
+    
     func displayLyrics(firstLyrics:NSString?, secondLyrics:NSString?) {
         if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
             // first Lyrics empty means it's instrument time
-            baseLayer.speed=0.2
-            baseLayer.frame = NSMakeRect(baseLayer.frame.origin.x+baseLayer.frame.size.width/2, 0, 0, 0)
+            
+            flag = true
+            backgroundLayer.speed=0.2
+            firstLyricsLayer.speed = 0.2
+            secondLyricsLayer.speed = 0.2
+            
+            firstLyricsLayer.frame = NSMakeRect(backgroundLayer.frame.size.width/3, 0, 0, 0)
+            secondLyricsLayer.frame = NSMakeRect(backgroundLayer.frame.size.width/3, 0, 0, 0)
             firstLyricsLayer.string = ""
-            secondlyricsLayer.string = ""
+            secondLyricsLayer.string = ""
             firstLyricsLayer.hidden=true
-            secondlyricsLayer.hidden=true
-            baseLayer.hidden=true
+            secondLyricsLayer.hidden=true
+            backgroundLayer.hidden=true
         }
         else if (secondLyrics==nil) || (secondLyrics?.isEqualToString(""))! {
             // One-Line Mode or sencond lyrics is instrument time
-            baseLayer.speed = 1.1
-            firstLyricsLayer.string = ""
-            secondlyricsLayer.string = ""
+            
+            flag = true
+            backgroundLayer.speed = 0.8
+            firstLyricsLayer.speed = 0.8
+            secondLyricsLayer.speed = 0.8
+            
+            secondLyricsLayer.string = ""
             firstLyricsLayer.hidden = false
-            secondlyricsLayer.hidden = true
-            baseLayer.hidden = false
+            secondLyricsLayer.hidden = true
+            backgroundLayer.hidden = false
             
             let strSize:NSSize = firstLyrics!.sizeWithAttributes(attrs)
             let x:CGFloat
@@ -112,7 +174,7 @@ class LyricsWindowController: NSWindowController {
                 x = visibleOrigin.x+(visibleSize.width-frameSize.width)/2
                 y = visibleOrigin.y+CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
                 
-                baseLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height)
+                backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height)
                 firstLyricsLayer.frame=CGRectMake(0, 0, frameSize.width, frameSize.height)
             } else {
                 
@@ -120,7 +182,7 @@ class LyricsWindowController: NSWindowController {
                 x = CGFloat(userDefaults.integerForKey(LyricsConstToLeft))
                 y = CGFloat(userDefaults.integerForKey(LyricsConstToBottom))
                 
-                baseLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height)
+                backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height)
                 firstLyricsLayer.frame=CGRectMake(0, (frameSize.height-strSize.height)/2, frameSize.width, strSize.height)
             }
             
@@ -128,16 +190,18 @@ class LyricsWindowController: NSWindowController {
         }
         else {
             // Two-Line Mode
-            baseLayer.speed = 1.1
-            firstLyricsLayer.string = ""
-            secondlyricsLayer.string = ""
+            backgroundLayer.speed = 0.8
+            firstLyricsLayer.speed = 0.8
+            secondLyricsLayer.speed = 0.8
+            
             firstLyricsLayer.hidden=false
-            secondlyricsLayer.hidden=false
-            baseLayer.hidden=false
+            secondLyricsLayer.hidden=false
+            backgroundLayer.hidden=false
+            
             var size2nd:NSSize=secondLyrics!.sizeWithAttributes(attrs)
             size2nd.width=size2nd.width+50
             size2nd.height=size2nd.height*0.9
-            secondlyricsLayer.string=secondLyrics
+            secondLyricsLayer.string=secondLyrics
             
             var size1st:NSSize=firstLyrics!.sizeWithAttributes(attrs)
             size1st.width=size1st.width+50
@@ -179,64 +243,42 @@ class LyricsWindowController: NSWindowController {
                 rect2nd.origin.y = height/2-rect2nd.size.height
             }
             
-            baseLayer.frame = CGRectMake(x, y, width, height)
-            firstLyricsLayer.frame = rect1st
-            secondlyricsLayer.frame = rect2nd
-            firstLyricsLayer.string = firstLyrics
-            secondlyricsLayer.string = secondLyrics
-        }
-    }
-    
-    func setAttributes() {
-        let bkColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsBackgroundColor) as! NSData) as! NSColor
-        let textColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsTextColor) as! NSData) as! NSColor
-        let textSize:CGFloat = CGFloat(userDefaults.floatForKey(LyricsFontSize))
-        let font:NSFont = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: textSize)!
-        
-        attrs=[NSFontAttributeName:font]
-        
-        baseLayer.backgroundColor = bkColor.CGColor
-        
-        firstLyricsLayer.foregroundColor = textColor.CGColor
-        firstLyricsLayer.fontSize = textSize
-        firstLyricsLayer.font = font
-        
-        secondlyricsLayer.foregroundColor = textColor.CGColor
-        secondlyricsLayer.fontSize = textSize
-        secondlyricsLayer.font = font
-        
-        if userDefaults.boolForKey(LyricsShadowModeEnable) {
-            let shadowColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsShadowColor) as! NSData) as! NSColor
-            let shadowRadius:CGFloat = CGFloat(userDefaults.floatForKey(LyricsShadowRadius))
-            firstLyricsLayer.shadowColor = shadowColor.CGColor
-            firstLyricsLayer.shadowRadius = shadowRadius
-            firstLyricsLayer.shadowOpacity = 1
-            firstLyricsLayer.shadowOffset = CGSizeMake(0,0)
+            backgroundLayer.frame = CGRectMake(x, y, width, height)
             
-            secondlyricsLayer.shadowColor = shadowColor.CGColor
-            secondlyricsLayer.shadowRadius = shadowRadius
-            secondlyricsLayer.shadowOpacity = 1
-            secondlyricsLayer.shadowOffset = CGSizeMake(0,0)
-        } else {
-            firstLyricsLayer.shadowOpacity = 0
-            secondlyricsLayer.shadowOpacity = 0
+            if flag {
+                firstLyricsLayer.string = firstLyrics
+                secondLyricsLayer.string = secondLyrics
+                firstLyricsLayer.frame = rect1st
+                secondLyricsLayer.frame = rect2nd
+                
+            } else {
+                firstLyricsLayer.string = secondLyrics
+                secondLyricsLayer.string = firstLyrics
+                firstLyricsLayer.frame = rect2nd
+                secondLyricsLayer.frame = rect1st
+            }
+            
+            flag = !flag
         }
     }
-    
-    func setScreenResolution() {
-        // Only this method can run in background thread
-        let visibleFrame:NSRect=(NSScreen.mainScreen()?.visibleFrame)!
-        visibleSize=visibleFrame.size
-        visibleOrigin=visibleFrame.origin
-        self.window?.setFrame(CGRectMake(0, 0, visibleSize.width, visibleSize.height), display: true)
-        firstLyricsLayer.contentsScale=(NSScreen.mainScreen()?.backingScaleFactor)!
-        secondlyricsLayer.contentsScale=firstLyricsLayer.contentsScale
-        NSLog("Screen Visible Res Changed to:(%f,%f) O:(%f,%f)", visibleSize.width,visibleSize.height,visibleOrigin.x,visibleOrigin.y)
-    }
+
+//MARK: - Notification Methods
     
     func handleAttributesUpdate() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.setAttributes()
+            
+            //reflash lyrics
+            self.displayLyrics(self.firstLyricsLayer.string as? NSString, secondLyrics: self.secondLyricsLayer.string as? NSString)
+        }
+    }
+    
+    func handleScreenResolutionChange() {
+        setScreenResolution()
+        
+        //reflash lyrics
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.displayLyrics(self.firstLyricsLayer.string as? NSString, secondLyrics: self.secondLyricsLayer.string as? NSString)
         }
     }
 

@@ -56,5 +56,16 @@
     }
 }
 
+-(NSData *) artwork {
+    @autoreleasepool {
+        SBElementArray* theArtworks = [[iTunes currentTrack] artworks];
+        if ([theArtworks count] > 0) {
+            iTunesArtwork *artwork = [theArtworks objectAtIndex:0];
+            return [artwork rawData];
+        } else {
+            return nil;
+        }
+    }
+}
 
 @end
