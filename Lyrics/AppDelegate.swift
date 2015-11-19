@@ -30,17 +30,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsSearchForBetterLrc : NSNumber(bool: true),
             LyricsDisplayInAllSpaces: NSNumber(bool: true),
             LyricsUseAutoLayout : NSNumber(bool: true),
-            LyricsHeightFromDockToLyrics : NSNumber(integer: 25),
+            LyricsHeightFromDockToLyrics : NSNumber(integer: 15),
             LyricsConstToLeft : NSNumber(integer: 50),
             LyricsConstToBottom : NSNumber(integer: 70),
             LyricsConstWidth : NSNumber(integer: 1000),
             LyricsConstHeight : NSNumber(integer: 100),
             LyricsFontName : "Helvetica",
             LyricsFontSize : NSNumber(float: 36),
-            LyricsTextColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.redColor()),
-            LyricsBackgroundColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor(calibratedWhite: 0, alpha: 0.3)),
+            LyricsTextColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.whiteColor()),
+            LyricsBackgroundColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor(calibratedWhite: 0, alpha: 0.5)),
             LyricsShadowColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.yellowColor()),
-            LyricsShadowRadius : NSNumber(float: 2)
+            LyricsShadowRadius : NSNumber(float: 4)
         ]
         
         NSUserDefaults.standardUserDefaults().registerDefaults(userDefaults)

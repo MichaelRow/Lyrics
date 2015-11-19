@@ -147,6 +147,10 @@ class AppController: NSObject {
     }
     
     @IBAction func exportArtwork(sender: AnyObject) {
+        let desktop: String = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, [.UserDomainMask], true).first!
+        let panel = NSSavePanel()
+        panel.directoryURL = NSURL(string: desktop)
+        panel.allowedFileTypes = ["png",  "jpg", "jpf", "bmp", "gif", "tiff"]
         
     }
     
@@ -183,7 +187,7 @@ class AppController: NSObject {
             if iTunes.playing() {
                 if lyricsArray.count != 0 {
                     iTunesPosition = iTunes.playerPosition()
-                    if ((currentPosition / 1000) != (iTunesPosition / 1000) && currentPosition % 1000 < 849) {
+                    if (currentPosition < iTunesPosition) || ((currentPosition / 1000) != (iTunesPosition / 1000) && currentPosition % 1000 < 850) {
                         currentPosition = iTunesPosition
                     }
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
@@ -385,10 +389,16 @@ class AppController: NSObject {
                     return
                 }
                 else {
+                    var secondLyrics: NSString!
                     if currentLyrics != tempLyricsArray[index-1].lyricsSentence {
                         currentLyrics = tempLyricsArray[index-1].lyricsSentence
+                        if userDefaults.boolForKey(LyricsTwoLineMode) && index < tempLyricsArray.count {
+                            if tempLyricsArray[index].lyricsSentence != "" {
+                                secondLyrics = tempLyricsArray[index].lyricsSentence
+                            }
+                        }
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.lyricsWindow.displayLyrics(tempLyricsArray[index-1].lyricsSentence, secondLyrics: nil)
+                            self.lyricsWindow.displayLyrics(tempLyricsArray[index-1].lyricsSentence, secondLyrics: secondLyrics)
                         })
                     }
                     return
