@@ -20,7 +20,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Lyrics" id="0NF-uT-60C">
                         <items>
-                            <menuItem title="Slider" id="ENJ-eO-aCa">
+                            <menuItem title="Lyrics Delay Setter" id="ENJ-eO-aCa">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Kon-oS-t3B"/>
@@ -107,16 +107,11 @@
             <point key="canvasLocation" x="332" y="211.5"/>
         </menu>
         <customView id="3Jx-vU-QNM" userLabel="Lyrics Delay View">
-            <rect key="frame" x="0.0" y="0.0" width="289" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="235" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eBq-om-SCZ">
-                    <rect key="frame" x="103" y="5" width="127" height="21"/>
-                    <animations/>
-                    <sliderCell key="cell" state="on" alignment="left" minValue="-10" maxValue="10" tickMarkPosition="above" sliderType="linear" id="6KT-oh-Hbz"/>
-                </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q88-EF-ohR">
-                    <rect key="frame" x="18" y="8" width="81" height="17"/>
+                    <rect key="frame" x="18" y="7" width="81" height="17"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lyrics Delay:" id="03a-uH-jAo">
                         <font key="font" metaFont="system"/>
@@ -125,17 +120,52 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hod-ZB-daW">
-                    <rect key="frame" x="234" y="6" width="46" height="19"/>
+                    <rect key="frame" x="107" y="5" width="61" height="19"/>
                     <animations/>
-                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Xwr-CI-ndX">
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="Xwr-CI-ndX">
+                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" lenient="YES" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" id="ZW5-md-eUU">
+                            <real key="minimum" value="-10000"/>
+                            <real key="maximum" value="10000"/>
+                        </numberFormatter>
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.timeDly" id="KgN-fW-kct">
+                            <dictionary key="options">
+                                <string key="NSNullPlaceholder">0</string>
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQX-LU-OA2">
+                    <rect key="frame" x="195" y="7" width="22" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ms" id="htP-HY-Y99">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lUm-Ay-pgl">
+                    <rect key="frame" x="173" y="2" width="19" height="27"/>
+                    <animations/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" increment="100" minValue="-10000" maxValue="10000" id="beX-Hj-1Ng"/>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.timeDly" id="RUR-nb-r1Q">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </stepper>
             </subviews>
             <animations/>
-            <point key="canvasLocation" x="360.5" y="380"/>
+            <point key="canvasLocation" x="333.5" y="380"/>
         </customView>
     </objects>
 </document>
