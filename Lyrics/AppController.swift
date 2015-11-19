@@ -19,6 +19,7 @@ class AppController: NSObject {
     var lyricsWindow:LyricsWindowController!
     var statusBarItem:NSStatusItem!
     var lyricsArray:[LyricsLineModel]!
+    var idTagsArray:[NSString]!
     var currentLyrics: NSString!
     var operationQueue:NSOperationQueue!
     var iTunes:iTunesBridge!
@@ -44,6 +45,7 @@ class AppController: NSObject {
         super.init()
         iTunes = iTunesBridge()
         lyricsArray = Array()
+        idTagsArray = Array()
         songList = Array()
         qianqian = QianQianAPI()
         xiami = XiamiAPI()
@@ -55,6 +57,10 @@ class AppController: NSObject {
         NSBundle(forClass: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
         setupStatusItem()
         
+        lyricsWindow=LyricsWindowController()
+        lyricsWindow.showWindow(nil)
+        
+        // check lrc saving path
         if !checkSavingPath() {
             let alert: NSAlert = NSAlert()
             alert.messageText = "An error occured"
@@ -87,12 +93,10 @@ class AppController: NSObject {
 
     }
     
-    
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
         NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
     }
-    
     
     func setupStatusItem() {
         let icon:NSImage=NSImage(named: "status_icon")!
@@ -101,8 +105,6 @@ class AppController: NSObject {
         statusBarItem.image=icon
         statusBarItem.highlightMode=true
         statusBarItem.menu=statusBarMenu
-        lyricsWindow=LyricsWindowController()
-        lyricsWindow.showWindow(self)
         delayMenuItem.view=lyricsDelayView
         lyricsDelayView.autoresizingMask=[.ViewWidthSizable]
     }
@@ -151,16 +153,69 @@ class AppController: NSObject {
         let panel = NSSavePanel()
         panel.directoryURL = NSURL(string: desktop)
         panel.allowedFileTypes = ["png",  "jpg", "jpf", "bmp", "gif", "tiff"]
-        
+        panel.nameFieldStringValue = iTunes.currentTitle() + " - " + iTunes.currentArtist()
+        panel.extensionHidden = true
+        if panel.runModal() == NSFileHandlingPanelOKButton {
+            iTunes.artwork().writeToURL(panel.URL!, atomically: false)
+        }
     }
     
     @IBAction func searchLyricsAndArtworks(sender: AnyObject) {
+        
     }
     
     @IBAction func copyLyricsToPb(sender: AnyObject) {
+        let notification: NSUserNotification = NSUserNotification()
+        if lyricsArray.count == 0 {
+            notification.title = "No Lyrics Copied"
+            notification.informativeText = "There not exists any lyrics for the playing song."
+            notification.deliveryDate = NSDate(timeIntervalSinceNow: 0.5)
+            NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
+            return
+        }
+        
+        let theLyrics: NSMutableString = NSMutableString()
+        for lrc in lyricsArray {
+            theLyrics.appendString(lrc.lyricsSentence as String + "\n")
+        }
+        let pb = NSPasteboard.generalPasteboard()
+        pb.clearContents()
+        pb.writeObjects([theLyrics])
+        notification.title = "Lyrics Copied"
+        notification.informativeText = "Now you can right-click and paste the lyrics when needed."
+        notification.deliveryDate = NSDate(timeIntervalSinceNow: 0.5)
+        NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
     }
     
-    @IBAction func copyLrcFileContentsToPb(sender: AnyObject) {
+    @IBAction func copyLyricsWithTagsToPb(sender: AnyObject) {
+        
+        // reason for not reading frome original lrc is I want to disgards all useless infos in the
+        // original file and keep other changes.
+        let notification: NSUserNotification = NSUserNotification()
+        if lyricsArray.count == 0 {
+            notification.title = "No Lyrics Copied"
+            notification.informativeText = "There not exists any lyrics for the playing song."
+            notification.deliveryDate = NSDate(timeIntervalSinceNow: 0.5)
+            NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
+            return
+        
+        } else {
+            let theLyrics: NSMutableString = NSMutableString()
+            for idtag in idTagsArray {
+                theLyrics.appendString((idtag as String) + "\n")
+            }
+            theLyrics.appendString("[offset:\(timeDly)]\n")
+            for lrc in lyricsArray {
+                theLyrics.appendString((lrc.timeTag as String) + (lrc.lyricsSentence as String) + "\n")
+            }
+            let pb = NSPasteboard.generalPasteboard()
+            pb.clearContents()
+            pb.writeObjects([theLyrics])
+            notification.title = "Lyrics Copied"
+            notification.informativeText = "Now you can right-click and paste the lyrics when needed."
+            notification.deliveryDate = NSDate(timeIntervalSinceNow: 0.5)
+            NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
+        }
     }
     
     @IBAction func editLyrics(sender: AnyObject) {
@@ -179,6 +234,7 @@ class AppController: NSObject {
 // MARK: - iTunes Events
     
     func iTunesTrackingThread() {
+        
         // side node: iTunes update playerPosition once per second.
         var iTunesPosition: Int = 0
         var currentPosition: Int = 0
@@ -196,6 +252,7 @@ class AppController: NSObject {
                 }
             }
             else {
+                
                 //No need to track iTunes PlayerPosition when it's paused, just kill the thread.
                 NSLog("Kill iTunesTrackingThread")
                 isTrackingRunning=false
@@ -221,7 +278,11 @@ class AppController: NSObject {
                     })
                 }
                 NSLog("iTunes Paused")
+                
                 if userDefaults.boolForKey(LyricsQuitWithITunes) {
+                    
+                    // iTunes would paused before quited, so we should check whether iTunes is running
+                    // seconds later.
                     if timer != nil {
                         timer.invalidate()
                     }
@@ -230,7 +291,8 @@ class AppController: NSObject {
                 return
             }
             else if userInfo!["Player State"] as! String == "Playing" {
-                //iTunes is playing, we should create the tracking thread
+                
+                //iTunes is playing now, we should create the tracking thread if not exists.
                 if !isTrackingRunning {
                     NSLog("Create new iTunesTrackingThead")
                     isTrackingRunning = true
@@ -240,6 +302,8 @@ class AppController: NSObject {
                 }
                 NSLog("iTunes Playing")
             }
+            
+            // check song ID
             if currentPlayingSongID == nil {
                 currentPlayingSongID = iTunes.currentPersistentID().copy() as! NSString
                 return
@@ -249,6 +313,8 @@ class AppController: NSObject {
             } else {
                 NSLog("Song Changed to: %@",iTunes.currentTitle())
                 lyricsArray.removeAll()
+                idTagsArray.removeAll()
+                timeDly = 0
                 lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                 currentPlayingSongID = iTunes.currentPersistentID().copy() as! NSString
                 handlingSongChange()
@@ -269,7 +335,11 @@ class AppController: NSObject {
         // Parse lrc file to get lyrics, time-tags and time offset
         NSLog("Start to Parse lrc")
         lyricsArray.removeAll()
+        idTagsArray.removeAll()
+        timeDly = 0
         let lrcContents: NSString
+        
+        // whether convert Chinese type
         if userDefaults.boolForKey(LyricsAutoConvertChinese) {
             switch userDefaults.integerForKey(LyricsChineseTypeIndex) {
             case 0:
@@ -334,10 +404,11 @@ class AppController: NSObject {
                 if theMatchedRange.length == 0 {
                     continue
                 }
+                idTagsArray.append(str as! NSString)
                 let theIDTag: NSString = str.substringWithRange(theMatchedRange)
                 let colonRange: NSRange = theIDTag.rangeOfString(":")
                 let idStr: NSString = theIDTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
-                if idStr != "offset" {
+                if idStr != "offset".stringByReplacingOccurrencesOfString(" ", withString: "") {
                     continue
                 }
                 else {
@@ -345,7 +416,6 @@ class AppController: NSObject {
                     timeDly = delayStr.integerValue
                 }
             }
-            
         }
     }
     
@@ -465,6 +535,30 @@ class AppController: NSObject {
         return output
     }
     
+//    func readLyricsFromFile() -> NSString? {
+//        let savingPath: NSString
+//        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
+//            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+//        } else {
+//            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
+//        }
+//        let songTitle:String = iTunes.currentTitle().stringByReplacingOccurrencesOfString("/", withString: "&")
+//        let artist:String = iTunes.currentArtist().stringByReplacingOccurrencesOfString("/", withString: "&")
+//        let lrcFilePath = savingPath.stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
+//        if  NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath) {
+//            let lrcContents: NSString?
+//            do {
+//                lrcContents = try NSString(contentsOfFile: lrcFilePath, encoding: NSUTF8StringEncoding)
+//            } catch {
+//                lrcContents = nil
+//                NSLog("Failed to load lrc")
+//            }
+//            return lrcContents
+//        } else {
+//            return nil
+//        }
+//    }
+    
 // MARK: - Lyrics Source Loading Completion
     
     func isBetterLrc(serverSongTitle: NSString) -> Bool {
@@ -545,7 +639,7 @@ class AppController: NSObject {
         }
         if betterLrc != nil {
             if loadingLrcSongID == currentPlayingSongID {
-                serverSongInfo = betterLrc.songTitle
+                serverSongInfo = betterLrc.songTitle + betterLrc.artist
                 parsingLrc(lyricsContents)
             }
             saveLrcToLocal(lyricsContents)
@@ -559,8 +653,10 @@ class AppController: NSObject {
         if !testLrc(lyricsContents) {
             return
         }
-        serverSongInfo = iTunes.currentTitle()
-        parsingLrc(lyricsContents)
+        serverSongInfo = loadingLrcSongTitle
+        if loadingLrcSongID == currentPlayingSongID {
+            parsingLrc(lyricsContents)
+        }
         if lyricsArray.count  == 0 {
             return
         }

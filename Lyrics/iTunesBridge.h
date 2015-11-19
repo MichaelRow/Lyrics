@@ -18,5 +18,6 @@
 -(NSString *) currentArtist;
 -(NSString *) currentPersistentID;
 -(NSInteger) playerPosition;
+-(NSData *) artwork;
 
 @end

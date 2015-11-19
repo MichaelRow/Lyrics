@@ -10,7 +10,7 @@
 /************************ IMPORTANT ************************/
 /*                                                         */
 /*     LyricsWindowController Must Run in Main Thread      */
-/*   In other threads may cause some unexpected problems   */
+/*        In other threads may no response or crash        */
 /*                                                         */
 /************************ IMPORTANT ************************/
 
@@ -28,60 +28,58 @@ class LyricsWindowController: NSWindowController {
     var flag: Bool = true
     
     convenience init() {
-        self.init(windowNibName:"LyricsWindow")
-        userDefaults = NSUserDefaults.standardUserDefaults()
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-
-    override func windowDidLoad() {
-        super.windowDidLoad()
         NSLog("Init Lyrics window")
-        self.window?.backgroundColor=NSColor.clearColor()
-        self.window?.opaque=false
-        self.window?.hasShadow=false
-        self.window?.ignoresMouseEvents=true
-        self.window?.level=Int(CGWindowLevelForKey(.FloatingWindowLevelKey))
-        self.window?.contentView?.layer=CALayer()
-        self.window?.contentView?.wantsLayer=true
+        let lyricsWindow = NSWindow(contentRect: NSZeroRect, styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.Buffered, `defer`: false)
+        self.init(window: lyricsWindow)
+        self.window = lyricsWindow
         
+        lyricsWindow.backgroundColor = NSColor.clearColor()
+        lyricsWindow.opaque = false
+        lyricsWindow.hasShadow = false
+        lyricsWindow.ignoresMouseEvents = true
+        lyricsWindow.level = Int(CGWindowLevelForKey(.FloatingWindowLevelKey))
+        lyricsWindow.contentView?.layer = CALayer()
+        lyricsWindow.contentView?.wantsLayer=true
+        
+        userDefaults = NSUserDefaults.standardUserDefaults()
         if userDefaults.boolForKey(LyricsDisabledWhenSreenShot) {
-            self.window?.sharingType=NSWindowSharingType.None
+            lyricsWindow.sharingType = NSWindowSharingType.None
         }
         if userDefaults.boolForKey(LyricsDisplayInAllSpaces) {
-            self.window?.collectionBehavior=NSWindowCollectionBehavior.CanJoinAllSpaces
+            lyricsWindow.collectionBehavior = NSWindowCollectionBehavior.CanJoinAllSpaces
         }
         
-        backgroundLayer=CALayer()
-        firstLyricsLayer=CATextLayer()
-        secondLyricsLayer=CATextLayer()
+        backgroundLayer = CALayer()
+        firstLyricsLayer = CATextLayer()
+        secondLyricsLayer = CATextLayer()
         
-        backgroundLayer.anchorPoint=CGPointZero
-        backgroundLayer.position=CGPointMake(0, 0)
-        backgroundLayer.cornerRadius=20
+        backgroundLayer.anchorPoint = CGPointZero
+        backgroundLayer.position = CGPointMake(0, 0)
+        backgroundLayer.cornerRadius = 20
         
-        firstLyricsLayer.anchorPoint=CGPointZero
-        firstLyricsLayer.position=CGPointMake(0, 0)
-        firstLyricsLayer.alignmentMode=kCAAlignmentCenter
+        firstLyricsLayer.anchorPoint = CGPointZero
+        firstLyricsLayer.position = CGPointMake(0, 0)
+        firstLyricsLayer.alignmentMode = kCAAlignmentCenter
         
-        secondLyricsLayer.anchorPoint=CGPointZero
-        secondLyricsLayer.position=CGPointMake(0, 0)
-        secondLyricsLayer.alignmentMode=kCAAlignmentCenter
+        secondLyricsLayer.anchorPoint = CGPointZero
+        secondLyricsLayer.position = CGPointMake(0, 0)
+        secondLyricsLayer.alignmentMode = kCAAlignmentCenter
         
-        self.window?.contentView?.layer!.addSublayer(backgroundLayer)
+        lyricsWindow.contentView?.layer!.addSublayer(backgroundLayer)
         backgroundLayer.addSublayer(firstLyricsLayer)
         backgroundLayer.addSublayer(secondLyricsLayer)
         setAttributes()
         setScreenResolution()
-        backgroundLayer.speed=1.1
+        backgroundLayer.speed = 1.1
         displayLyrics("LyricsX", secondLyrics: nil)
         
-        let nc:NSNotificationCenter=NSNotificationCenter.defaultCenter()
+        let nc:NSNotificationCenter = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "handleAttributesUpdate", name: LyricsAttributesChangedNotification, object: nil)
         nc.addObserver(self, selector: "handleScreenResolutionChange", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
-
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
 // MARK: - set lyrics properties
@@ -123,7 +121,7 @@ class LyricsWindowController: NSWindowController {
     }
     
     func setScreenResolution() {
-        // Only this method can run in background thread
+
         let visibleFrame:NSRect=(NSScreen.mainScreen()?.visibleFrame)!
         visibleSize=visibleFrame.size
         visibleOrigin=visibleFrame.origin
@@ -274,10 +272,10 @@ class LyricsWindowController: NSWindowController {
     }
     
     func handleScreenResolutionChange() {
-        setScreenResolution()
         
         //reflash lyrics
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.setScreenResolution()
             self.displayLyrics(self.firstLyricsLayer.string as? NSString, secondLyrics: self.secondLyricsLayer.string as? NSString)
         }
     }
