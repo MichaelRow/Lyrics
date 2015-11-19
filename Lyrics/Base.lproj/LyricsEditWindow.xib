@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
@@ -7,35 +7,50 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LyricsEditWindowController" customModule="LyricsX" customModuleProvider="target">
             <connections>
+                <outlet property="cancelAction" destination="Zab-TL-zie" id="W2K-UX-pfJ"/>
+                <outlet property="textView" destination="DdJ-zl-cNn" id="4cz-qu-ebd"/>
                 <outlet property="window" destination="ar1-cr-ly1" id="1GL-PC-jIM"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="ar1-cr-ly1" customClass="NSPanel">
+        <window title="Edit Lyrics" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="ar1-cr-ly1" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" HUD="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="136" y="163" width="449" height="479"/>
+            <rect key="contentRect" x="136" y="163" width="449" height="505"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="iUk-dH-HqH">
-                <rect key="frame" x="0.0" y="0.0" width="449" height="479"/>
+                <rect key="frame" x="0.0" y="0.0" width="449" height="505"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJl-Am-Wtk">
-                        <rect key="frame" x="20" y="20" width="409" height="439"/>
-                        <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="M7e-zw-shG">
-                            <rect key="frame" x="0.0" y="0.0" width="409" height="439"/>
+                    <button verticalHuggingPriority="750" id="eqX-3O-wen">
+                        <rect key="frame" x="20" y="476" width="126" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <animations/>
+                        <buttonCell key="cell" type="roundRect" title="Copy to Pasteboard" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YUH-mE-ilV">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="cellTitle"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="copyToPb:" target="-2" id="Gl7-12-St4"/>
+                        </connections>
+                    </button>
+                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="fJl-Am-Wtk">
+                        <rect key="frame" x="20" y="39" width="409" height="430"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="M7e-zw-shG">
+                            <rect key="frame" x="1" y="1" width="407" height="428"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView ambiguous="YES" drawsBackground="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="DdJ-zl-cNn">
-                                    <rect key="frame" x="0.0" y="0.0" width="409" height="439"/>
+                                <textView drawsBackground="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="DdJ-zl-cNn">
+                                    <rect key="frame" x="0.0" y="0.0" width="407" height="428"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <animations/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="409" height="439"/>
+                                    <size key="minSize" width="407" height="428"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="409" height="439"/>
+                                    <size key="minSize" width="407" height="428"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -49,15 +64,39 @@
                             <animations/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="88f-K2-53Z">
-                            <rect key="frame" x="393" y="0.0" width="16" height="439"/>
+                            <rect key="frame" x="392" y="1" width="16" height="428"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <animations/>
                         </scroller>
                     </scrollView>
+                    <button verticalHuggingPriority="750" id="Zab-TL-zie">
+                        <rect key="frame" x="302" y="12" width="53" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
+                        <buttonCell key="cell" type="roundRect" title="Cancel" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="M2J-kq-dWj">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="cellTitle"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancelAction:" target="-2" id="kP0-Xg-Yzq"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" id="zeA-LU-YJy">
+                        <rect key="frame" x="376" y="12" width="53" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
+                        <buttonCell key="cell" type="roundRect" title="OK" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pnh-dj-Jao">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="cellTitle"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="okAction:" target="-2" id="C8Z-r5-AhO"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <animations/>
             </view>
-            <point key="canvasLocation" x="442.5" y="319.5"/>
+            <point key="canvasLocation" x="442.5" y="332.5"/>
         </window>
     </objects>
 </document>

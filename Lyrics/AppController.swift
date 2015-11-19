@@ -17,6 +17,7 @@ class AppController: NSObject {
     
     var isTrackingRunning:Bool = false
     var lyricsWindow:LyricsWindowController!
+    var lyricsEidtWindow:LyricsEditWindowController!
     var statusBarItem:NSStatusItem!
     var lyricsArray:[LyricsLineModel]!
     var idTagsArray:[NSString]!
@@ -41,7 +42,6 @@ class AppController: NSObject {
 // MARK: - Init & deinit
     
     override init() {
-        
         super.init()
         iTunes = iTunesBridge()
         lyricsArray = Array()
@@ -78,7 +78,7 @@ class AppController: NSObject {
         if iTunes.running() && iTunes.playing() {
             currentPlayingSongID = iTunes.currentPersistentID().copy() as! NSString
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-                self.handlingSongChange()
+                self.handleSongChange()
             }
             NSLog("Create new iTunesTrackingThead")
             isTrackingRunning = true
@@ -89,6 +89,8 @@ class AppController: NSObject {
         
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "lrcLoadingCompleted:", name: LrcLoadedNotification, object: nil)
+        nc.addObserver(self, selector: "handleUserEditLyrics:", name: LyricsUserEditLyrics, object: nil)
+        
         NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
 
     }
@@ -165,15 +167,9 @@ class AppController: NSObject {
     }
     
     @IBAction func copyLyricsToPb(sender: AnyObject) {
-        let notification: NSUserNotification = NSUserNotification()
         if lyricsArray.count == 0 {
-            notification.title = "No Lyrics Copied"
-            notification.informativeText = "There not exists any lyrics for the playing song."
-            notification.deliveryDate = NSDate(timeIntervalSinceNow: 0.5)
-            NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
             return
         }
-        
         let theLyrics: NSMutableString = NSMutableString()
         for lrc in lyricsArray {
             theLyrics.appendString(lrc.lyricsSentence as String + "\n")
@@ -181,44 +177,49 @@ class AppController: NSObject {
         let pb = NSPasteboard.generalPasteboard()
         pb.clearContents()
         pb.writeObjects([theLyrics])
-        notification.title = "Lyrics Copied"
-        notification.informativeText = "Now you can right-click and paste the lyrics when needed."
-        notification.deliveryDate = NSDate(timeIntervalSinceNow: 0.5)
-        NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
     }
     
     @IBAction func copyLyricsWithTagsToPb(sender: AnyObject) {
         
         // reason for not reading frome original lrc is I want to disgards all useless infos in the
         // original file and keep other changes.
-        let notification: NSUserNotification = NSUserNotification()
         if lyricsArray.count == 0 {
-            notification.title = "No Lyrics Copied"
-            notification.informativeText = "There not exists any lyrics for the playing song."
-            notification.deliveryDate = NSDate(timeIntervalSinceNow: 0.5)
-            NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
             return
-        
-        } else {
-            let theLyrics: NSMutableString = NSMutableString()
-            for idtag in idTagsArray {
-                theLyrics.appendString((idtag as String) + "\n")
-            }
-            theLyrics.appendString("[offset:\(timeDly)]\n")
-            for lrc in lyricsArray {
-                theLyrics.appendString((lrc.timeTag as String) + (lrc.lyricsSentence as String) + "\n")
-            }
-            let pb = NSPasteboard.generalPasteboard()
-            pb.clearContents()
-            pb.writeObjects([theLyrics])
-            notification.title = "Lyrics Copied"
-            notification.informativeText = "Now you can right-click and paste the lyrics when needed."
-            notification.deliveryDate = NSDate(timeIntervalSinceNow: 0.5)
-            NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
         }
+        let theLyrics: NSMutableString = NSMutableString()
+        for idtag in idTagsArray {
+            theLyrics.appendString((idtag as String) + "\n")
+        }
+        theLyrics.appendString("[offset:\(timeDly)]\n")
+        for lrc in lyricsArray {
+            theLyrics.appendString((lrc.timeTag as String) + (lrc.lyricsSentence as String) + "\n")
+        }
+        let pb = NSPasteboard.generalPasteboard()
+        pb.clearContents()
+        pb.writeObjects([theLyrics])
     }
     
     @IBAction func editLyrics(sender: AnyObject) {
+        let theLyrics: NSMutableString = NSMutableString()
+        for idtag in idTagsArray {
+            theLyrics.appendString((idtag as String) + "\n")
+        }
+        theLyrics.appendString("[offset:\(timeDly)]\n")
+        for lrc in lyricsArray {
+            theLyrics.appendString((lrc.timeTag as String) + (lrc.lyricsSentence as String) + "\n")
+        }
+        
+        if lyricsEidtWindow == nil {
+            lyricsEidtWindow = LyricsEditWindowController()
+        }
+        
+        lyricsEidtWindow.setLyricsContents(theLyrics as String, songID: currentPlayingSongID, songTitle: iTunes.currentTitle(), andArtist: iTunes.currentArtist())
+        
+        if !(lyricsEidtWindow.window?.visible)! {
+            lyricsEidtWindow.showWindow(nil)
+        }
+        lyricsEidtWindow.window?.makeKeyAndOrderFront(nil)
+        NSApp.activateIgnoringOtherApps(true)
     }
     
     @IBAction func importLrcFile(sender: AnyObject) {
@@ -247,7 +248,7 @@ class AppController: NSObject {
                         currentPosition = iTunesPosition
                     }
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                        self.handlingPositionChange(iTunesPosition)
+                        self.handlePositionChange(iTunesPosition)
                     })
                 }
             }
@@ -304,7 +305,7 @@ class AppController: NSObject {
             }
             
             // check song ID
-            if currentPlayingSongID == nil {
+            if currentPlayingSongID == "" {
                 currentPlayingSongID = iTunes.currentPersistentID().copy() as! NSString
                 return
             }
@@ -317,7 +318,7 @@ class AppController: NSObject {
                 timeDly = 0
                 lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                 currentPlayingSongID = iTunes.currentPersistentID().copy() as! NSString
-                handlingSongChange()
+                handleSongChange()
             }
         }
     }
@@ -442,9 +443,9 @@ class AppController: NSObject {
         return false
     }
 
-// MARK: - Handling Thead
+// MARK: - Handle Events
     
-    func handlingPositionChange (playerPosition: Int) {
+    func handlePositionChange (playerPosition: Int) {
         let tempLyricsArray = lyricsArray
         var index: Int
         for index=0; index < tempLyricsArray.count; ++index {
@@ -486,7 +487,7 @@ class AppController: NSObject {
         }
     }
     
-    func handlingSongChange() {
+    func handleSongChange() {
         let savingPath: NSString
         if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
             savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
@@ -522,9 +523,17 @@ class AppController: NSObject {
         geciMe.getLyricsWithTitle(titleForSearch, artist: artistForSearch)
     }
     
+    func handleUserEditLyrics(n: NSNotification) {
+        let userInfo: [NSObject:AnyObject] = n.userInfo!
+        if (userInfo["SongID"] as! String) == currentPlayingSongID {
+            parsingLrc(lyricsEidtWindow.textView.string!)
+        }
+        saveLrcToLocal(lyricsEidtWindow.textView.string!, songTitle: userInfo["SongTitle"] as! String, artist: userInfo["SongArtist"] as! String)
+    }
+    
     func delSpecificSymbol(input: NSString) -> NSString {
         let specificSymbol: [String] = [
-            ",", ".", "'", "\"", "`", "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "（", "）", "，",
+            ",", ".", "'", "\"", "`", "~", "!", "@", "#", "$", "%", "^", "&", "＆", "*", "(", ")", "（", "）", "，",
             "。", "“", "”", "‘", "’", "?", "？", "！", "/", "[", "]", "{", "}", "<", ">", "=", "-", "+", "×",
             "☆", "★", "√", "～"
         ]
@@ -569,30 +578,32 @@ class AppController: NSObject {
     }
     
     func lrcLoadingCompleted(n: NSNotification) {
+        
+        // we should run the handle thread one by one using dispatch_barrier_async()
         let source: Int = n.userInfo!["source"]!.integerValue
         switch source {
         case 1:
             dispatch_barrier_async(lrcSourceHandleQueue, { () -> Void in
-                self.handleLrcURL(self.qianqian.songs)
+                self.handleLrcURLDownloaded(self.qianqian.songs)
             })
         case 2:
             dispatch_barrier_async(lrcSourceHandleQueue, { () -> Void in
-                self.handleLrcURL(self.xiami.songs)
+                self.handleLrcURLDownloaded(self.xiami.songs)
             })
         case 3:
             dispatch_barrier_async(lrcSourceHandleQueue, { () -> Void in
-                self.handleLrcContents(self.ttpod.songInfo.lyric)
+                self.handleLrcContentsDownloaded(self.ttpod.songInfo.lyric)
             })
         case 4:
             dispatch_barrier_async(lrcSourceHandleQueue, { () -> Void in
-                self.handleLrcURL(self.geciMe.songs)
+                self.handleLrcURLDownloaded(self.geciMe.songs)
             })
         default:
             return;
         }
     }
     
-    func handleLrcURL(serverLrcs: NSArray) {
+    func handleLrcURLDownloaded(serverLrcs: NSArray) {
         if serverLrcs.count == 0 {
             return
         }
@@ -642,11 +653,11 @@ class AppController: NSObject {
                 serverSongInfo = betterLrc.songTitle + betterLrc.artist
                 parsingLrc(lyricsContents)
             }
-            saveLrcToLocal(lyricsContents)
+            saveLrcToLocal(lyricsContents, songTitle: loadingLrcSongTitle, artist: loadingLrcArtist)
         }
     }
     
-    func handleLrcContents(lyricsContents: NSString) {
+    func handleLrcContentsDownloaded(lyricsContents: NSString) {
         if serverSongInfo != nil {
             return
         }
@@ -660,10 +671,10 @@ class AppController: NSObject {
         if lyricsArray.count  == 0 {
             return
         }
-        saveLrcToLocal(lyricsContents)
+        saveLrcToLocal(lyricsContents, songTitle: loadingLrcSongTitle, artist: loadingLrcArtist)
     }
     
-    func saveLrcToLocal (lyricsContents: NSString) {
+    func saveLrcToLocal (lyricsContents: NSString, songTitle: NSString, artist: NSString) {
         let savingPath:NSString
         if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
             savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
@@ -686,8 +697,8 @@ class AppController: NSObject {
             }
         }
         
-        let titleForSaving = loadingLrcSongTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let artistForSaving = loadingLrcArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
+        let titleForSaving = songTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
+        let artistForSaving = artist.stringByReplacingOccurrencesOfString("/", withString: "&")
         let lrcFilePath = savingPath.stringByAppendingPathComponent("\(titleForSaving) - \(artistForSaving).lrc")
         
         if fm.fileExistsAtPath(lrcFilePath) {

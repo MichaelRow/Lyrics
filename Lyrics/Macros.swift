@@ -15,6 +15,7 @@ import Foundation
 
 //Notifications
 let LyricsAttributesChangedNotification:String="LyricsAttributesChanged"
+let LyricsUserEditLyrics:String="LyricsUserEditLyrics"
 
 //User Defaults
 let LyricsSavingPathPopUpIndex:String="LyricsSavingPathPopUpIndex"
@@ -42,4 +43,3 @@ let LyricsTextColor:String="LyricsTextColor"
 let LyricsBackgroundColor:String="LyricsBackgroundColor"
 let LyricsShadowColor:String="LyricsShadowColor"
 let LyricsShadowRadius:String="LyricsShadowRadius"
-

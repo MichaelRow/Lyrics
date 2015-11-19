@@ -85,8 +85,8 @@ class LyricsWindowController: NSWindowController {
 // MARK: - set lyrics properties
     
     func setAttributes() {
-        let bkColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsBackgroundColor) as! NSData) as! NSColor
-        let textColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.objectForKey(LyricsTextColor) as! NSData) as! NSColor
+        let bkColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsBackgroundColor)!) as! NSColor
+        let textColor:NSColor = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsTextColor)!) as! NSColor
         let textSize:CGFloat = CGFloat(userDefaults.floatForKey(LyricsFontSize))
         let font:NSFont = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: textSize)!
         

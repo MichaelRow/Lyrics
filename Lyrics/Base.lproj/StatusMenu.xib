@@ -30,10 +30,10 @@
                                     <action selector="copyLyricsToPb:" target="-2" id="c3I-f4-Cof"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Copy Lyrics to Pasteboard(with Time-Tags)" id="Ej4-Uf-FPV">
+                            <menuItem title="Copy Lyrics to Pasteboard(with Tags)" id="Ej4-Uf-FPV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="copyLrcFileContentsToPb:" target="-2" id="nhH-hL-5f1"/>
+                                    <action selector="copyLyricsWithTagsToPb:" target="-2" id="8QC-DU-PbF"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Edit Lyrics" id="aHI-5b-EXH">
