@@ -49,7 +49,7 @@ class TextPreview: NSView {
         strOrigin.x = self.bounds.origin.x + (self.bounds.size.width - strSize.width)/2
         strOrigin.y = self.bounds.origin.y + (self.bounds.size.height - strSize.height)/2
         
-        // draw background
+        // draw background layer
         let strRect: NSRect = NSMakeRect(strOrigin.x - 25, strOrigin.y, strSize.width + 50, strSize.height)
         let path:NSBezierPath = NSBezierPath(roundedRect: strRect, xRadius: 20, yRadius: 20)
         backgroundColor.set()

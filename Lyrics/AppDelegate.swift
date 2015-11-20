@@ -49,9 +49,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         applicationController = AppController()
     }
-
+    
     func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
+        if applicationController.timeDly != applicationController.timeDlyInFile {
+            NSLog("App terminating, saveing lrc time delay change...")
+            applicationController.handleLrcDelayChange()
+        }
+        
+        let runningApp = NSWorkspace.sharedWorkspace().runningApplications
+        for app in runningApp {
+            if app.executableURL?.lastPathComponent == "LrcSeeker" {
+                app.terminate()
+                NSLog("LrcSeeker Terminated")
+                break
+            }
+        }
     }
 
 }

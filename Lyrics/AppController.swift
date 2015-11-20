@@ -99,10 +99,11 @@ class AppController: NSObject {
         
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "lrcLoadingCompleted:", name: LrcLoadedNotification, object: nil)
-        nc.addObserver(self, selector: "handleUserEditLyrics:", name: LyricsUserEditLyrics, object: nil)
+        nc.addObserver(self, selector: "handleUserEditLyrics:", name: LyricsUserEditLyricsNotification, object: nil)
         
-        NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
-
+        let ndc = NSDistributedNotificationCenter.defaultCenter()
+        ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
+        ndc.addObserver(self, selector: "handleLrcSeekerEvent:", name: "LrcSeekerEvents", object: nil)
     }
     
     deinit {
@@ -161,9 +162,7 @@ class AppController: NSObject {
     }
     
     @IBAction func exportArtwork(sender: AnyObject) {
-        let desktop: String = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, [.UserDomainMask], true).first!
         let panel = NSSavePanel()
-        panel.directoryURL = NSURL(string: desktop)
         panel.allowedFileTypes = ["png",  "jpg", "jpf", "bmp", "gif", "tiff"]
         panel.nameFieldStringValue = (currentSongTitle as String) + " - " + (currentArtist as String)
         panel.extensionHidden = true
@@ -173,7 +172,8 @@ class AppController: NSObject {
     }
     
     @IBAction func searchLyricsAndArtworks(sender: AnyObject) {
-        
+        let appPath: NSURL = NSBundle.mainBundle().URLForResource("LrcSeeker", withExtension: "app")!
+        NSWorkspace.sharedWorkspace().launchApplication(appPath.path!)
     }
     
     @IBAction func copyLyricsToPb(sender: AnyObject) {
@@ -190,41 +190,23 @@ class AppController: NSObject {
     }
     
     @IBAction func copyLyricsWithTagsToPb(sender: AnyObject) {
-        
-        // reason for not reading frome original lrc is I want to disgards all useless infos in the
-        // original file and keep other changes.
-        if lyricsArray.count == 0 {
-            return
+        let lrcContents = readLocalLyrics()
+        if lrcContents != nil {
+            let pb = NSPasteboard.generalPasteboard()
+            pb.clearContents()
+            pb.writeObjects([lrcContents!])
         }
-        let theLyrics: NSMutableString = NSMutableString()
-        for idtag in idTagsArray {
-            theLyrics.appendString((idtag as String) + "\n")
-        }
-        theLyrics.appendString("[offset:\(timeDly)]\n")
-        for lrc in lyricsArray {
-            theLyrics.appendString((lrc.timeTag as String) + (lrc.lyricsSentence as String) + "\n")
-        }
-        let pb = NSPasteboard.generalPasteboard()
-        pb.clearContents()
-        pb.writeObjects([theLyrics])
     }
     
     @IBAction func editLyrics(sender: AnyObject) {
-        let theLyrics: NSMutableString = NSMutableString()
-        for idtag in idTagsArray {
-            theLyrics.appendString((idtag as String) + "\n")
+        var lrcContents = readLocalLyrics()
+        if lrcContents == nil {
+            lrcContents = ""
         }
-        theLyrics.appendString("[offset:\(timeDly)]\n")
-        for lrc in lyricsArray {
-            theLyrics.appendString((lrc.timeTag as String) + (lrc.lyricsSentence as String) + "\n")
-        }
-        
         if lyricsEidtWindow == nil {
             lyricsEidtWindow = LyricsEditWindowController()
         }
-        
-        lyricsEidtWindow.setLyricsContents(theLyrics as String, songID: currentSongID, songTitle: currentSongTitle, andArtist: currentArtist)
-        
+        lyricsEidtWindow.setLyricsContents(lrcContents! as String, songID: currentSongID, songTitle: currentSongTitle, andArtist: currentArtist)
         if !(lyricsEidtWindow.window?.visible)! {
             lyricsEidtWindow.showWindow(nil)
         }
@@ -233,12 +215,61 @@ class AppController: NSObject {
     }
     
     @IBAction func importLrcFile(sender: AnyObject) {
+        let panel: NSOpenPanel = NSOpenPanel()
+        panel.allowedFileTypes = ["lrc", "txt"]
+        panel.extensionHidden = false
+        if panel.runModal() == NSFileHandlingPanelOKButton {
+            let lrcContents: NSString!
+            do {
+                lrcContents = try NSString(contentsOfURL: panel.URL!, encoding: NSUTF8StringEncoding)
+
+            } catch let theError as NSError {
+                lrcContents = nil
+                NSLog("%@", theError.localizedDescription)
+                return
+            }
+            if lrcContents != nil && testLrc(lrcContents) {
+                parsingLrc(lrcContents)
+                saveLrcToLocal(lrcContents, songTitle: currentSongTitle, artist: currentArtist)
+            }
+        }
     }
     
     @IBAction func exportLrcFile(sender: AnyObject) {
+        let savingPath: NSString
+        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
+            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+        } else {
+            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
+        }
+        let songTitle:String = currentSongTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
+        let artist:String = currentArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
+        let lrcFilePath = savingPath.stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
+        
+        let panel: NSSavePanel = NSSavePanel()
+        panel.allowedFileTypes = ["lrc","txt"]
+        panel.nameFieldStringValue = (lrcFilePath as NSString).lastPathComponent as String
+        panel.extensionHidden = false
+        
+        if panel.runModal() == NSFileHandlingPanelOKButton {
+            do {
+                try NSFileManager.defaultManager().copyItemAtPath(lrcFilePath, toPath: panel.URL!.path!)
+            } catch let theError as NSError {
+                NSLog("%@", theError.localizedDescription)
+            }
+        }
     }
     
     @IBAction func writeLyricsToiTunes(sender: AnyObject) {
+        if lyricsArray.count == 0 {
+            return
+        } else {
+            let theLyrics: NSMutableString = NSMutableString()
+            for lrc in lyricsArray {
+                theLyrics.appendString(lrc.lyricsSentence as String + "\n")
+            }
+            iTunes.setLyrics(theLyrics as String)
+        }
     }
     
     
@@ -315,12 +346,6 @@ class AppController: NSObject {
             }
             
             // check whether song is changed
-            if currentSongID == "" {
-                currentSongID = iTunes.currentPersistentID().copy() as! NSString
-                currentSongTitle = iTunes.currentTitle().copy() as! NSString
-                currentArtist = iTunes.currentArtist().copy() as! NSString
-                return
-            }
             if currentSongID == iTunes.currentPersistentID() {
                 return
             } else {
@@ -509,31 +534,18 @@ class AppController: NSObject {
     
     func handleSongChange() {
         //load lyrics for the song which is about to play
-        let savingPath: NSString
-        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
-            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-        } else {
-            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
-        }
-        let songTitle:String = currentSongTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let artist:String = currentArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let lrcFilePath = savingPath.stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
-        if  NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath) {
-            let lrcContents: NSString
-            do {
-                lrcContents = try NSString(contentsOfFile: lrcFilePath, encoding: NSUTF8StringEncoding)
-            } catch {
-                NSLog("Failed to load lrc")
-                return
-            }
-            parsingLrc(lrcContents)
+        let lrcContents: NSString? = readLocalLyrics()
+        if lrcContents != nil {
+            parsingLrc(lrcContents!)
             if lyricsArray.count != 0 {
                 return
             }
         }
+        
+        //Search in the net if local lrc is nil or invalid
         loadingLrcSongID = currentSongID.copy() as! NSString
-        loadingLrcArtist = artist.copy() as! NSString
-        loadingLrcSongTitle = songTitle.copy() as! NSString
+        loadingLrcArtist = currentArtist.copy() as! NSString
+        loadingLrcSongTitle = currentSongTitle.copy() as! NSString
         serverSongInfo = nil
         
         let titleForSearch: String = delSpecificSymbol(currentSongTitle) as String
@@ -555,6 +567,9 @@ class AppController: NSObject {
     
     
     func handleLrcDelayChange () {
+        if lyricsArray.count == 0{
+            return
+        }
         let theLyrics: NSMutableString = NSMutableString()
         for idtag in idTagsArray {
             theLyrics.appendString((idtag as String) + "\n")
@@ -563,7 +578,24 @@ class AppController: NSObject {
         for lrc in lyricsArray {
             theLyrics.appendString((lrc.timeTag as String) + (lrc.lyricsSentence as String) + "\n")
         }
+        if lyricsArray.count > 0 {
+            theLyrics.deleteCharactersInRange(NSMakeRange(theLyrics.length-1, 1))
+        }
+        NSLog("Writing the time delay to file")
         saveLrcToLocal(theLyrics, songTitle: currentSongTitle, artist: currentArtist)
+    }
+    
+    func handleLrcSeekerEvent (n:NSNotification) {
+        NSLog("Recieved notification from LrcSeeker")
+        let userInfo = n.userInfo
+        dispatch_barrier_async(lrcSourceHandleQueue, { () -> Void in
+            let lyricsContents: String = userInfo!["LyricsContents"] as! String
+            if self.testLrc(lyricsContents) {
+                self.parsingLrc(lyricsContents)
+                self.serverSongInfo = (userInfo!["SongTitle"] as! String) + (userInfo!["Artist"] as! String)
+                self.saveLrcToLocal(lyricsContents, songTitle: self.currentSongTitle, artist: self.currentArtist)
+            }
+        })
     }
     
 // MARK: - Lyrics Source Loading Completion
@@ -740,29 +772,30 @@ class AppController: NSObject {
         return output
     }
     
-    //    func readLyricsFromFile() -> NSString? {
-    //        let savingPath: NSString
-    //        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
-    //            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-    //        } else {
-    //            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
-    //        }
-    //        let songTitle:String = currentSongTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
-    //        let artist:String = currentArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
-    //        let lrcFilePath = savingPath.stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
-    //        if  NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath) {
-    //            let lrcContents: NSString?
-    //            do {
-    //                lrcContents = try NSString(contentsOfFile: lrcFilePath, encoding: NSUTF8StringEncoding)
-    //            } catch {
-    //                lrcContents = nil
-    //                NSLog("Failed to load lrc")
-    //            }
-    //            return lrcContents
-    //        } else {
-    //            return nil
-    //        }
-    //    }
+    
+    func readLocalLyrics() -> NSString? {
+        let savingPath: NSString
+        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
+            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+        } else {
+            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
+        }
+        let songTitle:String = currentSongTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
+        let artist:String = currentArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
+        let lrcFilePath = savingPath.stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
+        if  NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath) {
+            let lrcContents: NSString?
+            do {
+                lrcContents = try NSString(contentsOfFile: lrcFilePath, encoding: NSUTF8StringEncoding)
+            } catch {
+                lrcContents = nil
+                NSLog("Failed to load lrc")
+            }
+            return lrcContents
+        } else {
+            return nil
+        }
+    }
     
 }
 

@@ -19,5 +19,6 @@
 -(NSString *) currentPersistentID;
 -(NSInteger) playerPosition;
 -(NSData *) artwork;
+-(void) setLyrics: (NSString *)lyrics;
 
 @end

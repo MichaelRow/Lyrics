@@ -32,21 +32,39 @@
     }
 }
 
+-(void) setLyrics: (NSString *)lyrics {
+    @autoreleasepool {
+        iTunes.currentTrack.lyrics = lyrics;
+    }
+}
+
 -(NSString *) currentTitle {
     @autoreleasepool {
-        return iTunes.currentTrack.name;
+        NSString *title = iTunes.currentTrack.name;
+        if (!title) {
+            title = @"";
+        }
+        return title;
     }
 }
 
 -(NSString *) currentArtist {
     @autoreleasepool {
-        return iTunes.currentTrack.artist;
+        NSString *artist = iTunes.currentTrack.artist;
+        if (!artist) {
+            artist = @"";
+        }
+        return artist;
     }
 }
 
 -(NSString *) currentPersistentID {
     @autoreleasepool {
-        return iTunes.currentTrack.persistentID;
+        NSString *persistentID = iTunes.currentTrack.persistentID;
+        if (!persistentID) {
+            persistentID = @"";
+        }
+        return persistentID;
     }
 }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7600121E1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7600121C1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib */; };
 		760012291BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */; };
+		760012521BFEB33500C7C1E4 /* LrcSeeker.app in Resources */ = {isa = PBXBuildFile; fileRef = 760012511BFEB33500C7C1E4 /* LrcSeeker.app */; };
 		7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */; };
 		7642B9041BF4709300D68FE9 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7642B9021BF4709300D68FE9 /* StatusMenu.xib */; };
 		764334931BF95ECF00C4B740 /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 764334921BF95ECF00C4B740 /* iTunesBridge.m */; };
@@ -64,6 +65,7 @@
 /* Begin PBXFileReference section */
 		7600121D1BFD9ECC00C7C1E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LyricsEditWindow.xib; sourceTree = "<group>"; };
 		760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsEditWindowController.swift; sourceTree = "<group>"; };
+		760012511BFEB33500C7C1E4 /* LrcSeeker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = LrcSeeker.app; sourceTree = "<group>"; };
 		7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsLineModel.swift; sourceTree = "<group>"; };
 		7642B9031BF4709300D68FE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusMenu.xib; sourceTree = "<group>"; };
 		7642B9061BF488AB00D68FE9 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		765FC4A81BEE514400BF3706 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				760012511BFEB33500C7C1E4 /* LrcSeeker.app */,
 				768BCB401BF1C74C00D6F5EB /* OpenCC Res */,
 				76C5115E1BEC6F8F0095F510 /* Assets.xcassets */,
 			);
@@ -390,6 +393,7 @@
 				768BCB381BF1C74400D6F5EB /* s2t.json in Resources */,
 				768BCB261BF1C64900D6F5EB /* libopencc.dylib in Resources */,
 				768BCB3C1BF1C74400D6F5EB /* t2s.json in Resources */,
+				760012521BFEB33500C7C1E4 /* LrcSeeker.app in Resources */,
 				7600121E1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib in Resources */,
 				768BCB391BF1C74400D6F5EB /* s2tw.json in Resources */,
 				768BCB3D1BF1C74400D6F5EB /* TSCharacters.ocd in Resources */,

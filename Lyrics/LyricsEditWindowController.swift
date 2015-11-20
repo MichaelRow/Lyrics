@@ -41,7 +41,7 @@ class LyricsEditWindowController: NSWindowController {
     
     @IBAction func okAction(sender: AnyObject) {
         let dic: [String:AnyObject] = ["SongID":currentSongID, "SongTitle":currentTitle, "SongArtist":currentArtist]
-        NSNotificationCenter.defaultCenter().postNotificationName(LyricsUserEditLyrics, object: nil, userInfo: dic)
+        NSNotificationCenter.defaultCenter().postNotificationName(LyricsUserEditLyricsNotification, object: nil, userInfo: dic)
         self.window?.orderOut(nil)
     }
     

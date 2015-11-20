@@ -15,7 +15,7 @@ import Foundation
 
 //Notifications
 let LyricsAttributesChangedNotification:String="LyricsAttributesChanged"
-let LyricsUserEditLyrics:String="LyricsUserEditLyrics"
+let LyricsUserEditLyricsNotification:String="LyricsUserEditLyrics"
 
 //User Defaults
 let LyricsSavingPathPopUpIndex:String="LyricsSavingPathPopUpIndex"
