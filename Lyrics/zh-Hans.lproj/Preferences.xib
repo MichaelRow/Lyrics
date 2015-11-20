@@ -37,7 +37,7 @@
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="BAs-qX-t5U">
                             <items>
-                                <menuItem title="LyricsX (Default)" id="JmS-7B-Qmm">
+                                <menuItem title="LyricsX (默认)" id="JmS-7B-Qmm">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="User Path" id="HwD-eG-KkH">
@@ -71,7 +71,7 @@
                     <rect key="frame" x="18" y="335" width="149" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lrc files download path:" id="hr6-dW-Nap">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="歌词文件保存路径:" id="hr6-dW-Nap">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -81,7 +81,7 @@
                     <rect key="frame" x="18" y="159" width="268" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Disable lyrics when taking screen shot  (restart required)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MgV-lM-BoM">
+                    <buttonCell key="cell" type="check" title="在屏幕截图时不显示歌词  (重启生效)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MgV-lM-BoM">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -98,7 +98,7 @@
                     <rect key="frame" x="18" y="276" width="120" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Quit with iTunes" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HlU-FW-E5p">
+                    <buttonCell key="cell" type="check" title="随iTunes退出" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HlU-FW-E5p">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -115,7 +115,7 @@
                     <rect key="frame" x="18" y="226" width="266" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Disable lyrics when iTunes is not playing" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="u5g-uT-rtd">
+                    <buttonCell key="cell" type="check" title="iTunes暂停时不显示歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="u5g-uT-rtd">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -132,7 +132,7 @@
                     <rect key="frame" x="18" y="77" width="222" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Use auto layout  with height from dock to lyrics:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4DC-rM-sB4">
+                    <buttonCell key="cell" type="check" title="使用动态调整的歌词布局 并设置Dock到歌词的间距:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4DC-rM-sB4">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -149,7 +149,7 @@
                     <rect key="frame" x="18" y="118" width="233" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Display lyrics in all desktop spaces (restart required)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="raA-KZ-p1a">
+                    <buttonCell key="cell" type="check" title="在所有的桌面中显示歌词 (重启生效)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="raA-KZ-p1a">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -162,29 +162,6 @@
                         </binding>
                     </connections>
                 </button>
-                <textField verticalHuggingPriority="750" id="fUX-O1-K7t">
-                    <rect key="frame" x="257" y="78" width="52" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="25" drawsBackground="YES" id="tFh-wU-dQE">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" lenient="YES" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" id="Y1v-ie-gHp">
-                            <real key="minimum" value="0.0"/>
-                            <real key="maximum" value="2000"/>
-                        </numberFormatter>
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsHeightFromDockToLyrics" id="V8Y-qg-k9m">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <bool key="NSValidatesImmediately" value="YES"/>
-                            </dictionary>
-                        </binding>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="cDL-hk-TLE"/>
-                    </connections>
-                </textField>
                 <textField verticalHuggingPriority="750" id="5Sz-bb-rfm">
                     <rect key="frame" x="40" y="21" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -365,7 +342,7 @@
                     <rect key="frame" x="18" y="43" width="351" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Use const Lyrics position (Left, Bottom, Width, Height)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="eaR-Nu-hIQ">
+                    <buttonCell key="cell" type="check" title="使用固定的歌词布局 (左间距, 底部间距, 宽度, 高度)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="eaR-Nu-hIQ">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -383,7 +360,7 @@
                     <rect key="frame" x="18" y="201" width="306" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Replace current lyrics when found a better one" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ION-iq-BzH">
+                    <buttonCell key="cell" type="check" title="当找到更佳歌词时替换当前歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ION-iq-BzH">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -392,7 +369,7 @@
                     <rect key="frame" x="18" y="251" width="175" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Display two lines of lyrics" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MG8-bW-VCk">
+                    <buttonCell key="cell" type="check" title="双行显示歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MG8-bW-VCk">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -409,7 +386,7 @@
                     <rect key="frame" x="18" y="302" width="152" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Auto convert lyrics to" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bap-1U-cHR">
+                    <buttonCell key="cell" type="check" title="自动转换歌词为:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bap-1U-cHR">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -426,15 +403,15 @@
                     <rect key="frame" x="183" y="298" width="153" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <popUpButtonCell key="cell" type="push" title="Traditional Chinese (Taiwan)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="T4i-cj-Otg" id="Giz-EL-lrv">
+                    <popUpButtonCell key="cell" type="push" title="台湾正体" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="T4i-cj-Otg" id="Giz-EL-lrv">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="HXS-u2-fMl">
                             <items>
-                                <menuItem title="Simplified Chinese" id="6Of-gP-ln0"/>
-                                <menuItem title="Traditional Chinese" id="U9R-zU-dlC"/>
-                                <menuItem title="Traditional Chinese (Taiwan)" state="on" id="T4i-cj-Otg"/>
-                                <menuItem title="Traditional Chinese (Hong Kong)" id="jkT-Vf-1nL">
+                                <menuItem title="简体中文" id="6Of-gP-ln0"/>
+                                <menuItem title="繁体中文" id="U9R-zU-dlC"/>
+                                <menuItem title="台湾正体" state="on" id="T4i-cj-Otg"/>
+                                <menuItem title="香港繁体" id="jkT-Vf-1nL">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                             </items>
@@ -449,6 +426,29 @@
                         </binding>
                     </connections>
                 </popUpButton>
+                <textField verticalHuggingPriority="750" id="fUX-O1-K7t">
+                    <rect key="frame" x="208" y="79" width="52" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="25" drawsBackground="YES" id="tFh-wU-dQE">
+                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" lenient="YES" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" id="Y1v-ie-gHp">
+                            <real key="minimum" value="0.0"/>
+                            <real key="maximum" value="2000"/>
+                        </numberFormatter>
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsHeightFromDockToLyrics" id="V8Y-qg-k9m">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="cDL-hk-TLE"/>
+                    </connections>
+                </textField>
             </subviews>
             <animations/>
             <point key="canvasLocation" x="319" y="255"/>
@@ -458,17 +458,17 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="mRZ-GY-6eW">
-                    <rect key="frame" x="182" y="178" width="103" height="17"/>
+                    <rect key="frame" x="222" y="178" width="72" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Bkground Color:" id="ppy-d0-8h2">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="背景颜色:" id="ppy-d0-8h2">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <colorWell id="EW0-Bd-p9N">
-                    <rect key="frame" x="294" y="175" width="52" height="23"/>
+                    <rect key="frame" x="295" y="173" width="52" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <color key="color" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -501,7 +501,7 @@
                     <rect key="frame" x="18" y="233" width="35" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Font:" id="zh2-zj-mcJ">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="字体:" id="zh2-zj-mcJ">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -511,7 +511,7 @@
                     <rect key="frame" x="18" y="175" width="70" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text Color:" id="dzy-7B-rAj">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="文字颜色:" id="dzy-7B-rAj">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -521,14 +521,14 @@
                     <rect key="frame" x="18" y="146" width="93" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Shadow Color:" id="R4p-PL-Qsu">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="阴影颜色:" id="R4p-PL-Qsu">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <colorWell id="Bkr-05-QrQ">
-                    <rect key="frame" x="117" y="175" width="52" height="23"/>
+                    <rect key="frame" x="93" y="173" width="52" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -543,7 +543,7 @@
                     </connections>
                 </colorWell>
                 <colorWell id="0vG-ps-ld4">
-                    <rect key="frame" x="117" y="144" width="52" height="23"/>
+                    <rect key="frame" x="93" y="142" width="52" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -563,7 +563,7 @@
                     </connections>
                 </colorWell>
                 <textField verticalHuggingPriority="750" id="EFR-xQ-6Lz">
-                    <rect key="frame" x="294" y="144" width="52" height="22"/>
+                    <rect key="frame" x="295" y="144" width="52" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="3" drawsBackground="YES" id="0Fz-Vv-mno">
@@ -588,10 +588,10 @@
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="KjN-M2-O5n">
-                    <rect key="frame" x="182" y="146" width="101" height="17"/>
+                    <rect key="frame" x="222" y="146" width="67" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Shadow Radius:" id="q3A-xR-kMb">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="阴影半径:" id="q3A-xR-kMb">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -601,7 +601,7 @@
                     <rect key="frame" x="18" y="204" width="140" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Enable text shadow" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pmn-h8-cK0">
+                    <buttonCell key="cell" type="check" title="使用文字阴影效果" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pmn-h8-cK0">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -630,7 +630,7 @@
                     <rect key="frame" x="284" y="7" width="70" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kga-pK-E2E">
+                    <buttonCell key="cell" type="push" title="应用" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kga-pK-E2E">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
@@ -642,10 +642,10 @@ DQ
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="lBX-iN-a5e">
-                    <rect key="frame" x="208" y="7" width="70" height="32"/>
+                    <rect key="frame" x="209" y="7" width="70" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="push" title="Revert" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wNt-Qo-6us">
+                    <buttonCell key="cell" type="push" title="还原" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wNt-Qo-6us">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
@@ -662,7 +662,7 @@ Gw
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="UKb-ML-D6F"/>
         <customView id="162-Ff-cWD" userLabel="Donate View">
-            <rect key="frame" x="0.0" y="0.0" width="422" height="330"/>
+            <rect key="frame" x="0.0" y="0.0" width="422" height="313"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ci2-BL-qsI">
@@ -681,7 +681,7 @@ Gw
                     <rect key="frame" x="26" y="149" width="54" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Wechat:" id="aej-Pv-vvF">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="微信:" id="aej-Pv-vvF">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -691,26 +691,26 @@ Gw
                     <rect key="frame" x="275" y="149" width="45" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Alipay:" id="1zg-KH-477">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="支付宝:" id="1zg-KH-477">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="IgD-Fm-Ttn">
-                    <rect key="frame" x="26" y="174" width="371" height="136"/>
+                    <rect key="frame" x="26" y="157" width="371" height="136"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="AAK-6G-7y1">
                         <font key="font" metaFont="system"/>
-                        <mutableString key="title">     Hi from the developer of LricsX. I hope you enjoy using LricsX!      LyricsX is a open source app based on some code of DynamicLyrics and oter third party libraries. Its maintenance and developing needs time and money. In fact, I'm concidering set up a server to deal with the update thing. If you love this app, you can support me by donating using Wechat or Alipay. Thank you for being awesome!</mutableString>
+                        <string key="title">     您好，我是LyricsX的开发者。很高兴能给你带来一款为您提供便利的软件，希望您在使用过程中度过愉快的每一天!      LyricsX是一款开源的软件，并基于DynamicLyrics的部分代码以及一些第三方库。它仍需要花费时间维护与后期开发，并且将来可能需要搭建服务器以提供更便捷的更新支持。如果您喜爱这款软件，您可以通过微信以及支付宝向我提供捐赠以支持后续的开发维护。感谢您的慷慨捐赠！</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
             <animations/>
-            <point key="canvasLocation" x="804" y="232"/>
+            <point key="canvasLocation" x="804" y="223.5"/>
         </customView>
     </objects>
     <resources>

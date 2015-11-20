@@ -38,7 +38,7 @@
                         <rect key="frame" x="20" y="39" width="409" height="430"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="M7e-zw-shG">
-                            <rect key="frame" x="1" y="1" width="392" height="428"/>
+                            <rect key="frame" x="1" y="1" width="407" height="428"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView drawsBackground="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="DdJ-zl-cNn">
@@ -46,10 +46,10 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <animations/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="392" height="428"/>
+                                    <size key="minSize" width="407" height="428"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="392" height="428"/>
+                                    <size key="minSize" width="407" height="428"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -63,7 +63,7 @@
                             <animations/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="88f-K2-53Z">
-                            <rect key="frame" x="393" y="1" width="15" height="428"/>
+                            <rect key="frame" x="392" y="1" width="16" height="428"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <animations/>
                         </scroller>

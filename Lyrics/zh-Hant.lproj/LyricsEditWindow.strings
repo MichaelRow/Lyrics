@@ -1,0 +1,12 @@
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "M2J-kq-dWj"; */
+"M2J-kq-dWj.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "Pnh-dj-Jao"; */
+"Pnh-dj-Jao.title" = "確認";
+
+/* Class = "NSButtonCell"; title = "Copy to Pasteboard"; ObjectID = "YUH-mE-ilV"; */
+"YUH-mE-ilV.title" = "複製到剪貼簿";
+
+/* Class = "NSWindow"; title = "Edit Lyrics"; ObjectID = "ar1-cr-ly1"; */
+"ar1-cr-ly1.title" = "編輯歌詞";

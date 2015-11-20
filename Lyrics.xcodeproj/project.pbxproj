@@ -18,6 +18,7 @@
 		76596BC41BF6219300DEEF62 /* QianQianAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 76596BBF1BF6219300DEEF62 /* QianQianAPI.m */; };
 		76596BC51BF6219300DEEF62 /* GeciMeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 76596BC11BF6219300DEEF62 /* GeciMeAPI.m */; };
 		7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660C5011BF05471002E3204 /* LyricsWindowController.swift */; };
+		7678AA081BFF526700FE848C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7678AA061BFF526700FE848C /* Localizable.strings */; };
 		768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
 		768BCB211BF1C62000D6F5EB /* libopencc.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */; };
 		768BCB221BF1C62000D6F5EB /* libopencc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1F1BF1C62000D6F5EB /* libopencc.2.dylib */; };
@@ -80,6 +81,15 @@
 		76596BC01BF6219300DEEF62 /* GeciMeAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeciMeAPI.h; sourceTree = "<group>"; };
 		76596BC11BF6219300DEEF62 /* GeciMeAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeciMeAPI.m; sourceTree = "<group>"; };
 		7660C5011BF05471002E3204 /* LyricsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsWindowController.swift; sourceTree = "<group>"; };
+		7678A9F41BFF428200FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
+		7678A9F71BFF428900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
+		7678A9FC1BFF475900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/StatusMenu.xib"; sourceTree = "<group>"; };
+		7678A9FD1BFF475D00FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/StatusMenu.xib"; sourceTree = "<group>"; };
+		7678AA041BFF50CD00FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/Preferences.xib"; sourceTree = "<group>"; };
+		7678AA051BFF50D700FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.xib"; sourceTree = "<group>"; };
+		7678AA071BFF526700FE848C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7678AA091BFF552700FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7678AA0A1BFF552900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		768BCAE51BF1866400D6F5EB /* Lyrics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Bridging-Header.h"; sourceTree = "<group>"; };
 		768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.1.0.0.dylib; sourceTree = "<group>"; };
@@ -192,6 +202,7 @@
 				76C046D11BF21876005053AC /* Preferences.xib */,
 				7600121C1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib */,
 				76C511601BEC6F8F0095F510 /* MainMenu.xib */,
+				7678AA061BFF526700FE848C /* Localizable.strings */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -368,6 +379,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 76C511501BEC6F8F0095F510;
 			productRefGroup = 76C5115A1BEC6F8F0095F510 /* Products */;
@@ -395,6 +408,7 @@
 				768BCB3C1BF1C74400D6F5EB /* t2s.json in Resources */,
 				760012521BFEB33500C7C1E4 /* LrcSeeker.app in Resources */,
 				7600121E1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib in Resources */,
+				7678AA081BFF526700FE848C /* Localizable.strings in Resources */,
 				768BCB391BF1C74400D6F5EB /* s2tw.json in Resources */,
 				768BCB3D1BF1C74400D6F5EB /* TSCharacters.ocd in Resources */,
 				76C5115F1BEC6F8F0095F510 /* Assets.xcassets in Resources */,
@@ -465,6 +479,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				7600121D1BFD9ECC00C7C1E4 /* Base */,
+				7678A9F41BFF428200FE848C /* zh-Hans */,
+				7678A9F71BFF428900FE848C /* zh-Hant */,
 			);
 			name = LyricsEditWindow.xib;
 			sourceTree = "<group>";
@@ -473,14 +489,28 @@
 			isa = PBXVariantGroup;
 			children = (
 				7642B9031BF4709300D68FE9 /* Base */,
+				7678A9FC1BFF475900FE848C /* zh-Hant */,
+				7678A9FD1BFF475D00FE848C /* zh-Hans */,
 			);
 			name = StatusMenu.xib;
+			sourceTree = "<group>";
+		};
+		7678AA061BFF526700FE848C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7678AA071BFF526700FE848C /* Base */,
+				7678AA091BFF552700FE848C /* zh-Hans */,
+				7678AA0A1BFF552900FE848C /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		76C046D11BF21876005053AC /* Preferences.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				76C046D21BF21876005053AC /* Base */,
+				7678AA041BFF50CD00FE848C /* zh-Hans */,
+				7678AA051BFF50D700FE848C /* zh-Hant */,
 			);
 			name = Preferences.xib;
 			sourceTree = "<group>";

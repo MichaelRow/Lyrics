@@ -65,16 +65,16 @@ class AppController: NSObject {
         // check lrc saving path
         if !checkSavingPath() {
             let alert: NSAlert = NSAlert()
-            alert.messageText = "An error occured"
-            alert.informativeText = "The default path which used to save lrc files is not a directory.\nIn this case no lrc can be saved."
-            alert.addButtonWithTitle("Open Preferences and Set")
-            alert.addButtonWithTitle("Ignore")
+            alert.messageText = NSLocalizedString("ERROR_OCCUR", comment: "")
+            alert.informativeText = NSLocalizedString("PATH_IS_NOT_DIR", comment: "")
+            alert.addButtonWithTitle(NSLocalizedString("OPEN_PREFS", comment: ""))
+            alert.addButtonWithTitle(NSLocalizedString("IGNORE", comment: ""))
             let response: NSModalResponse = alert.runModal()
             if response == NSAlertFirstButtonReturn {
                 showPreferences(nil)
             }
         }
-        
+    
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
             
@@ -493,7 +493,7 @@ class AppController: NSObject {
         let tempLyricsArray = lyricsArray
         var index: Int
         for index=0; index < tempLyricsArray.count; ++index {
-            if playerPosition < tempLyricsArray[index].msecPosition + timeDly {
+            if playerPosition < tempLyricsArray[index].msecPosition - timeDly {
                 if index-1 == -1 {
                     if currentLyrics != nil {
                         currentLyrics = nil

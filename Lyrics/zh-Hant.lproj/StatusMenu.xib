@@ -16,47 +16,47 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu id="tTA-dl-Isx" userLabel="Statusbar menu">
             <items>
-                <menuItem title="Lyrics" id="Mfq-Dd-Wzf">
+                <menuItem title="歌詞" id="Mfq-Dd-Wzf">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Lyrics" id="0NF-uT-60C">
+                    <menu key="submenu" title="歌詞" id="0NF-uT-60C">
                         <items>
                             <menuItem title="Lyrics Delay Setter" id="ENJ-eO-aCa">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Kon-oS-t3B"/>
-                            <menuItem title="Copy Lyrics to Pasteboafd" id="hA5-FO-Nk2">
+                            <menuItem title="拷貝歌詞到剪貼簿" id="hA5-FO-Nk2">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="copyLyricsToPb:" target="-2" id="c3I-f4-Cof"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Copy Lyrics to Pasteboard(with Tags)" id="Ej4-Uf-FPV">
+                            <menuItem title="拷貝歌詞(帶標籤)到剪貼簿" id="Ej4-Uf-FPV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="copyLyricsWithTagsToPb:" target="-2" id="8QC-DU-PbF"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Edit Lyrics..." id="aHI-5b-EXH">
+                            <menuItem title="編輯歌詞..." id="aHI-5b-EXH">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="editLyrics:" target="-2" id="1NM-fU-FWj"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="V78-Pj-41Z"/>
-                            <menuItem title="Import Lrc File..." id="M13-bN-2sa">
+                            <menuItem title="匯入Lrc歌詞檔案..." id="M13-bN-2sa">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="importLrcFile:" target="-2" id="Sxg-UQ-GlJ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Export Lrc File..." id="gbo-B5-Rdc">
+                            <menuItem title="匯出Lrc歌詞檔案..." id="gbo-B5-Rdc">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="exportLrcFile:" target="-2" id="OtZ-vi-by1"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="CM0-FN-R8L"/>
-                            <menuItem title="Write Lyrics to iTunes" id="9IB-fJ-7CD">
+                            <menuItem title="將歌詞寫入iTunes" id="9IB-fJ-7CD">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="writeLyricsToiTunes:" target="-2" id="OzK-ZJ-pvP"/>
@@ -65,39 +65,39 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Export Artwork From iTunes..." id="Czc-V7-Kvq">
+                <menuItem title="從iTunes匯出專輯封面..." id="Czc-V7-Kvq">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="exportArtwork:" target="-2" id="qL1-eT-eXl"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Search Lyrics &amp; Artworks..." id="a7O-Hu-mob">
+                <menuItem title="搜尋歌詞與專輯封面..." id="a7O-Hu-mob">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="searchLyricsAndArtworks:" target="-2" id="6Uh-VR-sAm"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="jz7-1h-D1M"/>
-                <menuItem title="Preferences..." id="Hpk-pw-fAI">
+                <menuItem title="偏好設定..." id="Hpk-pw-fAI">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="showPreferences:" target="-2" id="OHZ-tL-sQF"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="lfR-h4-Fcs"/>
-                <menuItem title="About Lyrics..." id="QoB-2y-8a4">
+                <menuItem title="關於Lyrics..." id="QoB-2y-8a4">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="orderFrontStandardAboutPanel:" target="-1" id="UVr-pZ-Hc1"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Check For Update..." id="R96-lC-i2Q">
+                <menuItem title="檢查更新..." id="R96-lC-i2Q">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="checkForUpdate:" target="-2" id="J20-89-mLG"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Quit Lyrics" id="V6J-Hi-T0z">
+                <menuItem title="結束Lyrics" id="V6J-Hi-T0z">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="terminate:" target="-1" id="KYg-M6-JfZ"/>
@@ -107,20 +107,20 @@
             <point key="canvasLocation" x="332" y="211.5"/>
         </menu>
         <customView id="3Jx-vU-QNM" userLabel="Lyrics Delay View">
-            <rect key="frame" x="0.0" y="0.0" width="237" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="261" height="33"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q88-EF-ohR">
-                    <rect key="frame" x="18" y="6" width="92" height="17"/>
+                    <rect key="frame" x="18" y="8" width="121" height="17"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lyrics Offset:" id="03a-uH-jAo">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="歌詞偏移(正值提前):" id="03a-uH-jAo">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hod-ZB-daW">
-                    <rect key="frame" x="109" y="5" width="61" height="19"/>
+                    <rect key="frame" x="141" y="6" width="61" height="19"/>
                     <animations/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="Xwr-CI-ndX">
                         <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" lenient="YES" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" id="ZW5-md-eUU">
@@ -142,7 +142,7 @@
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQX-LU-OA2">
-                    <rect key="frame" x="197" y="6" width="22" height="17"/>
+                    <rect key="frame" x="229" y="8" width="22" height="17"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ms" id="htP-HY-Y99">
                         <font key="font" metaFont="system"/>
@@ -151,7 +151,7 @@
                     </textFieldCell>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lUm-Ay-pgl">
-                    <rect key="frame" x="175" y="1" width="19" height="27"/>
+                    <rect key="frame" x="207" y="3" width="19" height="27"/>
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" increment="100" minValue="-10000" maxValue="10000" id="beX-Hj-1Ng"/>
                     <connections>
@@ -165,7 +165,7 @@
                 </stepper>
             </subviews>
             <animations/>
-            <point key="canvasLocation" x="334.5" y="380"/>
+            <point key="canvasLocation" x="346.5" y="378.5"/>
         </customView>
     </objects>
 </document>

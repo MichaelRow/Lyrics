@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Lyrics
+
+  Created by Eru on 15/11/20.
+  Copyright © 2015年 Eru. All rights reserved.
+*/
+"ERROR_OCCUR" = "运行过程中出现错误";
+"PATH_IS_NOT_DIR" = "默认的Lrc歌词保存路径不是文件夹，\n在这种情况下，歌词文件不会被保存到本地。";
+"OPEN_PREFS" = "打开偏好设置并重设路径";
+"IGNORE" = "忽略";

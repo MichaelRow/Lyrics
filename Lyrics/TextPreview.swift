@@ -12,19 +12,18 @@ class TextPreview: NSView {
     
     private var attributes: [String:AnyObject]
     private var backgroundColor: NSColor
+    private var image: NSImage
 
     required init?(coder: NSCoder) {
         attributes = [String:AnyObject]()
         backgroundColor = NSColor.blackColor()
+        image = NSImage(named: "preview_bkground")!
         super.init(coder: coder)
     }
 
     override func drawRect(dirtyRect: NSRect) {
+        drawBkgroundImage()
         drawStringInCenter()
-        
-        NSColor.grayColor().set()
-        NSBezierPath.setDefaultLineWidth(5)
-        NSBezierPath.strokeRect(self.bounds)
     }
     
     func setAttributs(font:NSFont, textColor:NSColor, bkColor:NSColor, enableShadow:Bool, shadowColor:NSColor, shadowRadius:CGFloat) {
@@ -39,6 +38,10 @@ class TextPreview: NSView {
             attributes[NSShadowAttributeName] = shadow
         }
         self.needsDisplay = true
+    }
+    
+    func drawBkgroundImage() {
+        image.drawInRect(self.bounds)
     }
     
     func drawStringInCenter() {
