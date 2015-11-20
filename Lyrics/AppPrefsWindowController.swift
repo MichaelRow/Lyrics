@@ -194,11 +194,11 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     
     func displayAlert(closeWindow: Bool, identifier: String!) {
         let alert: NSAlert = NSAlert()
-        alert.messageText = "Changes unsaved"
-        alert.informativeText = "Do you really want to revert all the changes and leave?"
-        alert.addButtonWithTitle("Apply and Leave")
-        alert.addButtonWithTitle("Revert and Leave")
-        alert.addButtonWithTitle("Cancel")
+        alert.messageText = NSLocalizedString("CHANGE_UNSAVED", comment: "")
+        alert.informativeText = NSLocalizedString("DISGARDS_LEAVE", comment: "")
+        alert.addButtonWithTitle(NSLocalizedString("APPLY_LEAVE", comment: ""))
+        alert.addButtonWithTitle(NSLocalizedString("REVERT_LEAVE", comment: ""))
+        alert.addButtonWithTitle(NSLocalizedString("CANCEL", comment: ""))
         alert.beginSheetModalForWindow(self.window!, completionHandler: { (response) -> Void in
             if response != NSAlertThirdButtonReturn {
                 if response == NSAlertFirstButtonReturn {

@@ -9,3 +9,9 @@
 "PATH_IS_NOT_DIR" = "預設的Lrc歌詞儲存路徑不是資料夾，\n在這種情況下，歌詞檔案不會被儲存到本地。";
 "OPEN_PREFS" = "開啟偏好設定並重設路徑";
 "IGNORE" = "忽略";
+"IGNORE" = "忽略";
+"CHANGE_UNSAVED"="更改未儲存";
+"DISGARDS_LEAVE"="您確定放棄儲存兵離開當前介面?";
+"APPLY_LEAVE"="應用並離開";
+"REVERT_LEAVE"="還原並離開";
+"CANCEL"="取消";
