@@ -8,9 +8,9 @@
 
 #import "SongInfos.h"
 
-@implementation SongInfos
+NSString *const LrcLoadedNotification = @"LrcLoaded";
 
-NSString *const LrcLoadedNotification=@"LrcLoaded";
+@implementation SongInfos
 
 @synthesize songTitle;
 @synthesize artist;
@@ -18,6 +18,15 @@ NSString *const LrcLoadedNotification=@"LrcLoaded";
 @synthesize songID;
 @synthesize lyric;
 
+-(id) copyWithZone:(NSZone *)zone {
+    SongInfos *info = [[SongInfos allocWithZone:zone] init];
+    info.songTitle = songTitle;
+    info.artist = artist;
+    info.lyricURL = lyricURL;
+    info.songID = songID;
+    info.lyric = lyric;
+    return info;
+}
 
 //-(void)setSongTitleWithUnicode:(NSString *) unicodeTitle artist:(NSString *) unicodeArtist {
 //    songTitle=[self unicodeToCharacter:unicodeTitle];

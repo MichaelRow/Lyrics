@@ -10,7 +10,7 @@
 
 extern NSString *const LrcLoadedNotification;
 
-@interface SongInfos : NSObject
+@interface SongInfos : NSObject <NSCopying>
 
 @property (nonatomic,copy) NSString *songTitle;
 @property (nonatomic,copy) NSString *artist;

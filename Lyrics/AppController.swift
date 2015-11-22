@@ -27,16 +27,13 @@ class AppController: NSObject {
     var currentSongID:NSString!
     var currentSongTitle:NSString!
     var currentArtist:NSString!
-    var loadingLrcSongID:NSString!
-    var loadingLrcSongTitle:NSString!
-    var loadingLrcArtist:NSString!
     var serverSongInfo:NSString!
     var songList:[SongInfos]!
-    var qianqian:QianQianAPI!
-    var xiami:XiamiAPI!
-    var ttpod:TTPodAPI!
-    var geciMe:GeciMeAPI!
-    var lrcSourceHandleQueue:dispatch_queue_t!
+    var qianqian:QianQian!
+    var xiami:Xiami!
+    var ttpod:TTPod!
+    var geciMe:GeCiMe!
+    var lrcSourceHandleQueue:NSOperationQueue!
     var userDefaults:NSUserDefaults!
     var timer: NSTimer!
     var timeDly:Int = 0
@@ -49,12 +46,13 @@ class AppController: NSObject {
         lyricsArray = Array()
         idTagsArray = Array()
         songList = Array()
-        qianqian = QianQianAPI()
-        xiami = XiamiAPI()
-        ttpod = TTPodAPI()
-        geciMe = GeciMeAPI()
-        lrcSourceHandleQueue = dispatch_queue_create("HandleLrcSource", DISPATCH_QUEUE_CONCURRENT);
+        qianqian = QianQian()
+        xiami = Xiami()
+        ttpod = TTPod()
+        geciMe = GeCiMe()
         userDefaults = NSUserDefaults.standardUserDefaults()
+        lrcSourceHandleQueue = NSOperationQueue()
+        lrcSourceHandleQueue.maxConcurrentOperationCount = 1
         
         NSBundle(forClass: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
         setupStatusItem()
@@ -75,6 +73,14 @@ class AppController: NSObject {
             }
         }
     
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: "lrcLoadingCompleted:", name: LrcLoadedNotification, object: nil)
+        nc.addObserver(self, selector: "handleUserEditLyrics:", name: LyricsUserEditLyricsNotification, object: nil)
+        
+        let ndc = NSDistributedNotificationCenter.defaultCenter()
+        ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
+        ndc.addObserver(self, selector: "handleLrcSeekerEvent:", name: "LrcSeekerEvents", object: nil)
+        
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
             
@@ -96,14 +102,6 @@ class AppController: NSObject {
             currentSongTitle = ""
             currentArtist = ""
         }
-        
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: "lrcLoadingCompleted:", name: LrcLoadedNotification, object: nil)
-        nc.addObserver(self, selector: "handleUserEditLyrics:", name: LyricsUserEditLyricsNotification, object: nil)
-        
-        let ndc = NSDistributedNotificationCenter.defaultCenter()
-        ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
-        ndc.addObserver(self, selector: "handleLrcSeekerEvent:", name: "LrcSeekerEvents", object: nil)
     }
     
     deinit {
@@ -215,6 +213,9 @@ class AppController: NSObject {
     }
     
     @IBAction func importLrcFile(sender: AnyObject) {
+        let songTitle: String = currentSongTitle.copy() as! String
+        let artist: String = currentArtist.copy() as! String
+        let songID: String = currentSongID.copy() as! String
         let panel: NSOpenPanel = NSOpenPanel()
         panel.allowedFileTypes = ["lrc", "txt"]
         panel.extensionHidden = false
@@ -229,8 +230,15 @@ class AppController: NSObject {
                 return
             }
             if lrcContents != nil && testLrc(lrcContents) {
-                parsingLrc(lrcContents)
-                saveLrcToLocal(lrcContents, songTitle: currentSongTitle, artist: currentArtist)
+                lrcSourceHandleQueue.cancelAllOperations()
+                lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
+                    //"中" make the current lrc the better one so that it can't be replaced.
+                    if songID == self.currentSongID {
+                        self.parsingLrc(lrcContents)
+                        self.serverSongInfo = "中" + songTitle + artist
+                    }
+                    self.saveLrcToLocal(lrcContents, songTitle: songTitle, artist: artist)
+                })
             }
         }
     }
@@ -520,15 +528,6 @@ class AppController: NSObject {
                 }
             }
         }
-        if index == tempLyricsArray.count {
-            if currentLyrics != nil {
-                currentLyrics = nil
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                })
-            }
-            return
-        }
     }
     
     
@@ -541,28 +540,40 @@ class AppController: NSObject {
                 return
             }
         }
+        lrcSourceHandleQueue.cancelAllOperations()
         
         //Search in the net if local lrc is nil or invalid
-        loadingLrcSongID = currentSongID.copy() as! NSString
-        loadingLrcArtist = currentArtist.copy() as! NSString
-        loadingLrcSongTitle = currentSongTitle.copy() as! NSString
+        let loadingSongID: String = currentSongID.copy() as! String
+        let loadingArtist: String = currentArtist.copy() as! String
+        let loadingTitle: String = currentSongTitle.copy() as! String
         serverSongInfo = nil
         
-        let titleForSearch: String = delSpecificSymbol(currentSongTitle) as String
-        let artistForSearch: String = delSpecificSymbol(currentArtist) as String
-        qianqian.getLyricsWithTitle(convertToSC(titleForSearch) as String, artist: convertToSC(artistForSearch) as String)
-        xiami.getLyricsWithTitle(titleForSearch, artist: artistForSearch)
-        ttpod.getLyricsWithTitle(titleForSearch, artist: artistForSearch)
-        geciMe.getLyricsWithTitle(titleForSearch, artist: artistForSearch)
+        let artistForSearching: String = self.delSpecificSymbol(loadingArtist) as String
+        let titleForSearching: String = self.delSpecificSymbol(loadingTitle) as String
+        
+        qianqian.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: convertToSC(titleForSearching) as String, andArtistForSearching: convertToSC(artistForSearching) as String)
+        xiami.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
+        ttpod.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
+        geciMe.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
     }
     
     
     func handleUserEditLyrics(n: NSNotification) {
         let userInfo: [NSObject:AnyObject] = n.userInfo!
-        if (userInfo["SongID"] as! String) == currentSongID {
-            parsingLrc(lyricsEidtWindow.textView.string!)
+        let lyrics: String = self.lyricsEidtWindow.textView.string!
+        
+        if testLrc(lyrics) {
+            //User lrc has the highest priority level
+            lrcSourceHandleQueue.cancelAllOperations()
+            lrcSourceHandleQueue.addOperationWithBlock { () -> Void in
+                if (userInfo["SongID"] as! String) == self.currentSongID {
+                    //"中" make the current lrc the better one so that it can't be replaced.
+                    self.serverSongInfo = "中" + (userInfo["SongTitle"] as! String) + (userInfo["SongArtist"] as! String)
+                    self.parsingLrc(lyrics)
+                }
+                self.saveLrcToLocal(lyrics, songTitle: userInfo["SongTitle"] as! String, artist: userInfo["SongArtist"] as! String)
+            }
         }
-        saveLrcToLocal(lyricsEidtWindow.textView.string!, songTitle: userInfo["SongTitle"] as! String, artist: userInfo["SongArtist"] as! String)
     }
     
     
@@ -588,14 +599,18 @@ class AppController: NSObject {
     func handleLrcSeekerEvent (n:NSNotification) {
         NSLog("Recieved notification from LrcSeeker")
         let userInfo = n.userInfo
-        dispatch_barrier_async(lrcSourceHandleQueue, { () -> Void in
+        
+        //User lrc has the highest priority level
+        lrcSourceHandleQueue.cancelAllOperations()
+        lrcSourceHandleQueue.addOperationWithBlock { () -> Void in
             let lyricsContents: String = userInfo!["LyricsContents"] as! String
             if self.testLrc(lyricsContents) {
                 self.parsingLrc(lyricsContents)
-                self.serverSongInfo = (userInfo!["SongTitle"] as! String) + (userInfo!["Artist"] as! String)
+                //"中" make the current lrc the better one so that it can't be replaced.
+                self.serverSongInfo = "中" + (userInfo!["SongTitle"] as! String) + (userInfo!["Artist"] as! String)
                 self.saveLrcToLocal(lyricsContents, songTitle: self.currentSongTitle, artist: self.currentArtist)
             }
-        })
+        }
     }
     
 // MARK: - Lyrics Source Loading Completion
@@ -610,32 +625,48 @@ class AppController: NSObject {
     
     func lrcLoadingCompleted(n: NSNotification) {
         
-        // we should run the handle thread one by one using dispatch_barrier_async()
-        let source: Int = n.userInfo!["source"]!.integerValue
+        // we should run the handle thread one by one in the queue of maxConcurrentOperationCount =1
+        let userInfo = n.userInfo
+        let source: Int = userInfo!["source"]!.integerValue
+        let songTitle: String = userInfo!["title"] as! String
+        let artist: String = userInfo!["artist"] as! String
+        let songID: String = userInfo!["songID"] as! String
         switch source {
         case 1:
-            dispatch_barrier_async(lrcSourceHandleQueue, { () -> Void in
-                self.handleLrcURLDownloaded(self.qianqian.songs)
-            })
+            let serverLrcs: NSArray = (self.qianqian.currentSongs as NSArray).copy() as! NSArray
+            if serverLrcs.count > 0 {
+                lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
+                    self.handleLrcURLDownloaded(serverLrcs, songTitle: songTitle, artist: artist, songID: songID)
+                })
+            }
         case 2:
-            dispatch_barrier_async(lrcSourceHandleQueue, { () -> Void in
-                self.handleLrcURLDownloaded(self.xiami.songs)
-            })
+            let serverLrcs: NSArray = (self.xiami.currentSongs as NSArray).copy() as! NSArray
+            if serverLrcs.count > 0 {
+                lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
+                    self.handleLrcURLDownloaded(serverLrcs, songTitle: songTitle, artist: artist, songID: songID)
+                })
+            }
         case 3:
-            dispatch_barrier_async(lrcSourceHandleQueue, { () -> Void in
-                self.handleLrcContentsDownloaded(self.ttpod.songInfo.lyric)
-            })
+            let serverLrc: SongInfos = self.ttpod.songInfos.copy() as! SongInfos
+            if serverLrc.lyric != "" {
+                lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
+                    self.handleLrcContentsDownloaded(serverLrc.lyric, songTitle: songTitle, artist: artist, songID: songID)
+                })
+            }
         case 4:
-            dispatch_barrier_async(lrcSourceHandleQueue, { () -> Void in
-                self.handleLrcURLDownloaded(self.geciMe.songs)
-            })
+            let serverLrcs: NSArray = (self.geciMe.currentSongs as NSArray).copy() as! NSArray
+            if serverLrcs.count > 0 {
+                lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
+                    self.handleLrcURLDownloaded(serverLrcs, songTitle: songTitle, artist: artist, songID: songID)
+                })
+            }
         default:
             return;
         }
     }
     
     
-    func handleLrcURLDownloaded(serverLrcs: NSArray) {
+    func handleLrcURLDownloaded(serverLrcs: NSArray, songTitle:String, artist:NSString, songID:NSString) {
         if serverLrcs.count == 0 {
             return
         }
@@ -681,30 +712,30 @@ class AppController: NSObject {
             }
         }
         if betterLrc != nil {
-            if loadingLrcSongID == currentSongID {
+            if songID == currentSongID {
                 serverSongInfo = betterLrc.songTitle + betterLrc.artist
                 parsingLrc(lyricsContents)
             }
-            saveLrcToLocal(lyricsContents, songTitle: loadingLrcSongTitle, artist: loadingLrcArtist)
+            saveLrcToLocal(lyricsContents, songTitle: songTitle, artist: artist)
         }
     }
     
     
-    func handleLrcContentsDownloaded(lyricsContents: NSString) {
+    func handleLrcContentsDownloaded(lyricsContents: NSString, songTitle:String, artist:NSString, songID:NSString) {
         if serverSongInfo != nil {
             return
         }
         if !testLrc(lyricsContents) {
             return
         }
-        serverSongInfo = loadingLrcSongTitle
-        if loadingLrcSongID == currentSongID {
+        serverSongInfo = songTitle
+        if songID == currentSongID {
             parsingLrc(lyricsContents)
         }
         if lyricsArray.count  == 0 {
             return
         }
-        saveLrcToLocal(lyricsContents, songTitle: loadingLrcSongTitle, artist: loadingLrcArtist)
+        saveLrcToLocal(lyricsContents, songTitle: songTitle, artist: artist)
     }
     
 // MARK: Other Methods

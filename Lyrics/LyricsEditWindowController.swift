@@ -23,10 +23,10 @@ class LyricsEditWindowController: NSWindowController {
     }
     
     func setLyricsContents(contents: String, songID: NSString, songTitle: NSString, andArtist artist: NSString) {
-        currentSongID = songID
-        currentTitle = songTitle
-        currentArtist = artist
-        textView.string = contents 
+        currentSongID = songID.copy() as! NSString
+        currentTitle = songTitle.copy() as! NSString
+        currentArtist = artist.copy() as! NSString
+        textView.string = contents
     }
     
     @IBAction func copyToPb(sender: AnyObject) {

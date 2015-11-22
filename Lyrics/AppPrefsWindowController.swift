@@ -43,6 +43,8 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         super.windowDidLoad()
         self.window?.delegate = self
         hasUnsaveChange = false
+        
+        //Pop up button and font is hard to bind to NSUserDefaultsController, do it selves
         let defaultSavingPath: String = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
         let userSavingPath: NSString = NSUserDefaults.standardUserDefaults().stringForKey(LyricsUserSavingPath)!
         savingPathPopUp.itemAtIndex(0)?.toolTip = defaultSavingPath
@@ -54,6 +56,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
         textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: Bool(shadowModeCheckbox.state), shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
         
+        //observe the changes
         textColor.addObserver(self, forKeyPath: "color", options: [], context: &prefsChangeContext)
         bkColor.addObserver(self, forKeyPath: "color", options: [], context: &prefsChangeContext)
         shadowColor.addObserver(self, forKeyPath: "color", options: [], context: &prefsChangeContext)
@@ -61,11 +64,14 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     override func displayViewForIdentifier(identifier: String, animate: Bool) {
+        
+        //check if changes are unsaved
         if hasUnsaveChange && self.window?.title == "Lyrics" {
             displayAlert(false, identifier: identifier)
             return
         }
         
+        //applies Immediately in other prefs view
         NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = true
         
         super.displayViewForIdentifier(identifier, animate: animate)
@@ -151,18 +157,6 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         fontPanel.makeKeyAndOrderFront(self)
         fontPanel.delegate = self
     }
-
-    func windowShouldClose(sender: AnyObject) -> Bool {
-        if (sender as! NSWindow).title == "Lyrics" {
-            if hasUnsaveChange {
-                displayAlert(true, identifier: nil)
-                return false
-            } else {
-                return true
-            }
-        }
-        return true
-    }
     
 // MARK: - KVO and TextField Delegate
     
@@ -188,6 +182,18 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         }
         hasUnsaveChange = true
         textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: Bool(shadowModeCheckbox.state), shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
+    }
+    
+    func windowShouldClose(sender: AnyObject) -> Bool {
+        if (sender as! NSWindow).title == "Lyrics" {
+            if hasUnsaveChange {
+                displayAlert(true, identifier: nil)
+                return false
+            } else {
+                return true
+            }
+        }
+        return true
     }
     
 // MARK: - Alert

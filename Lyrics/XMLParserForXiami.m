@@ -36,6 +36,10 @@
             trimmed=[currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             [currentField setObject:trimmed forKey:@"lyricURL"];
         }
+        else if ([elementName isEqualToString:@"album_pic"]) {
+            trimmed=[currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            [currentField setObject:trimmed forKey:@"artWorkURL"];
+        }
     }
     currentString=nil;
 }

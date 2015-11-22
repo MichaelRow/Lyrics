@@ -1,25 +1,37 @@
 //
-//  TTPodAPI.m
+//  TTPod.m
 //  LrcSeeker
 //
 //  Created by Eru on 15/10/23.
 //  Copyright © 2015年 Eru. All rights reserved.
 //
 
-#import "TTPodAPI.h"
+#import "TTPod.h"
 
-@implementation TTPodAPI
+@implementation TTPod
 
-@synthesize songInfo;
+@synthesize songInfos;
 
--(void)getLyricsWithTitle:(NSString *)theTitle artist:(NSString *)theArtist {
-    songInfo=nil;
+-(id) init {
+    self = [super init];
+    if (self) {
+        songInfos = [[SongInfos alloc] init];
+    }
+    return self;
+}
+
+-(void)getLyricsWithTitle:(NSString *)theTitle artist:(NSString *)theArtist songID:(NSString *)songID titleForSearching:(NSString *)titleForSearching andArtistForSearching:(NSString *) artistForSearching {
+    songInfos.lyric = @"";
+    date = [NSDate date];
+    NSDate *dateWhenSearch = date;
+
     NSLog(@"TTPod starting searching lrcs");
-    NSString *urlString=[NSString stringWithFormat:@"http://lp.music.ttpod.com/lrc/down?lrcid=&artist=%@&title=%@",theTitle,theArtist];
+    NSString *urlString=[NSString stringWithFormat:@"http://lp.music.ttpod.com/lrc/down?lrcid=&artist=%@&title=%@",titleForSearching,artistForSearching];
     NSString *convertedURLString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     NSMutableURLRequest *req=[NSMutableURLRequest requestWithURL:[NSURL URLWithString: convertedURLString] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:15];
     [req setHTTPMethod:@"GET"];
     [req addValue:@"text/xml" forHTTPHeaderField: @"Content-Type"];
+    
     NSURLSession *session=[NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask=[session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSError *jsonError;
@@ -30,17 +42,24 @@
         }
         NSDictionary *temp=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
         if (jsonError) {
-            NSLog(@"TTPodAPI:%@",[jsonError localizedDescription]);
             return;
         }
+        SongInfos *info = [[SongInfos alloc] init];
         NSString *lyric=[[temp objectForKey:@"data"] objectForKey:@"lrc"];
         if (lyric!=nil && [lyric isNotEqualTo:@""]) {
-            songInfo=[[SongInfos alloc] init];
-            songInfo.songTitle=theTitle;
-            songInfo.artist=theArtist;
-            songInfo.lyric=lyric;
-            NSDictionary *userInfo=[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:3] forKey:@"source"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:LrcLoadedNotification object:self userInfo:userInfo];
+            info.songTitle=theTitle;
+            info.artist=theArtist;
+            info.lyric=lyric;
+            
+            if ([date isEqualToDate:dateWhenSearch]) {
+                songInfos = info;
+                NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+                [userInfo setObject:[NSNumber numberWithInteger:3] forKey:@"source"];
+                [userInfo setObject:theTitle forKey:@"title"];
+                [userInfo setObject:theArtist forKey:@"artist"];
+                [userInfo setObject:songID forKey:@"songID"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:LrcLoadedNotification object:nil userInfo:userInfo];
+            }
         }
     }];
     [dataTask resume];
