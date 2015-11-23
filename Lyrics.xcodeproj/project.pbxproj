@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7600121E1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7600121C1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib */; };
 		760012291BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */; };
-		760012521BFEB33500C7C1E4 /* LrcSeeker.app in Resources */ = {isa = PBXBuildFile; fileRef = 760012511BFEB33500C7C1E4 /* LrcSeeker.app */; };
 		760A01831C01A33400015C62 /* SongInfos.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A017E1C01A33400015C62 /* SongInfos.m */; };
 		760A01841C01A33400015C62 /* GeCiMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A01801C01A33400015C62 /* GeCiMe.m */; };
 		760A01851C01A33400015C62 /* TTPod.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A01821C01A33400015C62 /* TTPod.m */; };
@@ -50,6 +49,14 @@
 		76C511621BEC6F8F0095F510 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C511601BEC6F8F0095F510 /* MainMenu.xib */; };
 		76C5116D1BEC6F8F0095F510 /* LyricsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5116C1BEC6F8F0095F510 /* LyricsTests.swift */; };
 		76C511781BEC6FD50095F510 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C511771BEC6FD50095F510 /* Macros.swift */; };
+		76D060451C02B8D8000DA86C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D060441C02B8D8000DA86C /* AppDelegate.swift */; };
+		76D060471C02B8D9000DA86C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D060461C02B8D9000DA86C /* Assets.xcassets */; };
+		76D0604A1C02B8D9000DA86C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D060481C02B8D9000DA86C /* MainMenu.xib */; };
+		76D060551C02B8D9000DA86C /* LyricsX_HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D060541C02B8D9000DA86C /* LyricsX_HelperTests.swift */; };
+		76D0605E1C02B930000DA86C /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D0605D1C02B930000DA86C /* ServiceManagement.framework */; };
+		76D060601C02BBB7000DA86C /* LyricsX Helper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76D060421C02B8D8000DA86C /* LyricsX Helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76D060651C02C4D1000DA86C /* LrcSeeker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76D060631C02C4AB000DA86C /* LrcSeeker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76D0606B1C02FBCD000DA86C /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
 		76FE94411BFC223600A1AC27 /* TextPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FE94401BFC223600A1AC27 /* TextPreview.swift */; };
 		76FF43791BEF9BAB00D2B14F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -62,12 +69,41 @@
 			remoteGlobalIDString = 76C511581BEC6F8F0095F510;
 			remoteInfo = Lyrics;
 		};
+		76D060511C02B8D9000DA86C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76C511511BEC6F8F0095F510 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76D060411C02B8D8000DA86C;
+			remoteInfo = "LyricsX Helper";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		76D0605F1C02BAD5000DA86C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				76D060601C02BBB7000DA86C /* LyricsX Helper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76D060611C02BE1D000DA86C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library;
+			dstSubfolderSpec = 1;
+			files = (
+				76D060651C02C4D1000DA86C /* LrcSeeker.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7600121D1BFD9ECC00C7C1E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LyricsEditWindow.xib; sourceTree = "<group>"; };
 		760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsEditWindowController.swift; sourceTree = "<group>"; };
-		760012511BFEB33500C7C1E4 /* LrcSeeker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = LrcSeeker.app; sourceTree = "<group>"; };
 		760A017D1C01A33400015C62 /* SongInfos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongInfos.h; sourceTree = "<group>"; };
 		760A017E1C01A33400015C62 /* SongInfos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongInfos.m; sourceTree = "<group>"; };
 		760A017F1C01A33400015C62 /* GeCiMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeCiMe.h; sourceTree = "<group>"; };
@@ -92,8 +128,6 @@
 		7678A9F71BFF428900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
 		7678A9FC1BFF475900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/StatusMenu.xib"; sourceTree = "<group>"; };
 		7678A9FD1BFF475D00FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/StatusMenu.xib"; sourceTree = "<group>"; };
-		7678AA041BFF50CD00FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/Preferences.xib"; sourceTree = "<group>"; };
-		7678AA051BFF50D700FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.xib"; sourceTree = "<group>"; };
 		7678AA071BFF526700FE848C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7678AA091BFF552700FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7678AA0A1BFF552900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -131,6 +165,19 @@
 		76C5116C1BEC6F8F0095F510 /* LyricsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsTests.swift; sourceTree = "<group>"; };
 		76C5116E1BEC6F8F0095F510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76C511771BEC6FD50095F510 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
+		76D060421C02B8D8000DA86C /* LyricsX Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LyricsX Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76D060441C02B8D8000DA86C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		76D060461C02B8D9000DA86C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		76D060491C02B8D9000DA86C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		76D0604B1C02B8D9000DA86C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76D060501C02B8D9000DA86C /* LyricsX HelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LyricsX HelperTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76D060541C02B8D9000DA86C /* LyricsX_HelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsX_HelperTests.swift; sourceTree = "<group>"; };
+		76D060561C02B8D9000DA86C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76D0605D1C02B930000DA86C /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		76D060631C02C4AB000DA86C /* LrcSeeker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = LrcSeeker.app; sourceTree = "<group>"; };
+		76D060681C02E997000DA86C /* Lyrics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Prefix.pch"; sourceTree = "<group>"; };
+		76D060741C03221B000DA86C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/Preferences.xib"; sourceTree = "<group>"; };
+		76D060751C032220000DA86C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.xib"; sourceTree = "<group>"; };
 		76FE94401BFC223600A1AC27 /* TextPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPreview.swift; sourceTree = "<group>"; };
 		76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -140,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76D0605E1C02B930000DA86C /* ServiceManagement.framework in Frameworks */,
 				768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */,
 				76FF43791BEF9BAB00D2B14F /* QuartzCore.framework in Frameworks */,
 				768BCB231BF1C62000D6F5EB /* libopencc.dylib in Frameworks */,
@@ -149,6 +197,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		76C511651BEC6F8F0095F510 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76D0603F1C02B8D8000DA86C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76D0606B1C02FBCD000DA86C /* ScriptingBridge.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76D0604D1C02B8D9000DA86C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,6 +297,7 @@
 				768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */,
 				768BCB1F1BF1C62000D6F5EB /* libopencc.2.dylib */,
 				768BCB201BF1C62000D6F5EB /* libopencc.dylib */,
+				76D0605D1C02B930000DA86C /* ServiceManagement.framework */,
 				768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */,
 				76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */,
 			);
@@ -250,6 +314,7 @@
 				768BCAE51BF1866400D6F5EB /* Lyrics-Bridging-Header.h */,
 				764334911BF95ECF00C4B740 /* iTunesBridge.h */,
 				764334921BF95ECF00C4B740 /* iTunesBridge.m */,
+				76D060681C02E997000DA86C /* Lyrics-Prefix.pch */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -257,7 +322,7 @@
 		765FC4A81BEE514400BF3706 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				760012511BFEB33500C7C1E4 /* LrcSeeker.app */,
+				76D060631C02C4AB000DA86C /* LrcSeeker.app */,
 				768BCB401BF1C74C00D6F5EB /* OpenCC Res */,
 				76C5115E1BEC6F8F0095F510 /* Assets.xcassets */,
 			);
@@ -297,6 +362,8 @@
 			children = (
 				76C5115B1BEC6F8F0095F510 /* Lyrics */,
 				76C5116B1BEC6F8F0095F510 /* LyricsTests */,
+				76D060431C02B8D8000DA86C /* LyricsX Helper */,
+				76D060531C02B8D9000DA86C /* LyricsX HelperTests */,
 				76C5115A1BEC6F8F0095F510 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -306,6 +373,8 @@
 			children = (
 				76C511591BEC6F8F0095F510 /* LyricsX.app */,
 				76C511681BEC6F8F0095F510 /* LyricsTests.xctest */,
+				76D060421C02B8D8000DA86C /* LyricsX Helper.app */,
+				76D060501C02B8D9000DA86C /* LyricsX HelperTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -336,6 +405,26 @@
 			path = LyricsTests;
 			sourceTree = "<group>";
 		};
+		76D060431C02B8D8000DA86C /* LyricsX Helper */ = {
+			isa = PBXGroup;
+			children = (
+				76D060441C02B8D8000DA86C /* AppDelegate.swift */,
+				76D060461C02B8D9000DA86C /* Assets.xcassets */,
+				76D060481C02B8D9000DA86C /* MainMenu.xib */,
+				76D0604B1C02B8D9000DA86C /* Info.plist */,
+			);
+			path = "LyricsX Helper";
+			sourceTree = "<group>";
+		};
+		76D060531C02B8D9000DA86C /* LyricsX HelperTests */ = {
+			isa = PBXGroup;
+			children = (
+				76D060541C02B8D9000DA86C /* LyricsX_HelperTests.swift */,
+				76D060561C02B8D9000DA86C /* Info.plist */,
+			);
+			path = "LyricsX HelperTests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -346,6 +435,8 @@
 				76C511551BEC6F8F0095F510 /* Sources */,
 				76C511561BEC6F8F0095F510 /* Frameworks */,
 				76C511571BEC6F8F0095F510 /* Resources */,
+				76D0605F1C02BAD5000DA86C /* CopyFiles */,
+				76D060611C02BE1D000DA86C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -374,6 +465,41 @@
 			productReference = 76C511681BEC6F8F0095F510 /* LyricsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		76D060411C02B8D8000DA86C /* LyricsX Helper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76D060571C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsX Helper" */;
+			buildPhases = (
+				76D0603E1C02B8D8000DA86C /* Sources */,
+				76D0603F1C02B8D8000DA86C /* Frameworks */,
+				76D060401C02B8D8000DA86C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "LyricsX Helper";
+			productName = "LyricsX Helper";
+			productReference = 76D060421C02B8D8000DA86C /* LyricsX Helper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		76D0604F1C02B8D9000DA86C /* LyricsX HelperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76D0605A1C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsX HelperTests" */;
+			buildPhases = (
+				76D0604C1C02B8D9000DA86C /* Sources */,
+				76D0604D1C02B8D9000DA86C /* Frameworks */,
+				76D0604E1C02B8D9000DA86C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76D060521C02B8D9000DA86C /* PBXTargetDependency */,
+			);
+			name = "LyricsX HelperTests";
+			productName = "LyricsX HelperTests";
+			productReference = 76D060501C02B8D9000DA86C /* LyricsX HelperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -390,6 +516,13 @@
 					76C511671BEC6F8F0095F510 = {
 						CreatedOnToolsVersion = 7.1;
 						TestTargetID = 76C511581BEC6F8F0095F510;
+					};
+					76D060411C02B8D8000DA86C = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					76D0604F1C02B8D9000DA86C = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 76D060411C02B8D8000DA86C;
 					};
 				};
 			};
@@ -409,7 +542,9 @@
 			projectRoot = "";
 			targets = (
 				76C511581BEC6F8F0095F510 /* LyricsX */,
+				76D060411C02B8D8000DA86C /* LyricsX Helper */,
 				76C511671BEC6F8F0095F510 /* LyricsTests */,
+				76D0604F1C02B8D9000DA86C /* LyricsX HelperTests */,
 			);
 		};
 /* End PBXProject section */
@@ -427,7 +562,6 @@
 				768BCB381BF1C74400D6F5EB /* s2t.json in Resources */,
 				768BCB261BF1C64900D6F5EB /* libopencc.dylib in Resources */,
 				768BCB3C1BF1C74400D6F5EB /* t2s.json in Resources */,
-				760012521BFEB33500C7C1E4 /* LrcSeeker.app in Resources */,
 				7600121E1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib in Resources */,
 				7678AA081BFF526700FE848C /* Localizable.strings in Resources */,
 				768BCB391BF1C74400D6F5EB /* s2tw.json in Resources */,
@@ -444,6 +578,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		76C511661BEC6F8F0095F510 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76D060401C02B8D8000DA86C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76D060471C02B8D9000DA86C /* Assets.xcassets in Resources */,
+				76D0604A1C02B8D9000DA86C /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76D0604E1C02B8D9000DA86C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -486,6 +636,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		76D0603E1C02B8D8000DA86C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76D060451C02B8D8000DA86C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76D0604C1C02B8D9000DA86C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76D060551C02B8D9000DA86C /* LyricsX_HelperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -493,6 +659,11 @@
 			isa = PBXTargetDependency;
 			target = 76C511581BEC6F8F0095F510 /* LyricsX */;
 			targetProxy = 76C511691BEC6F8F0095F510 /* PBXContainerItemProxy */;
+		};
+		76D060521C02B8D9000DA86C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76D060411C02B8D8000DA86C /* LyricsX Helper */;
+			targetProxy = 76D060511C02B8D9000DA86C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -531,8 +702,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				76C046D21BF21876005053AC /* Base */,
-				7678AA041BFF50CD00FE848C /* zh-Hans */,
-				7678AA051BFF50D700FE848C /* zh-Hant */,
+				76D060741C03221B000DA86C /* zh-Hans */,
+				76D060751C032220000DA86C /* zh-Hant */,
 			);
 			name = Preferences.xib;
 			sourceTree = "<group>";
@@ -541,6 +712,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				76C511611BEC6F8F0095F510 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		76D060481C02B8D9000DA86C /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76D060491C02B8D9000DA86C /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -636,6 +815,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Lyrics/Lyrics-Prefix.pch";
 				INFOPLIST_FILE = Lyrics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../Resources";
 				LIBRARY_SEARCH_PATHS = (
@@ -658,6 +838,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Lyrics/Lyrics-Prefix.pch";
 				INFOPLIST_FILE = Lyrics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../Resources";
 				LIBRARY_SEARCH_PATHS = (
@@ -698,6 +879,62 @@
 			};
 			name = Release;
 		};
+		76D060581C02B8D9000DA86C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "LyricsX Helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "Eru.LyricsX-Helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		76D060591C02B8D9000DA86C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "LyricsX Helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "Eru.LyricsX-Helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		76D0605B1C02B8D9000DA86C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "LyricsX HelperTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MichaelRow.LyricsX-HelperTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LyricsX Helper.app/Contents/MacOS/LyricsX Helper";
+			};
+			name = Debug;
+		};
+		76D0605C1C02B8D9000DA86C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "LyricsX HelperTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MichaelRow.LyricsX-HelperTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LyricsX Helper.app/Contents/MacOS/LyricsX Helper";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -724,6 +961,24 @@
 			buildConfigurations = (
 				76C511751BEC6F8F0095F510 /* Debug */,
 				76C511761BEC6F8F0095F510 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76D060571C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsX Helper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76D060581C02B8D9000DA86C /* Debug */,
+				76D060591C02B8D9000DA86C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76D0605A1C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsX HelperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76D0605B1C02B8D9000DA86C /* Debug */,
+				76D0605C1C02B8D9000DA86C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

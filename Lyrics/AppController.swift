@@ -16,6 +16,9 @@ class AppController: NSObject {
     @IBOutlet weak var delayMenuItem: NSMenuItem!
     
     var isTrackingRunning:Bool = false
+    var hasBetterLrc:Bool = false
+    var timeDly:Int = 0
+    var timeDlyInFile:Int = 0
     var lyricsWindow:LyricsWindowController!
     var lyricsEidtWindow:LyricsEditWindowController!
     var statusBarItem:NSStatusItem!
@@ -27,7 +30,6 @@ class AppController: NSObject {
     var currentSongID:NSString!
     var currentSongTitle:NSString!
     var currentArtist:NSString!
-    var serverSongInfo:NSString!
     var songList:[SongInfos]!
     var qianqian:QianQian!
     var xiami:Xiami!
@@ -36,8 +38,6 @@ class AppController: NSObject {
     var lrcSourceHandleQueue:NSOperationQueue!
     var userDefaults:NSUserDefaults!
     var timer: NSTimer!
-    var timeDly:Int = 0
-    var timeDlyInFile:Int = 0
     
 // MARK: - Init & deinit
     override init() {
@@ -170,8 +170,8 @@ class AppController: NSObject {
     }
     
     @IBAction func searchLyricsAndArtworks(sender: AnyObject) {
-        let appPath: NSURL = NSBundle.mainBundle().URLForResource("LrcSeeker", withExtension: "app")!
-        NSWorkspace.sharedWorkspace().launchApplication(appPath.path!)
+        let appPath = NSBundle.mainBundle().bundlePath + "/Contents/Library/LrcSeeker.app"
+        NSWorkspace.sharedWorkspace().launchApplication(appPath)
     }
     
     @IBAction func copyLyricsToPb(sender: AnyObject) {
@@ -232,10 +232,10 @@ class AppController: NSObject {
             if lrcContents != nil && testLrc(lrcContents) {
                 lrcSourceHandleQueue.cancelAllOperations()
                 lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
-                    //"中" make the current lrc the better one so that it can't be replaced.
+                    //make the current lrc the better one so that it can't be replaced.
                     if songID == self.currentSongID {
                         self.parsingLrc(lrcContents)
-                        self.serverSongInfo = "中" + songTitle + artist
+                        self.hasBetterLrc = true
                     }
                     self.saveLrcToLocal(lrcContents, songTitle: songTitle, artist: artist)
                 })
@@ -546,7 +546,7 @@ class AppController: NSObject {
         let loadingSongID: String = currentSongID.copy() as! String
         let loadingArtist: String = currentArtist.copy() as! String
         let loadingTitle: String = currentSongTitle.copy() as! String
-        serverSongInfo = nil
+        hasBetterLrc = false
         
         let artistForSearching: String = self.delSpecificSymbol(loadingArtist) as String
         let titleForSearching: String = self.delSpecificSymbol(loadingTitle) as String
@@ -567,8 +567,8 @@ class AppController: NSObject {
             lrcSourceHandleQueue.cancelAllOperations()
             lrcSourceHandleQueue.addOperationWithBlock { () -> Void in
                 if (userInfo["SongID"] as! String) == self.currentSongID {
-                    //"中" make the current lrc the better one so that it can't be replaced.
-                    self.serverSongInfo = "中" + (userInfo["SongTitle"] as! String) + (userInfo["SongArtist"] as! String)
+                    //make the current lrc the better one so that it can't be replaced.
+                    self.hasBetterLrc = true
                     self.parsingLrc(lyrics)
                 }
                 self.saveLrcToLocal(lyrics, songTitle: userInfo["SongTitle"] as! String, artist: userInfo["SongArtist"] as! String)
@@ -606,8 +606,8 @@ class AppController: NSObject {
             let lyricsContents: String = userInfo!["LyricsContents"] as! String
             if self.testLrc(lyricsContents) {
                 self.parsingLrc(lyricsContents)
-                //"中" make the current lrc the better one so that it can't be replaced.
-                self.serverSongInfo = "中" + (userInfo!["SongTitle"] as! String) + (userInfo!["Artist"] as! String)
+                //make the current lrc the better one so that it can't be replaced.
+                self.hasBetterLrc = true
                 self.saveLrcToLocal(lyricsContents, songTitle: self.currentSongTitle, artist: self.currentArtist)
             }
         }
@@ -667,53 +667,56 @@ class AppController: NSObject {
     
     
     func handleLrcURLDownloaded(serverLrcs: NSArray, songTitle:String, artist:NSString, songID:NSString) {
-        if serverLrcs.count == 0 {
-            return
-        }
-        if serverSongInfo != nil {
+        // alread has lyrics, check if user needs a better one.
+        if lyricsArray.count > 0 {
             if userDefaults.boolForKey(LyricsSearchForBetterLrc) {
-                if isBetterLrc(serverSongInfo) {
+                if hasBetterLrc {
                     return
                 }
             } else {
                 return
             }
         }
+        
         var lyricsContents: NSString! = nil
-        var betterLrc: SongInfos! = nil
         for lrc in serverLrcs {
             if isBetterLrc(lrc.songTitle + lrc.artist) {
-                betterLrc = lrc as! SongInfos
                 do {
-                    lyricsContents = try NSString(contentsOfURL: NSURL(string: betterLrc.lyricURL)!, encoding: NSUTF8StringEncoding)
+                    lyricsContents = try NSString(contentsOfURL: NSURL(string: lrc.lyricURL)!, encoding: NSUTF8StringEncoding)
                 } catch let theError as NSError{
                     NSLog("%@", theError.localizedDescription)
+                    lyricsContents = nil
+                    continue
                 }
                 break
             }
         }
-        if betterLrc == nil && serverSongInfo != nil {
+        if lyricsContents == nil && lyricsArray.count > 0 {
             return
         }
+        
         if lyricsContents == nil || !testLrc(lyricsContents) {
             NSLog("better lrc not found or it's not lrc file,trying others")
-            betterLrc = nil
+            lyricsContents = nil
+            hasBetterLrc = false
             for lrc in serverLrcs {
                 let theURL:NSURL = NSURL(string: lrc.lyricURL)!
                 do {
                     lyricsContents = try NSString(contentsOfURL: theURL, encoding: NSUTF8StringEncoding)
                 } catch let theError as NSError{
                     NSLog("%@", theError.localizedDescription)
+                    lyricsContents = nil
+                    continue
                 }
                 if lyricsContents != nil && testLrc(lyricsContents) {
-                    betterLrc = lrc as! SongInfos
                     break
                 }
             }
+        } else {
+            hasBetterLrc = true
         }
-        if betterLrc != nil {
+        if lyricsContents != nil {
             if songID == currentSongID {
-                serverSongInfo = betterLrc.songTitle + betterLrc.artist
                 parsingLrc(lyricsContents)
             }
             saveLrcToLocal(lyricsContents, songTitle: songTitle, artist: artist)
@@ -722,18 +725,14 @@ class AppController: NSObject {
     
     
     func handleLrcContentsDownloaded(lyricsContents: NSString, songTitle:String, artist:NSString, songID:NSString) {
-        if serverSongInfo != nil {
+        if lyricsArray.count > 0 {
             return
         }
         if !testLrc(lyricsContents) {
             return
         }
-        serverSongInfo = songTitle
         if songID == currentSongID {
             parsingLrc(lyricsContents)
-        }
-        if lyricsArray.count  == 0 {
-            return
         }
         saveLrcToLocal(lyricsContents, songTitle: songTitle, artist: artist)
     }
@@ -742,7 +741,7 @@ class AppController: NSObject {
     
     func terminate() {
         if !iTunes.running() {
-            NSApplication.sharedApplication().terminate(self)
+            NSApplication.sharedApplication().terminate(nil)
         }
     }
     

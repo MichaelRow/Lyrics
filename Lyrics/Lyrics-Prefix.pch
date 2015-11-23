@@ -1,0 +1,20 @@
+//
+//  Lyrics-Prefix.pch
+//  Lyrics
+//
+//  Created by Eru on 15/11/23.
+//  Copyright © 2015年 Eru. All rights reserved.
+//
+
+#ifndef Lyrics_Prefix_pch
+#define Lyrics_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#if DEBUG
+#else
+#define NSLog(...) {}
+#endif
+
+#endif /* Lyrics_Prefix_pch */

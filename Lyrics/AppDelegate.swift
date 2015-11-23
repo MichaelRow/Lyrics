@@ -20,6 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let userDefaults: [String:AnyObject] = [
             LyricsSavingPathPopUpIndex : NSNumber(integer: 0),
             LyricsUserSavingPath : userSavingPath,
+            LyricsAutoLaunches : NSNumber(bool: true),
+            LyricsLaunchTpyePopUpIndex : NSNumber(integer: 1),
             LyricsAutoConvertChinese : NSNumber(bool: false),
             LyricsChineseTypeIndex : NSNumber(integer: 0),
             LyricsQuitWithITunes : NSNumber(bool: false),

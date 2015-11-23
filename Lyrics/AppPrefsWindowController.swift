@@ -7,11 +7,13 @@
 //
 
 import Cocoa
+import ServiceManagement
 
 class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     
     @IBOutlet var generalPrefsView:NSView!
     @IBOutlet var lyricsPrefsView:NSView!
+    @IBOutlet var fontAndColorPrefsView:NSView!
     @IBOutlet var donateView:NSView!
     
     @IBOutlet weak var textPreview: TextPreview!
@@ -56,7 +58,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
         textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: Bool(shadowModeCheckbox.state), shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
         
-        //observe the changes
+        //observe the font and color changes for preview
         textColor.addObserver(self, forKeyPath: "color", options: [], context: &prefsChangeContext)
         bkColor.addObserver(self, forKeyPath: "color", options: [], context: &prefsChangeContext)
         shadowColor.addObserver(self, forKeyPath: "color", options: [], context: &prefsChangeContext)
@@ -66,34 +68,36 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     override func displayViewForIdentifier(identifier: String, animate: Bool) {
         
         //check if changes are unsaved
-        if hasUnsaveChange && self.window?.title == "Lyrics" {
-            displayAlert(false, identifier: identifier)
+        if hasUnsaveChange && self.window?.title == "Font & Color" {
+            displayAlert(identifier)
             return
         }
         
-        //applies Immediately in other prefs view
-        NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = true
-        
         super.displayViewForIdentifier(identifier, animate: animate)
         
-        if self.window?.title == "Lyrics" {
+        if self.window?.title == "Font & Color" {
             NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = false
             let userDefaults = NSUserDefaults.standardUserDefaults()
             font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))!
+        } else {
+            //applies Immediately in other prefs view
+            NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = true
         }
     }
     
     override func setupToolbar () {
         self.addView(generalPrefsView, label: "General", image: NSImage(named: "general_icon"))
         self.addView(lyricsPrefsView, label: "Lyrics", image: NSImage(named: "lyrics_icon"))
+        self.addView(fontAndColorPrefsView, label: "Font & Color", image: NSImage(named: "font_Color_icon"))
+        self.addFlexibleSpacer()
         self.addView(donateView, label: "Donate", image: NSImage(named: "donate_icon"))
         self.crossFade=true
         self.shiftSlowsAnimation=true
     }
     
-// MARK: - Interface Methods
+// MARK: - General Prefs
     
-    @IBAction func changeSavingPath(sender: AnyObject) {
+    @IBAction func changeLrcSavingPath(sender: AnyObject) {
         let openPanel = NSOpenPanel()
         openPanel.canChooseFiles = false
         openPanel.canChooseDirectories = true
@@ -109,7 +113,23 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         }
     }
     
-    @IBAction func applyChanges(sender: AnyObject) {
+    @IBAction func enableLoginItem(sender: AnyObject) {
+        let identifier: String = "Eru.LyricsX-Helper"
+        if (sender as! NSButton).state == NSOnState {
+            if !SMLoginItemSetEnabled((identifier as CFStringRef), true) {
+                NSLog("Failed to enable login item")
+            }
+        } else {
+            if !SMLoginItemSetEnabled(identifier, false) {
+                NSLog("Failed to disable login item")
+            }
+        }
+        
+    }
+    
+// MARK: - Font and Color Prefs
+    
+    @IBAction func applyFontAndColorChanges(sender: AnyObject?) {
         NSUserDefaultsController.sharedUserDefaultsController().save(nil)
         hasUnsaveChange = false
         revertButton.enabled = false
@@ -120,7 +140,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName(LyricsAttributesChangedNotification, object: nil)
     }
     
-    @IBAction func restoreChanges(sender: AnyObject) {
+    @IBAction func revertFontAndColorChanges(sender: AnyObject?) {
         flag = false
         NSUserDefaultsController.sharedUserDefaultsController().revert(nil)
         hasUnsaveChange = false
@@ -131,8 +151,6 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
         textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: Bool(shadowModeCheckbox.state), shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
     }
-    
-// MARK: - Font Methods
     
     override func changeFont(sender: AnyObject?) {
         font = (sender?.convertFont(font))!
@@ -146,7 +164,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     override func validModesForFontPanel(fontPanel: NSFontPanel) -> Int {
-        return Int(NSFontPanelAllModesMask)
+        return Int(NSFontPanelSizeModeMask | NSFontPanelCollectionModeMask | NSFontPanelFaceModeMask)
     }
     
     @IBAction func showFontPanel(sender: AnyObject) {
@@ -158,7 +176,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         fontPanel.delegate = self
     }
     
-// MARK: - KVO and TextField Delegate
+// MARK: - KVO and Delegate
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if context == &prefsChangeContext {
@@ -185,9 +203,9 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     func windowShouldClose(sender: AnyObject) -> Bool {
-        if (sender as! NSWindow).title == "Lyrics" {
+        if (sender as! NSWindow).title == "Font & Color" {
             if hasUnsaveChange {
-                displayAlert(true, identifier: nil)
+                displayAlert(nil)
                 return false
             } else {
                 return true
@@ -198,7 +216,8 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     
 // MARK: - Alert
     
-    func displayAlert(closeWindow: Bool, identifier: String!) {
+    // identifier nil means window is about to close
+    func displayAlert(identifier: String!) {
         let alert: NSAlert = NSAlert()
         alert.messageText = NSLocalizedString("CHANGE_UNSAVED", comment: "")
         alert.informativeText = NSLocalizedString("DISGARDS_LEAVE", comment: "")
@@ -208,22 +227,19 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         alert.beginSheetModalForWindow(self.window!, completionHandler: { (response) -> Void in
             if response != NSAlertThirdButtonReturn {
                 if response == NSAlertFirstButtonReturn {
-                    NSUserDefaultsController.sharedUserDefaultsController().save(nil)
+                    self.applyFontAndColorChanges(nil)
                 } else {
-                    NSUserDefaultsController.sharedUserDefaultsController().revert(nil)
+                    self.revertFontAndColorChanges(nil)
                 }
-                self.hasUnsaveChange = false
-                self.revertButton.enabled = false
-                self.applyButton.enabled = false
                 if identifier != nil {
                     self.displayViewForIdentifier(identifier,animate: true)
                     NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = true
-                }
-                if closeWindow {
+                } else {
                     self.window?.orderOut(nil)
                 }
+                
             } else {
-                self.window?.toolbar?.selectedItemIdentifier = "Lyrics"
+                self.window?.toolbar?.selectedItemIdentifier = "Font & Color"
             }
         })
     }

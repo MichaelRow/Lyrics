@@ -17,18 +17,12 @@ import Foundation
 let LyricsAttributesChangedNotification:String="LyricsAttributesChanged"
 let LyricsUserEditLyricsNotification:String="LyricsUserEditLyrics"
 
-//User Defaults
+//General Preferences Defaults
 let LyricsSavingPathPopUpIndex:String="LyricsSavingPathPopUpIndex"
 let LyricsUserSavingPath:String="LyricsUserSavingPath"
-let LyricsAutoConvertChinese:String="LyricsAutoConvertChinese"
-let LyricsChineseTypeIndex:String="LyricsChineseTypeIndex"
+let LyricsAutoLaunches:String="LyricsAutoLaunches"
+let LyricsLaunchTpyePopUpIndex:String="LyricsLaunchTpyePopUpIndex"
 let LyricsQuitWithITunes:String="LyricsQuitWithITunes"
-let LyricsDisabledWhenPaused:String="LyricsDisabledWhenPaused"
-let LyricsDisabledWhenSreenShot:String="LyricsDisabledWhenSreenShot"
-
-let LyricsTwoLineMode:String="LyricsTwoLineMode"
-let LyricsSearchForBetterLrc:String="LyricsSearchForBetterLrc"
-let LyricsDisplayInAllSpaces:String="LyricsDisplayInAllSpaces"
 let LyricsUseAutoLayout:String="LyricsUseAutoLayout"
 let LyricsHeightFromDockToLyrics:String="LyricsHeightFromDockToLyrics"
 let LyricsConstToLeft:String="LyricsConstToLeft"
@@ -36,6 +30,16 @@ let LyricsConstToBottom:String="LyricsConstToBottom"
 let LyricsConstWidth:String="LyricsConstWidth"
 let LyricsConstHeight:String="LyricsConstHeight"
 
+//Lyrics Preferences Defaults
+let LyricsAutoConvertChinese:String="LyricsAutoConvertChinese"
+let LyricsChineseTypeIndex:String="LyricsChineseTypeIndex"
+let LyricsTwoLineMode:String="LyricsTwoLineMode"
+let LyricsDisabledWhenPaused:String="LyricsDisabledWhenPaused"
+let LyricsDisabledWhenSreenShot:String="LyricsDisabledWhenSreenShot"
+let LyricsSearchForBetterLrc:String="LyricsSearchForBetterLrc"
+let LyricsDisplayInAllSpaces:String="LyricsDisplayInAllSpaces"
+
+//Font and Color Preferences Defaults
 let LyricsFontName:String="LyricsFontName"
 let LyricsFontSize:String="LyricsFontSize"
 let LyricsShadowModeEnable:String="LyricsShadowModeEnable"

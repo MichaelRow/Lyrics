@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>LyricsX Helper.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Release.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,16 @@
 			<true/>
 		</dict>
 		<key>76C511671BEC6F8F0095F510</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>76D060411C02B8D8000DA86C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>76D0604F1C02B8D9000DA86C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

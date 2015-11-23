@@ -1,15 +1,15 @@
 //
-//  LyricsTests.swift
-//  LyricsTests
+//  LyricsX_HelperTests.swift
+//  LyricsX HelperTests
 //
-//  Created by Eru on 15/11/6.
+//  Created by Eru on 15/11/23.
 //  Copyright © 2015年 Eru. All rights reserved.
 //
 
 import XCTest
-@testable import LyricsX
+@testable import LyricsX_Helper
 
-class LyricsTests: XCTestCase {
+class LyricsX_HelperTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
