@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsSavingPathPopUpIndex : NSNumber(integer: 0),
             LyricsUserSavingPath : userSavingPath,
             LyricsAutoLaunches : NSNumber(bool: true),
-            LyricsLaunchTpyePopUpIndex : NSNumber(integer: 1),
+            LyricsLaunchTpyePopUpIndex : NSNumber(integer: 2),
             LyricsAutoConvertChinese : NSNumber(bool: false),
             LyricsChineseTypeIndex : NSNumber(integer: 0),
             LyricsQuitWithITunes : NSNumber(bool: false),
@@ -58,6 +58,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             applicationController.handleLrcDelayChange()
         }
         
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if userDefaults.boolForKey(LyricsAutoLaunches) {
+            if userDefaults.integerForKey(LyricsLaunchTpyePopUpIndex) != 0 {
+                let helperPath = NSBundle.mainBundle().bundlePath + "/Contents/Library/LoginItems/LyricsX Helper.app"
+                NSWorkspace.sharedWorkspace().launchApplication(helperPath)
+            }
+        }
+        
+        //Terminate LrcSeeker
         let runningApp = NSWorkspace.sharedWorkspace().runningApplications
         for app in runningApp {
             if app.executableURL?.lastPathComponent == "LrcSeeker" {

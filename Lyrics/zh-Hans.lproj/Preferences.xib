@@ -26,11 +26,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="hzc-UQ-83r" userLabel="General Prefs View">
-            <rect key="frame" x="0.0" y="0.0" width="369" height="236"/>
+            <rect key="frame" x="0.0" y="0.0" width="365" height="236"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <popUpButton verticalHuggingPriority="750" id="zr6-Uo-3Au">
-                    <rect key="frame" x="183" y="192" width="137" height="26"/>
+                    <rect key="frame" x="162" y="192" width="154" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="fWl-Xe-miF">
@@ -38,7 +38,7 @@
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="BAs-qX-t5U">
                             <items>
-                                <menuItem title="LyricsX (Default)" id="JmS-7B-Qmm">
+                                <menuItem title="LyricsX (默认)" id="JmS-7B-Qmm">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="User Path" id="HwD-eG-KkH">
@@ -57,7 +57,7 @@
                     </connections>
                 </popUpButton>
                 <button id="KNE-hz-sb3">
-                    <rect key="frame" x="333" y="196" width="16" height="16"/>
+                    <rect key="frame" x="329" y="196" width="16" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="openDir_icon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="jsI-Sz-XAb">
@@ -113,7 +113,7 @@
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" id="fUX-O1-K7t">
-                    <rect key="frame" x="257" y="97" width="52" height="22"/>
+                    <rect key="frame" x="215" y="97" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="25" drawsBackground="YES" id="tFh-wU-dQE">
@@ -330,7 +330,7 @@
                     </connections>
                 </button>
                 <popUpButton verticalHuggingPriority="750" id="DaO-06-BZN">
-                    <rect key="frame" x="183" y="159" width="137" height="26"/>
+                    <rect key="frame" x="162" y="159" width="154" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Q9V-sw-d2o">
@@ -380,7 +380,7 @@
                 </button>
             </subviews>
             <animations/>
-            <point key="canvasLocation" x="272.5" y="256"/>
+            <point key="canvasLocation" x="270.5" y="256"/>
         </customView>
         <customView id="57y-D4-ovD" userLabel="Lyrics Prefs View">
             <rect key="frame" x="0.0" y="0.0" width="368" height="275"/>
@@ -632,7 +632,8 @@ Gw
                     <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="AAK-6G-7y1">
                         <font key="font" metaFont="system"/>
-                        <string key="title">      您好，我是LyricsX的开发者。很高兴能给你带来一款为您提供便利的软件，希望您在使用过程中度过愉快的每一天!      LyricsX是一款开源的软件，并基于DynamicLyrics的部分代码以及一些第三方库。它仍需要花费时间维护与后期开发，并且将来可能需要搭建服务器以提供更便捷的更新支持。如果您喜爱这款软件，您可以通过微信以及支付宝向我提供捐赠以支持后续的开发维护。感谢您的慷慨捐赠！</string>
+                        <string key="title">      您好，我是LyricsX的开发者。很高兴能给你带来一款为您提供便利的软件，希望您在使用过程中度过愉快的每一天!
+      LyricsX是一款开源的软件，并基于DynamicLyrics的部分代码以及一些第三方库。它仍需要花费时间维护与后期开发，并且将来可能需要搭建服务器以提供更便捷的更新支持。如果您喜爱这款软件，您可以通过微信以及支付宝向我提供捐赠以支持后续的开发维护。感谢您的慷慨捐赠！</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -743,14 +744,14 @@ Gw
                     <rect key="frame" x="145" y="175" width="153" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <popUpButtonCell key="cell" type="push" title="台湾正体" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="oiR-vz-qK4" id="pf4-9N-YYu">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="pf4-9N-YYu">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="Ad1-Aa-zS3">
                             <items>
                                 <menuItem title="简体中文" id="Imc-I5-fgX"/>
                                 <menuItem title="繁体中文" id="qpy-Dj-g7D"/>
-                                <menuItem title="台湾正体" state="on" id="oiR-vz-qK4"/>
+                                <menuItem title="台湾正体" id="oiR-vz-qK4"/>
                                 <menuItem title="香港繁体" id="b82-xP-mbv">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
