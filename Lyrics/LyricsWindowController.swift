@@ -18,6 +18,8 @@ import Cocoa
 
 class LyricsWindowController: NSWindowController {
     
+    var firstLyrics: NSString?
+    var secondLyrics: NSString?
     var backgroundLayer: CALayer!
     var firstLyricsLayer: CATextLayer!
     var secondLyricsLayer: CATextLayer!
@@ -133,7 +135,11 @@ class LyricsWindowController: NSWindowController {
 
 // MARK: - display lyrics
     
-    func displayLyrics(firstLyrics:NSString?, secondLyrics:NSString?) {
+    func displayLyrics(theFirstLyrics:NSString?, secondLyrics theSecondLyrics:NSString?) {
+        
+        firstLyrics = theFirstLyrics
+        secondLyrics = theSecondLyrics
+        
         if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
             // first Lyrics empty means it's instrument time
             
@@ -243,6 +249,7 @@ class LyricsWindowController: NSWindowController {
             
             backgroundLayer.frame = CGRectMake(x, y, width, height)
             
+            // whether needs rotate to show animation
             if flag {
                 firstLyricsLayer.string = firstLyrics
                 secondLyricsLayer.string = secondLyrics
@@ -266,17 +273,19 @@ class LyricsWindowController: NSWindowController {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.setAttributes()
             
-            //reflash lyrics
-            self.displayLyrics(self.firstLyricsLayer.string as? NSString, secondLyrics: self.secondLyricsLayer.string as? NSString)
+            //reflash lyrics and keep the lyrics order by !flag
+            self.flag = !self.flag
+            self.displayLyrics(self.firstLyrics, secondLyrics: self.secondLyrics)
         }
     }
     
     func handleScreenResolutionChange() {
         
-        //reflash lyrics
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.setScreenResolution()
-            self.displayLyrics(self.firstLyricsLayer.string as? NSString, secondLyrics: self.secondLyricsLayer.string as? NSString)
+            //reflash lyrics and keep the lyrics order by !flag
+            self.flag = !self.flag
+            self.displayLyrics(self.firstLyrics, secondLyrics: self.secondLyrics)
         }
     }
 
