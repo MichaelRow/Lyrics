@@ -22,3 +22,6 @@
 "LYRICS"="Lyrics";
 "FONT_COLOR"="Font & Color";
 "DONATE"="Donate";
+
+// TextPreview
+"PREVIEW_TEXT"="Lyrics Preview";

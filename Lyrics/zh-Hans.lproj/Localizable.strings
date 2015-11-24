@@ -22,3 +22,6 @@
 "LYRICS"="歌词";
 "FONT_COLOR"="字体与颜色";
 "DONATE"="捐赠";
+
+// TextPreview
+"PREVIEW_TEXT"="歌词效果预览";

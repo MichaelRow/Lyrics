@@ -45,7 +45,7 @@ class TextPreview: NSView {
     }
     
     func drawStringInCenter() {
-        let str: NSString = "歌词效果预览"
+        let str: NSString = NSLocalizedString("PREVIEW_TEXT", comment: "")
         let strSize: NSSize = str.sizeWithAttributes(attributes)
         var strOrigin: NSPoint = NSPoint()
         

@@ -21,3 +21,6 @@
 "LYRICS"="歌詞";
 "FONT_COLOR"="字型與顏色";
 "DONATE"="捐贈";
+
+// TextPreview
+"PREVIEW_TEXT"="歌詞效果預覽";
