@@ -280,9 +280,9 @@ class LyricsWindowController: NSWindowController {
     }
     
     func handleScreenResolutionChange() {
-        
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.setScreenResolution()
+            
             //reflash lyrics and keep the lyrics order by !flag
             self.flag = !self.flag
             self.displayLyrics(self.firstLyrics, secondLyrics: self.secondLyrics)
