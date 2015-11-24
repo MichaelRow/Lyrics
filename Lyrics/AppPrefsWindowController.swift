@@ -68,14 +68,14 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     override func displayViewForIdentifier(identifier: String, animate: Bool) {
         
         //check if changes are unsaved
-        if hasUnsaveChange && self.window?.title == "Font & Color" {
+        if hasUnsaveChange && self.window?.title == NSLocalizedString("FONT_COLOR", comment: "") {
             displayAlert(identifier)
             return
         }
         
         super.displayViewForIdentifier(identifier, animate: animate)
         
-        if self.window?.title == "Font & Color" {
+        if self.window?.title == NSLocalizedString("FONT_COLOR", comment: "") {
             NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = false
             let userDefaults = NSUserDefaults.standardUserDefaults()
             font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))!
@@ -86,11 +86,11 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     override func setupToolbar () {
-        self.addView(generalPrefsView, label: "General", image: NSImage(named: "general_icon"))
-        self.addView(lyricsPrefsView, label: "Lyrics", image: NSImage(named: "lyrics_icon"))
-        self.addView(fontAndColorPrefsView, label: "Font & Color", image: NSImage(named: "font_Color_icon"))
+        self.addView(generalPrefsView, label: NSLocalizedString("GENERAL", comment: ""), image: NSImage(named: "general_icon"))
+        self.addView(lyricsPrefsView, label: NSLocalizedString("LYRICS", comment: ""), image: NSImage(named: "lyrics_icon"))
+        self.addView(fontAndColorPrefsView, label: NSLocalizedString("FONT_COLOR", comment: ""), image: NSImage(named: "font_Color_icon"))
         self.addFlexibleSpacer()
-        self.addView(donateView, label: "Donate", image: NSImage(named: "donate_icon"))
+        self.addView(donateView, label: NSLocalizedString("DONATE", comment: ""), image: NSImage(named: "donate_icon"))
         self.crossFade=true
         self.shiftSlowsAnimation=true
     }
@@ -203,7 +203,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     func windowShouldClose(sender: AnyObject) -> Bool {
-        if (sender as! NSWindow).title == "Font & Color" {
+        if (sender as! NSWindow).title == NSLocalizedString("FONT_COLOR", comment: "") {
             if hasUnsaveChange {
                 displayAlert(nil)
                 return false
@@ -239,7 +239,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
                 }
                 
             } else {
-                self.window?.toolbar?.selectedItemIdentifier = "Font & Color"
+                self.window?.toolbar?.selectedItemIdentifier = NSLocalizedString("FONT_COLOR", comment: "")
             }
         })
     }

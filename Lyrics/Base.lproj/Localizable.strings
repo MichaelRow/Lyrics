@@ -5,6 +5,8 @@
   Created by Eru on 15/11/20.
   Copyright © 2015年 Eru. All rights reserved.
 */
+
+// Alert
 "ERROR_OCCUR"="An error occured";
 "PATH_IS_NOT_DIR"="The default path which used to save lrc files is not a directory.\nIn this case no lrc can be saved.";
 "OPEN_PREFS"="Open Preferences and Set";
@@ -14,3 +16,9 @@
 "APPLY_LEAVE"="Apply and Leave";
 "REVERT_LEAVE"="Revert and Leave";
 "CANCEL"="Cancel";
+
+// Prefs Toolbar Identifier
+"GENERAL"="General";
+"LYRICS"="Lyrics";
+"FONT_COLOR"="Font & Color";
+"DONATE"="Donate";

@@ -5,6 +5,8 @@
   Created by Eru on 15/11/20.
   Copyright © 2015年 Eru. All rights reserved.
 */
+
+// Alert
 "ERROR_OCCUR" = "运行过程中出现错误";
 "PATH_IS_NOT_DIR" = "默认的Lrc歌词保存路径不是文件夹，\n在这种情况下，歌词文件不会被保存到本地。";
 "OPEN_PREFS" = "打开偏好设置并重设路径";
@@ -14,3 +16,9 @@
 "APPLY_LEAVE"="应用并离开";
 "REVERT_LEAVE"="还原并离开";
 "CANCEL"="取消";
+
+// Prefs Toolbar Identifier
+"GENERAL"="通用";
+"LYRICS"="歌词";
+"FONT_COLOR"="字体与颜色";
+"DONATE"="捐赠";

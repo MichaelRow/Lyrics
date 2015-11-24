@@ -15,3 +15,9 @@
 "APPLY_LEAVE"="應用並離開";
 "REVERT_LEAVE"="還原並離開";
 "CANCEL"="取消";
+
+// Prefs Toolbar Identifier
+"GENERAL"="通用";
+"LYRICS"="歌詞";
+"FONT_COLOR"="字型與顏色";
+"DONATE"="捐贈";
