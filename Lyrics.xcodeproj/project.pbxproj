@@ -21,6 +21,7 @@
 		764334931BF95ECF00C4B740 /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 764334921BF95ECF00C4B740 /* iTunesBridge.m */; };
 		7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660C5011BF05471002E3204 /* LyricsWindowController.swift */; };
 		766D670F1C03530E00B5405B /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D670E1C03530E00B5405B /* iTunesBridge.m */; };
+		766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F03C41C049372003F4790 /* LyricsEditView.swift */; };
 		7678AA081BFF526700FE848C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7678AA061BFF526700FE848C /* Localizable.strings */; };
 		768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
 		768BCB211BF1C62000D6F5EB /* libopencc.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */; };
@@ -41,7 +42,6 @@
 		768BCB3E1BF1C74400D6F5EB /* TSPhrases.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 768BCB331BF1C74400D6F5EB /* TSPhrases.ocd */; };
 		768BCB3F1BF1C74400D6F5EB /* TWVariants.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 768BCB341BF1C74400D6F5EB /* TWVariants.ocd */; };
 		768BCB431BF1C84B00D6F5EB /* ChineseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */; };
-		768F21061C03F8C1003D6070 /* LyricsApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F21051C03F8C1003D6070 /* LyricsApplication.swift */; };
 		76C046D01BF2178B005053AC /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C046CF1BF2178B005053AC /* AppController.swift */; };
 		76C046D31BF21876005053AC /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C046D11BF21876005053AC /* Preferences.xib */; };
 		76C0471A1BF2E335005053AC /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C047181BF2E335005053AC /* DBPrefsWindowController.m */; };
@@ -130,6 +130,7 @@
 		766D670C1C03530E00B5405B /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		766D670D1C03530E00B5405B /* iTunesBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridge.h; sourceTree = "<group>"; };
 		766D670E1C03530E00B5405B /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
+		766F03C41C049372003F4790 /* LyricsEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsEditView.swift; sourceTree = "<group>"; };
 		7678A9F41BFF428200FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
 		7678A9F71BFF428900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
 		7678A9FC1BFF475900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/StatusMenu.xib"; sourceTree = "<group>"; };
@@ -157,7 +158,6 @@
 		768BCB331BF1C74400D6F5EB /* TSPhrases.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = TSPhrases.ocd; sourceTree = "<group>"; };
 		768BCB341BF1C74400D6F5EB /* TWVariants.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = TWVariants.ocd; sourceTree = "<group>"; };
 		768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChineseConverter.swift; sourceTree = "<group>"; };
-		768F21051C03F8C1003D6070 /* LyricsApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsApplication.swift; sourceTree = "<group>"; };
 		76C046CF1BF2178B005053AC /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		76C046D21BF21876005053AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Preferences.xib; sourceTree = "<group>"; };
 		76C047171BF2E335005053AC /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
@@ -276,6 +276,7 @@
 		765FC4A31BEE508100BF3706 /* Wins & Views */ = {
 			isa = PBXGroup;
 			children = (
+				766F03C41C049372003F4790 /* LyricsEditView.swift */,
 				76C047251BF2F34C005053AC /* AppPrefsWindowController.swift */,
 				76FE94401BFC223600A1AC27 /* TextPreview.swift */,
 				7660C5011BF05471002E3204 /* LyricsWindowController.swift */,
@@ -358,7 +359,6 @@
 			isa = PBXGroup;
 			children = (
 				7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */,
-				768F21051C03F8C1003D6070 /* LyricsApplication.swift */,
 				768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */,
 				76C511771BEC6FD50095F510 /* Macros.swift */,
 			);
@@ -620,7 +620,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				76C047261BF2F34C005053AC /* AppPrefsWindowController.swift in Sources */,
-				768F21061C03F8C1003D6070 /* LyricsApplication.swift in Sources */,
 				764334931BF95ECF00C4B740 /* iTunesBridge.m in Sources */,
 				76FE94411BFC223600A1AC27 /* TextPreview.swift in Sources */,
 				760A018A1C01A36700015C62 /* QianQian.m in Sources */,
@@ -633,6 +632,7 @@
 				768BCB431BF1C84B00D6F5EB /* ChineseConverter.swift in Sources */,
 				76C5115D1BEC6F8F0095F510 /* AppDelegate.swift in Sources */,
 				760A01901C01A37400015C62 /* Xiami.m in Sources */,
+				766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */,
 				760A01911C01A37400015C62 /* XMLParserForXiami.m in Sources */,
 				76C0471A1BF2E335005053AC /* DBPrefsWindowController.m in Sources */,
 				76C046D01BF2178B005053AC /* AppController.swift in Sources */,
