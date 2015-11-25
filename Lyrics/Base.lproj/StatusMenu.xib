@@ -24,6 +24,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Kon-oS-t3B"/>
+                            <menuItem title="Edit Lyrics..." id="aHI-5b-EXH">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="editLyrics:" target="-2" id="1NM-fU-FWj"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Copy Lyrics to Pasteboafd" id="hA5-FO-Nk2">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -34,12 +40,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="copyLyricsWithTagsToPb:" target="-2" id="8QC-DU-PbF"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Edit Lyrics..." id="aHI-5b-EXH">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="editLyrics:" target="-2" id="1NM-fU-FWj"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="V78-Pj-41Z"/>
@@ -56,6 +56,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="CM0-FN-R8L"/>
+                            <menuItem title="Wrong Lyrics" id="ed7-VT-i2J">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="wrongLyrics:" target="-2" id="SVi-Ox-Yea"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Write Lyrics to iTunes" id="9IB-fJ-7CD">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -85,6 +91,18 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="lfR-h4-Fcs"/>
+                <menuItem title="It's In Full Screen" id="REF-TU-uaB">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="handleWorkSpaceChange:" target="-2" id="S5S-yQ-Doe"/>
+                        <binding destination="Ppe-ZY-ULn" name="enabled" keyPath="values.LyricsUseAutoLayout" id="kin-tO-CGe">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="zet-Go-5yF"/>
                 <menuItem title="About Lyrics..." id="QoB-2y-8a4">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -167,5 +185,6 @@
             <animations/>
             <point key="canvasLocation" x="334.5" y="380"/>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="Ppe-ZY-ULn"/>
     </objects>
 </document>

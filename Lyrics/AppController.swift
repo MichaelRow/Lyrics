@@ -61,7 +61,7 @@ class AppController: NSObject {
         lyricsWindow.showWindow(nil)
         
         // check lrc saving path
-        if !checkSavingPath() {
+        if !userDefaults.boolForKey(LyricsDisableAllAlert) && !checkSavingPath() {
             let alert: NSAlert = NSAlert()
             alert.messageText = NSLocalizedString("ERROR_OCCUR", comment: "")
             alert.informativeText = NSLocalizedString("PATH_IS_NOT_DIR", comment: "")
@@ -80,6 +80,8 @@ class AppController: NSObject {
         let ndc = NSDistributedNotificationCenter.defaultCenter()
         ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
         ndc.addObserver(self, selector: "handleLrcSeekerEvent:", name: "LrcSeekerEvents", object: nil)
+        
+        NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "handleWorkSpaceChange:", name: NSWorkspaceActiveSpaceDidChangeNotification, object: nil)
         
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
@@ -280,6 +282,26 @@ class AppController: NSObject {
         }
     }
     
+    @IBAction func wrongLyrics(sender: AnyObject) {
+        if !userDefaults.boolForKey(LyricsDisableAllAlert) {
+            let alert: NSAlert = NSAlert()
+            alert.messageText = NSLocalizedString("CONFIRM_SIGN_WRONG", comment: "")
+            alert.informativeText = NSLocalizedString("CANT_UNDONE", comment: "")
+            alert.addButtonWithTitle(NSLocalizedString("CANCEL", comment: ""))
+            alert.addButtonWithTitle(NSLocalizedString("SIGN", comment: ""))
+            let response: NSModalResponse = alert.runModal()
+            if response == NSAlertFirstButtonReturn {
+                return
+            }
+        }
+        let wrongLyricsTag: String = NSLocalizedString("WRONG_LYRICS", comment: "")
+        lyricsArray.removeAll()
+        currentLyrics = nil
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+        }
+        saveLrcToLocal(wrongLyricsTag, songTitle: currentSongTitle, artist: currentArtist)
+    }
     
 // MARK: - iTunes Events
     
@@ -368,6 +390,7 @@ class AppController: NSObject {
                 idTagsArray.removeAll()
                 self.setValue(0, forKey: "timeDly")
                 timeDlyInFile = 0
+                currentLyrics = nil
                 lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                 currentSongID = iTunes.currentPersistentID().copy() as! NSString
                 currentSongTitle = iTunes.currentTitle().copy() as! NSString
@@ -521,15 +544,22 @@ class AppController: NSObject {
                             }
                         }
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.lyricsWindow.displayLyrics(tempLyricsArray[index-1].lyricsSentence, secondLyrics: secondLyrics)
+                            self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: secondLyrics)
                         })
                     }
                     return
                 }
             }
         }
+        if index == tempLyricsArray.count && tempLyricsArray.count>0 {
+            if currentLyrics != tempLyricsArray[tempLyricsArray.count - 1].lyricsSentence {
+                currentLyrics = tempLyricsArray[tempLyricsArray.count - 1].lyricsSentence
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: nil)
+                })
+            }
+        }
     }
-    
     
     func handleSongChange() {
         //load lyrics for the song which is about to play
@@ -557,6 +587,15 @@ class AppController: NSObject {
         geciMe.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
     }
     
+    @IBAction func handleWorkSpaceChange(sender: AnyObject?) {
+        if statusBarMenu.itemAtIndex(6)?.state == NSOnState {
+            statusBarMenu.itemAtIndex(6)?.state = NSOffState
+        } else {
+            statusBarMenu.itemAtIndex(6)?.state = NSOnState
+        }
+        lyricsWindow.isFullScreen = !lyricsWindow.isFullScreen
+        lyricsWindow.reflash()
+    }
     
     func handleUserEditLyrics(n: NSNotification) {
         let userInfo: [NSObject:AnyObject] = n.userInfo!

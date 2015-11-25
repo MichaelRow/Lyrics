@@ -16,6 +16,10 @@
 "REVERT_LEAVE"="還原並離開";
 "CANCEL"="取消";
 
+"CONFIRM_SIGN_WRONG"="您確定要刪除當前歌詞並標記錯誤?";
+"CANT_UNDONE"="這項操作不能撤銷!";
+"SIGN"="刪除歌詞並標記";
+
 // Prefs Toolbar Identifier
 "GENERAL"="通用";
 "LYRICS"="歌詞";
@@ -24,3 +28,6 @@
 
 // TextPreview
 "PREVIEW_TEXT"="歌詞效果預覽";
+
+// Wrong Lyrics Tag
+"WRONG_LYRICS"="[00:00:00]當前播放的歌曲被標記“錯誤的歌詞”\n[00:05:00]";

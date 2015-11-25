@@ -17,6 +17,10 @@
 "REVERT_LEAVE"="Revert and Leave";
 "CANCEL"="Cancel";
 
+"CONFIRM_SIGN_WRONG"="Are you sure to sign the lyrics wrong and delete?";
+"CANT_UNDONE"="This operation can NOT be undone!";
+"SIGN"="Delete Lyrics and Sign";
+
 // Prefs Toolbar Identifier
 "GENERAL"="General";
 "LYRICS"="Lyrics";
@@ -25,3 +29,6 @@
 
 // TextPreview
 "PREVIEW_TEXT"="Lyrics Preview";
+
+// Wrong Lyrics Tag
+"WRONG_LYRICS"="[00:00:00]Current playing song is signed as Wrong Lyrics\n[00:05:00]";

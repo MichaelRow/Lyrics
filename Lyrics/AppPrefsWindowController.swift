@@ -127,6 +127,10 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         
     }
     
+    @IBAction func layoutChanged(sender: AnyObject) {
+        NSNotificationCenter.defaultCenter().postNotificationName(LyricsLayoutChangeNotification, object: nil)
+    }
+    
 // MARK: - Font and Color Prefs
     
     @IBAction func applyFontAndColorChanges(sender: AnyObject?) {

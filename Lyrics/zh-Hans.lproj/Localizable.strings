@@ -17,6 +17,10 @@
 "REVERT_LEAVE"="还原并离开";
 "CANCEL"="取消";
 
+"CONFIRM_SIGN_WRONG"="您确定要删除当前歌词并标记错误?";
+"CANT_UNDONE"="这项操作不能撤销!";
+"SIGN"="删除歌词并标记";
+
 // Prefs Toolbar Identifier
 "GENERAL"="通用";
 "LYRICS"="歌词";
@@ -25,3 +29,6 @@
 
 // TextPreview
 "PREVIEW_TEXT"="歌词效果预览";
+
+// Wrong Lyrics Tag
+"WRONG_LYRICS"="[00:00:00]当前播放的歌曲被标记“错误的歌词”\n[00:05:00]";

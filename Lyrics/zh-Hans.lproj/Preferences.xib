@@ -26,11 +26,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="hzc-UQ-83r" userLabel="General Prefs View">
-            <rect key="frame" x="0.0" y="0.0" width="365" height="236"/>
+            <rect key="frame" x="0.0" y="0.0" width="365" height="259"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <popUpButton verticalHuggingPriority="750" id="zr6-Uo-3Au">
-                    <rect key="frame" x="162" y="192" width="154" height="26"/>
+                    <rect key="frame" x="162" y="215" width="154" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="fWl-Xe-miF">
@@ -57,7 +57,7 @@
                     </connections>
                 </popUpButton>
                 <button id="KNE-hz-sb3">
-                    <rect key="frame" x="329" y="196" width="16" height="16"/>
+                    <rect key="frame" x="329" y="219" width="16" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="openDir_icon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="jsI-Sz-XAb">
@@ -69,7 +69,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jJf-SX-8uR">
-                    <rect key="frame" x="18" y="195" width="149" height="17"/>
+                    <rect key="frame" x="18" y="218" width="149" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lrc歌词文件保存路径:" id="hr6-dW-Nap">
@@ -79,7 +79,7 @@
                     </textFieldCell>
                 </textField>
                 <button id="70D-Cz-LtQ">
-                    <rect key="frame" x="18" y="135" width="120" height="18"/>
+                    <rect key="frame" x="18" y="158" width="120" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <buttonCell key="cell" type="check" title="随iTunes退出" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HlU-FW-E5p">
@@ -96,7 +96,7 @@
                     </connections>
                 </button>
                 <button id="Itb-Lx-q7k">
-                    <rect key="frame" x="18" y="96" width="222" height="34"/>
+                    <rect key="frame" x="18" y="89" width="222" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <buttonCell key="cell" type="check" title="使用动态调整的歌词布局 并设置Dock到歌词的间距:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4DC-rM-sB4">
@@ -104,6 +104,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
+                        <action selector="layoutChanged:" target="-2" id="rPZ-fI-QhY"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsUseAutoLayout" id="uJr-0u-Hg2">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -113,7 +114,7 @@
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" id="fUX-O1-K7t">
-                    <rect key="frame" x="215" y="97" width="52" height="22"/>
+                    <rect key="frame" x="215" y="90" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="25" drawsBackground="YES" id="tFh-wU-dQE">
@@ -136,7 +137,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" id="5Sz-bb-rfm">
-                    <rect key="frame" x="37" y="27" width="52" height="22"/>
+                    <rect key="frame" x="37" y="20" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="HOw-SW-9xG">
@@ -160,7 +161,7 @@
                     </connections>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="es0-AV-pP5">
-                    <rect key="frame" x="92" y="24" width="19" height="27"/>
+                    <rect key="frame" x="92" y="17" width="19" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="vND-dE-260"/>
@@ -180,7 +181,7 @@
                     </connections>
                 </stepper>
                 <textField verticalHuggingPriority="750" id="9lt-Gt-079">
-                    <rect key="frame" x="116" y="26" width="52" height="22"/>
+                    <rect key="frame" x="116" y="19" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="gUV-uH-W9Z">
@@ -204,7 +205,7 @@
                     </connections>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="DNF-46-LV7">
-                    <rect key="frame" x="171" y="23" width="19" height="27"/>
+                    <rect key="frame" x="171" y="16" width="19" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="UkZ-uf-4Yu"/>
@@ -224,7 +225,7 @@
                     </connections>
                 </stepper>
                 <textField verticalHuggingPriority="750" id="x6a-Sz-CjN">
-                    <rect key="frame" x="196" y="26" width="52" height="22"/>
+                    <rect key="frame" x="196" y="19" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="BnQ-Iv-2KO">
@@ -248,7 +249,7 @@
                     </connections>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="dLf-io-WlB">
-                    <rect key="frame" x="251" y="23" width="19" height="27"/>
+                    <rect key="frame" x="251" y="16" width="19" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="q6s-5O-VWm"/>
@@ -268,7 +269,7 @@
                     </connections>
                 </stepper>
                 <textField verticalHuggingPriority="750" id="Frb-GN-2NO">
-                    <rect key="frame" x="275" y="26" width="52" height="22"/>
+                    <rect key="frame" x="275" y="19" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Sk4-5k-fY7">
@@ -292,7 +293,7 @@
                     </connections>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="grI-dN-iUd">
-                    <rect key="frame" x="330" y="23" width="19" height="27"/>
+                    <rect key="frame" x="330" y="16" width="19" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="oNH-qP-SNA"/>
@@ -312,7 +313,7 @@
                     </connections>
                 </stepper>
                 <button id="e8a-EN-4Dd">
-                    <rect key="frame" x="18" y="57" width="222" height="34"/>
+                    <rect key="frame" x="18" y="50" width="222" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <buttonCell key="cell" type="check" title="使用固定的歌词布局 (左间距, 底部间距, 宽度, 高度)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="eaR-Nu-hIQ">
@@ -320,6 +321,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
+                        <action selector="layoutChanged:" target="-2" id="At0-uL-EYd"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsUseAutoLayout" id="eO5-mh-vYI">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -330,7 +332,7 @@
                     </connections>
                 </button>
                 <popUpButton verticalHuggingPriority="750" id="DaO-06-BZN">
-                    <rect key="frame" x="162" y="159" width="154" height="26"/>
+                    <rect key="frame" x="162" y="182" width="154" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Q9V-sw-d2o">
@@ -361,7 +363,7 @@
                     </connections>
                 </popUpButton>
                 <button id="evm-fG-gkq">
-                    <rect key="frame" x="18" y="161" width="148" height="18"/>
+                    <rect key="frame" x="18" y="184" width="148" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
                     <buttonCell key="cell" type="check" title="自动启动LyricsX:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="qBk-yU-0Pr">
@@ -378,9 +380,26 @@
                         </binding>
                     </connections>
                 </button>
+                <button id="PDf-aQ-sEo">
+                    <rect key="frame" x="18" y="132" width="100" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <animations/>
+                    <buttonCell key="cell" type="check" title="禁用所有警告" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="C6c-WT-TpI">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" size="13" name=".PingFangSC-Regular"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsDisableAllAlert" id="tY4-go-mSt">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
             </subviews>
             <animations/>
-            <point key="canvasLocation" x="270.5" y="256"/>
+            <point key="canvasLocation" x="270.5" y="267.5"/>
         </customView>
         <customView id="57y-D4-ovD" userLabel="Lyrics Prefs View">
             <rect key="frame" x="0.0" y="0.0" width="368" height="275"/>

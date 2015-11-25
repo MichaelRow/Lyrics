@@ -24,6 +24,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Kon-oS-t3B"/>
+                            <menuItem title="編輯歌詞..." id="aHI-5b-EXH">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="editLyrics:" target="-2" id="1NM-fU-FWj"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="拷貝歌詞到剪貼簿" id="hA5-FO-Nk2">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -34,12 +40,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="copyLyricsWithTagsToPb:" target="-2" id="8QC-DU-PbF"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="編輯歌詞..." id="aHI-5b-EXH">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="editLyrics:" target="-2" id="1NM-fU-FWj"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="V78-Pj-41Z"/>
@@ -56,6 +56,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="CM0-FN-R8L"/>
+                            <menuItem title="錯誤的歌詞" id="z6P-Jg-75I">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="wrongLyrics:" target="-2" id="s12-uv-Nup"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="將歌詞寫入iTunes" id="9IB-fJ-7CD">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -85,6 +91,18 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="lfR-h4-Fcs"/>
+                <menuItem title="全屏模式中" id="IhB-YC-zct">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="handleWorkSpaceChange:" target="-2" id="5t5-zB-Pv5"/>
+                        <binding destination="ulf-d7-gEq" name="enabled" keyPath="values.LyricsUseAutoLayout" id="LI1-ch-Oce">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="dPi-Mc-wI5"/>
                 <menuItem title="關於Lyrics..." id="QoB-2y-8a4">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -167,5 +185,6 @@
             <animations/>
             <point key="canvasLocation" x="346.5" y="378.5"/>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="ulf-d7-gEq"/>
     </objects>
 </document>

@@ -30,6 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsShadowModeEnable : NSNumber(bool: true),
             LyricsTwoLineMode : NSNumber(bool: true),
             LyricsSearchForBetterLrc : NSNumber(bool: true),
+            LyricsDisableAllAlert : NSNumber(bool: false),
             LyricsDisplayInAllSpaces: NSNumber(bool: true),
             LyricsUseAutoLayout : NSNumber(bool: true),
             LyricsHeightFromDockToLyrics : NSNumber(integer: 15),

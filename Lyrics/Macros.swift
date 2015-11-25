@@ -16,6 +16,7 @@ import Foundation
 //Notifications
 let LyricsAttributesChangedNotification:String="LyricsAttributesChanged"
 let LyricsUserEditLyricsNotification:String="LyricsUserEditLyrics"
+let LyricsLayoutChangeNotification:String="LyricsLayoutChange"
 
 //General Preferences Defaults
 let LyricsSavingPathPopUpIndex:String="LyricsSavingPathPopUpIndex"
@@ -23,6 +24,7 @@ let LyricsUserSavingPath:String="LyricsUserSavingPath"
 let LyricsAutoLaunches:String="LyricsAutoLaunches"
 let LyricsLaunchTpyePopUpIndex:String="LyricsLaunchTpyePopUpIndex"
 let LyricsQuitWithITunes:String="LyricsQuitWithITunes"
+let LyricsDisableAllAlert:String="LyricsDisableAllAlert"
 let LyricsUseAutoLayout:String="LyricsUseAutoLayout"
 let LyricsHeightFromDockToLyrics:String="LyricsHeightFromDockToLyrics"
 let LyricsConstToLeft:String="LyricsConstToLeft"

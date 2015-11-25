@@ -27,6 +27,7 @@ class LyricsWindowController: NSWindowController {
     var visibleSize: NSSize!
     var visibleOrigin: NSPoint!
     var userDefaults: NSUserDefaults!
+    var isFullScreen: Bool = false
     var flag: Bool = true
     
     convenience init() {
@@ -72,12 +73,13 @@ class LyricsWindowController: NSWindowController {
         backgroundLayer.addSublayer(secondLyricsLayer)
         setAttributes()
         setScreenResolution()
-        backgroundLayer.speed = 1.1
+        backgroundLayer.speed = 0.8
         displayLyrics("LyricsX", secondLyrics: nil)
         
         let nc:NSNotificationCenter = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "handleAttributesUpdate", name: LyricsAttributesChangedNotification, object: nil)
         nc.addObserver(self, selector: "handleScreenResolutionChange", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
+        nc.addObserver(self, selector: "reflash", name: LyricsLayoutChangeNotification, object: nil)
     }
     
     deinit {
@@ -133,7 +135,7 @@ class LyricsWindowController: NSWindowController {
         NSLog("Screen Visible Res Changed to:(%f,%f) O:(%f,%f)", visibleSize.width,visibleSize.height,visibleOrigin.x,visibleOrigin.y)
     }
 
-// MARK: - display lyrics
+// MARK: - display lyrics methods
     
     func displayLyrics(theFirstLyrics:NSString?, secondLyrics theSecondLyrics:NSString?) {
         
@@ -175,8 +177,14 @@ class LyricsWindowController: NSWindowController {
             
             if userDefaults.boolForKey(LyricsUseAutoLayout) {
                 let frameSize = NSMakeSize(strSize.width+50, strSize.height)
-                x = visibleOrigin.x+(visibleSize.width-frameSize.width)/2
-                y = visibleOrigin.y+CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
+                
+                if !isFullScreen {
+                    x = visibleOrigin.x+(visibleSize.width-frameSize.width)/2
+                    y = visibleOrigin.y+CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
+                } else {
+                    x = (visibleSize.width-frameSize.width)/2
+                    y = CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
+                }
                 
                 backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height)
                 firstLyricsLayer.frame=CGRectMake(0, 0, frameSize.width, frameSize.height)
@@ -231,8 +239,14 @@ class LyricsWindowController: NSWindowController {
             }
             
             if userDefaults.boolForKey(LyricsUseAutoLayout) {
-                x = visibleOrigin.x+(visibleSize.width-width)/2
-                y = visibleOrigin.y+CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
+                if !isFullScreen {
+                    x = visibleOrigin.x+(visibleSize.width-width)/2
+                    y = visibleOrigin.y+CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
+                } else {
+                    x = (visibleSize.width-width)/2
+                    y = CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
+                }
+                
                 height=size1st.height+size2nd.height
                 
             } else {
@@ -266,26 +280,25 @@ class LyricsWindowController: NSWindowController {
             flag = !flag
         }
     }
+    
+    func reflash () {
+        self.flag = !self.flag
+        self.displayLyrics(self.firstLyrics, secondLyrics: self.secondLyrics)
+    }
 
 //MARK: - Notification Methods
     
     func handleAttributesUpdate() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.setAttributes()
-            
-            //reflash lyrics and keep the lyrics order by !flag
-            self.flag = !self.flag
-            self.displayLyrics(self.firstLyrics, secondLyrics: self.secondLyrics)
+            self.reflash()
         }
     }
     
     func handleScreenResolutionChange() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.setScreenResolution()
-            
-            //reflash lyrics and keep the lyrics order by !flag
-            self.flag = !self.flag
-            self.displayLyrics(self.firstLyrics, secondLyrics: self.secondLyrics)
+            self.reflash()
         }
     }
 

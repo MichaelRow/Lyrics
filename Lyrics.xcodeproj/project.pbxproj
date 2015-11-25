@@ -276,10 +276,10 @@
 		765FC4A31BEE508100BF3706 /* Wins & Views */ = {
 			isa = PBXGroup;
 			children = (
-				766F03C41C049372003F4790 /* LyricsEditView.swift */,
 				76C047251BF2F34C005053AC /* AppPrefsWindowController.swift */,
 				76FE94401BFC223600A1AC27 /* TextPreview.swift */,
 				7660C5011BF05471002E3204 /* LyricsWindowController.swift */,
+				766F03C41C049372003F4790 /* LyricsEditView.swift */,
 				760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */,
 				76C047171BF2E335005053AC /* DBPrefsWindowController.h */,
 				76C047181BF2E335005053AC /* DBPrefsWindowController.m */,
