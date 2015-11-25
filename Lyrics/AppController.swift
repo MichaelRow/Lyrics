@@ -15,29 +15,30 @@ class AppController: NSObject {
     @IBOutlet weak var lyricsDelayView: NSView!
     @IBOutlet weak var delayMenuItem: NSMenuItem!
     
-    var isTrackingRunning:Bool = false
-    var hasBetterLrc:Bool = false
     var timeDly:Int = 0
     var timeDlyInFile:Int = 0
-    var lyricsWindow:LyricsWindowController!
-    var lyricsEidtWindow:LyricsEditWindowController!
-    var statusBarItem:NSStatusItem!
-    var lyricsArray:[LyricsLineModel]!
-    var idTagsArray:[NSString]!
-    var operationQueue:NSOperationQueue!
-    var iTunes:iTunesBridge!
-    var currentLyrics: NSString!
-    var currentSongID:NSString!
-    var currentSongTitle:NSString!
-    var currentArtist:NSString!
-    var songList:[SongInfos]!
-    var qianqian:QianQian!
-    var xiami:Xiami!
-    var ttpod:TTPod!
-    var geciMe:GeCiMe!
-    var lrcSourceHandleQueue:NSOperationQueue!
-    var userDefaults:NSUserDefaults!
-    var timer: NSTimer!
+    
+    private var isTrackingRunning:Bool = false
+    private var hasBetterLrc:Bool = false
+    private var lyricsWindow:LyricsWindowController!
+    private var lyricsEidtWindow:LyricsEditWindowController!
+    private var statusBarItem:NSStatusItem!
+    private var lyricsArray:[LyricsLineModel]!
+    private var idTagsArray:[NSString]!
+    private var operationQueue:NSOperationQueue!
+    private var iTunes:iTunesBridge!
+    private var currentLyrics: NSString!
+    private var currentSongID:NSString!
+    private var currentSongTitle:NSString!
+    private var currentArtist:NSString!
+    private var songList:[SongInfos]!
+    private var qianqian:QianQian!
+    private var xiami:Xiami!
+    private var ttpod:TTPod!
+    private var geciMe:GeCiMe!
+    private var lrcSourceHandleQueue:NSOperationQueue!
+    private var userDefaults:NSUserDefaults!
+    private var timer: NSTimer!
     
 // MARK: - Init & deinit
     override init() {
@@ -354,7 +355,7 @@ class AppController: NSObject {
                 
                 if userDefaults.boolForKey(LyricsQuitWithITunes) {
                     
-                    // iTunes would paused before quited, so we should check whether iTunes is running
+                    // iTunes would paused before it has quited, so we should check whether iTunes is running
                     // seconds later.
                     if timer != nil {
                         timer.invalidate()
