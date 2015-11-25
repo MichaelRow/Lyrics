@@ -18,17 +18,18 @@ import Cocoa
 
 class LyricsWindowController: NSWindowController {
     
-    var firstLyrics: NSString?
-    var secondLyrics: NSString?
-    var backgroundLayer: CALayer!
-    var firstLyricsLayer: CATextLayer!
-    var secondLyricsLayer: CATextLayer!
-    var attrs: [String:AnyObject]!
-    var visibleSize: NSSize!
-    var visibleOrigin: NSPoint!
-    var userDefaults: NSUserDefaults!
     var isFullScreen: Bool = false
-    var flag: Bool = true
+    
+    private var firstLyrics: NSString?
+    private var secondLyrics: NSString?
+    private var backgroundLayer: CALayer!
+    private var firstLyricsLayer: CATextLayer!
+    private var secondLyricsLayer: CATextLayer!
+    private var attrs: [String:AnyObject]!
+    private var visibleSize: NSSize!
+    private var visibleOrigin: NSPoint!
+    private var userDefaults: NSUserDefaults!
+    private var flag: Bool = true
     
     convenience init() {
         NSLog("Init Lyrics window")

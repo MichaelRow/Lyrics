@@ -12,9 +12,9 @@ class LyricsLineModel: NSObject {
     
     var lyricsSentence:NSString!
     
-    var msecPosition:Int!
+    private(set) var msecPosition:Int!
     
-    var timeTag:NSString!
+    private(set) var timeTag:NSString!
     
     func setMsecPositionWithTimeTag (theTimeTag: NSString) {
         self.timeTag=theTimeTag

@@ -11,21 +11,21 @@ import ServiceManagement
 
 class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     
-    @IBOutlet var generalPrefsView:NSView!
-    @IBOutlet var lyricsPrefsView:NSView!
-    @IBOutlet var fontAndColorPrefsView:NSView!
-    @IBOutlet var donateView:NSView!
+    @IBOutlet private var generalPrefsView:NSView!
+    @IBOutlet private var lyricsPrefsView:NSView!
+    @IBOutlet private var fontAndColorPrefsView:NSView!
+    @IBOutlet private var donateView:NSView!
     
-    @IBOutlet weak var textPreview: TextPreview!
-    @IBOutlet weak var savingPathPopUp: NSPopUpButton!
-    @IBOutlet weak var fontDisplayText: NSTextField!
-    @IBOutlet weak var shadowModeCheckbox: NSButton!
-    @IBOutlet weak var textColor: NSColorWell!
-    @IBOutlet weak var bkColor: NSColorWell!
-    @IBOutlet weak var shadowColor: NSColorWell!
-    @IBOutlet weak var shadowRadius: NSTextField!
-    @IBOutlet weak var revertButton: NSButton!
-    @IBOutlet weak var applyButton: NSButton!
+    @IBOutlet private weak var textPreview: TextPreview!
+    @IBOutlet private weak var savingPathPopUp: NSPopUpButton!
+    @IBOutlet private weak var fontDisplayText: NSTextField!
+    @IBOutlet private weak var shadowModeCheckbox: NSButton!
+    @IBOutlet private weak var textColor: NSColorWell!
+    @IBOutlet private weak var bkColor: NSColorWell!
+    @IBOutlet private weak var shadowColor: NSColorWell!
+    @IBOutlet private weak var shadowRadius: NSTextField!
+    @IBOutlet private weak var revertButton: NSButton!
+    @IBOutlet private weak var applyButton: NSButton!
     
     private var hasUnsaveChange: Bool = false
     private var flag: Bool = true

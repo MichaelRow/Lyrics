@@ -482,7 +482,7 @@ class AppController: NSObject {
                 let theIDTag: NSString = str.substringWithRange(theMatchedRange)
                 let colonRange: NSRange = theIDTag.rangeOfString(":")
                 let idStr: NSString = theIDTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
-                if idStr != "offset".stringByReplacingOccurrencesOfString(" ", withString: "") {
+                if idStr.stringByReplacingOccurrencesOfString(" ", withString: "") != "offset" {
                     idTagsArray.append(str as! NSString)
                     continue
                 }

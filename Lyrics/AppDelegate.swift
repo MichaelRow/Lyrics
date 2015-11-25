@@ -50,6 +50,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         NSColorPanel.sharedColorPanel().showsAlpha = true
         
+        let lyricsXHelpers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LyricsX-Helper")
+        for helper in lyricsXHelpers {
+            helper.terminate()
+        }
+        
         applicationController = AppController()
     }
     
@@ -68,13 +73,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         //Terminate LrcSeeker
-        let runningApp = NSWorkspace.sharedWorkspace().runningApplications
-        for app in runningApp {
-            if app.executableURL?.lastPathComponent == "LrcSeeker" {
-                app.terminate()
-                NSLog("LrcSeeker Terminated")
-                break
-            }
+        let lrcSeekers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LrcSeeker")
+        for ls in lrcSeekers {
+            ls.terminate()
         }
     }
 

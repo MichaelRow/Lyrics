@@ -11,6 +11,7 @@ import Cocoa
 class LyricsEditWindowController: NSWindowController {
     
     @IBOutlet var textView: NSTextView!
+    
     private var currentSongID: NSString!
     private var currentTitle: NSString!
     private var currentArtist: NSString!
