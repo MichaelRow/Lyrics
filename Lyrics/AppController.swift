@@ -640,7 +640,14 @@ class AppController: NSObject {
     func handleLrcSeekerEvent (n:NSNotification) {
         NSLog("Recieved notification from LrcSeeker")
         let userInfo = n.userInfo
-        
+        if currentSongID == "" {
+            let notification: NSUserNotification = NSUserNotification()
+            notification.title = NSLocalizedString("NO_PLAYING_TRACK", comment: "")
+            notification.informativeText = NSLocalizedString("IGNORE_LYRICS", comment: "")
+            notification.deliveryDate = NSDate(timeIntervalSinceNow: 0.1)
+            NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
+            return
+        }
         //User lrc has the highest priority level
         lrcSourceHandleQueue.cancelAllOperations()
         lrcSourceHandleQueue.addOperationWithBlock { () -> Void in

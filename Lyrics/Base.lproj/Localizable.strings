@@ -32,3 +32,7 @@
 
 // Wrong Lyrics Tag
 "WRONG_LYRICS"="[00:00:00]Current playing song is signed as Wrong Lyrics\n[00:05:00]";
+
+// Notification
+"NO_PLAYING_TRACK"="No Playing Track";
+"IGNORE_LYRICS"="Ignored lyrics from LrcSeeker.";

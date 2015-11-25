@@ -32,3 +32,8 @@
 
 // Wrong Lyrics Tag
 "WRONG_LYRICS"="[00:00:00]当前播放的歌曲被标记“错误的歌词”\n[00:05:00]";
+
+// Notification
+"NO_PLAYING_TRACK"="没有播放中的音乐";
+"IGNORE_LYRICS"="忽略来自LrcSeeker的歌词";
+
