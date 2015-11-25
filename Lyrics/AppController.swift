@@ -56,6 +56,7 @@ class AppController: NSObject {
         
         NSBundle(forClass: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
         setupStatusItem()
+        statusBarMenu.itemAtIndex(6)?.image = NSImage(named: "red_dot")
         
         lyricsWindow=LyricsWindowController()
         lyricsWindow.showWindow(nil)
@@ -588,12 +589,12 @@ class AppController: NSObject {
     }
     
     @IBAction func handleWorkSpaceChange(sender: AnyObject?) {
-        if statusBarMenu.itemAtIndex(6)?.state == NSOnState {
-            statusBarMenu.itemAtIndex(6)?.state = NSOffState
-        } else {
-            statusBarMenu.itemAtIndex(6)?.state = NSOnState
-        }
         lyricsWindow.isFullScreen = !lyricsWindow.isFullScreen
+        if lyricsWindow.isFullScreen {
+            statusBarMenu.itemAtIndex(6)?.image = NSImage(named: "green_dot")
+        } else {
+            statusBarMenu.itemAtIndex(6)?.image = NSImage(named: "red_dot")
+        }
         lyricsWindow.reflash()
     }
     

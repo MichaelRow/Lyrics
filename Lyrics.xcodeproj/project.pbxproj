@@ -268,7 +268,10 @@
 		765FC4A01BEE4F5800BF3706 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				76C5115E1BEC6F8F0095F510 /* Assets.xcassets */,
 				76C511631BEC6F8F0095F510 /* Info.plist */,
+				76D060631C02C4AB000DA86C /* LrcSeeker.app */,
+				768BCB401BF1C74C00D6F5EB /* OpenCC Res */,
 			);
 			name = "Support Files";
 			sourceTree = "<group>";
@@ -325,16 +328,6 @@
 				76D060681C02E997000DA86C /* Lyrics-Prefix.pch */,
 			);
 			name = Headers;
-			sourceTree = "<group>";
-		};
-		765FC4A81BEE514400BF3706 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				76D060631C02C4AB000DA86C /* LrcSeeker.app */,
-				768BCB401BF1C74C00D6F5EB /* OpenCC Res */,
-				76C5115E1BEC6F8F0095F510 /* Assets.xcassets */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		768BCB401BF1C74C00D6F5EB /* OpenCC Res */ = {
@@ -399,7 +392,6 @@
 				76596BB91BF6216A00DEEF62 /* Lyrics Sources */,
 				765FC4A61BEE50DF00BF3706 /* Libraries & Frameworks */,
 				765FC4A01BEE4F5800BF3706 /* Support Files */,
-				765FC4A81BEE514400BF3706 /* Resources */,
 			);
 			path = Lyrics;
 			sourceTree = "<group>";
