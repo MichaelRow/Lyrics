@@ -57,7 +57,6 @@ class AppController: NSObject {
         
         NSBundle(forClass: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
         setupStatusItem()
-        statusBarMenu.itemAtIndex(6)?.image = NSImage(named: "red_dot")
         
         lyricsWindow=LyricsWindowController()
         lyricsWindow.showWindow(nil)
@@ -82,8 +81,6 @@ class AppController: NSObject {
         let ndc = NSDistributedNotificationCenter.defaultCenter()
         ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
         ndc.addObserver(self, selector: "handleLrcSeekerEvent:", name: "LrcSeekerEvents", object: nil)
-        
-        NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "handleWorkSpaceChange:", name: NSWorkspaceActiveSpaceDidChangeNotification, object: nil)
         
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
@@ -587,16 +584,6 @@ class AppController: NSObject {
         xiami.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
         ttpod.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
         geciMe.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
-    }
-    
-    @IBAction func handleWorkSpaceChange(sender: AnyObject?) {
-        lyricsWindow.isFullScreen = !lyricsWindow.isFullScreen
-        if lyricsWindow.isFullScreen {
-            statusBarMenu.itemAtIndex(6)?.image = NSImage(named: "green_dot")
-        } else {
-            statusBarMenu.itemAtIndex(6)?.image = NSImage(named: "red_dot")
-        }
-        lyricsWindow.reflash()
     }
     
     func handleUserEditLyrics(n: NSNotification) {

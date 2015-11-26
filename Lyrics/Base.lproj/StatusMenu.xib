@@ -91,18 +91,6 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="lfR-h4-Fcs"/>
-                <menuItem title="It's In Full Screen" id="REF-TU-uaB">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="handleWorkSpaceChange:" target="-2" id="S5S-yQ-Doe"/>
-                        <binding destination="Ppe-ZY-ULn" name="enabled" keyPath="values.LyricsUseAutoLayout" id="kin-tO-CGe">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="zet-Go-5yF"/>
                 <menuItem title="About Lyrics..." id="QoB-2y-8a4">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>

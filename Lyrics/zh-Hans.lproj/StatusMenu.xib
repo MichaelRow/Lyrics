@@ -91,18 +91,6 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="lfR-h4-Fcs"/>
-                <menuItem title="全屏模式中" id="Gjr-po-ZZK">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="handleWorkSpaceChange:" target="-2" id="jLh-2v-sRi"/>
-                        <binding destination="VKQ-E3-KXV" name="enabled" keyPath="values.LyricsUseAutoLayout" id="Wtr-Nu-1iN">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="hJ4-Iu-Utw"/>
                 <menuItem title="关于Lyrics..." id="QoB-2y-8a4">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>

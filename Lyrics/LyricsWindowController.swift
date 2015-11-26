@@ -74,13 +74,15 @@ class LyricsWindowController: NSWindowController {
         backgroundLayer.addSublayer(secondLyricsLayer)
         setAttributes()
         setScreenResolution()
-        backgroundLayer.speed = 0.8
+        checkFullScreen()
         displayLyrics("LyricsX", secondLyrics: nil)
         
         let nc:NSNotificationCenter = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "handleAttributesUpdate", name: LyricsAttributesChangedNotification, object: nil)
         nc.addObserver(self, selector: "handleScreenResolutionChange", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
         nc.addObserver(self, selector: "reflash", name: LyricsLayoutChangeNotification, object: nil)
+        
+        NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "handleWorkSpaceChange", name: NSWorkspaceActiveSpaceDidChangeNotification, object: nil)
     }
     
     deinit {
@@ -155,17 +157,17 @@ class LyricsWindowController: NSWindowController {
             secondLyricsLayer.frame = NSMakeRect(backgroundLayer.frame.size.width/3, 0, 0, 0)
             firstLyricsLayer.string = ""
             secondLyricsLayer.string = ""
-            firstLyricsLayer.hidden=true
-            secondLyricsLayer.hidden=true
-            backgroundLayer.hidden=true
+            firstLyricsLayer.hidden = true
+            secondLyricsLayer.hidden = true
+            backgroundLayer.hidden = true
         }
         else if (secondLyrics==nil) || (secondLyrics?.isEqualToString(""))! {
             // One-Line Mode or sencond lyrics is instrument time
             
             flag = true
-            backgroundLayer.speed = 0.8
-            firstLyricsLayer.speed = 0.8
-            secondLyricsLayer.speed = 0.8
+            backgroundLayer.speed = 0.9
+            firstLyricsLayer.speed = 0.9
+            secondLyricsLayer.speed = 0.9
             
             secondLyricsLayer.string = ""
             firstLyricsLayer.hidden = false
@@ -203,9 +205,9 @@ class LyricsWindowController: NSWindowController {
         }
         else {
             // Two-Line Mode
-            backgroundLayer.speed = 0.8
-            firstLyricsLayer.speed = 0.8
-            secondLyricsLayer.speed = 0.8
+            backgroundLayer.speed = 0.9
+            firstLyricsLayer.speed = 0.9
+            secondLyricsLayer.speed = 0.9
             
             firstLyricsLayer.hidden=false
             secondLyricsLayer.hidden=false
@@ -302,5 +304,33 @@ class LyricsWindowController: NSWindowController {
             self.reflash()
         }
     }
+    
+    func handleWorkSpaceChange() {
+        isFullScreen = !isFullScreen
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.reflash()
+        }
+    }
 
+//MARK: - Checking Methods
+
+    func checkFullScreen() {
+        let frontmostAppName: String = (NSWorkspace.sharedWorkspace().frontmostApplication?.localizedName)!
+        let windows: NSArray = CGWindowListCopyWindowInfo(CGWindowListOption(arrayLiteral: CGWindowListOption.ExcludeDesktopElements, CGWindowListOption.OptionOnScreenAboveWindow), CGWindowID(0))!
+        let screenSize = NSScreen.mainScreen()?.frame.size
+        for window in windows {
+            var bounds: CGRect = CGRect()
+            if window.stringForKey("kCGWindowOwnerName") == frontmostAppName {
+                CGRectMakeWithDictionaryRepresentation(window.objectForKey(kCGWindowBounds) as? NSDictionary, &bounds)
+                let height = bounds.size.height + bounds.origin.y
+                if height == screenSize?.height {
+                    isFullScreen = true
+                    NSLog("Started with Full Screen mode")
+                    return
+                }
+            }
+        }
+        NSLog("Satrted with regular screen mode")
+    }
+    
 }
