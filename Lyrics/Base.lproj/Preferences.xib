@@ -716,10 +716,10 @@ Gw
                     </connections>
                 </button>
                 <button id="OWN-3P-nqI">
-                    <rect key="frame" x="18" y="101" width="306" height="18"/>
+                    <rect key="frame" x="18" y="101" width="149" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Replace current lyrics when found a better one" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="S6K-Eb-m9C">
+                    <buttonCell key="cell" type="check" title="Prefer bilingual lyrics" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="S6K-Eb-m9C">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
