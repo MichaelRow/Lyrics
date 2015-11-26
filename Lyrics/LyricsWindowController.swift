@@ -315,6 +315,7 @@ class LyricsWindowController: NSWindowController {
 //MARK: - Checking Methods
 
     func checkFullScreen() {
+        // window in full screen mode height + origin y = screen height
         let frontmostAppName: String = (NSWorkspace.sharedWorkspace().frontmostApplication?.localizedName)!
         let windows: NSArray = CGWindowListCopyWindowInfo(CGWindowListOption(arrayLiteral: CGWindowListOption.ExcludeDesktopElements, CGWindowListOption.OptionOnScreenAboveWindow), CGWindowID(0))!
         let screenSize = NSScreen.mainScreen()?.frame.size
