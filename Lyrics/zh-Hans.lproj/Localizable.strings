@@ -17,9 +17,13 @@
 "REVERT_LEAVE"="还原并离开";
 "CANCEL"="取消";
 
-"CONFIRM_SIGN_WRONG"="您确定要删除当前歌词并标记错误?";
+"CONFIRM_MARK_WRONG"="您确定要删除当前歌词并标记错误?";
 "CANT_UNDONE"="这项操作不能撤销!";
-"SIGN"="删除歌词并标记";
+"MARK"="删除歌词并标记";
+
+"UNSUPPORTED_ENCODING"="不支持的文字编码";
+"ONLY_UTF8"="LyricsX仅支持UTF-8文字编码，在后续版本中将支持更多编码，尽请期待。";
+"OK"="了解";
 
 // Prefs Toolbar Identifier
 "GENERAL"="通用";

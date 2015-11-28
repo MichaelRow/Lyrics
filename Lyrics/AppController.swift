@@ -244,6 +244,13 @@ class AppController: NSObject {
             } catch let theError as NSError {
                 lrcContents = nil
                 NSLog("%@", theError.localizedDescription)
+                
+                // Error must be the text encoding thing.
+                let alert: NSAlert = NSAlert()
+                alert.messageText = NSLocalizedString("UNSUPPORTED_ENCODING", comment: "")
+                alert.informativeText = NSLocalizedString("ONLY_UTF8", comment: "")
+                alert.addButtonWithTitle(NSLocalizedString("OK", comment: ""))
+                alert.runModal()
                 return
             }
             if lrcContents != nil && testLrc(lrcContents) {
@@ -300,10 +307,10 @@ class AppController: NSObject {
     @IBAction func wrongLyrics(sender: AnyObject) {
         if !userDefaults.boolForKey(LyricsDisableAllAlert) {
             let alert: NSAlert = NSAlert()
-            alert.messageText = NSLocalizedString("CONFIRM_SIGN_WRONG", comment: "")
+            alert.messageText = NSLocalizedString("CONFIRM_MARK_WRONG", comment: "")
             alert.informativeText = NSLocalizedString("CANT_UNDONE", comment: "")
             alert.addButtonWithTitle(NSLocalizedString("CANCEL", comment: ""))
-            alert.addButtonWithTitle(NSLocalizedString("SIGN", comment: ""))
+            alert.addButtonWithTitle(NSLocalizedString("MARK", comment: ""))
             let response: NSModalResponse = alert.runModal()
             if response == NSAlertFirstButtonReturn {
                 return
