@@ -74,15 +74,13 @@ class LyricsWindowController: NSWindowController {
         backgroundLayer.addSublayer(secondLyricsLayer)
         setAttributes()
         setScreenResolution()
-        checkFullScreen()
+//        checkFullScreen()
         displayLyrics("LyricsX", secondLyrics: nil)
         
         let nc:NSNotificationCenter = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "handleAttributesUpdate", name: LyricsAttributesChangedNotification, object: nil)
         nc.addObserver(self, selector: "handleScreenResolutionChange", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
         nc.addObserver(self, selector: "reflash", name: LyricsLayoutChangeNotification, object: nil)
-        
-        NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "handleWorkSpaceChange", name: NSWorkspaceActiveSpaceDidChangeNotification, object: nil)
     }
     
     deinit {
@@ -304,17 +302,11 @@ class LyricsWindowController: NSWindowController {
             self.reflash()
         }
     }
-    
-    func handleWorkSpaceChange() {
-        isFullScreen = !isFullScreen
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.reflash()
-        }
-    }
 
 //MARK: - Checking Methods
 
     func checkFullScreen() {
+        // bug exists.
         // window in full screen mode height + origin y = screen height
         let frontmostAppName: String = (NSWorkspace.sharedWorkspace().frontmostApplication?.localizedName)!
         let windows: NSArray = CGWindowListCopyWindowInfo(CGWindowListOption(arrayLiteral: CGWindowListOption.ExcludeDesktopElements, CGWindowListOption.OptionOnScreenAboveWindow), CGWindowID(0))!
