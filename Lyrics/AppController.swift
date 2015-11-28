@@ -246,11 +246,13 @@ class AppController: NSObject {
                 NSLog("%@", theError.localizedDescription)
                 
                 // Error must be the text encoding thing.
-                let alert: NSAlert = NSAlert()
-                alert.messageText = NSLocalizedString("UNSUPPORTED_ENCODING", comment: "")
-                alert.informativeText = NSLocalizedString("ONLY_UTF8", comment: "")
-                alert.addButtonWithTitle(NSLocalizedString("OK", comment: ""))
-                alert.runModal()
+                if !userDefaults.boolForKey(LyricsDisableAllAlert) {
+                    let alert: NSAlert = NSAlert()
+                    alert.messageText = NSLocalizedString("UNSUPPORTED_ENCODING", comment: "")
+                    alert.informativeText = NSLocalizedString("ONLY_UTF8", comment: "")
+                    alert.addButtonWithTitle(NSLocalizedString("OK", comment: ""))
+                    alert.runModal()
+                }
                 return
             }
             if lrcContents != nil && testLrc(lrcContents) {
