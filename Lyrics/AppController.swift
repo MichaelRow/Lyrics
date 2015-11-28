@@ -468,6 +468,8 @@ class AppController: NSObject {
             return
         }
         
+        //the regex below should only use when the string doesn't contain time-tags
+        //because all time-tags would be matched as well.
         do {
             regexForIDTag = try NSRegularExpression(pattern: "\\[.*:.*\\]", options: [])
         } catch let theError as NSError {
@@ -548,6 +550,9 @@ class AppController: NSObject {
     func handlePositionChange (playerPosition: Int) {
         let tempLyricsArray = lyricsArray
         var index: Int
+        
+        //1.Find the first lyrics which time position is larger than current position, and its index is "index"
+        //2.The index of first-line-lyrics which needs to display is "index - 1"
         for index=0; index < tempLyricsArray.count; ++index {
             if playerPosition < tempLyricsArray[index].msecPosition - timeDly {
                 if index-1 == -1 {
@@ -597,7 +602,7 @@ class AppController: NSObject {
         }
         lrcSourceHandleQueue.cancelAllOperations()
         
-        //Search in the net if local lrc is nil or invalid
+        //Search in the Net if local lrc is nil or invalid
         let loadingSongID: String = currentSongID.copy() as! String
         let loadingArtist: String = currentArtist.copy() as! String
         let loadingTitle: String = currentSongTitle.copy() as! String
@@ -606,6 +611,9 @@ class AppController: NSObject {
         let artistForSearching: String = self.delSpecificSymbol(loadingArtist) as String
         let titleForSearching: String = self.delSpecificSymbol(loadingTitle) as String
         
+        //千千静听不支持繁体中文搜索，先转成简体中文。搜歌词组件参数是iTunes中显示的歌曲名
+        //歌手名以及iTunes的唯一编号（防止歌曲变更造成的歌词对错歌），以及用于搜索用的歌曲
+        //名与歌手名。另外，天天动听只会获取歌词文本，其他歌词源都是获取歌词URL
         qianqian.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: convertToSC(titleForSearching) as String, andArtistForSearching: convertToSC(artistForSearching) as String)
         xiami.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
         ttpod.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
@@ -632,6 +640,7 @@ class AppController: NSObject {
     
     
     func handleLrcDelayChange () {
+        //save the delay change to file.
         if lyricsArray.count == 0{
             return
         }
@@ -653,6 +662,8 @@ class AppController: NSObject {
     func handleLrcSeekerEvent (n:NSNotification) {
         NSLog("Recieved notification from LrcSeeker")
         let userInfo = n.userInfo
+        
+        //no playing track?
         if currentSongID == "" {
             let notification: NSUserNotification = NSUserNotification()
             notification.title = NSLocalizedString("NO_PLAYING_TRACK", comment: "")

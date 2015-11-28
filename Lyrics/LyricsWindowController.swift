@@ -160,12 +160,12 @@ class LyricsWindowController: NSWindowController {
             backgroundLayer.hidden = true
         }
         else if (secondLyrics==nil) || (secondLyrics?.isEqualToString(""))! {
-            // One-Line Mode or sencond lyrics is instrument time
+            // One-Line Mode or sencond lyrics is in instrument time
             
             flag = true
-            backgroundLayer.speed = 0.9
-            firstLyricsLayer.speed = 0.9
-            secondLyricsLayer.speed = 0.9
+            backgroundLayer.speed = 1
+            firstLyricsLayer.speed = 1
+            secondLyricsLayer.speed = 1
             
             secondLyricsLayer.string = ""
             firstLyricsLayer.hidden = false
@@ -203,9 +203,9 @@ class LyricsWindowController: NSWindowController {
         }
         else {
             // Two-Line Mode
-            backgroundLayer.speed = 0.9
-            firstLyricsLayer.speed = 0.9
-            secondLyricsLayer.speed = 0.9
+            backgroundLayer.speed = 1
+            firstLyricsLayer.speed = 1
+            secondLyricsLayer.speed = 1
             
             firstLyricsLayer.hidden=false
             secondLyricsLayer.hidden=false
