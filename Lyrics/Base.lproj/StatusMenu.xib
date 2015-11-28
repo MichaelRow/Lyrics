@@ -117,7 +117,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="332" y="211.5"/>
+            <point key="canvasLocation" x="331" y="211.5"/>
         </menu>
         <customView id="3Jx-vU-QNM" userLabel="Lyrics Delay View">
             <rect key="frame" x="0.0" y="0.0" width="237" height="30"/>
