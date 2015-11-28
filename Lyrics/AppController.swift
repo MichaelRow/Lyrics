@@ -112,6 +112,7 @@ class AppController: NSObject {
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
         NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
+        NSWorkspace.sharedWorkspace().notificationCenter.removeObserver(self)
     }
     
     func setupStatusItem() {
