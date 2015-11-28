@@ -74,7 +74,7 @@ class LyricsWindowController: NSWindowController {
         backgroundLayer.addSublayer(secondLyricsLayer)
         setAttributes()
         setScreenResolution()
-//        checkFullScreen()
+        checkFullScreen()
         displayLyrics("LyricsX", secondLyrics: nil)
         
         let nc:NSNotificationCenter = NSNotificationCenter.defaultCenter()
