@@ -83,9 +83,6 @@ class AppController: NSObject {
         ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
         ndc.addObserver(self, selector: "handleLrcSeekerEvent:", name: "LrcSeekerEvents", object: nil)
         
-        NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "handleWorkSpaceChange:", name: NSWorkspaceActiveSpaceDidChangeNotification, object: nil)
-
-        
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
             
