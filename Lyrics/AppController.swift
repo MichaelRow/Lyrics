@@ -57,7 +57,6 @@ class AppController: NSObject {
         
         NSBundle(forClass: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
         setupStatusItem()
-        statusBarMenu.itemAtIndex(6)?.image = NSImage(named: "red_dot")
         
         lyricsWindow=LyricsWindowController()
         lyricsWindow.showWindow(nil)
@@ -150,11 +149,12 @@ class AppController: NSObject {
 // MARK: - Interface Methods
     
     @IBAction func handleWorkSpaceChange(sender:AnyObject?) {
+        //before finding the way to detect full screen, user should adjust lyrics by selves
         lyricsWindow.isFullScreen = !lyricsWindow.isFullScreen
         if lyricsWindow.isFullScreen {
-            statusBarMenu.itemAtIndex(6)?.image = NSImage(named: "green_dot")
+            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("HIGHER_LYRICS", comment: "")
         } else {
-            statusBarMenu.itemAtIndex(6)?.image = NSImage(named: "red_dot")
+            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("LOWER_LYRICS", comment: "")
         }
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.lyricsWindow.reflash()

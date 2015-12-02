@@ -40,3 +40,8 @@
 // Notification
 "NO_PLAYING_TRACK"="No Playing Track";
 "IGNORE_LYRICS"="Ignored lyrics from LrcSeeker.";
+
+// menu bar
+"HIGHER_LYRICS"="Higher Lyrics";
+"LOWER_LYRICS"="Lower Lyrics";
+

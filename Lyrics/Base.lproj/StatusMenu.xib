@@ -91,10 +91,16 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="txX-dr-HGn"/>
-                <menuItem title="In Full Screen Mode" id="UNY-Ob-RmT">
+                <menuItem title="Higher Lyrics" id="UNY-Ob-RmT">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="handleWorkSpaceChange:" target="-2" id="lLA-li-Fau"/>
+                        <binding destination="Ppe-ZY-ULn" name="hidden" keyPath="values.LyricsUseAutoLayout" id="jIB-go-ZVW">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="lfR-h4-Fcs"/>
