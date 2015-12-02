@@ -764,8 +764,10 @@ class AppController: NSObject {
             return
         }
         
+        var hasLrc: Bool
         if lyricsContents == nil || !testLrc(lyricsContents) {
             NSLog("better lrc not found or it's not lrc file,trying others")
+            hasLrc = false
             lyricsContents = nil
             hasBetterLrc = false
             for lrc in serverLrcs {
@@ -778,13 +780,15 @@ class AppController: NSObject {
                     continue
                 }
                 if lyricsContents != nil && testLrc(lyricsContents) {
+                    hasLrc = true
                     break
                 }
             }
         } else {
+            hasLrc = true
             hasBetterLrc = true
         }
-        if lyricsContents != nil {
+        if hasLrc {
             if songID == currentSongID {
                 parsingLrc(lyricsContents)
             }
