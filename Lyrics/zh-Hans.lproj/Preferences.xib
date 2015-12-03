@@ -104,7 +104,7 @@
                         <font key="font" size="13" name=".PingFangSC-Regular"/>
                     </buttonCell>
                     <connections>
-                        <action selector="layoutChanged:" target="-2" id="rPZ-fI-QhY"/>
+                        <action selector="reflashLyrics:" target="-2" id="k7p-z1-Q3f"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsUseAutoLayout" id="uJr-0u-Hg2">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -127,6 +127,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="55b-hO-WFO"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsHeightFromDockToLyrics" id="V8Y-qg-k9m">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -146,6 +147,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="eBX-kW-I0Q"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToLeft" id="qL1-Bs-w3c">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -166,6 +168,7 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="vND-dE-260"/>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="qUx-kg-tuB"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToLeft" id="Ffa-R4-eDx">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -190,6 +193,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="z8Y-53-ShT"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToBottom" id="e7b-Dj-M8H">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -210,6 +214,7 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="UkZ-uf-4Yu"/>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="hm7-SA-Nos"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToBottom" id="s1g-dU-mWP">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -234,6 +239,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="Hny-ny-FWh"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstWidth" id="cQh-Pa-QzV">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -254,6 +260,7 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="q6s-5O-VWm"/>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="3jn-hE-uVB"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstWidth" id="LNZ-32-MwP">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -278,6 +285,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="LWV-jB-rHs"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstHeight" id="axy-vf-Bae">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -298,6 +306,7 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="oNH-qP-SNA"/>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="oaL-Qa-wFs"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstHeight" id="7z3-HS-44l">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -321,7 +330,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="layoutChanged:" target="-2" id="At0-uL-EYd"/>
+                        <action selector="reflashLyrics:" target="-2" id="eFa-g6-QBr"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsUseAutoLayout" id="eO5-mh-vYI">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -411,17 +420,18 @@
                     <rect key="frame" x="162" y="213" width="154" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <popUpButtonCell key="cell" type="push" title="歌词居左" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Iwg-nh-zLm">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Iwg-nh-zLm">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="YUs-IO-2Wj">
                             <items>
-                                <menuItem title="歌词居左" state="on" id="FZw-86-E7C"/>
+                                <menuItem title="歌词居左" id="FZw-86-E7C"/>
                                 <menuItem title="歌词居右" id="ats-h6-Xi9"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="abm-zE-OJU"/>
                         <binding destination="UKb-ML-D6F" name="selectedIndex" keyPath="values.LyricsVerticalLyricsPosition" id="4BW-OU-f3h">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>

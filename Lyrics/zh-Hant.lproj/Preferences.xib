@@ -101,11 +101,12 @@
                     <animations/>
                     <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4DC-rM-sB4">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <string key="title">使用動態調整的歌詞佈局並設定Dock或邊界到歌詞的間距:</string>
+                        <string key="title">使用動態調整的歌詞佈局
+並設定Dock或邊界到歌詞的間距:</string>
                         <font key="font" size="13" name=".PingFangSC-Regular"/>
                     </buttonCell>
                     <connections>
-                        <action selector="layoutChanged:" target="-2" id="8nm-rT-zDd"/>
+                        <action selector="reflashLyrics:" target="-2" id="baM-Cw-CYa"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsUseAutoLayout" id="uJr-0u-Hg2">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -128,6 +129,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="ugF-Jn-Jc9"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsHeightFromDockToLyrics" id="V8Y-qg-k9m">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -147,6 +149,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="fcW-1b-o0f"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToLeft" id="qL1-Bs-w3c">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -167,6 +170,7 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="vND-dE-260"/>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="hSD-Wf-Pxr"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToLeft" id="Ffa-R4-eDx">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -191,6 +195,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="pqV-uW-HHm"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToBottom" id="e7b-Dj-M8H">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -211,6 +216,7 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="UkZ-uf-4Yu"/>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="oIr-dV-cGT"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToBottom" id="s1g-dU-mWP">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -235,6 +241,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="lso-xF-wot"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstWidth" id="cQh-Pa-QzV">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -255,6 +262,7 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="q6s-5O-VWm"/>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="DJZ-C9-5ho"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstWidth" id="LNZ-32-MwP">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -279,6 +287,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="A52-Zg-1Y1"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstHeight" id="axy-vf-Bae">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -299,6 +308,7 @@
                     <animations/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="oNH-qP-SNA"/>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="vnh-bv-SUQ"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstHeight" id="7z3-HS-44l">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -324,7 +334,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="layoutChanged:" target="-2" id="6JR-Np-0Yg"/>
+                        <action selector="reflashLyrics:" target="-2" id="PQo-4b-3hm"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsUseAutoLayout" id="eO5-mh-vYI">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -404,17 +414,18 @@
                     <rect key="frame" x="162" y="214" width="154" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <popUpButtonCell key="cell" type="push" title="歌詞居左" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Yk4-e2-xrf" id="cRc-v7-XTx">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="cRc-v7-XTx">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="z9u-lY-U8K">
                             <items>
-                                <menuItem title="歌詞居左" state="on" id="Yk4-e2-xrf"/>
+                                <menuItem title="歌詞居左" id="Yk4-e2-xrf"/>
                                 <menuItem title="歌詞居右" id="NiY-Bp-1Kn"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
                     <connections>
+                        <action selector="reflashLyrics:" target="-2" id="LeJ-7m-gj3"/>
                         <binding destination="UKb-ML-D6F" name="selectedIndex" keyPath="values.LyricsVerticalLyricsPosition" id="nhL-Nd-qZh">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>

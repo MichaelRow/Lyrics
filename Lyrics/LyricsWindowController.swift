@@ -298,6 +298,7 @@ class LyricsWindowController: NSWindowController {
     }
     
     func displayVerticalLyrics() {
+        //Current vertical lyrics mode is not perfect, it should be implemented by core text.
         if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
             // first Lyrics empty means it's in instrumental time
             

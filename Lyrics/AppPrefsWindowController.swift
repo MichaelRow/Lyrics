@@ -127,7 +127,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         
     }
     
-    @IBAction func layoutChanged(sender: AnyObject) {
+    @IBAction func reflashLyrics(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName(LyricsLayoutChangeNotification, object: nil)
     }
     
