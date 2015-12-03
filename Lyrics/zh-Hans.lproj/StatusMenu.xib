@@ -101,6 +101,16 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="handleWorkSpaceChange:" target="-2" id="xnu-uL-rDm"/>
+                        <binding destination="VKQ-E3-KXV" name="enabled2" keyPath="values.LyricsIsVerticalLyrics" previousBinding="S0H-VU-ehO" id="NLO-QH-VHv">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
                         <binding destination="VKQ-E3-KXV" name="enabled" keyPath="values.LyricsUseAutoLayout" id="S0H-VU-ehO">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
