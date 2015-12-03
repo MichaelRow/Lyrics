@@ -74,7 +74,6 @@ class LyricsWindowController: NSWindowController {
         backgroundLayer.addSublayer(secondLyricsLayer)
         setAttributes()
         setScreenResolution()
-//        checkFullScreen()
         displayLyrics("LyricsX", secondLyrics: nil)
         
         let nc:NSNotificationCenter = NSNotificationCenter.defaultCenter()
@@ -301,29 +300,6 @@ class LyricsWindowController: NSWindowController {
             self.setScreenResolution()
             self.reflash()
         }
-    }
-
-//MARK: - Checking Methods
-
-    func checkFullScreen() {
-        // bug exists.
-        // window in full screen mode height + origin y = screen height
-        let frontmostAppName: String = (NSWorkspace.sharedWorkspace().frontmostApplication?.localizedName)!
-        let windows: NSArray = CGWindowListCopyWindowInfo(CGWindowListOption(arrayLiteral: CGWindowListOption.ExcludeDesktopElements, CGWindowListOption.OptionOnScreenAboveWindow), CGWindowID(0))!
-        let screenSize = NSScreen.mainScreen()?.frame.size
-        for window in windows {
-            var bounds: CGRect = CGRect()
-            if window.stringForKey("kCGWindowOwnerName") == frontmostAppName {
-                CGRectMakeWithDictionaryRepresentation(window.objectForKey(kCGWindowBounds) as? NSDictionary, &bounds)
-                let height = bounds.size.height + bounds.origin.y
-                if height == screenSize?.height {
-                    isFullScreen = true
-                    NSLog("Started with Full Screen mode")
-                    return
-                }
-            }
-        }
-        NSLog("Satrted with regular screen mode")
     }
     
 }
