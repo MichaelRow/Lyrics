@@ -44,4 +44,6 @@
 // menu bar
 "HIGHER_LYRICS"="Higher Lyrics";
 "LOWER_LYRICS"="Lower Lyrics";
+"VERTICAL"="Switch to Vertical Lyrics(beta)";
+"HORIZONTAL"="Switch to Horizontal Lyrics";
 

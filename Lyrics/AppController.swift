@@ -120,6 +120,12 @@ class AppController: NSObject {
         statusBarItem.menu=statusBarMenu
         delayMenuItem.view=lyricsDelayView
         lyricsDelayView.autoresizingMask=[.ViewWidthSizable]
+        
+        if userDefaults.boolForKey(LyricsIsVerticalLyrics) {
+            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("HORIZONTAL", comment: "")
+        } else {
+            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("VERTICAL", comment: "")
+        }
     }
     
     func checkSavingPath() -> Bool{
@@ -152,9 +158,22 @@ class AppController: NSObject {
         //before finding the way to detect full screen, user should adjust lyrics by selves
         lyricsWindow.isFullScreen = !lyricsWindow.isFullScreen
         if lyricsWindow.isFullScreen {
-            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("HIGHER_LYRICS", comment: "")
+            statusBarMenu.itemAtIndex(7)?.title = NSLocalizedString("HIGHER_LYRICS", comment: "")
         } else {
-            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("LOWER_LYRICS", comment: "")
+            statusBarMenu.itemAtIndex(7)?.title = NSLocalizedString("LOWER_LYRICS", comment: "")
+        }
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.lyricsWindow.reflash()
+        }
+    }
+    
+    @IBAction func changeLyricsMode(sender:AnyObject?) {
+        let isVertical = !userDefaults.boolForKey(LyricsIsVerticalLyrics)
+        userDefaults.setObject(NSNumber(bool: isVertical), forKey: LyricsIsVerticalLyrics)
+        if isVertical {
+            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("HORIZONTAL", comment: "")
+        } else {
+            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("VERTICAL", comment: "")
         }
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.lyricsWindow.reflash()

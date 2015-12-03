@@ -91,14 +91,19 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="8H9-gJ-UYS"/>
+                <menuItem title="使用縱向歌詞模式(beta)" id="0qn-No-pIc">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changeLyricsMode:" target="-2" id="k5H-I3-6xS"/>
+                    </connections>
+                </menuItem>
                 <menuItem title="降低歌詞位置" id="CES-ME-bZV">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="handleWorkSpaceChange:" target="-2" id="qIP-yv-s1c"/>
-                        <binding destination="ulf-d7-gEq" name="hidden" keyPath="values.LyricsUseAutoLayout" id="9mK-ed-8qR">
+                        <binding destination="ulf-d7-gEq" name="enabled" keyPath="values.LyricsUseAutoLayout" id="4Kf-jy-pnk">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>

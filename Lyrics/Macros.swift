@@ -18,6 +18,9 @@ let LyricsAttributesChangedNotification:String="LyricsAttributesChanged"
 let LyricsUserEditLyricsNotification:String="LyricsUserEditLyrics"
 let LyricsLayoutChangeNotification:String="LyricsLayoutChange"
 
+//Menu
+let LyricsIsVerticalLyrics:String="LyricsIsVerticalLyrics"
+
 //General Preferences Defaults
 let LyricsSavingPathPopUpIndex:String="LyricsSavingPathPopUpIndex"
 let LyricsUserSavingPath:String="LyricsUserSavingPath"
@@ -34,6 +37,7 @@ let LyricsConstHeight:String="LyricsConstHeight"
 
 //Lyrics Preferences Defaults
 let LyricsAutoConvertChinese:String="LyricsAutoConvertChinese"
+let LyricsVerticalLyricsPosition:String="LyricsVerticalLyricsPosition"
 let LyricsChineseTypeIndex:String="LyricsChineseTypeIndex"
 let LyricsTwoLineMode:String="LyricsTwoLineMode"
 let LyricsDisabledWhenPaused:String="LyricsDisabledWhenPaused"

@@ -91,14 +91,19 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="txX-dr-HGn"/>
+                <menuItem title="Switch to Vertical Lyrics(beta)" id="hHn-pb-szM">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changeLyricsMode:" target="-2" id="xhP-gS-gzf"/>
+                    </connections>
+                </menuItem>
                 <menuItem title="Higher Lyrics" id="UNY-Ob-RmT">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="handleWorkSpaceChange:" target="-2" id="lLA-li-Fau"/>
-                        <binding destination="Ppe-ZY-ULn" name="hidden" keyPath="values.LyricsUseAutoLayout" id="jIB-go-ZVW">
+                        <binding destination="Ppe-ZY-ULn" name="enabled" keyPath="values.LyricsUseAutoLayout" id="ULG-Fi-6Wu">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>

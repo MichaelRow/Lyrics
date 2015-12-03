@@ -28,6 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsDisabledWhenPaused : NSNumber(bool: true),
             LyricsDisabledWhenSreenShot : NSNumber(bool: true),
             LyricsShadowModeEnable : NSNumber(bool: true),
+            LyricsIsVerticalLyrics : NSNumber(bool: false),
+            LyricsVerticalLyricsPosition : NSNumber(integer: 1),
             LyricsTwoLineMode : NSNumber(bool: true),
             LyricsSearchForBetterLrc : NSNumber(bool: true),
             LyricsDisableAllAlert : NSNumber(bool: false),
