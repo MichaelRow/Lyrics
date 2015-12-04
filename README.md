@@ -7,8 +7,11 @@ Swift-based iTunes plug-in app to display lyrics on the desktop.
 * Display lyrics on the desktop.
 
 
-![lyrics effect preview]
+![lyrics horizontal]
 (http://i63.tinypic.com/108d543.jpg)
+
+![lyrics vertical]
+(http://i63.tinypic.com/2v7ugkz.jpg)
 * Nice HUD Window to edit lyrics of playing track.
 
 
