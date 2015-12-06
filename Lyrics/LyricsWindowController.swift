@@ -307,13 +307,13 @@ class LyricsWindowController: NSWindowController {
             firstLyricsLayer.speed = 0.2
             secondLyricsLayer.speed = 0.2
             
-            firstLyricsLayer.frame = NSMakeRect(backgroundLayer.frame.size.width/3, 0, 0, 0)
-            secondLyricsLayer.frame = NSMakeRect(backgroundLayer.frame.size.width/3, 0, 0, 0)
             firstLyricsLayer.string = ""
             secondLyricsLayer.string = ""
             firstLyricsLayer.hidden = true
             secondLyricsLayer.hidden = true
             backgroundLayer.hidden = true
+            
+            backgroundLayer.transform = CATransform3DMakeRotation(CGFloat(-M_PI_2), 0, 0, 1)
         }
         else {
             //one line mode
