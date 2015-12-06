@@ -19,12 +19,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
-        // SB is well known for memory leak
-        autoreleasepool { () -> () in
-            let lyrics: SBApplication = SBApplication(bundleIdentifier: "Eru.Lyrics")!
-            if lyrics.running {
-                NSApp.terminate(nil)
-            }
+        let lyrics = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.Lyrics")
+        if lyrics.count > 0 {
+            NSApp.terminate(nil)
         }
 
         let lyricsXDefaults: NSUserDefaults = NSUserDefaults.init(suiteName: "Eru.Lyrics")!
