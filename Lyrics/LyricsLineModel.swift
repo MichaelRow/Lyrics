@@ -47,9 +47,9 @@ class LyricsLineModel: NSObject {
         if mSecond > 99 {
             theTimeTag += "\(mSecond)]"
         } else if mSecond > 9 {
-            theTimeTag += "0\(second)]"
+            theTimeTag += "0\(mSecond)]"
         } else {
-            theTimeTag += "00\(second)]"
+            theTimeTag += "00\(mSecond)]"
         }
         self.timeTag = theTimeTag
     }
