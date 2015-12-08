@@ -29,7 +29,8 @@ class LyricsWindowController: NSWindowController {
     private var visibleSize: NSSize!
     private var visibleOrigin: NSPoint!
     private var userDefaults: NSUserDefaults!
-    private var flag: Bool = true
+    private var rollingOver: Bool = true
+    private var isRotated: Bool = false
     
     convenience init() {
         NSLog("Init Lyrics window")
@@ -148,7 +149,10 @@ class LyricsWindowController: NSWindowController {
         firstLyrics = theFirstLyrics
         secondLyrics = theSecondLyrics
         
-        backgroundLayer.transform = CATransform3DMakeRotation(0, 0, 0, 1)
+        if isRotated {
+            backgroundLayer.transform = CATransform3DMakeRotation(0, 0, 0, 1)
+            isRotated = false
+        }
         
         if userDefaults.boolForKey(LyricsIsVerticalLyrics) {
             displayVerticalLyrics()
@@ -161,7 +165,7 @@ class LyricsWindowController: NSWindowController {
         if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
             // first Lyrics empty means it's in instrumental time
             
-            flag = true
+            rollingOver = true
             backgroundLayer.speed=0.2
             firstLyricsLayer.speed = 0.2
             secondLyricsLayer.speed = 0.2
@@ -177,7 +181,7 @@ class LyricsWindowController: NSWindowController {
         else if (secondLyrics==nil) || (secondLyrics?.isEqualToString(""))! {
             // One-Line Mode or sencond lyrics is in instrumental time
             
-            flag = true
+            rollingOver = true
             backgroundLayer.speed = 1
             firstLyricsLayer.speed = 1
             secondLyricsLayer.speed = 1
@@ -279,8 +283,8 @@ class LyricsWindowController: NSWindowController {
             
             backgroundLayer.frame = CGRectMake(x, y, width, height)
             
-            // whether needs rotate to show animation
-            if flag {
+            // whether needs rolling-over to show animation
+            if rollingOver {
                 firstLyricsLayer.string = firstLyrics
                 secondLyricsLayer.string = secondLyrics
                 firstLyricsLayer.frame = rect1st
@@ -293,7 +297,7 @@ class LyricsWindowController: NSWindowController {
                 secondLyricsLayer.frame = rect1st
             }
             
-            flag = !flag
+            rollingOver = !rollingOver
         }
     }
     
@@ -302,7 +306,7 @@ class LyricsWindowController: NSWindowController {
         if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
             // first Lyrics empty means it's in instrumental time
             
-            flag = true
+            rollingOver = true
             backgroundLayer.speed=0.2
             firstLyricsLayer.speed = 0.2
             secondLyricsLayer.speed = 0.2
@@ -314,10 +318,11 @@ class LyricsWindowController: NSWindowController {
             backgroundLayer.hidden = true
             
             backgroundLayer.transform = CATransform3DMakeRotation(CGFloat(-M_PI_2), 0, 0, 1)
+            isRotated = true
         }
         else {
             //one line mode
-            flag = true
+            rollingOver = true
             backgroundLayer.speed = 1
             firstLyricsLayer.speed = 1
             secondLyricsLayer.speed = 1
@@ -350,15 +355,14 @@ class LyricsWindowController: NSWindowController {
             
             backgroundLayer.frame = CGRectMake(x, y, frameSize.width, frameSize.height)
             firstLyricsLayer.frame = CGRectMake(0, -frameSize.height/4, frameSize.width, frameSize.height)
-            
             backgroundLayer.transform = CATransform3DMakeRotation(CGFloat(-M_PI_2), 0, 0, 1)
-            
+            isRotated = true
             firstLyricsLayer.string=attributedStr
         }
     }
     
     func reflash () {
-        flag = !flag
+        rollingOver = !rollingOver
         displayLyrics(firstLyrics, secondLyrics: secondLyrics)
     }
 
