@@ -80,7 +80,7 @@ class AppController: NSObject {
         
         let ndc = NSDistributedNotificationCenter.defaultCenter()
         ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
-        ndc.addObserver(self, selector: "handleLrcSeekerEvent:", name: "LrcSeekerEvents", object: nil)
+        ndc.addObserver(self, selector: "handleExtenalLyricsEvent:", name: "ExtenalLyricsEvent", object: nil)
         
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
@@ -675,7 +675,7 @@ class AppController: NSObject {
         saveLrcToLocal(theLyrics, songTitle: currentSongTitle, artist: currentArtist)
     }
     
-    func handleLrcSeekerEvent (n:NSNotification) {
+    func handleExtenalLyricsEvent (n:NSNotification) {
         NSLog("Recieved notification from LrcSeeker")
         let userInfo = n.userInfo
         
