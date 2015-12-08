@@ -23,6 +23,7 @@
 		766D670F1C03530E00B5405B /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D670E1C03530E00B5405B /* iTunesBridge.m */; };
 		766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F03C41C049372003F4790 /* LyricsEditView.swift */; };
 		7678AA081BFF526700FE848C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7678AA061BFF526700FE848C /* Localizable.strings */; };
+		767E4A151C1713B600D48EFD /* LrcMaker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 767E4A121C17137D00D48EFD /* LrcMaker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
 		768BCB211BF1C62000D6F5EB /* libopencc.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */; };
 		768BCB221BF1C62000D6F5EB /* libopencc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1F1BF1C62000D6F5EB /* libopencc.2.dylib */; };
@@ -81,6 +82,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		767E4A141C1713A200D48EFD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library;
+			dstSubfolderSpec = 1;
+			files = (
+				767E4A151C1713B600D48EFD /* LrcMaker.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		76D0605F1C02BAD5000DA86C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -138,6 +149,7 @@
 		7678AA071BFF526700FE848C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7678AA091BFF552700FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7678AA0A1BFF552900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		767E4A121C17137D00D48EFD /* LrcMaker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = LrcMaker.app; sourceTree = "<group>"; };
 		768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		768BCAE51BF1866400D6F5EB /* Lyrics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Bridging-Header.h"; sourceTree = "<group>"; };
 		768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.1.0.0.dylib; sourceTree = "<group>"; };
@@ -270,6 +282,7 @@
 			children = (
 				76C5115E1BEC6F8F0095F510 /* Assets.xcassets */,
 				76C511631BEC6F8F0095F510 /* Info.plist */,
+				767E4A121C17137D00D48EFD /* LrcMaker.app */,
 				76D060631C02C4AB000DA86C /* LrcSeeker.app */,
 				768BCB401BF1C74C00D6F5EB /* OpenCC Res */,
 			);
@@ -441,6 +454,7 @@
 				76C511571BEC6F8F0095F510 /* Resources */,
 				76D0605F1C02BAD5000DA86C /* CopyFiles */,
 				76D060611C02BE1D000DA86C /* CopyFiles */,
+				767E4A141C1713A200D48EFD /* CopyFiles */,
 			);
 			buildRules = (
 			);

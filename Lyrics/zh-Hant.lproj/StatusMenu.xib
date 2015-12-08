@@ -43,6 +43,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="V78-Pj-41Z"/>
+                            <menuItem title="製作Lrc..." id="Dch-DP-Oe3">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="makeLrc:" target="-2" id="GRx-g7-JcO"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="匯入Lrc歌詞檔案..." id="M13-bN-2sa">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

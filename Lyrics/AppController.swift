@@ -230,6 +230,11 @@ class AppController: NSObject {
         }
     }
     
+    @IBAction func makeLrc(sender: AnyObject) {
+        let appPath = NSBundle.mainBundle().bundlePath + "/Contents/Library/LrcMaker.app"
+        NSWorkspace.sharedWorkspace().launchApplication(appPath)
+    }
+    
     @IBAction func editLyrics(sender: AnyObject) {
         var lrcContents = readLocalLyrics()
         if lrcContents == nil {
@@ -654,7 +659,6 @@ class AppController: NSObject {
         }
     }
     
-    
     func handleLrcDelayChange () {
         //save the delay change to file.
         if lyricsArray.count == 0{
@@ -676,8 +680,8 @@ class AppController: NSObject {
     }
     
     func handleExtenalLyricsEvent (n:NSNotification) {
-        NSLog("Recieved notification from LrcSeeker")
         let userInfo = n.userInfo
+        NSLog("Recieved notification from %@",userInfo!["Sender"] as! String)
         
         //no playing track?
         if currentSongID == "" {

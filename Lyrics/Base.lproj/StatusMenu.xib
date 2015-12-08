@@ -43,6 +43,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="V78-Pj-41Z"/>
+                            <menuItem title="Make lrc..." id="Kxk-N2-7Jt">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="makeLrc:" target="-2" id="QXD-vb-dOD"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Import Lrc File..." id="M13-bN-2sa">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
