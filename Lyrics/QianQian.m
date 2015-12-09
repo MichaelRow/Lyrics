@@ -33,9 +33,15 @@
     NSMutableString *artist = [NSMutableString stringWithString:[artistForSearching stringByReplacingOccurrencesOfString:@" " withString:@""]];
      
     [artist setString:[artist lowercaseString]];
-     
-     
-    NSString *urlString=[NSString stringWithFormat:@"http://ttlrccnc.qianqian.com/dll/lyricsvr.dll?sh?Artist=%@&Title=%@&Flags=0",setToHexString(artist),setToHexString(title)];
+    
+    NSString *urlString;
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"LyricsServerIndex"] == 0) {
+        urlString=[NSString stringWithFormat:@"http://ttlrcct.qianqian.com/dll/lyricsvr.dll?sh?Artist=%@&Title=%@&Flags=0",setToHexString(artist),setToHexString(title)];
+    } else {
+        urlString=[NSString stringWithFormat:@"http://ttlrccnc.qianqian.com/dll/lyricsvr.dll?sh?Artist=%@&Title=%@&Flags=0",setToHexString(artist),setToHexString(title)];
+    }
+    NSLog(@"%@",urlString);
+
     NSMutableURLRequest *req=[NSMutableURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:15];
     [req setHTTPMethod:@"GET"];
     [req addValue:@"text/xml" forHTTPHeaderField: @"Content-Type"];

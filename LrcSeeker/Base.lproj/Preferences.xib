@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PreferencesController">
+            <connections>
+                <outlet property="artworkPathButton" destination="EDf-fC-nfX" id="YgK-gE-iQ2"/>
+                <outlet property="lrcPathButton" destination="kKc-4k-iEk" id="3yH-lB-IfI"/>
+                <outlet property="window" destination="mY1-xl-wIa" id="wPK-D4-Npy"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="mY1-xl-wIa">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <rect key="contentRect" x="196" y="207" width="442" height="249"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="0fn-wN-S8G">
+                <rect key="frame" x="0.0" y="0.0" width="442" height="249"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EDf-fC-nfX">
+                        <rect key="frame" x="206" y="170" width="166" height="26"/>
+                        <animations/>
+                        <popUpButtonCell key="cell" type="push" title="Music" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="2gJ-0c-GsM" id="zMa-jC-b4B">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="c7l-64-vRA">
+                                <items>
+                                    <menuItem title="Desktop" id="NSa-pO-Wdn">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="Music" state="on" id="2gJ-0c-GsM"/>
+                                    <menuItem title="Item 3" id="Ngg-hy-7QT">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="Ask me..." id="BRB-6v-T5Q">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="setArtworkDownloadPathbyPopUp:" target="-2" id="vAh-Dd-u8B"/>
+                            <binding destination="5GM-8k-X2a" name="selectedIndex" keyPath="values.LSArtworkPathIndex" id="w0w-lZ-hY4">
+                                <dictionary key="options">
+                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </popUpButton>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kKc-4k-iEk">
+                        <rect key="frame" x="206" y="205" width="166" height="26"/>
+                        <animations/>
+                        <popUpButtonCell key="cell" type="push" title="Desktop" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="yFd-9I-aZ5" id="nB6-Gd-tvs">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="3Ma-Dr-Qr7">
+                                <items>
+                                    <menuItem title="Desktop" state="on" id="yFd-9I-aZ5"/>
+                                    <menuItem title="Music" id="Udn-DM-Hb9"/>
+                                    <menuItem title="Item 3" id="Nqq-S9-ClS">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="Ask me..." id="j2r-06-8s1">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="setLrcDownloadPathByPopUp:" target="-2" id="hf9-ub-rL4"/>
+                            <binding destination="5GM-8k-X2a" name="selectedIndex" keyPath="values.LSLrcPathIndex" id="Zrk-oA-r8q">
+                                <dictionary key="options">
+                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </popUpButton>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xQl-6t-d01">
+                        <rect key="frame" x="25" y="210" width="144" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default lrc saving path:" id="k4i-La-DGf">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YuN-22-UBf">
+                        <rect key="frame" x="25" y="176" width="175" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default artwork saving path:" id="niZ-ta-Uyi">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FPf-a5-eWf">
+                        <rect key="frame" x="25" y="75" width="395" height="18"/>
+                        <animations/>
+                        <buttonCell key="cell" type="check" title="Autofill and search using iTunes playing track when launched." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Mgv-zy-F47">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="5GM-8k-X2a" name="value" keyPath="values.LSAutofillAndSearchWhenLaunched" id="NyU-nB-AoO">
+                                <dictionary key="options">
+                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </button>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wdD-mb-afE">
+                        <rect key="frame" x="206" y="100" width="166" height="26"/>
+                        <animations/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="8uj-Uh-WeV">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="kAf-cA-zBO">
+                                <items>
+                                    <menuItem title="Simplified Chinese" image="CN_china" id="0VF-HE-qAT"/>
+                                    <menuItem title="Traditional Chinese" image="TraditionalChinese" id="qKy-yP-LVC">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="Traditional Chinese (Taiwan Standard)" image="TW_taiwan" id="jEm-yt-aZS">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="Traditional Chinese (Hong Kong Standard)" image="HK_hongKong" id="b4f-y7-9f9"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <binding destination="5GM-8k-X2a" name="selectedIndex" keyPath="values.LSChineseConvertTpye" id="aCi-6U-NJb">
+                                <dictionary key="options">
+                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
+                            <binding destination="5GM-8k-X2a" name="enabled" keyPath="values.LSWhetherConvertChinese" id="mDG-yK-UtM">
+                                <dictionary key="options">
+                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </popUpButton>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n1C-uI-SZS">
+                        <rect key="frame" x="25" y="104" width="163" height="18"/>
+                        <animations/>
+                        <buttonCell key="cell" type="check" title="Automaticly convert to:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="WbH-tl-I5W">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="5GM-8k-X2a" name="value" keyPath="values.LSWhetherConvertChinese" id="tYh-kb-6wa">
+                                <dictionary key="options">
+                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fzd-d1-NtB">
+                        <rect key="frame" x="25" y="50" width="395" height="18"/>
+                        <animations/>
+                        <buttonCell key="cell" type="check" title="Display optimized lyric in the preview window." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="d0U-da-J9u">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="5GM-8k-X2a" name="value" keyPath="values.LSLyricStyle" id="BQQ-P1-n2J">
+                                <dictionary key="options">
+                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lvv-Pw-j3c">
+                        <rect key="frame" x="25" y="26" width="209" height="18"/>
+                        <animations/>
+                        <buttonCell key="cell" type="check" title="Quit when last window closed ." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="GUp-Rf-c1M">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="5GM-8k-X2a" name="value" keyPath="values.LSQuitWhenClosed" id="Qnw-Ef-PQK">
+                                <dictionary key="options">
+                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W26-af-6W7">
+                        <rect key="frame" x="393" y="208" width="16" height="16"/>
+                        <animations/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="openDir" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="yNC-yJ-j9q">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="setLrcDownloadPath:" target="-2" id="EsI-35-Hkf"/>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XKY-zV-5JC">
+                        <rect key="frame" x="393" y="173" width="16" height="16"/>
+                        <animations/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="openDir" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="aJn-nx-qJu">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="setArtworkDownloadPath:" target="-2" id="YdX-Di-z6t"/>
+                        </connections>
+                    </button>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SXV-Ov-SaQ">
+                        <rect key="frame" x="206" y="133" width="166" height="26"/>
+                        <animations/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="E7O-gi-OH6">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="hSv-wC-UWU">
+                                <items>
+                                    <menuItem title="China Telecom" id="yG1-Mv-1pr"/>
+                                    <menuItem title="China Unicom" id="QWX-Jf-cSv"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <binding destination="5GM-8k-X2a" name="selectedIndex" keyPath="values.LSServerIndex" id="o70-Gu-9Lk">
+                                <dictionary key="options">
+                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </popUpButton>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NiB-Ka-c5p">
+                        <rect key="frame" x="25" y="139" width="175" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lrc searching use server:" id="JnW-ua-05l">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <animations/>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="3Rs-a4-2FM"/>
+            </connections>
+            <point key="canvasLocation" x="783" y="5.5"/>
+        </window>
+        <userDefaultsController representsSharedInstance="YES" id="5GM-8k-X2a"/>
+    </objects>
+    <resources>
+        <image name="CN_china" width="24" height="24"/>
+        <image name="HK_hongKong" width="24" height="24"/>
+        <image name="TW_taiwan" width="24" height="24"/>
+        <image name="TraditionalChinese" width="24" height="24"/>
+        <image name="openDir" width="32" height="32"/>
+    </resources>
+</document>

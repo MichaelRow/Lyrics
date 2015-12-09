@@ -24,6 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsLaunchTpyePopUpIndex : NSNumber(integer: 2),
             LyricsAutoConvertChinese : NSNumber(bool: false),
             LyricsChineseTypeIndex : NSNumber(integer: 0),
+            LyricsServerIndex : NSNumber(integer: 0),
             LyricsQuitWithITunes : NSNumber(bool: false),
             LyricsDisabledWhenPaused : NSNumber(bool: true),
             LyricsDisabledWhenSreenShot : NSNumber(bool: true),

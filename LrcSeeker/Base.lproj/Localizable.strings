@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  LrcSeeker
+
+  Created by Eru on 15/10/23.
+  Copyright © 2015年 Eru. All rights reserved.
+*/
+"XIAMI"="Xiami";
+"TTPOD"="TTPod";
+"BAIDU"="Baidu";
+"QIANQIAN"="QianQian";
+"GECIME"="Geci.me";
+"NO_LRC_AVAILABLE"="No lrc available for this song.";
+"NO_ARTWORK_AVAILABLE"="No Artwork";
+"NO_SELECTION"="No Selection";
+"PATH_IS_NOT_DIC"="Path Invalid";
+"ITUNES_NOT_RUNNING"="iTunes Not Running";
+"ITUNES_NOT_PLAYING"="iTunes Not Playing";
+"NO_SONG_SELECTED"="(No song selected.)";
+"NO_LRC_ERROR"="No Lrc Available";
+"NET_CONNECTION_ERROR"="Net Error";
+"PARSE_ERROR"="Parse Error";

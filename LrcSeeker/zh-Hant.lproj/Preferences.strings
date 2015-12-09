@@ -1,0 +1,66 @@
+
+/* Class = "NSMenuItem"; title = "簡體中文"; ObjectID = "0VF-HE-qAT"; */
+"0VF-HE-qAT.title" = "簡體中文";
+
+/* Class = "NSMenuItem"; title = "音樂"; ObjectID = "2gJ-0c-GsM"; */
+"2gJ-0c-GsM.title" = "音樂";
+
+/* Class = "NSMenuItem"; title = "需要時詢問我..."; ObjectID = "BRB-6v-T5Q"; */
+"BRB-6v-T5Q.title" = "需要時詢問我...";
+
+/* Class = "NSButtonCell"; title = "當最後一個視窗關閉時結束程式"; ObjectID = "GUp-Rf-c1M"; */
+"GUp-Rf-c1M.title" = "當最後一個視窗關閉時結束程式";
+
+/* Class = "NSTextFieldCell"; title = "搜尋lrc歌詞使用伺服器:"; ObjectID = "JnW-ua-05l"; */
+"JnW-ua-05l.title" = "搜尋lrc歌詞使用伺服器:";
+
+/* Class = "NSButtonCell"; title = "啟動時用iTunes播放中的曲目自動填充歌詞與歌手名並搜尋"; ObjectID = "Mgv-zy-F47"; */
+"Mgv-zy-F47.title" = "啟動時用iTunes播放中的曲目自動填充歌詞與歌手名並搜尋";
+
+/* Class = "NSMenuItem"; title = "桌面"; ObjectID = "NSa-pO-Wdn"; */
+"NSa-pO-Wdn.title" = "桌面";
+
+/* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Ngg-hy-7QT"; */
+"Ngg-hy-7QT.title" = "Item 3";
+
+/* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Nqq-S9-ClS"; */
+"Nqq-S9-ClS.title" = "Item 3";
+
+/* Class = "NSMenuItem"; title = "中國聯通"; ObjectID = "QWX-Jf-cSv"; */
+"QWX-Jf-cSv.title" = "中國聯通";
+
+/* Class = "NSMenuItem"; title = "音樂"; ObjectID = "Udn-DM-Hb9"; */
+"Udn-DM-Hb9.title" = "音樂";
+
+/* Class = "NSButtonCell"; title = "自動轉換為:"; ObjectID = "WbH-tl-I5W"; */
+"WbH-tl-I5W.title" = "自動轉換為:";
+
+/* Class = "NSMenuItem"; title = "香港繁體"; ObjectID = "b4f-y7-9f9"; */
+"b4f-y7-9f9.title" = "香港繁體";
+
+/* Class = "NSButtonCell"; title = "在歌詞預覽視窗使用為顯示效果優化的歌詞"; ObjectID = "d0U-da-J9u"; */
+"d0U-da-J9u.title" = "在歌詞預覽視窗使用為顯示效果優化的歌詞";
+
+/* Class = "NSMenuItem"; title = "需要時詢問我..."; ObjectID = "j2r-06-8s1"; */
+"j2r-06-8s1.title" = "需要時詢問我...";
+
+/* Class = "NSMenuItem"; title = "臺灣正體"; ObjectID = "jEm-yt-aZS"; */
+"jEm-yt-aZS.title" = "臺灣正體";
+
+/* Class = "NSTextFieldCell"; title = "預設歌詞儲存路徑:"; ObjectID = "k4i-La-DGf"; */
+"k4i-La-DGf.title" = "預設歌詞儲存路徑:";
+
+/* Class = "NSWindow"; title = "偏好設定"; ObjectID = "mY1-xl-wIa"; */
+"mY1-xl-wIa.title" = "偏好設定";
+
+/* Class = "NSTextFieldCell"; title = "預設專輯封面儲存路徑:"; ObjectID = "niZ-ta-Uyi"; */
+"niZ-ta-Uyi.title" = "預設專輯封面儲存路徑:";
+
+/* Class = "NSMenuItem"; title = "繁體中文"; ObjectID = "qKy-yP-LVC"; */
+"qKy-yP-LVC.title" = "繁體中文";
+
+/* Class = "NSMenuItem"; title = "桌面"; ObjectID = "yFd-9I-aZ5"; */
+"yFd-9I-aZ5.title" = "桌面";
+
+/* Class = "NSMenuItem"; title = "中國電信"; ObjectID = "yG1-Mv-1pr"; */
+"yG1-Mv-1pr.title" = "中國電信";
