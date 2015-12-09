@@ -16,7 +16,6 @@
 		760A018B1C01A36700015C62 /* XMLParserForQianQian.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A01891C01A36700015C62 /* XMLParserForQianQian.m */; };
 		760A01901C01A37400015C62 /* Xiami.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A018D1C01A37400015C62 /* Xiami.m */; };
 		760A01911C01A37400015C62 /* XMLParserForXiami.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A018F1C01A37400015C62 /* XMLParserForXiami.m */; };
-		7613A6C11C17D17000D7CB66 /* LrcSeeker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 767D7AA01C17BF5E00F8BCBE /* LrcSeeker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7613A6C91C17D1A200D7CB66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6C81C17D1A200D7CB66 /* AppDelegate.swift */; };
 		7613A6CB1C17D1A200D7CB66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7613A6CA1C17D1A200D7CB66 /* Assets.xcassets */; };
 		7613A6CE1C17D1A200D7CB66 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7613A6CC1C17D1A200D7CB66 /* MainMenu.xib */; };
@@ -33,6 +32,7 @@
 		7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */; };
 		7642B9041BF4709300D68FE9 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7642B9021BF4709300D68FE9 /* StatusMenu.xib */; };
 		764334931BF95ECF00C4B740 /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 764334921BF95ECF00C4B740 /* iTunesBridge.m */; };
+		764CA5851C17F33400C12490 /* LrcSeeker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 767D7AA01C17BF5E00F8BCBE /* LrcSeeker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7654A1C21C17DD0700591985 /* LrcMaker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7613A6C61C17D1A200D7CB66 /* LrcMaker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7654A1C31C17DDAC00591985 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7654A1C51C17DDAC00591985 /* MainWindow.xib */; };
 		7654A1CA1C17DE0800591985 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7654A1CC1C17DE0800591985 /* Localizable.strings */; };
@@ -149,7 +149,7 @@
 			dstPath = Contents/Library;
 			dstSubfolderSpec = 1;
 			files = (
-				7613A6C11C17D17000D7CB66 /* LrcSeeker.app in CopyFiles */,
+				764CA5851C17F33400C12490 /* LrcSeeker.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
