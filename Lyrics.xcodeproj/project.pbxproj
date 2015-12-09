@@ -50,12 +50,10 @@
 		76C5115D1BEC6F8F0095F510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5115C1BEC6F8F0095F510 /* AppDelegate.swift */; };
 		76C5115F1BEC6F8F0095F510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76C5115E1BEC6F8F0095F510 /* Assets.xcassets */; };
 		76C511621BEC6F8F0095F510 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C511601BEC6F8F0095F510 /* MainMenu.xib */; };
-		76C5116D1BEC6F8F0095F510 /* LyricsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5116C1BEC6F8F0095F510 /* LyricsTests.swift */; };
 		76C511781BEC6FD50095F510 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C511771BEC6FD50095F510 /* Macros.swift */; };
 		76D060451C02B8D8000DA86C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D060441C02B8D8000DA86C /* AppDelegate.swift */; };
 		76D060471C02B8D9000DA86C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D060461C02B8D9000DA86C /* Assets.xcassets */; };
 		76D0604A1C02B8D9000DA86C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D060481C02B8D9000DA86C /* MainMenu.xib */; };
-		76D060551C02B8D9000DA86C /* LyricsX_HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D060541C02B8D9000DA86C /* LyricsX_HelperTests.swift */; };
 		76D0605E1C02B930000DA86C /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D0605D1C02B930000DA86C /* ServiceManagement.framework */; };
 		76D060601C02BBB7000DA86C /* LyricsX Helper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76D060421C02B8D8000DA86C /* LyricsX Helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76D060651C02C4D1000DA86C /* LrcSeeker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76D060631C02C4AB000DA86C /* LrcSeeker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -63,23 +61,6 @@
 		76FE94411BFC223600A1AC27 /* TextPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FE94401BFC223600A1AC27 /* TextPreview.swift */; };
 		76FF43791BEF9BAB00D2B14F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		76C511691BEC6F8F0095F510 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 76C511511BEC6F8F0095F510 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 76C511581BEC6F8F0095F510;
-			remoteInfo = Lyrics;
-		};
-		76D060511C02B8D9000DA86C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 76C511511BEC6F8F0095F510 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 76D060411C02B8D8000DA86C;
-			remoteInfo = "LyricsX Helper";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		767E4A141C1713A200D48EFD /* CopyFiles */ = {
@@ -180,18 +161,12 @@
 		76C5115E1BEC6F8F0095F510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76C511611BEC6F8F0095F510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		76C511631BEC6F8F0095F510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76C511681BEC6F8F0095F510 /* LyricsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LyricsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		76C5116C1BEC6F8F0095F510 /* LyricsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsTests.swift; sourceTree = "<group>"; };
-		76C5116E1BEC6F8F0095F510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76C511771BEC6FD50095F510 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 		76D060421C02B8D8000DA86C /* LyricsX Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LyricsX Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D060441C02B8D8000DA86C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76D060461C02B8D9000DA86C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76D060491C02B8D9000DA86C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		76D0604B1C02B8D9000DA86C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76D060501C02B8D9000DA86C /* LyricsX HelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LyricsX HelperTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		76D060541C02B8D9000DA86C /* LyricsX_HelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsX_HelperTests.swift; sourceTree = "<group>"; };
-		76D060561C02B8D9000DA86C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76D0605D1C02B930000DA86C /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		76D060631C02C4AB000DA86C /* LrcSeeker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = LrcSeeker.app; sourceTree = "<group>"; };
 		76D060681C02E997000DA86C /* Lyrics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Prefix.pch"; sourceTree = "<group>"; };
@@ -215,25 +190,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		76C511651BEC6F8F0095F510 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		76D0603F1C02B8D8000DA86C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				76D0606B1C02FBCD000DA86C /* ScriptingBridge.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76D0604D1C02B8D9000DA86C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,9 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				76C5115B1BEC6F8F0095F510 /* Lyrics */,
-				76C5116B1BEC6F8F0095F510 /* LyricsTests */,
 				76D060431C02B8D8000DA86C /* LyricsX Helper */,
-				76D060531C02B8D9000DA86C /* LyricsX HelperTests */,
 				76C5115A1BEC6F8F0095F510 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -386,9 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				76C511591BEC6F8F0095F510 /* LyricsX.app */,
-				76C511681BEC6F8F0095F510 /* LyricsTests.xctest */,
 				76D060421C02B8D8000DA86C /* LyricsX Helper.app */,
-				76D060501C02B8D9000DA86C /* LyricsX HelperTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -409,15 +366,6 @@
 			path = Lyrics;
 			sourceTree = "<group>";
 		};
-		76C5116B1BEC6F8F0095F510 /* LyricsTests */ = {
-			isa = PBXGroup;
-			children = (
-				76C5116C1BEC6F8F0095F510 /* LyricsTests.swift */,
-				76C5116E1BEC6F8F0095F510 /* Info.plist */,
-			);
-			path = LyricsTests;
-			sourceTree = "<group>";
-		};
 		76D060431C02B8D8000DA86C /* LyricsX Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,15 +379,6 @@
 				76D0604B1C02B8D9000DA86C /* Info.plist */,
 			);
 			path = "LyricsX Helper";
-			sourceTree = "<group>";
-		};
-		76D060531C02B8D9000DA86C /* LyricsX HelperTests */ = {
-			isa = PBXGroup;
-			children = (
-				76D060541C02B8D9000DA86C /* LyricsX_HelperTests.swift */,
-				76D060561C02B8D9000DA86C /* Info.plist */,
-			);
-			path = "LyricsX HelperTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -465,24 +404,6 @@
 			productReference = 76C511591BEC6F8F0095F510 /* LyricsX.app */;
 			productType = "com.apple.product-type.application";
 		};
-		76C511671BEC6F8F0095F510 /* LyricsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 76C511741BEC6F8F0095F510 /* Build configuration list for PBXNativeTarget "LyricsTests" */;
-			buildPhases = (
-				76C511641BEC6F8F0095F510 /* Sources */,
-				76C511651BEC6F8F0095F510 /* Frameworks */,
-				76C511661BEC6F8F0095F510 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				76C5116A1BEC6F8F0095F510 /* PBXTargetDependency */,
-			);
-			name = LyricsTests;
-			productName = LyricsTests;
-			productReference = 76C511681BEC6F8F0095F510 /* LyricsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		76D060411C02B8D8000DA86C /* LyricsX Helper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76D060571C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsX Helper" */;
@@ -500,24 +421,6 @@
 			productReference = 76D060421C02B8D8000DA86C /* LyricsX Helper.app */;
 			productType = "com.apple.product-type.application";
 		};
-		76D0604F1C02B8D9000DA86C /* LyricsX HelperTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 76D0605A1C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsX HelperTests" */;
-			buildPhases = (
-				76D0604C1C02B8D9000DA86C /* Sources */,
-				76D0604D1C02B8D9000DA86C /* Frameworks */,
-				76D0604E1C02B8D9000DA86C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				76D060521C02B8D9000DA86C /* PBXTargetDependency */,
-			);
-			name = "LyricsX HelperTests";
-			productName = "LyricsX HelperTests";
-			productReference = 76D060501C02B8D9000DA86C /* LyricsX HelperTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -531,16 +434,8 @@
 					76C511581BEC6F8F0095F510 = {
 						CreatedOnToolsVersion = 7.1;
 					};
-					76C511671BEC6F8F0095F510 = {
-						CreatedOnToolsVersion = 7.1;
-						TestTargetID = 76C511581BEC6F8F0095F510;
-					};
 					76D060411C02B8D8000DA86C = {
 						CreatedOnToolsVersion = 7.1;
-					};
-					76D0604F1C02B8D9000DA86C = {
-						CreatedOnToolsVersion = 7.1;
-						TestTargetID = 76D060411C02B8D8000DA86C;
 					};
 				};
 			};
@@ -561,8 +456,6 @@
 			targets = (
 				76C511581BEC6F8F0095F510 /* LyricsX */,
 				76D060411C02B8D8000DA86C /* LyricsX Helper */,
-				76C511671BEC6F8F0095F510 /* LyricsTests */,
-				76D0604F1C02B8D9000DA86C /* LyricsX HelperTests */,
 			);
 		};
 /* End PBXProject section */
@@ -595,26 +488,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		76C511661BEC6F8F0095F510 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		76D060401C02B8D8000DA86C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				76D060471C02B8D9000DA86C /* Assets.xcassets in Resources */,
 				76D0604A1C02B8D9000DA86C /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76D0604E1C02B8D9000DA86C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,14 +526,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		76C511641BEC6F8F0095F510 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				76C5116D1BEC6F8F0095F510 /* LyricsTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		76D0603E1C02B8D8000DA86C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -664,28 +535,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		76D0604C1C02B8D9000DA86C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				76D060551C02B8D9000DA86C /* LyricsX_HelperTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		76C5116A1BEC6F8F0095F510 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 76C511581BEC6F8F0095F510 /* LyricsX */;
-			targetProxy = 76C511691BEC6F8F0095F510 /* PBXContainerItemProxy */;
-		};
-		76D060521C02B8D9000DA86C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 76D060411C02B8D8000DA86C /* LyricsX Helper */;
-			targetProxy = 76D060511C02B8D9000DA86C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7600121C1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib */ = {
@@ -873,32 +723,6 @@
 			};
 			name = Release;
 		};
-		76C511751BEC6F8F0095F510 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = LyricsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Eru.LyricsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lyrics.app/Contents/MacOS/Lyrics";
-			};
-			name = Debug;
-		};
-		76C511761BEC6F8F0095F510 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = LyricsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Eru.LyricsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lyrics.app/Contents/MacOS/Lyrics";
-			};
-			name = Release;
-		};
 		76D060581C02B8D9000DA86C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -932,34 +756,6 @@
 			};
 			name = Release;
 		};
-		76D0605B1C02B8D9000DA86C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "LyricsX HelperTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.MichaelRow.LyricsX-HelperTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LyricsX Helper.app/Contents/MacOS/LyricsX Helper";
-			};
-			name = Debug;
-		};
-		76D0605C1C02B8D9000DA86C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "LyricsX HelperTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.MichaelRow.LyricsX-HelperTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LyricsX Helper.app/Contents/MacOS/LyricsX Helper";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -981,29 +777,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76C511741BEC6F8F0095F510 /* Build configuration list for PBXNativeTarget "LyricsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				76C511751BEC6F8F0095F510 /* Debug */,
-				76C511761BEC6F8F0095F510 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		76D060571C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsX Helper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76D060581C02B8D9000DA86C /* Debug */,
 				76D060591C02B8D9000DA86C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		76D0605A1C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsX HelperTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				76D0605B1C02B8D9000DA86C /* Debug */,
-				76D0605C1C02B8D9000DA86C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
