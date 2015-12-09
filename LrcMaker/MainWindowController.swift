@@ -461,8 +461,6 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
         // Current line is last line
         if currentLine == lyricsArray.count - 1 {
             endCurrentLine()
-            lyricsXButton.enabled = true
-            saveButton.enabled = true
             return
         }
         NSLog("Add New Lrc Line")
@@ -482,6 +480,10 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
             return
         }
         NSLog("End Current Lyrics")
+        if currentLine == lyricsArray.count - 1 {
+            lyricsXButton.enabled = true
+            saveButton.enabled = true
+        }
         let msecPosition: Int = Int(player.currentTime * 1000)
         let lrcLine: LyricsLineModel = LyricsLineModel()
         lrcLine.lyricsSentence = ""
