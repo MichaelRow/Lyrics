@@ -297,6 +297,9 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
             let fm: NSFileManager = NSFileManager.defaultManager()
             let iTunesLibrary: String = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/iTunes/iTunes Music Library.xml"
             if fm.fileExistsAtPath(iTunesLibrary) {
+                self.songTitle.stringValue = ""
+                self.artist.stringValue = ""
+                self.album.stringValue = ""
                 let data: NSData = NSData(contentsOfFile: iTunesLibrary)!
                 let parser: NSXMLParser = NSXMLParser(data: data)
                 parser.delegate = self
@@ -321,7 +324,7 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
                         self.setValue(Int(self.player.duration * 1000), forKeyPath: "self.duration")
                         self.setValue(0, forKey: "currentPosition")
                         self.updateTimeTag()
-                        self.playPause(nil)
+                        self.play()
                         (sender as! NSButton).enabled = true
                     })
                 })
@@ -335,6 +338,9 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
         openPanel.extensionHidden = false
         openPanel.beginSheetModalForWindow(self.window!) { (response) -> Void in
             if response == NSFileHandlingPanelOKButton {
+                self.songTitle.stringValue = ""
+                self.artist.stringValue = ""
+                self.album.stringValue = ""
                 self.path.URL = openPanel.URL
                 do {
                     self.player = try AVAudioPlayer(contentsOfURL: openPanel.URL!)
@@ -343,11 +349,33 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
                     return
                 }
                 NSLog("Song changed")
+                let asset = AVURLAsset(URL: self.path.URL!, options: nil)
+                asset.loadValuesAsynchronouslyForKeys(["commonMetadata"], completionHandler: { () -> Void in
+                    let metadatas: [AVMetadataItem]
+                    if openPanel.URL?.pathExtension == "mp3" {
+                        metadatas = AVMetadataItem.metadataItemsFromArray(asset.commonMetadata, withKey: nil, keySpace: AVMetadataKeySpaceID3)
+                    }
+                    else {
+                        metadatas = AVMetadataItem.metadataItemsFromArray(asset.commonMetadata, withKey: nil, keySpace: AVMetadataKeySpaceiTunes)
+                    }
+                    for md in metadatas {
+                        switch md.commonKey! {
+                        case "title":
+                            self.songTitle.stringValue = md.value as! String
+                        case "artist":
+                            self.artist.stringValue = md.value as! String
+                        case "albumName":
+                            self.album.stringValue = md.value as! String
+                        default:
+                            break
+                        }
+                    }
+                })
                 self.setValue(Int(self.player.duration * 1000), forKey: "duration")
                 self.setValue(0, forKey: "currentPosition")
                 self.player.prepareToPlay()
                 self.updateTimeTag()
-                self.playPause(nil)
+                self.play()
             }
         }
     }
