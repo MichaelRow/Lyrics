@@ -297,9 +297,6 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
             let fm: NSFileManager = NSFileManager.defaultManager()
             let iTunesLibrary: String = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/iTunes/iTunes Music Library.xml"
             if fm.fileExistsAtPath(iTunesLibrary) {
-                self.songTitle.stringValue = ""
-                self.artist.stringValue = ""
-                self.album.stringValue = ""
                 let data: NSData = NSData(contentsOfFile: iTunesLibrary)!
                 let parser: NSXMLParser = NSXMLParser(data: data)
                 parser.delegate = self
