@@ -510,8 +510,8 @@ class AppController: NSObject {
                     lrcLine.lyricsSentence = lyricsSentence
                     lrcLine.setMsecPositionWithTimeTag(str.substringWithRange(matched))
                     let currentCount: Int = lyricsArray.count
-                    var j: Int = 0
-                    for j; j<currentCount; ++j {
+                    var j: Int
+                    for j=0; j<currentCount; ++j {
                         if lrcLine.msecPosition < lyricsArray[j].msecPosition {
                             lyricsArray.insert(lrcLine, atIndex: j)
                             break
