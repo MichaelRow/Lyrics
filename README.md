@@ -55,10 +55,6 @@ Swift-based iTunes plug-in app to display lyrics on the desktop.
 * Mac OS X 10.11 (El Capitan) or above
 * Xcode 7.0 or above
 
-###How to Build
-1. You should compile the LyricsX_Helper target first
-2. Compile LyricsX or the release target (Release builds would disable NSLog all over the code)
-
 ###Third Party Library & Frameworks
 * [OpenCC](https://github.com/BYVoid/OpenCC)
 * [DBPrefsWindowController](https://github.com/kgn/DBPrefsWindowController)
