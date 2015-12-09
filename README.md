@@ -31,13 +31,21 @@ Swift-based iTunes plug-in app to display lyrics on the desktop.
 
 
 ![Statusbar]
-(http://i68.tinypic.com/spaf6o.jpg)
+(http://i65.tinypic.com/2u5x8b4.jpg)
 * Build-In LrcSeeker to search lyrics and artwork.
 
 
 ![lrcseeker]
 (http://i67.tinypic.com/14xiccp.jpg)
+* Build-In LrcMaker to make lrc by yourself
 
+
+![lrcmaker-1]
+(http://i68.tinypic.com/29o2xwj.jpg)
+
+
+![lrcmaker-2]
+(http://i64.tinypic.com/169es0z.jpg)
 * Auto launches with iTunes or user login.
 
 ###System Requirement
