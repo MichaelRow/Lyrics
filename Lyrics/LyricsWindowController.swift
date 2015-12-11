@@ -366,7 +366,6 @@ class LyricsWindowController: NSWindowController {
         }
         else {
             //two line mode
-            rollingOver = true
             backgroundLayer.speed = 0.8
             firstLyricsLayer.speed = 0.8
             secondLyricsLayer.speed = 0.8
