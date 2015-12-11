@@ -320,7 +320,7 @@ class LyricsWindowController: NSWindowController {
             backgroundLayer.transform = CATransform3DMakeRotation(CGFloat(-M_PI_2), 0, 0, 1)
             isRotated = true
         }
-        else {
+        else if (secondLyrics==nil) || (secondLyrics?.isEqualToString(""))! {
             //one line mode
             rollingOver = true
             backgroundLayer.speed = 1
@@ -351,6 +351,7 @@ class LyricsWindowController: NSWindowController {
             }
             y = heightWithDock - deltaH/2
             
+            //lyrics on left or right side
             if userDefaults.integerForKey(LyricsVerticalLyricsPosition) == 0 {
                 x = 0
             } else {
@@ -359,9 +360,93 @@ class LyricsWindowController: NSWindowController {
             
             backgroundLayer.frame = CGRectMake(x, y, frameSize.width, frameSize.height)
             firstLyricsLayer.frame = CGRectMake(0, -frameSize.height * 0.1, frameSize.width, frameSize.height * 1.1)
+            firstLyricsLayer.string=attributedStr
             backgroundLayer.transform = CATransform3DMakeRotation(CGFloat(-M_PI_2), 0, 0, 1)
             isRotated = true
-            firstLyricsLayer.string=attributedStr
+        }
+        else {
+            //two line mode
+            rollingOver = true
+            backgroundLayer.speed = 0.8
+            firstLyricsLayer.speed = 0.8
+            secondLyricsLayer.speed = 0.8
+            
+            firstLyricsLayer.hidden = false
+            secondLyricsLayer.hidden = false
+            backgroundLayer.hidden = false
+            
+            let firstAttrStr: NSMutableAttributedString = NSMutableAttributedString(string: firstLyrics as! String, attributes: attrs)
+            for var i=0; i<firstLyrics?.length; ++i {
+                if isChinese((firstLyrics?.substringWithRange(NSMakeRange(i, 1)))!) {
+                    firstAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(i, 1))
+                }
+            }
+            
+            let secondAttrStr: NSMutableAttributedString = NSMutableAttributedString(string: secondLyrics as! String, attributes: attrs)
+            for var i=0; i<secondLyrics?.length; ++i {
+                if isChinese((secondLyrics?.substringWithRange(NSMakeRange(i, 1)))!) {
+                    secondAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(i, 1))
+                }
+            }
+            var size1st:NSSize=firstAttrStr.size()
+            size1st.width=size1st.width+50
+            size1st.height=size1st.height*0.9
+            
+            var size2nd:NSSize=secondAttrStr.size()
+            size2nd.width=size2nd.width+50
+            size2nd.height=size2nd.height*0.9
+            
+            var width: CGFloat
+            var height: CGFloat
+            let x: CGFloat
+            let y: CGFloat
+            var rect1st: CGRect
+            var rect2nd: CGRect
+            let heightWithDock = visibleOrigin.y + visibleSize.height
+            
+            if size1st.width>=size2nd.width {
+                width=size1st.width
+                rect1st=CGRectMake(0, size2nd.height, size1st.width, size1st.height)
+                rect2nd=CGRectMake(0, 0, size1st.width, size2nd.height)
+            }
+            else {
+                width=size2nd.width
+                rect1st=CGRectMake(0, size2nd.height, size2nd.width, size1st.height)
+                rect2nd=CGRectMake(0, 0, size2nd.width, size2nd.height)
+            }
+            
+            height=size1st.height+size2nd.height
+            var deltaH = heightWithDock - width
+            if deltaH < 0 {
+                deltaH = 8
+            }
+            y = heightWithDock - deltaH/2
+            
+            //lyrics on left or right side
+            if userDefaults.integerForKey(LyricsVerticalLyricsPosition) == 0 {
+                x = 0
+            } else {
+                x = visibleSize.width - height
+            }
+            
+            backgroundLayer.frame = CGRectMake(x, y, width, height)
+            backgroundLayer.transform = CATransform3DMakeRotation(CGFloat(-M_PI_2), 0, 0, 1)
+            isRotated = true
+            
+            // whether needs rolling-over to show animation
+            if rollingOver {
+                firstLyricsLayer.string = firstAttrStr
+                secondLyricsLayer.string = secondAttrStr
+                firstLyricsLayer.frame = rect1st
+                secondLyricsLayer.frame = rect2nd
+                
+            } else {
+                firstLyricsLayer.string = secondAttrStr
+                secondLyricsLayer.string = firstAttrStr
+                firstLyricsLayer.frame = rect2nd
+                secondLyricsLayer.frame = rect1st
+            }
+            rollingOver = !rollingOver
         }
     }
     
