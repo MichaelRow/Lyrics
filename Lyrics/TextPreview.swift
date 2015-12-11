@@ -54,7 +54,7 @@ class TextPreview: NSView {
         
         // draw background layer
         let strRect: NSRect = NSMakeRect(strOrigin.x - 25, strOrigin.y, strSize.width + 50, strSize.height)
-        let path:NSBezierPath = NSBezierPath(roundedRect: strRect, xRadius: 20, yRadius: 20)
+        let path:NSBezierPath = NSBezierPath(roundedRect: strRect, xRadius: 12, yRadius: 12)
         backgroundColor.set()
         path.fill()
         

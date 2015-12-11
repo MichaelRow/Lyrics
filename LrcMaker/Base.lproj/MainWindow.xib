@@ -378,7 +378,7 @@ IA
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="XGW-nJ-mvd">
-                        <rect key="frame" x="610" y="1" width="15" height="248"/>
+                        <rect key="frame" x="609" y="1" width="16" height="248"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>

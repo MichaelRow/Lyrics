@@ -60,7 +60,7 @@ class LyricsWindowController: NSWindowController {
         
         backgroundLayer.anchorPoint = CGPointZero
         backgroundLayer.position = CGPointMake(0, 0)
-        backgroundLayer.cornerRadius = 20
+        backgroundLayer.cornerRadius = 12
         
         firstLyricsLayer.anchorPoint = CGPointZero
         firstLyricsLayer.position = CGPointMake(0, 0)
@@ -333,7 +333,11 @@ class LyricsWindowController: NSWindowController {
             backgroundLayer.hidden = false
             
             let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: firstLyrics as! String, attributes: attrs)
-            attributedStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(0, attributedStr.length))
+            for var i=0; i<firstLyrics?.length; ++i {
+                if isChinese((firstLyrics?.substringWithRange(NSMakeRange(i, 1)))!) {
+                    attributedStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(i, 1))
+                }
+            }
             
             let strSize:NSSize = attributedStr.size()
             let frameSize = NSMakeSize(strSize.width+50, strSize.height)
@@ -354,7 +358,7 @@ class LyricsWindowController: NSWindowController {
             }
             
             backgroundLayer.frame = CGRectMake(x, y, frameSize.width, frameSize.height)
-            firstLyricsLayer.frame = CGRectMake(0, -frameSize.height/4, frameSize.width, frameSize.height)
+            firstLyricsLayer.frame = CGRectMake(0, -frameSize.height * 0.1, frameSize.width, frameSize.height * 1.1)
             backgroundLayer.transform = CATransform3DMakeRotation(CGFloat(-M_PI_2), 0, 0, 1)
             isRotated = true
             firstLyricsLayer.string=attributedStr
@@ -379,6 +383,16 @@ class LyricsWindowController: NSWindowController {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.setScreenResolution()
             self.reflash()
+        }
+    }
+
+//Other Methods
+    private func isChinese (character: NSString) -> Bool {
+        let char: UnsafePointer<Int8> = character.UTF8String
+        if strlen(char) == 3 {
+            return true
+        } else {
+            return false
         }
     }
     
