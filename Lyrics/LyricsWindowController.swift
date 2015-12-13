@@ -538,7 +538,7 @@ class LyricsWindowController: NSWindowController {
                 }
             }
         }
-        if leftBracket != nil {
+        if leftBracket != nil && leftBracket != -1 {
             let formerPart = (firstLyrics?.substringWithRange(NSMakeRange(0, leftBracket!)))! as NSString
             let latterPart = (firstLyrics?.substringWithRange(NSMakeRange(leftBracket!, index-leftBracket!+1)))! as NSString
             if formerPart.sizeWithAttributes(attrs).width<=widthLimite && latterPart.sizeWithAttributes(attrs).width<=widthLimite {
