@@ -14,8 +14,8 @@ class LyricsView: NSView {
     var lyricsArray: [String]!
     var height: CGFloat!
     var attrs: [String:AnyObject]!
-    var highlightedCerulean: [String:AnyObject]!
-    var highlightedBlue: [String:AnyObject]!
+    var highlightedEndLine: [String:AnyObject]!
+    var highlighted: [String:AnyObject]!
     var currentHighLightedIndex: Int!
     var maxWidth: CGFloat!
     
@@ -35,15 +35,16 @@ class LyricsView: NSView {
         self.layer = CALayer()
         self.wantsLayer = true
         self.layer?.speed = 3
+        let userDefaults = NSUserDefaults.standardUserDefaults()
         
         attrs = [NSFontAttributeName : NSFont(name: "HiraginoSansGB-W3", size: 18)!]
         attrs[NSForegroundColorAttributeName] = NSColor.blackColor()
         
-        highlightedCerulean = [NSFontAttributeName : NSFont(name: "HiraginoSansGB-W6", size: 21.5)!]
-        highlightedCerulean[NSForegroundColorAttributeName] = NSColor(red: 2/255, green: 163/255, blue: 1, alpha: 1)
+        highlighted = [NSFontAttributeName : NSFont(name: "HiraginoSansGB-W6", size: 21.5)!]
+        highlighted[NSForegroundColorAttributeName] = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey("LMHighLightedColor1")!)
         
-        highlightedBlue = [NSFontAttributeName : NSFont(name: "HiraginoSansGB-W6", size: 21.5)!]
-        highlightedBlue[NSForegroundColorAttributeName] = NSColor.blueColor()
+        highlightedEndLine = [NSFontAttributeName : NSFont(name: "HiraginoSansGB-W6", size: 21.5)!]
+        highlightedEndLine[NSForegroundColorAttributeName] = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey("LMHighLightedColor2")!)
         
         lyricsLayers = [CATextLayer]()
         height = (self.frame.height - 10) / 7
@@ -98,9 +99,9 @@ class LyricsView: NSView {
         currentHighLightedIndex = index
         let attributes: [String:AnyObject]
         if style == 1 {
-            attributes = highlightedBlue
+            attributes = highlighted
         } else {
-            attributes = highlightedCerulean
+            attributes = highlightedEndLine
         }
         let attributedStr = NSAttributedString(string: lyricsArray[index], attributes: attributes)
         let w = attributedStr.size().width
