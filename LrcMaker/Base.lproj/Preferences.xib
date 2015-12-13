@@ -22,7 +22,7 @@
                 <subviews>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yaf-Bv-irC">
                         <rect key="frame" x="18" y="59" width="296" height="34"/>
-                        <buttonCell key="cell" type="check" title="Play music when set byi Tunes or Open Panel" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="IYl-VT-koE">
+                        <buttonCell key="cell" type="check" title="Play music when set by iTunes or Open Panel" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="IYl-VT-koE">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>

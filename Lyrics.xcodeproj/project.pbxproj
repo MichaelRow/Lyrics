@@ -332,6 +332,8 @@
 		76D060681C02E997000DA86C /* Lyrics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Prefix.pch"; sourceTree = "<group>"; };
 		76D060741C03221B000DA86C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/Preferences.xib"; sourceTree = "<group>"; };
 		76D060751C032220000DA86C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.xib"; sourceTree = "<group>"; };
+		76E7E06E1C1D616400C0C4F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Preferences.strings"; sourceTree = "<group>"; };
+		76E7E0701C1D616600C0C4F1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.strings"; sourceTree = "<group>"; };
 		76FE94401BFC223600A1AC27 /* TextPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPreview.swift; sourceTree = "<group>"; };
 		76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -1070,6 +1072,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				760432BC1C1D410A0077E9B4 /* Base */,
+				76E7E06E1C1D616400C0C4F1 /* zh-Hans */,
+				76E7E0701C1D616600C0C4F1 /* zh-Hant */,
 			);
 			name = Preferences.xib;
 			sourceTree = "<group>";
