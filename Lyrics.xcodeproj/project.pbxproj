@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7600121E1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7600121C1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib */; };
 		760012291BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */; };
+		760432BA1C1D40B90077E9B4 /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760432B91C1D40B90077E9B4 /* PreferencesController.swift */; };
+		760432BD1C1D410A0077E9B4 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760432BB1C1D410A0077E9B4 /* Preferences.xib */; };
 		760A01831C01A33400015C62 /* SongInfos.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A017E1C01A33400015C62 /* SongInfos.m */; };
 		760A01841C01A33400015C62 /* GeCiMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A01801C01A33400015C62 /* GeCiMe.m */; };
 		760A01851C01A33400015C62 /* TTPod.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A01821C01A33400015C62 /* TTPod.m */; };
@@ -158,6 +160,8 @@
 /* Begin PBXFileReference section */
 		7600121D1BFD9ECC00C7C1E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LyricsEditWindow.xib; sourceTree = "<group>"; };
 		760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsEditWindowController.swift; sourceTree = "<group>"; };
+		760432B91C1D40B90077E9B4 /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesController.swift; sourceTree = "<group>"; };
+		760432BC1C1D410A0077E9B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Preferences.xib; sourceTree = "<group>"; };
 		760A017D1C01A33400015C62 /* SongInfos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongInfos.h; sourceTree = "<group>"; };
 		760A017E1C01A33400015C62 /* SongInfos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongInfos.m; sourceTree = "<group>"; };
 		760A017F1C01A33400015C62 /* GeCiMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeCiMe.h; sourceTree = "<group>"; };
@@ -378,6 +382,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		760432BE1C1D41120077E9B4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7613A6CC1C17D1A200D7CB66 /* MainMenu.xib */,
+				760432BB1C1D410A0077E9B4 /* Preferences.xib */,
+				7654A1C51C17DDAC00591985 /* MainWindow.xib */,
+				7654A1CC1C17DE0800591985 /* Localizable.strings */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		760A01921C01A38C00015C62 /* QianQian */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,11 +419,9 @@
 			isa = PBXGroup;
 			children = (
 				7613A6C81C17D1A200D7CB66 /* AppDelegate.swift */,
-				7613A6CC1C17D1A200D7CB66 /* MainMenu.xib */,
-				7654A1C51C17DDAC00591985 /* MainWindow.xib */,
-				7654A1CC1C17DE0800591985 /* Localizable.strings */,
-				7613A6EE1C17D3BD00D7CB66 /* Headers */,
 				7613A6E31C17D33200D7CB66 /* Wins & Views */,
+				760432BE1C1D41120077E9B4 /* UI */,
+				7613A6EE1C17D3BD00D7CB66 /* Headers */,
 				7613A6EC1C17D37200D7CB66 /* Other */,
 				7613A6D41C17D21600D7CB66 /* AVFoundation.framework */,
 			);
@@ -419,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				7613A6DB1C17D32B00D7CB66 /* MainWindowController.swift */,
+				760432B91C1D40B90077E9B4 /* PreferencesController.swift */,
 				7613A6DC1C17D32B00D7CB66 /* LyricsView.swift */,
 				7613A6DD1C17D32B00D7CB66 /* TextView.swift */,
 				7613A6DE1C17D32B00D7CB66 /* ErrorWindow.swift */,
@@ -890,6 +904,7 @@
 				7654A1CA1C17DE0800591985 /* Localizable.strings in Resources */,
 				7613A6CE1C17D1A200D7CB66 /* MainMenu.xib in Resources */,
 				7654A1C31C17DDAC00591985 /* MainWindow.xib in Resources */,
+				760432BD1C1D410A0077E9B4 /* Preferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,6 +983,7 @@
 				7613A6E91C17D35F00D7CB66 /* Macros.swift in Sources */,
 				7613A6DF1C17D32B00D7CB66 /* MainWindowController.swift in Sources */,
 				7613A6EA1C17D35F00D7CB66 /* LyricsLineModel.swift in Sources */,
+				760432BA1C1D40B90077E9B4 /* PreferencesController.swift in Sources */,
 				7613A6E11C17D32B00D7CB66 /* TextView.swift in Sources */,
 				7613A6E01C17D32B00D7CB66 /* LyricsView.swift in Sources */,
 				7613A6C91C17D1A200D7CB66 /* AppDelegate.swift in Sources */,
@@ -1048,6 +1064,14 @@
 				7678A9F71BFF428900FE848C /* zh-Hant */,
 			);
 			name = LyricsEditWindow.xib;
+			sourceTree = "<group>";
+		};
+		760432BB1C1D410A0077E9B4 /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				760432BC1C1D410A0077E9B4 /* Base */,
+			);
+			name = Preferences.xib;
 			sourceTree = "<group>";
 		};
 		7613A6CC1C17D1A200D7CB66 /* MainMenu.xib */ = {

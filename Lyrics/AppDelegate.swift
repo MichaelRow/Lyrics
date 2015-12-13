@@ -46,7 +46,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsTextColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.whiteColor()),
             LyricsBackgroundColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor(calibratedWhite: 0, alpha: 0.5)),
             LyricsShadowColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.yellowColor()),
-            LyricsShadowRadius : NSNumber(float: 4)
+            LyricsShadowRadius : NSNumber(float: 4),
+            LyricsTwoLineModeIndex : NSNumber(integer: 0)
         ]
         
         NSUserDefaults.standardUserDefaults().registerDefaults(userDefaults)

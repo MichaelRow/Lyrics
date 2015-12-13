@@ -589,7 +589,7 @@ class AppController: NSObject {
                     var secondLyrics: NSString!
                     if currentLyrics != tempLyricsArray[index-1].lyricsSentence {
                         currentLyrics = tempLyricsArray[index-1].lyricsSentence
-                        if userDefaults.boolForKey(LyricsTwoLineMode) && index < tempLyricsArray.count {
+                        if userDefaults.boolForKey(LyricsTwoLineMode) && userDefaults.integerForKey(LyricsTwoLineModeIndex)==0 && index < tempLyricsArray.count {
                             if tempLyricsArray[index].lyricsSentence != "" {
                                 secondLyrics = tempLyricsArray[index].lyricsSentence
                             }
