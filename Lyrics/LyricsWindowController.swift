@@ -222,14 +222,14 @@ class LyricsWindowController: NSWindowController {
                     y = CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
                 }
                 // lyrics too long, show former part
-                if x < 0 {
+                if x < 4 {
                     if userDefaults.boolForKey(LyricsTwoLineMode) && userDefaults.integerForKey(LyricsTwoLineModeIndex)==1 {
-                        clipLyrics(visibleSize.width-50)
+                        clipLyrics(visibleSize.width-54)
                         isCliped = true
                         reflash()
                         return
                     } else {
-                        x = 0
+                        x = 4
                     }
                 }
                 backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height)
@@ -292,8 +292,8 @@ class LyricsWindowController: NSWindowController {
                     x = (visibleSize.width-width)/2
                     y = CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
                 }
-                if x < 0 {
-                    x = 0
+                if x < 4 {
+                    x = 4
                 }
                 height=size1st.height+size2nd.height
                 
@@ -379,14 +379,14 @@ class LyricsWindowController: NSWindowController {
             let y: CGFloat
             
             var deltaH = heightWithDock - frameSize.width
-            if deltaH < 0 {
+            if deltaH < 8 {
                 if userDefaults.boolForKey(LyricsTwoLineMode) && userDefaults.integerForKey(LyricsTwoLineModeIndex)==1 {
-                    clipLyrics(heightWithDock-50)
+                    clipLyrics(heightWithDock-54)
                     isCliped = true
                     reflash()
                     return
                 } else {
-                    deltaH = 0
+                    deltaH = 8
                 }
             }
             y = heightWithDock - deltaH/2
@@ -459,8 +459,8 @@ class LyricsWindowController: NSWindowController {
             
             height=size1st.height+size2nd.height
             var deltaH = heightWithDock - width
-            if deltaH < 0 {
-                deltaH = 0
+            if deltaH < 8 {
+                deltaH = 8
             }
             y = heightWithDock - deltaH/2
             
