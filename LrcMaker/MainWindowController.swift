@@ -321,7 +321,9 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
                         self.setValue(Int(self.player.duration * 1000), forKeyPath: "self.duration")
                         self.setValue(0, forKey: "currentPosition")
                         self.updateTimeTag()
-                        self.play()
+                        if NSUserDefaults.standardUserDefaults().boolForKey("LMPlayWhenAdded") {
+                            self.play()
+                        }
                         (sender as! NSButton).enabled = true
                     })
                 })
@@ -372,7 +374,9 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
                 self.setValue(0, forKey: "currentPosition")
                 self.player.prepareToPlay()
                 self.updateTimeTag()
-                self.play()
+                if NSUserDefaults.standardUserDefaults().boolForKey("LMPlayWhenAdded") {
+                    self.play()
+                }
             }
         }
     }
