@@ -81,6 +81,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
             font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))!
         } else {
             //applies Immediately in other prefs view
+            NSFontPanel.sharedFontPanel().orderOut(nil)
             NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = true
         }
     }
@@ -212,6 +213,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
                 displayAlert(nil)
                 return false
             } else {
+                NSFontPanel.sharedFontPanel().orderOut(nil)
                 return true
             }
         }
@@ -237,9 +239,11 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
                 }
                 if identifier != nil {
                     self.displayViewForIdentifier(identifier,animate: true)
+                    NSFontPanel.sharedFontPanel().orderOut(nil)
                     NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = true
                 } else {
                     self.window?.orderOut(nil)
+                    NSFontPanel.sharedFontPanel().orderOut(nil)
                 }
                 
             } else {
