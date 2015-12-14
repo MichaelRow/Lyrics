@@ -30,14 +30,14 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
     @IBOutlet weak var positionLabel: NSTextField!
     
     // lyrics Making
-    private var lyricsArray: [String]!
-    private var lrcLineArray: [LyricsLineModel]!
-    private var lyricsView: LyricsView!
-    private var currentLine: Int = -1
-    private var isSaved: Bool = false
+    var lyricsArray: [String]!
+    var lrcLineArray: [LyricsLineModel]!
+    var lyricsView: LyricsView!
+    var currentLine: Int = -1
+    var isSaved: Bool = false
     
-    private var currentView: Int = 1
-    private var errorWin: ErrorWindow!
+    var currentView: Int = 1
+    var errorWin: ErrorWindow!
     @IBOutlet var textView: TextView!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var box: NSBox!
@@ -575,25 +575,4 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
         currentString = currentString + string
     }
     
-    //MARK: - Window Delegate
-    func windowShouldClose(sender: AnyObject?) -> Bool {
-        if currentView == 2 {
-            if lrcLineArray.count > 0 && !isSaved {
-                let alert: NSAlert = NSAlert()
-                alert.messageText = NSLocalizedString("NOT_SAVE", comment: "")
-                alert.informativeText = NSLocalizedString("CHECK_QUITE", comment: "")
-                alert.addButtonWithTitle(NSLocalizedString("CANCEL", comment: ""))
-                alert.addButtonWithTitle(NSLocalizedString("QUIT", comment: ""))
-                alert.beginSheetModalForWindow(self.window!, completionHandler: { (response) -> Void in
-                    if response == NSAlertSecondButtonReturn {
-                        self.window?.orderOut(nil)
-                    }
-                })
-                return false
-            } else {
-                return true
-            }
-        }
-        return true
-    }
 }
