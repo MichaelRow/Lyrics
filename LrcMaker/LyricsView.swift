@@ -35,6 +35,13 @@ class LyricsView: NSView {
         self.layer = CALayer()
         self.wantsLayer = true
         self.layer?.speed = 3
+        setAttributes()
+        lyricsLayers = [CATextLayer]()
+        height = (self.frame.height - 10) / 7
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setAttributes", name: NSUserDefaultsDidChangeNotification, object: nil)
+    }
+    
+    func setAttributes() {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         attrs = [NSFontAttributeName : NSFont(name: "HiraginoSansGB-W3", size: 18)!]
@@ -45,9 +52,6 @@ class LyricsView: NSView {
         
         highlightedEndLine = [NSFontAttributeName : NSFont(name: "HiraginoSansGB-W6", size: 21.5)!]
         highlightedEndLine[NSForegroundColorAttributeName] = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey("LMHighLightedColor2")!)
-        
-        lyricsLayers = [CATextLayer]()
-        height = (self.frame.height - 10) / 7
     }
     
     override var flipped:Bool {
@@ -62,6 +66,10 @@ class LyricsView: NSView {
     
     override func becomeFirstResponder() -> Bool {
         return true
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     // Lyrics Methods
