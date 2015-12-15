@@ -17,7 +17,6 @@
                 <outlet property="revertButton" destination="lBX-iN-a5e" id="9eh-RN-Oat"/>
                 <outlet property="savingPathPopUp" destination="zr6-Uo-3Au" id="e5E-dm-H7H"/>
                 <outlet property="shadowColor" destination="0vG-ps-ld4" id="YUl-nh-JWn"/>
-                <outlet property="shadowModeCheckbox" destination="vcw-CJ-Mdz" id="7Zr-oN-yXd"/>
                 <outlet property="shadowRadius" destination="EFR-xQ-6Lz" id="MjK-rx-KHZ"/>
                 <outlet property="textColor" destination="Bkr-05-QrQ" id="Edz-dd-qeK"/>
                 <outlet property="textPreview" destination="FdQ-wS-kv6" id="0UG-0D-gZw"/>
@@ -444,13 +443,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="color" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsBackgroundColor" id="H1N-Tk-VbG">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <bool key="NSValidatesImmediately" value="YES"/>
-                                <string key="NSValueTransformerName">NSKeyedUnarchiveFromData</string>
-                            </dictionary>
-                        </binding>
+                        <action selector="fontAndColorChanged:" target="-2" id="Aa8-Ld-ic4"/>
                     </connections>
                 </colorWell>
                 <textField verticalHuggingPriority="750" id="0FF-WL-2dH">
@@ -498,13 +491,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsTextColor" id="Zac-rs-auN">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <bool key="NSValidatesImmediately" value="YES"/>
-                                <string key="NSValueTransformerName">NSKeyedUnarchiveFromData</string>
-                            </dictionary>
-                        </binding>
+                        <action selector="fontAndColorChanged:" target="-2" id="nHd-IT-9cX"/>
                     </connections>
                 </colorWell>
                 <colorWell id="0vG-ps-ld4">
@@ -512,14 +499,8 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsShadowColor" id="LoZ-2l-x2h">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <bool key="NSValidatesImmediately" value="YES"/>
-                                <string key="NSValueTransformerName">NSKeyedUnarchiveFromData</string>
-                            </dictionary>
-                        </binding>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsShadowModeEnable" id="Zau-5j-qCE">
+                        <action selector="fontAndColorChanged:" target="-2" id="3Mz-Us-i35"/>
+                        <binding destination="-2" name="enabled" keyPath="self.shadowModeEnabled" id="oh0-3C-tZd">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                             </dictionary>
@@ -536,18 +517,12 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsShadowModeEnable" id="aMJ-D0-THN">
+                        <action selector="fontAndColorChanged:" target="-2" id="wm4-2i-XMn"/>
+                        <binding destination="-2" name="enabled" keyPath="self.shadowModeEnabled" id="wzq-MN-Dgb">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                             </dictionary>
                         </binding>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsShadowRadius" id="YEb-gy-1R2">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <bool key="NSValidatesImmediately" value="YES"/>
-                            </dictionary>
-                        </binding>
-                        <outlet property="delegate" destination="-2" id="EcN-by-IEw"/>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="KjN-M2-O5n">
@@ -567,7 +542,8 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsShadowModeEnable" id="HP7-ZE-anf">
+                        <action selector="fontAndColorChanged:" target="-2" id="2Ae-Ct-PhW"/>
+                        <binding destination="-2" name="value" keyPath="self.shadowModeEnabled" id="tPt-uN-7I8">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
@@ -592,9 +568,6 @@
                     <buttonCell key="cell" type="push" title="應用" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kga-pK-E2E">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
-                        <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
                     </buttonCell>
                     <connections>
                         <action selector="applyFontAndColorChanges:" target="-2" id="tzd-Bv-ehG"/>

@@ -19,7 +19,6 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     @IBOutlet private weak var textPreview: TextPreview!
     @IBOutlet private weak var savingPathPopUp: NSPopUpButton!
     @IBOutlet private weak var fontDisplayText: NSTextField!
-    @IBOutlet private weak var shadowModeCheckbox: NSButton!
     @IBOutlet private weak var textColor: NSColorWell!
     @IBOutlet private weak var bkColor: NSColorWell!
     @IBOutlet private weak var shadowColor: NSColorWell!
@@ -27,20 +26,12 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     @IBOutlet private weak var revertButton: NSButton!
     @IBOutlet private weak var applyButton: NSButton!
     
+    var shadowModeEnabled: Bool = false
     private var hasUnsaveChange: Bool = false
-    private var flag: Bool = true
-    private var prefsChangeContext = 0
     private var font: NSFont!
     
-//MARK: - Override superclass methods
-    
-    deinit {
-        textColor.removeObserver(self, forKeyPath: "color", context: &prefsChangeContext)
-        bkColor.removeObserver(self, forKeyPath: "color", context: &prefsChangeContext)
-        shadowColor.removeObserver(self, forKeyPath: "color", context: &prefsChangeContext)
-        shadowModeCheckbox.removeObserver(self, forKeyPath: "cell.state", context: &prefsChangeContext)
-    }
-    
+//MARK: - Override
+
     override func windowDidLoad() {
         super.windowDidLoad()
         self.window?.delegate = self
@@ -53,37 +44,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         savingPathPopUp.itemAtIndex(1)?.toolTip = userSavingPath as String
         savingPathPopUp.itemAtIndex(1)?.title = userSavingPath.lastPathComponent
         
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))!
-        fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
-        textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: Bool(shadowModeCheckbox.state), shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
-        
-        //observe the font and color changes for preview
-        textColor.addObserver(self, forKeyPath: "color", options: [], context: &prefsChangeContext)
-        bkColor.addObserver(self, forKeyPath: "color", options: [], context: &prefsChangeContext)
-        shadowColor.addObserver(self, forKeyPath: "color", options: [], context: &prefsChangeContext)
-        shadowModeCheckbox.addObserver(self, forKeyPath: "cell.state", options: [], context: &prefsChangeContext)
-    }
-    
-    override func displayViewForIdentifier(identifier: String, animate: Bool) {
-        
-        //check if changes are unsaved
-        if hasUnsaveChange && self.window?.title == NSLocalizedString("FONT_COLOR", comment: "") {
-            displayAlert(identifier)
-            return
-        }
-        
-        super.displayViewForIdentifier(identifier, animate: animate)
-        
-        if self.window?.title == NSLocalizedString("FONT_COLOR", comment: "") {
-            NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = false
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))!
-        } else {
-            //applies Immediately in other prefs view
-            NSFontPanel.sharedFontPanel().orderOut(nil)
-            NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = true
-        }
+        reflashFontAndColorPrefs()
     }
     
     override func setupToolbar () {
@@ -94,6 +55,22 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         self.addView(donateView, label: NSLocalizedString("DONATE", comment: ""), image: NSImage(named: "donate_icon"))
         self.crossFade=true
         self.shiftSlowsAnimation=true
+    }
+    
+    override func displayViewForIdentifier(identifier: String, animate: Bool) {
+        //check if changes are unsaved
+        let fontAndColorID: String = NSLocalizedString("FONT_COLOR", comment: "")
+        if self.window?.title == fontAndColorID {
+            if identifier != fontAndColorID {
+                if hasUnsaveChange {
+                    displayAlert(identifier)
+                    return
+                } else {
+                    NSFontPanel.sharedFontPanel().orderOut(nil)
+                }
+            }
+        }
+        super.displayViewForIdentifier(identifier, animate: animate)
     }
     
 // MARK: - General Prefs
@@ -134,38 +111,52 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     
 // MARK: - Font and Color Prefs
     
+    func reflashFontAndColorPrefs () {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))!
+        fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
+        
+        self.setValue(userDefaults.boolForKey(LyricsShadowModeEnable), forKey: "shadowModeEnabled")
+        textColor.color = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsTextColor)!)! as! NSColor
+        bkColor.color = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsBackgroundColor)!)! as! NSColor
+        shadowColor.color = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsShadowColor)!)! as! NSColor
+        shadowRadius.floatValue = userDefaults.floatForKey(LyricsShadowRadius)
+        textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
+    }
+    
+    @IBAction func fontAndColorChanged(sender: AnyObject?) {
+        revertButton.enabled = true
+        applyButton.enabled = true
+        hasUnsaveChange = true
+        textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
+    }
+    
     @IBAction func applyFontAndColorChanges(sender: AnyObject?) {
-        NSUserDefaultsController.sharedUserDefaultsController().save(nil)
         hasUnsaveChange = false
         revertButton.enabled = false
         applyButton.enabled = false
         let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setObject(font.fontName, forKey: LyricsFontName)
-        userDefaults.setObject(NSNumber(float: Float(font.pointSize)), forKey: LyricsFontSize)
+        userDefaults.setFloat(Float(font.pointSize), forKey: LyricsFontSize)
+        userDefaults.setFloat(shadowRadius.floatValue, forKey: LyricsShadowRadius)
+        userDefaults.setBool(shadowModeEnabled, forKey: LyricsShadowModeEnable)
+        userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(textColor.color), forKey: LyricsTextColor)
+        userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(bkColor.color), forKey: LyricsBackgroundColor)
+        userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(shadowColor.color), forKey: LyricsShadowColor)
         NSNotificationCenter.defaultCenter().postNotificationName(LyricsAttributesChangedNotification, object: nil)
     }
     
     @IBAction func revertFontAndColorChanges(sender: AnyObject?) {
-        flag = false
-        NSUserDefaultsController.sharedUserDefaultsController().revert(nil)
         hasUnsaveChange = false
         revertButton.enabled = false
         applyButton.enabled = false
-        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))
-        fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
-        textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: Bool(shadowModeCheckbox.state), shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
+        reflashFontAndColorPrefs()
     }
     
     override func changeFont(sender: AnyObject?) {
         font = (sender?.convertFont(font))!
         fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
-        if !hasUnsaveChange {
-            revertButton.enabled = true
-            applyButton.enabled = true
-        }
-        hasUnsaveChange = true
-        textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: Bool(shadowModeCheckbox.state), shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
+        fontAndColorChanged(nil)
     }
     
     override func validModesForFontPanel(fontPanel: NSFontPanel) -> Int {
@@ -181,32 +172,8 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         fontPanel.delegate = self
     }
     
-// MARK: - KVO and Delegate
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if context == &prefsChangeContext {
-            if flag {
-                if !hasUnsaveChange {
-                    revertButton.enabled = true
-                    applyButton.enabled = true
-                }
-                hasUnsaveChange = true
-            } else {
-                flag = true
-            }
-            textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: Bool(shadowModeCheckbox.state), shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
-        }
-    }
-    
-    override func controlTextDidChange(obj: NSNotification) {
-        if !hasUnsaveChange {
-            revertButton.enabled = true
-            applyButton.enabled = true
-        }
-        hasUnsaveChange = true
-        textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: Bool(shadowModeCheckbox.state), shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
-    }
-    
+// MARK: - Delegate
+
     func windowShouldClose(sender: AnyObject) -> Bool {
         if (sender as! NSWindow).title == NSLocalizedString("FONT_COLOR", comment: "") {
             if hasUnsaveChange {
@@ -222,8 +189,8 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     
 // MARK: - Alert
     
-    // identifier nil means window is about to close
     func displayAlert(identifier: String!) {
+        // identifier nil means window is about to close
         let alert: NSAlert = NSAlert()
         alert.messageText = NSLocalizedString("CHANGE_UNSAVED", comment: "")
         alert.informativeText = NSLocalizedString("DISGARDS_LEAVE", comment: "")
@@ -238,15 +205,14 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
                     self.revertFontAndColorChanges(nil)
                 }
                 if identifier != nil {
+                    NSFontPanel.sharedFontPanel().orderOut(nil)
                     self.displayViewForIdentifier(identifier,animate: true)
-                    NSFontPanel.sharedFontPanel().orderOut(nil)
-                    NSUserDefaultsController.sharedUserDefaultsController().appliesImmediately = true
                 } else {
-                    self.window?.orderOut(nil)
                     NSFontPanel.sharedFontPanel().orderOut(nil)
+                    self.window?.orderOut(nil)
                 }
-                
-            } else {
+            }
+            else {
                 self.window?.toolbar?.selectedItemIdentifier = NSLocalizedString("FONT_COLOR", comment: "")
             }
         })
