@@ -515,7 +515,6 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <action selector="fontAndColorChanged:" target="-2" id="1gO-LF-NdQ"/>
                         <binding destination="-2" name="enabled" keyPath="self.shadowModeEnabled" id="1VB-4Y-69T">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -527,6 +526,8 @@
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
                         </binding>
+                        <outlet property="delegate" destination="-2" id="XCb-k1-BGy"/>
+                        <outlet property="nextKeyView" destination="FO5-IL-3M4" id="vC9-Eo-aU2"/>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="KjN-M2-O5n">
@@ -589,27 +590,28 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="RpM-Je-dx2">
                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="6he-f7-gwb">
-                            <real key="minimum" value="-30"/>
-                            <real key="maximum" value="30"/>
+                            <real key="minimum" value="-50"/>
+                            <real key="maximum" value="50"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <action selector="fontAndColorChanged:" target="-2" id="Ub4-ym-KbY"/>
                         <binding destination="-2" name="value" keyPath="self.bgHeightIncreasement" id="gOe-zd-QWG">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
                         </binding>
+                        <outlet property="delegate" destination="-2" id="xgI-70-c0O"/>
+                        <outlet property="nextKeyView" destination="Eq5-mo-x2w" id="oKi-YH-LjP"/>
                     </connections>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="XcW-ke-lSB">
                     <rect key="frame" x="182" y="146" width="19" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="-30" maxValue="30" id="zfN-nc-FzY"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="-50" maxValue="50" id="zfN-nc-FzY"/>
                     <connections>
                         <action selector="fontAndColorChanged:" target="-2" id="hhc-va-qWW"/>
                         <binding destination="-2" name="value" keyPath="self.bgHeightIncreasement" id="hVr-0q-zjo"/>
@@ -629,27 +631,28 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="9kx-fp-SXs">
                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="VYD-XU-1SU">
-                            <real key="minimum" value="-30"/>
-                            <real key="maximum" value="30"/>
+                            <real key="minimum" value="-50"/>
+                            <real key="maximum" value="50"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <action selector="fontAndColorChanged:" target="-2" id="ytj-LQ-5ta"/>
                         <binding destination="-2" name="value" keyPath="self.lyricsYOffset" id="E6a-5D-rJK">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
                         </binding>
+                        <outlet property="delegate" destination="-2" id="Su6-Ik-iti"/>
+                        <outlet property="nextKeyView" destination="EFR-xQ-6Lz" id="G8m-F5-Qlc"/>
                     </connections>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="E7Q-WP-bse">
                     <rect key="frame" x="369" y="146" width="19" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="-30" maxValue="30" id="Cwo-Ja-KNS"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="-50" maxValue="50" id="Cwo-Ja-KNS"/>
                     <connections>
                         <action selector="fontAndColorChanged:" target="-2" id="as5-pM-LHN"/>
                         <binding destination="-2" name="value" keyPath="self.lyricsYOffset" id="bzq-AW-tnD">

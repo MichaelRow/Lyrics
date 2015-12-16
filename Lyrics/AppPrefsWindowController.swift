@@ -30,7 +30,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     var bgHeightIncreasement: Float = 0
     var lyricsYOffset: Float = 0
     
-    private var hasUnsaveChange: Bool = false
+    private var hasUnsavedChange: Bool = false
     private var font: NSFont!
     
 //MARK: - Override
@@ -38,7 +38,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
         self.window?.delegate = self
-        hasUnsaveChange = false
+        hasUnsavedChange = false
         
         //Pop up button and font is hard to bind to NSUserDefaultsController, do it selves
         let defaultSavingPath: String = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
@@ -65,7 +65,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         let fontAndColorID: String = NSLocalizedString("FONT_COLOR", comment: "")
         if self.window?.title == fontAndColorID {
             if identifier != fontAndColorID {
-                if hasUnsaveChange {
+                if hasUnsavedChange {
                     displayAlert(identifier)
                     return
                 } else {
@@ -130,14 +130,16 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     @IBAction func fontAndColorChanged(sender: AnyObject?) {
-        revertButton.enabled = true
-        applyButton.enabled = true
-        hasUnsaveChange = true
+        if !hasUnsavedChange {
+            revertButton.enabled = true
+            applyButton.enabled = true
+        }
+        hasUnsavedChange = true
         textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, heightInrc:bgHeightIncreasement, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: shadowRadius, yOffset:lyricsYOffset)
     }
     
     @IBAction func applyFontAndColorChanges(sender: AnyObject?) {
-        hasUnsaveChange = false
+        hasUnsavedChange = false
         revertButton.enabled = false
         applyButton.enabled = false
         let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -154,7 +156,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     @IBAction func revertFontAndColorChanges(sender: AnyObject?) {
-        hasUnsaveChange = false
+        hasUnsavedChange = false
         revertButton.enabled = false
         applyButton.enabled = false
         reflashFontAndColorPrefs()
@@ -183,7 +185,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
 
     func windowShouldClose(sender: AnyObject) -> Bool {
         if (sender as! NSWindow).title == NSLocalizedString("FONT_COLOR", comment: "") {
-            if hasUnsaveChange {
+            if hasUnsavedChange {
                 displayAlert(nil)
                 return false
             } else {
@@ -192,6 +194,10 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
             }
         }
         return true
+    }
+    
+    override func controlTextDidChange(obj: NSNotification) {
+        fontAndColorChanged(nil)
     }
     
 // MARK: - Alert
