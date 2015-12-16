@@ -8,7 +8,6 @@
 
 import Cocoa
 import AVFoundation
-import QuartzCore
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSXMLParserDelegate {

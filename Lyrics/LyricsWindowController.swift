@@ -15,6 +15,8 @@
 /************************ IMPORTANT ************************/
 
 import Cocoa
+import QuartzCore
+import CoreGraphics
 
 class LyricsWindowController: NSWindowController {
     
@@ -241,7 +243,7 @@ class LyricsWindowController: NSWindowController {
                 y = CGFloat(userDefaults.integerForKey(LyricsConstToBottom))
                 
                 backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height)
-                firstLyricsLayer.frame=CGRectMake(0, (frameSize.height-strSize.height)/2, frameSize.width, strSize.height)
+                firstLyricsLayer.frame=CGRectMake(0, 0, frameSize.width, strSize.height)
             }
             
             firstLyricsLayer.string=firstLyrics
