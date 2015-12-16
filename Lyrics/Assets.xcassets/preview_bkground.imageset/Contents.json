@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "preview_bkground.png",
+      "filename" : "lyrics_preview_bk.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "preview_bkground@x2.png",
+      "filename" : "lyrics_preview_bk@x2.png",
       "scale" : "2x"
     },
     {

@@ -15,6 +15,8 @@ class TextPreview: NSView {
     private var image: NSImage
     private var bkLayer: CALayer!
     private var textLayer: CATextLayer!
+    private var textYOffset: CGFloat!
+    private var bgHeightIncreasement: CGFloat!
     private let stringValue: String = NSLocalizedString("PREVIEW_TEXT", comment: "")
 
     required init?(coder: NSCoder) {
@@ -69,33 +71,36 @@ class TextPreview: NSView {
         }
     }
     
-    func setAttributs(font:NSFont, textColor:NSColor, bkColor:NSColor, enableShadow:Bool, shadowColor:NSColor, shadowRadius:CGFloat) {
+    func setAttributs(font:NSFont, textColor:NSColor, bkColor:NSColor, heightInrc:Float, enableShadow:Bool, shadowColor:NSColor, shadowRadius:Float, yOffset:Float) {
         backgroundColor = bkColor
         attributes.removeAll()
         attributes[NSForegroundColorAttributeName] = textColor
         attributes[NSFontAttributeName] = font
+        bgHeightIncreasement = CGFloat(heightInrc)
+        textYOffset = CGFloat(yOffset)
         if enableShadow {
             textLayer.shadowColor = shadowColor.CGColor
-            textLayer.shadowRadius = shadowRadius
+            textLayer.shadowRadius = CGFloat(shadowRadius)
             textLayer.shadowOffset = NSZeroSize
             textLayer.shadowOpacity = 1
         } else {
             textLayer.shadowOpacity = 0
         }
-        drawString()
+        drawContents()
     }
     
-    func drawString() {
+    func drawContents() {
         let viewSize = self.bounds.size
         let attrString: NSAttributedString = NSAttributedString(string: stringValue, attributes: attributes)
         var strSize: NSSize = attrString.size()
         strSize.width += 50
+        strSize.height += bgHeightIncreasement
         let strOrigin: NSPoint = NSMakePoint((viewSize.width-strSize.width)/2, (viewSize.height-strSize.height)/2)
         bkLayer.backgroundColor = backgroundColor.CGColor
         bkLayer.frame.size = strSize
         bkLayer.frame.origin = strOrigin
         
-        textLayer.frame.size = strSize
+        textLayer.frame = NSMakeRect(0, textYOffset, strSize.width, strSize.height)
         textLayer.string = attrString
     }
     

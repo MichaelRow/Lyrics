@@ -22,11 +22,14 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     @IBOutlet private weak var textColor: NSColorWell!
     @IBOutlet private weak var bkColor: NSColorWell!
     @IBOutlet private weak var shadowColor: NSColorWell!
-    @IBOutlet private weak var shadowRadius: NSTextField!
     @IBOutlet private weak var revertButton: NSButton!
     @IBOutlet private weak var applyButton: NSButton!
     
     var shadowModeEnabled: Bool = false
+    var shadowRadius: Float = 0
+    var bgHeightIncreasement: Float = 0
+    var lyricsYOffset: Float = 0
+    
     private var hasUnsaveChange: Bool = false
     private var font: NSFont!
     
@@ -117,18 +120,20 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
         
         self.setValue(userDefaults.boolForKey(LyricsShadowModeEnable), forKey: "shadowModeEnabled")
+        self.setValue(userDefaults.floatForKey(LyricsShadowRadius), forKey: "shadowRadius")
+        self.setValue(userDefaults.floatForKey(LyricsBgHeightINCR), forKey: "bgHeightIncreasement")
+        self.setValue(userDefaults.floatForKey(LyricsYOffset), forKey: "lyricsYOffset")
         textColor.color = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsTextColor)!)! as! NSColor
         bkColor.color = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsBackgroundColor)!)! as! NSColor
         shadowColor.color = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsShadowColor)!)! as! NSColor
-        shadowRadius.floatValue = userDefaults.floatForKey(LyricsShadowRadius)
-        textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
+        textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, heightInrc:bgHeightIncreasement, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: shadowRadius, yOffset:lyricsYOffset)
     }
     
     @IBAction func fontAndColorChanged(sender: AnyObject?) {
         revertButton.enabled = true
         applyButton.enabled = true
         hasUnsaveChange = true
-        textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: CGFloat(shadowRadius.floatValue))
+        textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, heightInrc:bgHeightIncreasement, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: shadowRadius, yOffset:lyricsYOffset)
     }
     
     @IBAction func applyFontAndColorChanges(sender: AnyObject?) {
@@ -138,7 +143,9 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setObject(font.fontName, forKey: LyricsFontName)
         userDefaults.setFloat(Float(font.pointSize), forKey: LyricsFontSize)
-        userDefaults.setFloat(shadowRadius.floatValue, forKey: LyricsShadowRadius)
+        userDefaults.setFloat(shadowRadius, forKey: LyricsShadowRadius)
+        userDefaults.setFloat(bgHeightIncreasement, forKey: LyricsBgHeightINCR)
+        userDefaults.setFloat(lyricsYOffset, forKey: LyricsYOffset)
         userDefaults.setBool(shadowModeEnabled, forKey: LyricsShadowModeEnable)
         userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(textColor.color), forKey: LyricsTextColor)
         userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(bkColor.color), forKey: LyricsBackgroundColor)

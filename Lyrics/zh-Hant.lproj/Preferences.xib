@@ -17,7 +17,6 @@
                 <outlet property="revertButton" destination="lBX-iN-a5e" id="9eh-RN-Oat"/>
                 <outlet property="savingPathPopUp" destination="zr6-Uo-3Au" id="e5E-dm-H7H"/>
                 <outlet property="shadowColor" destination="0vG-ps-ld4" id="YUl-nh-JWn"/>
-                <outlet property="shadowRadius" destination="EFR-xQ-6Lz" id="MjK-rx-KHZ"/>
                 <outlet property="textColor" destination="Bkr-05-QrQ" id="Edz-dd-qeK"/>
                 <outlet property="textPreview" destination="FdQ-wS-kv6" id="0UG-0D-gZw"/>
             </connections>
@@ -426,11 +425,11 @@
             <point key="canvasLocation" x="-1106" y="224"/>
         </customView>
         <customView id="57y-D4-ovD" userLabel="Lyrics Prefs View">
-            <rect key="frame" x="0.0" y="0.0" width="368" height="275"/>
+            <rect key="frame" x="0.0" y="0.0" width="408" height="308"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="mRZ-GY-6eW">
-                    <rect key="frame" x="182" y="178" width="73" height="17"/>
+                    <rect key="frame" x="204" y="211" width="73" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="背景顏色:" id="ppy-d0-8h2">
                         <font key="font" metaFont="system"/>
@@ -439,7 +438,7 @@
                     </textFieldCell>
                 </textField>
                 <colorWell id="EW0-Bd-p9N">
-                    <rect key="frame" x="260" y="175" width="52" height="23"/>
+                    <rect key="frame" x="298" y="208" width="52" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="color" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
@@ -447,7 +446,7 @@
                     </connections>
                 </colorWell>
                 <textField verticalHuggingPriority="750" id="0FF-WL-2dH">
-                    <rect key="frame" x="69" y="233" width="198" height="22"/>
+                    <rect key="frame" x="71" y="266" width="198" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="DHh-rI-WhT">
                         <font key="font" metaFont="system"/>
@@ -456,11 +455,11 @@
                     </textFieldCell>
                 </textField>
                 <customView id="FdQ-wS-kv6" userLabel="Font Preview" customClass="TextPreview" customModule="LyricsX" customModuleProvider="target">
-                    <rect key="frame" x="20" y="43" width="328" height="90"/>
+                    <rect key="frame" x="20" y="43" width="368" height="90"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="eTF-XY-b6N">
-                    <rect key="frame" x="18" y="233" width="35" height="17"/>
+                    <rect key="frame" x="20" y="266" width="35" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="字型:" id="zh2-zj-mcJ">
                         <font key="font" metaFont="system"/>
@@ -469,7 +468,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="eib-Ly-6Tm">
-                    <rect key="frame" x="18" y="175" width="70" height="17"/>
+                    <rect key="frame" x="20" y="208" width="70" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="文字顏色:" id="dzy-7B-rAj">
                         <font key="font" metaFont="system"/>
@@ -478,7 +477,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="FJt-iV-yN3">
-                    <rect key="frame" x="18" y="146" width="93" height="17"/>
+                    <rect key="frame" x="20" y="179" width="76" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="陰影顏色:" id="R4p-PL-Qsu">
                         <font key="font" metaFont="system"/>
@@ -487,7 +486,7 @@
                     </textFieldCell>
                 </textField>
                 <colorWell id="Bkr-05-QrQ">
-                    <rect key="frame" x="94" y="175" width="52" height="23"/>
+                    <rect key="frame" x="120" y="208" width="52" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
@@ -495,7 +494,7 @@
                     </connections>
                 </colorWell>
                 <colorWell id="0vG-ps-ld4">
-                    <rect key="frame" x="94" y="144" width="52" height="23"/>
+                    <rect key="frame" x="120" y="177" width="52" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
@@ -508,10 +507,13 @@
                     </connections>
                 </colorWell>
                 <textField verticalHuggingPriority="750" id="EFR-xQ-6Lz">
-                    <rect key="frame" x="260" y="144" width="52" height="22"/>
+                    <rect key="frame" x="298" y="177" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="3" drawsBackground="YES" id="0Fz-Vv-mno">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Ufw-dI-E9n"/>
+                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Ufw-dI-E9n">
+                            <real key="minimum" value="0.0"/>
+                            <real key="maximum" value="10"/>
+                        </numberFormatter>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -523,10 +525,16 @@
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                             </dictionary>
                         </binding>
+                        <binding destination="-2" name="value" keyPath="self.shadowRadius" id="yM8-ZJ-dQg">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="KjN-M2-O5n">
-                    <rect key="frame" x="182" y="146" width="73" height="17"/>
+                    <rect key="frame" x="204" y="179" width="73" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="陰影半徑:" id="q3A-xR-kMb">
                         <font key="font" metaFont="system"/>
@@ -535,7 +543,7 @@
                     </textFieldCell>
                 </textField>
                 <button id="vcw-CJ-Mdz">
-                    <rect key="frame" x="18" y="204" width="140" height="18"/>
+                    <rect key="frame" x="20" y="237" width="140" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="使用文字陰影效果" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pmn-h8-cK0">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -552,7 +560,7 @@
                     </connections>
                 </button>
                 <button id="DDA-IL-DE4">
-                    <rect key="frame" x="289" y="233" width="24" height="24"/>
+                    <rect key="frame" x="290" y="266" width="24" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Font_icon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="8Uo-Cn-lYP">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -563,7 +571,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="2MS-Zm-Upl">
-                    <rect key="frame" x="284" y="7" width="70" height="32"/>
+                    <rect key="frame" x="324" y="7" width="70" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="應用" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kga-pK-E2E">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -574,7 +582,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="lBX-iN-a5e">
-                    <rect key="frame" x="208" y="7" width="70" height="32"/>
+                    <rect key="frame" x="248" y="7" width="70" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="還原" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wNt-Qo-6us">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -587,8 +595,107 @@ Gw
                         <action selector="revertFontAndColorChanges:" target="-2" id="iPg-C1-x77"/>
                     </connections>
                 </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="bDF-Gl-g8a">
+                    <rect key="frame" x="20" y="148" width="86" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="矩形背景加高:" id="307-n4-aWK">
+                        <font key="font" size="13" name=".PingFangSC-Regular"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" id="kqf-i0-Qo3">
+                    <rect key="frame" x="120" y="146" width="52" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="837-N0-rnn">
+                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="QWl-YL-x7e">
+                            <real key="minimum" value="-30"/>
+                            <real key="maximum" value="30"/>
+                        </numberFormatter>
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <action selector="fontAndColorChanged:" target="-2" id="fYJ-8n-i7V"/>
+                        <binding destination="-2" name="value" keyPath="self.bgHeightIncreasement" id="QSD-Oa-h6r">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </textField>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="lro-Rl-h8n">
+                    <rect key="frame" x="175" y="144" width="19" height="27"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="-30" maxValue="30" id="3RV-CF-ff6"/>
+                    <connections>
+                        <action selector="fontAndColorChanged:" target="-2" id="SdD-xW-QsR"/>
+                        <binding destination="-2" name="value" keyPath="self.bgHeightIncreasement" id="rBC-T7-Ua7"/>
+                    </connections>
+                </stepper>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="d0z-d3-hYU">
+                    <rect key="frame" x="204" y="148" width="82" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="歌詞Y軸偏移:" id="I3L-s8-Gna">
+                        <font key="font" size="13" name=".PingFangSC-Regular"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" id="65k-c5-cSx">
+                    <rect key="frame" x="298" y="146" width="52" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="nVq-Rc-HkF">
+                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="djW-JP-UOz">
+                            <real key="minimum" value="-30"/>
+                            <real key="maximum" value="30"/>
+                        </numberFormatter>
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <action selector="fontAndColorChanged:" target="-2" id="lnb-f1-Y1I"/>
+                        <binding destination="-2" name="value" keyPath="self.lyricsYOffset" id="eZf-7d-qVx">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </textField>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="JD5-Iv-Qz8">
+                    <rect key="frame" x="353" y="144" width="19" height="27"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="-30" maxValue="30" id="edd-wH-4es"/>
+                    <connections>
+                        <action selector="fontAndColorChanged:" target="-2" id="ODm-lk-vlY"/>
+                        <binding destination="-2" name="value" keyPath="self.lyricsYOffset" id="WUW-1E-lpw">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </stepper>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="Aw3-kk-2Sd">
+                    <rect key="frame" x="353" y="174" width="19" height="27"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" increment="0.5" maxValue="10" id="dI7-FK-8Tc"/>
+                    <connections>
+                        <action selector="fontAndColorChanged:" target="-2" id="kpy-Ow-PG6"/>
+                        <binding destination="-2" name="value" keyPath="self.shadowRadius" id="E6D-o3-xuV">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </stepper>
             </subviews>
-            <point key="canvasLocation" x="-195" y="233.5"/>
+            <point key="canvasLocation" x="-210" y="245"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="UKb-ML-D6F"/>
         <customView id="162-Ff-cWD" userLabel="Donate View">
