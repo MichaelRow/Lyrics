@@ -208,6 +208,10 @@
         [[self window] setInitialFirstResponder:newView];
 
         if(animate && [self crossFade]){
+            NSMutableDictionary *info = [NSMutableDictionary dictionary];
+            [info setObject:self.window.title forKey:@"OldViewName"];
+            [info setObject:identifier forKey:@"NewViewName"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PrefsViewChanged" object:nil userInfo:info];
             [self crossFadeView:oldView withView:newView];
         }else{
             [oldView removeFromSuperviewWithoutNeedingDisplay];

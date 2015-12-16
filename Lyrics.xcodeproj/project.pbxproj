@@ -31,6 +31,7 @@
 		7613A6E91C17D35F00D7CB66 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E51C17D35F00D7CB66 /* Macros.swift */; };
 		7613A6EA1C17D35F00D7CB66 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E61C17D35F00D7CB66 /* LyricsLineModel.swift */; };
 		7613A6EB1C17D35F00D7CB66 /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E81C17D35F00D7CB66 /* iTunesBridge.m */; };
+		7633A2FF1C202F9500D58360 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7633A2FE1C202F9500D58360 /* CoreGraphics.framework */; };
 		7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */; };
 		7642B9041BF4709300D68FE9 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7642B9021BF4709300D68FE9 /* StatusMenu.xib */; };
 		764334931BF95ECF00C4B740 /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 764334921BF95ECF00C4B740 /* iTunesBridge.m */; };
@@ -192,6 +193,7 @@
 		7613A6E71C17D35F00D7CB66 /* iTunesBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridge.h; sourceTree = "<group>"; };
 		7613A6E81C17D35F00D7CB66 /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
 		7613A6ED1C17D3B800D7CB66 /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
+		7633A2FE1C202F9500D58360 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsLineModel.swift; sourceTree = "<group>"; };
 		7642B9031BF4709300D68FE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusMenu.xib; sourceTree = "<group>"; };
 		7642B9061BF488AB00D68FE9 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7633A2FF1C202F9500D58360 /* CoreGraphics.framework in Frameworks */,
 				76D0605E1C02B930000DA86C /* ServiceManagement.framework in Frameworks */,
 				768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */,
 				76FF43791BEF9BAB00D2B14F /* QuartzCore.framework in Frameworks */,
@@ -521,6 +524,7 @@
 				768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */,
 				768BCB1F1BF1C62000D6F5EB /* libopencc.2.dylib */,
 				768BCB201BF1C62000D6F5EB /* libopencc.dylib */,
+				7633A2FE1C202F9500D58360 /* CoreGraphics.framework */,
 				76D0605D1C02B930000DA86C /* ServiceManagement.framework */,
 				768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */,
 				76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */,
