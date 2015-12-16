@@ -54,7 +54,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         self.addFlexibleSpacer()
         self.addView(donateView, label: NSLocalizedString("DONATE", comment: ""), image: NSImage(named: "donate_icon"))
         self.crossFade=true
-        self.shiftSlowsAnimation=true
+        self.shiftSlowsAnimation=false
     }
     
     override func displayViewForIdentifier(identifier: String, animate: Bool) {
