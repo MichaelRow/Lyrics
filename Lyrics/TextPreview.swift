@@ -17,6 +17,7 @@ class TextPreview: NSView {
     private var textLayer: CATextLayer!
     private var textYOffset: CGFloat!
     private var bgHeightIncreasement: CGFloat!
+    private var lyricsHeightIncreasement: CGFloat!
     private let stringValue: String = NSLocalizedString("PREVIEW_TEXT", comment: "")
 
     required init?(coder: NSCoder) {
@@ -77,6 +78,11 @@ class TextPreview: NSView {
         attributes[NSForegroundColorAttributeName] = textColor
         attributes[NSFontAttributeName] = font
         bgHeightIncreasement = CGFloat(heightInrc)
+        if bgHeightIncreasement < 0 {
+            lyricsHeightIncreasement = 0
+        } else {
+            lyricsHeightIncreasement = bgHeightIncreasement
+        }
         textYOffset = CGFloat(yOffset)
         if enableShadow {
             textLayer.shadowColor = shadowColor.CGColor
@@ -94,13 +100,11 @@ class TextPreview: NSView {
         let attrString: NSAttributedString = NSAttributedString(string: stringValue, attributes: attributes)
         var strSize: NSSize = attrString.size()
         strSize.width += 50
-        strSize.height += bgHeightIncreasement
-        let strOrigin: NSPoint = NSMakePoint((viewSize.width-strSize.width)/2, (viewSize.height-strSize.height)/2)
         bkLayer.backgroundColor = backgroundColor.CGColor
-        bkLayer.frame.size = strSize
-        bkLayer.frame.origin = strOrigin
+        bkLayer.frame.size = NSMakeSize(strSize.width, strSize.height+bgHeightIncreasement)
+        bkLayer.frame.origin = NSMakePoint((viewSize.width-strSize.width)/2, (viewSize.height-strSize.height)/2)
         
-        textLayer.frame = NSMakeRect(0, textYOffset, strSize.width, strSize.height)
+        textLayer.frame = NSMakeRect(0, textYOffset, strSize.width, strSize.height+lyricsHeightIncreasement)
         textLayer.string = attrString
     }
     

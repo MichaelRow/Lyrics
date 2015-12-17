@@ -31,7 +31,8 @@ class LyricsWindowController: NSWindowController {
     private var visibleSize: NSSize!
     private var visibleOrigin: NSPoint!
     private var yOffset: CGFloat!
-    private var heightIncreasement: CGFloat!
+    private var bgHeightIncreasement: CGFloat!
+    private var lyricsHeightIncreasement: CGFloat!
     private var userDefaults: NSUserDefaults!
     private var rollingOver: Bool = true
     private var isRotated: Bool = false
@@ -102,7 +103,12 @@ class LyricsWindowController: NSWindowController {
         let font:NSFont = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: textSize)!
         
         yOffset = CGFloat(userDefaults.floatForKey(LyricsYOffset))
-        heightIncreasement = CGFloat(userDefaults.floatForKey(LyricsBgHeightINCR))
+        bgHeightIncreasement = CGFloat(userDefaults.floatForKey(LyricsBgHeightINCR))
+        if bgHeightIncreasement < 0 {
+            lyricsHeightIncreasement = 0
+        } else {
+            lyricsHeightIncreasement = bgHeightIncreasement
+        }
         attrs=[NSFontAttributeName:font]
         attrs[NSForegroundColorAttributeName] = textColor
         
@@ -237,8 +243,8 @@ class LyricsWindowController: NSWindowController {
                         x = 4
                     }
                 }
-                backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height+heightIncreasement)
-                firstLyricsLayer.frame=CGRectMake(0, yOffset, frameSize.width, frameSize.height+heightIncreasement)
+                backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height+bgHeightIncreasement)
+                firstLyricsLayer.frame=CGRectMake(0, yOffset, frameSize.width, frameSize.height+lyricsHeightIncreasement)
             }
             else {
                 let frameSize = NSMakeSize(CGFloat(userDefaults.integerForKey(LyricsConstWidth)), CGFloat(userDefaults.integerForKey(LyricsConstHeight)))
@@ -280,13 +286,13 @@ class LyricsWindowController: NSWindowController {
             
             if size1st.width>=size2nd.width {
                 width=size1st.width
-                rect1st=CGRectMake(0, size2nd.height+yOffset, size1st.width, size1st.height+heightIncreasement)
-                rect2nd=CGRectMake(0, yOffset, size1st.width, size2nd.height+heightIncreasement)
+                rect1st=CGRectMake(0, size2nd.height+yOffset, size1st.width, size1st.height+lyricsHeightIncreasement)
+                rect2nd=CGRectMake(0, yOffset, size1st.width, size2nd.height+lyricsHeightIncreasement)
             }
             else {
                 width=size2nd.width
-                rect1st=CGRectMake(0, size2nd.height+yOffset, size2nd.width, size1st.height+heightIncreasement)
-                rect2nd=CGRectMake(0, yOffset, size2nd.width, size2nd.height+heightIncreasement)
+                rect1st=CGRectMake(0, size2nd.height+yOffset, size2nd.width, size1st.height+lyricsHeightIncreasement)
+                rect2nd=CGRectMake(0, yOffset, size2nd.width, size2nd.height+lyricsHeightIncreasement)
             }
             
             if userDefaults.boolForKey(LyricsUseAutoLayout) {
@@ -400,11 +406,11 @@ class LyricsWindowController: NSWindowController {
             if userDefaults.integerForKey(LyricsVerticalLyricsPosition) == 0 {
                 x = 0
             } else {
-                x = visibleSize.width - frameSize.height - heightIncreasement
+                x = visibleSize.width - frameSize.height - bgHeightIncreasement
             }
             
-            backgroundLayer.frame = CGRectMake(x, y, frameSize.width, frameSize.height*1.15+heightIncreasement)
-            firstLyricsLayer.frame = CGRectMake(0, -frameSize.height*0.15+yOffset, frameSize.width, frameSize.height*1.08+heightIncreasement)
+            backgroundLayer.frame = CGRectMake(x, y, frameSize.width, frameSize.height*1.15+bgHeightIncreasement)
+            firstLyricsLayer.frame = CGRectMake(0, -frameSize.height*0.15+yOffset, frameSize.width, frameSize.height*1.08+lyricsHeightIncreasement)
             firstLyricsLayer.string=attributedStr
             backgroundLayer.transform = CATransform3DMakeRotation(CGFloat(-M_PI_2), 0, 0, 1)
             isRotated = true
@@ -447,8 +453,8 @@ class LyricsWindowController: NSWindowController {
             var height: CGFloat
             let x: CGFloat
             let y: CGFloat
-            var rect1st: NSRect = CGRectMake(0, size2nd.height+yOffset, size1st.width, size1st.height+heightIncreasement)
-            var rect2nd: NSRect = CGRectMake(0, yOffset, size2nd.width, size2nd.height+heightIncreasement)
+            var rect1st: NSRect = CGRectMake(0, size2nd.height+yOffset, size1st.width, size1st.height+lyricsHeightIncreasement)
+            var rect2nd: NSRect = CGRectMake(0, yOffset, size2nd.width, size2nd.height+lyricsHeightIncreasement)
             let heightWithDock = visibleOrigin.y + visibleSize.height
             
             if size1st.width>=size2nd.width {
