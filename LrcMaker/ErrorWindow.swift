@@ -17,15 +17,15 @@ class ErrorWindow: NSWindow {
     
     init () {
         super.init(contentRect: NSZeroRect, styleMask: NSBorderlessWindowMask, backing: .Buffered, `defer`: false)
-        didWhenInit()
+        doInitialSetup()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        didWhenInit()
+        doInitialSetup()
     }
     
-    private func didWhenInit() {
+    private func doInitialSetup() {
         self.opaque = false
         self.hasShadow = false
         self.ignoresMouseEvents = true

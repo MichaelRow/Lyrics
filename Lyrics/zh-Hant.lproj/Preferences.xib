@@ -587,15 +587,15 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="oA7-dX-D4c">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                            </dictionary>
-                        </binding>
                         <binding destination="-2" name="value" keyPath="self.bgHeightIncreasement" id="QSD-Oa-h6r">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="oA7-dX-D4c">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                             </dictionary>
                         </binding>
                         <outlet property="delegate" destination="-2" id="R8a-kO-9Te"/>
@@ -608,15 +608,15 @@
                     <stepperCell key="cell" continuous="YES" alignment="left" minValue="-50" maxValue="50" id="3RV-CF-ff6"/>
                     <connections>
                         <action selector="fontAndColorChanged:" target="-2" id="SdD-xW-QsR"/>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="igt-8g-UIE">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                            </dictionary>
-                        </binding>
                         <binding destination="-2" name="value" keyPath="self.bgHeightIncreasement" id="cn4-4F-Q7v">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="igt-8g-UIE">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                             </dictionary>
                         </binding>
                     </connections>
@@ -643,15 +643,15 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="CHb-hR-ZrX">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                            </dictionary>
-                        </binding>
                         <binding destination="-2" name="value" keyPath="self.lyricsYOffset" id="eZf-7d-qVx">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="CHb-hR-ZrX">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                             </dictionary>
                         </binding>
                         <outlet property="delegate" destination="-2" id="fdt-bO-T6z"/>
@@ -664,15 +664,15 @@
                     <stepperCell key="cell" continuous="YES" alignment="left" minValue="-50" maxValue="50" id="edd-wH-4es"/>
                     <connections>
                         <action selector="fontAndColorChanged:" target="-2" id="ODm-lk-vlY"/>
-                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="zTu-hE-5hC">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                            </dictionary>
-                        </binding>
                         <binding destination="-2" name="value" keyPath="self.lyricsYOffset" id="WUW-1E-lpw">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsUseAutoLayout" id="zTu-hE-5hC">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                             </dictionary>
                         </binding>
                     </connections>
@@ -694,7 +694,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="KTl-sp-Kit">
                     <rect key="frame" x="20" y="149" width="260" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(豎直模式下的顯示效果可能與預覽完全不同)" id="TFS-1z-iTu">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(豎直模式下的顯示效果可能與預覽截然不同)" id="TFS-1z-iTu">
                         <font key="font" size="13" name=".PingFangSC-Regular"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

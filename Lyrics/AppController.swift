@@ -502,8 +502,7 @@ class AppController: NSObject {
             let timeTagsMatched: NSArray = regexForTimeTag.matchesInString(str as! String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
             if timeTagsMatched.count > 0 {
                 let index: Int = (timeTagsMatched.lastObject?.range.location)! + (timeTagsMatched.lastObject?.range.length)!
-                let lyricsSentenceRange: NSRange = NSMakeRange(index, str.length-index)
-                let lyricsSentence: NSString = str.substringWithRange(lyricsSentenceRange)
+                let lyricsSentence: NSString = str.substringFromIndex(index)
                 for result in timeTagsMatched {
                     let matched:NSRange = result.range
                     let lrcLine: LyricsLineModel = LyricsLineModel()
