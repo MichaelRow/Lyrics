@@ -391,6 +391,15 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
         panel.beginSheetModalForWindow(self.window!) { (response) -> Void in
             if response == NSFileHandlingPanelOKButton {
                 let lrcContent: NSString = self.generateLrc()
+                let fm = NSFileManager.defaultManager()
+                if fm.fileExistsAtPath(panel.URL!.path!) {
+                    do {
+                        try fm.removeItemAtPath(panel.URL!.path!)
+                    } catch let theError as NSError {
+                        NSLog("%@", theError.localizedDescription)
+                        return
+                    }
+                }
                 do {
                     try lrcContent.writeToURL(panel.URL!, atomically: false, encoding: NSUTF8StringEncoding)
                 } catch let theError as NSError {
