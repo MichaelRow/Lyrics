@@ -307,6 +307,15 @@ class AppController: NSObject {
         panel.extensionHidden = false
         
         if panel.runModal() == NSFileHandlingPanelOKButton {
+            let fm = NSFileManager.defaultManager()
+            if fm.fileExistsAtPath(lrcFilePath) {
+                do {
+                    try fm.removeItemAtPath(lrcFilePath)
+                } catch let theError as NSError {
+                    NSLog("%@", theError.localizedDescription)
+                    return
+                }
+            }
             do {
                 try NSFileManager.defaultManager().copyItemAtPath(lrcFilePath, toPath: panel.URL!.path!)
             } catch let theError as NSError {
