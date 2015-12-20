@@ -122,8 +122,9 @@
                     </textFieldCell>
                     <connections>
                         <action selector="reflashLyrics:" target="-2" id="ugF-Jn-Jc9"/>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsHeightFromDockToLyrics" id="V8Y-qg-k9m">
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsHeightFromDockToLyrics" id="gJr-T2-eTn">
                             <dictionary key="options">
+                                <integer key="NSNullPlaceholder" value="15"/>
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
@@ -141,8 +142,9 @@
                     </textFieldCell>
                     <connections>
                         <action selector="reflashLyrics:" target="-2" id="fcW-1b-o0f"/>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToLeft" id="qL1-Bs-w3c">
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToLeft" id="hqg-3H-81p">
                             <dictionary key="options">
+                                <string key="NSNullPlaceholder">50</string>
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
@@ -185,8 +187,9 @@
                     </textFieldCell>
                     <connections>
                         <action selector="reflashLyrics:" target="-2" id="pqV-uW-HHm"/>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToBottom" id="e7b-Dj-M8H">
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstToBottom" id="72j-gJ-mGU">
                             <dictionary key="options">
+                                <string key="NSNullPlaceholder">100</string>
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
@@ -229,8 +232,9 @@
                     </textFieldCell>
                     <connections>
                         <action selector="reflashLyrics:" target="-2" id="lso-xF-wot"/>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstWidth" id="cQh-Pa-QzV">
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstWidth" id="3kV-fk-UcN">
                             <dictionary key="options">
+                                <string key="NSNullPlaceholder">1000</string>
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
@@ -273,8 +277,9 @@
                     </textFieldCell>
                     <connections>
                         <action selector="reflashLyrics:" target="-2" id="A52-Zg-1Y1"/>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstHeight" id="axy-vf-Bae">
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsConstHeight" id="K8e-BY-yog">
                             <dictionary key="options">
+                                <string key="NSNullPlaceholder">60</string>
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
@@ -504,7 +509,7 @@
                     <rect key="frame" x="298" y="206" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="3" drawsBackground="YES" id="0Fz-Vv-mno">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Ufw-dI-E9n">
+                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="42" maximumFractionDigits="3" nilSymbol="nil" id="Ufw-dI-E9n">
                             <real key="minimum" value="0.0"/>
                             <real key="maximum" value="10"/>
                         </numberFormatter>
@@ -518,9 +523,8 @@
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                             </dictionary>
                         </binding>
-                        <binding destination="-2" name="value" keyPath="self.shadowRadius" id="yM8-ZJ-dQg">
+                        <binding destination="-2" name="value" keyPath="self.shadowRadius" id="KYO-JH-th0">
                             <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
                         </binding>
@@ -578,7 +582,7 @@
                     <rect key="frame" x="117" y="175" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="837-N0-rnn">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="QWl-YL-x7e">
+                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="42" maximumFractionDigits="3" nilSymbol="nil" id="QWl-YL-x7e">
                             <real key="minimum" value="-50"/>
                             <real key="maximum" value="50"/>
                         </numberFormatter>
@@ -587,9 +591,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="self.bgHeightIncreasement" id="QSD-Oa-h6r">
+                        <binding destination="-2" name="value" keyPath="self.bgHeightIncreasement" id="Qcf-p2-qgD">
                             <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
                         </binding>
@@ -634,7 +637,7 @@
                     <rect key="frame" x="298" y="175" width="52" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="nVq-Rc-HkF">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="djW-JP-UOz">
+                        <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="42" maximumFractionDigits="3" nilSymbol="nil" id="djW-JP-UOz">
                             <real key="minimum" value="-50"/>
                             <real key="maximum" value="50"/>
                         </numberFormatter>
@@ -643,9 +646,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="self.lyricsYOffset" id="eZf-7d-qVx">
+                        <binding destination="-2" name="value" keyPath="self.lyricsYOffset" id="mDi-Gw-d42">
                             <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
                         </binding>

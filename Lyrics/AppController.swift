@@ -25,7 +25,6 @@ class AppController: NSObject {
     private var statusBarItem:NSStatusItem!
     private var lyricsArray:[LyricsLineModel]!
     private var idTagsArray:[NSString]!
-    private var operationQueue:NSOperationQueue!
     private var iTunes:iTunesBridge!
     private var currentLyrics: NSString!
     private var currentSongID:NSString!

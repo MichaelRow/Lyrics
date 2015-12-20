@@ -66,6 +66,13 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         if self.window?.title == fontAndColorID {
             if identifier != fontAndColorID {
                 if hasUnsavedChange {
+                    //If textfield has uncommited invalid change, alert user before change view.
+                    let currentResponder = self.window?.firstResponder
+                    if currentResponder!.isKindOfClass(NSTextView) && (currentResponder as! NSTextView).string == "" {
+                        self.window?.makeFirstResponder(nil)
+                        self.window?.toolbar?.selectedItemIdentifier = NSLocalizedString("FONT_COLOR", comment: "")
+                        return
+                    }
                     displayAlert(identifier)
                     return
                 } else {
@@ -186,6 +193,12 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     func windowShouldClose(sender: AnyObject) -> Bool {
         if (sender as! NSWindow).title == NSLocalizedString("FONT_COLOR", comment: "") {
             if hasUnsavedChange {
+                let currentResponder = self.window?.firstResponder
+                if currentResponder!.isKindOfClass(NSTextView) && (currentResponder as! NSTextView).string == "" {
+                    self.window?.makeFirstResponder(nil)
+                    self.window?.toolbar?.selectedItemIdentifier = NSLocalizedString("FONT_COLOR", comment: "")
+                    return false
+                }
                 displayAlert(nil)
                 return false
             } else {
