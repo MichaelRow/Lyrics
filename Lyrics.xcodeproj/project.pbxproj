@@ -115,6 +115,7 @@
 		76C5115F1BEC6F8F0095F510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76C5115E1BEC6F8F0095F510 /* Assets.xcassets */; };
 		76C511621BEC6F8F0095F510 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C511601BEC6F8F0095F510 /* MainMenu.xib */; };
 		76C511781BEC6FD50095F510 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C511771BEC6FD50095F510 /* Macros.swift */; };
+		76CEAF681C281DCD0014B3F3 /* LrcMerger.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76CEAF671C281DBF0014B3F3 /* LrcMerger.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76D060451C02B8D8000DA86C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D060441C02B8D8000DA86C /* AppDelegate.swift */; };
 		76D060471C02B8D9000DA86C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D060461C02B8D9000DA86C /* Assets.xcassets */; };
 		76D0604A1C02B8D9000DA86C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D060481C02B8D9000DA86C /* MainMenu.xib */; };
@@ -133,6 +134,16 @@
 			dstSubfolderSpec = 1;
 			files = (
 				7654A1C21C17DD0700591985 /* LrcMaker.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76CEAF631C280F890014B3F3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library;
+			dstSubfolderSpec = 1;
+			files = (
+				76CEAF681C281DCD0014B3F3 /* LrcMerger.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +336,7 @@
 		76C511611BEC6F8F0095F510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		76C511631BEC6F8F0095F510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76C511771BEC6FD50095F510 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
+		76CEAF671C281DBF0014B3F3 /* LrcMerger.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = LrcMerger.app; sourceTree = "<group>"; };
 		76D060421C02B8D8000DA86C /* LyricsX Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LyricsX Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D060441C02B8D8000DA86C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76D060461C02B8D9000DA86C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -734,6 +746,7 @@
 				76D060431C02B8D8000DA86C /* LyricsX Helper */,
 				767D7AA11C17BF5F00F8BCBE /* LrcSeeker */,
 				7613A6C71C17D1A200D7CB66 /* LrcMaker */,
+				76CEAF671C281DBF0014B3F3 /* LrcMerger.app */,
 				76C5115A1BEC6F8F0095F510 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -827,6 +840,7 @@
 				76D0605F1C02BAD5000DA86C /* CopyFiles */,
 				76D060611C02BE1D000DA86C /* CopyFiles */,
 				767E4A141C1713A200D48EFD /* CopyFiles */,
+				76CEAF631C280F890014B3F3 /* CopyFiles */,
 			);
 			buildRules = (
 			);
