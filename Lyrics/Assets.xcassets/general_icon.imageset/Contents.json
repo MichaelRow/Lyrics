@@ -2,16 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "General－2（被拖移）.png",
+      "filename" : "general-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "General.png",
+      "filename" : "general@x2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "general@x3.png",
       "scale" : "3x"
     }
   ],

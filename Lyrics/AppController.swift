@@ -234,6 +234,11 @@ class AppController: NSObject {
         NSWorkspace.sharedWorkspace().launchApplication(appPath)
     }
     
+    @IBAction func mergeLrc(sender: AnyObject) {
+        let appPath = NSBundle.mainBundle().bundlePath + "/Contents/Library/LrcMerger.app"
+        NSWorkspace.sharedWorkspace().launchApplication(appPath)
+    }
+    
     @IBAction func editLyrics(sender: AnyObject) {
         var lrcContents = readLocalLyrics()
         if lrcContents == nil {

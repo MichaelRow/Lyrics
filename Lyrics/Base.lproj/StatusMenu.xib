@@ -24,12 +24,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Kon-oS-t3B"/>
-                            <menuItem title="Edit Lyrics..." id="aHI-5b-EXH">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="editLyrics:" target="-2" id="1NM-fU-FWj"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Copy Lyrics to Pasteboafd" id="hA5-FO-Nk2">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -42,13 +36,6 @@
                                     <action selector="copyLyricsWithTagsToPb:" target="-2" id="8QC-DU-PbF"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="V78-Pj-41Z"/>
-                            <menuItem title="Make lrc..." id="Kxk-N2-7Jt">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="makeLrc:" target="-2" id="QXD-vb-dOD"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Import Lrc File..." id="M13-bN-2sa">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -59,6 +46,25 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="exportLrcFile:" target="-2" id="OtZ-vi-by1"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="V78-Pj-41Z"/>
+                            <menuItem title="Edit Lyrics..." id="aHI-5b-EXH">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="editLyrics:" target="-2" id="1NM-fU-FWj"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Make lrc..." id="Kxk-N2-7Jt">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="makeLrc:" target="-2" id="QXD-vb-dOD"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Merge lrc..." id="1Rp-Wl-S09">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="mergeLrc:" target="-2" id="VfQ-dS-tGu"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="CM0-FN-R8L"/>
