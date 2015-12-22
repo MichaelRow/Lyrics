@@ -131,7 +131,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="lfR-h4-Fcs"/>
-                <menuItem title="About Lyrics..." id="QoB-2y-8a4">
+                <menuItem title="About LyricsX..." id="QoB-2y-8a4">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="orderFrontStandardAboutPanel:" target="-1" id="UVr-pZ-Hc1"/>
@@ -143,7 +143,7 @@
                         <action selector="checkForUpdate:" target="-2" id="J20-89-mLG"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Quit Lyrics" id="V6J-Hi-T0z">
+                <menuItem title="Quit LyricsX" id="V6J-Hi-T0z">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="terminate:" target="-1" id="KYg-M6-JfZ"/>
