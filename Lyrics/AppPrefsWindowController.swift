@@ -14,16 +14,25 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     @IBOutlet private var generalPrefsView:NSView!
     @IBOutlet private var lyricsPrefsView:NSView!
     @IBOutlet private var fontAndColorPrefsView:NSView!
+    @IBOutlet private var shortcutPrefsView:NSView!
     @IBOutlet private var donateView:NSView!
-    
-    @IBOutlet private weak var textPreview: TextPreview!
+    //General
     @IBOutlet private weak var savingPathPopUp: NSPopUpButton!
+    //Font & Color
+    @IBOutlet private weak var textPreview: TextPreview!
     @IBOutlet private weak var fontDisplayText: NSTextField!
     @IBOutlet private weak var textColor: NSColorWell!
     @IBOutlet private weak var bkColor: NSColorWell!
     @IBOutlet private weak var shadowColor: NSColorWell!
     @IBOutlet private weak var revertButton: NSButton!
     @IBOutlet private weak var applyButton: NSButton!
+    //Shortcuts
+    @IBOutlet weak var lrcSeekerShortcut: MASShortcutView!
+    @IBOutlet weak var copyLrcToPbShortcut: MASShortcutView!
+    @IBOutlet weak var editLrcShortcut: MASShortcutView!
+    @IBOutlet weak var makeLrcShortcut: MASShortcutView!
+    @IBOutlet weak var writeLrcToiTunesShortcut: MASShortcutView!
+    
     
     var shadowModeEnabled: Bool = false
     var shadowRadius: Float = 0
@@ -33,7 +42,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     private var hasUnsavedChange: Bool = false
     private var font: NSFont!
     
-//MARK: - Override
+//MARK: - Init
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -48,17 +57,55 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         savingPathPopUp.itemAtIndex(1)?.title = userSavingPath.lastPathComponent
         
         reflashFontAndColorPrefs()
+        setupShortcuts()
     }
     
     override func setupToolbar () {
         self.addView(generalPrefsView, label: NSLocalizedString("GENERAL", comment: ""), image: NSImage(named: "general_icon"))
         self.addView(lyricsPrefsView, label: NSLocalizedString("LYRICS", comment: ""), image: NSImage(named: "lyrics_icon"))
         self.addView(fontAndColorPrefsView, label: NSLocalizedString("FONT_COLOR", comment: ""), image: NSImage(named: "font_Color_icon"))
+        self.addView(shortcutPrefsView, label: NSLocalizedString("SHORTCUT", comment: ""), image: NSImage(named: "shortcut"))
         self.addFlexibleSpacer()
         self.addView(donateView, label: NSLocalizedString("DONATE", comment: ""), image: NSImage(named: "donate_icon"))
         self.crossFade=true
         self.shiftSlowsAnimation=false
     }
+    
+    private func setupShortcuts() {
+        let appController = AppController.sharedAppController
+        // User shortcuts
+        lrcSeekerShortcut.associatedUserDefaultsKey = ShortcutOpenLrcSeeker
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOpenLrcSeeker) { () -> Void in
+            appController.searchLyricsAndArtworks(nil)
+        }
+        copyLrcToPbShortcut.associatedUserDefaultsKey = ShortcutCopyLrcToPb
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutCopyLrcToPb) { () -> Void in
+            appController.copyLyricsToPb(nil)
+        }
+        editLrcShortcut.associatedUserDefaultsKey = ShortcutEditLrc
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutEditLrc) { () -> Void in
+            appController.editLyrics(nil)
+        }
+        makeLrcShortcut.associatedUserDefaultsKey = ShortcutMakeLrc
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutMakeLrc) { () -> Void in
+            appController.makeLrc(nil)
+        }
+        writeLrcToiTunesShortcut.associatedUserDefaultsKey = ShortcutWriteLrcToiTunes
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutWriteLrcToiTunes) { () -> Void in
+            appController.writeLyricsToiTunes(nil)
+        }
+        // Hard-Coded shortcuts
+        let offsetIncr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Equal), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
+        MASShortcutMonitor.sharedMonitor().registerShortcut(offsetIncr) { () -> Void in
+            appController.increaseTimeDly()
+        }
+        let offsetDecr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Minus), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
+        MASShortcutMonitor.sharedMonitor().registerShortcut(offsetDecr) { () -> Void in
+            appController.decreaseTimeDly()
+        }
+    }
+    
+//MARK: - Override
     
     override func displayViewForIdentifier(identifier: String, animate: Bool) {
         //check if changes are unsaved

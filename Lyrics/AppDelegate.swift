@@ -10,11 +10,8 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    var applicationController: AppController!
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        
         let userSavingPath: NSString = NSSearchPathForDirectoriesInDomains(.DownloadsDirectory, [.UserDomainMask], true).first! 
         
         let userDefaults: [String:AnyObject] = [
@@ -44,7 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsTwoLineModeIndex : NSNumber(integer: 0),
             LyricsDisabledWhenPaused : NSNumber(bool: true),
             LyricsDisabledWhenSreenShot : NSNumber(bool: true),
-            LyricsSearchForBetterLrc : NSNumber(bool: true),
+            LyricsSearchForDiglossiaLrc : NSNumber(bool: true),
             LyricsDisplayInAllSpaces: NSNumber(bool: true),
             
             //Font and Color Preferences Defaults
@@ -68,13 +65,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             helper.terminate()
         }
         
-        applicationController = AppController()
+        // Force Singleton to init
+        AppController.sharedAppController
+        // Force Prefs to load and setup shortcuts
+        let prefs = AppPrefsWindowController.sharedPrefsWindowController()
+        prefs.showWindow(nil)
+        prefs.window?.orderOut(nil)
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
-        if applicationController.timeDly != applicationController.timeDlyInFile {
+        let appController = AppController.sharedAppController
+        if appController.timeDly != appController.timeDlyInFile {
             NSLog("App terminating, saveing lrc time delay change...")
-            applicationController.handleLrcDelayChange()
+            appController.handleLrcDelayChange()
         }
         
         let userDefaults = NSUserDefaults.standardUserDefaults()

@@ -61,7 +61,7 @@
                                     <action selector="makeLrc:" target="-2" id="GRx-g7-JcO"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="合併Lrc..." id="vDC-7S-ive">
+                            <menuItem title="合併Lrc (beta)..." id="vDC-7S-ive">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="mergeLrc:" target="-2" id="mWw-Ua-sxT"/>
@@ -103,7 +103,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="8H9-gJ-UYS"/>
-                <menuItem title="使用縱向歌詞模式(beta)" id="0qn-No-pIc">
+                <menuItem title="使用縱向歌詞模式 (beta)" id="0qn-No-pIc">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="changeLyricsMode:" target="-2" id="k5H-I3-6xS"/>

@@ -61,7 +61,7 @@
                                     <action selector="makeLrc:" target="-2" id="QXD-vb-dOD"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Merge lrc..." id="1Rp-Wl-S09">
+                            <menuItem title="Merge lrc (beta)..." id="1Rp-Wl-S09">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="mergeLrc:" target="-2" id="VfQ-dS-tGu"/>
@@ -103,7 +103,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="txX-dr-HGn"/>
-                <menuItem title="Switch to Vertical Lyrics(beta)" id="k4O-V6-WJe">
+                <menuItem title="Switch to Vertical Lyrics (beta)" id="k4O-V6-WJe">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="changeLyricsMode:" target="-2" id="KN2-LZ-Uk5"/>

@@ -44,7 +44,7 @@ let LyricsTwoLineMode:String="LyricsTwoLineMode"
 let LyricsTwoLineModeIndex:String="LyricsTwoLineModeIndex"
 let LyricsDisabledWhenPaused:String="LyricsDisabledWhenPaused"
 let LyricsDisabledWhenSreenShot:String="LyricsDisabledWhenSreenShot"
-let LyricsSearchForBetterLrc:String="LyricsSearchForBetterLrc"
+let LyricsSearchForDiglossiaLrc:String="LyricsSearchForDiglossiaLrc"
 let LyricsDisplayInAllSpaces:String="LyricsDisplayInAllSpaces"
 
 //Font and Color Preferences Defaults
@@ -57,3 +57,10 @@ let LyricsShadowColor:String="LyricsShadowColor"
 let LyricsShadowRadius:String="LyricsShadowRadius"
 let LyricsBgHeightINCR:String="LyricsBgHeightINCR"
 let LyricsYOffset:String="LyricsYOffset"
+
+//Shortcut
+let ShortcutOpenLrcSeeker:String="ShortcutOpenLrcSeeker"
+let ShortcutCopyLrcToPb:String="ShortcutCopyLrcToPb"
+let ShortcutEditLrc:String="ShortcutEditLrc"
+let ShortcutMakeLrc:String="ShortcutMakeLrc"
+let ShortcutWriteLrcToiTunes:String="ShortcutWriteLrcToiTunes"

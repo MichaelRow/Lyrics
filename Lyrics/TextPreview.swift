@@ -95,7 +95,7 @@ class TextPreview: NSView {
         drawContents()
     }
     
-    func drawContents() {
+    private func drawContents() {
         let viewSize = self.bounds.size
         let attrString: NSAttributedString = NSAttributedString(string: stringValue, attributes: attributes)
         var strSize: NSSize = attrString.size()
