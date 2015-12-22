@@ -49,20 +49,16 @@ Swift-based iTunes plug-in app to display lyrics on the desktop.
 * Auto launches with iTunes or user login.
 
 ###System Requirement
-* Mac OS X 10.9 (Mavericks) or above.
+* Mac OS X 10.9 (Mavericks) or higher.
 
 ###Build Requirement
-* Mac OS X 10.11 (El Capitan) or above.
-* Xcode 7.0 or above.
+* Mac OS X 10.11 (El Capitan) or higher.
+* Xcode 7.0 or higher.
 
 ###Third Party Library & Frameworks
 * [OpenCC](https://github.com/BYVoid/OpenCC)
+* [MASShortcut](https://github.com/shpakovski/MASShortcut)
 * [DBPrefsWindowController](https://github.com/kgn/DBPrefsWindowController)
 
 ###Special Thanks
 * [DynamicLyrics Project](https://github.com/MartianZ/DynamicLyrics)
-
-###To-do List
-* Using Core Text to display vertical lyrics.
-* In const lyrics layout mode, you can move around lyrics window.
-* Improve Two-Line mode(clip one into two when lyric is too long).
