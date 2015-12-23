@@ -150,7 +150,7 @@ class LyricsWindowController: NSWindowController {
         let visibleFrame:NSRect=(NSScreen.mainScreen()?.visibleFrame)!
         visibleSize=visibleFrame.size
         visibleOrigin=visibleFrame.origin
-        self.window?.setFrame(CGRectMake(0, 0, visibleSize.width, visibleSize.height), display: true)
+        self.window?.setFrame((NSScreen.mainScreen()?.frame)!, display: true)
         firstLyricsLayer.contentsScale=(NSScreen.mainScreen()?.backingScaleFactor)!
         secondLyricsLayer.contentsScale=firstLyricsLayer.contentsScale
         NSLog("Screen Visible Res Changed to:(%f,%f) O:(%f,%f)", visibleSize.width,visibleSize.height,visibleOrigin.x,visibleOrigin.y)
@@ -305,7 +305,7 @@ class LyricsWindowController: NSWindowController {
                 if x < 4 {
                     x = 4
                 }
-                height=size1st.height+size2nd.height
+                height=rect1st.size.height+rect2nd.size.height
                 
             } else {
                 x = CGFloat(userDefaults.integerForKey(LyricsConstToLeft))
@@ -403,11 +403,10 @@ class LyricsWindowController: NSWindowController {
             
             //lyrics on left or right side
             if userDefaults.integerForKey(LyricsVerticalLyricsPosition) == 0 {
-                x = 0
+                x = visibleOrigin.x
             } else {
-                x = visibleSize.width - frameSize.height - bgHeightIncreasement
+                x = visibleOrigin.x + visibleSize.width - frameSize.height - bgHeightIncreasement - 8
             }
-            
             backgroundLayer.frame = CGRectMake(x, y, frameSize.width, frameSize.height*1.15+bgHeightIncreasement)
             firstLyricsLayer.frame = CGRectMake(0, -frameSize.height*0.15+yOffset, frameSize.width, frameSize.height*1.08+lyricsHeightIncreasement)
             firstLyricsLayer.string=attributedStr
@@ -467,7 +466,7 @@ class LyricsWindowController: NSWindowController {
                 rect2nd.size.width = width
             }
             
-            height=size1st.height+size2nd.height
+            height=rect1st.size.height+rect2nd.size.height
             var deltaH = heightWithDock - width
             if deltaH < 8 {
                 deltaH = 8
@@ -476,9 +475,9 @@ class LyricsWindowController: NSWindowController {
             
             //lyrics on left or right side
             if userDefaults.integerForKey(LyricsVerticalLyricsPosition) == 0 {
-                x = 0
+                x = visibleOrigin.x
             } else {
-                x = visibleSize.width - height
+                x = visibleOrigin.x + visibleSize.width - height - 8
             }
             
             backgroundLayer.frame = CGRectMake(x, y, width, height*1.15)
