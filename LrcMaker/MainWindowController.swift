@@ -37,7 +37,6 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
     var isSaved: Bool = false
     
     var currentView: Int = 1
-    var errorWin: ErrorWindow!
     @IBOutlet var textView: TextView!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var box: NSBox!
@@ -57,7 +56,6 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
         iTunes = iTunesBridge()
         switchToView(firstView, animated: false)
         lrcLineArray = [LyricsLineModel]()
-        errorWin = ErrorWindow()
         
         lyricsView = LyricsView(frame: scrollView.frame)
         scrollView.documentView = lyricsView
@@ -119,12 +117,12 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
     @IBAction func switchSecondView(sender: AnyObject) {
         if player == nil {
             NSBeep()
-            errorWin.fadeInAndOutWithErrorString(NSLocalizedString("NO_SONG", comment: ""))
+            ErrorWindowController.sharedErrorWindow.displayError(NSLocalizedString("NO_SONG", comment: ""))
             return
         }
         if songTitle.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "") == "" {
             NSBeep()
-            errorWin.fadeInAndOutWithErrorString(NSLocalizedString("NO_TITLE", comment: ""))
+            ErrorWindowController.sharedErrorWindow.displayError(NSLocalizedString("NO_TITLE", comment: ""))
             return
         }
         lyricsArray = textView.string!.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
@@ -140,7 +138,7 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
             ++i
         }
         if isEmpty {
-            errorWin.fadeInAndOutWithErrorString(NSLocalizedString("NO_LYRICS", comment: ""))
+            ErrorWindowController.sharedErrorWindow.displayError(NSLocalizedString("NO_LYRICS", comment: ""))
             return
         }
         lyricsView.setLyricsLayerWithArray(lyricsArray)
@@ -467,7 +465,7 @@ class MainWindowController: NSWindowController, NSXMLParserDelegate {
         let msecPosition: Int = Int(player.currentTime * 1000)
         // Not allow two lyrics in the same time point
         if lrcLineArray.count > 0 && lrcLineArray.last!.msecPosition == msecPosition {
-            errorWin.fadeInAndOutWithErrorString(NSLocalizedString("DUPLICATE_IN_T_PT", comment: ""))
+            ErrorWindowController.sharedErrorWindow.displayError(NSLocalizedString("DUPLICATE_IN_T_PT", comment: ""))
             NSBeep()
             return
         }

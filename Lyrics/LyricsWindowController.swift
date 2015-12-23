@@ -43,7 +43,6 @@ class LyricsWindowController: NSWindowController {
         NSLog("Init Lyrics window")
         let lyricsWindow = NSWindow(contentRect: NSZeroRect, styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.Buffered, `defer`: false)
         self.init(window: lyricsWindow)
-        self.window = lyricsWindow
         
         lyricsWindow.backgroundColor = NSColor.clearColor()
         lyricsWindow.opaque = false

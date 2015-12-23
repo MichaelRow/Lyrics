@@ -46,3 +46,6 @@
 "LOWER_LYRICS"="降低歌詞位置";
 "VERTICAL"="使用縱向歌詞模式(beta)";
 "HORIZONTAL"="使用橫向歌詞模式";
+
+// Message Window
+"OFFSET"="歌詞偏移: %d";

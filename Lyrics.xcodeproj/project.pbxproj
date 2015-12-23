@@ -27,7 +27,6 @@
 		7613A6DF1C17D32B00D7CB66 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6DB1C17D32B00D7CB66 /* MainWindowController.swift */; };
 		7613A6E01C17D32B00D7CB66 /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6DC1C17D32B00D7CB66 /* LyricsView.swift */; };
 		7613A6E11C17D32B00D7CB66 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6DD1C17D32B00D7CB66 /* TextView.swift */; };
-		7613A6E21C17D32B00D7CB66 /* ErrorWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6DE1C17D32B00D7CB66 /* ErrorWindow.swift */; };
 		7613A6E91C17D35F00D7CB66 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E51C17D35F00D7CB66 /* Macros.swift */; };
 		7613A6EA1C17D35F00D7CB66 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E61C17D35F00D7CB66 /* LyricsLineModel.swift */; };
 		7613A6EB1C17D35F00D7CB66 /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E81C17D35F00D7CB66 /* iTunesBridge.m */; };
@@ -110,6 +109,8 @@
 		768BCB3E1BF1C74400D6F5EB /* TSPhrases.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 768BCB331BF1C74400D6F5EB /* TSPhrases.ocd */; };
 		768BCB3F1BF1C74400D6F5EB /* TWVariants.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 768BCB341BF1C74400D6F5EB /* TWVariants.ocd */; };
 		768BCB431BF1C84B00D6F5EB /* ChineseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */; };
+		769AFC3C1C29A7AF00215A6D /* ErrorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AFC3B1C29A7AF00215A6D /* ErrorWindowController.swift */; };
+		769AFC401C29A9C600215A6D /* MessageWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AFC3F1C29A9C600215A6D /* MessageWindowController.swift */; };
 		76C046D01BF2178B005053AC /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C046CF1BF2178B005053AC /* AppController.swift */; };
 		76C046D31BF21876005053AC /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C046D11BF21876005053AC /* Preferences.xib */; };
 		76C0471A1BF2E335005053AC /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C047181BF2E335005053AC /* DBPrefsWindowController.m */; };
@@ -191,7 +192,6 @@
 		7613A6DB1C17D32B00D7CB66 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		7613A6DC1C17D32B00D7CB66 /* LyricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
 		7613A6DD1C17D32B00D7CB66 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
-		7613A6DE1C17D32B00D7CB66 /* ErrorWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorWindow.swift; sourceTree = "<group>"; };
 		7613A6E41C17D35E00D7CB66 /* LrcMaker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LrcMaker-Bridging-Header.h"; sourceTree = "<group>"; };
 		7613A6E51C17D35F00D7CB66 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 		7613A6E61C17D35F00D7CB66 /* LyricsLineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsLineModel.swift; sourceTree = "<group>"; };
@@ -320,6 +320,8 @@
 		768BCB331BF1C74400D6F5EB /* TSPhrases.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = TSPhrases.ocd; sourceTree = "<group>"; };
 		768BCB341BF1C74400D6F5EB /* TWVariants.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = TWVariants.ocd; sourceTree = "<group>"; };
 		768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChineseConverter.swift; sourceTree = "<group>"; };
+		769AFC3B1C29A7AF00215A6D /* ErrorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorWindowController.swift; sourceTree = "<group>"; };
+		769AFC3F1C29A9C600215A6D /* MessageWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageWindowController.swift; sourceTree = "<group>"; };
 		76C046CF1BF2178B005053AC /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		76C046D21BF21876005053AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Preferences.xib; sourceTree = "<group>"; };
 		76C047171BF2E335005053AC /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
@@ -446,9 +448,9 @@
 			children = (
 				7613A6DB1C17D32B00D7CB66 /* MainWindowController.swift */,
 				760432B91C1D40B90077E9B4 /* PreferencesController.swift */,
+				769AFC3B1C29A7AF00215A6D /* ErrorWindowController.swift */,
 				7613A6DC1C17D32B00D7CB66 /* LyricsView.swift */,
 				7613A6DD1C17D32B00D7CB66 /* TextView.swift */,
-				7613A6DE1C17D32B00D7CB66 /* ErrorWindow.swift */,
 			);
 			name = "Wins & Views";
 			sourceTree = "<group>";
@@ -508,6 +510,7 @@
 				7660C5011BF05471002E3204 /* LyricsWindowController.swift */,
 				766F03C41C049372003F4790 /* LyricsEditView.swift */,
 				760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */,
+				769AFC3F1C29A9C600215A6D /* MessageWindowController.swift */,
 				76C047171BF2E335005053AC /* DBPrefsWindowController.h */,
 				76C047181BF2E335005053AC /* DBPrefsWindowController.m */,
 			);
@@ -998,13 +1001,13 @@
 			files = (
 				7613A6E91C17D35F00D7CB66 /* Macros.swift in Sources */,
 				7613A6DF1C17D32B00D7CB66 /* MainWindowController.swift in Sources */,
+				769AFC3C1C29A7AF00215A6D /* ErrorWindowController.swift in Sources */,
 				7613A6EA1C17D35F00D7CB66 /* LyricsLineModel.swift in Sources */,
 				760432BA1C1D40B90077E9B4 /* PreferencesController.swift in Sources */,
 				7613A6E11C17D32B00D7CB66 /* TextView.swift in Sources */,
 				7613A6E01C17D32B00D7CB66 /* LyricsView.swift in Sources */,
 				7613A6C91C17D1A200D7CB66 /* AppDelegate.swift in Sources */,
 				7613A6EB1C17D35F00D7CB66 /* iTunesBridge.m in Sources */,
-				7613A6E21C17D32B00D7CB66 /* ErrorWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1047,6 +1050,7 @@
 				760A01851C01A33400015C62 /* TTPod.m in Sources */,
 				760A01841C01A33400015C62 /* GeCiMe.m in Sources */,
 				760A018B1C01A36700015C62 /* XMLParserForQianQian.m in Sources */,
+				769AFC401C29A9C600215A6D /* MessageWindowController.swift in Sources */,
 				76C511781BEC6FD50095F510 /* Macros.swift in Sources */,
 				768BCB431BF1C84B00D6F5EB /* ChineseConverter.swift in Sources */,
 				76C5115D1BEC6F8F0095F510 /* AppDelegate.swift in Sources */,

@@ -890,6 +890,8 @@ class AppController: NSObject {
             timeDly = 10000
         }
         self.didChangeValueForKey("timeDly")
+        let message:String = NSString(format: NSLocalizedString("OFFSET", comment: ""), timeDly) as String
+        MessageWindowController.sharedMsgWindow.displayMessage(message)
     }
     
     func decreaseTimeDly() {
@@ -899,6 +901,8 @@ class AppController: NSObject {
             timeDly = -10000
         }
         self.didChangeValueForKey("timeDly")
+        let message:String = NSString(format: NSLocalizedString("OFFSET", comment: ""), timeDly) as String
+        MessageWindowController.sharedMsgWindow.displayMessage(message)
     }
     
     func handleLrcDelayChange () {

@@ -1,41 +1,35 @@
 //
-//  ErrorWindow.swift
-//  LrcMaker
+//  ErrorWindowController.swift
+//  Lyrics
 //
-//  Created by Eru on 15/12/6.
+//  Created by Eru on 15/12/22.
 //  Copyright © 2015年 Eru. All rights reserved.
 //
 
 import Cocoa
 
-class ErrorWindow: NSWindow {
+class ErrorWindowController: NSWindowController {
+    
+    static let sharedErrorWindow = ErrorWindowController()
     
     var errorText: CATextLayer!
     var attrs: [String:AnyObject]!
     var isOrderFront: Bool = false
     var timer: NSTimer!
-    
-    init () {
-        super.init(contentRect: NSZeroRect, styleMask: NSBorderlessWindowMask, backing: .Buffered, `defer`: false)
-        doInitialSetup()
-    }
 
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        doInitialSetup()
-    }
-    
-    private func doInitialSetup() {
-        self.opaque = false
-        self.hasShadow = false
-        self.ignoresMouseEvents = true
-        self.level = Int(CGWindowLevelForKey(.FloatingWindowLevelKey))
-        self.backgroundColor = NSColor.clearColor()
-        
-        self.contentView?.layer = CALayer()
-        self.contentView?.wantsLayer = true
-        self.contentView?.layer?.backgroundColor = NSColor(calibratedWhite: 0, alpha: 0.65).CGColor
-        self.contentView?.layer?.cornerRadius = 15
+    convenience init() {
+        NSLog("Init MessageWindow")
+        let win = NSWindow(contentRect: NSZeroRect, styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.Buffered, `defer`: false)
+        self.init(window: win)
+        self.window?.opaque = false
+        self.window?.hasShadow = false
+        self.window?.ignoresMouseEvents = true
+        self.window?.level = Int(CGWindowLevelForKey(.FloatingWindowLevelKey))
+        self.window?.backgroundColor = NSColor.clearColor()
+        self.window?.contentView?.layer = CALayer()
+        self.window?.contentView?.wantsLayer = true
+        self.window?.contentView?.layer?.backgroundColor = NSColor(calibratedWhite: 0, alpha: 0.65).CGColor
+        self.window?.contentView?.layer?.cornerRadius = 15
         
         errorText = CATextLayer()
         errorText.anchorPoint = NSZeroPoint
@@ -44,32 +38,31 @@ class ErrorWindow: NSWindow {
         errorText.font = NSFont(name: "HiraginoSansGB-W6", size: 20)
         errorText.fontSize = 20
         errorText.foregroundColor = NSColor.whiteColor().CGColor
-        self.contentView?.layer?.addSublayer(errorText)
+        self.window?.contentView?.layer?.addSublayer(errorText)
         
         attrs = [NSFontAttributeName : NSFont(name: "HiraginoSansGB-W6", size: 20)!]
-    
-        self.orderOut(nil)
+        self.window?.orderOut(nil)
     }
     
-    func fadeInAndOutWithErrorString(errorStr: String) {
+    func displayError(errorStr: String) {
         let attributedStr = NSAttributedString(string: errorStr, attributes: attrs)
         let size = attributedStr.size()
         let mainWin = NSApplication.sharedApplication().mainWindow
         let mainFrame: NSRect = (mainWin?.frame)!
         if isOrderFront {
-            mainWin?.removeChildWindow(self)
+            mainWin?.removeChildWindow(self.window!)
         }
         let x = mainFrame.origin.x + (mainFrame.size.width - size.width)/2
         let y = mainFrame.origin.y + (mainFrame.size.height - size.height)/2
-        self.setFrame(NSMakeRect(x, y, size.width + 30, size.height + 30), display: true)
+        self.window!.setFrame(NSMakeRect(x, y, size.width + 30, size.height + 30), display: true)
         errorText.string = errorStr
         errorText.frame = NSMakeRect(0, 15, size.width + 30, size.height)
-        mainWin?.addChildWindow(self, ordered: .Above)
+        mainWin?.addChildWindow(self.window!, ordered: .Above)
         if !isOrderFront {
-            self.alphaValue = 0
-            self.makeKeyAndOrderFront(nil)
+            self.window!.alphaValue = 0
+            self.window!.makeKeyAndOrderFront(nil)
             isOrderFront = true
-            self.animator().alphaValue = 1
+            self.window!.animator().alphaValue = 1
         }
         if timer != nil {
             timer.invalidate()
@@ -80,11 +73,12 @@ class ErrorWindow: NSWindow {
     
     func fadeOut() {
         let delay: NSTimeInterval = NSAnimationContext.currentContext().duration + 0.1
-        self.performSelector("orderOut:", withObject: nil, afterDelay: delay)
-        self.animator().alphaValue = 0
+        self.window!.performSelector("orderOut:", withObject: nil, afterDelay: delay)
+        self.window!.animator().alphaValue = 0
         let mainWin = NSApplication.sharedApplication().mainWindow
-        mainWin?.removeChildWindow(self)
+        mainWin?.removeChildWindow(self.window!)
         errorText.string = ""
         isOrderFront = false
     }
+
 }
