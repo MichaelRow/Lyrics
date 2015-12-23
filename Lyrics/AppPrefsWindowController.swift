@@ -24,15 +24,15 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     @IBOutlet private weak var textColor: NSColorWell!
     @IBOutlet private weak var bkColor: NSColorWell!
     @IBOutlet private weak var shadowColor: NSColorWell!
-    
-    @IBOutlet private weak var revertButton: NSButton!
-    @IBOutlet private weak var applyButton: NSButton!
     //Shortcuts
     @IBOutlet private weak var lrcSeekerShortcut: MASShortcutView!
     @IBOutlet private weak var copyLrcToPbShortcut: MASShortcutView!
     @IBOutlet private weak var editLrcShortcut: MASShortcutView!
     @IBOutlet private weak var makeLrcShortcut: MASShortcutView!
     @IBOutlet private weak var writeLrcToiTunesShortcut: MASShortcutView!
+    
+    @IBOutlet weak var revertButton: NSButton!
+    @IBOutlet weak var applyButton: NSButton!
     
     var shadowModeEnabled: Bool = false
     var shadowRadius: Float = 0
@@ -49,7 +49,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         self.window?.delegate = self
         hasUnsavedChange = false
         
-        //Pop up button and font is hard to bind to NSUserDefaultsController, do it selves
+        //Pop up button and font is hard to bind to NSUserDefaultsController, do it by self
         let defaultSavingPath: String = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
         let userSavingPath: NSString = NSUserDefaults.standardUserDefaults().stringForKey(LyricsUserSavingPath)!
         savingPathPopUp.itemAtIndex(0)?.toolTip = defaultSavingPath
@@ -108,25 +108,28 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
 //MARK: - Override
     
     override func displayViewForIdentifier(identifier: String, animate: Bool) {
+        //If uncommited value exists, there must be a NSTextField object which is 
+        //First responder. And if the value is invalid, invoke NSNumber formatter
+        //by resigning the first responder.
+        if !checkTextFieldNumberValid() {
+            self.window?.makeFirstResponder(nil)
+            self.window?.toolbar?.selectedItemIdentifier = self.window?.title
+            return
+        }
         //check if changes are unsaved
         let fontAndColorID: String = NSLocalizedString("FONT_COLOR", comment: "")
         if self.window?.title == fontAndColorID {
             if identifier != fontAndColorID {
                 if hasUnsavedChange {
-                    //If textfield has uncommited invalid change, alert user before change view.
-                    let currentResponder = self.window?.firstResponder
-                    if currentResponder!.isKindOfClass(NSTextView) && (currentResponder as! NSTextView).string == "" {
-                        self.window?.makeFirstResponder(nil)
-                        self.window?.toolbar?.selectedItemIdentifier = NSLocalizedString("FONT_COLOR", comment: "")
-                        return
-                    }
                     displayAlert(identifier)
                     return
                 } else {
                     NSFontPanel.sharedFontPanel().orderOut(nil)
+                    NSColorPanel.sharedColorPanel().orderOut(nil)
                 }
             }
         }
+        self.window?.makeFirstResponder(nil)
         super.displayViewForIdentifier(identifier, animate: animate)
     }
     
@@ -193,11 +196,11 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     @IBAction func applyFontAndColorChanges(sender: AnyObject?) {
-        let currentResponder = self.window?.firstResponder
-        if currentResponder!.isKindOfClass(NSTextView) && (currentResponder as! NSTextView).string == "" {
+        if !checkTextFieldNumberValid() {
             self.window?.makeFirstResponder(nil)
             return
         }
+        self.window?.makeFirstResponder(nil)
         hasUnsavedChange = false
         revertButton.enabled = false
         applyButton.enabled = false
@@ -215,11 +218,12 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     @IBAction func revertFontAndColorChanges(sender: AnyObject?) {
-        let currentResponder = self.window?.firstResponder
-        if currentResponder!.isKindOfClass(NSTextView) && (currentResponder as! NSTextView).string == "" {
-            self.window?.makeFirstResponder(nil)
-            return
+        // If current value is invalid, set one before reverting
+        if !checkTextFieldNumberValid() {
+            let textView = self.window?.firstResponder as! NSTextView
+            textView.string = "0"
         }
+        self.window?.makeFirstResponder(nil)
         hasUnsavedChange = false
         revertButton.enabled = false
         applyButton.enabled = false
@@ -248,18 +252,17 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
 // MARK: - Delegate
 
     func windowShouldClose(sender: AnyObject) -> Bool {
+        if !checkTextFieldNumberValid() {
+            self.window?.makeFirstResponder(nil)
+            return false
+        }
         if (sender as! NSWindow).title == NSLocalizedString("FONT_COLOR", comment: "") {
             if hasUnsavedChange {
-                let currentResponder = self.window?.firstResponder
-                if currentResponder!.isKindOfClass(NSTextView) && (currentResponder as! NSTextView).string == "" {
-                    self.window?.makeFirstResponder(nil)
-                    self.window?.toolbar?.selectedItemIdentifier = NSLocalizedString("FONT_COLOR", comment: "")
-                    return false
-                }
                 displayAlert(nil)
                 return false
             } else {
                 NSFontPanel.sharedFontPanel().orderOut(nil)
+                NSColorPanel.sharedColorPanel().orderOut(nil)
                 return true
             }
         }
@@ -289,9 +292,11 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
                 }
                 if identifier != nil {
                     NSFontPanel.sharedFontPanel().orderOut(nil)
+                    NSColorPanel.sharedColorPanel().orderOut(nil)
                     self.displayViewForIdentifier(identifier,animate: true)
                 } else {
                     NSFontPanel.sharedFontPanel().orderOut(nil)
+                    NSColorPanel.sharedColorPanel().orderOut(nil)
                     self.window?.orderOut(nil)
                 }
             }
@@ -299,5 +304,24 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
                 self.window?.toolbar?.selectedItemIdentifier = NSLocalizedString("FONT_COLOR", comment: "")
             }
         })
+    }
+    
+// MARK: - Other 
+    
+    func checkTextFieldNumberValid() -> Bool {
+        let currentResponder = self.window?.firstResponder
+        if currentResponder != nil && currentResponder!.isKindOfClass(NSTextView) {
+            let formatter: NSNumberFormatter = ((currentResponder as! NSTextView).superview?.superview as! NSTextField).formatter as! NSNumberFormatter
+            let stringValue: String = (currentResponder as! NSTextView).string!
+            if formatter.numberFromString(stringValue) == nil {
+                return false
+            }
+            else {
+                return true
+            }
+        }
+        else {
+            return true
+        }
     }
 }
