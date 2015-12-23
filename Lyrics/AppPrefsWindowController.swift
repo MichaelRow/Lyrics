@@ -24,15 +24,15 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     @IBOutlet private weak var textColor: NSColorWell!
     @IBOutlet private weak var bkColor: NSColorWell!
     @IBOutlet private weak var shadowColor: NSColorWell!
+    
     @IBOutlet private weak var revertButton: NSButton!
     @IBOutlet private weak var applyButton: NSButton!
     //Shortcuts
-    @IBOutlet weak var lrcSeekerShortcut: MASShortcutView!
-    @IBOutlet weak var copyLrcToPbShortcut: MASShortcutView!
-    @IBOutlet weak var editLrcShortcut: MASShortcutView!
-    @IBOutlet weak var makeLrcShortcut: MASShortcutView!
-    @IBOutlet weak var writeLrcToiTunesShortcut: MASShortcutView!
-    
+    @IBOutlet private weak var lrcSeekerShortcut: MASShortcutView!
+    @IBOutlet private weak var copyLrcToPbShortcut: MASShortcutView!
+    @IBOutlet private weak var editLrcShortcut: MASShortcutView!
+    @IBOutlet private weak var makeLrcShortcut: MASShortcutView!
+    @IBOutlet private weak var writeLrcToiTunesShortcut: MASShortcutView!
     
     var shadowModeEnabled: Bool = false
     var shadowRadius: Float = 0
@@ -193,6 +193,11 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     @IBAction func applyFontAndColorChanges(sender: AnyObject?) {
+        let currentResponder = self.window?.firstResponder
+        if currentResponder!.isKindOfClass(NSTextView) && (currentResponder as! NSTextView).string == "" {
+            self.window?.makeFirstResponder(nil)
+            return
+        }
         hasUnsavedChange = false
         revertButton.enabled = false
         applyButton.enabled = false
@@ -210,6 +215,11 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     @IBAction func revertFontAndColorChanges(sender: AnyObject?) {
+        let currentResponder = self.window?.firstResponder
+        if currentResponder!.isKindOfClass(NSTextView) && (currentResponder as! NSTextView).string == "" {
+            self.window?.makeFirstResponder(nil)
+            return
+        }
         hasUnsavedChange = false
         revertButton.enabled = false
         applyButton.enabled = false

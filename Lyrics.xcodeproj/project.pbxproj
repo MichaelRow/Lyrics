@@ -30,6 +30,7 @@
 		7613A6E91C17D35F00D7CB66 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E51C17D35F00D7CB66 /* Macros.swift */; };
 		7613A6EA1C17D35F00D7CB66 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E61C17D35F00D7CB66 /* LyricsLineModel.swift */; };
 		7613A6EB1C17D35F00D7CB66 /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E81C17D35F00D7CB66 /* iTunesBridge.m */; };
+		7622A7631C2A6757001250DD /* ClickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622A7621C2A6757001250DD /* ClickView.swift */; };
 		7633A2FF1C202F9500D58360 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7633A2FE1C202F9500D58360 /* CoreGraphics.framework */; };
 		763763C81C292754003EB0B5 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763763C71C292754003EB0B5 /* MASShortcut.framework */; };
 		763763CC1C292957003EB0B5 /* MASShortcut.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 763763C71C292754003EB0B5 /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -198,6 +199,7 @@
 		7613A6E71C17D35F00D7CB66 /* iTunesBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridge.h; sourceTree = "<group>"; };
 		7613A6E81C17D35F00D7CB66 /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
 		7613A6ED1C17D3B800D7CB66 /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
+		7622A7621C2A6757001250DD /* ClickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickView.swift; sourceTree = "<group>"; };
 		7633A2FE1C202F9500D58360 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		763763C71C292754003EB0B5 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASShortcut.framework; sourceTree = "<group>"; };
 		7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsLineModel.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				76C047251BF2F34C005053AC /* AppPrefsWindowController.swift */,
+				7622A7621C2A6757001250DD /* ClickView.swift */,
 				76FE94401BFC223600A1AC27 /* TextPreview.swift */,
 				7660C5011BF05471002E3204 /* LyricsWindowController.swift */,
 				766F03C41C049372003F4790 /* LyricsEditView.swift */,
@@ -1046,6 +1049,7 @@
 				76FE94411BFC223600A1AC27 /* TextPreview.swift in Sources */,
 				760A018A1C01A36700015C62 /* QianQian.m in Sources */,
 				7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */,
+				7622A7631C2A6757001250DD /* ClickView.swift in Sources */,
 				760A01831C01A33400015C62 /* SongInfos.m in Sources */,
 				760A01851C01A33400015C62 /* TTPod.m in Sources */,
 				760A01841C01A33400015C62 /* GeCiMe.m in Sources */,
