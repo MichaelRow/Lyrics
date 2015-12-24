@@ -24,8 +24,9 @@ class AppController: NSObject {
     private var isTrackingRunning:Bool = false
     private var hasDiglossiaLrc:Bool = false
     private var lyricsWindow:LyricsWindowController!
+    private var statusBarLyrics:StatusBarLyrics!
     private var lyricsEidtWindow:LyricsEditWindowController!
-    private var statusBarItem:NSStatusItem!
+    private var statusItem:NSStatusItem!
     private var lyricsArray:[LyricsLineModel]!
     private var idTagsArray:[NSString]!
     private var iTunes:iTunesBridge!
@@ -62,6 +63,8 @@ class AppController: NSObject {
         
         lyricsWindow=LyricsWindowController()
         lyricsWindow.showWindow(nil)
+        
+        statusBarLyrics=StatusBarLyrics()
         
         // check lrc saving path
         if !userDefaults.boolForKey(LyricsDisableAllAlert) && !checkSavingPath() {
@@ -113,15 +116,19 @@ class AppController: NSObject {
     }
     
     private func setupStatusItem() {
-        let icon:NSImage=NSImage(named: "status_icon")!
-        icon.template=true
-        statusBarItem=NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
-        statusBarItem.image=icon
-        statusBarItem.highlightMode=true
-        statusBarItem.menu=statusBarMenu
-        delayMenuItem.view=lyricsDelayView
-        lyricsDelayView.autoresizingMask=[.ViewWidthSizable]
-        
+        let icon:NSImage = NSImage(named: "status_icon")!
+        icon.template = true
+        statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
+        statusItem.menu = statusBarMenu
+        if #available(OSX 10.10, *) {
+            statusItem.button?.image = icon
+        } else {
+            statusItem.image = icon
+            statusItem.highlightMode = true
+        }
+    
+        delayMenuItem.view = lyricsDelayView
+        lyricsDelayView.autoresizingMask = [.ViewWidthSizable]
         if userDefaults.boolForKey(LyricsIsVerticalLyrics) {
             statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("HORIZONTAL", comment: "")
         } else {
@@ -649,6 +656,7 @@ class AppController: NSObject {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                         })
+                        statusBarLyrics.displayLyrics(nil)
                     }
                     return
                 }
@@ -664,6 +672,7 @@ class AppController: NSObject {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: secondLyrics)
                         })
+                        statusBarLyrics.displayLyrics(currentLyrics as String)
                     }
                     return
                 }
