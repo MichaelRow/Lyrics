@@ -20,7 +20,7 @@
 + (void)initialize {
     NSMutableDictionary *registerDefaults=[NSMutableDictionary dictionary];
     [registerDefaults setObject:[NSNumber numberWithBool:YES] forKey:LSAutofillAndSearchWhenLaunched];
-    [registerDefaults setObject:[NSNumber numberWithBool:NO] forKey:LSQuitWhenClosed];
+    [registerDefaults setObject:[NSNumber numberWithBool:YES] forKey:LSQuitWhenClosed];
     [registerDefaults setObject:[NSNumber numberWithBool:YES] forKeyedSubscript:LSLyricStyle];
     [registerDefaults setObject:@"" forKey:LSLrcPath];
     [registerDefaults setObject:@"" forKey:LSArtworkPath];
