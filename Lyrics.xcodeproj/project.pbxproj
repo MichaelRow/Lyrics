@@ -91,7 +91,7 @@
 		767D7B481C17C86D00F8BCBE /* libopencc.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B431C17C82500F8BCBE /* libopencc.dylib */; };
 		767D7B491C17C87000F8BCBE /* libopencc.2.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B421C17C82500F8BCBE /* libopencc.2.dylib */; };
 		767D7B4A1C17C87300F8BCBE /* libopencc.1.0.0.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B441C17C82500F8BCBE /* libopencc.1.0.0.dylib */; };
-		768203AF1C2B6FA900DB93F0 /* StatusBarLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768203AE1C2B6FA900DB93F0 /* StatusBarLyrics.swift */; };
+		768203AF1C2B6FA900DB93F0 /* MenuBarLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768203AE1C2B6FA900DB93F0 /* MenuBarLyrics.swift */; };
 		768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
 		768BCB211BF1C62000D6F5EB /* libopencc.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */; };
 		768BCB221BF1C62000D6F5EB /* libopencc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1F1BF1C62000D6F5EB /* libopencc.2.dylib */; };
@@ -303,7 +303,7 @@
 		767D7B421C17C82500F8BCBE /* libopencc.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.2.dylib; sourceTree = "<group>"; };
 		767D7B431C17C82500F8BCBE /* libopencc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.dylib; sourceTree = "<group>"; };
 		767D7B441C17C82500F8BCBE /* libopencc.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.1.0.0.dylib; sourceTree = "<group>"; };
-		768203AE1C2B6FA900DB93F0 /* StatusBarLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarLyrics.swift; sourceTree = "<group>"; };
+		768203AE1C2B6FA900DB93F0 /* MenuBarLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarLyrics.swift; sourceTree = "<group>"; };
 		768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		768BCAE51BF1866400D6F5EB /* Lyrics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Bridging-Header.h"; sourceTree = "<group>"; };
 		768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.1.0.0.dylib; sourceTree = "<group>"; };
@@ -509,13 +509,14 @@
 		765FC4A31BEE508100BF3706 /* Wins & Views */ = {
 			isa = PBXGroup;
 			children = (
-				76C047251BF2F34C005053AC /* AppPrefsWindowController.swift */,
-				7622A7621C2A6757001250DD /* ClickView.swift */,
-				76FE94401BFC223600A1AC27 /* TextPreview.swift */,
+				768203AE1C2B6FA900DB93F0 /* MenuBarLyrics.swift */,
 				7660C5011BF05471002E3204 /* LyricsWindowController.swift */,
-				766F03C41C049372003F4790 /* LyricsEditView.swift */,
+				76C047251BF2F34C005053AC /* AppPrefsWindowController.swift */,
 				760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */,
+				766F03C41C049372003F4790 /* LyricsEditView.swift */,
+				76FE94401BFC223600A1AC27 /* TextPreview.swift */,
 				769AFC3F1C29A9C600215A6D /* MessageWindowController.swift */,
+				7622A7621C2A6757001250DD /* ClickView.swift */,
 				76C047171BF2E335005053AC /* DBPrefsWindowController.h */,
 				76C047181BF2E335005053AC /* DBPrefsWindowController.m */,
 			);
@@ -772,7 +773,6 @@
 			children = (
 				76C5115C1BEC6F8F0095F510 /* AppDelegate.swift */,
 				76C046CF1BF2178B005053AC /* AppController.swift */,
-				768203AE1C2B6FA900DB93F0 /* StatusBarLyrics.swift */,
 				765FC4A71BEE511D00BF3706 /* Headers */,
 				765FC4A41BEE50A000BF3706 /* UI */,
 				765FC4A31BEE508100BF3706 /* Wins & Views */,
@@ -1058,7 +1058,7 @@
 				760A01841C01A33400015C62 /* GeCiMe.m in Sources */,
 				760A018B1C01A36700015C62 /* XMLParserForQianQian.m in Sources */,
 				769AFC401C29A9C600215A6D /* MessageWindowController.swift in Sources */,
-				768203AF1C2B6FA900DB93F0 /* StatusBarLyrics.swift in Sources */,
+				768203AF1C2B6FA900DB93F0 /* MenuBarLyrics.swift in Sources */,
 				76C511781BEC6FD50095F510 /* Macros.swift in Sources */,
 				768BCB431BF1C84B00D6F5EB /* ChineseConverter.swift in Sources */,
 				76C5115D1BEC6F8F0095F510 /* AppDelegate.swift in Sources */,

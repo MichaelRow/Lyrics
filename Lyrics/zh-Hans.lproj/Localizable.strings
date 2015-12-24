@@ -50,3 +50,6 @@
 
 // Message Window
 "OFFSET"="歌词偏移: %d";
+"DESKTOP_ON"="桌面歌词开启";
+"MENU_BAR_ON"="菜单栏歌词开启";
+"BOTH_ON"="桌面与菜单栏歌词开启";

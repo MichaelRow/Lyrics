@@ -19,6 +19,8 @@ let LyricsUserEditLyricsNotification:String="LyricsUserEditLyrics"
 let LyricsLayoutChangeNotification:String="LyricsLayoutChange"
 
 //Menu
+let LyricsDesktopLyricsEnabled:String="LyricsDesktopLyricsEnabled"
+let LyricsMenuBarLyricsEnabled:String="LyricsMenuBarLyricsEnabled"
 let LyricsIsVerticalLyrics:String="LyricsIsVerticalLyrics"
 
 //General Preferences Defaults
@@ -59,6 +61,8 @@ let LyricsBgHeightINCR:String="LyricsBgHeightINCR"
 let LyricsYOffset:String="LyricsYOffset"
 
 //Shortcut
+let ShortcutLyricsModeSwitch:String="ShortcutLyricsModeSwitch"
+let ShortcutDesktopMenubarSwitch:String="ShortcutDesktopMenubarSwitch"
 let ShortcutOpenLrcSeeker:String="ShortcutOpenLrcSeeker"
 let ShortcutCopyLrcToPb:String="ShortcutCopyLrcToPb"
 let ShortcutEditLrc:String="ShortcutEditLrc"

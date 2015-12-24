@@ -25,6 +25,8 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     @IBOutlet private weak var bkColor: NSColorWell!
     @IBOutlet private weak var shadowColor: NSColorWell!
     //Shortcuts
+    @IBOutlet private weak var lyricsModeSwitchShortcut: MASShortcutView!
+    @IBOutlet private weak var desktopMenubarSwitchShortcut: MASShortcutView!
     @IBOutlet private weak var lrcSeekerShortcut: MASShortcutView!
     @IBOutlet private weak var copyLrcToPbShortcut: MASShortcutView!
     @IBOutlet private weak var editLrcShortcut: MASShortcutView!
@@ -74,6 +76,14 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     private func setupShortcuts() {
         let appController = AppController.sharedAppController
         // User shortcuts
+        lyricsModeSwitchShortcut.associatedUserDefaultsKey = ShortcutLyricsModeSwitch
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutLyricsModeSwitch) { () -> Void in
+            appController.changeLyricsMode(nil)
+        }
+        desktopMenubarSwitchShortcut.associatedUserDefaultsKey = ShortcutDesktopMenubarSwitch
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutDesktopMenubarSwitch) { () -> Void in
+            appController.switchDesktopMenuBarMode()
+        }
         lrcSeekerShortcut.associatedUserDefaultsKey = ShortcutOpenLrcSeeker
         MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOpenLrcSeeker) { () -> Void in
             appController.searchLyricsAndArtworks(nil)

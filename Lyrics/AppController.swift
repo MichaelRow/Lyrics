@@ -17,6 +17,8 @@ class AppController: NSObject {
     @IBOutlet weak var statusBarMenu: NSMenu!
     @IBOutlet weak var lyricsDelayView: NSView!
     @IBOutlet weak var delayMenuItem: NSMenuItem!
+    @IBOutlet weak var lyricsModeMenuItem: NSMenuItem!
+    @IBOutlet weak var lyricsHeightMenuItem: NSMenuItem!
     
     var timeDly:Int = 0
     var timeDlyInFile:Int = 0
@@ -24,7 +26,7 @@ class AppController: NSObject {
     private var isTrackingRunning:Bool = false
     private var hasDiglossiaLrc:Bool = false
     private var lyricsWindow:LyricsWindowController!
-    private var statusBarLyrics:StatusBarLyrics!
+    private var menuBarLyrics:MenuBarLyrics!
     private var lyricsEidtWindow:LyricsEditWindowController!
     private var statusItem:NSStatusItem!
     private var lyricsArray:[LyricsLineModel]!
@@ -64,7 +66,7 @@ class AppController: NSObject {
         lyricsWindow=LyricsWindowController()
         lyricsWindow.showWindow(nil)
         
-        statusBarLyrics=StatusBarLyrics()
+        menuBarLyrics=MenuBarLyrics()
         
         // check lrc saving path
         if !userDefaults.boolForKey(LyricsDisableAllAlert) && !checkSavingPath() {
@@ -130,9 +132,9 @@ class AppController: NSObject {
         delayMenuItem.view = lyricsDelayView
         lyricsDelayView.autoresizingMask = [.ViewWidthSizable]
         if userDefaults.boolForKey(LyricsIsVerticalLyrics) {
-            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("HORIZONTAL", comment: "")
+            lyricsModeMenuItem.title = NSLocalizedString("HORIZONTAL", comment: "")
         } else {
-            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("VERTICAL", comment: "")
+            lyricsModeMenuItem.title = NSLocalizedString("VERTICAL", comment: "")
         }
     }
     
@@ -166,12 +168,31 @@ class AppController: NSObject {
         //before finding the way to detect full screen, user should adjust lyrics by selves
         lyricsWindow.isFullScreen = !lyricsWindow.isFullScreen
         if lyricsWindow.isFullScreen {
-            statusBarMenu.itemAtIndex(7)?.title = NSLocalizedString("HIGHER_LYRICS", comment: "")
+            lyricsHeightMenuItem.title = NSLocalizedString("HIGHER_LYRICS", comment: "")
         } else {
-            statusBarMenu.itemAtIndex(7)?.title = NSLocalizedString("LOWER_LYRICS", comment: "")
+            lyricsHeightMenuItem.title = NSLocalizedString("LOWER_LYRICS", comment: "")
         }
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.lyricsWindow.reflash()
+        }
+    }
+    
+    @IBAction func enableDesktopLyrics(sender:AnyObject?) {
+        if (sender as! NSMenuItem).state == NSOnState {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+            })
+        } else {
+            //Force lyrics to show(handlePositionChange: method will update it if lyrics changed.)
+            currentLyrics = nil
+        }
+    }
+    
+    @IBAction func enableMenuBarLyrics(sender:AnyObject?) {
+        if (sender as! NSMenuItem).state == NSOnState {
+            menuBarLyrics.displayLyrics(nil)
+        } else {
+            menuBarLyrics.displayLyrics(currentLyrics as String)
         }
     }
     
@@ -179,9 +200,9 @@ class AppController: NSObject {
         let isVertical = !userDefaults.boolForKey(LyricsIsVerticalLyrics)
         userDefaults.setObject(NSNumber(bool: isVertical), forKey: LyricsIsVerticalLyrics)
         if isVertical {
-            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("HORIZONTAL", comment: "")
+            lyricsModeMenuItem.title = NSLocalizedString("HORIZONTAL", comment: "")
         } else {
-            statusBarMenu.itemAtIndex(6)?.title = NSLocalizedString("VERTICAL", comment: "")
+            lyricsModeMenuItem.title = NSLocalizedString("VERTICAL", comment: "")
         }
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.lyricsWindow.reflash()
@@ -402,15 +423,15 @@ class AppController: NSObject {
         else {
             if userInfo!["Player State"] as! String == "Paused" {
                 if userDefaults.boolForKey(LyricsDisabledWhenPaused) {
-                    currentLyrics = nil
+                    self.currentLyrics = nil
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                        self.menuBarLyrics.displayLyrics(nil)
                     })
                 }
                 NSLog("iTunes Paused")
                 
                 if userDefaults.boolForKey(LyricsQuitWithITunes) {
-                    
                     // iTunes would paused before it has quited, so we should check whether iTunes is running
                     // seconds later.
                     if timer != nil {
@@ -653,10 +674,14 @@ class AppController: NSObject {
                 if index-1 == -1 {
                     if currentLyrics != nil {
                         currentLyrics = nil
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                        })
-                        statusBarLyrics.displayLyrics(nil)
+                        if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                            })
+                        }
+                        if userDefaults.boolForKey(LyricsMenuBarLyricsEnabled) {
+                            menuBarLyrics.displayLyrics(nil)
+                        }
                     }
                     return
                 }
@@ -664,15 +689,19 @@ class AppController: NSObject {
                     var secondLyrics: NSString!
                     if currentLyrics != tempLyricsArray[index-1].lyricsSentence {
                         currentLyrics = tempLyricsArray[index-1].lyricsSentence
-                        if userDefaults.boolForKey(LyricsTwoLineMode) && userDefaults.integerForKey(LyricsTwoLineModeIndex)==0 && index < tempLyricsArray.count {
-                            if tempLyricsArray[index].lyricsSentence != "" {
-                                secondLyrics = tempLyricsArray[index].lyricsSentence
+                        if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
+                            if userDefaults.boolForKey(LyricsTwoLineMode) && userDefaults.integerForKey(LyricsTwoLineModeIndex)==0 && index < tempLyricsArray.count {
+                                if tempLyricsArray[index].lyricsSentence != "" {
+                                    secondLyrics = tempLyricsArray[index].lyricsSentence
+                                }
                             }
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: secondLyrics)
+                            })
                         }
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: secondLyrics)
-                        })
-                        statusBarLyrics.displayLyrics(currentLyrics as String)
+                        if userDefaults.boolForKey(LyricsMenuBarLyricsEnabled) {
+                            menuBarLyrics.displayLyrics(currentLyrics as String)
+                        }
                     }
                     return
                 }
@@ -681,9 +710,14 @@ class AppController: NSObject {
         if index == tempLyricsArray.count && tempLyricsArray.count>0 {
             if currentLyrics != tempLyricsArray[tempLyricsArray.count - 1].lyricsSentence {
                 currentLyrics = tempLyricsArray[tempLyricsArray.count - 1].lyricsSentence
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: nil)
-                })
+                if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: nil)
+                    })
+                }
+                if userDefaults.boolForKey(LyricsMenuBarLyricsEnabled) {
+                    menuBarLyrics.displayLyrics(currentLyrics as String)
+                }
             }
         }
     }
@@ -759,6 +793,26 @@ class AppController: NSObject {
                 self.saveLrcToLocal(lyricsContents, songTitle: self.currentSongTitle, artist: self.currentArtist)
             }
         }
+    }
+    
+    func handleLrcDelayChange () {
+        //save the delay change to file.
+        if lyricsArray.count == 0{
+            return
+        }
+        let theLyrics: NSMutableString = NSMutableString()
+        for idtag in idTagsArray {
+            theLyrics.appendString((idtag as String) + "\n")
+        }
+        theLyrics.appendString("[offset:\(timeDly)]\n")
+        for lrc in lyricsArray {
+            theLyrics.appendString((lrc.timeTag as String) + (lrc.lyricsSentence as String) + "\n")
+        }
+        if lyricsArray.count > 0 {
+            theLyrics.deleteCharactersInRange(NSMakeRange(theLyrics.length-1, 1))
+        }
+        NSLog("Writing the time delay to file")
+        saveLrcToLocal(theLyrics, songTitle: currentSongTitle, artist: currentArtist)
     }
     
 // MARK: - Lyrics Source Loading Completion
@@ -880,7 +934,7 @@ class AppController: NSObject {
         saveLrcToLocal(lyricsContents, songTitle: songTitle, artist: artist)
     }
     
-// MARK: - SetTimeDly
+// MARK: - Shortcut Events
     
     func increaseTimeDly() {
         self.willChangeValueForKey("timeDly")
@@ -904,24 +958,26 @@ class AppController: NSObject {
         MessageWindowController.sharedMsgWindow.displayMessage(message)
     }
     
-    func handleLrcDelayChange () {
-        //save the delay change to file.
-        if lyricsArray.count == 0{
-            return
+    func switchDesktopMenuBarMode() {
+        let isDesktopLyricsOn = userDefaults.boolForKey(LyricsDesktopLyricsEnabled)
+        let isMenuBarLyricsOn = userDefaults.boolForKey(LyricsMenuBarLyricsEnabled)
+        if isDesktopLyricsOn && isMenuBarLyricsOn {
+            userDefaults.setBool(false, forKey: LyricsMenuBarLyricsEnabled)
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("DESKTOP_ON", comment: ""))
+            menuBarLyrics.displayLyrics(nil)
         }
-        let theLyrics: NSMutableString = NSMutableString()
-        for idtag in idTagsArray {
-            theLyrics.appendString((idtag as String) + "\n")
+        else if isDesktopLyricsOn && !isMenuBarLyricsOn {
+            userDefaults.setBool(false, forKey: LyricsDesktopLyricsEnabled)
+            userDefaults.setBool(true, forKey: LyricsMenuBarLyricsEnabled)
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("MENU_BAR_ON", comment: ""))
+            lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+            menuBarLyrics.displayLyrics(currentLyrics as String)
         }
-        theLyrics.appendString("[offset:\(timeDly)]\n")
-        for lrc in lyricsArray {
-            theLyrics.appendString((lrc.timeTag as String) + (lrc.lyricsSentence as String) + "\n")
+        else {
+            userDefaults.setBool(true, forKey: LyricsDesktopLyricsEnabled)
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("BOTH_ON", comment: ""))
+            currentLyrics = nil
         }
-        if lyricsArray.count > 0 {
-            theLyrics.deleteCharactersInRange(NSMakeRange(theLyrics.length-1, 1))
-        }
-        NSLog("Writing the time delay to file")
-        saveLrcToLocal(theLyrics, songTitle: currentSongTitle, artist: currentArtist)
     }
     
 // MARK: - Other Methods
@@ -951,5 +1007,6 @@ class AppController: NSObject {
         }
         return output
     }
+    
 }
 

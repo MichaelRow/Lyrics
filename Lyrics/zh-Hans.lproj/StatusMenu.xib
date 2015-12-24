@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="delayMenuItem" destination="ENJ-eO-aCa" id="Ds4-Ab-aOj"/>
                 <outlet property="lyricsDelayView" destination="3Jx-vU-QNM" id="2fJ-DT-b0e"/>
+                <outlet property="lyricsHeightMenuItem" destination="Qde-lY-h4R" id="NW5-pf-CMW"/>
+                <outlet property="lyricsModeMenuItem" destination="kDn-f6-xtI" id="svf-jr-eIx"/>
                 <outlet property="statusBarMenu" destination="tTA-dl-Isx" id="TWf-gB-4JV"/>
             </connections>
         </customObject>
@@ -16,6 +18,63 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu id="tTA-dl-Isx" userLabel="Statusbar menu">
             <items>
+                <menuItem title="显示" id="ft0-ST-oVv">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="显示" id="XMl-De-owe">
+                        <items>
+                            <menuItem title="启用桌面歌词" id="yKO-bJ-2m5">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="enableDesktopLyrics:" target="-2" id="9eA-Pa-p9p"/>
+                                    <binding destination="VKQ-E3-KXV" name="value" keyPath="values.LyricsDesktopLyricsEnabled" id="Umd-Xf-9eV">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="启用菜单栏歌词" id="WeI-nG-Lzi">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="enableMenuBarLyrics:" target="-2" id="V9A-OB-IBf"/>
+                                    <binding destination="VKQ-E3-KXV" name="value" keyPath="values.LyricsMenuBarLyricsEnabled" id="aBt-Ox-rnj">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="bed-RV-aEB"/>
+                            <menuItem title="使用纵向歌词模式 (beta)" id="kDn-f6-xtI">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="changeLyricsMode:" target="-2" id="cxk-0i-vIe"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="降低歌词位置" id="Qde-lY-h4R">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="handleWorkSpaceChange:" target="-2" id="Aqa-4Q-pXB"/>
+                                    <binding destination="VKQ-E3-KXV" name="enabled2" keyPath="values.LyricsIsVerticalLyrics" previousBinding="ciB-6b-5Hy" id="57S-B1-0iW">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="VKQ-E3-KXV" name="enabled" keyPath="values.LyricsUseAutoLayout" id="ciB-6b-5Hy">
+                                        <dictionary key="options">
+                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="歌词" id="Mfq-Dd-Wzf">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="歌词" id="0NF-uT-60C">
@@ -83,6 +142,7 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem isSeparatorItem="YES" id="bBj-m8-pv7"/>
                 <menuItem title="从iTunes导出专辑封面..." id="Czc-V7-Kvq">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -100,34 +160,6 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="showPreferences:" target="-2" id="OHZ-tL-sQF"/>
-                    </connections>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="lfR-h4-Fcs"/>
-                <menuItem title="使用纵向歌词模式 (beta)" id="wMc-T6-Zsk">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="changeLyricsMode:" target="-2" id="chU-AG-bZp"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="降低歌词位置" id="tks-GA-GZ6">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="handleWorkSpaceChange:" target="-2" id="xnu-uL-rDm"/>
-                        <binding destination="VKQ-E3-KXV" name="enabled2" keyPath="values.LyricsIsVerticalLyrics" previousBinding="S0H-VU-ehO" id="NLO-QH-VHv">
-                            <dictionary key="options">
-                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                <integer key="NSNullPlaceholder" value="-1"/>
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
-                        <binding destination="VKQ-E3-KXV" name="enabled" keyPath="values.LyricsUseAutoLayout" id="S0H-VU-ehO">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                            </dictionary>
-                        </binding>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="NeM-rI-mss"/>
@@ -150,7 +182,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="332" y="211.5"/>
+            <point key="canvasLocation" x="347" y="125.5"/>
         </menu>
         <customView id="3Jx-vU-QNM" userLabel="Lyrics Delay View">
             <rect key="frame" x="0.0" y="0.0" width="263" height="33"/>

@@ -16,6 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let userDefaults: [String:AnyObject] = [
             //Menu
+            LyricsDesktopLyricsEnabled : NSNumber(bool: true),
+            LyricsMenuBarLyricsEnabled : NSNumber(bool: false),
             LyricsIsVerticalLyrics : NSNumber(bool: false),
             
             //General Preferences Defaults

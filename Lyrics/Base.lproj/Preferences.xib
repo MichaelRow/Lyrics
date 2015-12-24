@@ -10,12 +10,14 @@
                 <outlet property="applyButton" destination="2MS-Zm-Upl" id="BJn-wE-rb3"/>
                 <outlet property="bkColor" destination="EW0-Bd-p9N" id="fph-28-bHi"/>
                 <outlet property="copyLrcToPbShortcut" destination="hlc-is-WV9" id="gcA-Rv-gdq"/>
+                <outlet property="desktopMenubarSwitchShortcut" destination="Bxn-kf-FeY" id="iar-I4-ZY1"/>
                 <outlet property="donateView" destination="162-Ff-cWD" id="jzk-Ll-KB5"/>
                 <outlet property="editLrcShortcut" destination="paS-fO-cn5" id="fsu-14-fBK"/>
                 <outlet property="fontAndColorPrefsView" destination="57y-D4-ovD" id="9r1-x0-jZ6"/>
                 <outlet property="fontDisplayText" destination="0FF-WL-2dH" id="aqe-Ki-ifH"/>
                 <outlet property="generalPrefsView" destination="hzc-UQ-83r" id="gn9-FJ-f9h"/>
                 <outlet property="lrcSeekerShortcut" destination="dy6-ep-Gan" id="kFw-jY-zHC"/>
+                <outlet property="lyricsModeSwitchShortcut" destination="Xic-BL-Y5L" id="xTf-yp-hBx"/>
                 <outlet property="lyricsPrefsView" destination="5BK-8u-tNV" id="0r6-Ag-2Fa"/>
                 <outlet property="makeLrcShortcut" destination="qKj-Pg-4Lu" id="FaU-Ch-QCn"/>
                 <outlet property="revertButton" destination="lBX-iN-a5e" id="4jc-qV-XKa"/>
@@ -921,11 +923,11 @@
             <point key="canvasLocation" x="-175" y="264"/>
         </customView>
         <customView id="OaX-cK-ajI">
-            <rect key="frame" x="0.0" y="0.0" width="415" height="221"/>
+            <rect key="frame" x="0.0" y="0.0" width="415" height="279"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="xaB-p5-OLT">
-                    <rect key="frame" x="18" y="182" width="134" height="17"/>
+                    <rect key="frame" x="18" y="240" width="134" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1. Increase  lrc offset:" id="qok-bt-0Gp">
                         <font key="font" metaFont="system"/>
@@ -934,7 +936,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Ypx-q3-UNh">
-                    <rect key="frame" x="18" y="155" width="141" height="17"/>
+                    <rect key="frame" x="18" y="213" width="141" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2. Decrease  lrc offset:" id="DDN-HF-zck">
                         <font key="font" metaFont="system"/>
@@ -943,7 +945,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="59B-DD-91Z">
-                    <rect key="frame" x="245" y="182" width="150" height="19"/>
+                    <rect key="frame" x="245" y="240" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="jmS-03-WwS">
                         <font key="font" size="13" name=".LucidaGrandeUI"/>
@@ -955,7 +957,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="WRu-VI-ZcO">
-                    <rect key="frame" x="245" y="155" width="150" height="19"/>
+                    <rect key="frame" x="245" y="213" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="5mR-Pb-q92">
                         <font key="font" size="13" name=".LucidaGrandeUI"/>
@@ -966,6 +968,32 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="910-hO-gDx">
+                    <rect key="frame" x="18" y="184" width="218" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="3. Horizontal/Vertical mode switch:" id="ZCu-W5-ZZi">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="oYj-ag-Cg4">
+                    <rect key="frame" x="18" y="157" width="213" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="4. Desktop/MenuBar lyrics switch:" id="LaG-ye-jZk">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView id="Xic-BL-Y5L" customClass="MASShortcutView">
+                    <rect key="frame" x="245" y="184" width="150" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </customView>
+                <customView id="Bxn-kf-FeY" customClass="MASShortcutView">
+                    <rect key="frame" x="245" y="157" width="150" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </customView>
                 <customView id="dy6-ep-Gan" customClass="MASShortcutView">
                     <rect key="frame" x="245" y="128" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1032,7 +1060,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
             </subviews>
-            <point key="canvasLocation" x="335.5" y="231.5"/>
+            <point key="canvasLocation" x="335.5" y="260.5"/>
         </customView>
         <customView id="162-Ff-cWD" userLabel="Donate View">
             <rect key="frame" x="0.0" y="0.0" width="422" height="330"/>
