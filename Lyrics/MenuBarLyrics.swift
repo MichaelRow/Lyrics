@@ -17,8 +17,8 @@ class MenuBarLyrics: NSObject {
         attrs = [NSFontNameAttribute : NSFont(name: "HiraginoSansGB-W3", size: 15)!,
                  NSForegroundColorAttributeName : NSColor.blackColor()]
         super.init()
-        
-        statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
+        statusItem = NSStatusBar.systemStatusBar()._statusItemWithLength(0, withPriority: 0)
+        statusItem.length = NSVariableStatusItemLength
         statusItem.highlightMode = false
     }
     

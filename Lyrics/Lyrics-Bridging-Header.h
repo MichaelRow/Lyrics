@@ -4,6 +4,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <MASShortcut/Shortcut.h>
+#import "NSStatusBar+NSStatusBar_Private.h"
 #import "opencc.h"
 #import "iTunesBridge.h"
 #import "DBPrefsWindowController.h"

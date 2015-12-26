@@ -66,8 +66,9 @@ class AppController: NSObject {
         lyricsWindow=LyricsWindowController()
         lyricsWindow.showWindow(nil)
         
-        menuBarLyrics=MenuBarLyrics()
-        
+        if userDefaults.boolForKey(LyricsMenuBarLyricsEnabled) {
+            menuBarLyrics = MenuBarLyrics()
+        }
         // check lrc saving path
         if !userDefaults.boolForKey(LyricsDisableAllAlert) && !checkSavingPath() {
             let alert: NSAlert = NSAlert()
