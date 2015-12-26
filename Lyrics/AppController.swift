@@ -437,8 +437,8 @@ class AppController: NSObject {
                 NSLog("iTunes Paused")
                 
                 if userDefaults.boolForKey(LyricsQuitWithITunes) {
-                    // iTunes would paused before it has quited, so we should check whether iTunes is running
-                    // seconds later.
+                    // iTunes would paused before it quitted, so we should check whether iTunes is running
+                    // seconds later when playing or paused.
                     if timer != nil {
                         timer.invalidate()
                     }
@@ -447,7 +447,6 @@ class AppController: NSObject {
                 return
             }
             else if userInfo!["Player State"] as! String == "Playing" {
-                
                 //iTunes is playing now, we should create the tracking thread if not exists.
                 if !isTrackingRunning {
                     NSLog("Create new iTunesTrackingThead")
@@ -457,6 +456,13 @@ class AppController: NSObject {
                     }
                 }
                 NSLog("iTunes Playing")
+            }
+            else if userInfo!["Player State"] as! String == "Stopped" {
+                // No playing or paused, send this player state when quitted
+                if timer != nil {
+                    timer.invalidate()
+                }
+                timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "terminate", userInfo: nil, repeats: false)
             }
             
             // check whether song is changed
