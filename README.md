@@ -12,8 +12,12 @@ Swift-based iTunes plug-in app to display lyrics on the desktop.
 
 ![lyrics vertical]
 (http://i63.tinypic.com/2v7ugkz.jpg)
-* Nice HUD Window to edit lyrics of playing track.
+* Nice HUD window to edit lyrics of playing track.
 
+
+![menu bar lyrics]
+(http://i64.tinypic.com/1535s1w.jpg)
+* Menu bar lyrics.
 
 ![lyrcis edit window]
 (http://i67.tinypic.com/2m7gtg4.jpg)
@@ -29,6 +33,10 @@ Swift-based iTunes plug-in app to display lyrics on the desktop.
 (http://i64.tinypic.com/2e5s7xy.jpg)
 * Useful statusbar menus and contain a lyrics offset setter which is more elegant than DynamicLyrics.
 
+
+![shortcut]
+(http://i65.tinypic.com/23qyxdu.jpg)
+* Global shortcut
 
 ![Statusbar]
 (http://i65.tinypic.com/2u5x8b4.jpg)
