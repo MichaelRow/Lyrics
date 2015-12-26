@@ -113,6 +113,7 @@ class AppController: NSObject {
     }
     
     deinit {
+        NSStatusBar.systemStatusBar().removeStatusItem(statusItem)
         NSNotificationCenter.defaultCenter().removeObserver(self)
         NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -190,8 +191,9 @@ class AppController: NSObject {
     
     @IBAction func enableMenuBarLyrics(sender:AnyObject?) {
         if (sender as! NSMenuItem).state == NSOnState {
-            menuBarLyrics.displayLyrics(nil)
+            menuBarLyrics = nil
         } else {
+            menuBarLyrics = MenuBarLyrics()
             menuBarLyrics.displayLyrics(currentLyrics as String)
         }
     }
@@ -426,7 +428,9 @@ class AppController: NSObject {
                     self.currentLyrics = nil
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                        self.menuBarLyrics.displayLyrics(nil)
+                        if self.menuBarLyrics != nil {
+                            self.menuBarLyrics.displayLyrics(nil)
+                        }
                     })
                 }
                 NSLog("iTunes Paused")
@@ -679,7 +683,7 @@ class AppController: NSObject {
                                 self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                             })
                         }
-                        if userDefaults.boolForKey(LyricsMenuBarLyricsEnabled) {
+                        if menuBarLyrics != nil {
                             menuBarLyrics.displayLyrics(nil)
                         }
                     }
@@ -699,7 +703,7 @@ class AppController: NSObject {
                                 self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: secondLyrics)
                             })
                         }
-                        if userDefaults.boolForKey(LyricsMenuBarLyricsEnabled) {
+                        if menuBarLyrics != nil {
                             menuBarLyrics.displayLyrics(currentLyrics as String)
                         }
                     }
@@ -715,7 +719,7 @@ class AppController: NSObject {
                         self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: nil)
                     })
                 }
-                if userDefaults.boolForKey(LyricsMenuBarLyricsEnabled) {
+                if menuBarLyrics != nil {
                     menuBarLyrics.displayLyrics(currentLyrics as String)
                 }
             }
@@ -964,13 +968,14 @@ class AppController: NSObject {
         if isDesktopLyricsOn && isMenuBarLyricsOn {
             userDefaults.setBool(false, forKey: LyricsMenuBarLyricsEnabled)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("DESKTOP_ON", comment: ""))
-            menuBarLyrics.displayLyrics(nil)
+            menuBarLyrics = nil
         }
         else if isDesktopLyricsOn && !isMenuBarLyricsOn {
             userDefaults.setBool(false, forKey: LyricsDesktopLyricsEnabled)
             userDefaults.setBool(true, forKey: LyricsMenuBarLyricsEnabled)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("MENU_BAR_ON", comment: ""))
             lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+            menuBarLyrics = MenuBarLyrics()
             menuBarLyrics.displayLyrics(currentLyrics as String)
         }
         else {

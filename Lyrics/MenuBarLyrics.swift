@@ -23,6 +23,7 @@ class MenuBarLyrics: NSObject {
     }
     
     deinit {
+        NSStatusBar.systemStatusBar().removeStatusItem(statusItem)
         NSLog("Deint StatusBarLyrics")
     }
     
