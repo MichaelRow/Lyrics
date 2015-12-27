@@ -6,33 +6,45 @@ Swift-based iTunes plug-in app to display lyrics on the desktop.
 * Auto search and download lrc to local from Internet.
 * Display lyrics on the desktop.
 
+
 ![lyrics horizontal]
 (http://i63.tinypic.com/108d543.jpg)
 
 ![lyrics vertical]
 (http://i63.tinypic.com/2v7ugkz.jpg)
 * Nice HUD window to edit lyrics of playing track.
+
+
 ![lyrcis edit window]
 (http://i67.tinypic.com/2m7gtg4.jpg)
 
 * Menu bar lyrics.
+
+
 ![menu bar lyrics]
 (http://i64.tinypic.com/1535s1w.jpg)
 
 * Auto convert Traditional Chinese or Simplified Chinese if you want.
+
+
 ![auto chinese convert]
 (http://i68.tinypic.com/4uja6w.jpg)
 
 * Preview before font preferences applied to the lyrics.
+
+
 ![prefs font view]
 (http://i65.tinypic.com/2ngc6lu.jpg)
 
 * Useful statusbar menus and contain a lyrics offset setter which is more elegant than DynamicLyrics.
+
+
 ![Statusbar]
 (http://i66.tinypic.com/2d7sux4.jpg)
 
-
 * Global shortcut
+
+
 ![shortcut]
 (http://i65.tinypic.com/23qyxdu.jpg)
 
