@@ -44,6 +44,8 @@ class AppController: NSObject {
     private var lrcSourceHandleQueue:NSOperationQueue!
     private var userDefaults:NSUserDefaults!
     private var timer: NSTimer!
+    private var regexForTimeTag: NSRegularExpression!
+    private var regexForIDTag: NSRegularExpression!
     
 // MARK: - Init & deinit
     override init() {
@@ -89,6 +91,21 @@ class AppController: NSObject {
         let ndc = NSDistributedNotificationCenter.defaultCenter()
         ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
         ndc.addObserver(self, selector: "handleExtenalLyricsEvent:", name: "ExtenalLyricsEvent", object: nil)
+        
+        do {
+            regexForTimeTag = try NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+.[0-9]+\\]|\\[[0-9]+:[0-9]+\\]", options: [])
+        } catch let theError as NSError {
+            NSLog("%@", theError.localizedDescription)
+            return
+        }
+        //the regex below should only use when the string doesn't contain time-tags
+        //because all time-tags would be matched as well.
+        do {
+            regexForIDTag = try NSRegularExpression(pattern: "\\[.*:.*\\]", options: [])
+        } catch let theError as NSError {
+            NSLog("%@", theError.localizedDescription)
+            return
+        }
         
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
@@ -523,23 +540,6 @@ class AppController: NSObject {
         }
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
         let lrcParagraphs: NSArray = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
-        let regexForTimeTag: NSRegularExpression
-        let regexForIDTag: NSRegularExpression
-        do {
-            regexForTimeTag = try NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+.[0-9]+\\]|\\[[0-9]+:[0-9]+\\]", options: [])
-        } catch let theError as NSError {
-            NSLog("%@", theError.localizedDescription)
-            return
-        }
-        
-        //the regex below should only use when the string doesn't contain time-tags
-        //because all time-tags would be matched as well.
-        do {
-            regexForIDTag = try NSRegularExpression(pattern: "\\[.*:.*\\]", options: [])
-        } catch let theError as NSError {
-            NSLog("%@", theError.localizedDescription)
-            return
-        }
         
         for str in lrcParagraphs {
             let timeTagsMatched: NSArray = regexForTimeTag.matchesInString(str as! String, options: [.ReportProgress], range: NSMakeRange(0, str.length))

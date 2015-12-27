@@ -533,6 +533,9 @@ class LyricsWindowController: NSWindowController {
                 case "]":
                     leftBracket = getLeftBracketIndex(["[","]"], lastCharacterIndex: index)
                     break Loop
+                case "}":
+                    leftBracket = getLeftBracketIndex(["{","}"], lastCharacterIndex: index)
+                    break Loop
                 case ">":
                     leftBracket = getLeftBracketIndex(["<",">"], lastCharacterIndex: index)
                     break Loop
