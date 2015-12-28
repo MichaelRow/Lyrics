@@ -22,7 +22,6 @@ class XMLParserForQQ: NSObject, NSXMLParserDelegate {
         parser.delegate = self
         let success: Bool = parser.parse()
         if !success {
-            NSLog("%@",parser.parserError!)
             return nil
         }
         return lrcContents
