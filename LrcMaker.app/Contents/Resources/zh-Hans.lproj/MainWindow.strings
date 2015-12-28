@@ -1,0 +1,57 @@
+
+/* Class = "NSTextFieldCell"; title = "上一行"; ObjectID = "23t-of-ulB"; */
+"23t-of-ulB.title" = "上一行";
+
+/* Class = "NSButton"; ibShadowedToolTip = "播放"; ObjectID = "6X1-t7-1Wg"; */
+"6X1-t7-1Wg.ibShadowedToolTip" = "播放";
+
+/* Class = "NSTextFieldCell"; title = "暂停/播放"; ObjectID = "C4a-LW-BTG"; */
+"C4a-LW-BTG.title" = "暂停/播放";
+
+/* Class = "NSTextFieldCell"; title = "歌手名:"; ObjectID = "DTh-o1-jOq"; */
+"DTh-o1-jOq.title" = "歌手名:";
+
+/* Class = "NSTextFieldCell"; title = "*"; ObjectID = "Dnh-X9-3Ea"; */
+"Dnh-X9-3Ea.title" = "*";
+
+/* Class = "NSButton"; ibShadowedToolTip = "同步到LyricsX"; ObjectID = "KyG-ee-bgz"; */
+"KyG-ee-bgz.ibShadowedToolTip" = "同步到LyricsX";
+
+/* Class = "NSButton"; ibShadowedToolTip = "使用iTunes当前歌曲"; ObjectID = "LBd-u5-ear"; */
+"LBd-u5-ear.ibShadowedToolTip" = "使用iTunes当前歌曲";
+
+/* Class = "NSButton"; ibShadowedToolTip = "在Finder中选择歌曲"; ObjectID = "ZHb-Rn-eum"; */
+"ZHb-Rn-eum.ibShadowedToolTip" = "在Finder中选择歌曲";
+
+/* Class = "NSWindow"; title = "LrcMaker"; ObjectID = "gay-G1-xKY"; */
+"gay-G1-xKY.title" = "LrcMaker";
+
+/* Class = "NSButtonCell"; title = "保存"; ObjectID = "gu8-RN-heU"; */
+"gu8-RN-heU.title" = "保存";
+
+/* Class = "NSTextFieldCell"; title = "歌曲名:"; ObjectID = "h2W-EL-4Ig"; */
+"h2W-EL-4Ig.title" = "歌曲名:";
+
+/* Class = "NSButtonCell"; title = "上一步"; ObjectID = "h9Y-WE-wnW"; */
+"h9Y-WE-wnW.title" = "上一步";
+
+/* Class = "NSButtonCell"; title = "下一步"; ObjectID = "hlh-oY-kLf"; */
+"hlh-oY-kLf.title" = "下一步";
+
+/* Class = "NSTextFieldCell"; title = "歌曲路径:"; ObjectID = "kG4-uG-pkb"; */
+"kG4-uG-pkb.title" = "歌曲路径:";
+
+/* Class = "NSTextFieldCell"; title = "制作者:"; ObjectID = "naY-P2-D30"; */
+"naY-P2-D30.title" = "制作者:";
+
+/* Class = "NSTextFieldCell"; title = "下一行"; ObjectID = "pf4-nJ-UKL"; */
+"pf4-nJ-UKL.title" = "下一行";
+
+/* Class = "NSTextFieldCell"; title = "专辑名:"; ObjectID = "xKZ-Rw-vck"; */
+"xKZ-Rw-vck.title" = "专辑名:";
+
+/* Class = "NSTextFieldCell"; title = "结束当前行"; ObjectID = "y4r-EN-CVh"; */
+"y4r-EN-CVh.title" = "结束当前行";
+
+/* Class = "NSTextFieldCell"; title = "00:00/00:00"; ObjectID = "ySU-x5-IAf"; */
+"ySU-x5-IAf.title" = "00:00/00:00";

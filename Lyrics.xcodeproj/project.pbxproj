@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		7600121E1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7600121C1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib */; };
 		760012291BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */; };
-		760432BA1C1D40B90077E9B4 /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760432B91C1D40B90077E9B4 /* PreferencesController.swift */; };
-		760432BD1C1D410A0077E9B4 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760432BB1C1D410A0077E9B4 /* Preferences.xib */; };
 		760A01831C01A33400015C62 /* SongInfos.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A017E1C01A33400015C62 /* SongInfos.m */; };
 		760A01841C01A33400015C62 /* GeCiMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A01801C01A33400015C62 /* GeCiMe.m */; };
 		760A01851C01A33400015C62 /* TTPod.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A01821C01A33400015C62 /* TTPod.m */; };
@@ -18,79 +16,20 @@
 		760A018B1C01A36700015C62 /* XMLParserForQianQian.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A01891C01A36700015C62 /* XMLParserForQianQian.m */; };
 		760A01901C01A37400015C62 /* Xiami.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A018D1C01A37400015C62 /* Xiami.m */; };
 		760A01911C01A37400015C62 /* XMLParserForXiami.m in Sources */ = {isa = PBXBuildFile; fileRef = 760A018F1C01A37400015C62 /* XMLParserForXiami.m */; };
-		7613A6C91C17D1A200D7CB66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6C81C17D1A200D7CB66 /* AppDelegate.swift */; };
-		7613A6CB1C17D1A200D7CB66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7613A6CA1C17D1A200D7CB66 /* Assets.xcassets */; };
-		7613A6CE1C17D1A200D7CB66 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7613A6CC1C17D1A200D7CB66 /* MainMenu.xib */; };
-		7613A6D31C17D1BC00D7CB66 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
-		7613A6D51C17D21600D7CB66 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7613A6D41C17D21600D7CB66 /* AVFoundation.framework */; };
-		7613A6D61C17D22B00D7CB66 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */; };
-		7613A6DF1C17D32B00D7CB66 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6DB1C17D32B00D7CB66 /* MainWindowController.swift */; };
-		7613A6E01C17D32B00D7CB66 /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6DC1C17D32B00D7CB66 /* LyricsView.swift */; };
-		7613A6E11C17D32B00D7CB66 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6DD1C17D32B00D7CB66 /* TextView.swift */; };
-		7613A6E91C17D35F00D7CB66 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E51C17D35F00D7CB66 /* Macros.swift */; };
-		7613A6EA1C17D35F00D7CB66 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E61C17D35F00D7CB66 /* LyricsLineModel.swift */; };
-		7613A6EB1C17D35F00D7CB66 /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7613A6E81C17D35F00D7CB66 /* iTunesBridge.m */; };
+		760BB9681C30CF180014E361 /* LrcSeeker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 760BB9671C30CEFE0014E361 /* LrcSeeker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		760BB96A1C30CFBC0014E361 /* LrcMaker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 760BB9691C30CFAB0014E361 /* LrcMaker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7622A7631C2A6757001250DD /* ClickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622A7621C2A6757001250DD /* ClickView.swift */; };
 		7633A2FF1C202F9500D58360 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7633A2FE1C202F9500D58360 /* CoreGraphics.framework */; };
 		763763C81C292754003EB0B5 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763763C71C292754003EB0B5 /* MASShortcut.framework */; };
 		763763CC1C292957003EB0B5 /* MASShortcut.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 763763C71C292754003EB0B5 /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		76385EA31C2929C800104A34 /* LrcMerger.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76CEAF671C281DBF0014B3F3 /* LrcMerger.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		76385EA61C292A3100104A34 /* LrcSeeker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 767D7AA01C17BF5E00F8BCBE /* LrcSeeker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		76385EA71C292A3400104A34 /* LrcMaker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7613A6C61C17D1A200D7CB66 /* LrcMaker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */; };
 		7642B9041BF4709300D68FE9 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7642B9021BF4709300D68FE9 /* StatusMenu.xib */; };
 		764334931BF95ECF00C4B740 /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 764334921BF95ECF00C4B740 /* iTunesBridge.m */; };
-		7654A1C31C17DDAC00591985 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7654A1C51C17DDAC00591985 /* MainWindow.xib */; };
-		7654A1CA1C17DE0800591985 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7654A1CC1C17DE0800591985 /* Localizable.strings */; };
-		7654A1D31C17DE9000591985 /* HUDPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7654A1D51C17DE9000591985 /* HUDPreview.xib */; };
-		7654A1E21C17E02C00591985 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7654A1E41C17E02C00591985 /* Preferences.xib */; };
-		7654A1E51C17E03C00591985 /* ArtworkFiller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7654A1E71C17E03C00591985 /* ArtworkFiller.xib */; };
-		7654A1E81C17E04B00591985 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7654A1EA1C17E04B00591985 /* Localizable.strings */; };
 		7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660C5011BF05471002E3204 /* LyricsWindowController.swift */; };
 		766D670F1C03530E00B5405B /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D670E1C03530E00B5405B /* iTunesBridge.m */; };
 		766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F03C41C049372003F4790 /* LyricsEditView.swift */; };
 		7678AA081BFF526700FE848C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7678AA061BFF526700FE848C /* Localizable.strings */; };
-		767D7AA41C17BF5F00F8BCBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AA31C17BF5F00F8BCBE /* AppDelegate.m */; };
-		767D7AA71C17BF5F00F8BCBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AA61C17BF5F00F8BCBE /* main.m */; };
-		767D7AA91C17BF5F00F8BCBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 767D7AA81C17BF5F00F8BCBE /* Assets.xcassets */; };
-		767D7AAC1C17BF5F00F8BCBE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767D7AAA1C17BF5F00F8BCBE /* MainMenu.xib */; };
-		767D7ABE1C17C2C700F8BCBE /* LrcLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AB71C17C2C700F8BCBE /* LrcLineModel.m */; };
-		767D7ABF1C17C2C700F8BCBE /* SongInfos.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AB91C17C2C700F8BCBE /* SongInfos.m */; };
-		767D7AC01C17C2C700F8BCBE /* GeCiMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7ABB1C17C2C700F8BCBE /* GeCiMe.m */; };
-		767D7AC11C17C2C700F8BCBE /* TTPod.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7ABD1C17C2C700F8BCBE /* TTPod.m */; };
-		767D7AC71C17C2F200F8BCBE /* QianQian.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AC41C17C2F200F8BCBE /* QianQian.m */; };
-		767D7AC81C17C2F200F8BCBE /* XMLParserForQianQian.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AC61C17C2F200F8BCBE /* XMLParserForQianQian.m */; };
-		767D7ACE1C17C30B00F8BCBE /* Xiami.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7ACB1C17C30B00F8BCBE /* Xiami.m */; };
-		767D7ACF1C17C30B00F8BCBE /* XMLParserForXiami.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7ACD1C17C30B00F8BCBE /* XMLParserForXiami.m */; };
-		767D7ADF1C17C32A00F8BCBE /* AlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AD21C17C32A00F8BCBE /* AlbumView.m */; };
-		767D7AE01C17C32A00F8BCBE /* SongListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AD41C17C32A00F8BCBE /* SongListView.m */; };
-		767D7AE11C17C32A00F8BCBE /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AD61C17C32A00F8BCBE /* PreferencesController.m */; };
-		767D7AE21C17C32A00F8BCBE /* HUDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AD81C17C32A00F8BCBE /* HUDController.m */; };
-		767D7AE31C17C32A00F8BCBE /* ArtworkFiller.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7ADA1C17C32A00F8BCBE /* ArtworkFiller.m */; };
-		767D7AE41C17C32A00F8BCBE /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7ADC1C17C32A00F8BCBE /* ErrorView.m */; };
-		767D7AE51C17C32A00F8BCBE /* ErrorWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7ADE1C17C32A00F8BCBE /* ErrorWindow.m */; };
-		767D7AF41C17C51200F8BCBE /* ChineseConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AF11C17C51200F8BCBE /* ChineseConverter.m */; };
-		767D7AF51C17C51200F8BCBE /* GlobalConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D7AF31C17C51200F8BCBE /* GlobalConst.m */; };
-		767D7B2A1C17C5C100F8BCBE /* HKVariants.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B1B1C17C5C100F8BCBE /* HKVariants.ocd */; };
-		767D7B2B1C17C5C100F8BCBE /* HKVariantsPhrases.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B1C1C17C5C100F8BCBE /* HKVariantsPhrases.ocd */; };
-		767D7B2C1C17C5C100F8BCBE /* s2hk.json in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B1D1C17C5C100F8BCBE /* s2hk.json */; };
-		767D7B2D1C17C5C100F8BCBE /* s2tw.json in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B1E1C17C5C100F8BCBE /* s2tw.json */; };
-		767D7B2E1C17C5C100F8BCBE /* TWVariants.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B1F1C17C5C100F8BCBE /* TWVariants.ocd */; };
-		767D7B2F1C17C5C100F8BCBE /* s2t.json in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B201C17C5C100F8BCBE /* s2t.json */; };
-		767D7B301C17C5C100F8BCBE /* STCharacters.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B211C17C5C100F8BCBE /* STCharacters.ocd */; };
-		767D7B311C17C5C100F8BCBE /* STPhrases.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B221C17C5C100F8BCBE /* STPhrases.ocd */; };
-		767D7B321C17C5C100F8BCBE /* t2s.json in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B231C17C5C100F8BCBE /* t2s.json */; };
-		767D7B331C17C5C100F8BCBE /* TSCharacters.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B241C17C5C100F8BCBE /* TSCharacters.ocd */; };
-		767D7B341C17C5C100F8BCBE /* TSPhrases.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B251C17C5C100F8BCBE /* TSPhrases.ocd */; };
-		767D7B3B1C17C5EF00F8BCBE /* not_found.png in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B361C17C5EF00F8BCBE /* not_found.png */; };
-		767D7B3C1C17C5EF00F8BCBE /* no_selection.png in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B371C17C5EF00F8BCBE /* no_selection.png */; };
-		767D7B411C17C63700F8BCBE /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
-		767D7B451C17C82500F8BCBE /* libopencc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 767D7B421C17C82500F8BCBE /* libopencc.2.dylib */; };
-		767D7B461C17C82500F8BCBE /* libopencc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 767D7B431C17C82500F8BCBE /* libopencc.dylib */; };
-		767D7B471C17C82500F8BCBE /* libopencc.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 767D7B441C17C82500F8BCBE /* libopencc.1.0.0.dylib */; };
-		767D7B481C17C86D00F8BCBE /* libopencc.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B431C17C82500F8BCBE /* libopencc.dylib */; };
-		767D7B491C17C87000F8BCBE /* libopencc.2.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B421C17C82500F8BCBE /* libopencc.2.dylib */; };
-		767D7B4A1C17C87300F8BCBE /* libopencc.1.0.0.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 767D7B441C17C82500F8BCBE /* libopencc.1.0.0.dylib */; };
 		768203AF1C2B6FA900DB93F0 /* MenuBarLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768203AE1C2B6FA900DB93F0 /* MenuBarLyrics.swift */; };
 		768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
 		768BCB211BF1C62000D6F5EB /* libopencc.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */; };
@@ -111,7 +50,6 @@
 		768BCB3E1BF1C74400D6F5EB /* TSPhrases.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 768BCB331BF1C74400D6F5EB /* TSPhrases.ocd */; };
 		768BCB3F1BF1C74400D6F5EB /* TWVariants.ocd in Resources */ = {isa = PBXBuildFile; fileRef = 768BCB341BF1C74400D6F5EB /* TWVariants.ocd */; };
 		768BCB431BF1C84B00D6F5EB /* ChineseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */; };
-		769AFC3C1C29A7AF00215A6D /* ErrorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AFC3B1C29A7AF00215A6D /* ErrorWindowController.swift */; };
 		769AFC401C29A9C600215A6D /* MessageWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AFC3F1C29A9C600215A6D /* MessageWindowController.swift */; };
 		76C046D01BF2178B005053AC /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C046CF1BF2178B005053AC /* AppController.swift */; };
 		76C046D31BF21876005053AC /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C046D11BF21876005053AC /* Preferences.xib */; };
@@ -158,9 +96,9 @@
 			dstPath = Contents/Library;
 			dstSubfolderSpec = 1;
 			files = (
-				76385EA61C292A3100104A34 /* LrcSeeker.app in CopyFiles */,
-				76385EA71C292A3400104A34 /* LrcMaker.app in CopyFiles */,
 				76385EA31C2929C800104A34 /* LrcMerger.app in CopyFiles */,
+				760BB9681C30CF180014E361 /* LrcSeeker.app in CopyFiles */,
+				760BB96A1C30CFBC0014E361 /* LrcMaker.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,8 +107,6 @@
 /* Begin PBXFileReference section */
 		7600121D1BFD9ECC00C7C1E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LyricsEditWindow.xib; sourceTree = "<group>"; };
 		760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsEditWindowController.swift; sourceTree = "<group>"; };
-		760432B91C1D40B90077E9B4 /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesController.swift; sourceTree = "<group>"; };
-		760432BC1C1D410A0077E9B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Preferences.xib; sourceTree = "<group>"; };
 		760A017D1C01A33400015C62 /* SongInfos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongInfos.h; sourceTree = "<group>"; };
 		760A017E1C01A33400015C62 /* SongInfos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongInfos.m; sourceTree = "<group>"; };
 		760A017F1C01A33400015C62 /* GeCiMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeCiMe.h; sourceTree = "<group>"; };
@@ -185,21 +121,8 @@
 		760A018D1C01A37400015C62 /* Xiami.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xiami.m; sourceTree = "<group>"; };
 		760A018E1C01A37400015C62 /* XMLParserForXiami.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserForXiami.h; sourceTree = "<group>"; };
 		760A018F1C01A37400015C62 /* XMLParserForXiami.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserForXiami.m; sourceTree = "<group>"; };
-		7613A6C61C17D1A200D7CB66 /* LrcMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LrcMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7613A6C81C17D1A200D7CB66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7613A6CA1C17D1A200D7CB66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7613A6CD1C17D1A200D7CB66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		7613A6CF1C17D1A200D7CB66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7613A6D41C17D21600D7CB66 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		7613A6DB1C17D32B00D7CB66 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
-		7613A6DC1C17D32B00D7CB66 /* LyricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
-		7613A6DD1C17D32B00D7CB66 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
-		7613A6E41C17D35E00D7CB66 /* LrcMaker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LrcMaker-Bridging-Header.h"; sourceTree = "<group>"; };
-		7613A6E51C17D35F00D7CB66 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
-		7613A6E61C17D35F00D7CB66 /* LyricsLineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsLineModel.swift; sourceTree = "<group>"; };
-		7613A6E71C17D35F00D7CB66 /* iTunesBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridge.h; sourceTree = "<group>"; };
-		7613A6E81C17D35F00D7CB66 /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
-		7613A6ED1C17D3B800D7CB66 /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
+		760BB9671C30CEFE0014E361 /* LrcSeeker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = LrcSeeker.app; sourceTree = "<group>"; };
+		760BB9691C30CFAB0014E361 /* LrcMaker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = LrcMaker.app; sourceTree = "<group>"; };
 		7622A7621C2A6757001250DD /* ClickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickView.swift; sourceTree = "<group>"; };
 		7633A2FE1C202F9500D58360 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		763763C71C292754003EB0B5 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASShortcut.framework; sourceTree = "<group>"; };
@@ -208,26 +131,6 @@
 		7642B9061BF488AB00D68FE9 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		764334911BF95ECF00C4B740 /* iTunesBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridge.h; sourceTree = "<group>"; };
 		764334921BF95ECF00C4B740 /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
-		764984461C17EB3700513057 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Preferences.strings"; sourceTree = "<group>"; };
-		764984471C17EB3C00513057 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.strings"; sourceTree = "<group>"; };
-		7654A1C41C17DDAC00591985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		7654A1C71C17DDBA00591985 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainWindow.strings"; sourceTree = "<group>"; };
-		7654A1C91C17DDEC00591985 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainWindow.strings"; sourceTree = "<group>"; };
-		7654A1CB1C17DE0800591985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7654A1CD1C17DE0C00591985 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		7654A1CE1C17DE0E00591985 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		7654A1D41C17DE9000591985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HUDPreview.xib; sourceTree = "<group>"; };
-		7654A1DB1C17E00C00591985 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HUDPreview.strings"; sourceTree = "<group>"; };
-		7654A1DD1C17E00E00591985 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/HUDPreview.strings"; sourceTree = "<group>"; };
-		7654A1E31C17E02C00591985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Preferences.xib; sourceTree = "<group>"; };
-		7654A1E61C17E03C00591985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ArtworkFiller.xib; sourceTree = "<group>"; };
-		7654A1E91C17E04B00591985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7654A1F01C17E0D100591985 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ArtworkFiller.strings"; sourceTree = "<group>"; };
-		7654A1F21C17E0D400591985 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/ArtworkFiller.strings"; sourceTree = "<group>"; };
-		7654A1F41C17E0FC00591985 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		7654A1F51C17E10C00591985 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		7654A1FD1C17E2E900591985 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
-		7654A1FE1C17E2EE00591985 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		765B7F8A1C2E3B320066F2B4 /* NSStatusBar+NSStatusBar_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStatusBar+NSStatusBar_Private.h"; sourceTree = "<group>"; };
 		7660C5011BF05471002E3204 /* LyricsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsWindowController.swift; sourceTree = "<group>"; };
 		766D670B1C03530D00B5405B /* LyricsX Helper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LyricsX Helper-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -242,68 +145,6 @@
 		7678AA071BFF526700FE848C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7678AA091BFF552700FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7678AA0A1BFF552900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		767D7AA01C17BF5E00F8BCBE /* LrcSeeker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LrcSeeker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		767D7AA21C17BF5F00F8BCBE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		767D7AA31C17BF5F00F8BCBE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		767D7AA61C17BF5F00F8BCBE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		767D7AA81C17BF5F00F8BCBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		767D7AAB1C17BF5F00F8BCBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		767D7AAD1C17BF5F00F8BCBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		767D7AB11C17C29D00F8BCBE /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
-		767D7AB21C17C29D00F8BCBE /* opencc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opencc.h; sourceTree = "<group>"; };
-		767D7AB31C17C29D00F8BCBE /* Export.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Export.hpp; sourceTree = "<group>"; };
-		767D7AB41C17C29D00F8BCBE /* SimpleConverter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SimpleConverter.hpp; sourceTree = "<group>"; };
-		767D7AB61C17C2C700F8BCBE /* LrcLineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LrcLineModel.h; sourceTree = "<group>"; };
-		767D7AB71C17C2C700F8BCBE /* LrcLineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LrcLineModel.m; sourceTree = "<group>"; };
-		767D7AB81C17C2C700F8BCBE /* SongInfos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongInfos.h; sourceTree = "<group>"; };
-		767D7AB91C17C2C700F8BCBE /* SongInfos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongInfos.m; sourceTree = "<group>"; };
-		767D7ABA1C17C2C700F8BCBE /* GeCiMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeCiMe.h; sourceTree = "<group>"; };
-		767D7ABB1C17C2C700F8BCBE /* GeCiMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeCiMe.m; sourceTree = "<group>"; };
-		767D7ABC1C17C2C700F8BCBE /* TTPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPod.h; sourceTree = "<group>"; };
-		767D7ABD1C17C2C700F8BCBE /* TTPod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPod.m; sourceTree = "<group>"; };
-		767D7AC31C17C2F200F8BCBE /* QianQian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QianQian.h; sourceTree = "<group>"; };
-		767D7AC41C17C2F200F8BCBE /* QianQian.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianQian.m; sourceTree = "<group>"; };
-		767D7AC51C17C2F200F8BCBE /* XMLParserForQianQian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserForQianQian.h; sourceTree = "<group>"; };
-		767D7AC61C17C2F200F8BCBE /* XMLParserForQianQian.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserForQianQian.m; sourceTree = "<group>"; };
-		767D7ACA1C17C30B00F8BCBE /* Xiami.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xiami.h; sourceTree = "<group>"; };
-		767D7ACB1C17C30B00F8BCBE /* Xiami.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xiami.m; sourceTree = "<group>"; };
-		767D7ACC1C17C30B00F8BCBE /* XMLParserForXiami.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserForXiami.h; sourceTree = "<group>"; };
-		767D7ACD1C17C30B00F8BCBE /* XMLParserForXiami.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserForXiami.m; sourceTree = "<group>"; };
-		767D7AD11C17C32A00F8BCBE /* AlbumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumView.h; sourceTree = "<group>"; };
-		767D7AD21C17C32A00F8BCBE /* AlbumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumView.m; sourceTree = "<group>"; };
-		767D7AD31C17C32A00F8BCBE /* SongListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongListView.h; sourceTree = "<group>"; };
-		767D7AD41C17C32A00F8BCBE /* SongListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongListView.m; sourceTree = "<group>"; };
-		767D7AD51C17C32A00F8BCBE /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
-		767D7AD61C17C32A00F8BCBE /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
-		767D7AD71C17C32A00F8BCBE /* HUDController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDController.h; sourceTree = "<group>"; };
-		767D7AD81C17C32A00F8BCBE /* HUDController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDController.m; sourceTree = "<group>"; };
-		767D7AD91C17C32A00F8BCBE /* ArtworkFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkFiller.h; sourceTree = "<group>"; };
-		767D7ADA1C17C32A00F8BCBE /* ArtworkFiller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkFiller.m; sourceTree = "<group>"; };
-		767D7ADB1C17C32A00F8BCBE /* ErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorView.h; sourceTree = "<group>"; };
-		767D7ADC1C17C32A00F8BCBE /* ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorView.m; sourceTree = "<group>"; };
-		767D7ADD1C17C32A00F8BCBE /* ErrorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorWindow.h; sourceTree = "<group>"; };
-		767D7ADE1C17C32A00F8BCBE /* ErrorWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorWindow.m; sourceTree = "<group>"; };
-		767D7AF01C17C51200F8BCBE /* ChineseConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseConverter.h; sourceTree = "<group>"; };
-		767D7AF11C17C51200F8BCBE /* ChineseConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseConverter.m; sourceTree = "<group>"; };
-		767D7AF21C17C51200F8BCBE /* GlobalConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConst.h; sourceTree = "<group>"; };
-		767D7AF31C17C51200F8BCBE /* GlobalConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalConst.m; sourceTree = "<group>"; };
-		767D7AF71C17C54800F8BCBE /* LrcSeeker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LrcSeeker-Prefix.pch"; sourceTree = "<group>"; };
-		767D7B1B1C17C5C100F8BCBE /* HKVariants.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = HKVariants.ocd; sourceTree = "<group>"; };
-		767D7B1C1C17C5C100F8BCBE /* HKVariantsPhrases.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = HKVariantsPhrases.ocd; sourceTree = "<group>"; };
-		767D7B1D1C17C5C100F8BCBE /* s2hk.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = s2hk.json; sourceTree = "<group>"; };
-		767D7B1E1C17C5C100F8BCBE /* s2tw.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = s2tw.json; sourceTree = "<group>"; };
-		767D7B1F1C17C5C100F8BCBE /* TWVariants.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = TWVariants.ocd; sourceTree = "<group>"; };
-		767D7B201C17C5C100F8BCBE /* s2t.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = s2t.json; sourceTree = "<group>"; };
-		767D7B211C17C5C100F8BCBE /* STCharacters.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = STCharacters.ocd; sourceTree = "<group>"; };
-		767D7B221C17C5C100F8BCBE /* STPhrases.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = STPhrases.ocd; sourceTree = "<group>"; };
-		767D7B231C17C5C100F8BCBE /* t2s.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = t2s.json; sourceTree = "<group>"; };
-		767D7B241C17C5C100F8BCBE /* TSCharacters.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = TSCharacters.ocd; sourceTree = "<group>"; };
-		767D7B251C17C5C100F8BCBE /* TSPhrases.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = TSPhrases.ocd; sourceTree = "<group>"; };
-		767D7B361C17C5EF00F8BCBE /* not_found.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = not_found.png; sourceTree = "<group>"; };
-		767D7B371C17C5EF00F8BCBE /* no_selection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_selection.png; sourceTree = "<group>"; };
-		767D7B421C17C82500F8BCBE /* libopencc.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.2.dylib; sourceTree = "<group>"; };
-		767D7B431C17C82500F8BCBE /* libopencc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.dylib; sourceTree = "<group>"; };
-		767D7B441C17C82500F8BCBE /* libopencc.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.1.0.0.dylib; sourceTree = "<group>"; };
 		768203AE1C2B6FA900DB93F0 /* MenuBarLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarLyrics.swift; sourceTree = "<group>"; };
 		768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		768BCAE51BF1866400D6F5EB /* Lyrics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -325,7 +166,6 @@
 		768BCB331BF1C74400D6F5EB /* TSPhrases.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = TSPhrases.ocd; sourceTree = "<group>"; };
 		768BCB341BF1C74400D6F5EB /* TWVariants.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = TWVariants.ocd; sourceTree = "<group>"; };
 		768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChineseConverter.swift; sourceTree = "<group>"; };
-		769AFC3B1C29A7AF00215A6D /* ErrorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorWindowController.swift; sourceTree = "<group>"; };
 		769AFC3F1C29A9C600215A6D /* MessageWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageWindowController.swift; sourceTree = "<group>"; };
 		76C046CF1BF2178B005053AC /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		76C046D21BF21876005053AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Preferences.xib; sourceTree = "<group>"; };
@@ -348,34 +188,11 @@
 		76D060681C02E997000DA86C /* Lyrics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Prefix.pch"; sourceTree = "<group>"; };
 		76D060741C03221B000DA86C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/Preferences.xib"; sourceTree = "<group>"; };
 		76D060751C032220000DA86C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.xib"; sourceTree = "<group>"; };
-		76E7E06E1C1D616400C0C4F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Preferences.strings"; sourceTree = "<group>"; };
-		76E7E0701C1D616600C0C4F1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.strings"; sourceTree = "<group>"; };
 		76FE94401BFC223600A1AC27 /* TextPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPreview.swift; sourceTree = "<group>"; };
 		76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7613A6C31C17D1A200D7CB66 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7613A6D61C17D22B00D7CB66 /* QuartzCore.framework in Frameworks */,
-				7613A6D51C17D21600D7CB66 /* AVFoundation.framework in Frameworks */,
-				7613A6D31C17D1BC00D7CB66 /* ScriptingBridge.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		767D7A9D1C17BF5E00F8BCBE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				767D7B411C17C63700F8BCBE /* ScriptingBridge.framework in Frameworks */,
-				767D7B451C17C82500F8BCBE /* libopencc.2.dylib in Frameworks */,
-				767D7B471C17C82500F8BCBE /* libopencc.1.0.0.dylib in Frameworks */,
-				767D7B461C17C82500F8BCBE /* libopencc.dylib in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		76C511561BEC6F8F0095F510 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -402,17 +219,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		760432BE1C1D41120077E9B4 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				7613A6CC1C17D1A200D7CB66 /* MainMenu.xib */,
-				760432BB1C1D410A0077E9B4 /* Preferences.xib */,
-				7654A1C51C17DDAC00591985 /* MainWindow.xib */,
-				7654A1CC1C17DE0800591985 /* Localizable.strings */,
-			);
-			name = UI;
-			sourceTree = "<group>";
-		};
 		760A01921C01A38C00015C62 /* QianQian */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,53 +239,6 @@
 				760A018F1C01A37400015C62 /* XMLParserForXiami.m */,
 			);
 			name = Xiami;
-			sourceTree = "<group>";
-		};
-		7613A6C71C17D1A200D7CB66 /* LrcMaker */ = {
-			isa = PBXGroup;
-			children = (
-				7613A6C81C17D1A200D7CB66 /* AppDelegate.swift */,
-				7613A6E31C17D33200D7CB66 /* Wins & Views */,
-				760432BE1C1D41120077E9B4 /* UI */,
-				7613A6EE1C17D3BD00D7CB66 /* Headers */,
-				7613A6EC1C17D37200D7CB66 /* Other */,
-				7613A6D41C17D21600D7CB66 /* AVFoundation.framework */,
-			);
-			path = LrcMaker;
-			sourceTree = "<group>";
-		};
-		7613A6E31C17D33200D7CB66 /* Wins & Views */ = {
-			isa = PBXGroup;
-			children = (
-				7613A6DB1C17D32B00D7CB66 /* MainWindowController.swift */,
-				760432B91C1D40B90077E9B4 /* PreferencesController.swift */,
-				769AFC3B1C29A7AF00215A6D /* ErrorWindowController.swift */,
-				7613A6DC1C17D32B00D7CB66 /* LyricsView.swift */,
-				7613A6DD1C17D32B00D7CB66 /* TextView.swift */,
-			);
-			name = "Wins & Views";
-			sourceTree = "<group>";
-		};
-		7613A6EC1C17D37200D7CB66 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				7613A6E51C17D35F00D7CB66 /* Macros.swift */,
-				7613A6E61C17D35F00D7CB66 /* LyricsLineModel.swift */,
-				7613A6E71C17D35F00D7CB66 /* iTunesBridge.h */,
-				7613A6E81C17D35F00D7CB66 /* iTunesBridge.m */,
-				7613A6CA1C17D1A200D7CB66 /* Assets.xcassets */,
-				7613A6CF1C17D1A200D7CB66 /* Info.plist */,
-			);
-			name = Other;
-			sourceTree = "<group>";
-		};
-		7613A6EE1C17D3BD00D7CB66 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				7613A6ED1C17D3B800D7CB66 /* iTunes.h */,
-				7613A6E41C17D35E00D7CB66 /* LrcMaker-Bridging-Header.h */,
-			);
-			name = Headers;
 			sourceTree = "<group>";
 		};
 		76596BB91BF6216A00DEEF62 /* Lyrics Sources */ = {
@@ -565,158 +324,6 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
-		767D7AA11C17BF5F00F8BCBE /* LrcSeeker */ = {
-			isa = PBXGroup;
-			children = (
-				767D7AA21C17BF5F00F8BCBE /* AppDelegate.h */,
-				767D7AA31C17BF5F00F8BCBE /* AppDelegate.m */,
-				767D7AC21C17C2D200F8BCBE /* Lyrics Sources */,
-				767D7AE61C17C33100F8BCBE /* Controller */,
-				767D7AB51C17C2B000F8BCBE /* Headers */,
-				767D7AEF1C17C49C00F8BCBE /* UI */,
-				767D7AF61C17C51800F8BCBE /* Other Source */,
-				767D7AA51C17BF5F00F8BCBE /* Supporting Files */,
-				767D7B401C17C5F600F8BCBE /* Library */,
-			);
-			path = LrcSeeker;
-			sourceTree = "<group>";
-		};
-		767D7AA51C17BF5F00F8BCBE /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				767D7AA61C17BF5F00F8BCBE /* main.m */,
-				767D7AAD1C17BF5F00F8BCBE /* Info.plist */,
-				767D7AF71C17C54800F8BCBE /* LrcSeeker-Prefix.pch */,
-				767D7AA81C17BF5F00F8BCBE /* Assets.xcassets */,
-				767D7B361C17C5EF00F8BCBE /* not_found.png */,
-				767D7B371C17C5EF00F8BCBE /* no_selection.png */,
-				767D7B351C17C5CE00F8BCBE /* OpenCC Files */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		767D7AB51C17C2B000F8BCBE /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				767D7AB11C17C29D00F8BCBE /* iTunes.h */,
-				767D7AB21C17C29D00F8BCBE /* opencc.h */,
-				767D7AB31C17C29D00F8BCBE /* Export.hpp */,
-				767D7AB41C17C29D00F8BCBE /* SimpleConverter.hpp */,
-			);
-			name = Headers;
-			sourceTree = "<group>";
-		};
-		767D7AC21C17C2D200F8BCBE /* Lyrics Sources */ = {
-			isa = PBXGroup;
-			children = (
-				767D7AB61C17C2C700F8BCBE /* LrcLineModel.h */,
-				767D7AB71C17C2C700F8BCBE /* LrcLineModel.m */,
-				767D7AB81C17C2C700F8BCBE /* SongInfos.h */,
-				767D7AB91C17C2C700F8BCBE /* SongInfos.m */,
-				767D7ABA1C17C2C700F8BCBE /* GeCiMe.h */,
-				767D7ABB1C17C2C700F8BCBE /* GeCiMe.m */,
-				767D7ABC1C17C2C700F8BCBE /* TTPod.h */,
-				767D7ABD1C17C2C700F8BCBE /* TTPod.m */,
-				767D7AD01C17C31100F8BCBE /* Xiami */,
-				767D7AC91C17C2F900F8BCBE /* QianQian */,
-			);
-			name = "Lyrics Sources";
-			sourceTree = "<group>";
-		};
-		767D7AC91C17C2F900F8BCBE /* QianQian */ = {
-			isa = PBXGroup;
-			children = (
-				767D7AC31C17C2F200F8BCBE /* QianQian.h */,
-				767D7AC41C17C2F200F8BCBE /* QianQian.m */,
-				767D7AC51C17C2F200F8BCBE /* XMLParserForQianQian.h */,
-				767D7AC61C17C2F200F8BCBE /* XMLParserForQianQian.m */,
-			);
-			name = QianQian;
-			sourceTree = "<group>";
-		};
-		767D7AD01C17C31100F8BCBE /* Xiami */ = {
-			isa = PBXGroup;
-			children = (
-				767D7ACA1C17C30B00F8BCBE /* Xiami.h */,
-				767D7ACB1C17C30B00F8BCBE /* Xiami.m */,
-				767D7ACC1C17C30B00F8BCBE /* XMLParserForXiami.h */,
-				767D7ACD1C17C30B00F8BCBE /* XMLParserForXiami.m */,
-			);
-			name = Xiami;
-			sourceTree = "<group>";
-		};
-		767D7AE61C17C33100F8BCBE /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				767D7AD11C17C32A00F8BCBE /* AlbumView.h */,
-				767D7AD21C17C32A00F8BCBE /* AlbumView.m */,
-				767D7AD31C17C32A00F8BCBE /* SongListView.h */,
-				767D7AD41C17C32A00F8BCBE /* SongListView.m */,
-				767D7AD51C17C32A00F8BCBE /* PreferencesController.h */,
-				767D7AD61C17C32A00F8BCBE /* PreferencesController.m */,
-				767D7AD71C17C32A00F8BCBE /* HUDController.h */,
-				767D7AD81C17C32A00F8BCBE /* HUDController.m */,
-				767D7AD91C17C32A00F8BCBE /* ArtworkFiller.h */,
-				767D7ADA1C17C32A00F8BCBE /* ArtworkFiller.m */,
-				767D7ADB1C17C32A00F8BCBE /* ErrorView.h */,
-				767D7ADC1C17C32A00F8BCBE /* ErrorView.m */,
-				767D7ADD1C17C32A00F8BCBE /* ErrorWindow.h */,
-				767D7ADE1C17C32A00F8BCBE /* ErrorWindow.m */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		767D7AEF1C17C49C00F8BCBE /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				767D7AAA1C17BF5F00F8BCBE /* MainMenu.xib */,
-				7654A1D51C17DE9000591985 /* HUDPreview.xib */,
-				7654A1E41C17E02C00591985 /* Preferences.xib */,
-				7654A1E71C17E03C00591985 /* ArtworkFiller.xib */,
-				7654A1EA1C17E04B00591985 /* Localizable.strings */,
-			);
-			name = UI;
-			sourceTree = "<group>";
-		};
-		767D7AF61C17C51800F8BCBE /* Other Source */ = {
-			isa = PBXGroup;
-			children = (
-				767D7AF01C17C51200F8BCBE /* ChineseConverter.h */,
-				767D7AF11C17C51200F8BCBE /* ChineseConverter.m */,
-				767D7AF21C17C51200F8BCBE /* GlobalConst.h */,
-				767D7AF31C17C51200F8BCBE /* GlobalConst.m */,
-			);
-			name = "Other Source";
-			sourceTree = "<group>";
-		};
-		767D7B351C17C5CE00F8BCBE /* OpenCC Files */ = {
-			isa = PBXGroup;
-			children = (
-				767D7B1B1C17C5C100F8BCBE /* HKVariants.ocd */,
-				767D7B1C1C17C5C100F8BCBE /* HKVariantsPhrases.ocd */,
-				767D7B1D1C17C5C100F8BCBE /* s2hk.json */,
-				767D7B1E1C17C5C100F8BCBE /* s2tw.json */,
-				767D7B1F1C17C5C100F8BCBE /* TWVariants.ocd */,
-				767D7B201C17C5C100F8BCBE /* s2t.json */,
-				767D7B211C17C5C100F8BCBE /* STCharacters.ocd */,
-				767D7B221C17C5C100F8BCBE /* STPhrases.ocd */,
-				767D7B231C17C5C100F8BCBE /* t2s.json */,
-				767D7B241C17C5C100F8BCBE /* TSCharacters.ocd */,
-				767D7B251C17C5C100F8BCBE /* TSPhrases.ocd */,
-			);
-			name = "OpenCC Files";
-			sourceTree = "<group>";
-		};
-		767D7B401C17C5F600F8BCBE /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				767D7B421C17C82500F8BCBE /* libopencc.2.dylib */,
-				767D7B431C17C82500F8BCBE /* libopencc.dylib */,
-				767D7B441C17C82500F8BCBE /* libopencc.1.0.0.dylib */,
-			);
-			name = Library;
-			sourceTree = "<group>";
-		};
 		768BCB401BF1C74C00D6F5EB /* OpenCC Res */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,8 +359,8 @@
 			children = (
 				76C5115B1BEC6F8F0095F510 /* Lyrics */,
 				76D060431C02B8D8000DA86C /* LyricsX Helper */,
-				767D7AA11C17BF5F00F8BCBE /* LrcSeeker */,
-				7613A6C71C17D1A200D7CB66 /* LrcMaker */,
+				760BB9691C30CFAB0014E361 /* LrcMaker.app */,
+				760BB9671C30CEFE0014E361 /* LrcSeeker.app */,
 				76CEAF671C281DBF0014B3F3 /* LrcMerger.app */,
 				76C5115A1BEC6F8F0095F510 /* Products */,
 			);
@@ -764,8 +371,6 @@
 			children = (
 				76C511591BEC6F8F0095F510 /* LyricsX.app */,
 				76D060421C02B8D8000DA86C /* LyricsX Helper.app */,
-				767D7AA01C17BF5E00F8BCBE /* LrcSeeker.app */,
-				7613A6C61C17D1A200D7CB66 /* LrcMaker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -804,40 +409,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7613A6C51C17D1A200D7CB66 /* LrcMaker */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7613A6D01C17D1A200D7CB66 /* Build configuration list for PBXNativeTarget "LrcMaker" */;
-			buildPhases = (
-				7613A6C21C17D1A200D7CB66 /* Sources */,
-				7613A6C31C17D1A200D7CB66 /* Frameworks */,
-				7613A6C41C17D1A200D7CB66 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = LrcMaker;
-			productName = LrcMaker;
-			productReference = 7613A6C61C17D1A200D7CB66 /* LrcMaker.app */;
-			productType = "com.apple.product-type.application";
-		};
-		767D7A9F1C17BF5E00F8BCBE /* LrcSeeker */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 767D7AAE1C17BF5F00F8BCBE /* Build configuration list for PBXNativeTarget "LrcSeeker" */;
-			buildPhases = (
-				767D7A9C1C17BF5E00F8BCBE /* Sources */,
-				767D7A9D1C17BF5E00F8BCBE /* Frameworks */,
-				767D7A9E1C17BF5E00F8BCBE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = LrcSeeker;
-			productName = LrcSeeker;
-			productReference = 767D7AA01C17BF5E00F8BCBE /* LrcSeeker.app */;
-			productType = "com.apple.product-type.application";
-		};
 		76C511581BEC6F8F0095F510 /* LyricsX */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76C511711BEC6F8F0095F510 /* Build configuration list for PBXNativeTarget "LyricsX" */;
@@ -885,12 +456,6 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Eru;
 				TargetAttributes = {
-					7613A6C51C17D1A200D7CB66 = {
-						CreatedOnToolsVersion = 7.1.1;
-					};
-					767D7A9F1C17BF5E00F8BCBE = {
-						CreatedOnToolsVersion = 7.1.1;
-					};
 					76C511581BEC6F8F0095F510 = {
 						CreatedOnToolsVersion = 7.1;
 					};
@@ -916,54 +481,11 @@
 			targets = (
 				76C511581BEC6F8F0095F510 /* LyricsX */,
 				76D060411C02B8D8000DA86C /* LyricsX Helper */,
-				767D7A9F1C17BF5E00F8BCBE /* LrcSeeker */,
-				7613A6C51C17D1A200D7CB66 /* LrcMaker */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7613A6C41C17D1A200D7CB66 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7613A6CB1C17D1A200D7CB66 /* Assets.xcassets in Resources */,
-				7654A1CA1C17DE0800591985 /* Localizable.strings in Resources */,
-				7613A6CE1C17D1A200D7CB66 /* MainMenu.xib in Resources */,
-				7654A1C31C17DDAC00591985 /* MainWindow.xib in Resources */,
-				760432BD1C1D410A0077E9B4 /* Preferences.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		767D7A9E1C17BF5E00F8BCBE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				767D7B481C17C86D00F8BCBE /* libopencc.dylib in Resources */,
-				767D7B491C17C87000F8BCBE /* libopencc.2.dylib in Resources */,
-				767D7B4A1C17C87300F8BCBE /* libopencc.1.0.0.dylib in Resources */,
-				7654A1D31C17DE9000591985 /* HUDPreview.xib in Resources */,
-				767D7B3C1C17C5EF00F8BCBE /* no_selection.png in Resources */,
-				7654A1E81C17E04B00591985 /* Localizable.strings in Resources */,
-				767D7AA91C17BF5F00F8BCBE /* Assets.xcassets in Resources */,
-				767D7B2D1C17C5C100F8BCBE /* s2tw.json in Resources */,
-				767D7B2B1C17C5C100F8BCBE /* HKVariantsPhrases.ocd in Resources */,
-				767D7B3B1C17C5EF00F8BCBE /* not_found.png in Resources */,
-				767D7B321C17C5C100F8BCBE /* t2s.json in Resources */,
-				767D7B2E1C17C5C100F8BCBE /* TWVariants.ocd in Resources */,
-				767D7B2F1C17C5C100F8BCBE /* s2t.json in Resources */,
-				767D7B311C17C5C100F8BCBE /* STPhrases.ocd in Resources */,
-				767D7B341C17C5C100F8BCBE /* TSPhrases.ocd in Resources */,
-				7654A1E21C17E02C00591985 /* Preferences.xib in Resources */,
-				767D7AAC1C17BF5F00F8BCBE /* MainMenu.xib in Resources */,
-				767D7B2C1C17C5C100F8BCBE /* s2hk.json in Resources */,
-				767D7B2A1C17C5C100F8BCBE /* HKVariants.ocd in Resources */,
-				767D7B301C17C5C100F8BCBE /* STCharacters.ocd in Resources */,
-				7654A1E51C17E03C00591985 /* ArtworkFiller.xib in Resources */,
-				767D7B331C17C5C100F8BCBE /* TSCharacters.ocd in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		76C511571BEC6F8F0095F510 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1003,48 +525,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7613A6C21C17D1A200D7CB66 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7613A6E91C17D35F00D7CB66 /* Macros.swift in Sources */,
-				7613A6DF1C17D32B00D7CB66 /* MainWindowController.swift in Sources */,
-				769AFC3C1C29A7AF00215A6D /* ErrorWindowController.swift in Sources */,
-				7613A6EA1C17D35F00D7CB66 /* LyricsLineModel.swift in Sources */,
-				760432BA1C1D40B90077E9B4 /* PreferencesController.swift in Sources */,
-				7613A6E11C17D32B00D7CB66 /* TextView.swift in Sources */,
-				7613A6E01C17D32B00D7CB66 /* LyricsView.swift in Sources */,
-				7613A6C91C17D1A200D7CB66 /* AppDelegate.swift in Sources */,
-				7613A6EB1C17D35F00D7CB66 /* iTunesBridge.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		767D7A9C1C17BF5E00F8BCBE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				767D7AF51C17C51200F8BCBE /* GlobalConst.m in Sources */,
-				767D7AE11C17C32A00F8BCBE /* PreferencesController.m in Sources */,
-				767D7AC81C17C2F200F8BCBE /* XMLParserForQianQian.m in Sources */,
-				767D7AE51C17C32A00F8BCBE /* ErrorWindow.m in Sources */,
-				767D7AE31C17C32A00F8BCBE /* ArtworkFiller.m in Sources */,
-				767D7ABF1C17C2C700F8BCBE /* SongInfos.m in Sources */,
-				767D7AC01C17C2C700F8BCBE /* GeCiMe.m in Sources */,
-				767D7ACE1C17C30B00F8BCBE /* Xiami.m in Sources */,
-				767D7ADF1C17C32A00F8BCBE /* AlbumView.m in Sources */,
-				767D7AA71C17BF5F00F8BCBE /* main.m in Sources */,
-				767D7AC11C17C2C700F8BCBE /* TTPod.m in Sources */,
-				767D7AF41C17C51200F8BCBE /* ChineseConverter.m in Sources */,
-				767D7AA41C17BF5F00F8BCBE /* AppDelegate.m in Sources */,
-				767D7AE21C17C32A00F8BCBE /* HUDController.m in Sources */,
-				767D7AE41C17C32A00F8BCBE /* ErrorView.m in Sources */,
-				767D7ABE1C17C2C700F8BCBE /* LrcLineModel.m in Sources */,
-				767D7AC71C17C2F200F8BCBE /* QianQian.m in Sources */,
-				767D7ACF1C17C30B00F8BCBE /* XMLParserForXiami.m in Sources */,
-				767D7AE01C17C32A00F8BCBE /* SongListView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		76C511551BEC6F8F0095F510 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1096,24 +576,6 @@
 			name = LyricsEditWindow.xib;
 			sourceTree = "<group>";
 		};
-		760432BB1C1D410A0077E9B4 /* Preferences.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				760432BC1C1D410A0077E9B4 /* Base */,
-				76E7E06E1C1D616400C0C4F1 /* zh-Hans */,
-				76E7E0701C1D616600C0C4F1 /* zh-Hant */,
-			);
-			name = Preferences.xib;
-			sourceTree = "<group>";
-		};
-		7613A6CC1C17D1A200D7CB66 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7613A6CD1C17D1A200D7CB66 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
 		7642B9021BF4709300D68FE9 /* StatusMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1124,67 +586,6 @@
 			name = StatusMenu.xib;
 			sourceTree = "<group>";
 		};
-		7654A1C51C17DDAC00591985 /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7654A1C41C17DDAC00591985 /* Base */,
-				7654A1C71C17DDBA00591985 /* zh-Hans */,
-				7654A1C91C17DDEC00591985 /* zh-Hant */,
-			);
-			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		7654A1CC1C17DE0800591985 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7654A1CB1C17DE0800591985 /* Base */,
-				7654A1CD1C17DE0C00591985 /* zh-Hans */,
-				7654A1CE1C17DE0E00591985 /* zh-Hant */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		7654A1D51C17DE9000591985 /* HUDPreview.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7654A1D41C17DE9000591985 /* Base */,
-				7654A1DB1C17E00C00591985 /* zh-Hans */,
-				7654A1DD1C17E00E00591985 /* zh-Hant */,
-			);
-			name = HUDPreview.xib;
-			path = "/Volumes/Macintosh HDD/Documents/Lyrics/LrcSeeker";
-			sourceTree = "<absolute>";
-		};
-		7654A1E41C17E02C00591985 /* Preferences.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7654A1E31C17E02C00591985 /* Base */,
-				764984461C17EB3700513057 /* zh-Hans */,
-				764984471C17EB3C00513057 /* zh-Hant */,
-			);
-			name = Preferences.xib;
-			sourceTree = "<group>";
-		};
-		7654A1E71C17E03C00591985 /* ArtworkFiller.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7654A1E61C17E03C00591985 /* Base */,
-				7654A1F01C17E0D100591985 /* zh-Hans */,
-				7654A1F21C17E0D400591985 /* zh-Hant */,
-			);
-			name = ArtworkFiller.xib;
-			sourceTree = "<group>";
-		};
-		7654A1EA1C17E04B00591985 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7654A1E91C17E04B00591985 /* Base */,
-				7654A1F41C17E0FC00591985 /* zh-Hans */,
-				7654A1F51C17E10C00591985 /* zh-Hant */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		7678AA061BFF526700FE848C /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1193,16 +594,6 @@
 				7678AA0A1BFF552900FE848C /* zh-Hant */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		767D7AAA1C17BF5F00F8BCBE /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				767D7AAB1C17BF5F00F8BCBE /* Base */,
-				7654A1FD1C17E2E900591985 /* zh-Hans */,
-				7654A1FE1C17E2EE00591985 /* zh-Hant */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		76C046D11BF21876005053AC /* Preferences.xib */ = {
@@ -1234,73 +625,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7613A6D11C17D1A200D7CB66 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = LrcMaker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = Eru.LrcMaker;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LrcMaker/LrcMaker-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		7613A6D21C17D1A200D7CB66 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = LrcMaker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = Eru.LrcMaker;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LrcMaker/LrcMaker-Bridging-Header.h";
-			};
-			name = Release;
-		};
-		767D7AAF1C17BF5F00F8BCBE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/LrcSeeker/LrcSeeker-Prefix.pch";
-				INFOPLIST_FILE = LrcSeeker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../Resources";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/LrcSeeker",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = Eru.LrcSeeker;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		767D7AB01C17BF5F00F8BCBE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/LrcSeeker/LrcSeeker-Prefix.pch";
-				INFOPLIST_FILE = LrcSeeker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../Resources";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/LrcSeeker",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = Eru.LrcSeeker;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		76C5116F1BEC6F8F0095F510 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1471,24 +795,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7613A6D01C17D1A200D7CB66 /* Build configuration list for PBXNativeTarget "LrcMaker" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7613A6D11C17D1A200D7CB66 /* Debug */,
-				7613A6D21C17D1A200D7CB66 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		767D7AAE1C17BF5F00F8BCBE /* Build configuration list for PBXNativeTarget "LrcSeeker" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				767D7AAF1C17BF5F00F8BCBE /* Debug */,
-				767D7AB01C17BF5F00F8BCBE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		76C511541BEC6F8F0095F510 /* Build configuration list for PBXProject "Lyrics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

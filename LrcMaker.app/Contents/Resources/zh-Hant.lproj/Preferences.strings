@@ -1,0 +1,9 @@
+
+/* Class = "NSButtonCell"; title = "Play music when set byi Tunes or Open Panel"; ObjectID = "IYl-VT-koE"; */
+"IYl-VT-koE.title" = "當選擇音樂後立即播放";
+
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "ejv-3q-hXm"; */
+"ejv-3q-hXm.title" = "偏好設定";
+
+/* Class = "NSTextFieldCell"; title = "HighLighted Color:"; ObjectID = "pMZ-Ax-yfa"; */
+"pMZ-Ax-yfa.title" = "高亮顏色:";
