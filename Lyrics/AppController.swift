@@ -41,6 +41,7 @@ class AppController: NSObject {
     private var xiami:Xiami!
     private var ttpod:TTPod!
     private var geciMe:GeCiMe!
+    private var qqMusic:QQMusic!
     private var lrcSourceHandleQueue:NSOperationQueue!
     private var userDefaults:NSUserDefaults!
     private var timer: NSTimer!
@@ -58,6 +59,7 @@ class AppController: NSObject {
         xiami = Xiami()
         ttpod = TTPod()
         geciMe = GeCiMe()
+        qqMusic = QQMusic()
         userDefaults = NSUserDefaults.standardUserDefaults()
         lrcSourceHandleQueue = NSOperationQueue()
         lrcSourceHandleQueue.maxConcurrentOperationCount = 1
@@ -760,6 +762,7 @@ class AppController: NSObject {
         xiami.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
         ttpod.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
         geciMe.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
+        qqMusic.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
     }
     
     func handleUserEditLyrics(n: NSNotification) {
@@ -835,42 +838,35 @@ class AppController: NSObject {
         let songTitle: String = userInfo!["title"] as! String
         let artist: String = userInfo!["artist"] as! String
         let songID: String = userInfo!["songID"] as! String
+        let serverLrcs: [SongInfos]
         switch source {
         case 1:
-            let serverLrcs: NSArray = (self.qianqian.currentSongs as NSArray).copy() as! NSArray
-            if serverLrcs.count > 0 {
-                lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
-                    self.handleLrcURLDownloaded(serverLrcs, songTitle: songTitle, artist: artist, songID: songID)
-                })
-            }
+            serverLrcs = (self.qianqian.currentSongs as NSArray).copy() as! [SongInfos]
         case 2:
-            let serverLrcs: NSArray = (self.xiami.currentSongs as NSArray).copy() as! NSArray
-            if serverLrcs.count > 0 {
-                lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
-                    self.handleLrcURLDownloaded(serverLrcs, songTitle: songTitle, artist: artist, songID: songID)
-                })
-            }
+            serverLrcs = (self.xiami.currentSongs as NSArray).copy() as! [SongInfos]
         case 3:
-            let serverLrc: SongInfos = self.ttpod.songInfos.copy() as! SongInfos
-            if serverLrc.lyric != "" {
-                lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
-                    self.handleLrcContentsDownloaded(serverLrc.lyric, songTitle: songTitle, artist: artist, songID: songID)
-                })
+            let info: SongInfos = self.ttpod.songInfos.copy() as! SongInfos
+            if info.lyric == "" {
+                return
+            } else {
+                serverLrcs = [info]
             }
         case 4:
-            let serverLrcs: NSArray = (self.geciMe.currentSongs as NSArray).copy() as! NSArray
-            if serverLrcs.count > 0 {
-                lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
-                    self.handleLrcURLDownloaded(serverLrcs, songTitle: songTitle, artist: artist, songID: songID)
-                })
-            }
+            serverLrcs = (self.geciMe.currentSongs as NSArray).copy() as! [SongInfos]
+        case 5:
+            serverLrcs = (self.qqMusic.currentSongs as NSArray).copy() as! [SongInfos]
         default:
             return;
+        }
+        if serverLrcs.count > 0 {
+            lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
+                self.handleLrcURLDownloaded(serverLrcs, songTitle: songTitle, artist: artist, songID: songID)
+            })
         }
     }
     
     
-    private func handleLrcURLDownloaded(serverLrcs: NSArray, songTitle:String, artist:NSString, songID:NSString) {
+    private func handleLrcURLDownloaded(serverLrcs: [SongInfos], songTitle:String, artist:NSString, songID:NSString) {
         // alread has lyrics, check if user needs a better one.
         if lyricsArray.count > 0 {
             if userDefaults.boolForKey(LyricsSearchForDiglossiaLrc) {
@@ -885,12 +881,17 @@ class AppController: NSObject {
         var lyricsContents: NSString! = nil
         for lrc in serverLrcs {
             if isDiglossiaLrc(lrc.songTitle + lrc.artist) {
-                do {
-                    lyricsContents = try NSString(contentsOfURL: NSURL(string: lrc.lyricURL)!, encoding: NSUTF8StringEncoding)
-                } catch let theError as NSError{
-                    NSLog("%@", theError.localizedDescription)
-                    lyricsContents = nil
-                    continue
+                if lrc.lyric != nil {
+                    lyricsContents = lrc.lyric
+                }
+                else if lrc.lyricURL != nil {
+                    do {
+                        lyricsContents = try NSString(contentsOfURL: NSURL(string: lrc.lyricURL)!, encoding: NSUTF8StringEncoding)
+                    } catch let theError as NSError{
+                        NSLog("%@", theError.localizedDescription)
+                        lyricsContents = nil
+                        continue
+                    }
                 }
                 break
             }
@@ -906,13 +907,17 @@ class AppController: NSObject {
             lyricsContents = nil
             hasDiglossiaLrc = false
             for lrc in serverLrcs {
-                let theURL:NSURL = NSURL(string: lrc.lyricURL)!
-                do {
-                    lyricsContents = try NSString(contentsOfURL: theURL, encoding: NSUTF8StringEncoding)
-                } catch let theError as NSError{
-                    NSLog("%@", theError.localizedDescription)
-                    lyricsContents = nil
-                    continue
+                if lrc.lyric != nil {
+                    lyricsContents = lrc.lyric
+                }
+                else if lrc.lyricURL != nil {
+                    do {
+                        lyricsContents = try NSString(contentsOfURL: NSURL(string: lrc.lyricURL)!, encoding: NSUTF8StringEncoding)
+                    } catch let theError as NSError{
+                        NSLog("%@", theError.localizedDescription)
+                        lyricsContents = nil
+                        continue
+                    }
                 }
                 if lyricsContents != nil && testLrc(lyricsContents) {
                     hasLrc = true
@@ -929,20 +934,6 @@ class AppController: NSObject {
             }
             saveLrcToLocal(lyricsContents, songTitle: songTitle, artist: artist)
         }
-    }
-    
-    
-    private func handleLrcContentsDownloaded(lyricsContents: NSString, songTitle:String, artist:NSString, songID:NSString) {
-        if lyricsArray.count > 0 {
-            return
-        }
-        if !testLrc(lyricsContents) {
-            return
-        }
-        if songID == currentSongID {
-            parsingLrc(lyricsContents)
-        }
-        saveLrcToLocal(lyricsContents, songTitle: songTitle, artist: artist)
     }
     
 // MARK: - Shortcut Events

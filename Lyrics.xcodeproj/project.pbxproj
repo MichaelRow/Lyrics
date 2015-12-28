@@ -26,6 +26,8 @@
 		7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */; };
 		7642B9041BF4709300D68FE9 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7642B9021BF4709300D68FE9 /* StatusMenu.xib */; };
 		764334931BF95ECF00C4B740 /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 764334921BF95ECF00C4B740 /* iTunesBridge.m */; };
+		764B0A831C30D1600048419B /* QQMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764B0A811C30D1600048419B /* QQMusic.swift */; };
+		764B0A841C30D1600048419B /* XMLParserForQQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764B0A821C30D1600048419B /* XMLParserForQQ.swift */; };
 		7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660C5011BF05471002E3204 /* LyricsWindowController.swift */; };
 		766D670F1C03530E00B5405B /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D670E1C03530E00B5405B /* iTunesBridge.m */; };
 		766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F03C41C049372003F4790 /* LyricsEditView.swift */; };
@@ -131,6 +133,8 @@
 		7642B9061BF488AB00D68FE9 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		764334911BF95ECF00C4B740 /* iTunesBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridge.h; sourceTree = "<group>"; };
 		764334921BF95ECF00C4B740 /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
+		764B0A811C30D1600048419B /* QQMusic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQMusic.swift; sourceTree = "<group>"; };
+		764B0A821C30D1600048419B /* XMLParserForQQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLParserForQQ.swift; sourceTree = "<group>"; };
 		765B7F8A1C2E3B320066F2B4 /* NSStatusBar+NSStatusBar_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStatusBar+NSStatusBar_Private.h"; sourceTree = "<group>"; };
 		7660C5011BF05471002E3204 /* LyricsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsWindowController.swift; sourceTree = "<group>"; };
 		766D670B1C03530D00B5405B /* LyricsX Helper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LyricsX Helper-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -241,6 +245,25 @@
 			name = Xiami;
 			sourceTree = "<group>";
 		};
+		764B0A801C30D0F00048419B /* Build-In Apps */ = {
+			isa = PBXGroup;
+			children = (
+				760BB9691C30CFAB0014E361 /* LrcMaker.app */,
+				760BB9671C30CEFE0014E361 /* LrcSeeker.app */,
+				76CEAF671C281DBF0014B3F3 /* LrcMerger.app */,
+			);
+			name = "Build-In Apps";
+			sourceTree = "<group>";
+		};
+		764B0A851C30D1680048419B /* QQ */ = {
+			isa = PBXGroup;
+			children = (
+				764B0A811C30D1600048419B /* QQMusic.swift */,
+				764B0A821C30D1600048419B /* XMLParserForQQ.swift */,
+			);
+			name = QQ;
+			sourceTree = "<group>";
+		};
 		76596BB91BF6216A00DEEF62 /* Lyrics Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +273,7 @@
 				760A01801C01A33400015C62 /* GeCiMe.m */,
 				760A01811C01A33400015C62 /* TTPod.h */,
 				760A01821C01A33400015C62 /* TTPod.m */,
+				764B0A851C30D1680048419B /* QQ */,
 				760A01921C01A38C00015C62 /* QianQian */,
 				760A01931C01A39900015C62 /* Xiami */,
 			);
@@ -359,9 +383,7 @@
 			children = (
 				76C5115B1BEC6F8F0095F510 /* Lyrics */,
 				76D060431C02B8D8000DA86C /* LyricsX Helper */,
-				760BB9691C30CFAB0014E361 /* LrcMaker.app */,
-				760BB9671C30CEFE0014E361 /* LrcSeeker.app */,
-				76CEAF671C281DBF0014B3F3 /* LrcMerger.app */,
+				764B0A801C30D0F00048419B /* Build-In Apps */,
 				76C5115A1BEC6F8F0095F510 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -543,8 +565,10 @@
 				768203AF1C2B6FA900DB93F0 /* MenuBarLyrics.swift in Sources */,
 				76C511781BEC6FD50095F510 /* Macros.swift in Sources */,
 				768BCB431BF1C84B00D6F5EB /* ChineseConverter.swift in Sources */,
+				764B0A841C30D1600048419B /* XMLParserForQQ.swift in Sources */,
 				76C5115D1BEC6F8F0095F510 /* AppDelegate.swift in Sources */,
 				760A01901C01A37400015C62 /* Xiami.m in Sources */,
+				764B0A831C30D1600048419B /* QQMusic.swift in Sources */,
 				766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */,
 				760A01911C01A37400015C62 /* XMLParserForXiami.m in Sources */,
 				76C0471A1BF2E335005053AC /* DBPrefsWindowController.m in Sources */,
