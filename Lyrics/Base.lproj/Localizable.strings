@@ -50,7 +50,9 @@
 
 // Message Window
 "OFFSET"="Offset: %d";
-"DESKTOP_ON"="Desktop Lyrics ON";
-"MENU_BAR_ON"="Menu Bar Lyrics ON";
-"BOTH_ON"="Desktop & Menu Bar Lyrics ON";
-
+"DESKTOP_ON"="Desktop Lyrics:ON";
+"MENU_BAR_ON"="Menu Bar Lyrics:ON";
+"BOTH_ON"="Desktop & Menu Bar Lyrics:ON";
+"OPERATION_FAILED"="Operation Failed:No Lrc";
+"WROTE_TO_ITUNES"="Lyrics Has Wrote To iTunes";
+"COPYED_TO_PB"="Lyrics Has Copyed To Pasteboard";

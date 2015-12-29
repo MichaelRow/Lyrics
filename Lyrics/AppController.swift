@@ -261,6 +261,7 @@ class AppController: NSObject {
     
     @IBAction func copyLyricsToPb(sender: AnyObject?) {
         if lyricsArray.count == 0 {
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
             return
         }
         let theLyrics: NSMutableString = NSMutableString()
@@ -270,14 +271,18 @@ class AppController: NSObject {
         let pb = NSPasteboard.generalPasteboard()
         pb.clearContents()
         pb.writeObjects([theLyrics])
+        MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("COPYED_TO_PB", comment: ""))
     }
     
     @IBAction func copyLyricsWithTagsToPb(sender: AnyObject) {
         let lrcContents = readLocalLyrics()
-        if lrcContents != nil {
+        if lrcContents != nil && lrcContents != "" {
             let pb = NSPasteboard.generalPasteboard()
             pb.clearContents()
             pb.writeObjects([lrcContents!])
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("COPYED_TO_PB", comment: ""))
+        } else {
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
         }
     }
     
@@ -382,6 +387,7 @@ class AppController: NSObject {
     
     @IBAction func writeLyricsToiTunes(sender: AnyObject?) {
         if lyricsArray.count == 0 {
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
             return
         } else {
             let theLyrics: NSMutableString = NSMutableString()
@@ -389,6 +395,7 @@ class AppController: NSObject {
                 theLyrics.appendString(lrc.lyricsSentence as String + "\n")
             }
             iTunes.setLyrics(theLyrics as String)
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
         }
     }
     

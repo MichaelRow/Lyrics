@@ -53,3 +53,6 @@
 "DESKTOP_ON"="桌面歌词开启";
 "MENU_BAR_ON"="菜单栏歌词开启";
 "BOTH_ON"="桌面与菜单栏歌词开启";
+"OPERATION_FAILED"="操作失败:没有歌词";
+"WROTE_TO_ITUNES"="歌词已写入iTunes";
+"COPYED_TO_PB"="歌词已拷贝到剪贴板";

@@ -52,3 +52,6 @@
 "DESKTOP_ON"="桌面歌詞開啟";
 "MENU_BAR_ON"="選單欄歌詞開啟";
 "BOTH_ON"="桌面與選單欄歌詞開啟";
+"OPERATION_FAILED"="操作失敗:沒有歌詞";
+"WROTE_TO_ITUNES"="歌詞已寫入iTunes";
+"COPYED_TO_PB"="歌詞已拷貝到剪貼簿";
