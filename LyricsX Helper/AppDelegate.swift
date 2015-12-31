@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if returnedObj == nil {
             // nil when key not found (register defaults)
-            launchType = 2
+            launchType = 1
         } else {
             launchType = (returnedObj?.integerValue)!
         }
@@ -37,21 +37,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case 0:
             //launches at login
             launchLyricsVox()
-            NSApp.terminate(nil)
         case 1:
-            //launches with iTunes
+            //launches with vox
             if vox.running() {
                 waitForVoxQuit()
             }
             waitForVoxLaunch()
             launchLyricsVox()
-        case 2:
-            //launches when iTunes playing
-            if vox.running() {
-                waitForVoxQuit()
-            }
-            waitForVoxLaunch()
-            NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: "launchLyricsVox", name: "com.coppertino.Vox.trackChanged", object: nil)
         default:
             break
         }
@@ -68,6 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         pathComponents = pathComponents.subarrayWithRange(NSMakeRange(0, pathComponents.count-4))
         let path = NSString.pathWithComponents(pathComponents as! [String])
         NSWorkspace.sharedWorkspace().launchApplication(path)
+        NSApp.terminate(nil)
     }
     
     func waitForVoxLaunch() {

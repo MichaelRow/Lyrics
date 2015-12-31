@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsSavingPathPopUpIndex : NSNumber(integer: 0),
             LyricsUserSavingPath : userSavingPath,
             LyricsAutoLaunches : NSNumber(bool: true),
-            LyricsLaunchTpyePopUpIndex : NSNumber(integer: 2),
+            LyricsLaunchTpyePopUpIndex : NSNumber(integer: 1),
             LyricsServerIndex : NSNumber(integer: 0),
             LyricsQuitWithVox : NSNumber(bool: false),
             LyricsDisableAllAlert : NSNumber(bool: false),
@@ -62,7 +62,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         NSColorPanel.sharedColorPanel().showsAlpha = true
         
-        let lyricsXHelpers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LyricsX-Helper")
+        let lyricsXHelpers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LyricsVox-Helper")
         for helper in lyricsXHelpers {
             helper.forceTerminate()
         }

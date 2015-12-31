@@ -318,16 +318,13 @@
                 <popUpButton verticalHuggingPriority="750" id="DaO-06-BZN">
                     <rect key="frame" x="181" y="177" width="148" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" title="Vox Playing" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="F0g-b3-j9x" id="Q9V-sw-d2o">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Q9V-sw-d2o">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="bCO-9r-R0L">
                             <items>
                                 <menuItem title="User Login" id="aNq-Pa-I1J"/>
                                 <menuItem title="Vox Launched" id="kLu-hK-K4n"/>
-                                <menuItem title="Vox Playing" state="on" id="F0g-b3-j9x">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -1085,7 +1082,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="AAK-6G-7y1">
                         <font key="font" metaFont="system"/>
-                        <string key="title">     Hi from the developer of LricsX. I hope you enjoy using LricsX!      LyricsX is a open source app based on some code of DynamicLyrics and other third party libraries. Its maintenance and developing needs time and money. In fact, I'm concidering set up a server to deal with the update thing. If you love this app, you can support me by donating using Wechat or Alipay. Thank you for being awesome!</string>
+                        <mutableString key="title">     Hi from the developer of LricsVox. I hope you enjoy using LricsVox!      LyricsVox is a open source app based on some third party libraries. Its maintenance and developing needs time and money. In fact, I'm concidering set up a server to deal with the update thing. If you love this app, you can support me by donating using Wechat or Alipay. Thank you for being awesome!</mutableString>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

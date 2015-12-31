@@ -343,16 +343,13 @@
                 <popUpButton verticalHuggingPriority="750" id="DaO-06-BZN">
                     <rect key="frame" x="162" y="183" width="155" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" title="Vox開始播放時" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="F0g-b3-j9x" id="Q9V-sw-d2o">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Q9V-sw-d2o">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="bCO-9r-R0L">
                             <items>
                                 <menuItem title="開機啟動時" id="aNq-Pa-I1J"/>
                                 <menuItem title="Vox啟動時" id="kLu-hK-K4n"/>
-                                <menuItem title="Vox開始播放時" state="on" id="F0g-b3-j9x">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -1101,8 +1098,8 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="AAK-6G-7y1">
                         <font key="font" metaFont="system"/>
-                        <string key="title">      您好，我是LyricsX的開發者。很高興能給你帶來一款為您提供便利的軟體，希望您在使用過程中度過愉快的每一天!
-      LyricsX是一款開源的軟體，並基於DynamicLyrics的部分程式碼以及一些第三方庫。它仍需要花費時間維護與後期開發，並且將來可能需要搭建伺服器以提供更便捷的更新支援。如果您喜愛這款軟體，您可以通過微信以及支付寶向我提供捐贈以支援後續的開發維護。感謝您的慷慨捐贈！</string>
+                        <string key="title">      您好，我是LyricsVox的開發者。很高興能給你帶來一款為您提供便利的軟體，希望您在使用過程中度過愉快的每一天!
+      LyricsVox是一款開源的軟體，並基於一些第三方庫。它仍需要花費時間維護與後期開發，並且將來可能需要搭建伺服器以提供更便捷的更新支援。如果您喜愛這款軟體，您可以通過微信以及支付寶向我提供捐贈以支援後續的開發維護。感謝您的慷慨捐贈！</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

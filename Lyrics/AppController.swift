@@ -23,6 +23,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     var timeDly:Int = 0
     var timeDlyInFile:Int = 0
     
+    private var isTrackingThreadRunning = false
     private var hasDiglossiaLrc:Bool = false
     private var lyricsWindow:LyricsWindowController!
     private var menuBarLyrics:MenuBarLyrics!
@@ -109,9 +110,11 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         
         currentLyrics = "LyricsVox"
+        isTrackingThreadRunning = true
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             self.voxTrackingThread()
         }
+        
         if vox.running() && vox.playing() {
             currentSongID = vox.currentPersistentID().copy() as! NSString
             currentSongTitle = vox.currentTitle().copy() as! NSString
@@ -395,10 +398,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     private func voxTrackingThread() {
         var currentPosition: Int = 0
-        while true {
-            if vox.running() {
-                break
-            }
+        while !vox.running() {
             NSThread.sleepForTimeInterval(1.5)
         }
         
@@ -427,7 +427,15 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 //Check whether terminate.
                 if userDefaults.boolForKey(LyricsQuitWithVox) {
                     NSApp.terminate(nil)
+                    return
                 }
+                if currentLyrics != nil {
+                    currentLyrics = nil
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                    })
+                }
+                isTrackingThreadRunning = false
                 return
             }
             NSThread.sleepForTimeInterval(0.2)
@@ -437,6 +445,12 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     func voxPlayerInfoChanged (n:NSNotification){
         // check whether song is changed
+        if !isTrackingThreadRunning {
+            isTrackingThreadRunning = true
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                self.voxTrackingThread()
+            })
+        }
         if currentSongID == vox.currentPersistentID() {
             return
         } else {

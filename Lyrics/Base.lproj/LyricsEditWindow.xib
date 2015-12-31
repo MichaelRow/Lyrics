@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="LyricsEditWindowController" customModule="LyricsX" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="LyricsEditWindowController" customModule="LyricsVox" customModuleProvider="target">
             <connections>
                 <outlet property="textView" destination="DdJ-zl-cNn" id="4cz-qu-ebd"/>
                 <outlet property="window" destination="ar1-cr-ly1" id="1GL-PC-jIM"/>
@@ -40,7 +40,7 @@
                             <rect key="frame" x="1" y="1" width="407" height="428"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView drawsBackground="NO" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="DdJ-zl-cNn" customClass="LyricsEditView" customModule="LyricsX" customModuleProvider="target">
+                                <textView drawsBackground="NO" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="DdJ-zl-cNn" customClass="LyricsEditView" customModule="LyricsVox" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="392" height="428"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
