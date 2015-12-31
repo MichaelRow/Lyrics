@@ -9,7 +9,7 @@
 import Cocoa
 import ScriptingBridge
 
-class AppController: NSObject {
+class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     //Singleton
     static let sharedAppController = AppController()
@@ -807,8 +807,7 @@ class AppController: NSObject {
             let notification: NSUserNotification = NSUserNotification()
             notification.title = NSLocalizedString("NO_PLAYING_TRACK", comment: "")
             notification.informativeText = NSLocalizedString("IGNORE_LYRICS", comment: "")
-            notification.deliveryDate = NSDate(timeIntervalSinceNow: 0.1)
-            NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
+            NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
             return
         }
         //User lrc has the highest priority level
