@@ -31,7 +31,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     private var statusItem:NSStatusItem!
     private var lyricsArray:[LyricsLineModel]!
     private var idTagsArray:[NSString]!
-    private var iTunes:iTunesBridge!
+    private var vox:VoxBridge!
     private var currentLyrics: NSString!
     private var currentSongID:NSString!
     private var currentSongTitle:NSString!
@@ -51,7 +51,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
 // MARK: - Init & deinit
     override init() {
         super.init()
-        iTunes = iTunesBridge()
+        vox = VoxBridge()
         lyricsArray = Array()
         idTagsArray = Array()
         songList = Array()
@@ -110,11 +110,11 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         
         currentLyrics = "LyricsX"
-        if iTunes.running() && iTunes.playing() {
+        if vox.running() && vox.playing() {
             
-            currentSongID = iTunes.currentPersistentID().copy() as! NSString
-            currentSongTitle = iTunes.currentTitle().copy() as! NSString
-            currentArtist = iTunes.currentArtist().copy() as! NSString
+            currentSongID = vox.currentPersistentID().copy() as! NSString
+            currentSongTitle = vox.currentTitle().copy() as! NSString
+            currentArtist = vox.currentArtist().copy() as! NSString
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
                 self.handleSongChange()
@@ -250,7 +250,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         panel.nameFieldStringValue = (currentSongTitle as String) + " - " + (currentArtist as String)
         panel.extensionHidden = true
         if panel.runModal() == NSFileHandlingPanelOKButton {
-            iTunes.artwork().writeToURL(panel.URL!, atomically: false)
+            vox.artwork().writeToURL(panel.URL!, atomically: false)
         }
     }
     
@@ -394,7 +394,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             for lrc in lyricsArray {
                 theLyrics.appendString(lrc.lyricsSentence as String + "\n")
             }
-            iTunes.setLyrics(theLyrics as String)
+            vox.setLyrics(theLyrics as String)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
         }
     }
@@ -428,9 +428,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         var currentPosition: Int = 0
         
         while true {
-            if iTunes.playing() {
+            if vox.playing() {
                 if lyricsArray.count != 0 {
-                    iTunesPosition = iTunes.playerPosition()
+                    iTunesPosition = vox.playerPosition()
                     if (currentPosition < iTunesPosition) || ((currentPosition / 1000) != (iTunesPosition / 1000) && currentPosition % 1000 < 850) {
                         currentPosition = iTunesPosition
                     }
@@ -500,7 +500,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             }
             
             // check whether song is changed
-            if currentSongID == iTunes.currentPersistentID() {
+            if currentSongID == vox.currentPersistentID() {
                 return
             } else {
                 
@@ -516,9 +516,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 timeDlyInFile = 0
                 currentLyrics = nil
                 lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                currentSongID = iTunes.currentPersistentID().copy() as! NSString
-                currentSongTitle = iTunes.currentTitle().copy() as! NSString
-                currentArtist = iTunes.currentArtist().copy() as! NSString
+                currentSongID = vox.currentPersistentID().copy() as! NSString
+                currentSongTitle = vox.currentTitle().copy() as! NSString
+                currentArtist = vox.currentArtist().copy() as! NSString
                 NSLog("Song Changed to: %@",currentSongTitle)
                 handleSongChange()
             }
@@ -1000,7 +1000,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
 // MARK: - Other Methods
     
     func terminate() {
-        if !iTunes.running() {
+        if !vox.running() {
             NSApplication.sharedApplication().terminate(nil)
         }
     }

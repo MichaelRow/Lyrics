@@ -6,10 +6,10 @@
 #import <MASShortcut/Shortcut.h>
 #import "NSStatusBar+NSStatusBar_Private.h"
 #import "opencc.h"
-#import "iTunesBridge.h"
 #import "DBPrefsWindowController.h"
 #import "SongInfos.h"
 #import "TTPod.h"
 #import "QianQian.h"
 #import "GeCiMe.h"
 #import "Xiami.h"
+#import "VoxBridge.h"
