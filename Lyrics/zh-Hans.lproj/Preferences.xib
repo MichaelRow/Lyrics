@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AppPrefsWindowController" customModule="LyricsX" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="AppPrefsWindowController" customModule="LyricsVox" customModuleProvider="target">
             <connections>
                 <outlet property="applyButton" destination="2MS-Zm-Upl" id="EU3-Oa-phI"/>
                 <outlet property="bkColor" destination="EW0-Bd-p9N" id="fph-28-bHi"/>
@@ -26,12 +26,11 @@
                 <outlet property="shortcutPrefsView" destination="UVc-8X-3Mf" id="G3v-H4-WWa"/>
                 <outlet property="textColor" destination="Bkr-05-QrQ" id="Edz-dd-qeK"/>
                 <outlet property="textPreview" destination="FdQ-wS-kv6" id="0UG-0D-gZw"/>
-                <outlet property="writeLrcToiTunesShortcut" destination="fVP-oC-uGa" id="WxB-be-Dcx"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="hzc-UQ-83r" userLabel="General Prefs View" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
+        <customView id="hzc-UQ-83r" userLabel="General Prefs View" customClass="ClickView" customModule="LyricsVox" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="365" height="286"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -84,12 +83,12 @@
                 <button id="70D-Cz-LtQ">
                     <rect key="frame" x="18" y="158" width="120" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="随iTunes退出" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HlU-FW-E5p">
+                    <buttonCell key="cell" type="check" title="随Vox退出" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HlU-FW-E5p">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" size="13" name=".PingFangSC-Regular"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsQuitWithITunes" id="NmZ-Uh-DfU">
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsQuitWithVox" id="lka-NS-nt6">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
@@ -342,14 +341,14 @@
                 <popUpButton verticalHuggingPriority="750" id="DaO-06-BZN">
                     <rect key="frame" x="162" y="182" width="154" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Q9V-sw-d2o">
+                    <popUpButtonCell key="cell" type="push" title="Vox开始播放时" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="F0g-b3-j9x" id="Q9V-sw-d2o">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="bCO-9r-R0L">
                             <items>
                                 <menuItem title="开机启动时" id="aNq-Pa-I1J"/>
-                                <menuItem title="iTunes启动时" id="kLu-hK-K4n"/>
-                                <menuItem title="iTunes开始播放时" id="F0g-b3-j9x">
+                                <menuItem title="Vox启动时" id="kLu-hK-K4n"/>
+                                <menuItem title="Vox开始播放时" state="on" id="F0g-b3-j9x">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                             </items>
@@ -436,7 +435,7 @@
             </subviews>
             <point key="canvasLocation" x="-1127.5" y="226"/>
         </customView>
-        <customView id="57y-D4-ovD" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
+        <customView id="57y-D4-ovD" customClass="ClickView" customModule="LyricsVox" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="408" height="337"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -466,7 +465,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <customView id="FdQ-wS-kv6" userLabel="Font Preview" customClass="TextPreview" customModule="LyricsX" customModuleProvider="target">
+                <customView id="FdQ-wS-kv6" userLabel="Font Preview" customClass="TextPreview" customModule="LyricsVox" customModuleProvider="target">
                     <rect key="frame" x="20" y="49" width="368" height="90"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
@@ -868,7 +867,7 @@
                 <button id="vBy-mM-hbr">
                     <rect key="frame" x="18" y="126" width="175" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="iTunes暂停时不显示歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="359-gu-dk7">
+                    <buttonCell key="cell" type="check" title="Vox暂停时不显示歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="359-gu-dk7">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -933,11 +932,11 @@
             <point key="canvasLocation" x="-676" y="252"/>
         </customView>
         <customView id="UVc-8X-3Mf">
-            <rect key="frame" x="0.0" y="0.0" width="415" height="277"/>
+            <rect key="frame" x="0.0" y="0.0" width="415" height="250"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="4dM-nx-K5d">
-                    <rect key="frame" x="18" y="238" width="175" height="17"/>
+                    <rect key="frame" x="18" y="211" width="175" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1. 歌词提前:" id="HNN-8h-UIQ">
                         <font key="font" metaFont="system"/>
@@ -946,7 +945,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="NPb-yv-Nnu">
-                    <rect key="frame" x="18" y="211" width="175" height="17"/>
+                    <rect key="frame" x="18" y="184" width="175" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2. 歌词延迟:" id="H6g-uQ-pLz">
                         <font key="font" metaFont="system"/>
@@ -955,7 +954,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="P33-wf-7QY">
-                    <rect key="frame" x="245" y="238" width="150" height="19"/>
+                    <rect key="frame" x="245" y="211" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="2Tr-kr-izZ">
                         <font key="font" metaFont="system"/>
@@ -967,7 +966,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="cgi-ar-KSM">
-                    <rect key="frame" x="245" y="211" width="150" height="19"/>
+                    <rect key="frame" x="245" y="184" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="4VI-wP-DJL">
                         <font key="font" metaFont="system"/>
@@ -979,11 +978,11 @@
                     </textFieldCell>
                 </textField>
                 <customView id="Pez-oQ-i0s" customClass="MASShortcutView">
-                    <rect key="frame" x="245" y="128" width="150" height="19"/>
+                    <rect key="frame" x="245" y="101" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Cjb-YB-vsD">
-                    <rect key="frame" x="18" y="128" width="140" height="17"/>
+                    <rect key="frame" x="18" y="101" width="140" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="5. 搜索歌词与专辑封面:" id="4cX-bE-CRx">
                         <font key="font" metaFont="system"/>
@@ -992,7 +991,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Jiq-CV-dz8">
-                    <rect key="frame" x="18" y="101" width="127" height="17"/>
+                    <rect key="frame" x="18" y="74" width="127" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="6. 拷贝歌词到剪贴板:" id="Dyi-yE-zOw">
                         <font key="font" metaFont="system"/>
@@ -1001,7 +1000,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Tc7-Mp-l7h">
-                    <rect key="frame" x="18" y="74" width="99" height="17"/>
+                    <rect key="frame" x="18" y="47" width="99" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="7. 编辑当前歌词:" id="3ly-3W-FbV">
                         <font key="font" metaFont="system"/>
@@ -1010,7 +1009,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jXp-qP-rz9">
-                    <rect key="frame" x="18" y="47" width="75" height="17"/>
+                    <rect key="frame" x="18" y="20" width="75" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="8. 制作歌词:" id="vhm-2P-x4V">
                         <font key="font" metaFont="system"/>
@@ -1018,33 +1017,20 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Rnf-9Z-oHe">
-                    <rect key="frame" x="18" y="20" width="121" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="9. 将歌词写入iTune:" id="WvB-uq-qvf">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <customView id="qL5-ur-iqU" customClass="MASShortcutView">
-                    <rect key="frame" x="245" y="74" width="150" height="19"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                </customView>
-                <customView id="jnM-Ix-8c5" customClass="MASShortcutView">
                     <rect key="frame" x="245" y="47" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
-                <customView id="fVP-oC-uGa" customClass="MASShortcutView">
+                <customView id="jnM-Ix-8c5" customClass="MASShortcutView">
                     <rect key="frame" x="245" y="20" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
                 <customView id="8or-Fb-0xc" customClass="MASShortcutView">
-                    <rect key="frame" x="245" y="101" width="150" height="19"/>
+                    <rect key="frame" x="245" y="74" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="WJ2-tt-x2T">
-                    <rect key="frame" x="18" y="184" width="168" height="17"/>
+                    <rect key="frame" x="18" y="157" width="168" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="3. 横向/纵向歌词模式切换:" id="2Z5-fa-wdo">
                         <font key="font" metaFont="system"/>
@@ -1053,7 +1039,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="izQ-mO-JLx">
-                    <rect key="frame" x="18" y="157" width="199" height="17"/>
+                    <rect key="frame" x="18" y="130" width="199" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="4. 桌面歌词/菜单栏歌词模式切换:" id="weP-EL-Hhs">
                         <font key="font" metaFont="system"/>
@@ -1062,15 +1048,15 @@
                     </textFieldCell>
                 </textField>
                 <customView id="SJ2-aS-kbU" customClass="MASShortcutView">
-                    <rect key="frame" x="245" y="184" width="150" height="19"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                </customView>
-                <customView id="7Pg-oe-3mM" customClass="MASShortcutView">
                     <rect key="frame" x="245" y="157" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
+                <customView id="7Pg-oe-3mM" customClass="MASShortcutView">
+                    <rect key="frame" x="245" y="130" width="150" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </customView>
             </subviews>
-            <point key="canvasLocation" x="315.5" y="234.5"/>
+            <point key="canvasLocation" x="315.5" y="221"/>
         </customView>
         <customView id="162-Ff-cWD" userLabel="Donate View">
             <rect key="frame" x="0.0" y="0.0" width="422" height="317"/>

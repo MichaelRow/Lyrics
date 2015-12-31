@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "76D060411C02B8D8000DA86C"
-               BuildableName = "LyricsX Helper.app"
-               BlueprintName = "LyricsX Helper"
+               BuildableName = "LyricsVox Helper.app"
+               BlueprintName = "LyricsVox Helper"
                ReferencedContainer = "container:Lyrics.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "76D060411C02B8D8000DA86C"
-            BuildableName = "LyricsX Helper.app"
-            BlueprintName = "LyricsX Helper"
+            BuildableName = "LyricsVox Helper.app"
+            BlueprintName = "LyricsVox Helper"
             ReferencedContainer = "container:Lyrics.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "76D060411C02B8D8000DA86C"
-            BuildableName = "LyricsX Helper.app"
-            BlueprintName = "LyricsX Helper"
+            BuildableName = "LyricsVox Helper.app"
+            BlueprintName = "LyricsVox Helper"
             ReferencedContainer = "container:Lyrics.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "76D060411C02B8D8000DA86C"
-            BuildableName = "LyricsX Helper.app"
-            BlueprintName = "LyricsX Helper"
+            BuildableName = "LyricsVox Helper.app"
+            BlueprintName = "LyricsVox Helper"
             ReferencedContainer = "container:Lyrics.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

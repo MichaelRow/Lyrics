@@ -1,15 +1,14 @@
 //
-//  iTunesBridge.h
+//  VoxBridge.h
 //  Lyrics
 //
-//  Created by Eru on 15/11/16.
+//  Created by Eru on 15/12/31.
 //  Copyright © 2015年 Eru. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "iTunes.h"
 
-@interface iTunesBridge : NSObject
+@interface VoxBridge : NSObject
 
 -(BOOL) running;
 -(BOOL) playing;
@@ -18,7 +17,5 @@
 -(NSString *) currentArtist;
 -(NSString *) currentPersistentID;
 -(NSInteger) playerPosition;
--(NSData *) artwork;
--(void) setLyrics: (NSString *)lyrics;
 
 @end

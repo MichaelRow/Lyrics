@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AppController" customModule="LyricsX" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="AppController" customModule="LyricsVox" customModuleProvider="target">
             <connections>
                 <outlet property="delayMenuItem" destination="ENJ-eO-aCa" id="Ds4-Ab-aOj"/>
                 <outlet property="lyricsDelayView" destination="3Jx-vU-QNM" id="2fJ-DT-b0e"/>
@@ -133,20 +133,8 @@
                                     <action selector="wrongLyrics:" target="-2" id="SVi-Ox-Yea"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Write Lyrics to iTunes" id="9IB-fJ-7CD">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="writeLyricsToiTunes:" target="-2" id="OzK-ZJ-pvP"/>
-                                </connections>
-                            </menuItem>
                         </items>
                     </menu>
-                </menuItem>
-                <menuItem title="Export Artwork From iTunes..." id="Czc-V7-Kvq">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="exportArtwork:" target="-2" id="qL1-eT-eXl"/>
-                    </connections>
                 </menuItem>
                 <menuItem title="Search Lyrics &amp; Artworks..." id="a7O-Hu-mob">
                     <modifierMask key="keyEquivalentModifierMask"/>

@@ -26,9 +26,9 @@
 		764B0A841C30D1600048419B /* XMLParserForQQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764B0A821C30D1600048419B /* XMLParserForQQ.swift */; };
 		764F874B1C34FF810070852A /* VoxBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 764F874A1C34FF810070852A /* VoxBridge.m */; };
 		7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660C5011BF05471002E3204 /* LyricsWindowController.swift */; };
-		766D670F1C03530E00B5405B /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D670E1C03530E00B5405B /* iTunesBridge.m */; };
 		766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F03C41C049372003F4790 /* LyricsEditView.swift */; };
 		7678AA081BFF526700FE848C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7678AA061BFF526700FE848C /* Localizable.strings */; };
+		767BAFF71C35144900EF2A49 /* VoxBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 767BAFF61C35144900EF2A49 /* VoxBridge.m */; };
 		768203AF1C2B6FA900DB93F0 /* MenuBarLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768203AE1C2B6FA900DB93F0 /* MenuBarLyrics.swift */; };
 		768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
 		768BCB211BF1C62000D6F5EB /* libopencc.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */; };
@@ -62,7 +62,7 @@
 		76D060471C02B8D9000DA86C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D060461C02B8D9000DA86C /* Assets.xcassets */; };
 		76D0604A1C02B8D9000DA86C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D060481C02B8D9000DA86C /* MainMenu.xib */; };
 		76D0605E1C02B930000DA86C /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D0605D1C02B930000DA86C /* ServiceManagement.framework */; };
-		76D060601C02BBB7000DA86C /* LyricsX Helper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76D060421C02B8D8000DA86C /* LyricsX Helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76D060601C02BBB7000DA86C /* LyricsVox Helper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76D060421C02B8D8000DA86C /* LyricsVox Helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76D0606B1C02FBCD000DA86C /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
 		76ECE2641C31223400089705 /* LrcMaker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2611C31222B00089705 /* LrcMaker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76ECE2651C31223400089705 /* LrcMerger.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2621C31222B00089705 /* LrcMerger.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -88,7 +88,7 @@
 			dstPath = Contents/Library/LoginItems;
 			dstSubfolderSpec = 1;
 			files = (
-				76D060601C02BBB7000DA86C /* LyricsX Helper.app in CopyFiles */,
+				76D060601C02BBB7000DA86C /* LyricsVox Helper.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,9 +136,6 @@
 		765B7F8A1C2E3B320066F2B4 /* NSStatusBar+NSStatusBar_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStatusBar+NSStatusBar_Private.h"; sourceTree = "<group>"; };
 		7660C5011BF05471002E3204 /* LyricsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsWindowController.swift; sourceTree = "<group>"; };
 		766D670B1C03530D00B5405B /* LyricsX Helper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LyricsX Helper-Bridging-Header.h"; sourceTree = "<group>"; };
-		766D670C1C03530E00B5405B /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
-		766D670D1C03530E00B5405B /* iTunesBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridge.h; sourceTree = "<group>"; };
-		766D670E1C03530E00B5405B /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
 		766F03C41C049372003F4790 /* LyricsEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsEditView.swift; sourceTree = "<group>"; };
 		7678A9F41BFF428200FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
 		7678A9F71BFF428900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
@@ -147,6 +144,9 @@
 		7678AA071BFF526700FE848C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7678AA091BFF552700FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7678AA0A1BFF552900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		767BAFF41C35143600EF2A49 /* Vox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vox.h; sourceTree = "<group>"; };
+		767BAFF51C35144900EF2A49 /* VoxBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoxBridge.h; sourceTree = "<group>"; };
+		767BAFF61C35144900EF2A49 /* VoxBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoxBridge.m; sourceTree = "<group>"; };
 		768203AE1C2B6FA900DB93F0 /* MenuBarLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarLyrics.swift; sourceTree = "<group>"; };
 		768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		768BCAE51BF1866400D6F5EB /* Lyrics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -174,13 +174,13 @@
 		76C047171BF2E335005053AC /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
 		76C047181BF2E335005053AC /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
 		76C047251BF2F34C005053AC /* AppPrefsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPrefsWindowController.swift; sourceTree = "<group>"; };
-		76C511591BEC6F8F0095F510 /* LyricsX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LyricsX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76C511591BEC6F8F0095F510 /* LyricsVox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LyricsVox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C5115C1BEC6F8F0095F510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76C5115E1BEC6F8F0095F510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76C511611BEC6F8F0095F510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		76C511631BEC6F8F0095F510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76C511771BEC6FD50095F510 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
-		76D060421C02B8D8000DA86C /* LyricsX Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LyricsX Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76D060421C02B8D8000DA86C /* LyricsVox Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LyricsVox Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D060441C02B8D8000DA86C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76D060461C02B8D9000DA86C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76D060491C02B8D9000DA86C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -391,8 +391,8 @@
 		76C5115A1BEC6F8F0095F510 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				76C511591BEC6F8F0095F510 /* LyricsX.app */,
-				76D060421C02B8D8000DA86C /* LyricsX Helper.app */,
+				76C511591BEC6F8F0095F510 /* LyricsVox.app */,
+				76D060421C02B8D8000DA86C /* LyricsVox Helper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -417,10 +417,10 @@
 			isa = PBXGroup;
 			children = (
 				76D060441C02B8D8000DA86C /* AppDelegate.swift */,
-				766D670C1C03530E00B5405B /* iTunes.h */,
-				766D670D1C03530E00B5405B /* iTunesBridge.h */,
-				766D670E1C03530E00B5405B /* iTunesBridge.m */,
 				766D670B1C03530D00B5405B /* LyricsX Helper-Bridging-Header.h */,
+				767BAFF41C35143600EF2A49 /* Vox.h */,
+				767BAFF51C35144900EF2A49 /* VoxBridge.h */,
+				767BAFF61C35144900EF2A49 /* VoxBridge.m */,
 				76D060461C02B8D9000DA86C /* Assets.xcassets */,
 				76D060481C02B8D9000DA86C /* MainMenu.xib */,
 				76D0604B1C02B8D9000DA86C /* Info.plist */,
@@ -431,9 +431,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		76C511581BEC6F8F0095F510 /* LyricsX */ = {
+		76C511581BEC6F8F0095F510 /* LyricsVox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76C511711BEC6F8F0095F510 /* Build configuration list for PBXNativeTarget "LyricsX" */;
+			buildConfigurationList = 76C511711BEC6F8F0095F510 /* Build configuration list for PBXNativeTarget "LyricsVox" */;
 			buildPhases = (
 				76C511551BEC6F8F0095F510 /* Sources */,
 				76C511561BEC6F8F0095F510 /* Frameworks */,
@@ -446,14 +446,14 @@
 			);
 			dependencies = (
 			);
-			name = LyricsX;
+			name = LyricsVox;
 			productName = Lyrics;
-			productReference = 76C511591BEC6F8F0095F510 /* LyricsX.app */;
+			productReference = 76C511591BEC6F8F0095F510 /* LyricsVox.app */;
 			productType = "com.apple.product-type.application";
 		};
-		76D060411C02B8D8000DA86C /* LyricsX Helper */ = {
+		76D060411C02B8D8000DA86C /* LyricsVox Helper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76D060571C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsX Helper" */;
+			buildConfigurationList = 76D060571C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsVox Helper" */;
 			buildPhases = (
 				76D0603E1C02B8D8000DA86C /* Sources */,
 				76D0603F1C02B8D8000DA86C /* Frameworks */,
@@ -463,9 +463,9 @@
 			);
 			dependencies = (
 			);
-			name = "LyricsX Helper";
+			name = "LyricsVox Helper";
 			productName = "LyricsX Helper";
-			productReference = 76D060421C02B8D8000DA86C /* LyricsX Helper.app */;
+			productReference = 76D060421C02B8D8000DA86C /* LyricsVox Helper.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -501,8 +501,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				76C511581BEC6F8F0095F510 /* LyricsX */,
-				76D060411C02B8D8000DA86C /* LyricsX Helper */,
+				76C511581BEC6F8F0095F510 /* LyricsVox */,
+				76D060411C02B8D8000DA86C /* LyricsVox Helper */,
 			);
 		};
 /* End PBXProject section */
@@ -582,7 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				766D670F1C03530E00B5405B /* iTunesBridge.m in Sources */,
+				767BAFF71C35144900EF2A49 /* VoxBridge.m in Sources */,
 				76D060451C02B8D8000DA86C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -749,7 +749,7 @@
 					"$(PROJECT_DIR)/Lyrics",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = Eru.Lyrics;
+				PRODUCT_BUNDLE_IDENTIFIER = Eru.LyricsVox;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Lyrics/Lyrics-Bridging-Header.h";
@@ -776,7 +776,7 @@
 					"$(PROJECT_DIR)/Lyrics",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = Eru.Lyrics;
+				PRODUCT_BUNDLE_IDENTIFIER = Eru.LyricsVox;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Lyrics/Lyrics-Bridging-Header.h";
@@ -792,7 +792,7 @@
 				INFOPLIST_FILE = "LyricsX Helper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "Eru.LyricsX-Helper";
+				PRODUCT_BUNDLE_IDENTIFIER = "Eru.LyricsVox-Helper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LyricsX Helper/LyricsX Helper-Bridging-Header.h";
@@ -809,7 +809,7 @@
 				INFOPLIST_FILE = "LyricsX Helper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "Eru.LyricsX-Helper";
+				PRODUCT_BUNDLE_IDENTIFIER = "Eru.LyricsVox-Helper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LyricsX Helper/LyricsX Helper-Bridging-Header.h";
@@ -828,7 +828,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76C511711BEC6F8F0095F510 /* Build configuration list for PBXNativeTarget "LyricsX" */ = {
+		76C511711BEC6F8F0095F510 /* Build configuration list for PBXNativeTarget "LyricsVox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76C511721BEC6F8F0095F510 /* Debug */,
@@ -837,7 +837,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76D060571C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsX Helper" */ = {
+		76D060571C02B8D9000DA86C /* Build configuration list for PBXNativeTarget "LyricsVox Helper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76D060581C02B8D9000DA86C /* Debug */,

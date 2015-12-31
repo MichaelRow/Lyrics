@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AppPrefsWindowController" customModule="LyricsX" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="AppPrefsWindowController" customModule="LyricsVox" customModuleProvider="target">
             <connections>
                 <outlet property="applyButton" destination="2MS-Zm-Upl" id="BJn-wE-rb3"/>
                 <outlet property="bkColor" destination="EW0-Bd-p9N" id="fph-28-bHi"/>
@@ -26,12 +26,11 @@
                 <outlet property="shortcutPrefsView" destination="OaX-cK-ajI" id="jPA-xk-zy5"/>
                 <outlet property="textColor" destination="Bkr-05-QrQ" id="Edz-dd-qeK"/>
                 <outlet property="textPreview" destination="FdQ-wS-kv6" id="0UG-0D-gZw"/>
-                <outlet property="writeLrcToiTunesShortcut" destination="s4g-17-rwP" id="4dp-N9-Z49"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="hzc-UQ-83r" userLabel="General Prefs View" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
+        <customView id="hzc-UQ-83r" userLabel="General Prefs View" customClass="ClickView" customModule="LyricsVox" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="376" height="283"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -82,14 +81,14 @@
                     </textFieldCell>
                 </textField>
                 <button id="70D-Cz-LtQ">
-                    <rect key="frame" x="18" y="154" width="120" height="18"/>
+                    <rect key="frame" x="18" y="154" width="102" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Quit with iTunes" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HlU-FW-E5p">
+                    <buttonCell key="cell" type="check" title="Quit with Vox" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HlU-FW-E5p">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsQuitWithITunes" id="NmZ-Uh-DfU">
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsQuitWithVox" id="3dY-fo-2er">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                 <bool key="NSValidatesImmediately" value="YES"/>
@@ -319,14 +318,14 @@
                 <popUpButton verticalHuggingPriority="750" id="DaO-06-BZN">
                     <rect key="frame" x="181" y="177" width="148" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Q9V-sw-d2o">
+                    <popUpButtonCell key="cell" type="push" title="Vox Playing" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="F0g-b3-j9x" id="Q9V-sw-d2o">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="bCO-9r-R0L">
                             <items>
                                 <menuItem title="User Login" id="aNq-Pa-I1J"/>
-                                <menuItem title="iTunes Launched" id="kLu-hK-K4n"/>
-                                <menuItem title="iTunes Playing" id="F0g-b3-j9x">
+                                <menuItem title="Vox Launched" id="kLu-hK-K4n"/>
+                                <menuItem title="Vox Playing" state="on" id="F0g-b3-j9x">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                             </items>
@@ -458,9 +457,9 @@
                     </connections>
                 </button>
                 <button id="vBy-mM-hbr">
-                    <rect key="frame" x="18" y="126" width="266" height="18"/>
+                    <rect key="frame" x="18" y="126" width="249" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Disable lyrics when iTunes is not playing" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="359-gu-dk7">
+                    <buttonCell key="cell" type="check" title="Disable lyrics when Vox is not playing" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="359-gu-dk7">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -625,7 +624,7 @@
             </subviews>
             <point key="canvasLocation" x="-648" y="250"/>
         </customView>
-        <customView id="57y-D4-ovD" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
+        <customView id="57y-D4-ovD" customClass="ClickView" customModule="LyricsVox" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="408" height="336"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -655,7 +654,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <customView id="FdQ-wS-kv6" userLabel="Font Preview" customClass="TextPreview" customModule="LyricsX" customModuleProvider="target">
+                <customView id="FdQ-wS-kv6" userLabel="Font Preview" customClass="TextPreview" customModule="LyricsVox" customModuleProvider="target">
                     <rect key="frame" x="20" y="51" width="368" height="90"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
@@ -923,11 +922,11 @@
             <point key="canvasLocation" x="-175" y="264"/>
         </customView>
         <customView id="OaX-cK-ajI">
-            <rect key="frame" x="0.0" y="0.0" width="415" height="279"/>
+            <rect key="frame" x="0.0" y="0.0" width="415" height="252"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="xaB-p5-OLT">
-                    <rect key="frame" x="18" y="240" width="134" height="17"/>
+                    <rect key="frame" x="18" y="213" width="134" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1. Increase  lrc offset:" id="qok-bt-0Gp">
                         <font key="font" metaFont="system"/>
@@ -936,7 +935,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Ypx-q3-UNh">
-                    <rect key="frame" x="18" y="213" width="141" height="17"/>
+                    <rect key="frame" x="18" y="186" width="141" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2. Decrease  lrc offset:" id="DDN-HF-zck">
                         <font key="font" metaFont="system"/>
@@ -945,7 +944,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="59B-DD-91Z">
-                    <rect key="frame" x="245" y="240" width="150" height="19"/>
+                    <rect key="frame" x="245" y="213" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="jmS-03-WwS">
                         <font key="font" size="13" name=".LucidaGrandeUI"/>
@@ -957,7 +956,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="WRu-VI-ZcO">
-                    <rect key="frame" x="245" y="213" width="150" height="19"/>
+                    <rect key="frame" x="245" y="186" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="5mR-Pb-q92">
                         <font key="font" size="13" name=".LucidaGrandeUI"/>
@@ -969,7 +968,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="910-hO-gDx">
-                    <rect key="frame" x="18" y="184" width="218" height="17"/>
+                    <rect key="frame" x="18" y="157" width="218" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="3. Horizontal/Vertical mode switch:" id="ZCu-W5-ZZi">
                         <font key="font" metaFont="system"/>
@@ -978,7 +977,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="oYj-ag-Cg4">
-                    <rect key="frame" x="18" y="157" width="213" height="17"/>
+                    <rect key="frame" x="18" y="130" width="213" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="4. Desktop/MenuBar lyrics switch:" id="LaG-ye-jZk">
                         <font key="font" metaFont="system"/>
@@ -987,19 +986,19 @@
                     </textFieldCell>
                 </textField>
                 <customView id="Xic-BL-Y5L" customClass="MASShortcutView">
-                    <rect key="frame" x="245" y="184" width="150" height="19"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                </customView>
-                <customView id="Bxn-kf-FeY" customClass="MASShortcutView">
                     <rect key="frame" x="245" y="157" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
+                <customView id="Bxn-kf-FeY" customClass="MASShortcutView">
+                    <rect key="frame" x="245" y="130" width="150" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </customView>
                 <customView id="dy6-ep-Gan" customClass="MASShortcutView">
-                    <rect key="frame" x="245" y="128" width="150" height="19"/>
+                    <rect key="frame" x="245" y="101" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="cbN-9k-lkd">
-                    <rect key="frame" x="18" y="128" width="160" height="17"/>
+                    <rect key="frame" x="18" y="101" width="160" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="3. Search lrc and artwork:" id="6Ya-Mh-Mlp">
                         <font key="font" metaFont="system"/>
@@ -1008,7 +1007,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="4To-xZ-nch">
-                    <rect key="frame" x="18" y="101" width="179" height="17"/>
+                    <rect key="frame" x="18" y="74" width="179" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="4. Copy lyrics to pasteboard:" id="ffO-tr-Nli">
                         <font key="font" metaFont="system"/>
@@ -1017,7 +1016,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="O6a-jA-G2p">
-                    <rect key="frame" x="18" y="74" width="130" height="17"/>
+                    <rect key="frame" x="18" y="47" width="130" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="5. Edit current lyrics:" id="DJW-bt-ypq">
                         <font key="font" metaFont="system"/>
@@ -1026,7 +1025,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="6yT-07-chy">
-                    <rect key="frame" x="18" y="47" width="74" height="17"/>
+                    <rect key="frame" x="18" y="20" width="74" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="6. Make lrc:" id="kVc-dv-fSe">
                         <font key="font" metaFont="system"/>
@@ -1034,33 +1033,20 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="tcE-4a-kz9">
-                    <rect key="frame" x="18" y="20" width="148" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="7. Write lyrics to iTunes:" id="O2S-u2-uDh">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <customView id="hlc-is-WV9" customClass="MASShortcutView">
-                    <rect key="frame" x="245" y="101" width="150" height="19"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                </customView>
-                <customView id="paS-fO-cn5" customClass="MASShortcutView">
                     <rect key="frame" x="245" y="74" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
-                <customView id="qKj-Pg-4Lu" customClass="MASShortcutView">
+                <customView id="paS-fO-cn5" customClass="MASShortcutView">
                     <rect key="frame" x="245" y="47" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
-                <customView id="s4g-17-rwP" customClass="MASShortcutView">
+                <customView id="qKj-Pg-4Lu" customClass="MASShortcutView">
                     <rect key="frame" x="245" y="20" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
             </subviews>
-            <point key="canvasLocation" x="335.5" y="260.5"/>
+            <point key="canvasLocation" x="335.5" y="247"/>
         </customView>
         <customView id="162-Ff-cWD" userLabel="Donate View">
             <rect key="frame" x="0.0" y="0.0" width="422" height="330"/>

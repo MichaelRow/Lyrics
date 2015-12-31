@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsAutoLaunches : NSNumber(bool: true),
             LyricsLaunchTpyePopUpIndex : NSNumber(integer: 2),
             LyricsServerIndex : NSNumber(integer: 0),
-            LyricsQuitWithITunes : NSNumber(bool: false),
+            LyricsQuitWithVox : NSNumber(bool: false),
             LyricsDisableAllAlert : NSNumber(bool: false),
             LyricsUseAutoLayout : NSNumber(bool: true),
             LyricsHeightFromDockToLyrics : NSNumber(integer: 15),
@@ -64,7 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let lyricsXHelpers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LyricsX-Helper")
         for helper in lyricsXHelpers {
-            helper.terminate()
+            helper.forceTerminate()
         }
         
         // Force Singleton to init
@@ -85,7 +85,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if userDefaults.boolForKey(LyricsAutoLaunches) {
             if userDefaults.integerForKey(LyricsLaunchTpyePopUpIndex) != 0 {
-                let helperPath = NSBundle.mainBundle().bundlePath + "/Contents/Library/LoginItems/LyricsX Helper.app"
+                let helperPath = NSBundle.mainBundle().bundlePath + "/Contents/Library/LoginItems/LyricsVox Helper.app"
                 NSWorkspace.sharedWorkspace().launchApplication(helperPath)
             }
         }

@@ -31,7 +31,6 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     @IBOutlet private weak var copyLrcToPbShortcut: MASShortcutView!
     @IBOutlet private weak var editLrcShortcut: MASShortcutView!
     @IBOutlet private weak var makeLrcShortcut: MASShortcutView!
-    @IBOutlet private weak var writeLrcToiTunesShortcut: MASShortcutView!
     
     @IBOutlet weak var revertButton: NSButton!
     @IBOutlet weak var applyButton: NSButton!
@@ -99,10 +98,6 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         makeLrcShortcut.associatedUserDefaultsKey = ShortcutMakeLrc
         MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutMakeLrc) { () -> Void in
             appController.makeLrc(nil)
-        }
-        writeLrcToiTunesShortcut.associatedUserDefaultsKey = ShortcutWriteLrcToiTunes
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutWriteLrcToiTunes) { () -> Void in
-            appController.writeLyricsToiTunes(nil)
         }
         // Hard-Coded shortcuts
         let offsetIncr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Equal), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)

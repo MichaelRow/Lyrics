@@ -23,7 +23,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     var timeDly:Int = 0
     var timeDlyInFile:Int = 0
     
-    private var isTrackingRunning:Bool = false
     private var hasDiglossiaLrc:Bool = false
     private var lyricsWindow:LyricsWindowController!
     private var menuBarLyrics:MenuBarLyrics!
@@ -91,7 +90,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         nc.addObserver(self, selector: "handleUserEditLyrics:", name: LyricsUserEditLyricsNotification, object: nil)
         
         let ndc = NSDistributedNotificationCenter.defaultCenter()
-        ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
+        ndc.addObserver(self, selector: "voxPlayerInfoChanged:", name: "com.coppertino.Vox.trackChanged", object: nil)
         ndc.addObserver(self, selector: "handleExtenalLyricsEvent:", name: "ExtenalLyricsEvent", object: nil)
         
         do {
@@ -109,21 +108,17 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             return
         }
         
-        currentLyrics = "LyricsX"
+        currentLyrics = "LyricsVox"
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+            self.voxTrackingThread()
+        }
         if vox.running() && vox.playing() {
-            
             currentSongID = vox.currentPersistentID().copy() as! NSString
             currentSongTitle = vox.currentTitle().copy() as! NSString
             currentArtist = vox.currentArtist().copy() as! NSString
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
                 self.handleSongChange()
-            }
-            
-            NSLog("Create new iTunesTrackingThead")
-            isTrackingRunning = true
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-                self.iTunesTrackingThread()
             }
         } else {
             currentSongID = ""
@@ -242,16 +237,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     @IBAction func checkForUpdate(sender: AnyObject) {
         NSWorkspace.sharedWorkspace().openURL(NSURL(string: "https://github.com/MichaelRow/Lyrics/releases")!)
-    }
-    
-    @IBAction func exportArtwork(sender: AnyObject) {
-        let panel = NSSavePanel()
-        panel.allowedFileTypes = ["png",  "jpg", "jpf", "bmp", "gif", "tiff"]
-        panel.nameFieldStringValue = (currentSongTitle as String) + " - " + (currentArtist as String)
-        panel.extensionHidden = true
-        if panel.runModal() == NSFileHandlingPanelOKButton {
-            vox.artwork().writeToURL(panel.URL!, atomically: false)
-        }
     }
     
     @IBAction func searchLyricsAndArtworks(sender: AnyObject?) {
@@ -385,20 +370,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
-    @IBAction func writeLyricsToiTunes(sender: AnyObject?) {
-        if lyricsArray.count == 0 {
-            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
-            return
-        } else {
-            let theLyrics: NSMutableString = NSMutableString()
-            for lrc in lyricsArray {
-                theLyrics.appendString(lrc.lyricsSentence as String + "\n")
-            }
-            vox.setLyrics(theLyrics as String)
-            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
-        }
-    }
-    
     @IBAction func wrongLyrics(sender: AnyObject) {
         if !userDefaults.boolForKey(LyricsDisableAllAlert) {
             let alert: NSAlert = NSAlert()
@@ -420,108 +391,72 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         saveLrcToLocal(wrongLyricsTag, songTitle: currentSongTitle, artist: currentArtist)
     }
     
-// MARK: - iTunes Events
+// MARK: - Vox Events
     
-    private func iTunesTrackingThread() {
-        // side node: iTunes update playerPosition once per second.
-        var iTunesPosition: Int = 0
+    private func voxTrackingThread() {
         var currentPosition: Int = 0
+        while true {
+            if vox.running() {
+                break
+            }
+            NSThread.sleepForTimeInterval(1.5)
+        }
         
         while true {
-            if vox.playing() {
-                if lyricsArray.count != 0 {
-                    iTunesPosition = vox.playerPosition()
-                    if (currentPosition < iTunesPosition) || ((currentPosition / 1000) != (iTunesPosition / 1000) && currentPosition % 1000 < 850) {
-                        currentPosition = iTunesPosition
+            if vox.running() {
+                if vox.playing() {
+                    if lyricsArray.count != 0 {
+                        currentPosition = vox.playerPosition()
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                            self.handlePositionChange(currentPosition)
+                        })
                     }
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                        self.handlePositionChange(iTunesPosition)
-                    })
+                } else {
+                    //Pause
+                    if userDefaults.boolForKey(LyricsDisabledWhenPaused) {
+                        if currentLyrics != nil {
+                            currentLyrics = nil
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                            })
+                        }
+                    }
                 }
             }
             else {
-                
-                //No need to track iTunes PlayerPosition when it's paused, just kill the thread.
-                NSLog("Kill iTunesTrackingThread")
-                isTrackingRunning=false
+                //Check whether terminate.
+                if userDefaults.boolForKey(LyricsQuitWithVox) {
+                    NSApp.terminate(nil)
+                }
                 return
             }
-            NSThread.sleepForTimeInterval(0.15)
-            currentPosition += 150
+            NSThread.sleepForTimeInterval(0.2)
         }
     }
     
     
-    func iTunesPlayerInfoChanged (n:NSNotification){
-        let userInfo = n.userInfo
-        if userInfo == nil {
+    func voxPlayerInfoChanged (n:NSNotification){
+        // check whether song is changed
+        if currentSongID == vox.currentPersistentID() {
             return
-        }
-        else {
-            if userInfo!["Player State"] as! String == "Paused" {
-                if userDefaults.boolForKey(LyricsDisabledWhenPaused) {
-                    self.currentLyrics = nil
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                        if self.menuBarLyrics != nil {
-                            self.menuBarLyrics.displayLyrics(nil)
-                        }
-                    })
-                }
-                NSLog("iTunes Paused")
-                
-                if userDefaults.boolForKey(LyricsQuitWithITunes) {
-                    // iTunes would paused before it quitted, so we should check whether iTunes is running
-                    // seconds later when playing or paused.
-                    if timer != nil {
-                        timer.invalidate()
-                    }
-                    timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "terminate", userInfo: nil, repeats: false)
-                }
-                return
-            }
-            else if userInfo!["Player State"] as! String == "Playing" {
-                //iTunes is playing now, we should create the tracking thread if not exists.
-                if !isTrackingRunning {
-                    NSLog("Create new iTunesTrackingThead")
-                    isTrackingRunning = true
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-                        self.iTunesTrackingThread()
-                    }
-                }
-                NSLog("iTunes Playing")
-            }
-            else if userInfo!["Player State"] as! String == "Stopped" {
-                // No playing or paused, send this player state when quitted
-                if timer != nil {
-                    timer.invalidate()
-                }
-                timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "terminate", userInfo: nil, repeats: false)
+        } else {
+            //if time-Delay for the previous song is changed, we should save the change to lrc file.
+            //Save time-Delay laziely for better I/O performance.
+            if timeDly != timeDlyInFile {
+                handleLrcDelayChange()
             }
             
-            // check whether song is changed
-            if currentSongID == vox.currentPersistentID() {
-                return
-            } else {
-                
-                //if time-Delay for the previous song is changed, we should save the change to lrc file.
-                //Save time-Delay laziely for better I/O performance.
-                if timeDly != timeDlyInFile {
-                    handleLrcDelayChange()
-                }
-                
-                lyricsArray.removeAll()
-                idTagsArray.removeAll()
-                self.setValue(0, forKey: "timeDly")
-                timeDlyInFile = 0
-                currentLyrics = nil
-                lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                currentSongID = vox.currentPersistentID().copy() as! NSString
-                currentSongTitle = vox.currentTitle().copy() as! NSString
-                currentArtist = vox.currentArtist().copy() as! NSString
-                NSLog("Song Changed to: %@",currentSongTitle)
-                handleSongChange()
-            }
+            lyricsArray.removeAll()
+            idTagsArray.removeAll()
+            self.setValue(0, forKey: "timeDly")
+            timeDlyInFile = 0
+            currentLyrics = nil
+            lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+            currentSongID = vox.currentPersistentID().copy() as! NSString
+            currentSongTitle = vox.currentTitle().copy() as! NSString
+            currentArtist = vox.currentArtist().copy() as! NSString
+            NSLog("Song Changed to: %@",currentSongTitle)
+            handleSongChange()
         }
     }
 
@@ -770,8 +705,8 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         let artistForSearching: String = self.delSpecificSymbol(loadingArtist) as String
         let titleForSearching: String = self.delSpecificSymbol(loadingTitle) as String
         
-        //千千静听不支持繁体中文搜索，先转成简体中文。搜歌词组件参数是iTunes中显示的歌曲名
-        //歌手名以及iTunes的唯一编号（防止歌曲变更造成的歌词对错歌），以及用于搜索用的歌曲
+        //千千静听不支持繁体中文搜索，先转成简体中文。搜歌词组件参数是Vox中显示的歌曲名
+        //歌手名以及Vox的唯一编号（防止歌曲变更造成的歌词对错歌），以及用于搜索用的歌曲
         //名与歌手名。另外，天天动听只会获取歌词文本，其他歌词源都是获取歌词URL
         qianqian.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: convertToSC(titleForSearching) as String, andArtistForSearching: convertToSC(artistForSearching) as String)
         xiami.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
@@ -998,12 +933,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
 // MARK: - Other Methods
-    
-    func terminate() {
-        if !vox.running() {
-            NSApplication.sharedApplication().terminate(nil)
-        }
-    }
     
     private func isDiglossiaLrc(serverSongTitle: NSString) -> Bool {
         if serverSongTitle.rangeOfString("中").location != NSNotFound || serverSongTitle.rangeOfString("对照").location != NSNotFound || serverSongTitle.rangeOfString("双").location != NSNotFound {
