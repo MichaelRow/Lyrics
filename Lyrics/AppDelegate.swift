@@ -64,7 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let lyricsXHelpers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LyricsX-Helper")
         for helper in lyricsXHelpers {
-            helper.terminate()
+            helper.forceTerminate()
         }
         
         // Force Singleton to init
