@@ -245,12 +245,17 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func exportArtwork(sender: AnyObject) {
+        let artworkData: NSData? = iTunes.artwork()
+        if artworkData == nil {
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("NO_ARTWORK", comment: ""))
+            return
+        }
         let panel = NSSavePanel()
         panel.allowedFileTypes = ["png",  "jpg", "jpf", "bmp", "gif", "tiff"]
         panel.nameFieldStringValue = (currentSongTitle as String) + " - " + (currentArtist as String)
         panel.extensionHidden = true
         if panel.runModal() == NSFileHandlingPanelOKButton {
-            iTunes.artwork().writeToURL(panel.URL!, atomically: false)
+            artworkData!.writeToURL(panel.URL!, atomically: false)
         }
     }
     
