@@ -17,9 +17,6 @@
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "2oI-Rn-ZJC"; */
 "2oI-Rn-ZJC.title" = "Transformations";
 
-/* Class = "NSWindow"; title = "Window"; ObjectID = "2rQ-xo-esE"; */
-"2rQ-xo-esE.title" = "Window";
-
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "3IN-sU-3Bg"; */
 "3IN-sU-3Bg.title" = "Spelling";
 
@@ -35,8 +32,8 @@
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "4EN-yA-p0u"; */
 "4EN-yA-p0u.title" = "Find";
 
-/* Class = "NSMenuItem"; title = "退出LrcSeeker"; ObjectID = "4sb-4s-VLi"; */
-"4sb-4s-VLi.title" = "退出LrcSeeker";
+/* Class = "NSMenuItem"; title = "退出 LrcSeeker"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "退出 LrcSeeker";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T"; */
 "5QF-Oa-p0T.title" = "Edit";
@@ -47,8 +44,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "歌手名"; ObjectID = "5aP-nU-Hjw"; */
 "5aP-nU-Hjw.headerCell.title" = "歌手名";
 
-/* Class = "NSMenuItem"; title = "关于LrcSeeker..."; ObjectID = "5kV-Vb-QxS"; */
-"5kV-Vb-QxS.title" = "关于LrcSeeker...";
+/* Class = "NSMenuItem"; title = "关于 LrcSeeker..."; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "关于 LrcSeeker...";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
 "6dh-zS-Vam.title" = "Redo";
@@ -140,8 +137,8 @@
 /* Class = "NSMenuItem"; title = "Revert to Saved"; ObjectID = "KaW-ft-85H"; */
 "KaW-ft-85H.title" = "Revert to Saved";
 
-/* Class = "NSMenuItem"; title = "全部显示"; ObjectID = "Kd2-mp-pUS"; */
-"Kd2-mp-pUS.title" = "全部显示";
+/* Class = "NSMenuItem"; title = "显示全部"; ObjectID = "Kd2-mp-pUS"; */
+"Kd2-mp-pUS.title" = "显示全部";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
 "LE2-aR-0XJ.title" = "Bring All to Front";
@@ -161,6 +158,9 @@
 /* Class = "NSMenuItem"; title = "服务"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "服务";
 
+/* Class = "NSMenuItem"; title = "填充专辑封面..."; ObjectID = "Ngf-bL-zl8"; */
+"Ngf-bL-zl8.title" = "填充专辑封面...";
+
 /* Class = "NSMenuItem"; title = "\tDefault"; ObjectID = "Nop-cj-93Q"; */
 "Nop-cj-93Q.title" = "\tDefault";
 
@@ -170,8 +170,8 @@
 /* Class = "NSMenuItem"; title = "Baseline"; ObjectID = "OaQ-X3-Vso"; */
 "OaQ-X3-Vso.title" = "Baseline";
 
-/* Class = "NSMenuItem"; title = "隐藏LrcSeeker"; ObjectID = "Olw-nP-bQN"; */
-"Olw-nP-bQN.title" = "隐藏LrcSeeker";
+/* Class = "NSMenuItem"; title = "隐藏 LrcSeeker"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "隐藏 LrcSeeker";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "OwM-mh-QMV"; */
 "OwM-mh-QMV.title" = "Find Previous";
@@ -311,8 +311,8 @@
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL"; */
 "gVA-U4-sdL.title" = "Paste";
 
-/* Class = "NSMenuItem"; title = "歌词预览"; ObjectID = "gmh-tg-22Q"; */
-"gmh-tg-22Q.title" = "歌词预览";
+/* Class = "NSMenuItem"; title = "歌词预览..."; ObjectID = "gmh-tg-22Q"; */
+"gmh-tg-22Q.title" = "歌词预览...";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "hQb-2v-fYv"; */
 "hQb-2v-fYv.title" = "Smart Quotes";
@@ -353,8 +353,8 @@
 /* Class = "NSMenuItem"; title = "Loosen"; ObjectID = "ogc-rX-tC1"; */
 "ogc-rX-tC1.title" = "Loosen";
 
-/* Class = "NSMenuItem"; title = "同步到LyricsX"; ObjectID = "onp-IV-zB7"; */
-"onp-IV-zB7.title" = "同步到LyricsX";
+/* Class = "NSMenuItem"; title = "同步到 LyricsX"; ObjectID = "onp-IV-zB7"; */
+"onp-IV-zB7.title" = "同步到 LyricsX";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "pJ9-kz-UIU"; */
 "pJ9-kz-UIU.title" = "Text Cell";
