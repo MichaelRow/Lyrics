@@ -36,7 +36,6 @@ class LyricsWindowController: NSWindowController {
     private var userDefaults: NSUserDefaults!
     private var rollingOver: Bool = true
     private var isRotated: Bool = false
-    private var isCliped: Bool = false
     private var verticalStyle: Int = 0
     
     convenience init() {
@@ -193,7 +192,6 @@ class LyricsWindowController: NSWindowController {
         if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
             // first Lyrics empty means it's in instrumental time, hide lyrics
             rollingOver = true
-            isCliped = false
             backgroundLayer.speed=0.2
             firstLyricsLayer.speed = 0.2
             secondLyricsLayer.speed = 0.2
@@ -209,7 +207,6 @@ class LyricsWindowController: NSWindowController {
         else if (secondLyrics==nil) || (secondLyrics?.isEqualToString(""))! {
             // one lyrics
             rollingOver = true
-            isCliped = false
             backgroundLayer.speed = 1
             firstLyricsLayer.speed = 1
             secondLyricsLayer.speed = 1
@@ -223,7 +220,7 @@ class LyricsWindowController: NSWindowController {
             let y:CGFloat
             
             if userDefaults.boolForKey(LyricsUseAutoLayout) {
-                let frameSize = NSMakeSize(strSize.width+50, strSize.height)
+                var frameSize = NSMakeSize(strSize.width+50, strSize.height)
                 if !isFullScreen {
                     x = visibleOrigin.x+(visibleSize.width-frameSize.width)/2
                     y = visibleOrigin.y+CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
@@ -235,11 +232,11 @@ class LyricsWindowController: NSWindowController {
                 if x < 4 {
                     if userDefaults.boolForKey(LyricsTwoLineMode) && userDefaults.integerForKey(LyricsTwoLineModeIndex)==1 {
                         clipLyrics(visibleSize.width-54)
-                        isCliped = true
                         displayLyrics(firstLyrics, secondLyrics: secondLyrics)
                         return
                     } else {
                         x = 4
+                        frameSize.width = visibleSize.width
                     }
                 }
                 backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height+bgHeightIncreasement)
@@ -250,8 +247,12 @@ class LyricsWindowController: NSWindowController {
                 x = CGFloat(userDefaults.integerForKey(LyricsConstToLeft))
                 y = CGFloat(userDefaults.integerForKey(LyricsConstToBottom))
                 
+                var layerY = (frameSize.height - strSize.height)/2
+                if layerY < 0 {
+                    layerY = 0
+                }
                 backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height)
-                firstLyricsLayer.frame=CGRectMake(0, 0, frameSize.width, strSize.height)
+                firstLyricsLayer.frame=CGRectMake(0, layerY, frameSize.width, strSize.height)
             }
             
             firstLyricsLayer.string=firstLyrics
@@ -285,14 +286,16 @@ class LyricsWindowController: NSWindowController {
             
             if size1st.width>=size2nd.width {
                 width=size1st.width
-                rect1st=CGRectMake(0, size2nd.height+yOffset, size1st.width, size1st.height+lyricsHeightIncreasement)
-                rect2nd=CGRectMake(0, yOffset, size1st.width, size2nd.height+lyricsHeightIncreasement)
             }
             else {
                 width=size2nd.width
-                rect1st=CGRectMake(0, size2nd.height+yOffset, size2nd.width, size1st.height+lyricsHeightIncreasement)
-                rect2nd=CGRectMake(0, yOffset, size2nd.width, size2nd.height+lyricsHeightIncreasement)
             }
+            if width > visibleSize.width {
+                width = visibleSize.width
+            }
+            
+            rect1st=CGRectMake(0, size2nd.height+yOffset, width, size1st.height+lyricsHeightIncreasement)
+            rect2nd=CGRectMake(0, yOffset, width, size2nd.height+lyricsHeightIncreasement)
             
             if userDefaults.boolForKey(LyricsUseAutoLayout) {
                 if !isFullScreen {
@@ -344,7 +347,6 @@ class LyricsWindowController: NSWindowController {
         if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
             // first Lyrics empty means it's in instrumental time, hide lyrics
             rollingOver = true
-            isCliped = false
             backgroundLayer.speed=0.2
             firstLyricsLayer.speed = 0.2
             secondLyricsLayer.speed = 0.2
@@ -361,7 +363,6 @@ class LyricsWindowController: NSWindowController {
         else if (secondLyrics==nil) || (secondLyrics?.isEqualToString(""))! {
             //one lyrics
             rollingOver = true
-            isCliped = false
             backgroundLayer.speed = 1
             firstLyricsLayer.speed = 1
             secondLyricsLayer.speed = 1
@@ -383,7 +384,7 @@ class LyricsWindowController: NSWindowController {
             }
             
             let strSize:NSSize = attributedStr.size()
-            let frameSize = NSMakeSize(strSize.width+50, strSize.height)
+            var frameSize = NSMakeSize(strSize.width+50, strSize.height)
             let heightWithDock = visibleOrigin.y + visibleSize.height
             let x: CGFloat
             let y: CGFloat
@@ -392,11 +393,11 @@ class LyricsWindowController: NSWindowController {
             if deltaH < 8 {
                 if userDefaults.boolForKey(LyricsTwoLineMode) && userDefaults.integerForKey(LyricsTwoLineModeIndex)==1 {
                     clipLyrics(heightWithDock-54)
-                    isCliped = true
                     displayLyrics(firstLyrics, secondLyrics: secondLyrics)
                     return
                 } else {
                     deltaH = 8
+                    frameSize.width = visibleSize.height
                 }
             }
             y = heightWithDock - deltaH/2
@@ -415,9 +416,9 @@ class LyricsWindowController: NSWindowController {
         }
         else {
             //two lyrics
-            backgroundLayer.speed = 1.2
-            firstLyricsLayer.speed = 1.2
-            secondLyricsLayer.speed = 1.2
+            backgroundLayer.speed = 1.5
+            firstLyricsLayer.speed = 1.5
+            secondLyricsLayer.speed = 1.5
             
             firstLyricsLayer.hidden = false
             secondLyricsLayer.hidden = false
@@ -451,9 +452,6 @@ class LyricsWindowController: NSWindowController {
             var height: CGFloat
             let x: CGFloat
             let y: CGFloat
-            var rect1st: NSRect = CGRectMake(0, size2nd.height+yOffset, size1st.width, size1st.height+lyricsHeightIncreasement)
-            var rect2nd: NSRect = CGRectMake(0, yOffset, size2nd.width, size2nd.height+lyricsHeightIncreasement)
-            let heightWithDock = visibleOrigin.y + visibleSize.height
             
             if size1st.width>=size2nd.width {
                 width=size1st.width
@@ -461,10 +459,13 @@ class LyricsWindowController: NSWindowController {
             else {
                 width=size2nd.width
             }
-            if isCliped {
-                rect1st.size.width = width
-                rect2nd.size.width = width
+            if width > visibleSize.height {
+                width = visibleSize.height
             }
+            
+            let rect1st: NSRect = CGRectMake(0, size2nd.height+yOffset, width, size1st.height+lyricsHeightIncreasement)
+            let rect2nd: NSRect = CGRectMake(0, yOffset, width, size2nd.height+lyricsHeightIncreasement)
+            let heightWithDock = visibleOrigin.y + visibleSize.height
             
             height=rect1st.size.height+rect2nd.size.height
             var deltaH = heightWithDock - width
