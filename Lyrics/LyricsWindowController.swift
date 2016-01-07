@@ -173,8 +173,16 @@ class LyricsWindowController: NSWindowController {
 // MARK: - display lyrics methods
     
     func displayLyrics(theFirstLyrics:NSString?, secondLyrics theSecondLyrics:NSString?) {
-        firstLyrics = theFirstLyrics
-        secondLyrics = theSecondLyrics
+        if theFirstLyrics != nil && theFirstLyrics?.stringByReplacingOccurrencesOfString(" ", withString: "") == "" {
+           firstLyrics = nil
+        } else {
+            firstLyrics = theFirstLyrics
+        }
+        if theSecondLyrics != nil && theSecondLyrics?.stringByReplacingOccurrencesOfString(" ", withString: "") == "" {
+            secondLyrics = nil
+        } else {
+            secondLyrics = theSecondLyrics
+        }
         
         if isRotated {
             backgroundLayer.transform = CATransform3DMakeRotation(0, 0, 0, 1)
