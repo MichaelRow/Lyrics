@@ -6,17 +6,17 @@
 	<dict>
 		<key>Resources/AppIcon.icns</key>
 		<data>
-		GPG5Gji4QAXOLhc+IT2cTO6gPi4=
+		DYBPx2UU2XRimVgkGYfn3hlU3xU=
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		RCfUjeuP4E+srzEQBHmMVUt86yg=
+		AhFZvx3VnjaMgGDrwcsLG++xzAI=
 		</data>
 		<key>Resources/Base.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Ax0NCQyrDrprFx5ZOxu23o6T/Zk=
+			QChvuCScYXVx/vurwyzWcVSnNuA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -52,7 +52,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fXNST9Gn3/vYodzrMk/5zUFShko=
+			yoA6MLnsL9taO7lCz53yFuJyeQo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -79,7 +79,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ruOIQyG1xpHHkpQR65lJ6kBfsrQ=
+			8Uvt0nzYdiWuoPKX9jCs9mIS5Ck=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -215,17 +215,17 @@
 		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<data>
-		GPG5Gji4QAXOLhc+IT2cTO6gPi4=
+		DYBPx2UU2XRimVgkGYfn3hlU3xU=
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		RCfUjeuP4E+srzEQBHmMVUt86yg=
+		AhFZvx3VnjaMgGDrwcsLG++xzAI=
 		</data>
 		<key>Resources/Base.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Ax0NCQyrDrprFx5ZOxu23o6T/Zk=
+			QChvuCScYXVx/vurwyzWcVSnNuA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -261,7 +261,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fXNST9Gn3/vYodzrMk/5zUFShko=
+			yoA6MLnsL9taO7lCz53yFuJyeQo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -288,7 +288,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ruOIQyG1xpHHkpQR65lJ6kBfsrQ=
+			8Uvt0nzYdiWuoPKX9jCs9mIS5Ck=
 			</data>
 			<key>optional</key>
 			<true/>
