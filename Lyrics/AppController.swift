@@ -431,29 +431,31 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         // side node: iTunes update playerPosition once per second.
         var iTunesPosition: Int = 0
         var currentPosition: Int = 0
-        
-        while true {
-            if iTunes.playing() {
-                if lyricsArray.count != 0 {
-                    iTunesPosition = iTunes.playerPosition()
-                    if (currentPosition < iTunesPosition) || ((currentPosition / 1000) != (iTunesPosition / 1000) && currentPosition % 1000 < 850) {
-                        currentPosition = iTunesPosition
-                    }
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                        self.handlePositionChange(iTunesPosition)
-                    })
+        //No need to track iTunes PlayerPosition when it's paused, just end the thread.
+        while iTunes.playing() {
+            if lyricsArray.count != 0 {
+                iTunesPosition = iTunes.playerPosition()
+                if (currentPosition < iTunesPosition) || ((currentPosition / 1000) != (iTunesPosition / 1000) && currentPosition % 1000 < 850) {
+                    currentPosition = iTunesPosition
                 }
-            }
-            else {
-                
-                //No need to track iTunes PlayerPosition when it's paused, just kill the thread.
-                NSLog("Kill iTunesTrackingThread")
-                isTrackingRunning=false
-                return
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                    self.handlePositionChange(iTunesPosition)
+                })
             }
             NSThread.sleepForTimeInterval(0.15)
             currentPosition += 150
         }
+        if userDefaults.boolForKey(LyricsDisabledWhenPaused) {
+            self.currentLyrics = nil
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                if self.menuBarLyrics != nil {
+                    self.menuBarLyrics.displayLyrics(nil)
+                }
+            })
+        }
+        NSLog("iTunesTrackingThread Ended")
+        isTrackingRunning=false
     }
     
     
@@ -464,17 +466,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         else {
             if userInfo!["Player State"] as! String == "Paused" {
-                if userDefaults.boolForKey(LyricsDisabledWhenPaused) {
-                    self.currentLyrics = nil
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                        if self.menuBarLyrics != nil {
-                            self.menuBarLyrics.displayLyrics(nil)
-                        }
-                    })
-                }
                 NSLog("iTunes Paused")
-                
                 if userDefaults.boolForKey(LyricsQuitWithITunes) {
                     // iTunes would paused before it quitted, so we should check whether iTunes is running
                     // seconds later when playing or paused.
