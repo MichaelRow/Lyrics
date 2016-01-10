@@ -15,7 +15,6 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     @IBOutlet private var lyricsPrefsView:NSView!
     @IBOutlet private var fontAndColorPrefsView:NSView!
     @IBOutlet private var shortcutPrefsView:NSView!
-    @IBOutlet private var donateView:NSView!
     //General
     @IBOutlet private weak var savingPathPopUp: NSPopUpButton!
     //Font & Color
@@ -67,8 +66,6 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         self.addView(lyricsPrefsView, label: NSLocalizedString("LYRICS", comment: ""), image: NSImage(named: "lyrics_icon"))
         self.addView(fontAndColorPrefsView, label: NSLocalizedString("FONT_COLOR", comment: ""), image: NSImage(named: "font_Color_icon"))
         self.addView(shortcutPrefsView, label: NSLocalizedString("SHORTCUT", comment: ""), image: NSImage(named: "shortcut"))
-        self.addFlexibleSpacer()
-        self.addView(donateView, label: NSLocalizedString("DONATE", comment: ""), image: NSImage(named: "donate_icon"))
         self.crossFade=true
         self.shiftSlowsAnimation=false
     }

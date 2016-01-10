@@ -57,3 +57,6 @@
 "WROTE_TO_ITUNES"="Lyrics Has Wrote To iTunes";
 "COPYED_TO_PB"="Lyrics Has Copyed To Pasteboard";
 "NO_ARTWORK"="No Available Artwork";
+
+// About Window
+"EULA"="EULA";

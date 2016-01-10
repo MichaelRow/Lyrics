@@ -165,7 +165,7 @@
                 <menuItem title="About LyricsX..." id="QoB-2y-8a4">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="orderFrontStandardAboutPanel:" target="-1" id="UVr-pZ-Hc1"/>
+                        <action selector="showAboutWindow:" target="-2" id="12Q-aq-Cs4"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Check For Update..." id="R96-lC-i2Q">

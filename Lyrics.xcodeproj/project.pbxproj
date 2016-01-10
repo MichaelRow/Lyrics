@@ -64,6 +64,10 @@
 		76D0605E1C02B930000DA86C /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D0605D1C02B930000DA86C /* ServiceManagement.framework */; };
 		76D060601C02BBB7000DA86C /* LyricsX Helper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76D060421C02B8D8000DA86C /* LyricsX Helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76D0606B1C02FBCD000DA86C /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
+		76E0D22B1C42407A00946E63 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E0D2291C42407A00946E63 /* AboutWindowController.swift */; };
+		76E0D22D1C42575900946E63 /* AboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E0D22F1C42575900946E63 /* AboutWindow.xib */; };
+		76E0D2361C426B2800946E63 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 76E0D2341C426B2800946E63 /* Credits.rtf */; };
+		76E0D2371C426B2800946E63 /* EULA.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 76E0D2351C426B2800946E63 /* EULA.rtf */; };
 		76ECE2641C31223400089705 /* LrcMaker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2611C31222B00089705 /* LrcMaker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76ECE2651C31223400089705 /* LrcMerger.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2621C31222B00089705 /* LrcMerger.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76ECE2661C31223400089705 /* LrcSeeker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2631C31222B00089705 /* LrcSeeker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -189,6 +193,12 @@
 		76D060681C02E997000DA86C /* Lyrics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Prefix.pch"; sourceTree = "<group>"; };
 		76D060741C03221B000DA86C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/Preferences.xib"; sourceTree = "<group>"; };
 		76D060751C032220000DA86C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.xib"; sourceTree = "<group>"; };
+		76E0D2291C42407A00946E63 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
+		76E0D22E1C42575900946E63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AboutWindow.xib; sourceTree = "<group>"; };
+		76E0D2311C42576600946E63 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AboutWindow.strings"; sourceTree = "<group>"; };
+		76E0D2331C42576900946E63 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AboutWindow.strings"; sourceTree = "<group>"; };
+		76E0D2341C426B2800946E63 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		76E0D2351C426B2800946E63 /* EULA.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = EULA.rtf; sourceTree = "<group>"; };
 		76ECE2611C31222B00089705 /* LrcMaker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = LrcMaker.app; path = "Build-In App/LrcMaker.app"; sourceTree = "<group>"; };
 		76ECE2621C31222B00089705 /* LrcMerger.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = LrcMerger.app; path = "Build-In App/LrcMerger.app"; sourceTree = "<group>"; };
 		76ECE2631C31222B00089705 /* LrcSeeker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = LrcSeeker.app; path = "Build-In App/LrcSeeker.app"; sourceTree = "<group>"; };
@@ -285,6 +295,8 @@
 			children = (
 				76C5115E1BEC6F8F0095F510 /* Assets.xcassets */,
 				76C511631BEC6F8F0095F510 /* Info.plist */,
+				76E0D2341C426B2800946E63 /* Credits.rtf */,
+				76E0D2351C426B2800946E63 /* EULA.rtf */,
 				768BCB401BF1C74C00D6F5EB /* OpenCC Res */,
 			);
 			name = "Support Files";
@@ -300,6 +312,7 @@
 				766F03C41C049372003F4790 /* LyricsEditView.swift */,
 				76FE94401BFC223600A1AC27 /* TextPreview.swift */,
 				769AFC3F1C29A9C600215A6D /* MessageWindowController.swift */,
+				76E0D2291C42407A00946E63 /* AboutWindowController.swift */,
 				7622A7621C2A6757001250DD /* ClickView.swift */,
 				76C047171BF2E335005053AC /* DBPrefsWindowController.h */,
 				76C047181BF2E335005053AC /* DBPrefsWindowController.m */,
@@ -313,6 +326,7 @@
 				7642B9021BF4709300D68FE9 /* StatusMenu.xib */,
 				76C046D11BF21876005053AC /* Preferences.xib */,
 				7600121C1BFD9ECC00C7C1E4 /* LyricsEditWindow.xib */,
+				76E0D22F1C42575900946E63 /* AboutWindow.xib */,
 				76C511601BEC6F8F0095F510 /* MainMenu.xib */,
 				7678AA061BFF526700FE848C /* Localizable.strings */,
 			);
@@ -526,10 +540,13 @@
 				768BCB3D1BF1C74400D6F5EB /* TSCharacters.ocd in Resources */,
 				76C5115F1BEC6F8F0095F510 /* Assets.xcassets in Resources */,
 				768BCB371BF1C74400D6F5EB /* s2hk.json in Resources */,
+				76E0D22D1C42575900946E63 /* AboutWindow.xib in Resources */,
 				768BCB3B1BF1C74400D6F5EB /* STPhrases.ocd in Resources */,
 				768BCB351BF1C74400D6F5EB /* HKVariants.ocd in Resources */,
 				768BCB3F1BF1C74400D6F5EB /* TWVariants.ocd in Resources */,
 				768BCB3E1BF1C74400D6F5EB /* TSPhrases.ocd in Resources */,
+				76E0D2371C426B2800946E63 /* EULA.rtf in Resources */,
+				76E0D2361C426B2800946E63 /* Credits.rtf in Resources */,
 				76C046D31BF21876005053AC /* Preferences.xib in Resources */,
 				76C511621BEC6F8F0095F510 /* MainMenu.xib in Resources */,
 			);
@@ -560,6 +577,7 @@
 				760A01831C01A33400015C62 /* SongInfos.m in Sources */,
 				760A01851C01A33400015C62 /* TTPod.m in Sources */,
 				760A01841C01A33400015C62 /* GeCiMe.m in Sources */,
+				76E0D22B1C42407A00946E63 /* AboutWindowController.swift in Sources */,
 				760A018B1C01A36700015C62 /* XMLParserForQianQian.m in Sources */,
 				769AFC401C29A9C600215A6D /* MessageWindowController.swift in Sources */,
 				768203AF1C2B6FA900DB93F0 /* MenuBarLyrics.swift in Sources */,
@@ -644,6 +662,16 @@
 				76D060491C02B8D9000DA86C /* Base */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		76E0D22F1C42575900946E63 /* AboutWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76E0D22E1C42575900946E63 /* Base */,
+				76E0D2311C42576600946E63 /* zh-Hans */,
+				76E0D2331C42576900946E63 /* zh-Hant */,
+			);
+			name = AboutWindow.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -166,7 +166,7 @@
                 <menuItem title="关于LyricsX..." id="QoB-2y-8a4">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="orderFrontStandardAboutPanel:" target="-1" id="UVr-pZ-Hc1"/>
+                        <action selector="showAboutWindow:" target="-2" id="gaX-4t-nlk"/>
                     </connections>
                 </menuItem>
                 <menuItem title="检查更新..." id="R96-lC-i2Q">

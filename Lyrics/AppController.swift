@@ -231,13 +231,17 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
+    @IBAction func showAboutWindow(sender: AnyObject?) {
+        AboutWindowController.sharedAboutWindow.showWindow(nil)
+    }
+    
     @IBAction func showPreferences(sender:AnyObject?) {
         let prefs = AppPrefsWindowController.sharedPrefsWindowController()
         if !(prefs.window?.visible)! {
             prefs.showWindow(nil)
         }
-        prefs.window?.makeKeyAndOrderFront(nil)
-        NSApp.activateIgnoringOtherApps(true)
+        prefs.window?.orderFrontRegardless()
+        prefs.window?.makeKeyWindow()
     }
     
     @IBAction func checkForUpdate(sender: AnyObject) {
@@ -598,7 +602,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             }
         }
     }
-    
     
     private func testLrc(lrcFileContents: NSString) -> Bool {
         // test whether the string is lrc

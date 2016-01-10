@@ -57,3 +57,6 @@
 "WROTE_TO_ITUNES"="歌词已写入iTunes";
 "COPYED_TO_PB"="歌词已拷贝到剪贴板";
 "NO_ARTWORK"="歌曲不包含专辑封面";
+
+// About Window
+"EULA"="许可协议";
