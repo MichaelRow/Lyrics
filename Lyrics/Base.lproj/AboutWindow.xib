@@ -35,7 +35,7 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="g0D-Y5-N7U"/>
                     </imageView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f6Z-CT-G2A">
-                        <rect key="frame" x="187" y="140" width="284" height="18"/>
+                        <rect key="frame" x="187" y="141" width="284" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="M3b-2q-Fiv"/>
                             <constraint firstAttribute="width" constant="280" id="oaq-n5-zzL"/>
@@ -60,13 +60,13 @@
                         </connections>
                     </button>
                     <scrollView placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="77" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccP-gL-PsY">
-                        <rect key="frame" x="183" y="53" width="320" height="78"/>
+                        <rect key="frame" x="183" y="53" width="320" height="79"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="zbp-uZ-Hy5">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jhi-hy-Rco">
-                                    <rect key="frame" x="148" y="4" width="191" height="143"/>
+                                    <rect key="frame" x="138" y="137" width="119" height="199"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -79,7 +79,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Ncp-HV-zgU">
-                            <rect key="frame" x="304" y="0.0" width="16" height="78"/>
+                            <rect key="frame" x="304" y="0.0" width="16" height="79"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -97,7 +97,7 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tgC-0J-SjY">
-                        <rect key="frame" x="184" y="163" width="284" height="39"/>
+                        <rect key="frame" x="184" y="164" width="284" height="39"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="280" id="LzD-Ga-amd"/>
                             <constraint firstAttribute="height" constant="39" id="Pug-7o-qSg"/>
@@ -113,7 +113,7 @@
                     <constraint firstItem="f6Z-CT-G2A" firstAttribute="leading" secondItem="V8y-4Y-GTM" secondAttribute="trailing" constant="24" id="6ae-7r-e6h"/>
                     <constraint firstItem="HaG-3y-xrr" firstAttribute="top" secondItem="ccP-gL-PsY" secondAttribute="bottom" constant="12" id="C1U-0g-uKm"/>
                     <constraint firstAttribute="bottom" secondItem="Aev-sf-19Y" secondAttribute="bottom" constant="20" id="CSO-rF-7DQ"/>
-                    <constraint firstItem="tgC-0J-SjY" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="1" id="CSe-Pq-I82"/>
+                    <constraint firstItem="tgC-0J-SjY" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="CSe-Pq-I82"/>
                     <constraint firstAttribute="trailing" secondItem="Aev-sf-19Y" secondAttribute="trailing" constant="20" id="D0K-Wd-Afv"/>
                     <constraint firstAttribute="bottom" secondItem="HaG-3y-xrr" secondAttribute="bottom" constant="20" id="EWE-wD-eyw"/>
                     <constraint firstItem="V8y-4Y-GTM" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="15" id="JqT-kG-zfc"/>
@@ -147,7 +147,7 @@
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="cOR-4f-EW5">
                     <rect key="frame" x="-2" y="118" width="287" height="170"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="Pbr-7J-nw6">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="Pbr-7J-nw6">
                         <font key="font" metaFont="system"/>
                         <string key="title">     Hi from the developer of LricsX. I hope you enjoy using LricsX!      LyricsX is a open source app based on some code of DynamicLyrics and other third party libraries. Its maintenance and developing needs time and money. In fact, I'm concidering set up a server to deal with the update thing. If you love this app, you can support me by donating using Wechat or Alipay. Thank you for being awesome!</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
