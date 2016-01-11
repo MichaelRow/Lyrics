@@ -946,7 +946,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="59B-DD-91Z">
                     <rect key="frame" x="245" y="240" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="jmS-03-WwS">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="jmS-03-WwS">
                         <font key="font" size="13" name=".LucidaGrandeUI"/>
                         <string key="title" base64-UTF8="YES">
 4oylEeKMmCs
@@ -958,7 +958,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="WRu-VI-ZcO">
                     <rect key="frame" x="245" y="213" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="5mR-Pb-q92">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="5mR-Pb-q92">
                         <font key="font" size="13" name=".LucidaGrandeUI"/>
                         <string key="title" base64-UTF8="YES">
 4oylEeKMmC0

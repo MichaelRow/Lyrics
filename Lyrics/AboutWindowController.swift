@@ -68,8 +68,8 @@ class AboutWindowController: NSWindowController {
     
     override func showWindow(sender: AnyObject?) {
         super.showWindow(sender)
-        self.window?.orderFrontRegardless()
-        self.window?.makeKeyWindow()
+        self.window?.makeKeyAndOrderFront(nil)
+        NSApp.activateIgnoringOtherApps(true)
     }
     
     @IBAction func switchTextView(sender: AnyObject) {

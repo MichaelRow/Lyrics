@@ -956,7 +956,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="P33-wf-7QY">
                     <rect key="frame" x="245" y="238" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="2Tr-kr-izZ">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="2Tr-kr-izZ">
                         <font key="font" metaFont="system"/>
                         <string key="title" base64-UTF8="YES">
 4oylEeKMmCs
@@ -968,7 +968,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="cgi-ar-KSM">
                     <rect key="frame" x="245" y="211" width="150" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="4VI-wP-DJL">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="4VI-wP-DJL">
                         <font key="font" metaFont="system"/>
                         <string key="title" base64-UTF8="YES">
 4oylEeKMmC0

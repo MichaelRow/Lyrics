@@ -240,8 +240,8 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         if !(prefs.window?.visible)! {
             prefs.showWindow(nil)
         }
-        prefs.window?.orderFrontRegardless()
-        prefs.window?.makeKeyWindow()
+        prefs.window?.makeKeyAndOrderFront(nil)
+        NSApp.activateIgnoringOtherApps(true)
     }
     
     @IBAction func checkForUpdate(sender: AnyObject) {
@@ -317,8 +317,8 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         if !(lyricsEidtWindow.window?.visible)! {
             lyricsEidtWindow.showWindow(nil)
         }
-        lyricsEidtWindow.window?.makeKeyAndOrderFront(nil)
-        NSApp.activateIgnoringOtherApps(true)
+        lyricsEidtWindow.window?.orderFrontRegardless()
+        lyricsEidtWindow.window?.makeKeyWindow()
     }
     
     @IBAction func importLrcFile(sender: AnyObject) {
@@ -772,7 +772,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         
         //千千静听不支持繁体中文搜索，先转成简体中文。搜歌词组件参数是iTunes中显示的歌曲名
         //歌手名以及iTunes的唯一编号（防止歌曲变更造成的歌词对错歌），以及用于搜索用的歌曲
-        //名与歌手名。另外，天天动听只会获取歌词文本，其他歌词源都是获取歌词URL
+        //名与歌手名。另外，天天动听/QQ只会获取歌词文本，其他歌词源都是获取歌词URL
         qianqian.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: convertToSC(titleForSearching) as String, andArtistForSearching: convertToSC(artistForSearching) as String)
         xiami.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
         ttpod.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
