@@ -60,11 +60,13 @@
     // in Interface Builder, it gets replaced with this one.
     NSWindow *window = 
     [[NSWindow alloc] initWithContentRect:NSMakeRect(0,0,1000,1000)
-                                styleMask:(NSTitledWindowMask |
+                                styleMask:(NSTexturedBackgroundWindowMask |
+                                           NSTitledWindowMask |
                                            NSClosableWindowMask |
                                            NSMiniaturizableWindowMask)
                                   backing:NSBackingStoreBuffered
                                     defer:YES];
+    window.backgroundColor = [NSColor colorWithRed:245.0/255 green:245.0/255 blue:245.0/255 alpha:1];
     [self setWindow:window];
     self.contentSubview = [[NSView alloc] initWithFrame:[[[self window] contentView] frame]];
     [self.contentSubview setAutoresizingMask:(NSViewMinYMargin | NSViewWidthSizable)];
