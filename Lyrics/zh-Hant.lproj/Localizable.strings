@@ -11,7 +11,7 @@
 "IGNORE" = "忽略";
 "IGNORE" = "忽略";
 "CHANGE_UNSAVED"="更改未儲存";
-"DISGARDS_LEAVE"="您確定放棄儲存兵離開當前介面?";
+"DISGARDS_LEAVE"="您確定放棄儲存並離開當前介面?";
 "APPLY_LEAVE"="應用並離開";
 "REVERT_LEAVE"="還原並離開";
 "CANCEL"="取消";
