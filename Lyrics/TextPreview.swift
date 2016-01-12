@@ -45,31 +45,6 @@ class TextPreview: NSView {
         textLayer.position = NSZeroPoint
         textLayer.alignmentMode = kCAAlignmentCenter
         bkLayer.addSublayer(textLayer)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "viewChanged:", name: "PrefsViewChanged", object: nil)
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    // Layers don't fade out, so we have to do it selves.
-    func viewChanged(n: NSNotification) {
-        let userInfo = n.userInfo as! [String:AnyObject]
-        let fontAndColorPrefs: String = NSLocalizedString("FONT_COLOR", comment: "")
-        if userInfo["OldViewName"] as! String == fontAndColorPrefs {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.layer?.hidden = true
-                self.bkLayer.hidden = true
-                self.textLayer.hidden = true
-            })
-        } else if userInfo["NewViewName"] as! String == fontAndColorPrefs {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.layer?.hidden = false
-                self.bkLayer.hidden = false
-                self.textLayer.hidden = false
-            })
-        }
     }
     
     func setAttributs(font:NSFont, textColor:NSColor, bkColor:NSColor, heightInrc:Float, enableShadow:Bool, shadowColor:NSColor, shadowRadius:Float, yOffset:Float) {

@@ -72,6 +72,18 @@
     [self.contentSubview setAutoresizingMask:(NSViewMinYMargin | NSViewWidthSizable)];
     [[[self window] contentView] addSubview:self.contentSubview];
     [[self window] setShowsToolbarButton:NO];
+    
+    [self setupToolbar];
+    if([[self window] toolbar] == nil){
+        NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"DBPreferencesToolbar"];
+        [toolbar setAllowsUserCustomization:NO];
+        [toolbar setAutosavesConfiguration:NO];
+        [toolbar setSizeMode:NSToolbarSizeModeDefault];
+        [toolbar setDisplayMode:NSToolbarDisplayModeIconAndLabel];
+        [toolbar setDelegate:(id<NSToolbarDelegate>)self];
+        [[self window] setToolbar:toolbar];
+    }
+
 }
 
 
@@ -127,24 +139,8 @@
     // This forces the resources in the nib to load.
     [self window];
 
-    // Clear the last setup and get a fresh one.
-    [self.toolbarIdentifiers removeAllObjects];
-    [self.toolbarViews removeAllObjects];
-    [self.toolbarItems removeAllObjects];
-    [self setupToolbar];
-
     if(![_toolbarIdentifiers count]){
         return;
-    }
-
-    if([[self window] toolbar] == nil){
-        NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"DBPreferencesToolbar"];
-        [toolbar setAllowsUserCustomization:NO];
-        [toolbar setAutosavesConfiguration:NO];
-        [toolbar setSizeMode:NSToolbarSizeModeDefault];
-        [toolbar setDisplayMode:NSToolbarDisplayModeIconAndLabel];
-        [toolbar setDelegate:(id<NSToolbarDelegate>)self];
-        [[self window] setToolbar:toolbar];
     }
 
     NSString *firstIdentifier = (self.toolbarIdentifiers)[0];
@@ -210,11 +206,8 @@
         [[self window] setInitialFirstResponder:newView];
 
         if(animate && [self crossFade]){
-            NSMutableDictionary *info = [NSMutableDictionary dictionary];
-            [info setObject:self.window.title forKey:@"OldViewName"];
-            [info setObject:identifier forKey:@"NewViewName"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"PrefsViewChanged" object:nil userInfo:info];
-            [self crossFadeView:oldView withView:newView];
+            [oldView removeFromSuperviewWithoutNeedingDisplay];
+            [self crossResizeToView: newView];
         }else{
             [oldView removeFromSuperviewWithoutNeedingDisplay];
             [newView setHidden:NO];
@@ -234,7 +227,7 @@
 #pragma mark -
 #pragma mark Cross-Fading Methods
 
-- (void)crossFadeView:(NSView *)oldView withView:(NSView *)newView{
+- (void)crossResizeToView:(NSView *)newView {
     [self.viewAnimation stopAnimation];
 
     if([self shiftSlowsAnimation] && [[[self window] currentEvent] modifierFlags] & NSShiftKeyMask){
@@ -243,23 +236,12 @@
         [self.viewAnimation setDuration:0.25];
     }
 
-    NSDictionary *fadeOutDictionary = 
-    @{NSViewAnimationTargetKey: oldView,
-     NSViewAnimationEffectKey: NSViewAnimationFadeOutEffect};
-
-    NSDictionary *fadeInDictionary = 
-    @{NSViewAnimationTargetKey: newView,
-     NSViewAnimationEffectKey: NSViewAnimationFadeInEffect};
-
     NSDictionary *resizeDictionary = 
     @{NSViewAnimationTargetKey: [self window],
      NSViewAnimationStartFrameKey: [NSValue valueWithRect:[[self window] frame]],
      NSViewAnimationEndFrameKey: [NSValue valueWithRect:[self frameForView:newView]]};
 
-    NSArray *animationArray = 
-    @[fadeOutDictionary,
-     fadeInDictionary,
-     resizeDictionary];
+    NSArray *animationArray = @[resizeDictionary];
 
     [self.viewAnimation setViewAnimations:animationArray];
     [self.viewAnimation startAnimation];

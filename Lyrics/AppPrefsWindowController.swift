@@ -67,7 +67,6 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         self.addView(fontAndColorPrefsView, label: NSLocalizedString("FONT_COLOR", comment: ""), image: NSImage(named: "font_Color_icon"))
         self.addView(shortcutPrefsView, label: NSLocalizedString("SHORTCUT", comment: ""), image: NSImage(named: "shortcut"))
         self.crossFade=true
-        self.shiftSlowsAnimation=false
     }
     
     private func setupShortcuts() {
@@ -300,7 +299,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
                 if identifier != nil {
                     NSFontPanel.sharedFontPanel().orderOut(nil)
                     NSColorPanel.sharedColorPanel().orderOut(nil)
-                    self.displayViewForIdentifier(identifier,animate: true)
+                    self.displayViewForIdentifier(identifier,animate: false)
                 } else {
                     NSFontPanel.sharedFontPanel().orderOut(nil)
                     NSColorPanel.sharedColorPanel().orderOut(nil)

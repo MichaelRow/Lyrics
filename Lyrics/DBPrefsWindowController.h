@@ -10,6 +10,8 @@
 //  Copyright 2007. Some rights reserved.
 //  This work is licensed under a Creative Commons license:
 //  http://creativecommons.org/licenses/by/3.0/
+//
+//  Modified by MichaelRow for needs of LyricsX on 1.12.2016
 
 #import <Cocoa/Cocoa.h>
 
@@ -28,7 +30,7 @@
 
 - (void)toggleActivePreferenceView:(NSToolbarItem *)toolbarItem;
 - (void)displayViewForIdentifier:(NSString *)identifier animate:(BOOL)animate;
-- (void)crossFadeView:(NSView *)oldView withView:(NSView *)newView;
+- (void)crossResizeToView:(NSView *)newView;
 - (NSRect)frameForView:(NSView *)view;
 
 // select both the view & toolbar item for the given identifier
