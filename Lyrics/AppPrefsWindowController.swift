@@ -11,6 +11,8 @@ import ServiceManagement
 
 class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     
+    static let sharedPrefsWindowController = AppPrefsWindowController(windowNibName:"Preferences")
+    
     @IBOutlet private var generalPrefsView:NSView!
     @IBOutlet private var lyricsPrefsView:NSView!
     @IBOutlet private var fontAndColorPrefsView:NSView!
@@ -24,13 +26,13 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     @IBOutlet private weak var bkColor: NSColorWell!
     @IBOutlet private weak var shadowColor: NSColorWell!
     //Shortcuts
-    @IBOutlet private weak var lyricsModeSwitchShortcut: MASShortcutView!
-    @IBOutlet private weak var desktopMenubarSwitchShortcut: MASShortcutView!
-    @IBOutlet private weak var lrcSeekerShortcut: MASShortcutView!
-    @IBOutlet private weak var copyLrcToPbShortcut: MASShortcutView!
-    @IBOutlet private weak var editLrcShortcut: MASShortcutView!
-    @IBOutlet private weak var makeLrcShortcut: MASShortcutView!
-    @IBOutlet private weak var writeLrcToiTunesShortcut: MASShortcutView!
+    @IBOutlet weak var lyricsModeSwitchShortcut: MASShortcutView!
+    @IBOutlet weak var desktopMenubarSwitchShortcut: MASShortcutView!
+    @IBOutlet weak var lrcSeekerShortcut: MASShortcutView!
+    @IBOutlet weak var copyLrcToPbShortcut: MASShortcutView!
+    @IBOutlet weak var editLrcShortcut: MASShortcutView!
+    @IBOutlet weak var makeLrcShortcut: MASShortcutView!
+    @IBOutlet weak var writeLrcToiTunesShortcut: MASShortcutView!
     
     @IBOutlet weak var revertButton: NSButton!
     @IBOutlet weak var applyButton: NSButton!
@@ -58,58 +60,16 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         savingPathPopUp.itemAtIndex(1)?.title = userSavingPath.lastPathComponent
         
         reflashFontAndColorPrefs()
-        setupShortcuts()
     }
     
     override func setupToolbar () {
-        self.addView(generalPrefsView, label: NSLocalizedString("GENERAL", comment: ""), image: NSImage(named: "general_icon"))
+        self.addView(generalPrefsView, label: NSLocalizedString("GENERAL", comment: ""), image: NSImage(named: NSImageNamePreferencesGeneral))
         self.addView(lyricsPrefsView, label: NSLocalizedString("LYRICS", comment: ""), image: NSImage(named: "lyrics_icon"))
         self.addView(fontAndColorPrefsView, label: NSLocalizedString("FONT_COLOR", comment: ""), image: NSImage(named: "font_Color_icon"))
         self.addView(shortcutPrefsView, label: NSLocalizedString("SHORTCUT", comment: ""), image: NSImage(named: "shortcut"))
         self.crossFade=true
     }
     
-    private func setupShortcuts() {
-        let appController = AppController.sharedAppController
-        // User shortcuts
-        lyricsModeSwitchShortcut.associatedUserDefaultsKey = ShortcutLyricsModeSwitch
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutLyricsModeSwitch) { () -> Void in
-            appController.changeLyricsMode(nil)
-        }
-        desktopMenubarSwitchShortcut.associatedUserDefaultsKey = ShortcutDesktopMenubarSwitch
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutDesktopMenubarSwitch) { () -> Void in
-            appController.switchDesktopMenuBarMode()
-        }
-        lrcSeekerShortcut.associatedUserDefaultsKey = ShortcutOpenLrcSeeker
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOpenLrcSeeker) { () -> Void in
-            appController.searchLyricsAndArtworks(nil)
-        }
-        copyLrcToPbShortcut.associatedUserDefaultsKey = ShortcutCopyLrcToPb
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutCopyLrcToPb) { () -> Void in
-            appController.copyLyricsToPb(nil)
-        }
-        editLrcShortcut.associatedUserDefaultsKey = ShortcutEditLrc
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutEditLrc) { () -> Void in
-            appController.editLyrics(nil)
-        }
-        makeLrcShortcut.associatedUserDefaultsKey = ShortcutMakeLrc
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutMakeLrc) { () -> Void in
-            appController.makeLrc(nil)
-        }
-        writeLrcToiTunesShortcut.associatedUserDefaultsKey = ShortcutWriteLrcToiTunes
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutWriteLrcToiTunes) { () -> Void in
-            appController.writeLyricsToiTunes(nil)
-        }
-        // Hard-Coded shortcuts
-        let offsetIncr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Equal), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
-        MASShortcutMonitor.sharedMonitor().registerShortcut(offsetIncr) { () -> Void in
-            appController.increaseTimeDly()
-        }
-        let offsetDecr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Minus), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
-        MASShortcutMonitor.sharedMonitor().registerShortcut(offsetDecr) { () -> Void in
-            appController.decreaseTimeDly()
-        }
-    }
     
 //MARK: - Override
     
@@ -117,7 +77,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         //If uncommited value exists, there must be a NSTextField object which is 
         //First responder. And if the value is invalid, invoke NSNumber formatter
         //by resigning the first responder.
-        if !checkTextFieldNumberValid() {
+        if !canResignFirstResponder() {
             self.window?.makeFirstResponder(nil)
             self.window?.toolbar?.selectedItemIdentifier = self.window?.title
             return
@@ -202,7 +162,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     }
     
     @IBAction func applyFontAndColorChanges(sender: AnyObject?) {
-        if !checkTextFieldNumberValid() {
+        if !canResignFirstResponder() {
             self.window?.makeFirstResponder(nil)
             return
         }
@@ -225,7 +185,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
     
     @IBAction func revertFontAndColorChanges(sender: AnyObject?) {
         // If current value is invalid, set one before reverting
-        if !checkTextFieldNumberValid() {
+        if !canResignFirstResponder() {
             let textView = self.window?.firstResponder as! NSTextView
             textView.string = "0"
         }
@@ -258,7 +218,7 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
 // MARK: - Delegate
 
     func windowShouldClose(sender: AnyObject) -> Bool {
-        if !checkTextFieldNumberValid() {
+        if !canResignFirstResponder() {
             self.window?.makeFirstResponder(nil)
             return false
         }
@@ -312,9 +272,9 @@ class AppPrefsWindowController: DBPrefsWindowController,NSWindowDelegate {
         })
     }
     
-// MARK: - Other 
+// MARK: - Other
     
-    func checkTextFieldNumberValid() -> Bool {
+    func canResignFirstResponder() -> Bool {
         let currentResponder = self.window?.firstResponder
         if currentResponder != nil && currentResponder!.isKindOfClass(NSTextView) {
             let formatter: NSNumberFormatter = ((currentResponder as! NSTextView).superview?.superview as! NSTextField).formatter as! NSNumberFormatter

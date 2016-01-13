@@ -15,23 +15,6 @@
 @implementation DBPrefsWindowController
 
 #pragma mark -
-#pragma mark Class Methods
-
-+ (DBPrefsWindowController *)sharedPrefsWindowController{
-    static DBPrefsWindowController *_sharedPrefsWindowController = nil;    
-	if(!_sharedPrefsWindowController){
-		_sharedPrefsWindowController = [[self alloc] initWithWindowNibName:[self nibName]];
-	}
-	return _sharedPrefsWindowController;
-}
-
-// Subclasses can override this to use a nib with a different name.
-+ (NSString *)nibName{
-   return @"Preferences";
-}
-
-
-#pragma mark -
 #pragma mark Setup & Teardown
 
 - (id)initWithWindow:(NSWindow *)window{

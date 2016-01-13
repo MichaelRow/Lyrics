@@ -236,7 +236,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func showPreferences(sender:AnyObject?) {
-        let prefs = AppPrefsWindowController.sharedPrefsWindowController()
+        let prefs = AppPrefsWindowController.sharedPrefsWindowController
         if !(prefs.window?.visible)! {
             prefs.showWindow(nil)
         }

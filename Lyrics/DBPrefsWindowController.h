@@ -20,9 +20,6 @@
 @property (nonatomic) BOOL crossFade;
 @property (nonatomic) BOOL shiftSlowsAnimation;
 
-+ (DBPrefsWindowController *)sharedPrefsWindowController;
-+ (NSString *)nibName;
-
 - (void)setupToolbar;
 - (void)addFlexibleSpacer;
 - (void)addView:(NSView *)view label:(NSString *)label;
