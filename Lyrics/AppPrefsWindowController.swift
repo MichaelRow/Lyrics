@@ -13,11 +13,11 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
     static let sharedPrefsWindowController = AppPrefsWindowController(windowNibName:"Preferences")
     
-    @IBOutlet private var generalPrefsView:NSView!
-    @IBOutlet private var lyricsPrefsView:NSView!
-    @IBOutlet private var fontAndColorPrefsView:NSView!
-    @IBOutlet private var shortcutPrefsView:NSView!
-    @IBOutlet private var presetPrefsView: NSView!
+    @IBOutlet private var generalPrefsView: ClickView!
+    @IBOutlet private var lyricsPrefsView: NSView!
+    @IBOutlet private var fontAndColorPrefsView: ClickView!
+    @IBOutlet private var shortcutPrefsView: NSView!
+    @IBOutlet private var presetPrefsView: ClickView!
     //General
     @IBOutlet private weak var savingPathPopUp: NSPopUpButton!
     //Font & Color
@@ -313,7 +313,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
 // MARK: - Preset Prefs
     
-    @IBAction func loadPresets(sender: AnyObject?) {
+    @IBAction func reflashPreset(sender: AnyObject?) {
         presets.removeAll()
         let fm = NSFileManager.defaultManager()
         let libraryPath: String = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX"
