@@ -74,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let prefs = AppPrefsWindowController.sharedPrefsWindowController
         prefs.showWindow(nil)
         prefs.setupShortcuts()
-        prefs.loadPresets(nil)
+        prefs.reflashPreset(nil)
         prefs.window?.orderOut(nil)
     }
     
