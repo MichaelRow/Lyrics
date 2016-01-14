@@ -30,6 +30,13 @@
 "FONT_COLOR"="字型與顏色";
 "SHORTCUT"="快捷鍵";
 "DONATE"="捐贈";
+"PRESET"="預設";
+
+// Preset Prefs
+"UNTITLED_PRESET"="未命名預設";
+"PRESET_EXISTS"="已存在同名預設";
+"INVALID_PRESET"="無效的預設";
+"PRESET_LOADED"="預設已載入";
 
 // TextPreview
 "PREVIEW_TEXT"="歌詞效果預覽";

@@ -69,10 +69,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Force Singleton to init
         AppController.sharedAppController
+        
         // Force Prefs to load and setup shortcuts
         let prefs = AppPrefsWindowController.sharedPrefsWindowController
         prefs.showWindow(nil)
         prefs.setupShortcuts()
+        prefs.loadPresets(nil)
         prefs.window?.orderOut(nil)
     }
     

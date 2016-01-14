@@ -71,8 +71,6 @@ class MessageWindowController: NSWindowController {
         let delay: NSTimeInterval = NSAnimationContext.currentContext().duration + 0.1
         self.window!.performSelector("orderOut:", withObject: nil, afterDelay: delay)
         self.window!.animator().alphaValue = 0
-        let mainWin = NSApplication.sharedApplication().mainWindow
-        mainWin?.removeChildWindow(self.window!)
         msgText.string = ""
         isOrderFront = false
     }

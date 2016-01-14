@@ -31,6 +31,13 @@
 "FONT_COLOR"="Font & Color";
 "SHORTCUT"="Shortcut";
 "DONATE"="Donate";
+"PRESET"="Preset";
+
+// Preset Prefs
+"UNTITLED_PRESET"="Untitled Preset";
+"PRESET_EXISTS"="Preset With the Same Already Exists";
+"INVALID_PRESET"="Invalid Preset";
+"PRESET_LOADED"="Preset Loaded";
 
 // TextPreview
 "PREVIEW_TEXT"="Lyrics Preview";

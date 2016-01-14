@@ -8,7 +8,7 @@
 
 import Cocoa
 
-// This subclass is used to make NSTextField resign first responder
+// This subclass is used to make NSTextField, NSTableView, etc resign first responder
 
 class ClickView: NSView {
     override func mouseDown(theEvent: NSEvent) {

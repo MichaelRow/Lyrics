@@ -30,8 +30,8 @@
 		766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F03C41C049372003F4790 /* LyricsEditView.swift */; };
 		7678AA081BFF526700FE848C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7678AA061BFF526700FE848C /* Localizable.strings */; };
 		768203AF1C2B6FA900DB93F0 /* MenuBarLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768203AE1C2B6FA900DB93F0 /* MenuBarLyrics.swift */; };
-		768ADD031C45E2E100567FE2 /* AppPrefsWC+Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ADD021C45E2E100567FE2 /* AppPrefsWC+Shortcut.swift */; };
-		768ADD061C45F34400567FE2 /* AppPrefsWC+Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ADD051C45F34400567FE2 /* AppPrefsWC+Preset.swift */; };
+		768ADD0C1C47980800567FE2 /* PresetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ADD0B1C47980800567FE2 /* PresetListView.swift */; };
+		768ADD0E1C47A4AA00567FE2 /* ContextMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ADD0D1C47A4AA00567FE2 /* ContextMenuDelegate.swift */; };
 		768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */; };
 		768BCB211BF1C62000D6F5EB /* libopencc.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */; };
 		768BCB221BF1C62000D6F5EB /* libopencc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 768BCB1F1BF1C62000D6F5EB /* libopencc.2.dylib */; };
@@ -154,8 +154,8 @@
 		7678AA091BFF552700FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7678AA0A1BFF552900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		768203AE1C2B6FA900DB93F0 /* MenuBarLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarLyrics.swift; sourceTree = "<group>"; };
-		768ADD021C45E2E100567FE2 /* AppPrefsWC+Shortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppPrefsWC+Shortcut.swift"; sourceTree = "<group>"; };
-		768ADD051C45F34400567FE2 /* AppPrefsWC+Preset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppPrefsWC+Preset.swift"; sourceTree = "<group>"; };
+		768ADD0B1C47980800567FE2 /* PresetListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetListView.swift; sourceTree = "<group>"; };
+		768ADD0D1C47A4AA00567FE2 /* ContextMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextMenuDelegate.swift; sourceTree = "<group>"; };
 		768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		768BCAE51BF1866400D6F5EB /* Lyrics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyrics-Bridging-Header.h"; sourceTree = "<group>"; };
 		768BCB1E1BF1C62000D6F5EB /* libopencc.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.1.0.0.dylib; sourceTree = "<group>"; };
@@ -314,10 +314,8 @@
 				7660C5011BF05471002E3204 /* LyricsWindowController.swift */,
 				760012281BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift */,
 				766F03C41C049372003F4790 /* LyricsEditView.swift */,
-				76FE94401BFC223600A1AC27 /* TextPreview.swift */,
 				769AFC3F1C29A9C600215A6D /* MessageWindowController.swift */,
 				76E0D2291C42407A00946E63 /* AboutWindowController.swift */,
-				7622A7621C2A6757001250DD /* ClickView.swift */,
 			);
 			name = "Wins & Views";
 			sourceTree = "<group>";
@@ -368,10 +366,12 @@
 			isa = PBXGroup;
 			children = (
 				76C047251BF2F34C005053AC /* AppPrefsWindowController.swift */,
-				768ADD021C45E2E100567FE2 /* AppPrefsWC+Shortcut.swift */,
-				768ADD051C45F34400567FE2 /* AppPrefsWC+Preset.swift */,
 				76C047171BF2E335005053AC /* DBPrefsWindowController.h */,
 				76C047181BF2E335005053AC /* DBPrefsWindowController.m */,
+				7622A7621C2A6757001250DD /* ClickView.swift */,
+				76FE94401BFC223600A1AC27 /* TextPreview.swift */,
+				768ADD0D1C47A4AA00567FE2 /* ContextMenuDelegate.swift */,
+				768ADD0B1C47980800567FE2 /* PresetListView.swift */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -586,10 +586,8 @@
 				764334931BF95ECF00C4B740 /* iTunesBridge.m in Sources */,
 				76FE94411BFC223600A1AC27 /* TextPreview.swift in Sources */,
 				760A018A1C01A36700015C62 /* QianQian.m in Sources */,
-				768ADD061C45F34400567FE2 /* AppPrefsWC+Preset.swift in Sources */,
 				7660C5021BF05471002E3204 /* LyricsWindowController.swift in Sources */,
 				7622A7631C2A6757001250DD /* ClickView.swift in Sources */,
-				768ADD031C45E2E100567FE2 /* AppPrefsWC+Shortcut.swift in Sources */,
 				760A01831C01A33400015C62 /* SongInfos.m in Sources */,
 				760A01851C01A33400015C62 /* TTPod.m in Sources */,
 				760A01841C01A33400015C62 /* GeCiMe.m in Sources */,
@@ -605,8 +603,10 @@
 				764B0A831C30D1600048419B /* QQMusic.swift in Sources */,
 				766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */,
 				760A01911C01A37400015C62 /* XMLParserForXiami.m in Sources */,
+				768ADD0C1C47980800567FE2 /* PresetListView.swift in Sources */,
 				76C0471A1BF2E335005053AC /* DBPrefsWindowController.m in Sources */,
 				76C046D01BF2178B005053AC /* AppController.swift in Sources */,
+				768ADD0E1C47A4AA00567FE2 /* ContextMenuDelegate.swift in Sources */,
 				760012291BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift in Sources */,
 				7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */,
 			);

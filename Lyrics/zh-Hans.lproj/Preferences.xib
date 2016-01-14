@@ -11,6 +11,7 @@
                 <outlet property="bkColor" destination="EW0-Bd-p9N" id="fph-28-bHi"/>
                 <outlet property="copyLrcToPbShortcut" destination="8or-Fb-0xc" id="3rt-yv-AcM"/>
                 <outlet property="desktopMenubarSwitchShortcut" destination="7Pg-oe-3mM" id="lDb-xI-JPz"/>
+                <outlet property="dialog" destination="Sy1-yj-IFY" id="9TQ-da-iTm"/>
                 <outlet property="editLrcShortcut" destination="qL5-ur-iqU" id="sVb-Fd-VIj"/>
                 <outlet property="fontAndColorPrefsView" destination="57y-D4-ovD" id="9r1-x0-jZ6"/>
                 <outlet property="fontDisplayText" destination="0FF-WL-2dH" id="aqe-Ki-ifH"/>
@@ -19,10 +20,14 @@
                 <outlet property="lyricsModeSwitchShortcut" destination="SJ2-aS-kbU" id="uEw-WS-HY5"/>
                 <outlet property="lyricsPrefsView" destination="5BK-8u-tNV" id="0r6-Ag-2Fa"/>
                 <outlet property="makeLrcShortcut" destination="jnM-Ix-8c5" id="oTk-8d-e7a"/>
+                <outlet property="presetListView" destination="zbp-2J-yjp" id="3ve-7t-xnE"/>
+                <outlet property="presetNameTF" destination="c1m-bp-Zxn" id="184-y3-Egk"/>
+                <outlet property="presetPrefsView" destination="Kac-FP-cJa" id="bKl-UR-ddL"/>
                 <outlet property="revertButton" destination="lBX-iN-a5e" id="Wy9-dD-bAr"/>
                 <outlet property="savingPathPopUp" destination="zr6-Uo-3Au" id="e5E-dm-H7H"/>
                 <outlet property="shadowColor" destination="0vG-ps-ld4" id="YUl-nh-JWn"/>
                 <outlet property="shortcutPrefsView" destination="UVc-8X-3Mf" id="G3v-H4-WWa"/>
+                <outlet property="tableMenu" destination="JuB-Vw-z8Z" id="rmB-7U-9X7"/>
                 <outlet property="textColor" destination="Bkr-05-QrQ" id="Edz-dd-qeK"/>
                 <outlet property="textPreview" destination="FdQ-wS-kv6" id="0UG-0D-gZw"/>
                 <outlet property="writeLrcToiTunesShortcut" destination="fVP-oC-uGa" id="WxB-be-Dcx"/>
@@ -1071,6 +1076,189 @@
             </subviews>
             <point key="canvasLocation" x="315.5" y="234.5"/>
         </customView>
+        <customView id="Kac-FP-cJa" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="310" height="249"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="YNy-Aw-6do">
+                    <rect key="frame" x="20" y="47" width="270" height="147"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <clipView key="contentView" id="JkN-d3-bj6">
+                        <rect key="frame" x="1" y="23" width="268" height="123"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="MJj-3X-sm3" id="zbp-2J-yjp" customClass="PresetListView" customModule="LyricsX" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="268" height="123"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <size key="intercellSpacing" width="3" height="2"/>
+                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                <tableColumns>
+                                    <tableColumn identifier="presetName" width="265" minWidth="40" maxWidth="1000" id="otR-e6-7TH">
+                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="预设名称">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                        </tableHeaderCell>
+                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="UUy-78-6ab">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                    </tableColumn>
+                                </tableColumns>
+                                <connections>
+                                    <outlet property="dataSource" destination="-2" id="W1x-Sd-pFX"/>
+                                    <outlet property="delegate" destination="-2" id="OBb-C5-SLK"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="0oO-6a-jLi">
+                        <rect key="frame" x="1" y="166" width="175" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="NbB-tQ-amT">
+                        <rect key="frame" x="224" y="17" width="15" height="102"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <tableHeaderView key="headerView" id="MJj-3X-sm3">
+                        <rect key="frame" x="0.0" y="0.0" width="268" height="23"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </tableHeaderView>
+                </scrollView>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="WIz-rR-KL4">
+                    <rect key="frame" x="18" y="201" width="274" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="※ 预设将储存歌词布局、字体与颜色等相关偏好设置。新增的预设将使用当前偏好设置" id="7Dh-4X-vaD">
+                        <font key="font" size="11" name="LucidaGrande"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" id="brX-tD-qJI">
+                    <rect key="frame" x="230" y="8" width="66" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="新增" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1gn-CX-xr1">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="addPreset:" target="-2" id="ork-KK-gzQ"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" id="wou-Sa-dSV">
+                    <rect key="frame" x="164" y="8" width="66" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="导入" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nhC-hR-Cy2">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="importPreset:" target="-2" id="9u9-hZ-B0N"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" id="LTn-l2-VIK">
+                    <rect key="frame" x="98" y="8" width="66" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="刷新" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Da-2g-l07">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" size="13" name=".PingFangSC-Regular"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="loadPresets:" target="-2" id="mwh-HD-ZXY"/>
+                    </connections>
+                </button>
+            </subviews>
+            <point key="canvasLocation" x="773" y="220.5"/>
+        </customView>
+        <window title="Dialog" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Sy1-yj-IFY">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="207" width="334" height="87"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="u69-se-XrG">
+                <rect key="frame" x="0.0" y="0.0" width="334" height="87"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" id="c1m-bp-Zxn">
+                        <rect key="frame" x="20" y="20" width="157" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fe7-hc-fyM">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="cLm-Xe-PA0">
+                        <rect key="frame" x="18" y="50" width="99" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="请输入预设名称:" id="MZj-rl-06s">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" id="Fbd-Rt-iCT">
+                        <rect key="frame" x="188" y="14" width="66" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="取消" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OlB-fZ-JAL">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancelChangePresetName:" target="-2" id="sHB-xC-I1X"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" id="JQG-WD-7L6">
+                        <rect key="frame" x="254" y="14" width="66" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="确定" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hVm-5y-Pl7">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="confirmPrestName:" target="-2" id="ZIh-at-l96"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="1476" y="225.5"/>
+        </window>
+        <menu id="JuB-Vw-z8Z">
+            <items>
+                <menuItem title="应用" id="JAb-1F-MWo">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="applyPreset:" target="-2" id="cW1-o0-l9k"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="重命名" id="e1N-o7-udg">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="renamePreset:" target="-2" id="Zbp-Z8-wCU"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="导出" id="APT-ct-Jvv">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="exportPreset:" target="-2" id="wGU-gJ-Hcl"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="删除" id="Doh-il-FOF">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="removePreset:" target="-2" id="r8T-e2-ed8"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="1097.5" y="215.5"/>
+        </menu>
     </objects>
     <resources>
         <image name="Font_icon" width="24" height="24"/>
