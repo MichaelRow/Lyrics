@@ -35,6 +35,7 @@
 
 // Preset Prefs
 "UNTITLED_PRESET"="Untitled Preset";
+"EMPTY_NAME"="Empty Preset Name";
 "PRESET_EXISTS"="Preset With the Same Already Exists";
 "INVALID_PRESET"="Invalid Preset";
 "PRESET_LOADED"="Preset Loaded";

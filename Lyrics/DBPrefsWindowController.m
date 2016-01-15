@@ -31,7 +31,7 @@
         [self.viewAnimation setAnimationCurve:NSAnimationEaseInOut];
         [self.viewAnimation setDelegate:(id<NSAnimationDelegate>)self];
 
-        self.crossFade = YES;
+        self.crossFade = NO;
         self.shiftSlowsAnimation = YES;
 	}
 	return self;
@@ -189,15 +189,14 @@
         [[self window] setInitialFirstResponder:newView];
 
         if(animate && [self crossFade]){
-            [oldView removeFromSuperviewWithoutNeedingDisplay];
-            [self crossResizeToView: newView];
+            [self crossFadeView:oldView withView:newView];
         }else{
             [oldView removeFromSuperviewWithoutNeedingDisplay];
             [newView setHidden:NO];
             [[self window] setFrame:[self frameForView:newView] display:YES animate:animate];
         }
 
-        [[self window] setTitle:[(self.toolbarItems)[identifier] label]];
+        [[[self window] animator] setTitle:[(self.toolbarItems)[identifier] label]];
     }
 }
 
@@ -210,22 +209,33 @@
 #pragma mark -
 #pragma mark Cross-Fading Methods
 
-- (void)crossResizeToView:(NSView *)newView {
+- (void)crossFadeView:(NSView *)oldView withView:(NSView *)newView{
     [self.viewAnimation stopAnimation];
-
+    
     if([self shiftSlowsAnimation] && [[[self window] currentEvent] modifierFlags] & NSShiftKeyMask){
         [self.viewAnimation setDuration:1.25];
     }else{
         [self.viewAnimation setDuration:0.25];
     }
-
-    NSDictionary *resizeDictionary = 
+    
+    NSDictionary *fadeOutDictionary =
+    @{NSViewAnimationTargetKey: oldView,
+      NSViewAnimationEffectKey: NSViewAnimationFadeOutEffect};
+    
+    NSDictionary *fadeInDictionary =
+    @{NSViewAnimationTargetKey: newView,
+      NSViewAnimationEffectKey: NSViewAnimationFadeInEffect};
+    
+    NSDictionary *resizeDictionary =
     @{NSViewAnimationTargetKey: [self window],
-     NSViewAnimationStartFrameKey: [NSValue valueWithRect:[[self window] frame]],
-     NSViewAnimationEndFrameKey: [NSValue valueWithRect:[self frameForView:newView]]};
-
-    NSArray *animationArray = @[resizeDictionary];
-
+      NSViewAnimationStartFrameKey: [NSValue valueWithRect:[[self window] frame]],
+      NSViewAnimationEndFrameKey: [NSValue valueWithRect:[self frameForView:newView]]};
+    
+    NSArray *animationArray =
+    @[fadeOutDictionary,
+      fadeInDictionary,
+      resizeDictionary];
+    
     [self.viewAnimation setViewAnimations:animationArray];
     [self.viewAnimation startAnimation];
 }

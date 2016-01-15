@@ -35,6 +35,7 @@
 
 // Preset Prefs
 "UNTITLED_PRESET"="未命名预设";
+"EMPTY_NAME"="预设名不能为空";
 "PRESET_EXISTS"="已存在同名预设";
 "INVALID_PRESET"="无效的预设";
 "PRESET_LOADED"="预设已载入";

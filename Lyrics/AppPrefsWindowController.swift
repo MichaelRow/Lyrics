@@ -74,7 +74,6 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         self.addView(fontAndColorPrefsView, label: NSLocalizedString("FONT_COLOR", comment: ""), image: NSImage(named: "font_Color_icon"))
         self.addView(shortcutPrefsView, label: NSLocalizedString("SHORTCUT", comment: ""), image: NSImage(named: "shortcut"))
         self.addView(presetPrefsView, label: NSLocalizedString("PRESET", comment: ""), image: NSImage(named: NSImageNameAdvanced))
-        self.crossFade=true
     }
     
     override func displayViewForIdentifier(identifier: String, animate: Bool) {
@@ -518,6 +517,11 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     }
     
     @IBAction private func confirmPrestName(sender: AnyObject) {
+        if presetNameTF.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "") == "" {
+            NSBeep()
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("EMPTY_NAME", comment: ""))
+            return
+        }
         for preset in presets {
             if preset == presetNameTF.stringValue {
                 NSBeep()
