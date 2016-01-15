@@ -70,12 +70,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Force Singleton to init
         AppController.sharedAppController
         
-        // Force Prefs to load and setup shortcuts
+        // Force Prefs to load and setup shortcuts,etc
         let prefs = AppPrefsWindowController.sharedPrefsWindowController
         prefs.showWindow(nil)
         prefs.setupShortcuts()
         prefs.reflashPreset(nil)
-        prefs.window?.orderOut(nil)
+        prefs.window?.close()
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {

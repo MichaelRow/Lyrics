@@ -54,6 +54,7 @@
 "LOWER_LYRICS"="Lower Lyrics";
 "VERTICAL"="Switch to Vertical Lyrics(beta)";
 "HORIZONTAL"="Switch to Horizontal Lyrics";
+"EMPTY"="(Empty)";
 
 // Message Window
 "OFFSET"="Offset: %d";

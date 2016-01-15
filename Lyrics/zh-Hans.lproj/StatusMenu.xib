@@ -11,6 +11,7 @@
                 <outlet property="lyricsDelayView" destination="3Jx-vU-QNM" id="2fJ-DT-b0e"/>
                 <outlet property="lyricsHeightMenuItem" destination="Qde-lY-h4R" id="NW5-pf-CMW"/>
                 <outlet property="lyricsModeMenuItem" destination="kDn-f6-xtI" id="svf-jr-eIx"/>
+                <outlet property="presetMenuItem" destination="U6n-up-Ts7" id="HAl-Tc-aCV"/>
                 <outlet property="statusBarMenu" destination="tTA-dl-Isx" id="TWf-gB-4JV"/>
             </connections>
         </customObject>
@@ -138,6 +139,16 @@
                                 <connections>
                                     <action selector="writeLyricsToiTunes:" target="-2" id="OzK-ZJ-pvP"/>
                                 </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="预设" id="U6n-up-Ts7">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="预设" id="Vbn-Td-WTr">
+                        <items>
+                            <menuItem title="(空)" id="VE0-Vr-9nF">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
                     </menu>

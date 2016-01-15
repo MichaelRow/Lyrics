@@ -17,6 +17,7 @@ import Foundation
 let LyricsAttributesChangedNotification:String="LyricsAttributesChanged"
 let LyricsUserEditLyricsNotification:String="LyricsUserEditLyrics"
 let LyricsLayoutChangeNotification:String="LyricsLayoutChange"
+let LyricsPresetDidChangedNotification:String="LyricsPresetDidChanged"
 
 //Menu
 let LyricsDesktopLyricsEnabled:String="LyricsDesktopLyricsEnabled"

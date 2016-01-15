@@ -26,8 +26,8 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     @IBOutlet private weak var textColor: NSColorWell!
     @IBOutlet private weak var bkColor: NSColorWell!
     @IBOutlet private weak var shadowColor: NSColorWell!
-    @IBOutlet weak var revertButton: NSButton!
-    @IBOutlet weak var applyButton: NSButton!
+    @IBOutlet private weak var revertButton: NSButton!
+    @IBOutlet private weak var applyButton: NSButton!
     private var hasUnsavedChange: Bool = false
     private var font: NSFont!
     var shadowModeEnabled: Bool = false
@@ -35,19 +35,19 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     var bgHeightIncreasement: Float = 0
     var lyricsYOffset: Float = 0
     //Shortcuts
-    @IBOutlet weak var lyricsModeSwitchShortcut: MASShortcutView!
-    @IBOutlet weak var desktopMenubarSwitchShortcut: MASShortcutView!
-    @IBOutlet weak var lrcSeekerShortcut: MASShortcutView!
-    @IBOutlet weak var copyLrcToPbShortcut: MASShortcutView!
-    @IBOutlet weak var editLrcShortcut: MASShortcutView!
-    @IBOutlet weak var makeLrcShortcut: MASShortcutView!
-    @IBOutlet weak var writeLrcToiTunesShortcut: MASShortcutView!
+    @IBOutlet private weak var lyricsModeSwitchShortcut: MASShortcutView!
+    @IBOutlet private weak var desktopMenubarSwitchShortcut: MASShortcutView!
+    @IBOutlet private weak var lrcSeekerShortcut: MASShortcutView!
+    @IBOutlet private weak var copyLrcToPbShortcut: MASShortcutView!
+    @IBOutlet private weak var editLrcShortcut: MASShortcutView!
+    @IBOutlet private weak var makeLrcShortcut: MASShortcutView!
+    @IBOutlet private weak var writeLrcToiTunesShortcut: MASShortcutView!
     //Preset
     var presets: [String]!
     @IBOutlet weak var presetListView: PresetListView!
-    @IBOutlet var tableMenu: NSMenu!
-    @IBOutlet var dialog: NSWindow!
-    @IBOutlet var presetNameTF: NSTextField!
+    @IBOutlet private var tableMenu: NSMenu!
+    @IBOutlet private var dialog: NSWindow!
+    @IBOutlet private var presetNameTF: NSTextField!
     
 //MARK: - Init & Override
 
@@ -105,7 +105,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
 // MARK: - General Prefs
     
-    @IBAction func changeLrcSavingPath(sender: AnyObject) {
+    @IBAction private func changeLrcSavingPath(sender: AnyObject) {
         let openPanel = NSOpenPanel()
         openPanel.canChooseFiles = false
         openPanel.canChooseDirectories = true
@@ -121,7 +121,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         }
     }
     
-    @IBAction func enableLoginItem(sender: AnyObject) {
+    @IBAction private func enableLoginItem(sender: AnyObject) {
         let identifier: String = "Eru.LyricsX-Helper"
         if (sender as! NSButton).state == NSOnState {
             if !SMLoginItemSetEnabled((identifier as CFStringRef), true) {
@@ -141,7 +141,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
 // MARK: - Font and Color Prefs
     
-    func reflashFontAndColorPrefs () {
+    private func reflashFontAndColorPrefs () {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))!
         fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
@@ -156,7 +156,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, heightInrc:bgHeightIncreasement, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: shadowRadius, yOffset:lyricsYOffset)
     }
     
-    @IBAction func fontAndColorChanged(sender: AnyObject?) {
+    @IBAction private func fontAndColorChanged(sender: AnyObject?) {
         if !hasUnsavedChange {
             revertButton.enabled = true
             applyButton.enabled = true
@@ -165,7 +165,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, heightInrc:bgHeightIncreasement, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: shadowRadius, yOffset:lyricsYOffset)
     }
     
-    @IBAction func applyFontAndColorChanges(sender: AnyObject?) {
+    @IBAction private func applyFontAndColorChanges(sender: AnyObject?) {
         if !canResignFirstResponder() {
             self.window?.makeFirstResponder(nil)
             return
@@ -187,7 +187,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         NSNotificationCenter.defaultCenter().postNotificationName(LyricsAttributesChangedNotification, object: nil)
     }
     
-    @IBAction func revertFontAndColorChanges(sender: AnyObject?) {
+    @IBAction private func revertFontAndColorChanges(sender: AnyObject?) {
         // If current value is invalid, set one before reverting
         if !canResignFirstResponder() {
             let textView = self.window?.firstResponder as! NSTextView
@@ -219,7 +219,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         fontPanel.delegate = self
     }
     
-    func canResignFirstResponder() -> Bool {
+    private func canResignFirstResponder() -> Bool {
         let currentResponder = self.window?.firstResponder
         if currentResponder != nil && currentResponder!.isKindOfClass(NSTextView) {
             let formatter: NSNumberFormatter = ((currentResponder as! NSTextView).superview?.superview as! NSTextField).formatter as! NSNumberFormatter
@@ -236,7 +236,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         }
     }
     
-    func displayAlert(identifier: String!) {
+    private func displayAlert(identifier: String!) {
         // identifier nil means window is about to close
         let alert: NSAlert = NSAlert()
         alert.messageText = NSLocalizedString("CHANGE_UNSAVED", comment: "")
@@ -349,6 +349,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
             }
         }
         presetListView.reloadData()
+        NSNotificationCenter.defaultCenter().postNotificationName(LyricsPresetDidChangedNotification, object: nil)
     }
     
     @IBAction func applyPreset(sender: AnyObject?) {
@@ -372,7 +373,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("PRESET_LOADED", comment: ""))
     }
     
-    @IBAction func addPreset(sender: AnyObject?) {
+    @IBAction private func addPreset(sender: AnyObject?) {
         presetNameTF.stringValue = NSLocalizedString("UNTITLED_PRESET", comment: "")
         presetNameTF.selectText(nil)
         self.window!.beginSheet(dialog) { (response) -> Void in
@@ -386,6 +387,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                     LyricsConstToBottom : userDefaults.objectForKey(LyricsConstToBottom)!,
                     LyricsConstWidth : userDefaults.objectForKey(LyricsConstWidth)!,
                     LyricsConstHeight: userDefaults.objectForKey(LyricsConstHeight)!,
+                    LyricsIsVerticalLyrics : userDefaults.objectForKey(LyricsIsVerticalLyrics)!,
                     LyricsVerticalLyricsPosition: userDefaults.objectForKey(LyricsVerticalLyricsPosition)!,
                     LyricsTwoLineMode : userDefaults.objectForKey(LyricsTwoLineMode)!,
                     LyricsTwoLineModeIndex : userDefaults.objectForKey(LyricsTwoLineModeIndex)!,
@@ -403,11 +405,12 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                 (settings as NSDictionary).writeToFile(savingPath, atomically: false)
                 self.presets.append(self.presetNameTF.stringValue)
                 self.presetListView.reloadData()
+                NSNotificationCenter.defaultCenter().postNotificationName(LyricsPresetDidChangedNotification, object: nil)
             }
         }
     }
     
-    @IBAction func importPreset(sender: AnyObject?) {
+    @IBAction private func importPreset(sender: AnyObject?) {
         let panel = NSOpenPanel()
         panel.allowedFileTypes = ["lxconfig"]
         panel.extensionHidden = false
@@ -433,11 +436,12 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                 }
                 self.presets.append(presetName)
                 self.presetListView.reloadData()
+                NSNotificationCenter.defaultCenter().postNotificationName(LyricsPresetDidChangedNotification, object: nil)
             }
         }
     }
     
-    @IBAction func exportPreset(sender: AnyObject?) {
+    @IBAction private func exportPreset(sender: AnyObject?) {
         let selectedRow = presetListView.selectedRow
         if selectedRow == -1 {
             return
@@ -484,9 +488,10 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         }
         presets.removeAtIndex(selectedRow)
         presetListView.reloadData()
+        NSNotificationCenter.defaultCenter().postNotificationName(LyricsPresetDidChangedNotification, object: nil)
     }
     
-    @IBAction func renamePreset(sender: AnyObject) {
+    @IBAction private func renamePreset(sender: AnyObject) {
         let selectedRow: Int = presetListView.selectedRow
         if selectedRow == -1 {
             return
@@ -507,11 +512,12 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                 }
                 self.presets[selectedRow] = self.presetNameTF.stringValue
                 self.presetListView.reloadData()
+                NSNotificationCenter.defaultCenter().postNotificationName(LyricsPresetDidChangedNotification, object: nil)
             }
         })
     }
     
-    @IBAction func confirmPrestName(sender: AnyObject) {
+    @IBAction private func confirmPrestName(sender: AnyObject) {
         for preset in presets {
             if preset == presetNameTF.stringValue {
                 NSBeep()
@@ -522,7 +528,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         self.window!.endSheet(dialog, returnCode: NSModalResponseOK)
     }
 
-    @IBAction func cancelChangePresetName(sender: AnyObject) {
+    @IBAction private func cancelChangePresetName(sender: AnyObject) {
         self.window!.endSheet(dialog, returnCode: NSModalResponseCancel)
     }
     

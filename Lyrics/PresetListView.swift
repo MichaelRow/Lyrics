@@ -36,9 +36,7 @@ class PresetListView: NSTableView {
     override func keyDown(theEvent: NSEvent) {
         // delete key
         if theEvent.keyCode == 0x33 {
-            if AppPrefsWindowController.sharedPrefsWindowController.respondsToSelector("removePreset:") {
-                AppPrefsWindowController.sharedPrefsWindowController.removePreset(nil)
-            }
+            AppPrefsWindowController.sharedPrefsWindowController.removePreset(nil)
         } else {
             super.keyDown(theEvent)
         }

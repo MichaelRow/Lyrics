@@ -933,17 +933,17 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="xaB-p5-OLT">
                     <rect key="frame" x="18" y="240" width="134" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1. Increase  lrc offset:" id="qok-bt-0Gp">
-                        <font key="font" metaFont="system"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="※ Increase  lrc offset:" id="qok-bt-0Gp">
+                        <font key="font" size="13" name=".LucidaGrandeUI"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Ypx-q3-UNh">
-                    <rect key="frame" x="18" y="213" width="141" height="17"/>
+                    <rect key="frame" x="18" y="213" width="140" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2. Decrease  lrc offset:" id="DDN-HF-zck">
-                        <font key="font" metaFont="system"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="※ Decrease  lrc offset:" id="DDN-HF-zck">
+                        <font key="font" size="13" name=".LucidaGrandeUI"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -973,9 +973,9 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="910-hO-gDx">
-                    <rect key="frame" x="18" y="184" width="218" height="17"/>
+                    <rect key="frame" x="18" y="184" width="216" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="3. Horizontal/Vertical mode switch:" id="ZCu-W5-ZZi">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1. Horizontal/Vertical mode switch:" id="ZCu-W5-ZZi">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -984,7 +984,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="oYj-ag-Cg4">
                     <rect key="frame" x="18" y="157" width="213" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="4. Desktop/MenuBar lyrics switch:" id="LaG-ye-jZk">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2. Desktop/MenuBar lyrics switch:" id="LaG-ye-jZk">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1077,7 +1077,7 @@
                         <rect key="frame" x="1" y="23" width="268" height="123"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="kGj-os-NSe" id="mPZ-v6-VNT" customClass="PresetListView" customModule="LyricsX" customModuleProvider="target">
+                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="kGj-os-NSe" id="mPZ-v6-VNT" customClass="PresetListView" customModule="LyricsX" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="268" height="123"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -1122,7 +1122,7 @@
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="pHo-ly-zfM">
                     <rect key="frame" x="18" y="201" width="274" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="※ Preset will save lyrics layout, font and color settings. New preset use current preset to init." id="kSs-xj-7gk">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="※ Preset will save lyrics layout, font and color settings. New presets use current preset to init." id="kSs-xj-7gk">
                         <font key="font" size="11" name=".LucidaGrandeUI"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

@@ -19,6 +19,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     @IBOutlet weak var delayMenuItem: NSMenuItem!
     @IBOutlet weak var lyricsModeMenuItem: NSMenuItem!
     @IBOutlet weak var lyricsHeightMenuItem: NSMenuItem!
+    @IBOutlet weak var presetMenuItem: NSMenuItem!
     
     var timeDly:Int = 0
     var timeDlyInFile:Int = 0
@@ -89,6 +90,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "lrcLoadingCompleted:", name: LrcLoadedNotification, object: nil)
         nc.addObserver(self, selector: "handleUserEditLyrics:", name: LyricsUserEditLyricsNotification, object: nil)
+        nc.addObserver(self, selector: "handlePresetDidChanged", name: LyricsPresetDidChangedNotification, object: nil)
         
         let ndc = NSDistributedNotificationCenter.defaultCenter()
         ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
@@ -427,6 +429,18 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
         }
         saveLrcToLocal(wrongLyricsTag, songTitle: currentSongTitle, artist: currentArtist)
+    }
+
+    @IBAction func setPresetByMenu(sender: AnyObject?) {
+        if sender is NSMenuItem {
+            let index: Int = presetMenuItem.submenu!.indexOfItem(sender as! NSMenuItem)
+            if index == -1 {
+                return
+            }
+            let prefs = AppPrefsWindowController.sharedPrefsWindowController
+            prefs.presetListView.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
+            prefs.applyPreset(nil)
+        }
     }
     
 // MARK: - iTunes Events
@@ -841,6 +855,22 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         NSLog("Writing the time delay to file")
         saveLrcToLocal(theLyrics, songTitle: currentSongTitle, artist: currentArtist)
+    }
+    
+    func handlePresetDidChanged() {
+        presetMenuItem.submenu?.removeAllItems()
+        let prefs = AppPrefsWindowController.sharedPrefsWindowController
+        if prefs.presets.count == 0 {
+            presetMenuItem.submenu?.addItemWithTitle(NSLocalizedString("EMPTY", comment: ""), action: nil, keyEquivalent: "")
+            return
+        }
+        for preset in prefs.presets {
+            let item = NSMenuItem()
+            item.title = preset
+            item.target = self
+            item.action = "setPresetByMenu:"
+            presetMenuItem.submenu?.addItem(item)
+        }
     }
     
 // MARK: - Lyrics Source Loading Completion
