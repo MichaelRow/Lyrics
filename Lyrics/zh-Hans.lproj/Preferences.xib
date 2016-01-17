@@ -1094,7 +1094,7 @@
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn identifier="presetName" width="265" minWidth="40" maxWidth="1000" id="otR-e6-7TH">
+                                    <tableColumn identifier="presetName" editable="NO" width="265" minWidth="40" maxWidth="1000" id="otR-e6-7TH">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="预设名称">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1109,6 +1109,7 @@
                                     </tableColumn>
                                 </tableColumns>
                                 <connections>
+                                    <action trigger="doubleAction" selector="applyPreset:" target="-2" id="SZh-B8-7DZ"/>
                                     <outlet property="dataSource" destination="-2" id="W1x-Sd-pFX"/>
                                     <outlet property="delegate" destination="-2" id="OBb-C5-SLK"/>
                                 </connections>

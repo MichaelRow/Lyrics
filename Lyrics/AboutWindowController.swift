@@ -110,7 +110,7 @@ class AboutWindowController: NSWindowController {
         }
     }
     
-    @IBAction func showDonate(sender: AnyObject) {
+    @IBAction func showDonate(sender: AnyObject?) {
         if scrollView.documentView!.isEqual(textView) {
             scrollView.documentView = donateView
             let newScrollOrigin: NSPoint = NSMakePoint(0, NSMaxY(scrollView.documentView!.frame)-NSHeight(scrollView.contentView.bounds))

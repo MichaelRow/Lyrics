@@ -173,6 +173,12 @@
                         <action selector="showPreferences:" target="-2" id="OHZ-tL-sQF"/>
                     </connections>
                 </menuItem>
+                <menuItem title="捐赠..." id="tLQ-qm-1jC">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showDonate:" target="-2" id="YpT-ri-HJV"/>
+                    </connections>
+                </menuItem>
                 <menuItem isSeparatorItem="YES" id="NeM-rI-mss"/>
                 <menuItem title="关于LyricsX..." id="QoB-2y-8a4">
                     <modifierMask key="keyEquivalentModifierMask"/>

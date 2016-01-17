@@ -1100,7 +1100,7 @@
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn identifier="presetName" width="265" minWidth="40" maxWidth="1000" id="mpj-MV-sEz">
+                                    <tableColumn identifier="presetName" editable="NO" width="265" minWidth="40" maxWidth="1000" id="mpj-MV-sEz">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="預設名稱">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1115,6 +1115,7 @@
                                     </tableColumn>
                                 </tableColumns>
                                 <connections>
+                                    <action trigger="doubleAction" selector="applyPreset:" target="-2" id="eKf-Vj-ePQ"/>
                                     <outlet property="dataSource" destination="-2" id="xXh-6h-mVP"/>
                                     <outlet property="delegate" destination="-2" id="WKc-Ss-W7v"/>
                                 </connections>
