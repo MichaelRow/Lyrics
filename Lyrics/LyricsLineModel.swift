@@ -10,46 +10,46 @@ import Cocoa
 
 class LyricsLineModel: NSObject {
     
-    var lyricsSentence:NSString!
+    var lyricsSentence: String!
     
-    private(set) var msecPosition:Int!
+    private(set) var msecPosition: Int!
     
-    private(set) var timeTag:NSString!
+    private(set) var timeTag: String!
     
     func setMsecPositionWithTimeTag (theTimeTag: NSString) {
-        self.timeTag=theTimeTag
-        let colonRange:NSRange = theTimeTag.rangeOfString(":")
-        let minuteStr:NSString = theTimeTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
-        let secondStr:NSString = theTimeTag.substringWithRange(NSMakeRange(colonRange.location+1, theTimeTag.length-colonRange.length-colonRange.location-1))
-        let minute:Int = minuteStr.integerValue
-        let second:Float = secondStr.floatValue
+        self.timeTag = theTimeTag as String
+        let colonRange: NSRange = theTimeTag.rangeOfString(":")
+        let minuteStr: NSString = theTimeTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
+        let secondStr: NSString = theTimeTag.substringWithRange(NSMakeRange(colonRange.location+1, theTimeTag.length-colonRange.length-colonRange.location-1))
+        let minute: Int = minuteStr.integerValue
+        let second: Float = secondStr.floatValue
         self.msecPosition = Int((Float(minute)*60+second)*1000)
     }
     
     func setTimeTagWithMsecPosition (theMsecPosition: Int) {
-        let minute:Int = theMsecPosition/(60*1000)
-        let second:Int = (theMsecPosition-minute*60*1000)/1000
-        let mSecond:Int = theMsecPosition-(minute*60+second)*1000
-        var theTimeTag:String = String()
+        let minute: Int = theMsecPosition/(60*1000)
+        let second: Int = (theMsecPosition-minute*60*1000)/1000
+        let mSecond: Int = theMsecPosition-(minute*60+second)*1000
+        var theTimeTag: String = String()
         
         if minute < 10 {
-            theTimeTag += "[0\(minute):"
+            theTimeTag.appendContentsOf("[0\(minute):")
         } else {
-            theTimeTag += "[\(minute):"
+            theTimeTag.appendContentsOf("[\(minute):")
         }
         
         if second < 10 {
-            theTimeTag += "0\(second)."
+            theTimeTag.appendContentsOf("0\(second).")
         } else {
-            theTimeTag += "\(second)."
+            theTimeTag.appendContentsOf("\(second).")
         }
         
         if mSecond > 99 {
-            theTimeTag += "\(mSecond)]"
+            theTimeTag.appendContentsOf("\(mSecond)]")
         } else if mSecond > 9 {
-            theTimeTag += "0\(mSecond)]"
+            theTimeTag.appendContentsOf("0\(mSecond)]")
         } else {
-            theTimeTag += "00\(mSecond)]"
+            theTimeTag.appendContentsOf("00\(mSecond)]")
         }
         self.timeTag = theTimeTag
     }

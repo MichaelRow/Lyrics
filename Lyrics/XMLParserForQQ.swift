@@ -10,14 +10,14 @@ import Cocoa
 
 class XMLParserForQQ: NSObject, NSXMLParserDelegate {
     
-    var lrcContents: NSMutableString!
+    var lrcContents: String
     
     override init() {
+        lrcContents = String()
         super.init()
-        lrcContents = NSMutableString()
     }
     
-    func stringWithData(data:NSData) -> NSString? {
+    func stringWithData(data:NSData) -> String? {
         let parser = NSXMLParser(data: data)
         parser.delegate = self
         let success: Bool = parser.parse()
@@ -28,9 +28,10 @@ class XMLParserForQQ: NSObject, NSXMLParserDelegate {
     }
     
     func parser(parser: NSXMLParser, foundCDATA CDATABlock: NSData) {
-        let str = NSString(data: CDATABlock, encoding: NSUTF8StringEncoding)
-        lrcContents.appendString(str! as String)
+        let str = String(data: CDATABlock, encoding: NSUTF8StringEncoding)
+        if str != nil {
+            lrcContents.appendContentsOf(str!)
+        }
     }
-    
     
 }

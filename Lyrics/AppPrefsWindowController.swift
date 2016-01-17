@@ -60,10 +60,10 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         
         //Pop up button and font is hard to bind to NSUserDefaultsController, do it by self
         let defaultSavingPath: String = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-        let userSavingPath: NSString = NSUserDefaults.standardUserDefaults().stringForKey(LyricsUserSavingPath)!
+        let userSavingPath: String = NSUserDefaults.standardUserDefaults().stringForKey(LyricsUserSavingPath)!
         savingPathPopUp.itemAtIndex(0)?.toolTip = defaultSavingPath
-        savingPathPopUp.itemAtIndex(1)?.toolTip = userSavingPath as String
-        savingPathPopUp.itemAtIndex(1)?.title = userSavingPath.lastPathComponent
+        savingPathPopUp.itemAtIndex(1)?.toolTip = userSavingPath
+        savingPathPopUp.itemAtIndex(1)?.title = (userSavingPath as NSString).lastPathComponent
         
         reflashFontAndColorPrefs()
     }
@@ -110,12 +110,12 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         openPanel.canChooseDirectories = true
         openPanel.beginSheetModalForWindow(self.window!) { (result) -> Void in
             if result == NSFileHandlingPanelOKButton {
-                let newPath: NSString = (openPanel.URL?.path)!
+                let newPath: String = (openPanel.URL?.path)!
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 userDefaults.setObject(newPath, forKey: LyricsUserSavingPath)
                 userDefaults.setObject(NSNumber(integer: 1), forKey: LyricsSavingPathPopUpIndex)
-                self.savingPathPopUp.itemAtIndex(1)?.title = newPath.lastPathComponent
-                self.savingPathPopUp.itemAtIndex(1)?.toolTip = newPath as String
+                self.savingPathPopUp.itemAtIndex(1)?.title = (newPath as NSString).lastPathComponent
+                self.savingPathPopUp.itemAtIndex(1)?.toolTip = newPath
             }
         }
     }
@@ -143,7 +143,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     private func reflashFontAndColorPrefs () {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))!
-        fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
+        fontDisplayText.stringValue = String(format: "%@, %.1f", font.displayName!,font.pointSize)
         
         self.setValue(userDefaults.boolForKey(LyricsShadowModeEnable), forKey: "shadowModeEnabled")
         self.setValue(userDefaults.floatForKey(LyricsShadowRadius), forKey: "shadowRadius")
@@ -201,7 +201,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
     override func changeFont(sender: AnyObject?) {
         font = (sender?.convertFont(font))!
-        fontDisplayText.stringValue = NSString(format: "%@, %.1f", font.displayName!,font.pointSize) as String
+        fontDisplayText.stringValue = String(format: "%@, %.1f", font.displayName!,font.pointSize)
         fontAndColorChanged(nil)
     }
     
@@ -477,8 +477,8 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         if selectedRow == -1 {
             return
         }
-        let libraryPath: NSString = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-        let presetPath: String = libraryPath.stringByAppendingPathComponent(presets[selectedRow] + ".lxconfig")
+        let libraryPath: String = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+        let presetPath: String = (libraryPath as NSString).stringByAppendingPathComponent(presets[selectedRow] + ".lxconfig")
         do {
             try NSFileManager.defaultManager().removeItemAtPath(presetPath)
         } catch let theError as NSError {
@@ -500,7 +500,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         presetNameTF.selectText(nil)
         self.window?.beginSheet(dialog, completionHandler: { (response) -> Void in
             if response == NSModalResponseOK {
-                let libraryPath: NSString = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+                let libraryPath: NSString = (NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX") as NSString
                 let oldPath = libraryPath.stringByAppendingPathComponent(oldName + ".lxconfig")
                 let newPath = libraryPath.stringByAppendingPathComponent(self.presetNameTF.stringValue + ".lxconfig")
                 do {

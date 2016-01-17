@@ -12,9 +12,9 @@ class LyricsEditWindowController: NSWindowController {
     
     @IBOutlet var textView: NSTextView!
     
-    private var currentSongID: NSString!
-    private var currentTitle: NSString!
-    private var currentArtist: NSString!
+    private var currentSongID: String!
+    private var currentTitle: String!
+    private var currentArtist: String!
     
     convenience init() {
         self.init(windowNibName:"LyricsEditWindow")
@@ -23,10 +23,10 @@ class LyricsEditWindowController: NSWindowController {
         textView.font = NSFont(name: "Helvetica-Bold", size: 16)
     }
     
-    func setLyricsContents(contents: String, songID: NSString, songTitle: NSString, andArtist artist: NSString) {
-        currentSongID = songID.copy() as! NSString
-        currentTitle = songTitle.copy() as! NSString
-        currentArtist = artist.copy() as! NSString
+    func setLyricsContents(contents: String, songID: String, songTitle: String, andArtist artist: String) {
+        currentSongID = songID
+        currentTitle = songTitle
+        currentArtist = artist
         textView.string = contents
     }
     

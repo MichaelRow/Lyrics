@@ -8,32 +8,36 @@
 
 import Cocoa
 
-func convertToSC(input:NSString) ->NSString {
-    let profilePath:NSString=NSBundle.mainBundle().pathForResource("t2s", ofType: "json")!
+func convertToSC(input: String) -> String {
+    let profilePath: NSString = NSBundle.mainBundle().pathForResource("t2s", ofType: "json")!
     return convertToChineseUsingProfile(profilePath,inputStr: input)
 }
 
-func convertToTC(input:NSString) ->NSString {
-    let profilePath:NSString=NSBundle.mainBundle().pathForResource("s2t", ofType: "json")!
+func convertToTC(input: String) -> String {
+    let profilePath: NSString = NSBundle.mainBundle().pathForResource("s2t", ofType: "json")!
     return convertToChineseUsingProfile(profilePath,inputStr: input)
 }
 
-func convertToTC_Taiwan(input:NSString) ->NSString {
-    let profilePath:NSString=NSBundle.mainBundle().pathForResource("s2tw", ofType: "json")!
+func convertToTC_Taiwan(input: String) -> String {
+    let profilePath: NSString = NSBundle.mainBundle().pathForResource("s2tw", ofType: "json")!
     return convertToChineseUsingProfile(profilePath,inputStr: input)
 }
 
-func convertToTC_HK(input:NSString) ->NSString {
-    let profilePath:NSString=NSBundle.mainBundle().pathForResource("s2hk", ofType: "json")!
+func convertToTC_HK(input: String) -> String {
+    let profilePath: NSString = NSBundle.mainBundle().pathForResource("s2hk", ofType: "json")!
     return convertToChineseUsingProfile(profilePath,inputStr: input)
 }
 
-private func convertToChineseUsingProfile(profile:NSString, inputStr:NSString) ->NSString {
-    let cc:opencc_t=opencc_open(profile.UTF8String)
-    let cInput:UnsafePointer<Int8>=inputStr.UTF8String
-    let cOutputStr:UnsafeMutablePointer<Int8>=opencc_convert_utf8(cc, cInput, Int(strlen(cInput)))
-    let outputStr:NSString=NSString(UTF8String: cOutputStr)!
+private func convertToChineseUsingProfile(profile: NSString, inputStr: NSString) -> String {
+    let cc: opencc_t = opencc_open(profile.UTF8String)
+    let cInput: UnsafePointer<Int8> = inputStr.UTF8String
+    let cOutputStr: UnsafeMutablePointer<Int8> = opencc_convert_utf8(cc, cInput, Int(strlen(cInput)))
+    let outputStr: String? = String.fromCString(cOutputStr)
     opencc_convert_utf8_free(cOutputStr)
     opencc_close(cc)
-    return outputStr
+    if outputStr == nil {
+        return ""
+    } else {
+        return outputStr!
+    }
 }

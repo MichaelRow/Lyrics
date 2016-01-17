@@ -54,18 +54,18 @@ class QQMusic: NSObject {
                 if theRange.length == 0 {
                     return
                 }
-                let lrcCode: NSString = fStr.substringToIndex(theRange.location)
-                let lrcXMLURL: NSString = "http://music.qq.com/miniportal/static/lyric/\(lrcCode.integerValue%100)/\(lrcCode).xml"
+                let lrcCode: String = fStr.substringToIndex(theRange.location)
+                let lrcXMLURL: String = "http://music.qq.com/miniportal/static/lyric/\((lrcCode as NSString).integerValue%100)/\(lrcCode).xml"
                 let lrcData: NSData? = NSData(contentsOfURL: NSURL(string: lrcXMLURL as String)!)
                 if lrcData == nil {
                     continue
                 } else {
                     let parser = XMLParserForQQ()
-                    let lyricsContents: NSString? = parser.stringWithData(lrcData!)
+                    let lyricsContents: String? = parser.stringWithData(lrcData!)
                     if lyricsContents == nil {
                         continue
                     }
-                    info.lyric = lyricsContents! as String
+                    info.lyric = lyricsContents!
                     resultArray.append(info)
                 }
             }

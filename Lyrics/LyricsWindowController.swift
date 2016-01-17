@@ -22,8 +22,8 @@ class LyricsWindowController: NSWindowController {
     
     var isFullScreen: Bool = false
     
-    private var firstLyrics: NSString?
-    private var secondLyrics: NSString?
+    private var firstLyrics: String?
+    private var secondLyrics: String?
     private var backgroundLayer: CALayer!
     private var firstLyricsLayer: CATextLayer!
     private var secondLyricsLayer: CATextLayer!
@@ -172,7 +172,7 @@ class LyricsWindowController: NSWindowController {
 
 // MARK: - display lyrics methods
     
-    func displayLyrics(theFirstLyrics:NSString?, secondLyrics theSecondLyrics:NSString?) {
+    func displayLyrics(theFirstLyrics: String?, secondLyrics theSecondLyrics: String?) {
         if theFirstLyrics != nil && theFirstLyrics?.stringByReplacingOccurrencesOfString(" ", withString: "") == "" {
            firstLyrics = nil
         } else {
@@ -197,7 +197,7 @@ class LyricsWindowController: NSWindowController {
     }
     
     func displayHorizontalLyrics() {
-        if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
+        if firstLyrics == nil || firstLyrics == "" {
             // first Lyrics empty means it's in instrumental time, hide lyrics
             rollingOver = true
             backgroundLayer.speed=0.2
@@ -212,7 +212,7 @@ class LyricsWindowController: NSWindowController {
             secondLyricsLayer.hidden = true
             backgroundLayer.hidden = true
         }
-        else if (secondLyrics==nil) || (secondLyrics?.isEqualToString(""))! {
+        else if secondLyrics == nil || secondLyrics == "" {
             // one lyrics
             rollingOver = true
             backgroundLayer.speed = 1
@@ -247,8 +247,8 @@ class LyricsWindowController: NSWindowController {
                         frameSize.width = visibleSize.width
                     }
                 }
-                backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height+bgHeightIncreasement)
-                firstLyricsLayer.frame=CGRectMake(0, yOffset, frameSize.width, frameSize.height+lyricsHeightIncreasement)
+                backgroundLayer.frame = CGRectMake(x, y, frameSize.width, frameSize.height+bgHeightIncreasement)
+                firstLyricsLayer.frame = CGRectMake(0, yOffset, frameSize.width, frameSize.height+lyricsHeightIncreasement)
             }
             else {
                 let frameSize = NSMakeSize(CGFloat(userDefaults.integerForKey(LyricsConstWidth)), CGFloat(userDefaults.integerForKey(LyricsConstHeight)))
@@ -259,11 +259,11 @@ class LyricsWindowController: NSWindowController {
                 if layerY < 0 {
                     layerY = 0
                 }
-                backgroundLayer.frame=CGRectMake(x, y, frameSize.width, frameSize.height)
-                firstLyricsLayer.frame=CGRectMake(0, layerY, frameSize.width, strSize.height)
+                backgroundLayer.frame = CGRectMake(x, y, frameSize.width, frameSize.height)
+                firstLyricsLayer.frame = CGRectMake(0, layerY, frameSize.width, strSize.height)
             }
             
-            firstLyricsLayer.string=firstLyrics
+            firstLyricsLayer.string = firstLyrics
         }
         else {
             // Two lyrics
@@ -271,19 +271,19 @@ class LyricsWindowController: NSWindowController {
             firstLyricsLayer.speed = 1
             secondLyricsLayer.speed = 1
             
-            firstLyricsLayer.hidden=false
-            secondLyricsLayer.hidden=false
-            backgroundLayer.hidden=false
+            firstLyricsLayer.hidden = false
+            secondLyricsLayer.hidden = false
+            backgroundLayer.hidden = false
             
-            var size2nd:NSSize=secondLyrics!.sizeWithAttributes(attrs)
-            size2nd.width=size2nd.width+50
-            size2nd.height=size2nd.height*0.9
-            secondLyricsLayer.string=secondLyrics
+            var size2nd:NSSize = secondLyrics!.sizeWithAttributes(attrs)
+            size2nd.width = size2nd.width+50
+            size2nd.height = size2nd.height*0.9
+            secondLyricsLayer.string = secondLyrics
             
-            var size1st:NSSize=firstLyrics!.sizeWithAttributes(attrs)
-            size1st.width=size1st.width+50
-            size1st.height=size1st.height*0.9
-            firstLyricsLayer.string=firstLyrics
+            var size1st:NSSize = firstLyrics!.sizeWithAttributes(attrs)
+            size1st.width = size1st.width+50
+            size1st.height = size1st.height*0.9
+            firstLyricsLayer.string = firstLyrics
             
             var width: CGFloat
             var height: CGFloat
@@ -292,18 +292,18 @@ class LyricsWindowController: NSWindowController {
             var rect1st: CGRect
             var rect2nd: CGRect
             
-            if size1st.width>=size2nd.width {
-                width=size1st.width
+            if size1st.width >= size2nd.width {
+                width = size1st.width
             }
             else {
-                width=size2nd.width
+                width = size2nd.width
             }
             if width > visibleSize.width {
                 width = visibleSize.width
             }
             
-            rect1st=CGRectMake(0, size2nd.height+yOffset, width, size1st.height+lyricsHeightIncreasement)
-            rect2nd=CGRectMake(0, yOffset, width, size2nd.height+lyricsHeightIncreasement)
+            rect1st = CGRectMake(0, size2nd.height+yOffset, width, size1st.height+lyricsHeightIncreasement)
+            rect2nd = CGRectMake(0, yOffset, width, size2nd.height+lyricsHeightIncreasement)
             
             if userDefaults.boolForKey(LyricsUseAutoLayout) {
                 if !isFullScreen {
@@ -316,7 +316,7 @@ class LyricsWindowController: NSWindowController {
                 if x < 4 {
                     x = 4
                 }
-                height=rect1st.size.height+rect2nd.size.height
+                height = rect1st.size.height+rect2nd.size.height
                 
             } else {
                 x = CGFloat(userDefaults.integerForKey(LyricsConstToLeft))
@@ -352,7 +352,7 @@ class LyricsWindowController: NSWindowController {
     
     func displayVerticalLyrics() {
         //Current vertical lyrics mode is not perfect, it should be implemented by core text.
-        if (firstLyrics==nil) || (firstLyrics?.isEqualToString(""))! {
+        if firstLyrics == nil || firstLyrics == "" {
             // first Lyrics empty means it's in instrumental time, hide lyrics
             rollingOver = true
             backgroundLayer.speed=0.2
@@ -368,7 +368,7 @@ class LyricsWindowController: NSWindowController {
             backgroundLayer.transform = CATransform3DMakeRotation(CGFloat(-M_PI_2), 0, 0, 1)
             isRotated = true
         }
-        else if (secondLyrics==nil) || (secondLyrics?.isEqualToString(""))! {
+        else if secondLyrics == nil || secondLyrics == "" {
             //one lyrics
             rollingOver = true
             backgroundLayer.speed = 1
@@ -380,15 +380,15 @@ class LyricsWindowController: NSWindowController {
             secondLyricsLayer.hidden = true
             backgroundLayer.hidden = false
             
-            let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: firstLyrics as! String, attributes: attrs)
+            let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: firstLyrics!, attributes: attrs)
             if verticalStyle == 1 {
-                for var i=0; i<firstLyrics?.length; ++i {
-                    if isChinese((firstLyrics?.substringWithRange(NSMakeRange(i, 1)))!) {
+                for var i=0; i<firstLyrics!.characters.count; ++i {
+                    if isChinese((firstLyrics! as NSString).substringWithRange(NSMakeRange(i, 1))) {
                         attributedStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(i, 1))
                     }
                 }
             } else {
-                attributedStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(0, firstLyrics!.length))
+                attributedStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(0, firstLyrics!.characters.count))
             }
             
             let strSize:NSSize = attributedStr.size()
@@ -432,19 +432,19 @@ class LyricsWindowController: NSWindowController {
             secondLyricsLayer.hidden = false
             backgroundLayer.hidden = false
             
-            let firstAttrStr: NSMutableAttributedString = NSMutableAttributedString(string: firstLyrics as! String, attributes: attrs)
-            let secondAttrStr: NSMutableAttributedString = NSMutableAttributedString(string: secondLyrics as! String, attributes: attrs)
+            let firstAttrStr: NSMutableAttributedString = NSMutableAttributedString(string: firstLyrics!, attributes: attrs)
+            let secondAttrStr: NSMutableAttributedString = NSMutableAttributedString(string: secondLyrics!, attributes: attrs)
             if verticalStyle == 0 {
-                firstAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(0, firstLyrics!.length))
-                secondAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(0, secondLyrics!.length))
+                firstAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(0, firstLyrics!.characters.count))
+                secondAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(0, secondLyrics!.characters.count))
             } else {
-                for var i=0; i<firstLyrics?.length; ++i {
-                    if isChinese((firstLyrics?.substringWithRange(NSMakeRange(i, 1)))!) {
+                for var i=0; i<firstLyrics!.characters.count; ++i {
+                    if isChinese((firstLyrics! as NSString).substringWithRange(NSMakeRange(i, 1))) {
                         firstAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(i, 1))
                     }
                 }
-                for var i=0; i<secondLyrics?.length; ++i {
-                    if isChinese((secondLyrics?.substringWithRange(NSMakeRange(i, 1)))!) {
+                for var i=0; i<secondLyrics!.characters.count; ++i {
+                    if isChinese((secondLyrics! as NSString).substringWithRange(NSMakeRange(i, 1))) {
                         secondAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(i, 1))
                     }
                 }
@@ -518,18 +518,18 @@ class LyricsWindowController: NSWindowController {
 //MARK: - clip lyrics
     
     private func clipLyrics (widthLimite: CGFloat) {
-        var index: Int = (firstLyrics?.length)! - 1
+        var index: Int = firstLyrics!.characters.count - 1
         var leftBracket: Int?
         NSLog("Clip Lyrics")
         //1.clip when bracket found.
         Loop: while index >= 0 {
-            let lastCharacter = firstLyrics?.substringWithRange(NSMakeRange(index, 1))
+            let lastCharacter = (firstLyrics! as NSString).substringWithRange(NSMakeRange(index, 1))
             if lastCharacter == " " {
                 index--
                 continue
             }
             else {
-                switch lastCharacter! {
+                switch lastCharacter {
                 case "】":
                     leftBracket = getLeftBracketIndex(["【","】"], lastCharacterIndex: index)
                     break Loop
@@ -560,8 +560,8 @@ class LyricsWindowController: NSWindowController {
             }
         }
         if leftBracket != nil && leftBracket != -1 {
-            let formerPart = (firstLyrics?.substringWithRange(NSMakeRange(0, leftBracket!)))! as NSString
-            let latterPart = (firstLyrics?.substringWithRange(NSMakeRange(leftBracket!, index-leftBracket!+1)))! as NSString
+            let formerPart = (firstLyrics! as NSString).substringWithRange(NSMakeRange(0, leftBracket!))
+            let latterPart = (firstLyrics! as NSString).substringWithRange(NSMakeRange(leftBracket!, index-leftBracket!+1))
             if formerPart.sizeWithAttributes(attrs).width<=widthLimite && latterPart.sizeWithAttributes(attrs).width<=widthLimite {
                 firstLyrics = formerPart
                 secondLyrics = latterPart
@@ -570,15 +570,15 @@ class LyricsWindowController: NSWindowController {
         }
         //2.clip when slash or comma found.
         for str in ["/","，",","] {
-            let range: NSRange = (firstLyrics?.rangeOfString(str))!
+            let range: NSRange = (firstLyrics! as NSString).rangeOfString(str)
             if range.length != 0 {
                 let endIndex = range.location
                 let startIndex = range.location + 1
-                if endIndex==0 || startIndex==(firstLyrics?.length)! {
+                if endIndex == 0 || startIndex == firstLyrics!.characters.count {
                     continue
                 }
-                let formerPart = (firstLyrics?.substringToIndex(endIndex))! as NSString
-                let latterPart = (firstLyrics?.substringFromIndex(startIndex))! as NSString
+                let formerPart = (firstLyrics! as NSString).substringToIndex(endIndex)
+                let latterPart = (firstLyrics! as NSString).substringFromIndex(startIndex)
                 if formerPart.sizeWithAttributes(attrs).width<=widthLimite && latterPart.sizeWithAttributes(attrs).width<=widthLimite {
                     firstLyrics = formerPart
                     secondLyrics = latterPart
@@ -587,17 +587,17 @@ class LyricsWindowController: NSWindowController {
             }
         }
         //3.clip in the first space near center of the string.
-        let halfLength = (firstLyrics?.length)!/2
-        var spaceRange: NSRange = (firstLyrics?.rangeOfString(" ", options: NSStringCompareOptions.AnchoredSearch, range: NSMakeRange(halfLength, (firstLyrics?.length)! - halfLength)))!
+        let halfLength = firstLyrics!.characters.count/2
+        var spaceRange: NSRange = (firstLyrics! as NSString).rangeOfString(" ", options: NSStringCompareOptions.AnchoredSearch, range: NSMakeRange(halfLength, firstLyrics!.characters.count - halfLength))
         if spaceRange.length == 0 {
-            spaceRange = (firstLyrics?.rangeOfString(" ", options: NSStringCompareOptions.BackwardsSearch, range: NSMakeRange(0, halfLength)))!
+            spaceRange = (firstLyrics! as NSString).rangeOfString(" ", options: NSStringCompareOptions.BackwardsSearch, range: NSMakeRange(0, halfLength))
         }
         if spaceRange.length != 0 {
             let endIndex = spaceRange.location
             let startIndex = spaceRange.location + 1
-            if endIndex>0 && startIndex<(firstLyrics?.length)! {
-                let formerPart = (firstLyrics?.substringToIndex(endIndex))! as NSString
-                let latterPart = (firstLyrics?.substringFromIndex(startIndex))! as NSString
+            if endIndex>0 && startIndex<firstLyrics!.characters.count {
+                let formerPart = (firstLyrics! as NSString).substringToIndex(endIndex)
+                let latterPart = (firstLyrics! as NSString).substringFromIndex(startIndex)
                 if formerPart.sizeWithAttributes(attrs).width<=widthLimite && latterPart.sizeWithAttributes(attrs).width<=widthLimite {
                     firstLyrics = formerPart
                     secondLyrics = latterPart
@@ -606,8 +606,8 @@ class LyricsWindowController: NSWindowController {
             }
         }
         //4.just clip in the center
-        let formerPart = firstLyrics?.substringToIndex(halfLength-1)
-        let latterPart = firstLyrics?.substringFromIndex(halfLength)
+        let formerPart = (firstLyrics! as NSString).substringToIndex(halfLength-1)
+        let latterPart = (firstLyrics! as NSString).substringFromIndex(halfLength)
         firstLyrics = formerPart
         secondLyrics = latterPart
     }
@@ -616,7 +616,7 @@ class LyricsWindowController: NSWindowController {
         var stack: [Int] = Array()
         var index: Int = 0
         while index < theIndex {
-            let char: String = (firstLyrics?.substringWithRange(NSMakeRange(index, 1)))!
+            let char: String = (firstLyrics! as NSString).substringWithRange(NSMakeRange(index, 1))
             if char == bracket.first {
                 stack.append(index)
             }

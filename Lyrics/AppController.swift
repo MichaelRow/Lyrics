@@ -21,30 +21,30 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     @IBOutlet weak var lyricsHeightMenuItem: NSMenuItem!
     @IBOutlet weak var presetMenuItem: NSMenuItem!
     
-    var timeDly:Int = 0
-    var timeDlyInFile:Int = 0
+    var timeDly: Int = 0
+    var timeDlyInFile: Int = 0
     
-    private var isTrackingRunning:Bool = false
-    private var hasDiglossiaLrc:Bool = false
-    private var lyricsWindow:LyricsWindowController!
-    private var menuBarLyrics:MenuBarLyrics!
-    private var lyricsEidtWindow:LyricsEditWindowController!
-    private var statusItem:NSStatusItem!
-    private var lyricsArray:[LyricsLineModel]!
-    private var idTagsArray:[NSString]!
-    private var iTunes:iTunesBridge!
-    private var currentLyrics: NSString!
-    private var currentSongID:NSString!
-    private var currentSongTitle:NSString!
-    private var currentArtist:NSString!
-    private var songList:[SongInfos]!
-    private var qianqian:QianQian!
-    private var xiami:Xiami!
-    private var ttpod:TTPod!
-    private var geciMe:GeCiMe!
-    private var qqMusic:QQMusic!
-    private var lrcSourceHandleQueue:NSOperationQueue!
-    private var userDefaults:NSUserDefaults!
+    private var isTrackingRunning: Bool = false
+    private var hasDiglossiaLrc: Bool = false
+    private var lyricsWindow: LyricsWindowController!
+    private var menuBarLyrics: MenuBarLyrics!
+    private var lyricsEidtWindow: LyricsEditWindowController!
+    private var statusItem: NSStatusItem!
+    private var lyricsArray: [LyricsLineModel]!
+    private var idTagsArray: [String]!
+    private var iTunes: iTunesBridge!
+    private var currentLyrics: String!
+    private var currentSongID: String!
+    private var currentSongTitle: String!
+    private var currentArtist: String!
+    private var songList: [SongInfos]!
+    private var qianqian: QianQian!
+    private var xiami: Xiami!
+    private var ttpod: TTPod!
+    private var geciMe: GeCiMe!
+    private var qqMusic: QQMusic!
+    private var lrcSourceHandleQueue: NSOperationQueue!
+    private var userDefaults: NSUserDefaults!
     private var timer: NSTimer!
     private var regexForTimeTag: NSRegularExpression!
     private var regexForIDTag: NSRegularExpression!
@@ -114,9 +114,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
             
-            currentSongID = iTunes.currentPersistentID().copy() as! NSString
-            currentSongTitle = iTunes.currentTitle().copy() as! NSString
-            currentArtist = iTunes.currentArtist().copy() as! NSString
+            currentSongID = iTunes.currentPersistentID()
+            currentSongTitle = iTunes.currentTitle()
+            currentArtist = iTunes.currentArtist()
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
                 self.handleSongChange()
@@ -162,7 +162,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     private func checkSavingPath() -> Bool{
-        let savingPath:NSString
+        let savingPath: String
         if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
             savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
         } else {
@@ -171,13 +171,13 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         let fm: NSFileManager = NSFileManager.defaultManager()
         
         var isDir: ObjCBool = false
-        if fm.fileExistsAtPath(savingPath as String, isDirectory: &isDir) {
+        if fm.fileExistsAtPath(savingPath, isDirectory: &isDir) {
             if !isDir {
                 return false
             }
         } else {
             do {
-                try fm.createDirectoryAtPath(savingPath as String, withIntermediateDirectories: true, attributes: nil)
+                try fm.createDirectoryAtPath(savingPath, withIntermediateDirectories: true, attributes: nil)
             } catch let theError as NSError{
                 NSLog("%@", theError.localizedDescription)
             }
@@ -216,7 +216,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             menuBarLyrics = nil
         } else {
             menuBarLyrics = MenuBarLyrics()
-            menuBarLyrics.displayLyrics(currentLyrics as String)
+            menuBarLyrics.displayLyrics(currentLyrics)
         }
     }
     
@@ -235,6 +235,12 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     @IBAction func showAboutWindow(sender: AnyObject?) {
         AboutWindowController.sharedAboutWindow.showWindow(nil)
+    }
+    
+    @IBAction func showDonate(sender: AnyObject?) {
+        let aboutWC = AboutWindowController.sharedAboutWindow
+        aboutWC.showWindow(nil)
+        aboutWC.showDonate(nil)
     }
     
     @IBAction func showPreferences(sender:AnyObject?) {
@@ -258,7 +264,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         let panel = NSSavePanel()
         panel.allowedFileTypes = ["png",  "jpg", "jpf", "bmp", "gif", "tiff"]
-        panel.nameFieldStringValue = (currentSongTitle as String) + " - " + (currentArtist as String)
+        panel.nameFieldStringValue = currentSongTitle + " - " + currentArtist
         panel.extensionHidden = true
         if panel.runModal() == NSFileHandlingPanelOKButton {
             artworkData!.writeToURL(panel.URL!, atomically: false)
@@ -275,9 +281,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
             return
         }
-        let theLyrics: NSMutableString = NSMutableString()
+        var theLyrics: String = String()
         for lrc in lyricsArray {
-            theLyrics.appendString(lrc.lyricsSentence as String + "\n")
+            theLyrics.appendContentsOf(lrc.lyricsSentence + "\n")
         }
         let pb = NSPasteboard.generalPasteboard()
         pb.clearContents()
@@ -315,7 +321,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         if lyricsEidtWindow == nil {
             lyricsEidtWindow = LyricsEditWindowController()
         }
-        lyricsEidtWindow.setLyricsContents(lrcContents! as String, songID: currentSongID, songTitle: currentSongTitle, andArtist: currentArtist)
+        lyricsEidtWindow.setLyricsContents(lrcContents!, songID: currentSongID, songTitle: currentSongTitle, andArtist: currentArtist)
         if !(lyricsEidtWindow.window?.visible)! {
             lyricsEidtWindow.showWindow(nil)
         }
@@ -324,16 +330,16 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func importLrcFile(sender: AnyObject) {
-        let songTitle: String = currentSongTitle.copy() as! String
-        let artist: String = currentArtist.copy() as! String
-        let songID: String = currentSongID.copy() as! String
+        let songTitle: String = currentSongTitle
+        let artist: String = currentArtist
+        let songID: String = currentSongID
         let panel: NSOpenPanel = NSOpenPanel()
         panel.allowedFileTypes = ["lrc", "txt"]
         panel.extensionHidden = false
         if panel.runModal() == NSFileHandlingPanelOKButton {
-            let lrcContents: NSString!
+            let lrcContents: String!
             do {
-                lrcContents = try NSString(contentsOfURL: panel.URL!, encoding: NSUTF8StringEncoding)
+                lrcContents = try String(contentsOfURL: panel.URL!, encoding: NSUTF8StringEncoding)
 
             } catch let theError as NSError {
                 lrcContents = nil
@@ -364,7 +370,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func exportLrcFile(sender: AnyObject) {
-        let savingPath: NSString
+        let savingPath: String
         if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
             savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
         } else {
@@ -372,11 +378,11 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         let songTitle:String = currentSongTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
         let artist:String = currentArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let lrcFilePath = savingPath.stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
+        let lrcFilePath = (savingPath as NSString).stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
         
         let panel: NSSavePanel = NSSavePanel()
         panel.allowedFileTypes = ["lrc","txt"]
-        panel.nameFieldStringValue = (lrcFilePath as NSString).lastPathComponent as String
+        panel.nameFieldStringValue = (lrcFilePath as NSString).lastPathComponent
         panel.extensionHidden = false
         
         if panel.runModal() == NSFileHandlingPanelOKButton {
@@ -401,11 +407,11 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
             return
         } else {
-            let theLyrics: NSMutableString = NSMutableString()
+            var theLyrics: String = String()
             for lrc in lyricsArray {
-                theLyrics.appendString(lrc.lyricsSentence as String + "\n")
+                theLyrics.appendContentsOf(lrc.lyricsSentence + "\n")
             }
-            iTunes.setLyrics(theLyrics as String)
+            iTunes.setLyrics(theLyrics)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
         }
     }
@@ -431,7 +437,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         saveLrcToLocal(wrongLyricsTag, songTitle: currentSongTitle, artist: currentArtist)
     }
 
-    @IBAction func setPresetByMenu(sender: AnyObject?) {
+    func setPresetByMenu(sender: AnyObject?) {
         if sender is NSMenuItem {
             let index: Int = presetMenuItem.submenu!.indexOfItem(sender as! NSMenuItem)
             if index == -1 {
@@ -531,9 +537,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 timeDlyInFile = 0
                 currentLyrics = nil
                 lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                currentSongID = iTunes.currentPersistentID().copy() as! NSString
-                currentSongTitle = iTunes.currentTitle().copy() as! NSString
-                currentArtist = iTunes.currentArtist().copy() as! NSString
+                currentSongID = iTunes.currentPersistentID()
+                currentSongTitle = iTunes.currentTitle()
+                currentArtist = iTunes.currentArtist()
                 NSLog("Song Changed to: %@",currentSongTitle)
                 handleSongChange()
             }
@@ -543,14 +549,14 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
 // MARK: - Lrc Methods
     
-    private func parsingLrc(theLrcContents:NSString) {
+    private func parsingLrc(theLrcContents: String) {
         // Parse lrc file to get lyrics, time-tags and time offset
         NSLog("Start to Parse lrc")
         lyricsArray.removeAll()
         idTagsArray.removeAll()
         self.setValue(0, forKey: "timeDly")
         timeDlyInFile = 0
-        let lrcContents: NSString
+        let lrcContents: String
         
         // whether convert Chinese type
         if userDefaults.boolForKey(LyricsAutoConvertChinese) {
@@ -571,17 +577,17 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             lrcContents = theLrcContents
         }
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
-        let lrcParagraphs: NSArray = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
+        let lrcParagraphs: [NSString] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
         
         for str in lrcParagraphs {
-            let timeTagsMatched: NSArray = regexForTimeTag.matchesInString(str as! String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
+            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str as String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
             if timeTagsMatched.count > 0 {
-                let index: Int = (timeTagsMatched.lastObject?.range.location)! + (timeTagsMatched.lastObject?.range.length)!
+                let index: Int = timeTagsMatched.last!.range.location + timeTagsMatched.last!.range.length
                 let lyricsSentence: NSString = str.substringFromIndex(index)
                 for result in timeTagsMatched {
                     let matched:NSRange = result.range
                     let lrcLine: LyricsLineModel = LyricsLineModel()
-                    lrcLine.lyricsSentence = lyricsSentence
+                    lrcLine.lyricsSentence = lyricsSentence as String
                     lrcLine.setMsecPositionWithTimeTag(str.substringWithRange(matched))
                     let currentCount: Int = lyricsArray.count
                     var j: Int
@@ -597,7 +603,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 }
             }
             else {
-                let theMatchedRange: NSRange = regexForIDTag.rangeOfFirstMatchInString(str as! String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
+                let theMatchedRange: NSRange = regexForIDTag.rangeOfFirstMatchInString(str as String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
                 if theMatchedRange.length == 0 {
                     continue
                 }
@@ -605,11 +611,11 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 let colonRange: NSRange = theIDTag.rangeOfString(":")
                 let idStr: NSString = theIDTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
                 if idStr.stringByReplacingOccurrencesOfString(" ", withString: "") != "offset" {
-                    idTagsArray.append(str as! NSString)
+                    idTagsArray.append(str as String)
                     continue
                 }
                 else {
-                    let delayStr: NSString=theIDTag.substringWithRange(NSMakeRange(colonRange.location+1, theIDTag.length-colonRange.length-colonRange.location-1))
+                    let delayStr: NSString = theIDTag.substringWithRange(NSMakeRange(colonRange.location+1, theIDTag.length-colonRange.length-colonRange.location-1))
                     self.setValue(delayStr.integerValue, forKey: "timeDly")
                     timeDlyInFile = timeDly
                 }
@@ -617,10 +623,10 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
-    private func testLrc(lrcFileContents: NSString) -> Bool {
+    private func testLrc(lrcFileContents: String) -> Bool {
         // test whether the string is lrc
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
-        let lrcParagraphs: NSArray = lrcFileContents.componentsSeparatedByCharactersInSet(newLineCharSet)
+        let lrcParagraphs: [String] = lrcFileContents.componentsSeparatedByCharactersInSet(newLineCharSet)
         let regexForTimeTag: NSRegularExpression
         do {
             regexForTimeTag = try NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+.[0-9]+\\]|\\[[0-9]+:[0-9]+\\]", options: [.CaseInsensitive])
@@ -630,7 +636,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         var numberOfMatched: Int = 0
         for str in lrcParagraphs {
-            numberOfMatched = regexForTimeTag.numberOfMatchesInString(str as! String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
+            numberOfMatched = regexForTimeTag.numberOfMatchesInString(str, options: [.ReportProgress], range: NSMakeRange(0, str.characters.count))
             if numberOfMatched > 0 {
                 return true
             }
@@ -638,20 +644,20 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         return false
     }
     
-    private func readLocalLyrics() -> NSString? {
-        let savingPath: NSString
+    private func readLocalLyrics() -> String? {
+        let savingPath: String
         if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
             savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
         } else {
             savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
         }
-        let songTitle:String = currentSongTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let artist:String = currentArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let lrcFilePath = savingPath.stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
+        let songTitle: String = currentSongTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
+        let artist: String = currentArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
+        let lrcFilePath = (savingPath as NSString).stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
         if  NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath) {
-            let lrcContents: NSString?
+            let lrcContents: String?
             do {
-                lrcContents = try NSString(contentsOfFile: lrcFilePath, encoding: NSUTF8StringEncoding)
+                lrcContents = try String(contentsOfFile: lrcFilePath, encoding: NSUTF8StringEncoding)
             } catch {
                 lrcContents = nil
                 NSLog("Failed to load lrc")
@@ -662,8 +668,8 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
 
-    private func saveLrcToLocal (lyricsContents: NSString, songTitle: NSString, artist: NSString) {
-        let savingPath:NSString
+    private func saveLrcToLocal (lyricsContents: String, songTitle: String, artist: String) {
+        let savingPath: String
         if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
             savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
         } else {
@@ -672,13 +678,13 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         let fm: NSFileManager = NSFileManager.defaultManager()
         
         var isDir: ObjCBool = false
-        if fm.fileExistsAtPath(savingPath as String, isDirectory: &isDir) {
+        if fm.fileExistsAtPath(savingPath, isDirectory: &isDir) {
             if !isDir {
                 return
             }
         } else {
             do {
-                try fm.createDirectoryAtPath(savingPath as String, withIntermediateDirectories: true, attributes: nil)
+                try fm.createDirectoryAtPath(savingPath, withIntermediateDirectories: true, attributes: nil)
             } catch let theError as NSError{
                 NSLog("%@", theError.localizedDescription)
                 return
@@ -687,7 +693,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         
         let titleForSaving = songTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
         let artistForSaving = artist.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let lrcFilePath = savingPath.stringByAppendingPathComponent("\(titleForSaving) - \(artistForSaving).lrc")
+        let lrcFilePath = (savingPath as NSString).stringByAppendingPathComponent("\(titleForSaving) - \(artistForSaving).lrc")
         
         if fm.fileExistsAtPath(lrcFilePath) {
             do {
@@ -728,7 +734,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                     return
                 }
                 else {
-                    var secondLyrics: NSString!
+                    var secondLyrics: String!
                     if currentLyrics != tempLyricsArray[index-1].lyricsSentence {
                         currentLyrics = tempLyricsArray[index-1].lyricsSentence
                         if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
@@ -742,7 +748,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                             })
                         }
                         if menuBarLyrics != nil {
-                            menuBarLyrics.displayLyrics(currentLyrics as String)
+                            menuBarLyrics.displayLyrics(currentLyrics)
                         }
                     }
                     return
@@ -758,7 +764,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                     })
                 }
                 if menuBarLyrics != nil {
-                    menuBarLyrics.displayLyrics(currentLyrics as String)
+                    menuBarLyrics.displayLyrics(currentLyrics)
                 }
             }
         }
@@ -766,7 +772,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     func handleSongChange() {
         //load lyrics for the song which is about to play
-        let lrcContents: NSString? = readLocalLyrics()
+        let lrcContents: String? = readLocalLyrics()
         if lrcContents != nil {
             parsingLrc(lrcContents!)
             if lyricsArray.count != 0 {
@@ -776,18 +782,18 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         lrcSourceHandleQueue.cancelAllOperations()
         
         //Search in the Net if local lrc is nil or invalid
-        let loadingSongID: String = currentSongID.copy() as! String
-        let loadingArtist: String = currentArtist.copy() as! String
-        let loadingTitle: String = currentSongTitle.copy() as! String
+        let loadingSongID: String = currentSongID
+        let loadingArtist: String = currentArtist
+        let loadingTitle: String = currentSongTitle
         hasDiglossiaLrc = false
         
-        let artistForSearching: String = self.delSpecificSymbol(loadingArtist) as String
-        let titleForSearching: String = self.delSpecificSymbol(loadingTitle) as String
+        let artistForSearching: String = self.delSpecificSymbol(loadingArtist)
+        let titleForSearching: String = self.delSpecificSymbol(loadingTitle)
         
         //千千静听不支持繁体中文搜索，先转成简体中文。搜歌词组件参数是iTunes中显示的歌曲名
         //歌手名以及iTunes的唯一编号（防止歌曲变更造成的歌词对错歌），以及用于搜索用的歌曲
         //名与歌手名。另外，天天动听/QQ只会获取歌词文本，其他歌词源都是获取歌词URL
-        qianqian.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: convertToSC(titleForSearching) as String, andArtistForSearching: convertToSC(artistForSearching) as String)
+        qianqian.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: convertToSC(titleForSearching), andArtistForSearching: convertToSC(artistForSearching))
         xiami.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
         ttpod.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
         geciMe.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
@@ -842,16 +848,16 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         if lyricsArray.count == 0{
             return
         }
-        let theLyrics: NSMutableString = NSMutableString()
+        var theLyrics: String = String()
         for idtag in idTagsArray {
-            theLyrics.appendString((idtag as String) + "\n")
+            theLyrics.appendContentsOf(idtag + "\n")
         }
-        theLyrics.appendString("[offset:\(timeDly)]\n")
+        theLyrics.appendContentsOf("[offset:\(timeDly)]\n")
         for lrc in lyricsArray {
-            theLyrics.appendString((lrc.timeTag as String) + (lrc.lyricsSentence as String) + "\n")
+            theLyrics.appendContentsOf(lrc.timeTag + lrc.lyricsSentence + "\n")
         }
         if lyricsArray.count > 0 {
-            theLyrics.deleteCharactersInRange(NSMakeRange(theLyrics.length-1, 1))
+            theLyrics.removeAtIndex(theLyrics.endIndex.advancedBy(-1))
         }
         NSLog("Writing the time delay to file")
         saveLrcToLocal(theLyrics, songTitle: currentSongTitle, artist: currentArtist)
@@ -885,9 +891,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         let serverLrcs: [SongInfos]
         switch source {
         case 1:
-            serverLrcs = (self.qianqian.currentSongs as NSArray).copy() as! [SongInfos]
+            serverLrcs = (self.qianqian.currentSongs as NSArray) as! [SongInfos]
         case 2:
-            serverLrcs = (self.xiami.currentSongs as NSArray).copy() as! [SongInfos]
+            serverLrcs = (self.xiami.currentSongs as NSArray) as! [SongInfos]
         case 3:
             let info: SongInfos = self.ttpod.songInfos.copy() as! SongInfos
             if info.lyric == "" {
@@ -896,9 +902,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 serverLrcs = [info]
             }
         case 4:
-            serverLrcs = (self.geciMe.currentSongs as NSArray).copy() as! [SongInfos]
+            serverLrcs = (self.geciMe.currentSongs as NSArray) as! [SongInfos]
         case 5:
-            serverLrcs = (self.qqMusic.currentSongs as NSArray).copy() as! [SongInfos]
+            serverLrcs = self.qqMusic.currentSongs
         default:
             return;
         }
@@ -910,7 +916,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     
-    private func handleLrcURLDownloaded(serverLrcs: [SongInfos], songTitle:String, artist:NSString, songID:NSString) {
+    private func handleLrcURLDownloaded(serverLrcs: [SongInfos], songTitle:String, artist:String, songID:String) {
         // alread has lyrics, check if user needs a better one.
         if lyricsArray.count > 0 {
             if userDefaults.boolForKey(LyricsSearchForDiglossiaLrc) {
@@ -922,7 +928,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             }
         }
         
-        var lyricsContents: NSString! = nil
+        var lyricsContents: String! = nil
         for lrc in serverLrcs {
             if isDiglossiaLrc(lrc.songTitle + lrc.artist) {
                 if lrc.lyric != nil {
@@ -930,7 +936,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 }
                 else if lrc.lyricURL != nil {
                     do {
-                        lyricsContents = try NSString(contentsOfURL: NSURL(string: lrc.lyricURL)!, encoding: NSUTF8StringEncoding)
+                        lyricsContents = try String(contentsOfURL: NSURL(string: lrc.lyricURL)!, encoding: NSUTF8StringEncoding)
                     } catch let theError as NSError{
                         NSLog("%@", theError.localizedDescription)
                         lyricsContents = nil
@@ -956,7 +962,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 }
                 else if lrc.lyricURL != nil {
                     do {
-                        lyricsContents = try NSString(contentsOfURL: NSURL(string: lrc.lyricURL)!, encoding: NSUTF8StringEncoding)
+                        lyricsContents = try String(contentsOfURL: NSURL(string: lrc.lyricURL)!, encoding: NSUTF8StringEncoding)
                     } catch let theError as NSError{
                         NSLog("%@", theError.localizedDescription)
                         lyricsContents = nil
@@ -984,23 +990,23 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     func increaseTimeDly() {
         self.willChangeValueForKey("timeDly")
-        timeDly+=100
+        timeDly += 100
         if timeDly > 10000 {
             timeDly = 10000
         }
         self.didChangeValueForKey("timeDly")
-        let message:String = NSString(format: NSLocalizedString("OFFSET", comment: ""), timeDly) as String
+        let message: String = String(format: NSLocalizedString("OFFSET", comment: ""), timeDly)
         MessageWindowController.sharedMsgWindow.displayMessage(message)
     }
     
     func decreaseTimeDly() {
         self.willChangeValueForKey("timeDly")
-        timeDly-=100
+        timeDly -= 100
         if timeDly < -10000 {
             timeDly = -10000
         }
         self.didChangeValueForKey("timeDly")
-        let message:String = NSString(format: NSLocalizedString("OFFSET", comment: ""), timeDly) as String
+        let message: String = String(format: NSLocalizedString("OFFSET", comment: ""), timeDly)
         MessageWindowController.sharedMsgWindow.displayMessage(message)
     }
     
@@ -1018,7 +1024,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("MENU_BAR_ON", comment: ""))
             lyricsWindow.displayLyrics(nil, secondLyrics: nil)
             menuBarLyrics = MenuBarLyrics()
-            menuBarLyrics.displayLyrics(currentLyrics as String)
+            menuBarLyrics.displayLyrics(currentLyrics)
         }
         else {
             userDefaults.setBool(true, forKey: LyricsDesktopLyricsEnabled)
@@ -1042,15 +1048,15 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         return false
     }
     
-    private func delSpecificSymbol(input: NSString) -> NSString {
+    private func delSpecificSymbol(input: String) -> String {
         let specificSymbol: [String] = [
             ",", ".", "'", "\"", "`", "~", "!", "@", "#", "$", "%", "^", "&", "＆", "*", "(", ")", "（", "）", "，",
             "。", "“", "”", "‘", "’", "?", "？", "！", "/", "[", "]", "{", "}", "<", ">", "=", "-", "+", "×",
             "☆", "★", "√", "～"
         ]
-        let output: NSMutableString = input.mutableCopy() as! NSMutableString
+        var output: String = input
         for symbol in specificSymbol {
-            output.replaceOccurrencesOfString(symbol, withString: " ", options: [], range: NSMakeRange(0, output.length))
+            output = output.stringByReplacingOccurrencesOfString(symbol, withString: " ")
         }
         return output
     }
