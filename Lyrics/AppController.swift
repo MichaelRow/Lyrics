@@ -521,7 +521,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             if currentSongID == iTunes.currentPersistentID() {
                 return
             } else {
-                
                 //if time-Delay for the previous song is changed, we should save the change to lrc file.
                 //Save time-Delay laziely for better I/O performance.
                 if timeDly != timeDlyInFile {
@@ -538,7 +537,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 currentSongTitle = iTunes.currentTitle()
                 currentArtist = iTunes.currentArtist()
                 NSLog("Song Changed to: %@",currentSongTitle)
-                handleSongChange()
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                    self.handleSongChange()
+                })
             }
         }
     }
@@ -765,6 +766,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     func handleSongChange() {
         //load lyrics for the song which is about to play
+        lrcSourceHandleQueue.cancelAllOperations()
         let lrcContents: String? = readLocalLyrics()
         if lrcContents != nil {
             parsingLrc(lrcContents!)
@@ -772,7 +774,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 return
             }
         }
-        lrcSourceHandleQueue.cancelAllOperations()
         
         //Search in the Net if local lrc is nil or invalid
         let loadingSongID: String = currentSongID
