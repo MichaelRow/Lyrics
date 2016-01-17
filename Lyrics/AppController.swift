@@ -28,7 +28,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     private var hasDiglossiaLrc: Bool = false
     private var lyricsWindow: LyricsWindowController!
     private var menuBarLyrics: MenuBarLyrics!
-    private var lyricsEidtWindow: LyricsEditWindowController!
     private var statusItem: NSStatusItem!
     private var lyricsArray: [LyricsLineModel]!
     private var idTagsArray: [String]!
@@ -97,7 +96,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         ndc.addObserver(self, selector: "handleExtenalLyricsEvent:", name: "ExtenalLyricsEvent", object: nil)
         
         do {
-            regexForTimeTag = try NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+.[0-9]+\\]|\\[[0-9]+:[0-9]+\\]", options: [])
+            regexForTimeTag = try NSRegularExpression(pattern: "\\[\\d+:\\d+.\\d+\\]|\\[\\d+:\\d+\\]", options: [])
         } catch let theError as NSError {
             NSLog("%@", theError.localizedDescription)
             return
@@ -105,7 +104,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         //the regex below should only use when the string doesn't contain time-tags
         //because all time-tags would be matched as well.
         do {
-            regexForIDTag = try NSRegularExpression(pattern: "\\[.*:.*\\]", options: [])
+            regexForIDTag = try NSRegularExpression(pattern: "\\[[^\\]]+:[^\\]]+\\]", options: [])
         } catch let theError as NSError {
             NSLog("%@", theError.localizedDescription)
             return
@@ -318,15 +317,13 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         if lrcContents == nil {
             lrcContents = ""
         }
-        if lyricsEidtWindow == nil {
-            lyricsEidtWindow = LyricsEditWindowController()
+        let editWindowController = LyricsEditWindowController.sharedEditWindowController
+        editWindowController.setLyricsContents(lrcContents!, songID: currentSongID, songTitle: currentSongTitle, andArtist: currentArtist)
+        if !editWindowController.window!.visible {
+            editWindowController.showWindow(nil)
         }
-        lyricsEidtWindow.setLyricsContents(lrcContents!, songID: currentSongID, songTitle: currentSongTitle, andArtist: currentArtist)
-        if !(lyricsEidtWindow.window?.visible)! {
-            lyricsEidtWindow.showWindow(nil)
-        }
-        lyricsEidtWindow.window?.orderFrontRegardless()
-        lyricsEidtWindow.window?.makeKeyWindow()
+        editWindowController.window!.makeKeyAndOrderFront(nil)
+        NSApp.activateIgnoringOtherApps(true)
     }
     
     @IBAction func importLrcFile(sender: AnyObject) {
@@ -580,15 +577,15 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         let lrcParagraphs: [NSString] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
         
         for str in lrcParagraphs {
-            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str as String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
+            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str as String, options: [], range: NSMakeRange(0, str.length))
             if timeTagsMatched.count > 0 {
                 let index: Int = timeTagsMatched.last!.range.location + timeTagsMatched.last!.range.length
-                let lyricsSentence: NSString = str.substringFromIndex(index)
+                let lyricsSentence: String = str.substringFromIndex(index)
                 for result in timeTagsMatched {
-                    let matched:NSRange = result.range
+                    let matchedRange: NSRange = result.range
                     let lrcLine: LyricsLineModel = LyricsLineModel()
-                    lrcLine.lyricsSentence = lyricsSentence as String
-                    lrcLine.setMsecPositionWithTimeTag(str.substringWithRange(matched))
+                    lrcLine.lyricsSentence = lyricsSentence
+                    lrcLine.setMsecPositionWithTimeTag(str.substringWithRange(matchedRange))
                     let currentCount: Int = lyricsArray.count
                     var j: Int
                     for j=0; j<currentCount; ++j {
@@ -603,21 +600,24 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 }
             }
             else {
-                let theMatchedRange: NSRange = regexForIDTag.rangeOfFirstMatchInString(str as String, options: [.ReportProgress], range: NSMakeRange(0, str.length))
-                if theMatchedRange.length == 0 {
+                let idTagsMatched: [NSTextCheckingResult] = regexForIDTag.matchesInString(str as String, options: [], range: NSMakeRange(0, str.length))
+                if idTagsMatched.count == 0 {
                     continue
                 }
-                let theIDTag: NSString = str.substringWithRange(theMatchedRange)
-                let colonRange: NSRange = theIDTag.rangeOfString(":")
-                let idStr: NSString = theIDTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
-                if idStr.stringByReplacingOccurrencesOfString(" ", withString: "") != "offset" {
-                    idTagsArray.append(str as String)
-                    continue
-                }
-                else {
-                    let delayStr: NSString = theIDTag.substringWithRange(NSMakeRange(colonRange.location+1, theIDTag.length-colonRange.length-colonRange.location-1))
-                    self.setValue(delayStr.integerValue, forKey: "timeDly")
-                    timeDlyInFile = timeDly
+                for result in idTagsMatched {
+                    let matchedRange: NSRange = result.range
+                    let idTag: NSString = str.substringWithRange(matchedRange) as NSString
+                    let colonRange: NSRange = idTag.rangeOfString(":")
+                    let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
+                    if idStr.stringByReplacingOccurrencesOfString(" ", withString: "") != "offset" {
+                        idTagsArray.append(idTag as String)
+                        continue
+                    }
+                    else {
+                        let delayStr: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1))
+                        self.setValue((delayStr as NSString).integerValue, forKey: "timeDly")
+                        timeDlyInFile = timeDly
+                    }
                 }
             }
         }
@@ -627,13 +627,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         // test whether the string is lrc
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
         let lrcParagraphs: [String] = lrcFileContents.componentsSeparatedByCharactersInSet(newLineCharSet)
-        let regexForTimeTag: NSRegularExpression
-        do {
-            regexForTimeTag = try NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+.[0-9]+\\]|\\[[0-9]+:[0-9]+\\]", options: [.CaseInsensitive])
-        } catch let theError as NSError {
-            NSLog("%@", theError.localizedDescription)
-            return false
-        }
         var numberOfMatched: Int = 0
         for str in lrcParagraphs {
             numberOfMatched = regexForTimeTag.numberOfMatchesInString(str, options: [.ReportProgress], range: NSMakeRange(0, str.characters.count))
@@ -802,7 +795,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     func handleUserEditLyrics(n: NSNotification) {
         let userInfo: [NSObject:AnyObject] = n.userInfo!
-        let lyrics: String = self.lyricsEidtWindow.textView.string!
+        let lyrics: String = LyricsEditWindowController.sharedEditWindowController.textView.string!
         
         if testLrc(lyrics) {
             //User lrc has the highest priority level
@@ -845,7 +838,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     func handleLrcDelayChange () {
         //save the delay change to file.
-        if lyricsArray.count == 0{
+        if lyricsArray.count == 0 {
             return
         }
         var theLyrics: String = String()

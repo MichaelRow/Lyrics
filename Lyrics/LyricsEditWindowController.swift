@@ -10,6 +10,8 @@ import Cocoa
 
 class LyricsEditWindowController: NSWindowController {
     
+    static let sharedEditWindowController = LyricsEditWindowController()
+    
     @IBOutlet var textView: NSTextView!
     
     private var currentSongID: String!
