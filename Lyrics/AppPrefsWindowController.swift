@@ -131,11 +131,10 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                 NSLog("Failed to disable login item")
             }
         }
-        
     }
     
     @IBAction func reflashLyrics(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName(LyricsLayoutChangeNotification, object: nil)
+        DesktopLyricsController.sharedController.reflash()
     }
     
 // MARK: - Lyrics Prefs
@@ -161,7 +160,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     private func reflashFontAndColorPrefs () {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))!
-        fontDisplayText.stringValue = String(format: "%@, %.1f", font.displayName!,font.pointSize)
+        fontDisplayText.stringValue = String(format: "%@ (%.1f)", font.displayName!,font.pointSize)
         
         self.setValue(userDefaults.boolForKey(LyricsShadowModeEnable), forKey: "shadowModeEnabled")
         self.setValue(userDefaults.floatForKey(LyricsShadowRadius), forKey: "shadowRadius")
@@ -201,7 +200,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(textColor.color), forKey: LyricsTextColor)
         userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(bkColor.color), forKey: LyricsBackgroundColor)
         userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(shadowColor.color), forKey: LyricsShadowColor)
-        NSNotificationCenter.defaultCenter().postNotificationName(LyricsAttributesChangedNotification, object: nil)
+        DesktopLyricsController.sharedController.handleAttributesUpdate()
     }
     
     @IBAction private func revertFontAndColorChanges(sender: AnyObject?) {
@@ -219,7 +218,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
     override func changeFont(sender: AnyObject?) {
         font = (sender?.convertFont(font))!
-        fontDisplayText.stringValue = String(format: "%@, %.1f", font.displayName!,font.pointSize)
+        fontDisplayText.stringValue = String(format: "%@ (%.1f)", font.displayName!,font.pointSize)
         fontAndColorChanged(nil)
     }
     
@@ -386,7 +385,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
             userDefaults.setObject(value, forKey: key as! String)
         }
         reflashFontAndColorPrefs()
-        NSNotificationCenter.defaultCenter().postNotificationName(LyricsAttributesChangedNotification, object: nil)
+        DesktopLyricsController.sharedController.handleAttributesUpdate()
         MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("PRESET_LOADED", comment: ""))
     }
     

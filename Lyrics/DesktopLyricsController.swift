@@ -83,10 +83,7 @@ class DesktopLyricsController: NSWindowController {
         setScreenResolution()
         displayLyrics("LyricsX", secondLyrics: nil)
         
-        let nc: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: "handleAttributesUpdate", name: LyricsAttributesChangedNotification, object: nil)
-        nc.addObserver(self, selector: "reflash", name: LyricsLayoutChangeNotification, object: nil)
-        nc.addObserver(self, selector: "handleScreenResolutionChange", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleScreenResolutionChange", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
     }
     
     deinit {
@@ -154,6 +151,13 @@ class DesktopLyricsController: NSWindowController {
         firstLyricsLayer.contentsScale=(NSScreen.mainScreen()?.backingScaleFactor)!
         secondLyricsLayer.contentsScale=firstLyricsLayer.contentsScale
         NSLog("Screen Visible Res Changed to:(%f,%f) O:(%f,%f)", visibleSize.width,visibleSize.height,visibleOrigin.x,visibleOrigin.y)
+    }
+    
+    func handleAttributesUpdate() {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.setAttributes()
+            self.reflash()
+        }
     }
     
     //如果在竖直属性下，当前字形如果翻转了英文，那么我们只好只对中文添加翻转属性不翻转英文
@@ -637,13 +641,6 @@ class DesktopLyricsController: NSWindowController {
     }
 
 //MARK: - Notification Methods
-    
-    func handleAttributesUpdate() {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.setAttributes()
-            self.reflash()
-        }
-    }
     
     func handleScreenResolutionChange() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
