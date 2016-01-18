@@ -12,7 +12,7 @@ import ScriptingBridge
 class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     //Singleton
-    static let sharedAppController = AppController()
+    static let sharedController = AppController()
     
     @IBOutlet weak var statusBarMenu: NSMenu!
     @IBOutlet weak var lyricsDelayView: NSView!
@@ -26,7 +26,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     private var isTrackingRunning: Bool = false
     private var hasDiglossiaLrc: Bool = false
-    private var lyricsWindow: LyricsWindowController!
+    private var lyricsWindow: DesktopLyricsController!
     private var menuBarLyrics: MenuBarLyrics!
     private var statusItem: NSStatusItem!
     private var lyricsArray: [LyricsLineModel]!
@@ -67,7 +67,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         NSBundle(forClass: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
         setupStatusItem()
         
-        lyricsWindow=LyricsWindowController()
+        lyricsWindow = DesktopLyricsController.sharedController
         lyricsWindow.showWindow(nil)
         
         if userDefaults.boolForKey(LyricsMenuBarLyricsEnabled) {
@@ -233,13 +233,13 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func showAboutWindow(sender: AnyObject?) {
-        AboutWindowController.sharedAboutWindow.showWindow(nil)
+        AboutWindowController.sharedController.showWindow(nil)
     }
     
     @IBAction func showDonate(sender: AnyObject?) {
-        let aboutWC = AboutWindowController.sharedAboutWindow
-        aboutWC.showWindow(nil)
-        aboutWC.showDonate(nil)
+        let windowController = AboutWindowController.sharedController
+        windowController.showWindow(nil)
+        windowController.showDonate(nil)
     }
     
     @IBAction func showPreferences(sender:AnyObject?) {
@@ -317,12 +317,12 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         if lrcContents == nil {
             lrcContents = ""
         }
-        let editWindowController = LyricsEditWindowController.sharedEditWindowController
-        editWindowController.setLyricsContents(lrcContents!, songID: currentSongID, songTitle: currentSongTitle, andArtist: currentArtist)
-        if !editWindowController.window!.visible {
-            editWindowController.showWindow(nil)
+        let windowController = LyricsEditWindowController.sharedController
+        windowController.setLyricsContents(lrcContents!, songID: currentSongID, songTitle: currentSongTitle, andArtist: currentArtist)
+        if !windowController.window!.visible {
+            windowController.showWindow(nil)
         }
-        editWindowController.window!.makeKeyAndOrderFront(nil)
+        windowController.window!.makeKeyAndOrderFront(nil)
         NSApp.activateIgnoringOtherApps(true)
     }
     
@@ -796,7 +796,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     func handleUserEditLyrics(n: NSNotification) {
         let userInfo: [NSObject:AnyObject] = n.userInfo!
-        let lyrics: String = LyricsEditWindowController.sharedEditWindowController.textView.string!
+        let lyrics: String = LyricsEditWindowController.sharedController.textView.string!
         
         if testLrc(lyrics) {
             //User lrc has the highest priority level

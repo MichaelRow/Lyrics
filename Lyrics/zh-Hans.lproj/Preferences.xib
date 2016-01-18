@@ -853,7 +853,7 @@
                         </binding>
                     </connections>
                 </popUpButton>
-                <button toolTip="重启生效" id="cgR-6S-apL">
+                <button id="cgR-6S-apL">
                     <rect key="frame" x="18" y="45" width="181" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="在屏幕截图时不显示歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bbH-Zw-Uqf">
@@ -861,6 +861,7 @@
                         <font key="font" size="13" name=".PingFangSC-Regular"/>
                     </buttonCell>
                     <connections>
+                        <action selector="disableLyricsWhenSnapshot:" target="-2" id="hxk-gP-JkL"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsDisabledWhenSreenShot" id="ItX-fR-F1J">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
@@ -917,7 +918,7 @@
                         </binding>
                     </connections>
                 </button>
-                <button toolTip="重启生效" id="ulC-JT-Rx2">
+                <button id="ulC-JT-Rx2">
                     <rect key="frame" x="18" y="18" width="165" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="在所有的桌面显示歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wf9-yP-uqA">
@@ -925,6 +926,7 @@
                         <font key="font" size="13" name=".PingFangSC-Regular"/>
                     </buttonCell>
                     <connections>
+                        <action selector="lyricsCanJoinAllDesktop:" target="-2" id="rmo-V6-jEV"/>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsDisplayInAllSpaces" id="5tT-1z-uS1">
                             <dictionary key="options">
                                 <bool key="NSRaisesForNotApplicableKeys" value="NO"/>

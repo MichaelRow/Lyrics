@@ -10,7 +10,7 @@ import Cocoa
 
 class AboutWindowController: NSWindowController {
     
-    static let sharedAboutWindow = AboutWindowController()
+    static let sharedController = AboutWindowController()
     
     @IBOutlet weak var appName: NSTextField!
     @IBOutlet weak var appVersion: NSTextField!

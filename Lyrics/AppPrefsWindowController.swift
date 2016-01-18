@@ -138,6 +138,24 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         NSNotificationCenter.defaultCenter().postNotificationName(LyricsLayoutChangeNotification, object: nil)
     }
     
+// MARK: - Lyrics Prefs
+    
+    @IBAction func disableLyricsWhenSnapshot(sender: AnyObject) {
+        if (sender as! NSButton).state == NSOnState {
+            DesktopLyricsController.sharedController.window!.sharingType = .None
+        } else {
+            DesktopLyricsController.sharedController.window!.sharingType = .ReadOnly
+        }
+    }
+    
+    @IBAction func lyricsCanJoinAllDesktop(sender: AnyObject) {
+        if (sender as! NSButton).state == NSOnState {
+            DesktopLyricsController.sharedController.window!.collectionBehavior = .CanJoinAllSpaces
+        } else {
+            DesktopLyricsController.sharedController.window!.collectionBehavior = .Default
+        }
+    }
+    
 // MARK: - Font and Color Prefs
     
     private func reflashFontAndColorPrefs () {
@@ -269,7 +287,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
 // MARK: - Shortcut Prefs
     
     func setupShortcuts() {
-        let appController = AppController.sharedAppController
+        let appController = AppController.sharedController
         // User shortcuts
         lyricsModeSwitchShortcut.associatedUserDefaultsKey = ShortcutLyricsModeSwitch
         MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutLyricsModeSwitch) { () -> Void in

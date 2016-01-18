@@ -68,7 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         // Force Singleton to init
-        AppController.sharedAppController
+        AppController.sharedController
         
         // Force Prefs to load and setup shortcuts,etc
         let prefs = AppPrefsWindowController.sharedPrefsWindowController
@@ -79,7 +79,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
-        let appController = AppController.sharedAppController
+        let appController = AppController.sharedController
         if appController.timeDly != appController.timeDlyInFile {
             NSLog("App terminating, saveing lrc time delay change...")
             appController.handleLrcDelayChange()

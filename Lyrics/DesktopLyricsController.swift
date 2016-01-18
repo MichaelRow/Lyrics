@@ -1,5 +1,5 @@
 //
-//  LyricsWindowController.swift
+//  DesktopLyricsController.swift
 //  Lyrics
 //
 //  Created by Eru on 15/11/9.
@@ -9,7 +9,7 @@
 
 /************************ IMPORTANT ************************/
 /*                                                         */
-/*     LyricsWindowController Must Run in Main Thread      */
+/*     DesktopLyricsController Must Run in Main Thread     */
 /*        In other threads may no response or crash        */
 /*                                                         */
 /************************ IMPORTANT ************************/
@@ -18,10 +18,11 @@ import Cocoa
 import QuartzCore
 import CoreGraphics
 
-class LyricsWindowController: NSWindowController {
+class DesktopLyricsController: NSWindowController {
+    
+    static let sharedController = DesktopLyricsController()
     
     var isFullScreen: Bool = false
-    
     private var firstLyrics: String?
     private var secondLyrics: String?
     private var backgroundLayer: CALayer!
@@ -50,13 +51,13 @@ class LyricsWindowController: NSWindowController {
         lyricsWindow.level = Int(CGWindowLevelForKey(.FloatingWindowLevelKey))
         lyricsWindow.contentView?.layer = CALayer()
         lyricsWindow.contentView?.wantsLayer=true
-        
+                
         userDefaults = NSUserDefaults.standardUserDefaults()
         if userDefaults.boolForKey(LyricsDisabledWhenSreenShot) {
-            lyricsWindow.sharingType = NSWindowSharingType.None
+            lyricsWindow.sharingType = .None
         }
         if userDefaults.boolForKey(LyricsDisplayInAllSpaces) {
-            lyricsWindow.collectionBehavior = NSWindowCollectionBehavior.CanJoinAllSpaces
+            lyricsWindow.collectionBehavior = .CanJoinAllSpaces
         }
         
         backgroundLayer = CALayer()
@@ -82,10 +83,10 @@ class LyricsWindowController: NSWindowController {
         setScreenResolution()
         displayLyrics("LyricsX", secondLyrics: nil)
         
-        let nc:NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        let nc: NSNotificationCenter = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "handleAttributesUpdate", name: LyricsAttributesChangedNotification, object: nil)
-        nc.addObserver(self, selector: "handleScreenResolutionChange", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
         nc.addObserver(self, selector: "reflash", name: LyricsLayoutChangeNotification, object: nil)
+        nc.addObserver(self, selector: "handleScreenResolutionChange", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
     }
     
     deinit {

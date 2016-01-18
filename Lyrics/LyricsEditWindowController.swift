@@ -10,7 +10,7 @@ import Cocoa
 
 class LyricsEditWindowController: NSWindowController {
     
-    static let sharedEditWindowController = LyricsEditWindowController()
+    static let sharedController = LyricsEditWindowController()
     
     @IBOutlet var textView: NSTextView!
     
