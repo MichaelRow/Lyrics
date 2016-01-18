@@ -749,11 +749,11 @@
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="UKb-ML-D6F"/>
         <customView id="5BK-8u-tNV" userLabel="Lyrics Prefs View">
-            <rect key="frame" x="0.0" y="0.0" width="314" height="256"/>
+            <rect key="frame" x="0.0" y="0.0" width="314" height="229"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button id="0lJ-Y9-uvW">
-                    <rect key="frame" x="18" y="187" width="123" height="18"/>
+                    <rect key="frame" x="18" y="160" width="123" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="自动转换歌词为:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lDH-nC-7tc">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -769,7 +769,7 @@
                     </connections>
                 </button>
                 <popUpButton verticalHuggingPriority="750" id="Knm-ZX-zb5">
-                    <rect key="frame" x="144" y="183" width="153" height="26"/>
+                    <rect key="frame" x="144" y="156" width="153" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="pf4-9N-YYu">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -795,7 +795,7 @@
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="q1A-Ot-nmL">
-                    <rect key="frame" x="18" y="219" width="112" height="17"/>
+                    <rect key="frame" x="18" y="192" width="112" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="纵向歌词模式位置:" id="1rm-k6-Vp7">
                         <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -804,7 +804,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" id="1DX-RL-oIL">
-                    <rect key="frame" x="144" y="216" width="153" height="26"/>
+                    <rect key="frame" x="144" y="189" width="153" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Iwg-nh-zLm">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -827,7 +827,7 @@
                     </connections>
                 </popUpButton>
                 <popUpButton verticalHuggingPriority="750" id="H59-b3-fTK">
-                    <rect key="frame" x="144" y="151" width="153" height="26"/>
+                    <rect key="frame" x="144" y="124" width="153" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="V9J-zT-diV">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -853,12 +853,12 @@
                         </binding>
                     </connections>
                 </popUpButton>
-                <button id="cgR-6S-apL">
-                    <rect key="frame" x="18" y="59" width="181" height="34"/>
+                <button toolTip="重启生效" id="cgR-6S-apL">
+                    <rect key="frame" x="18" y="45" width="181" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="在屏幕截图时不显示歌词  (重启生效)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bbH-Zw-Uqf">
+                    <buttonCell key="cell" type="check" title="在屏幕截图时不显示歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bbH-Zw-Uqf">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" size="13" name=".PingFangSC-Regular"/>
                     </buttonCell>
                     <connections>
                         <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsDisabledWhenSreenShot" id="ItX-fR-F1J">
@@ -870,7 +870,7 @@
                     </connections>
                 </button>
                 <button id="vBy-mM-hbr">
-                    <rect key="frame" x="18" y="126" width="175" height="18"/>
+                    <rect key="frame" x="18" y="99" width="175" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="iTunes暂停时不显示歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="359-gu-dk7">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -885,24 +885,8 @@
                         </binding>
                     </connections>
                 </button>
-                <button id="ulC-JT-Rx2">
-                    <rect key="frame" x="18" y="18" width="165" height="34"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="在所有的桌面显示歌词 (重启生效)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wf9-yP-uqA">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsDisplayInAllSpaces" id="5tT-1z-uS1">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <bool key="NSValidatesImmediately" value="YES"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </button>
                 <button id="OWN-3P-nqI">
-                    <rect key="frame" x="18" y="101" width="158" height="18"/>
+                    <rect key="frame" x="18" y="74" width="158" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="优先选择双语歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="S6K-Eb-m9C">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -918,7 +902,7 @@
                     </connections>
                 </button>
                 <button id="x1B-W9-TCu">
-                    <rect key="frame" x="18" y="155" width="117" height="18"/>
+                    <rect key="frame" x="18" y="128" width="117" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="第二行歌词显示:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1IO-BV-Yed">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -933,8 +917,24 @@
                         </binding>
                     </connections>
                 </button>
+                <button toolTip="重启生效" id="ulC-JT-Rx2">
+                    <rect key="frame" x="18" y="18" width="165" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="在所有的桌面显示歌词" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wf9-yP-uqA">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" size="13" name=".PingFangSC-Regular"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsDisplayInAllSpaces" id="5tT-1z-uS1">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
             </subviews>
-            <point key="canvasLocation" x="-676" y="252"/>
+            <point key="canvasLocation" x="-676" y="238.5"/>
         </customView>
         <customView id="UVc-8X-3Mf">
             <rect key="frame" x="0.0" y="0.0" width="415" height="277"/>
