@@ -87,6 +87,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         }
         //check if changes are unsaved
         let fontAndColorID: String = NSLocalizedString("FONT_COLOR", comment: "")
+        let shortCutID: String = NSLocalizedString("SHORTCUT", comment: "")
         if self.window?.title == fontAndColorID {
             if identifier != fontAndColorID {
                 if hasUnsavedChange {
@@ -97,6 +98,9 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                     NSColorPanel.sharedColorPanel().orderOut(nil)
                 }
             }
+        }
+        else if self.window?.title == shortCutID {
+            endRecordShortcut()
         }
         self.window?.makeFirstResponder(nil)
         super.displayViewForIdentifier(identifier, animate: animate)
@@ -324,6 +328,30 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         let offsetDecr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Minus), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
         MASShortcutMonitor.sharedMonitor().registerShortcut(offsetDecr) { () -> Void in
             appController.decreaseTimeDly()
+        }
+    }
+    
+    private func endRecordShortcut() {
+        if lyricsModeSwitchShortcut.recording {
+            lyricsModeSwitchShortcut.recording = false
+        }
+        if desktopMenubarSwitchShortcut.recording {
+            desktopMenubarSwitchShortcut.recording = false
+        }
+        if lrcSeekerShortcut.recording {
+            lrcSeekerShortcut.recording = false
+        }
+        if copyLrcToPbShortcut.recording {
+            copyLrcToPbShortcut.recording = false
+        }
+        if editLrcShortcut.recording {
+            editLrcShortcut.recording = false
+        }
+        if makeLrcShortcut.recording {
+            makeLrcShortcut.recording = false
+        }
+        if writeLrcToiTunesShortcut.recording {
+            writeLrcToiTunesShortcut.recording = false
         }
     }
     
