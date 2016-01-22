@@ -57,7 +57,7 @@
 "EMPTY"="(空)";
 
 // Message Window
-"OFFSET"="歌詞偏移: %d";
+"OFFSET"="歌詞偏移:%d ms";
 "DESKTOP_ON"="桌面歌詞開啟";
 "MENU_BAR_ON"="選單欄歌詞開啟";
 "BOTH_ON"="桌面與選單欄歌詞開啟";
