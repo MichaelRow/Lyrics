@@ -127,7 +127,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     @IBAction private func enableLoginItem(sender: AnyObject) {
         let identifier: String = "Eru.LyricsX-Helper"
         if (sender as! NSButton).state == NSOnState {
-            if !SMLoginItemSetEnabled((identifier as CFStringRef), true) {
+            if !SMLoginItemSetEnabled(identifier, true) {
                 NSLog("Failed to enable login item")
             }
         } else {

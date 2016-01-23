@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ServiceManagement
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -67,7 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             helper.forceTerminate()
         }
         
-        // Force Singleton to init
+        // Force singleton to init
         AppController.sharedController
         
         // Force Prefs to load and setup shortcuts,etc
@@ -76,6 +77,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         prefs.setupShortcuts()
         prefs.reflashPreset(nil)
         prefs.window?.close()
+        
+        //Check if login item hasn't be enabled
+        let identifier: String = "Eru.LyricsX-Helper"
+        if NSUserDefaults.standardUserDefaults().boolForKey(LyricsAutoLaunches) {
+            if !SMLoginItemSetEnabled(identifier, true) {
+                NSLog("Failed to enable login item")
+            }
+        }
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
