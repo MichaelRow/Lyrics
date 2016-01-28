@@ -49,14 +49,14 @@ class QQMusic: NSObject {
                 let info = SongInfos()
                 info.songTitle = theDic.objectForKey("fsong") as! String
                 info.artist = theDic.objectForKey("fsinger") as! String
-                let fStr = theDic.objectForKey("f") as! NSString
+                let fStr = theDic.objectForKey("f") as! String
                 let theRange = fStr.rangeOfString("|")
-                if theRange.length == 0 {
+                if theRange == nil {
                     return
                 }
-                let lrcCode: String = fStr.substringToIndex(theRange.location)
+                let lrcCode: String = fStr.substringToIndex(theRange!.startIndex)
                 let lrcXMLURL: String = "http://music.qq.com/miniportal/static/lyric/\((lrcCode as NSString).integerValue%100)/\(lrcCode).xml"
-                let lrcData: NSData? = NSData(contentsOfURL: NSURL(string: lrcXMLURL as String)!)
+                let lrcData: NSData? = NSData(contentsOfURL: NSURL(string: lrcXMLURL)!)
                 if lrcData == nil {
                     continue
                 } else {

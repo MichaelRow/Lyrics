@@ -575,18 +575,18 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             lrcContents = theLrcContents
         }
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
-        let lrcParagraphs: [NSString] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
+        let lrcParagraphs: [String] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
         
         for str in lrcParagraphs {
-            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str as String, options: [], range: NSMakeRange(0, str.length))
+            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
             if timeTagsMatched.count > 0 {
                 let index: Int = timeTagsMatched.last!.range.location + timeTagsMatched.last!.range.length
-                let lyricsSentence: String = str.substringFromIndex(index)
+                let lyricsSentence: String = str.substringFromIndex(str.startIndex.advancedBy(index))
                 for result in timeTagsMatched {
                     let matchedRange: NSRange = result.range
                     let lrcLine: LyricsLineModel = LyricsLineModel()
                     lrcLine.lyricsSentence = lyricsSentence
-                    lrcLine.setMsecPositionWithTimeTag(str.substringWithRange(matchedRange))
+                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
                     let currentCount: Int = lyricsArray.count
                     var j: Int
                     for j=0; j<currentCount; ++j {
@@ -601,13 +601,13 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 }
             }
             else {
-                let idTagsMatched: [NSTextCheckingResult] = regexForIDTag.matchesInString(str as String, options: [], range: NSMakeRange(0, str.length))
+                let idTagsMatched: [NSTextCheckingResult] = regexForIDTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
                 if idTagsMatched.count == 0 {
                     continue
                 }
                 for result in idTagsMatched {
                     let matchedRange: NSRange = result.range
-                    let idTag: NSString = str.substringWithRange(matchedRange) as NSString
+                    let idTag: NSString = (str as NSString).substringWithRange(matchedRange) as NSString
                     let colonRange: NSRange = idTag.rangeOfString(":")
                     let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
                     if idStr.stringByReplacingOccurrencesOfString(" ", withString: "") != "offset" {
@@ -1035,8 +1035,8 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
-    private func isDiglossiaLrc(serverSongTitle: NSString) -> Bool {
-        if serverSongTitle.rangeOfString("中").location != NSNotFound || serverSongTitle.rangeOfString("对照").location != NSNotFound || serverSongTitle.rangeOfString("双").location != NSNotFound {
+    private func isDiglossiaLrc(serverSongTitle: String) -> Bool {
+        if serverSongTitle.rangeOfString("中") != nil || serverSongTitle.rangeOfString("对照") != nil || serverSongTitle.rangeOfString("双") != nil {
             return true
         }
         return false
