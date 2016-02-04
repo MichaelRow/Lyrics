@@ -480,7 +480,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     
-    func iTunesPlayerInfoChanged (n:NSNotification){
+    func iTunesPlayerInfoChanged (n:NSNotification) {
         let userInfo = n.userInfo
         if userInfo == nil {
             return
@@ -494,7 +494,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                     if timer != nil {
                         timer.invalidate()
                     }
-                    timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "terminate", userInfo: nil, repeats: false)
+                    timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "terminate", userInfo: nil, repeats: false)
                 }
                 return
             }
@@ -510,11 +510,15 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 NSLog("iTunes Playing")
             }
             else if userInfo!["Player State"] as! String == "Stopped" {
-                // No playing or paused, send this player state when quitted
+                // iTunes send this player state when quit in some case.
+                currentSongID = ""
+                currentSongTitle = ""
+                currentArtist = ""
                 if timer != nil {
                     timer.invalidate()
                 }
-                timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "terminate", userInfo: nil, repeats: false)
+                timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "terminate", userInfo: nil, repeats: false)
+                return
             }
             
             // check whether song is changed
@@ -536,10 +540,14 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 currentSongID = iTunes.currentPersistentID()
                 currentSongTitle = iTunes.currentTitle()
                 currentArtist = iTunes.currentArtist()
-                NSLog("Song Changed to: %@",currentSongTitle)
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                    self.handleSongChange()
-                })
+                if currentSongID != "" {
+                    NSLog("Song Changed to: %@",currentSongTitle)
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                        self.handleSongChange()
+                    })
+                } else {
+                    NSLog("iTunes Stopped")
+                }
             }
         }
     }
@@ -820,7 +828,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         if currentSongID == "" {
             let notification: NSUserNotification = NSUserNotification()
             notification.title = NSLocalizedString("NO_PLAYING_TRACK", comment: "")
-            notification.informativeText = NSLocalizedString("IGNORE_LYRICS", comment: "")
+            notification.informativeText = String(format: NSLocalizedString("IGNORE_LYRICS", comment: ""), userInfo!["Sender"] as! String)
             NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
             return
         }

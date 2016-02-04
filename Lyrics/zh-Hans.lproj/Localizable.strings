@@ -48,7 +48,7 @@
 
 // Notification
 "NO_PLAYING_TRACK"="没有播放中的音乐";
-"IGNORE_LYRICS"="忽略来自LrcSeeker的歌词";
+"IGNORE_LYRICS"="忽略来自%@的歌词";
 
 // menu bar
 "HIGHER_LYRICS"="提高歌词位置";

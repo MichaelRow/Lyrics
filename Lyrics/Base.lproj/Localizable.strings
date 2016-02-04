@@ -48,7 +48,7 @@
 
 // Notification
 "NO_PLAYING_TRACK"="No Playing Track";
-"IGNORE_LYRICS"="Ignored lyrics from LrcSeeker.";
+"IGNORE_LYRICS"="Ignored lyrics from %@.";
 
 // menu bar
 "HIGHER_LYRICS"="Higher Lyrics";
