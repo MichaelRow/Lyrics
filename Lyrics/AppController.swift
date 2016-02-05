@@ -495,7 +495,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             return
         }
         else {
-            print(userInfo)
             if userInfo!["Player State"] as! String == "Paused" {
                 NSLog("iTunes Paused")
                 if userDefaults.boolForKey(LyricsQuitWithITunes) {
