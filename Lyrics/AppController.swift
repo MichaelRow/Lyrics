@@ -112,21 +112,30 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
-            
             currentSongID = iTunes.currentPersistentID()
             currentSongTitle = iTunes.currentTitle()
             currentArtist = iTunes.currentArtist()
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-                self.handleSongChange()
+            if currentSongID == "" {
+                // If iTunes is playing Apple Music, nothing can get from API,
+                // so, we should pause and then play to force iTunes send
+                // distributed notification.
+                iTunes.pause()
+                iTunes.play()
             }
-            
-            NSLog("Create new iTunesTrackingThead")
-            isTrackingRunning = true
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-                self.iTunesTrackingThread()
+            else {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+                    self.handleSongChange()
+                }
+                
+                NSLog("Create new iTunesTrackingThead")
+                isTrackingRunning = true
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+                    self.iTunesTrackingThread()
+                }
             }
-        } else {
+        }
+        else {
             currentSongID = ""
             currentSongTitle = ""
             currentArtist = ""
@@ -486,6 +495,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             return
         }
         else {
+            print(userInfo)
             if userInfo!["Player State"] as! String == "Paused" {
                 NSLog("iTunes Paused")
                 if userDefaults.boolForKey(LyricsQuitWithITunes) {
@@ -521,14 +531,39 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 return
             }
             
-            // check whether song is changed
-            if currentSongID == iTunes.currentPersistentID() {
+            // Get infos from userinfo if can't get them from API.
+            var songID: String = iTunes.currentPersistentID()
+            var songTitle: String = iTunes.currentTitle()
+            var artist: String = iTunes.currentArtist()
+            if songID == "" {
+                let aSongID = userInfo!["PersistentID"]
+                if aSongID != nil {
+                    songID = (aSongID as! NSNumber).stringValue
+                }
+            }
+            if songTitle == "" {
+                let aSongTitle = userInfo!["Name"]
+                if aSongTitle != nil {
+                    songTitle = aSongTitle as! String
+                }
+            }
+            if artist == "" {
+                let aArtist = userInfo!["Artist"]
+                if aArtist != nil {
+                    artist = aArtist as! String
+                }
+            }
+            
+            // Check whether song is changed.
+            if currentSongID == songID {
                 return
             } else {
                 //if time-Delay for the previous song is changed, we should save the change to lrc file.
                 //Save time-Delay laziely for better I/O performance.
                 if timeDly != timeDlyInFile {
-                    handleLrcDelayChange()
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                        self.handleLrcDelayChange()
+                    })
                 }
                 
                 lyricsArray.removeAll()
@@ -537,9 +572,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 timeDlyInFile = 0
                 currentLyrics = nil
                 lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                currentSongID = iTunes.currentPersistentID()
-                currentSongTitle = iTunes.currentTitle()
-                currentArtist = iTunes.currentArtist()
+                currentSongID = songID
+                currentSongTitle = songTitle
+                currentArtist = artist
                 if currentSongID != "" {
                     NSLog("Song Changed to: %@",currentSongTitle)
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in

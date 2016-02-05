@@ -86,4 +86,18 @@
     }
 }
 
+-(void) play {
+    @autoreleasepool {
+        if (iTunes.playerState != iTunesEPlSPlaying) {
+            [iTunes playpause];
+        }
+    }
+}
+
+-(void) pause {
+    @autoreleasepool {
+        [iTunes pause];
+    }
+}
+
 @end

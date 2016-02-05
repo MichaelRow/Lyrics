@@ -1025,9 +1025,9 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Rnf-9Z-oHe">
-                    <rect key="frame" x="18" y="20" width="119" height="17"/>
+                    <rect key="frame" x="18" y="20" width="126" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="7. 将歌词写入iTune:" id="WvB-uq-qvf">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="7. 将歌词写入iTunes:" id="WvB-uq-qvf">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
