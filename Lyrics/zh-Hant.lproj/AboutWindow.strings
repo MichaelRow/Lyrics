@@ -7,7 +7,7 @@
 
 /* Class = "NSTextFieldCell"; title = "     Hi from the developer of LricsX. I hope you enjoy using LricsX!
  LyricsX is a open source app based on some code of DynamicLyrics and other third party libraries. Its maintenance and developing needs time and money. In fact, I'm concidering set up a server to deal with the update thing. If you love this app, you can support me by donating using Wechat or Alipay. Thank you for being awesome!"; ObjectID = "Pbr-7J-nw6"; */
-"Pbr-7J-nw6.title" = "    您好，我是LyricsX的開發者。很高興能給你帶來一款為您提供便利的軟體，希望您在使用過程中度過愉快的每一天!\n    LyricsX是一款開源的軟體，並基於DynamicLyrics的部分程式碼以及一些第三方庫。它仍需要花費時間維護與後期開發，並且將來可能需要搭建伺服器以提供更便捷的更新支援。如果您喜愛這款軟體，您可以通過下方微信以及支付寶的二維碼向我提供捐贈以支援後續的開發維護。感謝您的慷慨捐贈！";
+"Pbr-7J-nw6.title" = "您好，我是LyricsX的開發者。很高興能給你帶來一款為您提供便利的軟體，希望您在使用過程中度過愉快的每一天!\nLyricsX是一款開源的軟體，並基於DynamicLyrics的部分程式碼以及一些第三方庫。它仍需要花費時間維護與後期開發，並且將來可能需要搭建伺服器以提供更便捷的更新支援。如果您喜愛這款軟體，您可以通過下方微信以及支付寶的二維碼向我提供捐贈以支援後續的開發維護。感謝您的慷慨捐贈！";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "lYg-TA-ajc"; */
 "lYg-TA-ajc.title" = "Label";

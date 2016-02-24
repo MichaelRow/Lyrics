@@ -149,7 +149,7 @@
                     <rect key="frame" x="-2" y="118" width="287" height="170"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="Pbr-7J-nw6">
                         <font key="font" metaFont="system"/>
-                        <string key="title">     Hi from the developer of LricsX. I hope you enjoy using LricsX!      LyricsX is a open source app based on some code of DynamicLyrics and other third party libraries. Its maintenance and developing needs time and money. In fact, I'm concidering set up a server to deal with the update thing. If you love this app, you can support me by donating using Wechat or Alipay. Thank you for being awesome!</string>
+                        <string key="title">Hi from the developer of LricsX. I hope you enjoy using LricsX! LyricsX is a open source app based on some code of DynamicLyrics and other third party libraries. Its maintenance and developing needs time and money. In fact, I'm concidering set up a server to deal with the update thing. If you love this app, you can support me by donating using Wechat or Alipay. Thank you for being awesome!</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
