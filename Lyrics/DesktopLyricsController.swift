@@ -41,9 +41,8 @@ class DesktopLyricsController: NSWindowController {
     
     convenience init() {
         NSLog("Init Lyrics window")
-        let lyricsWindow = NSWindow(contentRect: NSZeroRect, styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.Buffered, `defer`: false)
+        let lyricsWindow = NSWindow(contentRect: NSMakeRect(0, 0, 100, 100), styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.Buffered, `defer`: false)
         self.init(window: lyricsWindow)
-        
         lyricsWindow.backgroundColor = NSColor.clearColor()
         lyricsWindow.opaque = false
         lyricsWindow.hasShadow = false
@@ -144,12 +143,12 @@ class DesktopLyricsController: NSWindowController {
     }
     
     func setScreenResolution() {
-        let visibleFrame:NSRect=(NSScreen.mainScreen()?.visibleFrame)!
-        visibleSize=visibleFrame.size
-        visibleOrigin=visibleFrame.origin
-        self.window?.setFrame((NSScreen.mainScreen()?.frame)!, display: true)
-        firstLyricsLayer.contentsScale=(NSScreen.mainScreen()?.backingScaleFactor)!
-        secondLyricsLayer.contentsScale=firstLyricsLayer.contentsScale
+        let visibleFrame: NSRect = self.window!.screen!.visibleFrame
+        visibleSize = visibleFrame.size
+        visibleOrigin = visibleFrame.origin
+        self.window?.setFrame(self.window!.screen!.frame, display: true)
+        firstLyricsLayer.contentsScale = self.window!.screen!.backingScaleFactor
+        secondLyricsLayer.contentsScale = firstLyricsLayer.contentsScale
         NSLog("Screen Visible Res Changed to:(%f,%f) O:(%f,%f)", visibleSize.width,visibleSize.height,visibleOrigin.x,visibleOrigin.y)
     }
     
