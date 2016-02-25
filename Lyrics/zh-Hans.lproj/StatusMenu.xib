@@ -46,13 +46,56 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="bed-RV-aEB"/>
-                            <menuItem title="使用纵向歌词模式 (beta)" id="kDn-f6-xtI">
+                            <menuItem title="使用自动布局" id="q3v-hx-4tg">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="setAutoLayout:" target="-2" id="bhD-vP-sIk"/>
+                                    <binding destination="VKQ-E3-KXV" name="value" keyPath="values.LyricsUseAutoLayout" id="mj2-Ae-4iS">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="使用固定布局" id="UKn-ou-ovS">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="setAutoLayout:" target="-2" id="O9w-pR-DsT"/>
+                                    <binding destination="VKQ-E3-KXV" name="value" keyPath="values.LyricsUseAutoLayout" id="7Vr-5W-fEH">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="L1y-Dy-GmS"/>
+                            <menuItem title="使用横向歌词模式" toolTip="仅自动布局下可用" id="iaf-8s-RF9">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="VKQ-E3-KXV" name="enabled" keyPath="values.LyricsUseAutoLayout" id="w5r-Jc-a1u"/>
+                                    <binding destination="VKQ-E3-KXV" name="value" keyPath="values.LyricsIsVerticalLyrics" id="eIK-QZ-DWs">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="使用纵向歌词模式 (beta)" toolTip="仅自动布局下可用" id="kDn-f6-xtI">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="changeLyricsMode:" target="-2" id="cxk-0i-vIe"/>
+                                    <binding destination="VKQ-E3-KXV" name="enabled" keyPath="values.LyricsUseAutoLayout" id="1Ds-Qy-yEk"/>
+                                    <binding destination="VKQ-E3-KXV" name="value" keyPath="values.LyricsIsVerticalLyrics" id="8ow-g5-CIx">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </menuItem>
-                            <menuItem title="降低歌词位置" id="Qde-lY-h4R">
+                            <menuItem isSeparatorItem="YES" id="tml-0n-qf8"/>
+                            <menuItem title="降低歌词位置" toolTip="仅自动布局下可用" id="Qde-lY-h4R">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="handleWorkSpaceChange:" target="-2" id="Aqa-4Q-pXB"/>

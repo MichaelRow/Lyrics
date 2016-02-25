@@ -88,24 +88,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
+        
+        //Save time delay
         let appController = AppController.sharedController
         if appController.timeDly != appController.timeDlyInFile {
             NSLog("App terminating, saveing lrc time delay change...")
             appController.handleLrcDelayChange()
         }
         
+        //Terminate LrcSeeker
+        let lrcSeekers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LrcSeeker")
+        for ls in lrcSeekers {
+            ls.terminate()
+        }
+        
         let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        //Save window state in constant layout mode
+        if userDefaults.boolForKey(LyricsUseAutoLayout) {
+            DesktopLyricsController.sharedController.storeWindowPosition()
+        }
+        
+        //Launch helper
         if userDefaults.boolForKey(LyricsAutoLaunches) {
             if userDefaults.integerForKey(LyricsLaunchTpyePopUpIndex) != 0 {
                 let helperPath = NSBundle.mainBundle().bundlePath + "/Contents/Library/LoginItems/LyricsX Helper.app"
                 NSWorkspace.sharedWorkspace().launchApplication(helperPath)
             }
-        }
-        
-        //Terminate LrcSeeker
-        let lrcSeekers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LrcSeeker")
-        for ls in lrcSeekers {
-            ls.terminate()
         }
     }
 

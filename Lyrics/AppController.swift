@@ -17,7 +17,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     @IBOutlet weak var statusBarMenu: NSMenu!
     @IBOutlet weak var lyricsDelayView: NSView!
     @IBOutlet weak var delayMenuItem: NSMenuItem!
-    @IBOutlet weak var lyricsModeMenuItem: NSMenuItem!
     @IBOutlet weak var lyricsHeightMenuItem: NSMenuItem!
     @IBOutlet weak var presetMenuItem: NSMenuItem!
     
@@ -162,11 +161,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
         delayMenuItem.view = lyricsDelayView
         lyricsDelayView.autoresizingMask = [.ViewWidthSizable]
-        if userDefaults.boolForKey(LyricsIsVerticalLyrics) {
-            lyricsModeMenuItem.title = NSLocalizedString("HORIZONTAL", comment: "")
-        } else {
-            lyricsModeMenuItem.title = NSLocalizedString("VERTICAL", comment: "")
-        }
     }
     
     private func checkSavingPath() -> Bool{
@@ -203,9 +197,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         } else {
             lyricsHeightMenuItem.title = NSLocalizedString("LOWER_LYRICS", comment: "")
         }
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.lyricsWindow.reflash()
-        }
+        lyricsWindow.reflash()
     }
     
     @IBAction func enableDesktopLyrics(sender:AnyObject?) {
@@ -229,16 +221,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func changeLyricsMode(sender:AnyObject?) {
-        let isVertical = !userDefaults.boolForKey(LyricsIsVerticalLyrics)
-        userDefaults.setObject(NSNumber(bool: isVertical), forKey: LyricsIsVerticalLyrics)
-        if isVertical {
-            lyricsModeMenuItem.title = NSLocalizedString("HORIZONTAL", comment: "")
-        } else {
-            lyricsModeMenuItem.title = NSLocalizedString("VERTICAL", comment: "")
-        }
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.lyricsWindow.reflash()
-        }
+        lyricsWindow.reflash()
     }
     
     @IBAction func showAboutWindow(sender: AnyObject?) {
@@ -443,6 +426,14 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         saveLrcToLocal(wrongLyricsTag, songTitle: currentSongTitle, artist: currentArtist)
     }
 
+    @IBAction func setAutoLayout(sender: AnyObject?) {
+        //Action triggers before NSUserDefaults, so, delay 0.1s 
+        if !userDefaults.boolForKey(LyricsUseAutoLayout) {
+            lyricsWindow.storeWindowPosition()
+        }
+        lyricsWindow.performSelector("checkAutoLayout", withObject: nil, afterDelay: 0.1)
+    }
+    
     func setPresetByMenu(sender: AnyObject?) {
         if sender is NSMenuItem {
             let index: Int = presetMenuItem.submenu!.indexOfItem(sender as! NSMenuItem)
