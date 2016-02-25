@@ -31,8 +31,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsDisableAllAlert : NSNumber(bool: false),
             LyricsUseAutoLayout : NSNumber(bool: true),
             LyricsHeightFromDockToLyrics : NSNumber(integer: 15),
-            LyricsConstToLeft : NSNumber(integer: 50),
-            LyricsConstToBottom : NSNumber(integer: 100),
             LyricsConstWidth : NSNumber(integer: 1000),
             LyricsConstHeight : NSNumber(integer: 60),
             
@@ -106,7 +104,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         //Save window state in constant layout mode
         if userDefaults.boolForKey(LyricsUseAutoLayout) {
-            DesktopLyricsController.sharedController.storeWindowPosition()
+            DesktopLyricsController.sharedController.storeWindowSize()
         }
         
         //Launch helper

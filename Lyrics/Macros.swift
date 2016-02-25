@@ -32,8 +32,6 @@ let LyricsQuitWithITunes:String="LyricsQuitWithITunes"
 let LyricsDisableAllAlert:String="LyricsDisableAllAlert"
 let LyricsUseAutoLayout:String="LyricsUseAutoLayout"
 let LyricsHeightFromDockToLyrics:String="LyricsHeightFromDockToLyrics"
-let LyricsConstToLeft:String="LyricsConstToLeft"
-let LyricsConstToBottom:String="LyricsConstToBottom"
 let LyricsConstWidth:String="LyricsConstWidth"
 let LyricsConstHeight:String="LyricsConstHeight"
 

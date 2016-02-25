@@ -22,6 +22,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     var timeDly: Int = 0
     var timeDlyInFile: Int = 0
+    var lockFloatingWindow: Bool = false
     
     private var isTrackingRunning: Bool = false
     private var hasDiglossiaLrc: Bool = false
@@ -429,9 +430,14 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     @IBAction func setAutoLayout(sender: AnyObject?) {
         //Action triggers before NSUserDefaults, so, delay 0.1s 
         if !userDefaults.boolForKey(LyricsUseAutoLayout) {
-            lyricsWindow.storeWindowPosition()
+            lyricsWindow.storeWindowSize()
         }
         lyricsWindow.performSelector("checkAutoLayout", withObject: nil, afterDelay: 0.1)
+    }
+    
+    @IBAction func lockLyricsFloatingWindow(sender: AnyObject?) {
+        lockFloatingWindow = !lockFloatingWindow
+        lyricsWindow.window?.ignoresMouseEvents = lockFloatingWindow
     }
     
     func setPresetByMenu(sender: AnyObject?) {

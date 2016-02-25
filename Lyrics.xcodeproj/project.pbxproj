@@ -61,7 +61,6 @@
 		76C511621BEC6F8F0095F510 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C511601BEC6F8F0095F510 /* MainMenu.xib */; };
 		76C511781BEC6FD50095F510 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C511771BEC6FD50095F510 /* Macros.swift */; };
 		76C590C61C7E050B004564D9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C590C51C7E050B004564D9 /* IOKit.framework */; };
-		76C590C91C7E091F004564D9 /* NSScreen+NSScreen_DisplayInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C590C81C7E091F004564D9 /* NSScreen+NSScreen_DisplayInfo.m */; };
 		76D060451C02B8D8000DA86C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D060441C02B8D8000DA86C /* AppDelegate.swift */; };
 		76D060471C02B8D9000DA86C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D060461C02B8D9000DA86C /* Assets.xcassets */; };
 		76D0604A1C02B8D9000DA86C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D060481C02B8D9000DA86C /* MainMenu.xib */; };
@@ -191,8 +190,6 @@
 		76C511631BEC6F8F0095F510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76C511771BEC6FD50095F510 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 		76C590C51C7E050B004564D9 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		76C590C71C7E091F004564D9 /* NSScreen+NSScreen_DisplayInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScreen+NSScreen_DisplayInfo.h"; sourceTree = "<group>"; };
-		76C590C81C7E091F004564D9 /* NSScreen+NSScreen_DisplayInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScreen+NSScreen_DisplayInfo.m"; sourceTree = "<group>"; };
 		76D060421C02B8D8000DA86C /* LyricsX Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LyricsX Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D060441C02B8D8000DA86C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76D060461C02B8D9000DA86C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -407,8 +404,6 @@
 				7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */,
 				768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */,
 				76C511771BEC6FD50095F510 /* Macros.swift */,
-				76C590C71C7E091F004564D9 /* NSScreen+NSScreen_DisplayInfo.h */,
-				76C590C81C7E091F004564D9 /* NSScreen+NSScreen_DisplayInfo.m */,
 				764334911BF95ECF00C4B740 /* iTunesBridge.h */,
 				764334921BF95ECF00C4B740 /* iTunesBridge.m */,
 			);
@@ -611,7 +606,6 @@
 				760A01901C01A37400015C62 /* Xiami.m in Sources */,
 				764B0A831C30D1600048419B /* QQMusic.swift in Sources */,
 				766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */,
-				76C590C91C7E091F004564D9 /* NSScreen+NSScreen_DisplayInfo.m in Sources */,
 				760A01911C01A37400015C62 /* XMLParserForXiami.m in Sources */,
 				768ADD0C1C47980800567FE2 /* PresetListView.swift in Sources */,
 				76C0471A1BF2E335005053AC /* DBPrefsWindowController.m in Sources */,

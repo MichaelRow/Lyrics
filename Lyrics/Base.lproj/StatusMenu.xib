@@ -10,7 +10,6 @@
                 <outlet property="delayMenuItem" destination="ENJ-eO-aCa" id="Ds4-Ab-aOj"/>
                 <outlet property="lyricsDelayView" destination="3Jx-vU-QNM" id="2fJ-DT-b0e"/>
                 <outlet property="lyricsHeightMenuItem" destination="3ij-j4-VJE" id="Q4F-Zg-dYg"/>
-                <outlet property="lyricsModeMenuItem" destination="WWe-QG-SLQ" id="7IY-DD-Jwn"/>
                 <outlet property="presetMenuItem" destination="2lK-fX-158" id="mBl-9H-PXZ"/>
                 <outlet property="statusBarMenu" destination="tTA-dl-Isx" id="TWf-gB-4JV"/>
             </connections>
@@ -73,25 +72,25 @@
                             <menuItem title="Use Horizontal Lyrics" toolTip="Only Auto Layout" id="mdB-hQ-Zqo">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <binding destination="Ppe-ZY-ULn" name="enabled" keyPath="values.LyricsUseAutoLayout" id="2EW-7T-6Ha"/>
                                     <binding destination="Ppe-ZY-ULn" name="value" keyPath="values.LyricsIsVerticalLyrics" id="E5l-vg-BWW">
                                         <dictionary key="options">
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                             <string key="NSValueTransformerName">NSNegateBoolean</string>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="Ppe-ZY-ULn" name="enabled" keyPath="values.LyricsUseAutoLayout" id="2EW-7T-6Ha"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Use Vertical Lyrics (beta)" toolTip="Only Auto Layout" id="WWe-QG-SLQ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="changeLyricsMode:" target="-2" id="j5E-GF-gel"/>
-                                    <binding destination="Ppe-ZY-ULn" name="enabled" keyPath="values.LyricsUseAutoLayout" id="FON-If-HlC"/>
                                     <binding destination="Ppe-ZY-ULn" name="value" keyPath="values.LyricsIsVerticalLyrics" id="5rE-5V-yts">
                                         <dictionary key="options">
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="Ppe-ZY-ULn" name="enabled" keyPath="values.LyricsUseAutoLayout" id="FON-If-HlC"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="wsZ-7A-xCk"/>
@@ -196,6 +195,7 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem isSeparatorItem="YES" id="6Qg-cW-Jgj"/>
                 <menuItem title="Export Artwork From iTunes..." id="Czc-V7-Kvq">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -206,6 +206,18 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="searchLyricsAndArtworks:" target="-2" id="6Uh-VR-sAm"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Lock Lyrics Floating Window" id="pjL-Kc-VQi">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="lockLyricsFloatingWindow:" target="-2" id="Ypj-1j-EUF"/>
+                        <binding destination="Ppe-ZY-ULn" name="hidden" keyPath="values.LyricsUseAutoLayout" id="sje-Pq-fbY"/>
+                        <binding destination="-2" name="value" keyPath="self.lockFloatingWindow" id="3CP-hu-gHH">
+                            <dictionary key="options">
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="jz7-1h-D1M"/>

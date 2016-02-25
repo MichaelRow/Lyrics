@@ -428,8 +428,6 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                 let settings: [String:AnyObject] = [
                     LyricsUseAutoLayout : userDefaults.objectForKey(LyricsUseAutoLayout)!,
                     LyricsHeightFromDockToLyrics : userDefaults.objectForKey(LyricsHeightFromDockToLyrics)!,
-                    LyricsConstToLeft : userDefaults.objectForKey(LyricsConstToLeft)!,
-                    LyricsConstToBottom : userDefaults.objectForKey(LyricsConstToBottom)!,
                     LyricsConstWidth : userDefaults.objectForKey(LyricsConstWidth)!,
                     LyricsConstHeight: userDefaults.objectForKey(LyricsConstHeight)!,
                     LyricsIsVerticalLyrics : userDefaults.objectForKey(LyricsIsVerticalLyrics)!,

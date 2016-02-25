@@ -10,7 +10,6 @@
                 <outlet property="delayMenuItem" destination="ENJ-eO-aCa" id="Ds4-Ab-aOj"/>
                 <outlet property="lyricsDelayView" destination="3Jx-vU-QNM" id="2fJ-DT-b0e"/>
                 <outlet property="lyricsHeightMenuItem" destination="vCd-AW-Rcg" id="8xb-RL-gkT"/>
-                <outlet property="lyricsModeMenuItem" destination="EXT-Nh-H57" id="bt9-7l-8fa"/>
                 <outlet property="presetMenuItem" destination="yhU-NE-UXp" id="sn3-gi-mUo"/>
                 <outlet property="statusBarMenu" destination="tTA-dl-Isx" id="TWf-gB-4JV"/>
             </connections>
@@ -73,25 +72,25 @@
                             <menuItem title="使用橫向歌詞模式" toolTip="僅自動佈局下可用" id="VqJ-Bq-8I9">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <binding destination="ulf-d7-gEq" name="enabled" keyPath="values.LyricsUseAutoLayout" id="GkX-Pg-lfS"/>
                                     <binding destination="ulf-d7-gEq" name="value" keyPath="values.LyricsIsVerticalLyrics" id="Lfg-x5-4VF">
                                         <dictionary key="options">
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                             <string key="NSValueTransformerName">NSNegateBoolean</string>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="ulf-d7-gEq" name="enabled" keyPath="values.LyricsUseAutoLayout" id="GkX-Pg-lfS"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="使用縱向歌詞模式 (beta)" toolTip="僅自動佈局下可用" id="EXT-Nh-H57">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="changeLyricsMode:" target="-2" id="5UX-SH-HaL"/>
-                                    <binding destination="ulf-d7-gEq" name="enabled" keyPath="values.LyricsUseAutoLayout" id="raV-Ah-Qw0"/>
                                     <binding destination="ulf-d7-gEq" name="value" keyPath="values.LyricsIsVerticalLyrics" id="dUs-kx-twg">
                                         <dictionary key="options">
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="ulf-d7-gEq" name="enabled" keyPath="values.LyricsUseAutoLayout" id="raV-Ah-Qw0"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="E2q-mq-dor"/>
@@ -196,6 +195,7 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem isSeparatorItem="YES" id="cz2-KG-u5t"/>
                 <menuItem title="從iTunes匯出專輯封面..." id="Czc-V7-Kvq">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -206,6 +206,18 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="searchLyricsAndArtworks:" target="-2" id="6Uh-VR-sAm"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="鎖定歌詞懸浮窗" id="XOu-wp-Jkk">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="lockLyricsFloatingWindow:" target="-2" id="RNv-HT-ZlM"/>
+                        <binding destination="ulf-d7-gEq" name="hidden" keyPath="values.LyricsUseAutoLayout" id="LhU-Zy-0XX"/>
+                        <binding destination="-2" name="value" keyPath="self.lockFloatingWindow" id="Hwv-eV-mer">
+                            <dictionary key="options">
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="jz7-1h-D1M"/>

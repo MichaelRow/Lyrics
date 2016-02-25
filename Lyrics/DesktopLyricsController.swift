@@ -145,6 +145,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
     }
     
     func setScreenResolution() {
+        self.window!.setFrameOrigin(NSZeroPoint)
         let visibleFrame: NSRect = self.window!.screen!.visibleFrame
         visibleSize = visibleFrame.size
         visibleOrigin = visibleFrame.origin
@@ -185,7 +186,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
             self.window!.styleMask = self.window!.styleMask & ~NSResizableWindowMask
         }
         else {
-            let frameSize = NSMakeRect(CGFloat(userDefaults.floatForKey(LyricsConstToLeft)), CGFloat(userDefaults.floatForKey(LyricsConstToBottom)), CGFloat(userDefaults.floatForKey(LyricsConstWidth)), CGFloat(userDefaults.floatForKey(LyricsConstHeight)))
+            let frameSize = NSMakeRect(100, 100, CGFloat(userDefaults.floatForKey(LyricsConstWidth)), CGFloat(userDefaults.floatForKey(LyricsConstHeight)))
             self.window!.setFrame(frameSize, display: true)
             self.window!.ignoresMouseEvents = false
             self.window!.styleMask = window!.styleMask | NSResizableWindowMask
@@ -233,7 +234,9 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
             secondLyricsLayer.string = ""
             firstLyricsLayer.hidden = true
             secondLyricsLayer.hidden = true
-            backgroundLayer.hidden = true
+            if self.window!.ignoresMouseEvents {
+                backgroundLayer.hidden = true
+            }
         }
         else if secondLyrics == nil || secondLyrics == "" {
             // one lyrics
@@ -674,12 +677,10 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
         }
     }
     
-    func storeWindowPosition() {
+    func storeWindowSize() {
         let position = self.window!.frame
         userDefaults.setFloat(Float(position.width), forKey: LyricsConstWidth)
         userDefaults.setFloat(Float(position.height), forKey: LyricsConstHeight)
-        userDefaults.setFloat(Float(position.origin.x), forKey: LyricsConstToLeft)
-        userDefaults.setFloat(Float(position.origin.y), forKey: LyricsConstToBottom)
     }
     
 //MARK: - Delegate
