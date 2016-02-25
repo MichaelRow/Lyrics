@@ -41,7 +41,7 @@ class DesktopLyricsController: NSWindowController {
     
     convenience init() {
         NSLog("Init Lyrics window")
-        let lyricsWindow = NSWindow(contentRect: NSMakeRect(0, 0, 100, 100), styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.Buffered, `defer`: false)
+        let lyricsWindow = NSWindow(contentRect: NSMakeRect(0, 0, 100, 100), styleMask: NSBorderlessWindowMask|NSTexturedBackgroundWindowMask, backing: NSBackingStoreType.Buffered, `defer`: false)
         self.init(window: lyricsWindow)
         lyricsWindow.backgroundColor = NSColor.clearColor()
         lyricsWindow.opaque = false
@@ -193,7 +193,7 @@ class DesktopLyricsController: NSWindowController {
             isRotated = false
         }
         
-        if userDefaults.boolForKey(LyricsIsVerticalLyrics) {
+        if userDefaults.boolForKey(LyricsIsVerticalLyrics) && userDefaults.boolForKey(LyricsUseAutoLayout) {
             displayVerticalLyrics()
         } else {
             displayHorizontalLyrics()
