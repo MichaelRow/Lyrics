@@ -348,8 +348,8 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
                 width = self.window!.frame.width
                 height = self.window!.frame.height
                 
-                rect1st = CGRectMake(0, size2nd.height+yOffset, width, size1st.height+lyricsHeightIncreasement)
-                rect2nd = CGRectMake(0, yOffset, width, size2nd.height+lyricsHeightIncreasement)
+                rect1st = CGRectMake(0, height/2, width, size1st.height+lyricsHeightIncreasement)
+                rect2nd = CGRectMake(0, height/2-size2nd.height, width, size2nd.height+lyricsHeightIncreasement)
                 backgroundLayer.frame = CGRectMake(0, 0, width, height)
             }
             
@@ -627,7 +627,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
             }
         }
         //4.just clip in the center
-        let formerPart = (firstLyrics! as NSString).substringToIndex(halfLength-1)
+        let formerPart = (firstLyrics! as NSString).substringToIndex(halfLength)
         let latterPart = (firstLyrics! as NSString).substringFromIndex(halfLength)
         firstLyrics = formerPart
         secondLyrics = latterPart
