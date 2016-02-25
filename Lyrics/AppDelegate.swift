@@ -103,7 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         //Save window state in constant layout mode
-        if userDefaults.boolForKey(LyricsUseAutoLayout) {
+        if !userDefaults.boolForKey(LyricsUseAutoLayout) {
             DesktopLyricsController.sharedController.storeWindowSize()
         }
         

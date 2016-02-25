@@ -415,6 +415,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         reflashFontAndColorPrefs()
         DesktopLyricsController.sharedController.handleAttributesUpdate()
         DesktopLyricsController.sharedController.checkAutoLayout()
+        AppController.sharedController.lockFloatingWindow = false
         MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("PRESET_LOADED", comment: ""))
     }
     

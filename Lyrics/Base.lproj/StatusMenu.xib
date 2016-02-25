@@ -72,6 +72,7 @@
                             <menuItem title="Use Horizontal Lyrics" toolTip="Only Auto Layout" id="mdB-hQ-Zqo">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
+                                    <action selector="changeLyricsMode:" target="-2" id="y9o-H0-R74"/>
                                     <binding destination="Ppe-ZY-ULn" name="value" keyPath="values.LyricsIsVerticalLyrics" id="E5l-vg-BWW">
                                         <dictionary key="options">
                                             <bool key="NSValidatesImmediately" value="YES"/>

@@ -224,19 +224,21 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
         if firstLyrics == nil || firstLyrics == "" {
             // first Lyrics empty means it's in instrumental time, hide lyrics
             rollingOver = true
-            backgroundLayer.speed=0.2
-            firstLyricsLayer.speed = 0.2
-            secondLyricsLayer.speed = 0.2
-            
-            firstLyricsLayer.frame = NSMakeRect(backgroundLayer.frame.size.width/3, 0, 0, 0)
-            secondLyricsLayer.frame = NSMakeRect(backgroundLayer.frame.size.width/3, 0, 0, 0)
-            firstLyricsLayer.string = ""
-            secondLyricsLayer.string = ""
-            firstLyricsLayer.hidden = true
-            secondLyricsLayer.hidden = true
             if self.window!.ignoresMouseEvents {
                 backgroundLayer.hidden = true
+                backgroundLayer.speed=0.4
             }
+            else {
+                backgroundLayer.frame = CGRectMake(0, 0, self.window!.frame.width, self.window!.frame.height)
+            }
+            firstLyricsLayer.speed = 0.4
+            secondLyricsLayer.speed = 0.4
+            
+            firstLyricsLayer.hidden = true
+            secondLyricsLayer.hidden = true
+            
+            firstLyricsLayer.string = ""
+            secondLyricsLayer.string = ""
         }
         else if secondLyrics == nil || secondLyrics == "" {
             // one lyrics
@@ -315,20 +317,20 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
             var rect1st: CGRect
             var rect2nd: CGRect
             
-            if size1st.width >= size2nd.width {
-                width = size1st.width
-            }
-            else {
-                width = size2nd.width
-            }
-            if width > visibleSize.width {
-                width = visibleSize.width
-            }
-            
-            rect1st = CGRectMake(0, size2nd.height+yOffset, width, size1st.height+lyricsHeightIncreasement)
-            rect2nd = CGRectMake(0, yOffset, width, size2nd.height+lyricsHeightIncreasement)
-            
             if userDefaults.boolForKey(LyricsUseAutoLayout) {
+                if size1st.width >= size2nd.width {
+                    width = size1st.width
+                }
+                else {
+                    width = size2nd.width
+                }
+                if width > visibleSize.width {
+                    width = visibleSize.width
+                }
+                
+                rect1st = CGRectMake(0, size2nd.height+yOffset, width, size1st.height+lyricsHeightIncreasement)
+                rect2nd = CGRectMake(0, yOffset, width, size2nd.height+lyricsHeightIncreasement)
+                
                 if !isFullScreen {
                     x = visibleOrigin.x+(visibleSize.width-width)/2
                     y = visibleOrigin.y+CGFloat(userDefaults.integerForKey(LyricsHeightFromDockToLyrics))
@@ -346,12 +348,9 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
                 width = self.window!.frame.width
                 height = self.window!.frame.height
                 
-                rect1st.origin.x += (width-rect1st.size.width)/2
-                rect1st.origin.y = height/2
-                rect2nd.origin.x += (width-rect2nd.size.width)/2
-                rect2nd.origin.y = height/2-rect2nd.size.height
-                let frameSize = self.window!.frame.size
-                backgroundLayer.frame = CGRectMake(0, 0, frameSize.width, frameSize.height)
+                rect1st = CGRectMake(0, size2nd.height+yOffset, width, size1st.height+lyricsHeightIncreasement)
+                rect2nd = CGRectMake(0, yOffset, width, size2nd.height+lyricsHeightIncreasement)
+                backgroundLayer.frame = CGRectMake(0, 0, width, height)
             }
             
             // whether needs rolling-over to show animation
@@ -377,9 +376,9 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
         if firstLyrics == nil || firstLyrics == "" {
             // first Lyrics empty means it's in instrumental time, hide lyrics
             rollingOver = true
-            backgroundLayer.speed=0.2
-            firstLyricsLayer.speed = 0.2
-            secondLyricsLayer.speed = 0.2
+            backgroundLayer.speed=0.4
+            firstLyricsLayer.speed = 0.4
+            secondLyricsLayer.speed = 0.4
             
             firstLyricsLayer.string = ""
             secondLyricsLayer.string = ""

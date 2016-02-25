@@ -198,7 +198,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         } else {
             lyricsHeightMenuItem.title = NSLocalizedString("LOWER_LYRICS", comment: "")
         }
-        lyricsWindow.reflash()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.lyricsWindow.reflash()
+        }
     }
     
     @IBAction func enableDesktopLyrics(sender:AnyObject?) {
@@ -222,7 +224,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func changeLyricsMode(sender:AnyObject?) {
-        lyricsWindow.reflash()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.lyricsWindow.reflash()
+        }
     }
     
     @IBAction func showAboutWindow(sender: AnyObject?) {

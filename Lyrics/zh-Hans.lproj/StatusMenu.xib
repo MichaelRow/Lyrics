@@ -72,6 +72,7 @@
                             <menuItem title="使用横向歌词模式" toolTip="仅自动布局下可用" id="iaf-8s-RF9">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
+                                    <action selector="changeLyricsMode:" target="-2" id="s1N-X5-1Ts"/>
                                     <binding destination="VKQ-E3-KXV" name="value" keyPath="values.LyricsIsVerticalLyrics" id="eIK-QZ-DWs">
                                         <dictionary key="options">
                                             <bool key="NSValidatesImmediately" value="YES"/>
