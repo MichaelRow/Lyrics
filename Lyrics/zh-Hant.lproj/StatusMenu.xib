@@ -95,7 +95,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="E2q-mq-dor"/>
-                            <menuItem title="降低歌詞位置" toolTip="僅自動佈局下可用" id="vCd-AW-Rcg">
+                            <menuItem title="降低歌詞位置" toolTip="在橫向模式與僅自動佈局開啟下可用" id="vCd-AW-Rcg">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="handleWorkSpaceChange:" target="-2" id="VBz-27-V8i"/>
@@ -213,12 +213,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="lockLyricsFloatingWindow:" target="-2" id="RNv-HT-ZlM"/>
-                        <binding destination="ulf-d7-gEq" name="hidden" keyPath="values.LyricsUseAutoLayout" id="LhU-Zy-0XX"/>
                         <binding destination="-2" name="value" keyPath="self.lockFloatingWindow" id="Hwv-eV-mer">
                             <dictionary key="options">
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
                         </binding>
+                        <binding destination="ulf-d7-gEq" name="hidden" keyPath="values.LyricsUseAutoLayout" id="LhU-Zy-0XX"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="jz7-1h-D1M"/>

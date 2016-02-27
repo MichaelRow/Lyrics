@@ -230,6 +230,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
             }
             else {
                 backgroundLayer.frame = CGRectMake(0, 0, self.window!.frame.width, self.window!.frame.height)
+                backgroundLayer.hidden = false
             }
             firstLyricsLayer.speed = 0.4
             secondLyricsLayer.speed = 0.4

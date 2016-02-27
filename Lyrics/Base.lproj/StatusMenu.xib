@@ -95,7 +95,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="wsZ-7A-xCk"/>
-                            <menuItem title="Lower Lyrics" toolTip="Only Auto Layout" id="3ij-j4-VJE">
+                            <menuItem title="Lower Lyrics" toolTip="Needs Auto Layout and Horizontal mode enabled" id="3ij-j4-VJE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="handleWorkSpaceChange:" target="-2" id="mqy-gU-MjL"/>
@@ -213,12 +213,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="lockLyricsFloatingWindow:" target="-2" id="Ypj-1j-EUF"/>
-                        <binding destination="Ppe-ZY-ULn" name="hidden" keyPath="values.LyricsUseAutoLayout" id="sje-Pq-fbY"/>
                         <binding destination="-2" name="value" keyPath="self.lockFloatingWindow" id="3CP-hu-gHH">
                             <dictionary key="options">
                                 <bool key="NSValidatesImmediately" value="YES"/>
                             </dictionary>
                         </binding>
+                        <binding destination="Ppe-ZY-ULn" name="hidden" keyPath="values.LyricsUseAutoLayout" id="sje-Pq-fbY"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="jz7-1h-D1M"/>

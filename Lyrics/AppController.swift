@@ -411,6 +411,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func wrongLyrics(sender: AnyObject) {
+        let songID = currentSongID
+        let songTitle = currentSongTitle
+        let artist = currentArtist
         if !userDefaults.boolForKey(LyricsDisableAllAlert) {
             let alert: NSAlert = NSAlert()
             alert.messageText = NSLocalizedString("CONFIRM_MARK_WRONG", comment: "")
@@ -423,12 +426,14 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             }
         }
         let wrongLyricsTag: String = NSLocalizedString("WRONG_LYRICS", comment: "")
-        lyricsArray.removeAll()
-        currentLyrics = nil
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+        if songID == currentSongID {
+            lyricsArray.removeAll()
+            currentLyrics = nil
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+            }
         }
-        saveLrcToLocal(wrongLyricsTag, songTitle: currentSongTitle, artist: currentArtist)
+        saveLrcToLocal(wrongLyricsTag, songTitle: songTitle, artist: artist)
     }
 
     @IBAction func setAutoLayout(sender: AnyObject?) {

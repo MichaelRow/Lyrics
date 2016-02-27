@@ -492,7 +492,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="KTl-sp-Kit">
                     <rect key="frame" x="20" y="149" width="260" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(豎直模式下的顯示效果可能與預覽截然不同)" id="TFS-1z-iTu">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(縱向模式下的顯示效果可能與預覽截然不同)" id="TFS-1z-iTu">
                         <font key="font" size="13" name=".PingFangSC-Regular"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
