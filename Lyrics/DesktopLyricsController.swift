@@ -224,17 +224,16 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
         if firstLyrics == nil || firstLyrics == "" {
             // first Lyrics empty means it's in instrumental time, hide lyrics
             rollingOver = true
+            firstLyricsLayer.speed = 0.4
+            secondLyricsLayer.speed = 0.4
             if self.window!.ignoresMouseEvents {
-                backgroundLayer.hidden = true
                 backgroundLayer.speed=0.4
+                backgroundLayer.hidden = true
             }
             else {
                 backgroundLayer.frame = CGRectMake(0, 0, self.window!.frame.width, self.window!.frame.height)
                 backgroundLayer.hidden = false
             }
-            firstLyricsLayer.speed = 0.4
-            secondLyricsLayer.speed = 0.4
-            
             firstLyricsLayer.hidden = true
             secondLyricsLayer.hidden = true
             
