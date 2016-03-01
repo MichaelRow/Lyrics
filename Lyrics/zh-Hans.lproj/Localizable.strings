@@ -44,7 +44,7 @@
 "PREVIEW_TEXT"="歌词效果预览";
 
 // Wrong Lyrics Tag
-"WRONG_LYRICS"="[00:00:00]当前播放的歌曲被标记“错误的歌词”\n[00:05:00]";
+"WRONG_LYRICS"="[00:00:00]当前播放的歌曲被标记「错误的歌词」\n[00:05:00]";
 
 // Notification
 "NO_PLAYING_TRACK"="没有播放中的音乐";
@@ -64,6 +64,7 @@
 "WROTE_TO_ITUNES"="歌词已写入iTunes";
 "COPYED_TO_PB"="歌词已拷贝到剪贴板";
 "NO_ARTWORK"="歌曲不包含专辑封面";
+"RECIEVE_LYRICS"="已应用来自「%@」的歌词";
 
 // About Window
 "EULA"="许可协议";

@@ -862,7 +862,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     func handleExtenalLyricsEvent (n:NSNotification) {
         let userInfo = n.userInfo
-        NSLog("Recieved notification from %@",userInfo!["Sender"] as! String)
         
         //no playing track?
         if currentSongID == "" {
@@ -872,6 +871,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
             return
         }
+        MessageWindowController.sharedMsgWindow.displayMessage(String(format: NSLocalizedString("RECIEVE_LYRICS", comment: ""), userInfo!["Sender"] as! String))
         //User lrc has the highest priority level
         lrcSourceHandleQueue.cancelAllOperations()
         lrcSourceHandleQueue.addOperationWithBlock { () -> Void in
