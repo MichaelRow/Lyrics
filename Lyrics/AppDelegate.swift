@@ -30,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsQuitWithITunes : NSNumber(bool: false),
             LyricsDisableAllAlert : NSNumber(bool: false),
             LyricsUseAutoLayout : NSNumber(bool: true),
-            LyricsHeightFromDockToLyrics : NSNumber(integer: 15),
+            LyricsHeightFromDockToLyrics : NSNumber(integer: 10),
             LyricsConstWidth : NSNumber(integer: 1000),
             LyricsConstHeight : NSNumber(integer: 60),
             

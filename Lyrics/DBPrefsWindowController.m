@@ -49,7 +49,7 @@
                                            NSMiniaturizableWindowMask)
                                   backing:NSBackingStoreBuffered
                                     defer:YES];
-    window.backgroundColor = [NSColor colorWithRed:245.0/255 green:245.0/255 blue:245.0/255 alpha:1];
+    window.backgroundColor = [NSColor whiteColor];
     [self setWindow:window];
     self.contentSubview = [[NSView alloc] initWithFrame:[[[self window] contentView] frame]];
     [self.contentSubview setAutoresizingMask:(NSViewMinYMargin | NSViewWidthSizable)];
