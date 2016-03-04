@@ -294,7 +294,11 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         // User shortcuts
         lyricsModeSwitchShortcut.associatedUserDefaultsKey = ShortcutLyricsModeSwitch
         MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutLyricsModeSwitch) { () -> Void in
-            appController.changeLyricsMode(nil)
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setBool(!userDefaults.boolForKey(LyricsIsVerticalLyrics), forKey: LyricsIsVerticalLyrics)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DesktopLyricsController.sharedController.reflash()
+            })
         }
         desktopMenubarSwitchShortcut.associatedUserDefaultsKey = ShortcutDesktopMenubarSwitch
         MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutDesktopMenubarSwitch) { () -> Void in
