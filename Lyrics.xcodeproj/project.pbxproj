@@ -130,11 +130,11 @@
 		760A018D1C01A37400015C62 /* Xiami.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xiami.m; sourceTree = "<group>"; };
 		760A018E1C01A37400015C62 /* XMLParserForXiami.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserForXiami.h; sourceTree = "<group>"; };
 		760A018F1C01A37400015C62 /* XMLParserForXiami.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserForXiami.m; sourceTree = "<group>"; };
-		7614B4971C8A9EA00001E212 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
-		7614B4981C8A9EAA0001E212 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
 		7622A7621C2A6757001250DD /* ClickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickView.swift; sourceTree = "<group>"; };
 		7633A2FE1C202F9500D58360 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		763763C71C292754003EB0B5 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASShortcut.framework; sourceTree = "<group>"; };
+		7641E35C1C8AB3ED00222FC0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
+		7641E35D1C8AB3F300222FC0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LyricsEditWindow.strings"; sourceTree = "<group>"; };
 		7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsLineModel.swift; sourceTree = "<group>"; };
 		7642B9031BF4709300D68FE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusMenu.xib; sourceTree = "<group>"; };
 		7642B9061BF488AB00D68FE9 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
@@ -632,8 +632,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				7600121D1BFD9ECC00C7C1E4 /* Base */,
-				7614B4971C8A9EA00001E212 /* zh-Hans */,
-				7614B4981C8A9EAA0001E212 /* zh-Hant */,
+				7641E35C1C8AB3ED00222FC0 /* zh-Hans */,
+				7641E35D1C8AB3F300222FC0 /* zh-Hant */,
 			);
 			name = LyricsEditWindow.xib;
 			sourceTree = "<group>";

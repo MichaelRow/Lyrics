@@ -81,25 +81,31 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="34" id="KGD-Qi-G9x"/>
                                     </constraints>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="】" drawsBackground="YES" id="vc4-L7-lKa">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="】" drawsBackground="YES" id="vc4-L7-lKa">
                                         <font key="font" size="13" name=".PingFangSC-Regular"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
+                                    <connections>
+                                        <outlet property="nextKeyView" destination="DdJ-zl-cNn" id="R0a-8Y-gBs"/>
+                                    </connections>
                                 </textField>
                                 <popUpButton verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tb3-4w-a6f">
                                     <rect key="frame" x="152" y="0.0" width="145" height="26"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="140" id="LTc-zt-6Ls"/>
                                     </constraints>
-                                    <popUpButtonCell key="cell" type="push" title="Exchange Content" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="yNY-4y-Xnn" id="Dwn-9d-zPu">
+                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Dwn-9d-zPu">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
                                         <menu key="menu" id="tJr-FA-3fz">
                                             <items>
                                                 <menuItem title="Delete Bracket Content" id="IY2-eR-F1R"/>
                                                 <menuItem title="Only Bracket Content" id="HTt-hS-XVb"/>
-                                                <menuItem title="Exchange Content" state="on" id="yNY-4y-Xnn"/>
+                                                <menuItem title="Exchange Bracket Content" state="on" id="yNY-4y-Xnn"/>
+                                                <menuItem title="Standardize" id="BzI-jq-pE8">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                </menuItem>
                                             </items>
                                         </menu>
                                     </popUpButtonCell>
@@ -109,11 +115,14 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="34" id="tBU-Lt-ZBF"/>
                                     </constraints>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="【" drawsBackground="YES" id="CA0-PP-4Pm">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="【" drawsBackground="YES" id="CA0-PP-4Pm">
                                         <font key="font" size="13" name=".PingFangSC-Regular"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
+                                    <connections>
+                                        <outlet property="nextKeyView" destination="u1Z-M9-ZNQ" id="FTG-Ai-AEA"/>
+                                    </connections>
                                 </textField>
                                 <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W3G-Yx-Pgh">
                                     <rect key="frame" x="303" y="3" width="84" height="19"/>

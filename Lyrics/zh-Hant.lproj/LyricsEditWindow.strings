@@ -1,8 +1,11 @@
 
+/* Class = "NSMenuItem"; title = "標準化歌詞"; ObjectID = "BzI-jq-pE8"; */
+"BzI-jq-pE8.title" = "標準化歌詞";
+
 /* Class = "NSTextFieldCell"; title = "【"; ObjectID = "CA0-PP-4Pm"; */
 "CA0-PP-4Pm.title" = "【";
 
-/* Class = "NSTextFieldCell"; title = "括號:"; ObjectID = "GJb-X6-XF0"; */
+/* Class = "NSTextFieldCell"; title = "括號類型:"; ObjectID = "GJb-X6-XF0"; */
 "GJb-X6-XF0.title" = "括號類型:";
 
 /* Class = "NSMenuItem"; title = "僅保留括號內字元"; ObjectID = "HTt-hS-XVb"; */

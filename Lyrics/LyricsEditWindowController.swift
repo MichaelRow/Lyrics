@@ -129,20 +129,27 @@ class LyricsEditWindowController: NSWindowController {
             if leftBracketIdx == -1 {
                 return str
             }
-            if actionType.indexOfSelectedItem == 0 {
+            switch actionType.indexOfSelectedItem {
+            case 0:
                 return (str as NSString).substringToIndex(leftBracketIdx)
-            }
-            else if actionType.indexOfSelectedItem == 1 {
+            case 1:
                 let loc = leftBracketIdx + 1
                 let len = rightBracketIdx - loc
                 return (str as NSString).substringWithRange(NSMakeRange(loc, len))
-            }
-            else {
+            case 2:
                 let loc = leftBracketIdx + 1
                 let len = rightBracketIdx - loc
                 let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
                 let latterPart = (str as NSString).substringWithRange(NSMakeRange(loc, len))
                 return latterPart + leftBracket.stringValue + formmerPart + rightBracket.stringValue
+            case 3:
+                let loc = leftBracketIdx + 1
+                let len = rightBracketIdx - loc
+                let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
+                let latterPart = (str as NSString).substringWithRange(NSMakeRange(loc, len))
+                return formmerPart + leftBracket.stringValue + latterPart + rightBracket.stringValue
+            default:
+                return str
             }
         }
         else if rightBracket.stringValue == "" {
@@ -150,18 +157,17 @@ class LyricsEditWindowController: NSWindowController {
             if leftBracketIdx == NSNotFound {
                 return str
             }
-            if actionType.indexOfSelectedItem == 0 {
+            switch actionType.indexOfSelectedItem {
+            case 0:
                 return (str as NSString).substringToIndex(leftBracketIdx)
-            }
-            else if actionType.indexOfSelectedItem == 1 {
+            case 1:
                 if leftBracketIdx == str.characters.count - 1 {
                     return str
                 }
                 else {
                     return (str as NSString).substringFromIndex(leftBracketIdx + 1)
                 }
-            }
-            else {
+            case 2:
                 if leftBracketIdx == str.characters.count - 1 {
                     return str
                 }
@@ -170,6 +176,17 @@ class LyricsEditWindowController: NSWindowController {
                     let latterPart = (str as NSString).substringFromIndex(leftBracketIdx + 1)
                     return latterPart + "【" + formmerPart + "】"
                 }
+            case 3:
+                if leftBracketIdx == str.characters.count - 1 {
+                    return str
+                }
+                else {
+                    let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
+                    let latterPart = (str as NSString).substringFromIndex(leftBracketIdx + 1)
+                    return formmerPart + "【" + latterPart + "】"
+                }
+            default:
+                return str
             }
         }
         else {
