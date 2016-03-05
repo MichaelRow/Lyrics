@@ -46,13 +46,30 @@ class LyricsEditWindowController: NSWindowController {
     
     @IBAction func showAndHideOptions(sender: AnyObject) {
         if (sender as! NSButton).state == NSOnState {
+            boxView.hidden = false
             boxView.removeConstraint(hideOptionConstraint)
             boxView.addConstraint(showOptionConstraint)
         }
         else {
             boxView.removeConstraint(showOptionConstraint)
             boxView.addConstraint(hideOptionConstraint)
+            boxView.hidden = true
         }
+    }
+    
+    @IBAction func cancelAction(sender: AnyObject) {
+        self.window?.orderOut(nil)
+    }
+    
+    @IBAction func okAction(sender: AnyObject) {
+        let dic: [String:AnyObject] = ["SongID":currentSongID, "SongTitle":currentTitle, "SongArtist":currentArtist]
+        NSNotificationCenter.defaultCenter().postNotificationName(LyricsUserEditLyricsNotification, object: nil, userInfo: dic)
+        self.window?.orderOut(nil)
+    }
+    
+    @IBAction func showHelp(sender: AnyObject) {
+        let helpFilePath = NSBundle.mainBundle().pathForResource("关于双语歌词编辑工具", ofType: "pdf")
+        NSWorkspace.sharedWorkspace().openFile(helpFilePath!)
     }
     
     @IBAction func applyOperation(sender: AnyObject) {
@@ -107,16 +124,6 @@ class LyricsEditWindowController: NSWindowController {
         self.textView.string = newLyrics
     }
     
-    @IBAction func cancelAction(sender: AnyObject) {
-        self.window?.orderOut(nil)
-    }
-    
-    @IBAction func okAction(sender: AnyObject) {
-        let dic: [String:AnyObject] = ["SongID":currentSongID, "SongTitle":currentTitle, "SongArtist":currentArtist]
-        NSNotificationCenter.defaultCenter().postNotificationName(LyricsUserEditLyricsNotification, object: nil, userInfo: dic)
-        self.window?.orderOut(nil)
-    }
-    
     //MARK: - Other
     
     private func operationToString (str: String) -> String {
@@ -147,7 +154,7 @@ class LyricsEditWindowController: NSWindowController {
                 let len = rightBracketIdx - loc
                 let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
                 let latterPart = (str as NSString).substringWithRange(NSMakeRange(loc, len))
-                return formmerPart + leftBracket.stringValue + latterPart + rightBracket.stringValue
+                return formmerPart + "【" + latterPart + "】"
             default:
                 return str
             }

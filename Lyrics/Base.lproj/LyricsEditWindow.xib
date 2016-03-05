@@ -59,7 +59,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <box autoresizesSubviews="NO" ambiguous="YES" misplaced="YES" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="NwA-1M-tbM">
+                    <box hidden="YES" autoresizesSubviews="NO" ambiguous="YES" misplaced="YES" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="NwA-1M-tbM">
                         <rect key="frame" x="20" y="474" width="421" height="24"/>
                         <view key="contentView" id="pGQ-90-WIV">
                             <rect key="frame" x="0.0" y="0.0" width="421" height="24"/>
@@ -102,7 +102,7 @@
                                             <items>
                                                 <menuItem title="Delete Bracket Content" id="IY2-eR-F1R"/>
                                                 <menuItem title="Only Bracket Content" id="HTt-hS-XVb"/>
-                                                <menuItem title="Exchange Bracket Content" state="on" id="yNY-4y-Xnn"/>
+                                                <menuItem title="Exchange Bracket Content" id="yNY-4y-Xnn"/>
                                                 <menuItem title="Standardize" id="BzI-jq-pE8">
                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                 </menuItem>
@@ -146,6 +146,9 @@
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="showHelp:" target="-2" id="6Zd-sL-8ez"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>
