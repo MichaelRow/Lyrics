@@ -56,7 +56,7 @@ class LyricsEditWindowController: NSWindowController {
     }
     
     @IBAction func applyOperation(sender: AnyObject) {
-        if leftBracket.stringValue.characters.count != 1 || rightBracket.stringValue.characters.count != 1 {
+        if leftBracket.stringValue.characters.count != 1 {
             return
         }
         var lyricsLines = [LyricsLineModel]()
@@ -120,28 +120,60 @@ class LyricsEditWindowController: NSWindowController {
     //MARK: - Other
     
     private func operationToString (str: String) -> String {
-        let rightBracketIdx = getRightBracketIndex(str)
-        if rightBracketIdx == -1 {
-            return str
+        if rightBracket.stringValue.characters.count == 1 {
+            let rightBracketIdx = getRightBracketIndex(str)
+            if rightBracketIdx == -1 {
+                return str
+            }
+            let leftBracketIdx = getLeftBracketIndex(str, lastCharacterIndex: rightBracketIdx)
+            if leftBracketIdx == -1 {
+                return str
+            }
+            if actionType.indexOfSelectedItem == 0 {
+                return (str as NSString).substringToIndex(leftBracketIdx)
+            }
+            else if actionType.indexOfSelectedItem == 1 {
+                let loc = leftBracketIdx + 1
+                let len = rightBracketIdx - loc
+                return (str as NSString).substringWithRange(NSMakeRange(loc, len))
+            }
+            else {
+                let loc = leftBracketIdx + 1
+                let len = rightBracketIdx - loc
+                let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
+                let latterPart = (str as NSString).substringWithRange(NSMakeRange(loc, len))
+                return latterPart + leftBracket.stringValue + formmerPart + rightBracket.stringValue
+            }
         }
-        let leftBracketIdx = getLeftBracketIndex(str, lastCharacterIndex: rightBracketIdx)
-        if leftBracketIdx == -1 {
-            return str
-        }
-        if actionType.indexOfSelectedItem == 0 {
-            return (str as NSString).substringToIndex(leftBracketIdx)
-        }
-        else if actionType.indexOfSelectedItem == 1 {
-            let loc = leftBracketIdx + 1
-            let len = rightBracketIdx - loc
-            return (str as NSString).substringWithRange(NSMakeRange(loc, len))
+        else if rightBracket.stringValue == "" {
+            let leftBracketIdx = (str as NSString).rangeOfString(leftBracket.stringValue).location
+            if leftBracketIdx == NSNotFound {
+                return str
+            }
+            if actionType.indexOfSelectedItem == 0 {
+                return (str as NSString).substringToIndex(leftBracketIdx)
+            }
+            else if actionType.indexOfSelectedItem == 1 {
+                if leftBracketIdx == str.characters.count - 1 {
+                    return str
+                }
+                else {
+                    return (str as NSString).substringFromIndex(leftBracketIdx + 1)
+                }
+            }
+            else {
+                if leftBracketIdx == str.characters.count - 1 {
+                    return str
+                }
+                else {
+                    let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
+                    let latterPart = (str as NSString).substringFromIndex(leftBracketIdx + 1)
+                    return latterPart + "【" + formmerPart + "】"
+                }
+            }
         }
         else {
-            let loc = leftBracketIdx + 1
-            let len = rightBracketIdx - loc
-            let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
-            let latterPart = (str as NSString).substringWithRange(NSMakeRange(loc, len))
-            return latterPart + leftBracket.stringValue + formmerPart + rightBracket.stringValue
+            return str
         }
     }
     

@@ -67,6 +67,9 @@
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQf-Zx-J8u">
                                     <rect key="frame" x="-2" y="4" width="55" height="17"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="51" id="P2v-vg-tGe"/>
+                                    </constraints>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Bracket:" id="GJb-X6-XF0">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -75,6 +78,9 @@
                                 </textField>
                                 <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u1Z-M9-ZNQ">
                                     <rect key="frame" x="105" y="2" width="34" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="34" id="KGD-Qi-G9x"/>
+                                    </constraints>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="】" drawsBackground="YES" id="vc4-L7-lKa">
                                         <font key="font" size="13" name=".PingFangSC-Regular"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -100,6 +106,9 @@
                                 </popUpButton>
                                 <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IVJ-ss-mLs">
                                     <rect key="frame" x="58" y="2" width="34" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="34" id="tBU-Lt-ZBF"/>
+                                    </constraints>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="【" drawsBackground="YES" id="CA0-PP-4Pm">
                                         <font key="font" size="13" name=".PingFangSC-Regular"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -108,6 +117,9 @@
                                 </textField>
                                 <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W3G-Yx-Pgh">
                                     <rect key="frame" x="303" y="3" width="84" height="19"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="84" id="r9d-ui-AqD"/>
+                                    </constraints>
                                     <buttonCell key="cell" type="roundRect" title="Apply Effect" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jTd-61-MOg">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="cellTitle"/>
@@ -118,6 +130,9 @@
                                 </button>
                                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVe-nj-BY5">
                                     <rect key="frame" x="397" y="-1" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="21" id="HSm-wm-2o1"/>
+                                    </constraints>
                                     <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Vg-2E-pdm">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
