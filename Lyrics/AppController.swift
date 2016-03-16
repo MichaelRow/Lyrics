@@ -288,7 +288,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func copyLyricsWithTagsToPb(sender: AnyObject) {
-        let lrcContents = readLocalLyrics()
+        let lrcContents = readLocalLyrics(currentSongTitle, theArtist: currentArtist)
         if lrcContents != nil && lrcContents != "" {
             let pb = NSPasteboard.generalPasteboard()
             pb.clearContents()
@@ -310,7 +310,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func editLyrics(sender: AnyObject?) {
-        var lrcContents = readLocalLyrics()
+        var lrcContents = readLocalLyrics(currentSongTitle, theArtist: currentArtist)
         if lrcContents == nil {
             lrcContents = ""
         }
@@ -354,7 +354,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
                     //make the current lrc the better one so that it can't be replaced.
                     if songID == self.currentSongID {
-                        self.parsingLrc(lrcContents)
+                        self.parseCurrentLrc(lrcContents)
                         self.hasDiglossiaLrc = true
                     }
                     self.saveLrcToLocal(lrcContents, songTitle: songTitle, artist: artist)
@@ -407,6 +407,17 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             }
             iTunes.setLyrics(theLyrics)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
+        }
+    }
+    
+    @IBAction func writeAllLyricsToiTunes(sender: AnyObject?) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+            if self.iTunes.setAllLyrics() {
+                MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
+            }
+            else {
+                MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
+            }
         }
     }
     
@@ -595,7 +606,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
 // MARK: - Lrc Methods
     
-    private func parsingLrc(theLrcContents: String) {
+    private func parseCurrentLrc(theLrcContents: String) {
         // Parse lrc file to get lyrics, time-tags and time offset
         NSLog("Start to Parse lrc")
         lyricsArray.removeAll()
@@ -672,6 +683,46 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
+    func parseLrcWithTitle(title: String, andArtist artist: String) -> String? {
+        let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
+        let lrcContents = readLocalLyrics(title, theArtist: artist)
+        if lrcContents == nil {
+            return nil
+        }
+        let lrcParagraphs: [String] = lrcContents!.componentsSeparatedByCharactersInSet(newLineCharSet)
+        var lrcArray = [LyricsLineModel]()
+        
+        for str in lrcParagraphs {
+            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
+            if timeTagsMatched.count > 0 {
+                let index: Int = timeTagsMatched.last!.range.location + timeTagsMatched.last!.range.length
+                let lyricsSentence: String = str.substringFromIndex(str.startIndex.advancedBy(index))
+                for result in timeTagsMatched {
+                    let matchedRange: NSRange = result.range
+                    let lrcLine: LyricsLineModel = LyricsLineModel()
+                    lrcLine.lyricsSentence = lyricsSentence
+                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
+                    let currentCount: Int = lrcArray.count
+                    var j: Int
+                    for j=0; j<currentCount; ++j {
+                        if lrcLine.msecPosition < lrcArray[j].msecPosition {
+                            lrcArray.insert(lrcLine, atIndex: j)
+                            break
+                        }
+                    }
+                    if j == currentCount {
+                        lrcArray.append(lrcLine)
+                    }
+                }
+            }
+        }
+        var newLrc = String()
+        for lrc in lrcArray {
+            newLrc.appendContentsOf(lrc.lyricsSentence + "\n")
+        }
+        return newLrc
+    }
+    
     private func testLrc(lrcFileContents: String) -> Bool {
         // test whether the string is lrc
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
@@ -684,30 +735,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             }
         }
         return false
-    }
-    
-    private func readLocalLyrics() -> String? {
-        let savingPath: String
-        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
-            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-        } else {
-            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
-        }
-        let songTitle: String = currentSongTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let artist: String = currentArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let lrcFilePath = (savingPath as NSString).stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
-        if  NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath) {
-            let lrcContents: String?
-            do {
-                lrcContents = try String(contentsOfFile: lrcFilePath, encoding: NSUTF8StringEncoding)
-            } catch {
-                lrcContents = nil
-                NSLog("Failed to load lrc")
-            }
-            return lrcContents
-        } else {
-            return nil
-        }
     }
 
     private func saveLrcToLocal (lyricsContents: String, songTitle: String, artist: String) {
@@ -749,6 +776,30 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             try lyricsContents.writeToFile(lrcFilePath, atomically: false, encoding: NSUTF8StringEncoding)
         } catch let theError as NSError {
             NSLog("%@", theError.localizedDescription)
+        }
+    }
+    
+    func readLocalLyrics(theTitle: String, theArtist: String) -> String? {
+        let savingPath: String
+        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
+            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+        } else {
+            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
+        }
+        let songTitle: String = theTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
+        let artist: String = theArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
+        let lrcFilePath = (savingPath as NSString).stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
+        if  NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath) {
+            let lrcContents: String?
+            do {
+                lrcContents = try String(contentsOfFile: lrcFilePath, encoding: NSUTF8StringEncoding)
+            } catch {
+                lrcContents = nil
+                NSLog("Failed to load lrc")
+            }
+            return lrcContents
+        } else {
+            return nil
         }
     }
 
@@ -815,9 +866,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     func handleSongChange() {
         //load lyrics for the song which is about to play
         lrcSourceHandleQueue.cancelAllOperations()
-        let lrcContents: String? = readLocalLyrics()
+        let lrcContents: String? = readLocalLyrics(currentSongTitle, theArtist: currentArtist)
         if lrcContents != nil {
-            parsingLrc(lrcContents!)
+            parseCurrentLrc(lrcContents!)
             if lyricsArray.count != 0 {
                 return
             }
@@ -853,7 +904,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 if (userInfo["SongID"] as! String) == self.currentSongID {
                     //make the current lrc the better one so that it can't be replaced.
                     self.hasDiglossiaLrc = true
-                    self.parsingLrc(lyrics)
+                    self.parseCurrentLrc(lyrics)
                 }
                 self.saveLrcToLocal(lyrics, songTitle: userInfo["SongTitle"] as! String, artist: userInfo["SongArtist"] as! String)
             }
@@ -877,7 +928,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         lrcSourceHandleQueue.addOperationWithBlock { () -> Void in
             let lyricsContents: String = userInfo!["LyricsContents"] as! String
             if self.testLrc(lyricsContents) {
-                self.parsingLrc(lyricsContents)
+                self.parseCurrentLrc(lyricsContents)
                 //make the current lrc the better one so that it can't be replaced.
                 self.hasDiglossiaLrc = true
                 self.saveLrcToLocal(lyricsContents, songTitle: self.currentSongTitle, artist: self.currentArtist)
@@ -1022,7 +1073,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         if hasLrc {
             if songID == currentSongID {
-                parsingLrc(lyricsContents)
+                parseCurrentLrc(lyricsContents)
             }
             saveLrcToLocal(lyricsContents, songTitle: songTitle, artist: artist)
         }

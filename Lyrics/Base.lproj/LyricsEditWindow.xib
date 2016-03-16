@@ -25,7 +25,7 @@
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="iUk-dH-HqH" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="449" height="505"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <scrollView ambiguous="YES" misplaced="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJl-Am-Wtk">
                         <rect key="frame" x="20" y="39" width="392" height="430"/>

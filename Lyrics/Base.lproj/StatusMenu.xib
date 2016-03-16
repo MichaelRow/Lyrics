@@ -171,16 +171,22 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="CM0-FN-R8L"/>
-                            <menuItem title="Wrong Lyrics" id="ed7-VT-i2J">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="wrongLyrics:" target="-2" id="SVi-Ox-Yea"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Write Lyrics to iTunes" id="9IB-fJ-7CD">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="writeLyricsToiTunes:" target="-2" id="OzK-ZJ-pvP"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Write All Lyrics to iTunes" id="0bi-X3-hct">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="writeAllLyricsToiTunes:" target="-2" id="NZD-Sq-Ebt"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Wrong Lyrics" id="ed7-VT-i2J">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="wrongLyrics:" target="-2" id="SVi-Ox-Yea"/>
                                 </connections>
                             </menuItem>
                         </items>

@@ -7,6 +7,7 @@
 //
 
 #import "iTunesBridge.h"
+#import "LyricsX-Swift.h"
 
 @implementation iTunesBridge {
     iTunesApplication *iTunes;
@@ -35,6 +36,31 @@
 -(void) setLyrics: (NSString *)lyrics {
     @autoreleasepool {
         iTunes.currentTrack.lyrics = lyrics;
+    }
+}
+
+-(BOOL) setAllLyrics {
+    @autoreleasepool {
+        if (iTunes.playerState == iTunesEPlSPlaying) {
+            SBElementArray *allTracks = iTunes.currentPlaylist.tracks;
+            if (allTracks.count == 0) {
+                return NO;
+            }
+            else {
+                for (iTunesTrack *track in allTracks) {
+                    NSString *title = track.name;
+                    NSString *artist = track.artist;
+                    NSString *lyrics = [[AppController sharedController] parseLrcWithTitle:title andArtist:artist];
+                    if (lyrics) {
+                        track.lyrics = lyrics;
+                    }
+                }
+                return YES;
+            }
+        }
+        else {
+            return NO;
+        }
     }
 }
 

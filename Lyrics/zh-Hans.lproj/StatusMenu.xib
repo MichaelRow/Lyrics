@@ -171,16 +171,22 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="CM0-FN-R8L"/>
-                            <menuItem title="错误的歌词" id="rpW-kn-eHF">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="wrongLyrics:" target="-2" id="1YJ-yZ-OBP"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="将歌词写入iTunes" id="9IB-fJ-7CD">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="writeLyricsToiTunes:" target="-2" id="OzK-ZJ-pvP"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="将所有歌词写入iTunes" id="lNS-sC-BHZ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="writeAllLyricsToiTunes:" target="-2" id="xl4-II-Eq8"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="错误的歌词" id="rpW-kn-eHF">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="wrongLyrics:" target="-2" id="1YJ-yZ-OBP"/>
                                 </connections>
                             </menuItem>
                         </items>
