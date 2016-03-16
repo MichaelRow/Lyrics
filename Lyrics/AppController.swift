@@ -413,10 +413,14 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     @IBAction func writeAllLyricsToiTunes(sender: AnyObject?) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             if self.iTunes.setAllLyrics() {
-                MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
+                })
             }
             else {
-                MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
+                })
             }
         }
     }
