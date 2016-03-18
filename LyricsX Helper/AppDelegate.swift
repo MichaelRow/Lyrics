@@ -19,12 +19,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
-        // SB is well known for memory leak
-        autoreleasepool { () -> () in
-            let lyrics: SBApplication = SBApplication(bundleIdentifier: "Eru.Lyrics")!
-            if lyrics.running {
-                NSApp.terminate(nil)
-            }
+        let lyrics = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.Lyrics")
+        if lyrics.count > 0 {
+            NSApp.terminate(nil)
         }
 
         let lyricsXDefaults: NSUserDefaults = NSUserDefaults.init(suiteName: "Eru.Lyrics")!
@@ -34,14 +31,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             // nil when key not found (register defaults)
             launchType = 2
         } else {
-            launchType = (returnedObj?.integerValue)!
+            launchType = (returnedObj as! NSNumber).integerValue
         }
-        
         switch launchType {
         case 0:
             //launches at login
-            launchLyricsX()
-            NSApp.terminate(nil)
+            launchLyricsXAndQuit()
         case 1:
             //launches with iTunes
             if iTunes.running() {
@@ -68,24 +63,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     
-    func launchLyricsX() {
+    func launchLyricsXAndQuit() {
         var pathComponents: NSArray = (NSBundle.mainBundle().bundlePath as NSString).pathComponents
         pathComponents = pathComponents.subarrayWithRange(NSMakeRange(0, pathComponents.count-4))
         let path = NSString.pathWithComponents(pathComponents as! [String])
         NSWorkspace.sharedWorkspace().launchApplication(path)
+        NSApp.terminate(nil)
     }
     
     
     func handleiTunesEvent (n: NSNotification) {
         if !shouldWaitForiTunesQuit && launchType == 2 && n.userInfo!["Player State"] as! String == "Playing" {
-            launchLyricsX();
-            NSApp.terminate(nil)
-        } else if shouldWaitForiTunesQuit && n.userInfo!["Player State"] as! String == "Paused" {
-            if timer != nil {
-                timer.invalidate()
-                timer = nil
+            launchLyricsXAndQuit();
+        } else if shouldWaitForiTunesQuit {
+            let playerState = n.userInfo!["Player State"] as! String
+            if playerState == "Paused" || playerState == "Stopped" {
+                if timer != nil {
+                    timer.invalidate()
+                    timer = nil
+                }
+                timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "checkiTunesQuit", userInfo: nil, repeats: false)
             }
-            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "checkiTunesQuit", userInfo: nil, repeats: false)
         }
     }
     
@@ -107,8 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         while !iTunes.running() {
             NSThread.sleepForTimeInterval(1.5)
         }
-        launchLyricsX()
-        NSApp.terminate(nil)
+        launchLyricsXAndQuit()
     }
 }
 

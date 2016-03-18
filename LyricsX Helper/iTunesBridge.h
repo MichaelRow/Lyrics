@@ -14,11 +14,4 @@
 -(BOOL) running;
 -(BOOL) playing;
 
--(NSString *) currentTitle;
--(NSString *) currentArtist;
--(NSString *) currentPersistentID;
--(NSInteger) playerPosition;
--(NSData *) artwork;
--(void) setLyrics: (NSString *)lyrics;
-
 @end

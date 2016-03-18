@@ -20,5 +20,7 @@
 -(NSInteger) playerPosition;
 -(NSData *) artwork;
 -(void) setLyrics: (NSString *)lyrics;
+-(void) pause;
+-(void) play;
 
 @end

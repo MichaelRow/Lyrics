@@ -15,23 +15,6 @@
 @implementation DBPrefsWindowController
 
 #pragma mark -
-#pragma mark Class Methods
-
-+ (DBPrefsWindowController *)sharedPrefsWindowController{
-    static DBPrefsWindowController *_sharedPrefsWindowController = nil;    
-	if(!_sharedPrefsWindowController){
-		_sharedPrefsWindowController = [[self alloc] initWithWindowNibName:[self nibName]];
-	}
-	return _sharedPrefsWindowController;
-}
-
-// Subclasses can override this to use a nib with a different name.
-+ (NSString *)nibName{
-   return @"Preferences";
-}
-
-
-#pragma mark -
 #pragma mark Setup & Teardown
 
 - (id)initWithWindow:(NSWindow *)window{
@@ -48,7 +31,7 @@
         [self.viewAnimation setAnimationCurve:NSAnimationEaseInOut];
         [self.viewAnimation setDelegate:(id<NSAnimationDelegate>)self];
 
-        self.crossFade = YES;
+        self.crossFade = NO;
         self.shiftSlowsAnimation = YES;
 	}
 	return self;
@@ -60,16 +43,30 @@
     // in Interface Builder, it gets replaced with this one.
     NSWindow *window = 
     [[NSWindow alloc] initWithContentRect:NSMakeRect(0,0,1000,1000)
-                                styleMask:(NSTitledWindowMask |
+                                styleMask:(NSTexturedBackgroundWindowMask |
+                                           NSTitledWindowMask |
                                            NSClosableWindowMask |
                                            NSMiniaturizableWindowMask)
                                   backing:NSBackingStoreBuffered
                                     defer:YES];
+    window.backgroundColor = [NSColor whiteColor];
     [self setWindow:window];
     self.contentSubview = [[NSView alloc] initWithFrame:[[[self window] contentView] frame]];
     [self.contentSubview setAutoresizingMask:(NSViewMinYMargin | NSViewWidthSizable)];
     [[[self window] contentView] addSubview:self.contentSubview];
     [[self window] setShowsToolbarButton:NO];
+    
+    [self setupToolbar];
+    if([[self window] toolbar] == nil){
+        NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"DBPreferencesToolbar"];
+        [toolbar setAllowsUserCustomization:NO];
+        [toolbar setAutosavesConfiguration:NO];
+        [toolbar setSizeMode:NSToolbarSizeModeDefault];
+        [toolbar setDisplayMode:NSToolbarDisplayModeIconAndLabel];
+        [toolbar setDelegate:(id<NSToolbarDelegate>)self];
+        [[self window] setToolbar:toolbar];
+    }
+
 }
 
 
@@ -125,24 +122,8 @@
     // This forces the resources in the nib to load.
     [self window];
 
-    // Clear the last setup and get a fresh one.
-    [self.toolbarIdentifiers removeAllObjects];
-    [self.toolbarViews removeAllObjects];
-    [self.toolbarItems removeAllObjects];
-    [self setupToolbar];
-
     if(![_toolbarIdentifiers count]){
         return;
-    }
-
-    if([[self window] toolbar] == nil){
-        NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"DBPreferencesToolbar"];
-        [toolbar setAllowsUserCustomization:NO];
-        [toolbar setAutosavesConfiguration:NO];
-        [toolbar setSizeMode:NSToolbarSizeModeDefault];
-        [toolbar setDisplayMode:NSToolbarDisplayModeIconAndLabel];
-        [toolbar setDelegate:(id<NSToolbarDelegate>)self];
-        [[self window] setToolbar:toolbar];
     }
 
     NSString *firstIdentifier = (self.toolbarIdentifiers)[0];
@@ -215,7 +196,7 @@
             [[self window] setFrame:[self frameForView:newView] display:YES animate:animate];
         }
 
-        [[self window] setTitle:[(self.toolbarItems)[identifier] label]];
+        [[[self window] animator] setTitle:[(self.toolbarItems)[identifier] label]];
     }
 }
 
@@ -230,31 +211,31 @@
 
 - (void)crossFadeView:(NSView *)oldView withView:(NSView *)newView{
     [self.viewAnimation stopAnimation];
-
+    
     if([self shiftSlowsAnimation] && [[[self window] currentEvent] modifierFlags] & NSShiftKeyMask){
         [self.viewAnimation setDuration:1.25];
     }else{
         [self.viewAnimation setDuration:0.25];
     }
-
-    NSDictionary *fadeOutDictionary = 
+    
+    NSDictionary *fadeOutDictionary =
     @{NSViewAnimationTargetKey: oldView,
-     NSViewAnimationEffectKey: NSViewAnimationFadeOutEffect};
-
-    NSDictionary *fadeInDictionary = 
+      NSViewAnimationEffectKey: NSViewAnimationFadeOutEffect};
+    
+    NSDictionary *fadeInDictionary =
     @{NSViewAnimationTargetKey: newView,
-     NSViewAnimationEffectKey: NSViewAnimationFadeInEffect};
-
-    NSDictionary *resizeDictionary = 
+      NSViewAnimationEffectKey: NSViewAnimationFadeInEffect};
+    
+    NSDictionary *resizeDictionary =
     @{NSViewAnimationTargetKey: [self window],
-     NSViewAnimationStartFrameKey: [NSValue valueWithRect:[[self window] frame]],
-     NSViewAnimationEndFrameKey: [NSValue valueWithRect:[self frameForView:newView]]};
-
-    NSArray *animationArray = 
+      NSViewAnimationStartFrameKey: [NSValue valueWithRect:[[self window] frame]],
+      NSViewAnimationEndFrameKey: [NSValue valueWithRect:[self frameForView:newView]]};
+    
+    NSArray *animationArray =
     @[fadeOutDictionary,
-     fadeInDictionary,
-     resizeDictionary];
-
+      fadeInDictionary,
+      resizeDictionary];
+    
     [self.viewAnimation setViewAnimations:animationArray];
     [self.viewAnimation startAnimation];
 }

@@ -17,15 +17,28 @@
 "REVERT_LEAVE"="Revert and Leave";
 "CANCEL"="Cancel";
 
-"CONFIRM_SIGN_WRONG"="Are you sure to sign the lyrics wrong and delete?";
+"CONFIRM_MARK_WRONG"="Are you sure to mark the lyrics wrong and delete?";
 "CANT_UNDONE"="This operation can NOT be undone!";
-"SIGN"="Delete Lyrics and Sign";
+"MARK"="Delete Lyrics and Mark";
+
+"UNSUPPORTED_ENCODING"="Unsupported Text Encoding";
+"ONLY_UTF8"="LyricsX only supports UTF-8 Encoding, and more encoding in the future updates.";
+"OK"="OK";
 
 // Prefs Toolbar Identifier
 "GENERAL"="General";
 "LYRICS"="Lyrics";
 "FONT_COLOR"="Font & Color";
+"SHORTCUT"="Shortcut";
 "DONATE"="Donate";
+"PRESET"="Preset";
+
+// Preset Prefs
+"UNTITLED_PRESET"="Untitled Preset";
+"EMPTY_NAME"="Empty Preset Name";
+"PRESET_EXISTS"="Preset With the Same Already Exists";
+"INVALID_PRESET"="Invalid Preset";
+"PRESET_LOADED"="Preset Loaded";
 
 // TextPreview
 "PREVIEW_TEXT"="Lyrics Preview";
@@ -35,4 +48,23 @@
 
 // Notification
 "NO_PLAYING_TRACK"="No Playing Track";
-"IGNORE_LYRICS"="Ignored lyrics from LrcSeeker.";
+"IGNORE_LYRICS"="Ignored lyrics from %@.";
+
+// menu bar
+"HIGHER_LYRICS"="Higher Lyrics";
+"LOWER_LYRICS"="Lower Lyrics";
+"EMPTY"="(Empty)";
+
+// Message Window
+"OFFSET"="Offset:%d ms";
+"DESKTOP_ON"="Desktop Lyrics:ON";
+"MENU_BAR_ON"="Menu Bar Lyrics:ON";
+"BOTH_ON"="Desktop & Menu Bar Lyrics:ON";
+"OPERATION_FAILED"="Operation Failed:No Lrc";
+"WROTE_TO_ITUNES"="Lyrics Has Wrote To iTunes";
+"COPYED_TO_PB"="Lyrics Has Copyed To Pasteboard";
+"NO_ARTWORK"="No Available Artwork";
+"RECIEVE_LYRICS"="Recieved Lyrics From %@";
+
+// About Window
+"EULA"="EULA";

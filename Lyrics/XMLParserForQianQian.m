@@ -35,7 +35,11 @@
         info.artist=[attributeDict objectForKey:@"artist"];
         info.songTitle=[attributeDict objectForKey:@"title"];
         NSString *accessCode=ttpCode(info.artist, info.songTitle, [info.songID intValue]);
-        info.lyricURL=[NSString stringWithFormat:@"http://ttlrccnc.qianqian.com/dll/lyricsvr.dll?dl?Id=%@&Code=%@",info.songID,accessCode];
+        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"LyricsServerIndex"] == 0) {
+            info.lyricURL=[NSString stringWithFormat:@"http://ttlrcct.qianqian.com/dll/lyricsvr.dll?dl?Id=%@&Code=%@",info.songID,accessCode];
+        } else {
+            info.lyricURL=[NSString stringWithFormat:@"http://ttlrccnc.qianqian.com/dll/lyricsvr.dll?dl?Id=%@&Code=%@",info.songID,accessCode];
+        }
         [resultArray addObject:info];
     }
 }

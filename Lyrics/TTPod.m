@@ -45,7 +45,7 @@
             return;
         }
         SongInfos *info = [[SongInfos alloc] init];
-        NSString *lyric=[[temp objectForKey:@"data"] objectForKey:@"lrc"];
+        NSString *lyric=[[[temp objectForKey:@"data"] objectForKey:@"lrc"] stringByReplacingOccurrencesOfString:@"�" withString:@""];
         if (lyric!=nil && [lyric isNotEqualTo:@""]) {
             info.songTitle=theTitle;
             info.artist=theArtist;

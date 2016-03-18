@@ -18,15 +18,28 @@ class LyricsEditView: NSTextView {
             if (event.modifierFlags.rawValue & NSEventModifierFlags.DeviceIndependentModifierFlagsMask.rawValue) == commandKey {
                 switch event.charactersIgnoringModifiers! {
                 case "x":
-                    if NSApp.sendAction(Selector("cut:"), to:nil, from:self) { return true }
+                    if NSApp.sendAction(Selector("cut:"), to:nil, from:self) {
+                        return true
+                    }
                 case "c":
-                    if NSApp.sendAction(Selector("copy:"), to:nil, from:self) { return true }
+                    if NSApp.sendAction(Selector("copy:"), to:nil, from:self) {
+                        return true
+                    }
                 case "v":
-                    if NSApp.sendAction(Selector("paste:"), to:nil, from:self) { return true }
+                    if NSApp.sendAction(Selector("paste:"), to:nil, from:self) {
+                        return true
+                    }
                 case "z":
-                    if NSApp.sendAction(Selector("undo:"), to:nil, from:self) { return true }
+                    if NSApp.sendAction(Selector("undo:"), to:nil, from:self) {
+                        return true
+                    }
                 case "a":
-                    if NSApp.sendAction(Selector("selectAll:"), to:nil, from:self) { return true }
+                    if NSApp.sendAction(Selector("selectAll:"), to:nil, from:self) {
+                        return true
+                    }
+                case "w":
+                    self.window?.close()
+                    return true
                 default:
                     break
                 }

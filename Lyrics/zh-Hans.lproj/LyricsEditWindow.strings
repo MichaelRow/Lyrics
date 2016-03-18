@@ -1,12 +1,36 @@
 
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "M2J-kq-dWj"; */
+/* Class = "NSMenuItem"; title = "标准化歌词"; ObjectID = "BzI-jq-pE8"; */
+"BzI-jq-pE8.title" = "标准化歌词";
+
+/* Class = "NSTextFieldCell"; title = "【"; ObjectID = "CA0-PP-4Pm"; */
+"CA0-PP-4Pm.title" = "【";
+
+/* Class = "NSTextFieldCell"; title = "括号类型:"; ObjectID = "GJb-X6-XF0"; */
+"GJb-X6-XF0.title" = "括号类型:";
+
+/* Class = "NSMenuItem"; title = "仅保留括号内字符"; ObjectID = "HTt-hS-XVb"; */
+"HTt-hS-XVb.title" = "仅保留括号内字符";
+
+/* Class = "NSMenuItem"; title = "删除括号内字符"; ObjectID = "IY2-eR-F1R"; */
+"IY2-eR-F1R.title" = "删除括号内字符";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "M2J-kq-dWj"; */
 "M2J-kq-dWj.title" = "取消";
 
-/* Class = "NSButtonCell"; title = "OK"; ObjectID = "Pnh-dj-Jao"; */
+/* Class = "NSBox"; title = "Box"; ObjectID = "NwA-1M-tbM"; */
+"NwA-1M-tbM.title" = "Box";
+
+/* Class = "NSButtonCell"; title = "确认"; ObjectID = "Pnh-dj-Jao"; */
 "Pnh-dj-Jao.title" = "确认";
 
-/* Class = "NSButtonCell"; title = "Copy to Pasteboard"; ObjectID = "YUH-mE-ilV"; */
-"YUH-mE-ilV.title" = "复制到剪贴板";
-
-/* Class = "NSWindow"; title = "Edit Lyrics"; ObjectID = "ar1-cr-ly1"; */
+/* Class = "NSWindow"; title = "编辑歌词"; ObjectID = "ar1-cr-ly1"; */
 "ar1-cr-ly1.title" = "编辑歌词";
+
+/* Class = "NSButtonCell"; title = "应用变换"; ObjectID = "jTd-61-MOg"; */
+"jTd-61-MOg.title" = "应用变换";
+
+/* Class = "NSTextFieldCell"; title = "】"; ObjectID = "vc4-L7-lKa"; */
+"vc4-L7-lKa.title" = "】";
+
+/* Class = "NSMenuItem"; title = "交换括号内外字符"; ObjectID = "yNY-4y-Xnn"; */
+"yNY-4y-Xnn.title" = "交换括号内外字符";

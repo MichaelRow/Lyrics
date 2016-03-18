@@ -10,6 +10,8 @@
 //  Copyright 2007. Some rights reserved.
 //  This work is licensed under a Creative Commons license:
 //  http://creativecommons.org/licenses/by/3.0/
+//
+//  Modified by MichaelRow for needs of LyricsX on 1.12.2016
 
 #import <Cocoa/Cocoa.h>
 
@@ -17,9 +19,6 @@
 
 @property (nonatomic) BOOL crossFade;
 @property (nonatomic) BOOL shiftSlowsAnimation;
-
-+ (DBPrefsWindowController *)sharedPrefsWindowController;
-+ (NSString *)nibName;
 
 - (void)setupToolbar;
 - (void)addFlexibleSpacer;

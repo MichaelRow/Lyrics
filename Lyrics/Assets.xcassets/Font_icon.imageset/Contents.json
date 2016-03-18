@@ -2,16 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "font_24px_1148174_easyicon.net.png",
+      "filename" : "font.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "font_48px_1148174_easyicon.net.png",
+      "filename" : "font@x2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "font@x3.png",
       "scale" : "3x"
     }
   ],
