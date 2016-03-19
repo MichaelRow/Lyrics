@@ -106,6 +106,12 @@
                                                 <menuItem title="Standardize" id="BzI-jq-pE8">
                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                 </menuItem>
+                                                <menuItem title="Convert Bracket Content To SC" id="qS7-Sq-nME">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                </menuItem>
+                                                <menuItem title="Convert Bracket Content To TC" id="dcO-C1-sq5">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                </menuItem>
                                             </items>
                                         </menu>
                                     </popUpButtonCell>

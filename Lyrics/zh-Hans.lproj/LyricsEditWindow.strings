@@ -26,8 +26,14 @@
 /* Class = "NSWindow"; title = "编辑歌词"; ObjectID = "ar1-cr-ly1"; */
 "ar1-cr-ly1.title" = "编辑歌词";
 
+/* Class = "NSMenuItem"; title = "Convert Bracket Content To TC"; ObjectID = "dcO-C1-sq5"; */
+"dcO-C1-sq5.title" = "将括号内字符转为繁体";
+
 /* Class = "NSButtonCell"; title = "应用变换"; ObjectID = "jTd-61-MOg"; */
 "jTd-61-MOg.title" = "应用变换";
+
+/* Class = "NSMenuItem"; title = "Convert Bracket Content To SC"; ObjectID = "qS7-Sq-nME"; */
+"qS7-Sq-nME.title" = "将括号内字符转为简体";
 
 /* Class = "NSTextFieldCell"; title = "】"; ObjectID = "vc4-L7-lKa"; */
 "vc4-L7-lKa.title" = "】";

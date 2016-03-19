@@ -155,6 +155,18 @@ class LyricsEditWindowController: NSWindowController {
                 let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
                 let latterPart = (str as NSString).substringWithRange(NSMakeRange(loc, len))
                 return formmerPart + "【" + latterPart + "】"
+            case 4:
+                let loc = leftBracketIdx + 1
+                let len = rightBracketIdx - loc
+                let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
+                let latterPart = convertToSC((str as NSString).substringWithRange(NSMakeRange(loc, len)))
+                return formmerPart + "【" + latterPart + "】"
+            case 5:
+                let loc = leftBracketIdx + 1
+                let len = rightBracketIdx - loc
+                let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
+                let latterPart = convertToTC((str as NSString).substringWithRange(NSMakeRange(loc, len)))
+                return formmerPart + "【" + latterPart + "】"
             default:
                 return str
             }

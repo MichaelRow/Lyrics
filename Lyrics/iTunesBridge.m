@@ -48,6 +48,9 @@
             }
             else {
                 for (iTunesTrack *track in allTracks) {
+                    if (![[track.lyrics stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
+                        continue;
+                    }
                     NSString *title = track.name;
                     NSString *artist = track.artist;
                     NSString *lyrics = [[AppController sharedController] parseLrcWithTitle:title andArtist:artist];
