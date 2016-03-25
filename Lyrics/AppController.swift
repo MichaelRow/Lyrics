@@ -87,13 +87,13 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     
         let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: "lrcLoadingCompleted:", name: LrcLoadedNotification, object: nil)
-        nc.addObserver(self, selector: "handleUserEditLyrics:", name: LyricsUserEditLyricsNotification, object: nil)
-        nc.addObserver(self, selector: "handlePresetDidChanged", name: LyricsPresetDidChangedNotification, object: nil)
+        nc.addObserver(self, selector: #selector(lrcLoadingCompleted(_:)), name: LrcLoadedNotification, object: nil)
+        nc.addObserver(self, selector: #selector(handleUserEditLyrics(_:)), name: LyricsUserEditLyricsNotification, object: nil)
+        nc.addObserver(self, selector: #selector(handlePresetDidChanged), name: LyricsPresetDidChangedNotification, object: nil)
         
         let ndc = NSDistributedNotificationCenter.defaultCenter()
-        ndc.addObserver(self, selector: "iTunesPlayerInfoChanged:", name: "com.apple.iTunes.playerInfo", object: nil)
-        ndc.addObserver(self, selector: "handleExtenalLyricsEvent:", name: "ExtenalLyricsEvent", object: nil)
+        ndc.addObserver(self, selector: #selector(iTunesPlayerInfoChanged(_:)), name: "com.apple.iTunes.playerInfo", object: nil)
+        ndc.addObserver(self, selector: #selector(handleExtenalLyricsEvent(_:)), name: "ExtenalLyricsEvent", object: nil)
         
         do {
             regexForTimeTag = try NSRegularExpression(pattern: "\\[\\d+:\\d+.\\d+\\]|\\[\\d+:\\d+\\]", options: [])
@@ -456,7 +456,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         if !userDefaults.boolForKey(LyricsUseAutoLayout) {
             lyricsWindow.storeWindowSize()
         }
-        lyricsWindow.performSelector("checkAutoLayout", withObject: nil, afterDelay: 0.1)
+        lyricsWindow.performSelector(Selector("checkAutoLayout"), withObject: nil, afterDelay: 0.1)
     }
     
     @IBAction func lockLyricsFloatingWindow(sender: AnyObject?) {
@@ -524,7 +524,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                     if timer != nil {
                         timer.invalidate()
                     }
-                    timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "terminate", userInfo: nil, repeats: false)
+                    timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(terminate), userInfo: nil, repeats: false)
                 }
                 return
             }
@@ -547,7 +547,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 if timer != nil {
                     timer.invalidate()
                 }
-                timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "terminate", userInfo: nil, repeats: false)
+                timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(terminate), userInfo: nil, repeats: false)
                 return
             }
             
@@ -651,12 +651,13 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                     lrcLine.lyricsSentence = lyricsSentence
                     lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
                     let currentCount: Int = lyricsArray.count
-                    var j: Int
-                    for j=0; j<currentCount; ++j {
+                    var j: Int = 0
+                    while j < currentCount {
                         if lrcLine.msecPosition < lyricsArray[j].msecPosition {
                             lyricsArray.insert(lrcLine, atIndex: j)
                             break
                         }
+                        j += 1
                     }
                     if j == currentCount {
                         lyricsArray.append(lrcLine)
@@ -707,12 +708,13 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                     lrcLine.lyricsSentence = lyricsSentence
                     lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
                     let currentCount: Int = lrcArray.count
-                    var j: Int
-                    for j=0; j<currentCount; ++j {
+                    var j: Int = 0
+                    while j < currentCount {
                         if lrcLine.msecPosition < lrcArray[j].msecPosition {
                             lrcArray.insert(lrcLine, atIndex: j)
                             break
                         }
+                        j += 1
                     }
                     if j == currentCount {
                         lrcArray.append(lrcLine)
@@ -811,10 +813,10 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     func handlePositionChange (playerPosition: Int) {
         let tempLyricsArray = lyricsArray
-        var index: Int
+        var index: Int = 0
         //1.Find the first lyrics which time position is larger than current position, and its index is "index"
         //2.The index of first-line-lyrics which needs to display is "index - 1"
-        for index=0; index < tempLyricsArray.count; ++index {
+        while index < tempLyricsArray.count {
             if playerPosition < tempLyricsArray[index].msecPosition - timeDly {
                 if index-1 == -1 {
                     if currentLyrics != nil {
@@ -851,6 +853,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                     return
                 }
             }
+            index += 1
         }
         if index == tempLyricsArray.count && tempLyricsArray.count>0 {
             if currentLyrics != tempLyricsArray[tempLyricsArray.count - 1].lyricsSentence {
@@ -971,7 +974,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             let item = NSMenuItem()
             item.title = preset
             item.target = self
-            item.action = "setPresetByMenu:"
+            item.action = #selector(setPresetByMenu(_:))
             presetMenuItem.submenu?.addItem(item)
         }
     }

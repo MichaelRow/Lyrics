@@ -41,7 +41,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
     
     convenience init() {
         NSLog("Init Lyrics window")
-        let lyricsWindow = NSWindow(contentRect: NSMakeRect(0, 0, 100, 100), styleMask: NSBorderlessWindowMask|NSTexturedBackgroundWindowMask, backing: NSBackingStoreType.Buffered, `defer`: false)
+        let lyricsWindow = NSWindow(contentRect: NSMakeRect(0, 0, 100, 100), styleMask: NSBorderlessWindowMask|NSTexturedBackgroundWindowMask, backing: NSBackingStoreType.Buffered, defer: false)
         self.init(window: lyricsWindow)
         lyricsWindow.delegate = self
         lyricsWindow.backgroundColor = NSColor.clearColor()
@@ -84,7 +84,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
         checkAutoLayout()
         displayLyrics("LyricsX", secondLyrics: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleScreenResolutionChange", name: NSApplicationDidChangeScreenParametersNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleScreenResolutionChange), name: NSApplicationDidChangeScreenParametersNotification, object: nil)
     }
     
     deinit {
@@ -403,7 +403,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
             
             let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: firstLyrics!, attributes: attrs)
             if verticalStyle == 1 {
-                for var i=0; i<firstLyrics!.characters.count; ++i {
+                for i in 0 ..< firstLyrics!.characters.count {
                     if isChinese((firstLyrics! as NSString).substringWithRange(NSMakeRange(i, 1))) {
                         attributedStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(i, 1))
                     }
@@ -459,12 +459,12 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
                 firstAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(0, firstLyrics!.characters.count))
                 secondAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(0, secondLyrics!.characters.count))
             } else {
-                for var i=0; i<firstLyrics!.characters.count; ++i {
+                for i in 0 ..< firstLyrics!.characters.count {
                     if isChinese((firstLyrics! as NSString).substringWithRange(NSMakeRange(i, 1))) {
                         firstAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(i, 1))
                     }
                 }
-                for var i=0; i<secondLyrics!.characters.count; ++i {
+                for i in 0 ..< secondLyrics!.characters.count {
                     if isChinese((secondLyrics! as NSString).substringWithRange(NSMakeRange(i, 1))) {
                         secondAttrStr.addAttribute(kCTVerticalFormsAttributeName as String, value: NSNumber(bool: true), range: NSMakeRange(i, 1))
                     }
@@ -546,7 +546,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
         Loop: while index >= 0 {
             let lastCharacter = (firstLyrics! as NSString).substringWithRange(NSMakeRange(index, 1))
             if lastCharacter == " " {
-                index--
+                index -= 1
                 continue
             }
             else {
@@ -647,7 +647,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
                 }
                 stack.removeLast()
             }
-            index++
+            index += 1
         }
         if stack.count == 1 {
             return stack.first!

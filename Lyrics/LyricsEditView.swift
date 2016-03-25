@@ -18,15 +18,15 @@ class LyricsEditView: NSTextView {
             if (event.modifierFlags.rawValue & NSEventModifierFlags.DeviceIndependentModifierFlagsMask.rawValue) == commandKey {
                 switch event.charactersIgnoringModifiers! {
                 case "x":
-                    if NSApp.sendAction(Selector("cut:"), to:nil, from:self) {
+                    if NSApp.sendAction(#selector(NSText.cut(_:)), to:nil, from:self) {
                         return true
                     }
                 case "c":
-                    if NSApp.sendAction(Selector("copy:"), to:nil, from:self) {
+                    if NSApp.sendAction(#selector(NSText.copy(_:)), to:nil, from:self) {
                         return true
                     }
                 case "v":
-                    if NSApp.sendAction(Selector("paste:"), to:nil, from:self) {
+                    if NSApp.sendAction(#selector(NSText.paste(_:)), to:nil, from:self) {
                         return true
                     }
                 case "z":
@@ -34,7 +34,7 @@ class LyricsEditView: NSTextView {
                         return true
                     }
                 case "a":
-                    if NSApp.sendAction(Selector("selectAll:"), to:nil, from:self) {
+                    if NSApp.sendAction(#selector(NSResponder.selectAll(_:)), to:nil, from:self) {
                         return true
                     }
                 case "w":

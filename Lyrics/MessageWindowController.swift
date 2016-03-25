@@ -19,7 +19,7 @@ class MessageWindowController: NSWindowController {
 
     convenience init() {
         NSLog("Init MessageWindow")
-        let win = NSWindow(contentRect: NSZeroRect, styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.Buffered, `defer`: false)
+        let win = NSWindow(contentRect: NSZeroRect, styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.Buffered, defer: false)
         self.init(window: win)
         self.window?.opaque = false
         self.window?.hasShadow = false
@@ -64,12 +64,12 @@ class MessageWindowController: NSWindowController {
             timer.invalidate()
             timer = nil
         }
-        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "fadeOut", userInfo: nil, repeats: false)
+        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(fadeOut), userInfo: nil, repeats: false)
     }
     
     func fadeOut() {
         let delay: NSTimeInterval = NSAnimationContext.currentContext().duration + 0.1
-        self.window!.performSelector("orderOut:", withObject: nil, afterDelay: delay)
+        self.window!.performSelector(#selector(NSWindow.orderOut(_:)), withObject: nil, afterDelay: delay)
         self.window!.animator().alphaValue = 0
         msgText.string = ""
         isOrderFront = false

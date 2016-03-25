@@ -100,12 +100,13 @@ class LyricsEditWindowController: NSWindowController {
                     lrcLine.lyricsSentence = lyricsSentence
                     lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
                     let currentCount: Int = lyricsLines.count
-                    var j: Int
-                    for j=0; j<currentCount; ++j {
+                    var j: Int = 0
+                    while j < currentCount {
                         if lrcLine.msecPosition < lyricsLines[j].msecPosition {
                             lyricsLines.insert(lrcLine, atIndex: j)
                             break
                         }
+                        j += 1
                     }
                     if j == currentCount {
                         lyricsLines.append(lrcLine)
@@ -166,7 +167,7 @@ class LyricsEditWindowController: NSWindowController {
                 let len = rightBracketIdx - loc
                 let formmerPart = (str as NSString).substringToIndex(leftBracketIdx)
                 let latterPart = convertToTC((str as NSString).substringWithRange(NSMakeRange(loc, len)))
-                return formmerPart + "【" + latterPart + "】"
+                return formmerPart + leftBracket.stringValue + latterPart + rightBracket.stringValue
             default:
                 return str
             }
@@ -218,7 +219,7 @@ class LyricsEditWindowController: NSWindowController {
         while index > -1 {
             let char: String = str.substringWithRange(NSMakeRange(index, 1))
             if char == " " {
-                index--
+                index -= 1
                 continue
             }
             else if char == rightBracket.stringValue {
@@ -245,7 +246,7 @@ class LyricsEditWindowController: NSWindowController {
                 }
                 stack.removeLast()
             }
-            index++
+            index += 1
         }
         if stack.count == 1 {
             return stack.first!

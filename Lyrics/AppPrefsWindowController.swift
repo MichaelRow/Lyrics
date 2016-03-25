@@ -471,7 +471,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                 if fm.fileExistsAtPath(fileSavingPath) {
                     var i: Int = 0
                     repeat {
-                        i++
+                        i += 1
                         fileSavingPath = libraryPath.stringByAppendingPathComponent(presetName + " \(i).lxconfig")
                     } while !fm.fileExistsAtPath(fileSavingPath)
                     presetName = presetName + " \(i)"

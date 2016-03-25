@@ -76,7 +76,7 @@ class AboutWindowController: NSWindowController {
         if scrollView.documentView!.isEqual(donateView) {
             scrollView.documentView = textView
         }
-        textViewState++
+        textViewState += 1
         if textViewState == 3 {
             textViewState = 0
             
