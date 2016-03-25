@@ -8,6 +8,13 @@
 
 import Cocoa
 
+// http://stackoverflow.com/questions/36156712/the-selector-keyword-has-been-deprecated-in-future-versions-of-swift-how-can-i
+
+@objc protocol UndoActionRespondable {
+    func undo(sender: AnyObject)
+    func redo(sender: AnyObject)
+}
+
 class LyricsEditView: NSTextView {
 
     private let commandKey = NSEventModifierFlags.CommandKeyMask.rawValue
@@ -30,7 +37,7 @@ class LyricsEditView: NSTextView {
                         return true
                     }
                 case "z":
-                    if NSApp.sendAction(Selector("undo:"), to:nil, from:self) {
+                    if NSApp.sendAction(#selector(UndoActionRespondable.undo(_:)), to:nil, from:self) {
                         return true
                     }
                 case "a":
@@ -46,7 +53,7 @@ class LyricsEditView: NSTextView {
             }
             else if (event.modifierFlags.rawValue & NSEventModifierFlags.DeviceIndependentModifierFlagsMask.rawValue) == commandShiftKey {
                 if event.charactersIgnoringModifiers == "Z" {
-                    if NSApp.sendAction(Selector("redo:"), to:nil, from:self) { return true }
+                    if NSApp.sendAction(#selector(UndoActionRespondable.redo(_:)), to:nil, from:self) { return true }
                 }
             }
         }

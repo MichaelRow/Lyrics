@@ -36,6 +36,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     private var currentSongID: String!
     private var currentSongTitle: String!
     private var currentArtist: String!
+    private var lrcParser: LrcParser!
     private var songList: [SongInfos]!
     private var qianqian: QianQian!
     private var xiami: Xiami!
@@ -45,13 +46,12 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     private var lrcSourceHandleQueue: NSOperationQueue!
     private var userDefaults: NSUserDefaults!
     private var timer: NSTimer!
-    private var regexForTimeTag: NSRegularExpression!
-    private var regexForIDTag: NSRegularExpression!
     
 // MARK: - Init & deinit
     override init() {
         super.init()
         iTunes = iTunesBridge()
+        lrcParser = LrcParser()
         lyricsArray = Array()
         idTagsArray = Array()
         songList = Array()
@@ -94,21 +94,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         let ndc = NSDistributedNotificationCenter.defaultCenter()
         ndc.addObserver(self, selector: #selector(iTunesPlayerInfoChanged(_:)), name: "com.apple.iTunes.playerInfo", object: nil)
         ndc.addObserver(self, selector: #selector(handleExtenalLyricsEvent(_:)), name: "ExtenalLyricsEvent", object: nil)
-        
-        do {
-            regexForTimeTag = try NSRegularExpression(pattern: "\\[\\d+:\\d+.\\d+\\]|\\[\\d+:\\d+\\]", options: [])
-        } catch let theError as NSError {
-            NSLog("%@", theError.localizedDescription)
-            return
-        }
-        //the regex below should only use when the string doesn't contain time-tags
-        //because all time-tags would be matched as well.
-        do {
-            regexForIDTag = try NSRegularExpression(pattern: "\\[[^\\]]+:[^\\]]+\\]", options: [])
-        } catch let theError as NSError {
-            NSLog("%@", theError.localizedDescription)
-            return
-        }
         
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
@@ -349,7 +334,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 }
                 return
             }
-            if lrcContents != nil && testLrc(lrcContents) {
+            if lrcContents != nil && lrcParser.testLrc(lrcContents) {
                 lrcSourceHandleQueue.cancelAllOperations()
                 lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
                     //make the current lrc the better one so that it can't be replaced.
@@ -456,7 +441,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         if !userDefaults.boolForKey(LyricsUseAutoLayout) {
             lyricsWindow.storeWindowSize()
         }
-        lyricsWindow.performSelector(Selector("checkAutoLayout"), withObject: nil, afterDelay: 0.1)
+        lyricsWindow.performSelector(#selector(DesktopLyricsController.checkAutoLayout), withObject: nil, afterDelay: 0.1)
     }
     
     @IBAction func lockLyricsFloatingWindow(sender: AnyObject?) {
@@ -607,140 +592,36 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
 
-    
 // MARK: - Lrc Methods
     
-    private func parseCurrentLrc(theLrcContents: String) {
-        // Parse lrc file to get lyrics, time-tags and time offset
-        NSLog("Start to Parse lrc")
+    private func parseCurrentLrc(lrcContents: String) {
         lyricsArray.removeAll()
         idTagsArray.removeAll()
-        self.setValue(0, forKey: "timeDly")
-        timeDlyInFile = 0
-        let lrcContents: String
+        let lrcToParse: String
         
         // whether convert Chinese type
         if userDefaults.boolForKey(LyricsAutoConvertChinese) {
             switch userDefaults.integerForKey(LyricsChineseTypeIndex) {
             case 0:
-                lrcContents = convertToSC(theLrcContents)
+                lrcToParse = convertToSC(lrcContents)
             case 1:
-                lrcContents = convertToTC(theLrcContents)
+                lrcToParse = convertToTC(lrcContents)
             case 2:
-                lrcContents = convertToTC_Taiwan(theLrcContents)
+                lrcToParse = convertToTC_Taiwan(lrcContents)
             case 3:
-                lrcContents = convertToTC_HK(theLrcContents)
+                lrcToParse = convertToTC_HK(lrcContents)
             default:
-                lrcContents = theLrcContents
+                lrcToParse = lrcContents
                 break
             }
         } else {
-            lrcContents = theLrcContents
+            lrcToParse = lrcContents
         }
-        let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
-        let lrcParagraphs: [String] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
-        
-        for str in lrcParagraphs {
-            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
-            if timeTagsMatched.count > 0 {
-                let index: Int = timeTagsMatched.last!.range.location + timeTagsMatched.last!.range.length
-                let lyricsSentence: String = str.substringFromIndex(str.startIndex.advancedBy(index))
-                for result in timeTagsMatched {
-                    let matchedRange: NSRange = result.range
-                    let lrcLine: LyricsLineModel = LyricsLineModel()
-                    lrcLine.lyricsSentence = lyricsSentence
-                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
-                    let currentCount: Int = lyricsArray.count
-                    var j: Int = 0
-                    while j < currentCount {
-                        if lrcLine.msecPosition < lyricsArray[j].msecPosition {
-                            lyricsArray.insert(lrcLine, atIndex: j)
-                            break
-                        }
-                        j += 1
-                    }
-                    if j == currentCount {
-                        lyricsArray.append(lrcLine)
-                    }
-                }
-            }
-            else {
-                let idTagsMatched: [NSTextCheckingResult] = regexForIDTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
-                if idTagsMatched.count == 0 {
-                    continue
-                }
-                for result in idTagsMatched {
-                    let matchedRange: NSRange = result.range
-                    let idTag: NSString = (str as NSString).substringWithRange(matchedRange) as NSString
-                    let colonRange: NSRange = idTag.rangeOfString(":")
-                    let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
-                    if idStr.stringByReplacingOccurrencesOfString(" ", withString: "") != "offset" {
-                        idTagsArray.append(idTag as String)
-                        continue
-                    }
-                    else {
-                        let delayStr: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1))
-                        self.setValue((delayStr as NSString).integerValue, forKey: "timeDly")
-                        timeDlyInFile = timeDly
-                    }
-                }
-            }
-        }
-    }
-    
-    func parseLrcWithTitle(title: String, andArtist artist: String) -> String? {
-        let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
-        let lrcContents = readLocalLyrics(title, theArtist: artist)
-        if lrcContents == nil {
-            return nil
-        }
-        let lrcParagraphs: [String] = lrcContents!.componentsSeparatedByCharactersInSet(newLineCharSet)
-        var lrcArray = [LyricsLineModel]()
-        
-        for str in lrcParagraphs {
-            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
-            if timeTagsMatched.count > 0 {
-                let index: Int = timeTagsMatched.last!.range.location + timeTagsMatched.last!.range.length
-                let lyricsSentence: String = str.substringFromIndex(str.startIndex.advancedBy(index))
-                for result in timeTagsMatched {
-                    let matchedRange: NSRange = result.range
-                    let lrcLine: LyricsLineModel = LyricsLineModel()
-                    lrcLine.lyricsSentence = lyricsSentence
-                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
-                    let currentCount: Int = lrcArray.count
-                    var j: Int = 0
-                    while j < currentCount {
-                        if lrcLine.msecPosition < lrcArray[j].msecPosition {
-                            lrcArray.insert(lrcLine, atIndex: j)
-                            break
-                        }
-                        j += 1
-                    }
-                    if j == currentCount {
-                        lrcArray.append(lrcLine)
-                    }
-                }
-            }
-        }
-        var newLrc = String()
-        for lrc in lrcArray {
-            newLrc.appendContentsOf(lrc.lyricsSentence + "\n")
-        }
-        return newLrc
-    }
-    
-    private func testLrc(lrcFileContents: String) -> Bool {
-        // test whether the string is lrc
-        let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
-        let lrcParagraphs: [String] = lrcFileContents.componentsSeparatedByCharactersInSet(newLineCharSet)
-        var numberOfMatched: Int = 0
-        for str in lrcParagraphs {
-            numberOfMatched = regexForTimeTag.numberOfMatchesInString(str, options: [.ReportProgress], range: NSMakeRange(0, str.characters.count))
-            if numberOfMatched > 0 {
-                return true
-            }
-        }
-        return false
+        lrcParser.fullParse(lrcToParse)
+        lyricsArray = lrcParser.lyrics
+        idTagsArray = lrcParser.idTags
+        self.setValue(lrcParser.timeDly, forKey: "timeDly")
+        timeDlyInFile = timeDly
     }
 
     private func saveLrcToLocal (lyricsContents: String, songTitle: String, artist: String) {
@@ -904,7 +785,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         let userInfo: [NSObject:AnyObject] = n.userInfo!
         let lyrics: String = LyricsEditWindowController.sharedController.textView.string!
         
-        if testLrc(lyrics) {
+        if lrcParser.testLrc(lyrics) {
             //User lrc has the highest priority level
             lrcSourceHandleQueue.cancelAllOperations()
             lrcSourceHandleQueue.addOperationWithBlock { () -> Void in
@@ -934,7 +815,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         lrcSourceHandleQueue.cancelAllOperations()
         lrcSourceHandleQueue.addOperationWithBlock { () -> Void in
             let lyricsContents: String = userInfo!["LyricsContents"] as! String
-            if self.testLrc(lyricsContents) {
+            if self.lrcParser.testLrc(lyricsContents) {
                 self.parseCurrentLrc(lyricsContents)
                 //make the current lrc the better one so that it can't be replaced.
                 self.hasDiglossiaLrc = true
@@ -1051,7 +932,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         
         var hasLrc: Bool
-        if lyricsContents == nil || !testLrc(lyricsContents) {
+        if lyricsContents == nil || !lrcParser.testLrc(lyricsContents) {
             NSLog("better lrc not found or it's not lrc file,trying others")
             hasLrc = false
             lyricsContents = nil
@@ -1069,7 +950,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                         continue
                     }
                 }
-                if lyricsContents != nil && testLrc(lyricsContents) {
+                if lyricsContents != nil && lrcParser.testLrc(lyricsContents) {
                     hasLrc = true
                     break
                 }

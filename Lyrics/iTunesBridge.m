@@ -47,16 +47,25 @@
                 return NO;
             }
             else {
+                LrcParser *parser = [[LrcParser alloc] init];
                 for (iTunesTrack *track in allTracks) {
                     if (![[track.lyrics stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
                         continue;
                     }
                     NSString *title = track.name;
                     NSString *artist = track.artist;
-                    NSString *lyrics = [[AppController sharedController] parseLrcWithTitle:title andArtist:artist];
-                    if (lyrics) {
-                        track.lyrics = lyrics;
+                    NSString *lrcContents = [[AppController sharedController] readLocalLyrics:title theArtist:artist];
+                    [parser parseForLyrics:lrcContents];
+                    NSArray *lrcArray = parser.lyrics;
+                    if (lrcArray.count == 0) {
+                        continue;
                     }
+                    NSMutableString *lyrics = [[NSMutableString alloc] init];
+                    for (LyricsLineModel *lrcLine in lrcArray) {
+                        [lyrics appendString:lrcLine.lyricsSentence];
+                        [lyrics appendString:@"\n"];
+                    }
+                    track.lyrics = lyrics;
                 }
                 return YES;
             }
