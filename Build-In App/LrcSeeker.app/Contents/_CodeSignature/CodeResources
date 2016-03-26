@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		W3LoVxroHlVw58iW8HfBHI338x4=
+		ptPf9Gl9eh7Q1/9q2u5RxK1We6E=
 		</data>
 		<key>Resources/Base.lproj/ArtworkFiller.nib</key>
 		<dict>
@@ -226,96 +226,114 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			BfWCqDz3l/ei3lMoRHzUs0Faz1I=
+			XgUEhrJ1tfffcG9YrLbf16wihMI=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"05f582a83cf797f7a2de5328447cd4b3415acf52"</string>
+			<string>cdhash H"845c75128a2fd7b115ce237714169c4e6c5c3479" or cdhash H"5e050486b275b5f7df706f58acb6dfd7ac2284c2"</string>
 		</dict>
 		<key>Frameworks/libswiftCore.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			KErlQnFHB1oAtlbBqagrepY0Pi0=
+			jLEdjabkchqMANhncmPZ/EzZymM=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"284ae5427147075a00b656c1a9a82b7a96343e2d"</string>
+			<string>cdhash H"c54e32b8875460bb16651b6d609aff76b8192a24" or cdhash H"8cb11d8da6e4721a8c00d8677263d9fc4cd9ca63"</string>
 		</dict>
 		<key>Frameworks/libswiftCoreData.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			+qOGIC1K4Jw18cvmWMeAL/7vb30=
+			01WS6A9a5b2eyUvNVXKPf3SEW9E=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"faa386202d4ae09c35f1cbe658c7802ffeef6f7d"</string>
+			<string>cdhash H"2fb276ca47a5914dee9815e269f754906c5f5f24" or cdhash H"d35592e80f5ae5bd9ec94bcd55728f7f74845bd1"</string>
 		</dict>
 		<key>Frameworks/libswiftCoreGraphics.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			gMATYaSfUYMCuY6NOWxpSdXV0rc=
+			KYRXnUceyTa1NpBmRAcyUNOkEOo=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"80c01361a49f518302b98e8d396c6949d5d5d2b7"</string>
+			<string>cdhash H"daf3de9ff018c2dca3b83405e507b839d6d0249d" or cdhash H"2984579d471ec936b536906644073250d3a410ea"</string>
 		</dict>
 		<key>Frameworks/libswiftCoreImage.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			xmyuSLfv82vL65/t1QEU7z/DC48=
+			s8ecCSmyAfU2U2TgWXS9GGxgZ1s=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"c66cae48b7eff36bcbeb9fedd50114ef3fc30b8f"</string>
+			<string>cdhash H"c9cf0b4820e3fbb6d5cf6a978ae2e1cfc41a3f81" or cdhash H"b3c79c0929b201f5365364e05974bd186c60675b"</string>
 		</dict>
 		<key>Frameworks/libswiftDarwin.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			TjFVRc30ZSuhgWSatSHtAUEyiqM=
+			0hg4cp8DHFFEWvBVELF5NOCZYCU=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"4e315545cdf4652ba181649ab521ed0141328aa3"</string>
+			<string>cdhash H"3be600503f94d46a7806ddbf44de6b2c68131ad9" or cdhash H"d21838729f031c51445af05510b17934e0996025"</string>
 		</dict>
 		<key>Frameworks/libswiftDispatch.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			yBUpkqP7Wv2E7BLzAMjTMV5pPIU=
+			laP8+4JRgMCxXpJ22dtD0MK3fO4=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"c8152992a3fb5afd84ec12f300c8d3315e693c85"</string>
+			<string>cdhash H"2477d0e471184e1c22aec0b3121984cdda1d8dea" or cdhash H"95a3fcfb825180c0b15e9276d9db43d0c2b77cee"</string>
 		</dict>
 		<key>Frameworks/libswiftFoundation.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			sf16n9ERJGQqjYPT05wC3zeiItQ=
+			YEgSAxLAC92kuBFPgK6qqV5qYN4=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"b1fd7a9fd11124642a8d83d3d39c02df37a222d4"</string>
+			<string>cdhash H"f3af62291b3aa3897edb366eabb0279ef79f52e2" or cdhash H"6048120312c00bdda4b8114f80aeaaa95e6a60de"</string>
 		</dict>
 		<key>Frameworks/libswiftObjectiveC.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			4R3j0BKBovRFuiMv3qqfuODkyB8=
+			ckypUpeOZeJCuMgsiin2irwkdb4=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"e11de3d01281a2f445ba232fdeaa9fb8e0e4c81f"</string>
+			<string>cdhash H"827574f7e42c51488f6186555852ee4f557a3de8" or cdhash H"724ca952978e65e242b8c82c8a29f68abc2475be"</string>
 		</dict>
 		<key>Resources/AppIcon.icns</key>
-		<data>
-		AA05OP3iEqD3+zr5jUclldC3hfY=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			AA05OP3iEqD3+zr5jUclldC3hfY=
+			</data>
+			<key>hash2</key>
+			<data>
+			PZIKcZdsN1R3ARw93fCmAq4Dvcooax4yNqEMQUjjxN8=
+			</data>
+		</dict>
 		<key>Resources/Assets.car</key>
-		<data>
-		W3LoVxroHlVw58iW8HfBHI338x4=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			ptPf9Gl9eh7Q1/9q2u5RxK1We6E=
+			</data>
+			<key>hash2</key>
+			<data>
+			e7PDXSrlDii5khoAT67r3mZhUfGtyQQXNo/1KiV1Fj0=
+			</data>
+		</dict>
 		<key>Resources/Base.lproj/ArtworkFiller.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
 			RnP7rXhPOCEL9nrYDVTuJp6gRho=
+			</data>
+			<key>hash2</key>
+			<data>
+			t48jlXDC0VtonLGJBBzmGhldkq2+MT4vk1Zwmw52rs0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -326,6 +344,10 @@
 			<data>
 			Q2DrY0iIMAcKvgWFVG+SP9PC4LE=
 			</data>
+			<key>hash2</key>
+			<data>
+			+Dh1nkVdUGv3k00Wp7ScErZvsQbrg0uSw+a/78rvO+g=
+			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
@@ -334,6 +356,10 @@
 			<key>hash</key>
 			<data>
 			RakyEJKxfxGgSMJuGok2JUxVU6g=
+			</data>
+			<key>hash2</key>
+			<data>
+			zYCheJengzrhJypp6NPBcD5ce31Oy2MF6BNayKJqDx8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -344,6 +370,10 @@
 			<data>
 			6hv8RAtNplSG/pscQEN4G8Zev0s=
 			</data>
+			<key>hash2</key>
+			<data>
+			Q2HuIR9GaIiA/p6UK/dWwPiU787HLHFzgNrnqbq4ioA=
+			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
@@ -353,91 +383,225 @@
 			<data>
 			ETUfDuN/5rKc9YB7n6z4DtRPu+U=
 			</data>
+			<key>hash2</key>
+			<data>
+			zA5lCNO8Nabp6aCJOCzCiAA/k19U0jgwXUcPCtgkZ6k=
+			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>Resources/HKVariants.ocd</key>
-		<data>
-		8XpHnLz0r7I81E0zCIxznlU8HAs=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			8XpHnLz0r7I81E0zCIxznlU8HAs=
+			</data>
+			<key>hash2</key>
+			<data>
+			XLacD2Fqhh/dI9ATagdj/qjayTZDBLZeRkV8pWerMPY=
+			</data>
+		</dict>
 		<key>Resources/HKVariantsPhrases.ocd</key>
-		<data>
-		9A3esr+5+YESwMTVGL3BDjTrw3w=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			9A3esr+5+YESwMTVGL3BDjTrw3w=
+			</data>
+			<key>hash2</key>
+			<data>
+			FxYjKiYiYV+c7Bg1NHNWhLW8/Cc1FHpVGhODvvsxwWM=
+			</data>
+		</dict>
 		<key>Resources/LrcSeeker.momd/LrcSeeker.mom</key>
-		<data>
-		dAh1FYeEP2dwnYGJnCbiJHTSrwM=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			dAh1FYeEP2dwnYGJnCbiJHTSrwM=
+			</data>
+			<key>hash2</key>
+			<data>
+			+s/Rh8yW7eavj/tguvanMG0NVgTSwvxgmp3UxaU73pc=
+			</data>
+		</dict>
 		<key>Resources/LrcSeeker.momd/LrcSeeker.omo</key>
-		<data>
-		cVX8ELTYUgCtTYxzhG8hD5joecc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			cVX8ELTYUgCtTYxzhG8hD5joecc=
+			</data>
+			<key>hash2</key>
+			<data>
+			7H8USyIFTStHvzd7RV1TXDmOTCxngb0Zi3l/4hFm6YM=
+			</data>
+		</dict>
 		<key>Resources/LrcSeeker.momd/VersionInfo.plist</key>
-		<data>
-		oqrBeziHkou76EVgIEb5Jg8xHMw=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			oqrBeziHkou76EVgIEb5Jg8xHMw=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZH5t7ATN2Ae/I84nrLiOzwHVh4FZ6DzmQhHGebkWRWs=
+			</data>
+		</dict>
 		<key>Resources/STCharacters.ocd</key>
-		<data>
-		NGOe2HhRestuoLTP5SHwDRsZ7jw=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			NGOe2HhRestuoLTP5SHwDRsZ7jw=
+			</data>
+			<key>hash2</key>
+			<data>
+			QyIl+yiiXL/zwjdcrMzAY2pq3KTPaZWvY/g2sEoUa1I=
+			</data>
+		</dict>
 		<key>Resources/STPhrases.ocd</key>
-		<data>
-		vAPBEPokCn74O3RzdWGnr0kisMU=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			vAPBEPokCn74O3RzdWGnr0kisMU=
+			</data>
+			<key>hash2</key>
+			<data>
+			GuNCIhsshfPaOCyc/TDA3MU7WBgeqClZOdLA0QbZ0PI=
+			</data>
+		</dict>
 		<key>Resources/TSCharacters.ocd</key>
-		<data>
-		sdi18zuS/B2cmtCUHvKEYIcv6yw=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			sdi18zuS/B2cmtCUHvKEYIcv6yw=
+			</data>
+			<key>hash2</key>
+			<data>
+			KH7dx0o6tPAAa6lheBAvRre7qmMd9HbLO8Na0r/D0Rc=
+			</data>
+		</dict>
 		<key>Resources/TSPhrases.ocd</key>
-		<data>
-		eEAYXX7jnqpwvZsITLYBiM6Dr5E=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			eEAYXX7jnqpwvZsITLYBiM6Dr5E=
+			</data>
+			<key>hash2</key>
+			<data>
+			Pvu66EE0WLB/Pma78FpeKknFHdI4azGvYida8JdCA4o=
+			</data>
+		</dict>
 		<key>Resources/TWVariants.ocd</key>
-		<data>
-		Anp+QapKZRE1nuuEUw2k6oaVf9w=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Anp+QapKZRE1nuuEUw2k6oaVf9w=
+			</data>
+			<key>hash2</key>
+			<data>
+			M76/Kbr+Ikf4T7Vlp1IGrCfSNAalkoh+FmFgUmliLGM=
+			</data>
+		</dict>
 		<key>Resources/libopencc.1.0.0.dylib</key>
-		<data>
-		3Jwepi61qsfqbzyohaoP+8yOXL8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			3Jwepi61qsfqbzyohaoP+8yOXL8=
+			</data>
+			<key>hash2</key>
+			<data>
+			qUmR0A/Ld29rGrt/Ni3i0uyi/LdX+PbmDxeReaDrgW4=
+			</data>
+		</dict>
 		<key>Resources/libopencc.2.dylib</key>
-		<data>
-		3Jwepi61qsfqbzyohaoP+8yOXL8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			3Jwepi61qsfqbzyohaoP+8yOXL8=
+			</data>
+			<key>hash2</key>
+			<data>
+			qUmR0A/Ld29rGrt/Ni3i0uyi/LdX+PbmDxeReaDrgW4=
+			</data>
+		</dict>
 		<key>Resources/libopencc.dylib</key>
 		<dict>
 			<key>symlink</key>
 			<string>libopencc.1.0.0.dylib</string>
 		</dict>
 		<key>Resources/no_selection.png</key>
-		<data>
-		L5L2eV8oiMBCE12aqtUuhPFbyzY=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			L5L2eV8oiMBCE12aqtUuhPFbyzY=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZLkPmKtzmY01QoUjG2YjgeueVFVdrdl2kWdE1w9iO2M=
+			</data>
+		</dict>
 		<key>Resources/not_found.png</key>
-		<data>
-		L5L2eV8oiMBCE12aqtUuhPFbyzY=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			L5L2eV8oiMBCE12aqtUuhPFbyzY=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZLkPmKtzmY01QoUjG2YjgeueVFVdrdl2kWdE1w9iO2M=
+			</data>
+		</dict>
 		<key>Resources/s2hk.json</key>
-		<data>
-		e+Nqn2MwTmVAO9NZeh5akiRasys=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			e+Nqn2MwTmVAO9NZeh5akiRasys=
+			</data>
+			<key>hash2</key>
+			<data>
+			84kVAUADn1gjvDbrSw+9668q43KV7Xks/Susw58y75E=
+			</data>
+		</dict>
 		<key>Resources/s2t.json</key>
-		<data>
-		YyCEfN6K5Ty721FiZqSO3k1xzP4=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			YyCEfN6K5Ty721FiZqSO3k1xzP4=
+			</data>
+			<key>hash2</key>
+			<data>
+			ildvSaecI038b81NQiePLjJImy9m/jUyppO9OLDRXiw=
+			</data>
+		</dict>
 		<key>Resources/s2tw.json</key>
-		<data>
-		7WPxUxf4dc95aSqQmPSm02wI6yc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			7WPxUxf4dc95aSqQmPSm02wI6yc=
+			</data>
+			<key>hash2</key>
+			<data>
+			em4GIKYFTaLhcH44q8tbSpPJtA3sWO3hxzpeKRK8IIE=
+			</data>
+		</dict>
 		<key>Resources/t2s.json</key>
-		<data>
-		/Kzb3720xeWAm78nrKeH4K5B4RY=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			/Kzb3720xeWAm78nrKeH4K5B4RY=
+			</data>
+			<key>hash2</key>
+			<data>
+			UFIsdzxF1PydnFmNmj1fdXSc4nJaMJIqrFvGQpH2SBE=
+			</data>
+		</dict>
 		<key>Resources/zh-Hans.lproj/ArtworkFiller.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
 			zq0QInhRYkloMfqD7BUX11XC66s=
+			</data>
+			<key>hash2</key>
+			<data>
+			M4fEYkIBTFxOg86mQ1H0zBR1uyGdzwoxdtXvz+smOsU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -448,6 +612,10 @@
 			<data>
 			YRgl3POyjotISHhNLr9E9i0MIK0=
 			</data>
+			<key>hash2</key>
+			<data>
+			rozGpuyRfaCu0B+rnW/r4hIeWo0I2Z+F/YWfwAC3Gk8=
+			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
@@ -456,6 +624,10 @@
 			<key>hash</key>
 			<data>
 			Z5IBlhrbDBMKsdpIEJH7LV9c2OY=
+			</data>
+			<key>hash2</key>
+			<data>
+			QxxwzJB0f8qzcu0Dxmm9dV+pbkiylBB2fUL0MEIujP0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -466,6 +638,10 @@
 			<data>
 			fKjnlqlOM/KWTnlmsbZ+0r1UD5M=
 			</data>
+			<key>hash2</key>
+			<data>
+			N50SAfiuUDoVVnpGcgK8wrFbJQMEbaly6vizyfQ3sMA=
+			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
@@ -474,6 +650,10 @@
 			<key>hash</key>
 			<data>
 			1YSNerLH97o1bC1lUm1adjWyous=
+			</data>
+			<key>hash2</key>
+			<data>
+			xXuHKbUu4I9hurtwr9sEdi7VsMtwHzZGXXlsupYbGZ8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -484,6 +664,10 @@
 			<data>
 			5ncLY6RSJAGwzXojek4D89LPWPc=
 			</data>
+			<key>hash2</key>
+			<data>
+			0gLR0SPIbap653yzq2YaYvJoJsqd1CxJ2dy32nFUTcg=
+			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
@@ -492,6 +676,10 @@
 			<key>hash</key>
 			<data>
 			/9OknoSxdreR51lZu+JY7arYExY=
+			</data>
+			<key>hash2</key>
+			<data>
+			zGHZQNIA1MWHzlvud23XJxzD7tmp69sYNJ8r0d+NM0Y=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -502,6 +690,10 @@
 			<data>
 			W8mfTv9SF954sN5FRjq35ZOJMAY=
 			</data>
+			<key>hash2</key>
+			<data>
+			sAMh1fdhjpjO8L/+JihVj6NqXVm72P4rb4HlFigYvlU=
+			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
@@ -511,6 +703,10 @@
 			<data>
 			dskodWIEB+LJu4r7iRx8Pn8Oh9Y=
 			</data>
+			<key>hash2</key>
+			<data>
+			x4GLN6PLzwMZz1uVIF6igxJ+7zL0q1FdmTRnqvPASEU=
+			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
@@ -519,6 +715,10 @@
 			<key>hash</key>
 			<data>
 			Bb5nIFgp+WUyc8gzxykGuMwbkcg=
+			</data>
+			<key>hash2</key>
+			<data>
+			uTYbC6CqY2wzBGUAypGIkOBE0NPON8Ef0ilV6kucAC0=
 			</data>
 			<key>optional</key>
 			<true/>
