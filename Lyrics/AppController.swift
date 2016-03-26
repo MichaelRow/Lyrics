@@ -622,6 +622,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         idTagsArray = lrcParser.idTags
         self.setValue(lrcParser.timeDly, forKey: "timeDly")
         timeDlyInFile = timeDly
+        lrcParser.cleanCache()
     }
 
     private func saveLrcToLocal (lyricsContents: String, songTitle: String, artist: String) {

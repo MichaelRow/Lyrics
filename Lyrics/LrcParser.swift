@@ -141,4 +141,10 @@ class LrcParser: NSObject {
         }
     }
     
+    func cleanCache() {
+        lyrics.removeAll()
+        idTags.removeAll()
+        timeDly = 0
+    }
+    
 }
