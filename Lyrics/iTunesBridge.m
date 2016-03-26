@@ -56,12 +56,11 @@
                     NSString *artist = track.artist;
                     NSString *lrcContents = [[AppController sharedController] readLocalLyrics:title theArtist:artist];
                     [parser parseForLyrics:lrcContents];
-                    NSArray *lrcArray = parser.lyrics;
-                    if (lrcArray.count == 0) {
+                    if (parser.lyrics.count == 0) {
                         continue;
                     }
                     NSMutableString *lyrics = [[NSMutableString alloc] init];
-                    for (LyricsLineModel *lrcLine in lrcArray) {
+                    for (LyricsLineModel *lrcLine in parser.lyrics) {
                         [lyrics appendString:lrcLine.lyricsSentence];
                         [lyrics appendString:@"\n"];
                     }
