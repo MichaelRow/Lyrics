@@ -617,28 +617,17 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         } else {
             lrcToParse = lrcContents
         }
-        lrcParser.fullParse(lrcToParse)
+        
         if userDefaults.boolForKey(LyricsEnableFilter) {
-            let filter = LrcFilter()
-            let tempLyricsArray = lrcParser.lyrics
-            let tempIDTagsArray = lrcParser.idTags
-            let tempTimeDly = lrcParser.timeDly
-            for line in tempLyricsArray {
-                if !filter.filter(line.lyricsSentence) {
-                    line.lyricsSentence = ""
-                }
-            }
-            lyricsArray = tempLyricsArray
-            idTagsArray = tempIDTagsArray
-            self.setValue(tempTimeDly, forKey: "timeDly")
-            timeDlyInFile = timeDly
+            lrcParser.parseWithFilter(lrcToParse)
         }
         else {
-            lyricsArray = lrcParser.lyrics
-            idTagsArray = lrcParser.idTags
-            self.setValue(lrcParser.timeDly, forKey: "timeDly")
-            timeDlyInFile = timeDly
+            lrcParser.regularParse(lrcToParse)
         }
+        lyricsArray = lrcParser.lyrics
+        idTagsArray = lrcParser.idTags
+        self.setValue(lrcParser.timeDly, forKey: "timeDly")
+        timeDlyInFile = timeDly
         lrcParser.cleanCache()
     }
 

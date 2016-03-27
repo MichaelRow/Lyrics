@@ -50,12 +50,13 @@ class LrcParser: NSObject {
         return false
     }
     
-    func fullParse(lrcContents: String) {
+    func regularParse(lrcContents: String) {
         NSLog("Start to Parse lrc")
         cleanCache()
         
         var tempLyrics = [LyricsLineModel]()
         var tempIDTags = [String]()
+        var tempTimeDly: Int = 0
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
         let lrcParagraphs: [String] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
         
@@ -99,13 +100,14 @@ class LrcParser: NSObject {
                     }
                     else {
                         let idContent: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1))
-                        timeDly = (idContent as NSString).integerValue
+                        tempTimeDly = (idContent as NSString).integerValue
                     }
                 }
             }
         }
         lyrics = tempLyrics
         idTags = tempIDTags
+        timeDly = tempTimeDly
     }
     
     func parseForLyrics(lrcContents: String) {
@@ -140,6 +142,116 @@ class LrcParser: NSObject {
             }
         }
         lyrics = tempLyrics
+    }
+    
+    func parseWithFilter(lrcContents: String) {
+        NSLog("Start to Parse lrc")
+        cleanCache()
+        
+        var tempLyrics = [LyricsLineModel]()
+        var tempIDTags = [String]()
+        var tempTimeDly: Int = 0
+        var titleAndAlbum = [String]()
+        var otherIDInfos = [String]()
+        let colons = [":","：","∶"]
+        
+        let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
+        let lrcParagraphs: [String] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
+        
+        for str in lrcParagraphs {
+            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
+            if timeTagsMatched.count > 0 {
+                let index: Int = timeTagsMatched.last!.range.location + timeTagsMatched.last!.range.length
+                let lyricsSentence: String = str.substringFromIndex(str.startIndex.advancedBy(index))
+                for result in timeTagsMatched {
+                    let matchedRange: NSRange = result.range
+                    let lrcLine: LyricsLineModel = LyricsLineModel()
+                    lrcLine.lyricsSentence = lyricsSentence
+                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
+                    let currentCount: Int = tempLyrics.count
+                    var j: Int = 0
+                    while j < currentCount {
+                        if lrcLine.msecPosition < tempLyrics[j].msecPosition {
+                            tempLyrics.insert(lrcLine, atIndex: j)
+                            break
+                        }
+                        j += 1
+                    }
+                    if j == currentCount {
+                        tempLyrics.append(lrcLine)
+                    }
+                }
+            }
+            else {
+                let idTagsMatched: [NSTextCheckingResult] = regexForIDTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
+                if idTagsMatched.count == 0 {
+                    continue
+                }
+                for result in idTagsMatched {
+                    let matchedRange: NSRange = result.range
+                    let idTag: NSString = (str as NSString).substringWithRange(matchedRange) as NSString
+                    let colonRange: NSRange = idTag.rangeOfString(":")
+                    let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1)).stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
+                    let idContent: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1)).stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
+                    if idStr == "offset" {
+                        tempTimeDly = (idContent as NSString).integerValue
+                    }
+                    else {
+                        tempIDTags.append(idTag as String)
+                        if idStr == "al" || idStr == "ti" {
+                            titleAndAlbum.append(idContent)
+                        }
+                        else {
+                            otherIDInfos.append(idContent)
+                        }
+                    }
+                }
+            }
+        }
+        //Filter
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let directFilter = userDefaults.arrayForKey(LyricsDirectFilter) as! [String]
+        let conditionalFilter = userDefaults.arrayForKey(LyricsConditionalFilter) as! [String]
+        var index: Int = 0
+        MainLoop: while index < tempLyrics.count {
+            let line = tempLyrics[index].lyricsSentence.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
+            for filter in titleAndAlbum {
+                if line == filter && index < 8 {
+                    tempLyrics.removeAtIndex(index)
+                    continue MainLoop
+                }
+                else if line.rangeOfString(filter) != nil && line.rangeOfString("「") != nil {
+                    tempLyrics.removeAtIndex(index)
+                    continue MainLoop
+                }
+            }
+            for filter in otherIDInfos {
+                if line.rangeOfString(filter) != nil {
+                    tempLyrics.removeAtIndex(index)
+                    continue MainLoop
+                }
+            }
+            for filter in directFilter {
+                if line.rangeOfString(filter) != nil {
+                    tempLyrics.removeAtIndex(index)
+                    continue MainLoop
+                }
+            }
+            for filter in conditionalFilter {
+                if line.rangeOfString(filter) != nil {
+                    for aColon in colons {
+                        if line.rangeOfString(aColon) != nil {
+                            tempLyrics.removeAtIndex(index)
+                            continue MainLoop
+                        }
+                    }
+                }
+            }
+            index += 1
+        }
+        lyrics = tempLyrics
+        idTags = tempIDTags
+        timeDly = tempTimeDly
     }
     
     func cleanCache() {

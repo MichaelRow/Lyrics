@@ -76,7 +76,6 @@
 		76ECE2641C31223400089705 /* LrcMaker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2611C31222B00089705 /* LrcMaker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76ECE2651C31223400089705 /* LrcMerger.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2621C31222B00089705 /* LrcMerger.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76ECE2661C31223400089705 /* LrcSeeker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2631C31222B00089705 /* LrcSeeker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		76F449BE1CA6708B00ABFFB1 /* LrcFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F449BD1CA6708B00ABFFB1 /* LrcFilter.swift */; };
 		76FDF20A1C8B0D18006C3AB8 /* 关于双语歌词编辑工具.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FDF2091C8B0D18006C3AB8 /* 关于双语歌词编辑工具.pdf */; };
 		76FE94411BFC223600A1AC27 /* TextPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FE94401BFC223600A1AC27 /* TextPreview.swift */; };
 		76FF43791BEF9BAB00D2B14F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */; };
@@ -214,7 +213,6 @@
 		76ECE2611C31222B00089705 /* LrcMaker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = LrcMaker.app; path = "Build-In App/LrcMaker.app"; sourceTree = "<group>"; };
 		76ECE2621C31222B00089705 /* LrcMerger.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = LrcMerger.app; path = "Build-In App/LrcMerger.app"; sourceTree = "<group>"; };
 		76ECE2631C31222B00089705 /* LrcSeeker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = LrcSeeker.app; path = "Build-In App/LrcSeeker.app"; sourceTree = "<group>"; };
-		76F449BD1CA6708B00ABFFB1 /* LrcFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LrcFilter.swift; sourceTree = "<group>"; };
 		76FDF2091C8B0D18006C3AB8 /* 关于双语歌词编辑工具.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "关于双语歌词编辑工具.pdf"; sourceTree = "<group>"; };
 		76FE94401BFC223600A1AC27 /* TextPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPreview.swift; sourceTree = "<group>"; };
 		76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -413,7 +411,6 @@
 				7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */,
 				76CE31811CA6BC8F00F1497B /* FilterString.swift */,
 				76251C691CA5336D00B9F049 /* LrcParser.swift */,
-				76F449BD1CA6708B00ABFFB1 /* LrcFilter.swift */,
 				768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */,
 				76C511771BEC6FD50095F510 /* Macros.swift */,
 				764334911BF95ECF00C4B740 /* iTunesBridge.h */,
@@ -628,7 +625,6 @@
 				768ADD0E1C47A4AA00567FE2 /* ContextMenuDelegate.swift in Sources */,
 				760012291BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift in Sources */,
 				7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */,
-				76F449BE1CA6708B00ABFFB1 /* LrcFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

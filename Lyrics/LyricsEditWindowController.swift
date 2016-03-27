@@ -78,7 +78,7 @@ class LyricsEditWindowController: NSWindowController {
         }
         var newLyrics = String()
         let parser = LrcParser()
-        parser.fullParse(textView.string!)
+        parser.regularParse(textView.string!)
         for str in parser.idTags {
             newLyrics.appendContentsOf(str + "\n")
         }
