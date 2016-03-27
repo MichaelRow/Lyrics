@@ -13,16 +13,17 @@ class LrcFilter: NSObject {
     let colon = [":","：","∶"]
     
     func filter(lyricsLine: String) -> Bool {
+        let convertedLyrics = lyricsLine.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
         let userDefaults = NSUserDefaults.standardUserDefaults()
         for str in userDefaults.arrayForKey(LyricsDirectFilter)! {
-            if lyricsLine.rangeOfString(str as! String) != nil {
+            if convertedLyrics.rangeOfString((str as! String).lowercaseString) != nil {
                 return false
             }
         }
         for str in userDefaults.arrayForKey(LyricsConditionalFilter)! {
-            if lyricsLine.rangeOfString(str as! String) != nil {
+            if convertedLyrics.rangeOfString((str as! String).lowercaseString) != nil {
                 for aColon in colon {
-                    if lyricsLine.rangeOfString(aColon) != nil {
+                    if convertedLyrics.rangeOfString(aColon) != nil {
                         return false
                     }
                 }
