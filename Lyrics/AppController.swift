@@ -433,7 +433,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
             }
         }
-        saveLrcToLocal(wrongLyricsTag, songTitle: songTitle, artist: artist)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
+            self.saveLrcToLocal(wrongLyricsTag, songTitle: songTitle, artist: artist)
+        }
     }
 
     @IBAction func setAutoLayout(sender: AnyObject?) {
@@ -566,9 +568,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 //if time-Delay for the previous song is changed, we should save the change to lrc file.
                 //Save time-Delay laziely for better I/O performance.
                 if timeDly != timeDlyInFile {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                        self.handleLrcDelayChange()
-                    })
+                    self.handleLrcDelayChange()
                 }
                 
                 lyricsArray.removeAll()
@@ -618,10 +618,27 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             lrcToParse = lrcContents
         }
         lrcParser.fullParse(lrcToParse)
-        lyricsArray = lrcParser.lyrics
-        idTagsArray = lrcParser.idTags
-        self.setValue(lrcParser.timeDly, forKey: "timeDly")
-        timeDlyInFile = timeDly
+        if userDefaults.boolForKey(LyricsEnableFilter) {
+            let filter = LrcFilter()
+            let tempLyricsArray = lrcParser.lyrics
+            let tempIDTagsArray = lrcParser.idTags
+            let tempTimeDly = lrcParser.timeDly
+            for line in tempLyricsArray {
+                if !filter.filter(line.lyricsSentence) {
+                    line.lyricsSentence = ""
+                }
+            }
+            lyricsArray = tempLyricsArray
+            idTagsArray = tempIDTagsArray
+            self.setValue(tempTimeDly, forKey: "timeDly")
+            timeDlyInFile = timeDly
+        }
+        else {
+            lyricsArray = lrcParser.lyrics
+            idTagsArray = lrcParser.idTags
+            self.setValue(lrcParser.timeDly, forKey: "timeDly")
+            timeDlyInFile = timeDly
+        }
         lrcParser.cleanCache()
     }
 
@@ -842,7 +859,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             theLyrics.removeAtIndex(theLyrics.endIndex.advancedBy(-1))
         }
         NSLog("Writing the time delay to file")
-        saveLrcToLocal(theLyrics, songTitle: currentSongTitle, artist: currentArtist)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
+            self.saveLrcToLocal(theLyrics, songTitle: self.currentSongTitle, artist: self.currentArtist)
+        }
     }
     
     func handlePresetDidChanged() {

@@ -24,6 +24,9 @@
 "UNSUPPORTED_ENCODING"="Unsupported Text Encoding";
 "ONLY_UTF8"="LyricsX only supports UTF-8 Encoding, and more encoding in the future updates.";
 "OK"="OK";
+"RESET_FILTER"="Reset Filter Keywords";
+"RESET_CONFIRM"="Do you really want to reset the list?";
+"RESET"="Reset";
 
 // Prefs Toolbar Identifier
 "GENERAL"="General";
@@ -32,6 +35,7 @@
 "SHORTCUT"="Shortcut";
 "DONATE"="Donate";
 "PRESET"="Preset";
+"FILTER"="Lyrics Filter";
 
 // Preset Prefs
 "UNTITLED_PRESET"="Untitled Preset";
@@ -68,3 +72,6 @@
 
 // About Window
 "EULA"="EULA";
+
+// Other
+"NEW_KEYWORD"="*New Keyword*";

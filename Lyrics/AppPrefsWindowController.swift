@@ -18,6 +18,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     @IBOutlet private var fontAndColorPrefsView: ClickView!
     @IBOutlet private var shortcutPrefsView: NSView!
     @IBOutlet private var presetPrefsView: ClickView!
+    @IBOutlet private var filterPrefsView: ClickView!
     //General
     @IBOutlet private weak var savingPathPopUp: NSPopUpButton!
     //Font & Color
@@ -28,7 +29,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     @IBOutlet private weak var shadowColor: NSColorWell!
     @IBOutlet private weak var revertButton: NSButton!
     @IBOutlet private weak var applyButton: NSButton!
-    private var hasUnsavedChange: Bool = false
+    private var hasFontAndColorChange: Bool = false
     private var font: NSFont!
     var shadowModeEnabled: Bool = false
     var shadowRadius: Float = 0
@@ -48,6 +49,12 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     @IBOutlet private var tableMenu: NSMenu!
     @IBOutlet private var dialog: NSWindow!
     @IBOutlet private var presetNameTF: NSTextField!
+    //Filter
+    dynamic var directFilter = [FilterString]()
+    dynamic var conditionalFilter = [FilterString]()
+    @IBOutlet var directFilterList: NSTableView!
+    @IBOutlet var conditionalFilterList: NSTableView!
+    @IBOutlet var helpPopover: NSPopover!
     
 //MARK: - Init & Override
 
@@ -56,7 +63,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         presets = [String]()
         
         self.window?.delegate = self
-        hasUnsavedChange = false
+        hasFontAndColorChange = false
         
         //Pop up button and font is hard to bind to NSUserDefaultsController, do it by self
         let defaultSavingPath: String = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
@@ -66,6 +73,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         savingPathPopUp.itemAtIndex(1)?.title = (userSavingPath as NSString).lastPathComponent
         
         reflashFontAndColorPrefs()
+        loadFilter()
     }
     
     override func setupToolbar () {
@@ -74,6 +82,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         self.addView(fontAndColorPrefsView, label: NSLocalizedString("FONT_COLOR", comment: ""), image: NSImage(named: "font_Color_icon"))
         self.addView(shortcutPrefsView, label: NSLocalizedString("SHORTCUT", comment: ""), image: NSImage(named: "shortcut"))
         self.addView(presetPrefsView, label: NSLocalizedString("PRESET", comment: ""), image: NSImage(named: NSImageNameAdvanced))
+        self.addView(filterPrefsView, label: NSLocalizedString("FILTER", comment: ""), image: NSImage(named:"Delete"))
     }
     
     override func displayViewForIdentifier(identifier: String, animate: Bool) {
@@ -90,8 +99,8 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         let shortCutID: String = NSLocalizedString("SHORTCUT", comment: "")
         if self.window?.title == fontAndColorID {
             if identifier != fontAndColorID {
-                if hasUnsavedChange {
-                    displayAlert(identifier)
+                if hasFontAndColorChange {
+                    fontAndColorAlert(identifier)
                     return
                 } else {
                     NSFontPanel.sharedFontPanel().orderOut(nil)
@@ -177,11 +186,11 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     }
     
     @IBAction private func fontAndColorChanged(sender: AnyObject?) {
-        if !hasUnsavedChange {
+        if !hasFontAndColorChange {
             revertButton.enabled = true
             applyButton.enabled = true
         }
-        hasUnsavedChange = true
+        hasFontAndColorChange = true
         textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, heightInrc:bgHeightIncreasement, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: shadowRadius, yOffset:lyricsYOffset)
     }
     
@@ -191,7 +200,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
             return
         }
         self.window?.makeFirstResponder(nil)
-        hasUnsavedChange = false
+        hasFontAndColorChange = false
         revertButton.enabled = false
         applyButton.enabled = false
         let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -214,7 +223,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
             textView.string = "0"
         }
         self.window?.makeFirstResponder(nil)
-        hasUnsavedChange = false
+        hasFontAndColorChange = false
         revertButton.enabled = false
         applyButton.enabled = false
         reflashFontAndColorPrefs()
@@ -242,9 +251,16 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     private func canResignFirstResponder() -> Bool {
         let currentResponder = self.window?.firstResponder
         if currentResponder != nil && currentResponder!.isKindOfClass(NSTextView) {
-            let formatter: NSNumberFormatter = ((currentResponder as! NSTextView).superview?.superview as! NSTextField).formatter as! NSNumberFormatter
+            let textField: NSTextField? = (currentResponder as! NSTextView).superview?.superview as? NSTextField
+            if textField == nil {
+                return true
+            }
+            let formatter = textField!.formatter as? NSNumberFormatter
+            if formatter == nil {
+                return true
+            }
             let stringValue: String = (currentResponder as! NSTextView).string!
-            if formatter.numberFromString(stringValue) == nil {
+            if formatter!.numberFromString(stringValue) == nil {
                 return false
             }
             else {
@@ -256,7 +272,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         }
     }
     
-    private func displayAlert(identifier: String!) {
+    private func fontAndColorAlert(identifier: String!) {
         // identifier nil means window is about to close
         let alert: NSAlert = NSAlert()
         alert.messageText = NSLocalizedString("CHANGE_UNSAVED", comment: "")
@@ -585,8 +601,78 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         self.window!.endSheet(dialog, returnCode: NSModalResponseCancel)
     }
     
+// MARK: - Filter Prefs   
     
+    func loadFilter() {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let directFilterStringArray = userDefault.arrayForKey(LyricsDirectFilter) as! [String]
+        let conditionalFilterStringArray = userDefault.arrayForKey(LyricsConditionalFilter) as! [String]
+        for str in directFilterStringArray {
+            directFilter.append(FilterString(keyword: str))
+        }
+        for str in conditionalFilterStringArray {
+            conditionalFilter.append(FilterString(keyword: str))
+        }
+    }
     
+    @IBAction func addKeywordForDirectFilterList(sender: AnyObject) {
+        directFilter.append(FilterString())
+        dispatch_async(dispatch_get_main_queue()) {
+            self.directFilterList.scrollRowToVisible(self.directFilter.count - 1)
+            self.directFilterList.editColumn(0, row: self.directFilter.count - 1, withEvent: nil, select: true)
+        }
+    }
+    
+    @IBAction func addKeywordForConditionalFilterList(sender: AnyObject) {
+        conditionalFilter.append(FilterString())
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.conditionalFilterList.scrollRowToVisible(self.conditionalFilter.count - 1)
+            self.conditionalFilterList.editColumn(0, row: self.conditionalFilter.count - 1, withEvent: nil, select: true)
+        }
+    }
+    
+    @IBAction func resetFilterList(sender: AnyObject) {
+        let alert: NSAlert = NSAlert()
+        alert.messageText = NSLocalizedString("RESET_FILTER", comment: "")
+        alert.informativeText = NSLocalizedString("RESET_CONFIRM", comment: "")
+        alert.addButtonWithTitle(NSLocalizedString("RESET", comment: ""))
+        alert.addButtonWithTitle(NSLocalizedString("CANCEL", comment: ""))
+        alert.beginSheetModalForWindow(self.window!) { (response) in
+            if response == NSAlertFirstButtonReturn {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                userDefaults.removeObjectForKey(LyricsDirectFilter)
+                userDefaults.removeObjectForKey(LyricsConditionalFilter)
+                self.directFilter.removeAll()
+                self.conditionalFilter.removeAll()
+                self.loadFilter()
+            }
+        }
+    }
+    
+    @IBAction func revertFilterKeyword(sender: AnyObject) {
+        self.directFilter.removeAll()
+        self.conditionalFilter.removeAll()
+        self.loadFilter()
+    }
+    
+    @IBAction func saveFilterKeyword(sender: AnyObject) {
+        var dircetFilterStringArray = [String]()
+        var conditionalFilterStringArray = [String]()
+        for filterStr in directFilter {
+            dircetFilterStringArray.append(filterStr.keyword)
+        }
+        for filterStr in conditionalFilter {
+            conditionalFilterStringArray.append(filterStr.keyword)
+        }
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.setObject(dircetFilterStringArray, forKey: LyricsDirectFilter)
+        userDefaults.setObject(conditionalFilterStringArray, forKey: LyricsConditionalFilter)
+    }
+    
+    @IBAction func showHelp(sender: NSButton) {
+        helpPopover.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: .MaxY)
+    }
+
 // MARK: - NSWindow & NSTextField Delegate
 
     func windowShouldClose(sender: AnyObject) -> Bool {
@@ -595,8 +681,8 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
             return false
         }
         if (sender as! NSWindow).title == NSLocalizedString("FONT_COLOR", comment: "") {
-            if hasUnsavedChange {
-                displayAlert(nil)
+            if hasFontAndColorChange {
+                fontAndColorAlert(nil)
                 return false
             } else {
                 NSFontPanel.sharedFontPanel().orderOut(nil)

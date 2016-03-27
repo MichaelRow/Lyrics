@@ -62,6 +62,7 @@
 		76C511621BEC6F8F0095F510 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C511601BEC6F8F0095F510 /* MainMenu.xib */; };
 		76C511781BEC6FD50095F510 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C511771BEC6FD50095F510 /* Macros.swift */; };
 		76C590C61C7E050B004564D9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C590C51C7E050B004564D9 /* IOKit.framework */; };
+		76CE31821CA6BC8F00F1497B /* FilterString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CE31811CA6BC8F00F1497B /* FilterString.swift */; };
 		76D060451C02B8D8000DA86C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D060441C02B8D8000DA86C /* AppDelegate.swift */; };
 		76D060471C02B8D9000DA86C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D060461C02B8D9000DA86C /* Assets.xcassets */; };
 		76D0604A1C02B8D9000DA86C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D060481C02B8D9000DA86C /* MainMenu.xib */; };
@@ -75,6 +76,7 @@
 		76ECE2641C31223400089705 /* LrcMaker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2611C31222B00089705 /* LrcMaker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76ECE2651C31223400089705 /* LrcMerger.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2621C31222B00089705 /* LrcMerger.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76ECE2661C31223400089705 /* LrcSeeker.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76ECE2631C31222B00089705 /* LrcSeeker.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76F449BE1CA6708B00ABFFB1 /* LrcFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F449BD1CA6708B00ABFFB1 /* LrcFilter.swift */; };
 		76FDF20A1C8B0D18006C3AB8 /* 关于双语歌词编辑工具.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FDF2091C8B0D18006C3AB8 /* 关于双语歌词编辑工具.pdf */; };
 		76FE94411BFC223600A1AC27 /* TextPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FE94401BFC223600A1AC27 /* TextPreview.swift */; };
 		76FF43791BEF9BAB00D2B14F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */; };
@@ -193,6 +195,7 @@
 		76C511631BEC6F8F0095F510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76C511771BEC6FD50095F510 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 		76C590C51C7E050B004564D9 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		76CE31811CA6BC8F00F1497B /* FilterString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterString.swift; sourceTree = "<group>"; };
 		76D060421C02B8D8000DA86C /* LyricsX Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LyricsX Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D060441C02B8D8000DA86C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76D060461C02B8D9000DA86C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 		76ECE2611C31222B00089705 /* LrcMaker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = LrcMaker.app; path = "Build-In App/LrcMaker.app"; sourceTree = "<group>"; };
 		76ECE2621C31222B00089705 /* LrcMerger.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = LrcMerger.app; path = "Build-In App/LrcMerger.app"; sourceTree = "<group>"; };
 		76ECE2631C31222B00089705 /* LrcSeeker.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = LrcSeeker.app; path = "Build-In App/LrcSeeker.app"; sourceTree = "<group>"; };
+		76F449BD1CA6708B00ABFFB1 /* LrcFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LrcFilter.swift; sourceTree = "<group>"; };
 		76FDF2091C8B0D18006C3AB8 /* 关于双语歌词编辑工具.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "关于双语歌词编辑工具.pdf"; sourceTree = "<group>"; };
 		76FE94401BFC223600A1AC27 /* TextPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPreview.swift; sourceTree = "<group>"; };
 		76FF43781BEF9BAB00D2B14F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -407,7 +411,9 @@
 			isa = PBXGroup;
 			children = (
 				7642B9001BF45B0100D68FE9 /* LyricsLineModel.swift */,
+				76CE31811CA6BC8F00F1497B /* FilterString.swift */,
 				76251C691CA5336D00B9F049 /* LrcParser.swift */,
+				76F449BD1CA6708B00ABFFB1 /* LrcFilter.swift */,
 				768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */,
 				76C511771BEC6FD50095F510 /* Macros.swift */,
 				764334911BF95ECF00C4B740 /* iTunesBridge.h */,
@@ -611,6 +617,7 @@
 				764B0A841C30D1600048419B /* XMLParserForQQ.swift in Sources */,
 				76C5115D1BEC6F8F0095F510 /* AppDelegate.swift in Sources */,
 				760A01901C01A37400015C62 /* Xiami.m in Sources */,
+				76CE31821CA6BC8F00F1497B /* FilterString.swift in Sources */,
 				764B0A831C30D1600048419B /* QQMusic.swift in Sources */,
 				766F03C51C049372003F4790 /* LyricsEditView.swift in Sources */,
 				760A01911C01A37400015C62 /* XMLParserForXiami.m in Sources */,
@@ -621,6 +628,7 @@
 				768ADD0E1C47A4AA00567FE2 /* ContextMenuDelegate.swift in Sources */,
 				760012291BFD9FAC00C7C1E4 /* LyricsEditWindowController.swift in Sources */,
 				7642B9011BF45B0100D68FE9 /* LyricsLineModel.swift in Sources */,
+				76F449BE1CA6708B00ABFFB1 /* LrcFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

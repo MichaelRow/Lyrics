@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AppPrefsWindowController" customModule="LyricsX" customModuleProvider="target">
             <connections>
                 <outlet property="applyButton" destination="2MS-Zm-Upl" id="BJn-wE-rb3"/>
                 <outlet property="bkColor" destination="EW0-Bd-p9N" id="fph-28-bHi"/>
+                <outlet property="conditionalFilterList" destination="q3C-Ye-vOl" id="xMh-Az-JoF"/>
                 <outlet property="copyLrcToPbShortcut" destination="hlc-is-WV9" id="gcA-Rv-gdq"/>
                 <outlet property="desktopMenubarSwitchShortcut" destination="Bxn-kf-FeY" id="iar-I4-ZY1"/>
                 <outlet property="dialog" destination="iu5-wj-vE1" id="4JO-Pw-5KZ"/>
+                <outlet property="directFilterList" destination="iOq-Po-ONP" id="MEq-di-ab2"/>
                 <outlet property="editLrcShortcut" destination="paS-fO-cn5" id="fsu-14-fBK"/>
+                <outlet property="filterPrefsView" destination="br6-UQ-beu" id="Ixv-Be-A7h"/>
                 <outlet property="fontAndColorPrefsView" destination="57y-D4-ovD" id="9r1-x0-jZ6"/>
                 <outlet property="fontDisplayText" destination="0FF-WL-2dH" id="aqe-Ki-ifH"/>
                 <outlet property="generalPrefsView" destination="hzc-UQ-83r" id="gn9-FJ-f9h"/>
+                <outlet property="helpPopover" destination="ogp-WF-MQM" id="npp-Ig-rP0"/>
                 <outlet property="lrcSeekerShortcut" destination="dy6-ep-Gan" id="kFw-jY-zHC"/>
                 <outlet property="lyricsModeSwitchShortcut" destination="Xic-BL-Y5L" id="xTf-yp-hBx"/>
                 <outlet property="lyricsPrefsView" destination="5BK-8u-tNV" id="0r6-Ag-2Fa"/>
@@ -1014,7 +1019,7 @@ DQ
                     </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="1483.5" y="225.5"/>
+            <point key="canvasLocation" x="773.5" y="622.5"/>
         </window>
         <menu id="A8e-2W-qhd">
             <items>
@@ -1043,8 +1048,271 @@ DQ
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="1097.5" y="215.5"/>
+            <point key="canvasLocation" x="670.5" y="448.5"/>
         </menu>
+        <arrayController objectClassName="LyricsX.FilterString" id="ZYF-Pk-6fW" userLabel="Direct Filter">
+            <declaredKeys>
+                <string>keyword</string>
+            </declaredKeys>
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="self.directFilter" id="Kfy-Ky-Nlg"/>
+            </connections>
+        </arrayController>
+        <arrayController objectClassName="LyricsX.FilterString" id="JzX-S8-jdO" userLabel="Condition Filter">
+            <declaredKeys>
+                <string>keyword</string>
+            </declaredKeys>
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="self.conditionalFilter" id="cIe-Gf-mIi"/>
+            </connections>
+        </arrayController>
+        <viewController id="2qk-ju-pFu" userLabel="Popover View Controller">
+            <connections>
+                <outlet property="view" destination="saB-ui-pbt" id="hxI-ZT-hRq"/>
+            </connections>
+        </viewController>
+        <popover behavior="t" id="ogp-WF-MQM">
+            <connections>
+                <outlet property="contentViewController" destination="2qk-ju-pFu" id="3Uz-hN-UQd"/>
+            </connections>
+        </popover>
+        <customView id="br6-UQ-beu" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="398" height="266"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button id="Mus-xI-ufB">
+                    <rect key="frame" x="19" y="230" width="131" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Enable lyrics filter" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="okA-6s-moD">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" size="13" name=".PingFangSC-Regular"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsEnableFilter" id="gsd-oX-szq">
+                            <dictionary key="options">
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
+                <box autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" id="Fa4-UG-48v">
+                    <rect key="frame" x="17" y="11" width="363" height="214"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <view key="contentView" id="Hcj-NH-RJ0">
+                        <rect key="frame" x="1" y="1" width="361" height="212"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" id="oez-Cc-Mq2">
+                                <rect key="frame" x="227" y="41" width="31" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Qu-4J-EKm">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="miniSystemBold"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="remove:" target="JzX-S8-jdO" id="aBl-dh-w5k"/>
+                                    <binding destination="JzX-S8-jdO" name="enabled" keyPath="canRemove" id="TmW-3j-VVK"/>
+                                </connections>
+                            </button>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="kyp-Lf-1Zb">
+                                <rect key="frame" x="20" y="65" width="150" height="135"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <clipView key="contentView" drawsBackground="NO" id="vos-t2-eGh">
+                                    <rect key="frame" x="1" y="23" width="148" height="111"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" headerView="hU6-M3-R6L" id="iOq-Po-ONP">
+                                            <rect key="frame" x="0.0" y="0.0" width="148" height="111"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn width="145" minWidth="40" maxWidth="1000" id="D04-Hb-SPR">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Direct Filter List">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="center" title="Text Cell" id="hNe-Gr-JIt">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="ZYF-Pk-6fW" name="value" keyPath="arrangedObjects.keyword" id="yUJ-UP-UzB"/>
+                                                    </connections>
+                                                </tableColumn>
+                                            </tableColumns>
+                                        </tableView>
+                                    </subviews>
+                                    <nil key="backgroundColor"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="jaM-4l-MQc">
+                                    <rect key="frame" x="1" y="118" width="148" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="5Gp-lp-Thc">
+                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <tableHeaderView key="headerView" id="hU6-M3-R6L">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="23"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableHeaderView>
+                            </scrollView>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="lLj-bQ-m7t">
+                                <rect key="frame" x="191" y="65" width="150" height="135"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <clipView key="contentView" id="27M-0Q-LXC">
+                                    <rect key="frame" x="1" y="23" width="148" height="111"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" headerView="FtL-g3-pP5" id="q3C-Ye-vOl">
+                                            <rect key="frame" x="0.0" y="0.0" width="152" height="19"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn width="149" minWidth="40" maxWidth="1000" id="1h2-He-58I">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Conditional Filter List">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="center" title="Text Cell" id="4r1-nB-KJ1">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="JzX-S8-jdO" name="value" keyPath="arrangedObjects.keyword" id="U4P-ET-lSc"/>
+                                                    </connections>
+                                                </tableColumn>
+                                            </tableColumns>
+                                        </tableView>
+                                    </subviews>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="geK-tP-p0X">
+                                    <rect key="frame" x="1" y="118" width="148" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="ikX-3S-bGc">
+                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <tableHeaderView key="headerView" id="FtL-g3-pP5">
+                                    <rect key="frame" x="0.0" y="0.0" width="152" height="23"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableHeaderView>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" id="Rqu-iu-HZQ">
+                                <rect key="frame" x="19" y="41" width="31" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="j61-9q-pV7">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="miniSystemBold"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addKeywordForDirectFilterList:" target="-2" id="elS-d5-tef"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" id="Ad3-br-whi">
+                                <rect key="frame" x="56" y="41" width="31" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WdR-tS-imm">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="miniSystemBold"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="remove:" target="ZYF-Pk-6fW" id="Dmt-D9-uQS"/>
+                                    <binding destination="ZYF-Pk-6fW" name="enabled" keyPath="canRemove" id="IFp-qU-vEr"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" id="stZ-0U-FWu">
+                                <rect key="frame" x="190" y="41" width="31" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RUo-95-VvH">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="miniSystemBold"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addKeywordForConditionalFilterList:" target="-2" id="D3t-s4-n8z"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" id="uri-VK-yuk">
+                                <rect key="frame" x="14" y="6" width="131" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Reset Filter List" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ljv-9p-mb2">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="resetFilterList:" target="-2" id="fdq-MW-Bw5"/>
+                                </connections>
+                            </button>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" id="2qM-Vb-g0g">
+                                <rect key="frame" x="318" y="10" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gw7-PD-1Yt">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showHelp:" target="-2" id="Jh1-Vf-2X6"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" id="tIB-I7-gbZ">
+                                <rect key="frame" x="250" y="7" width="69" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="X8y-ph-eWB">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="saveFilterKeyword:" target="-2" id="oAg-Aw-wPg"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" id="PTJ-Lg-LbK">
+                                <rect key="frame" x="170" y="6" width="80" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Revert" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NQO-E1-csh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="revertFilterKeyword:" target="-2" id="gHx-OA-8ol"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+            </subviews>
+            <point key="canvasLocation" x="1240" y="221"/>
+        </customView>
+        <customView id="saB-ui-pbt">
+            <rect key="frame" x="0.0" y="0.0" width="319" height="121"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="kz3-WR-6VP">
+                    <rect key="frame" x="18" y="20" width="275" height="84"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="q7o-1Z-gK3">
+                        <font key="font" size="11" name=".LucidaGrandeUI"/>
+                        <string key="title">※ Direct Filter List：Filter lyrics if keyword occured ※ Conditional Filter List：Filter lyrics if both keyword and colon occured ※ Don't type in space when add new keyword ※ Changes will not auto save unless you click Save button</string>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="1258.5" y="485.5"/>
+        </customView>
     </objects>
     <resources>
         <image name="Font_icon" width="24" height="24"/>

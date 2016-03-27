@@ -15,6 +15,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         let userSavingPath: NSString = NSSearchPathForDirectoriesInDomains(.DownloadsDirectory, [.UserDomainMask], true).first! 
         
+        let directFilter = ["作詞","作词","作曲","編曲","编曲","収録","収录","歌手","歌曲","制作","歌词","歌詞","製作","翻譯","翻译","lrc","qq","アニメ","opテマ","edテマ","lyricsby"]
+        let conditionalFilter = ["by","歌","唄","曲","作","唱","詞","词","編","编"]
+        
         let userDefaults: [String:AnyObject] = [
             //Menu
             LyricsDesktopLyricsEnabled : NSNumber(bool: true),
@@ -54,7 +57,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsShadowColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.orangeColor()),
             LyricsShadowRadius : NSNumber(float: 4),
             LyricsBgHeightINCR : NSNumber(float: 0),
-            LyricsYOffset : NSNumber(float: 0)
+            LyricsYOffset : NSNumber(float: 0),
+            
+            //Filter Preferences Defaults
+            LyricsDirectFilter : directFilter,
+            LyricsConditionalFilter : conditionalFilter,
+            LyricsEnableFilter : NSNumber(bool: false),
         ]
         
         NSUserDefaults.standardUserDefaults().registerDefaults(userDefaults)

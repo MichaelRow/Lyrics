@@ -52,10 +52,10 @@ class LrcParser: NSObject {
     
     func fullParse(lrcContents: String) {
         NSLog("Start to Parse lrc")
-        lyrics.removeAll()
-        idTags.removeAll()
-        timeDly = 0
+        cleanCache()
         
+        var tempLyrics = [LyricsLineModel]()
+        var tempIDTags = [String]()
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
         let lrcParagraphs: [String] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
         
@@ -69,17 +69,17 @@ class LrcParser: NSObject {
                     let lrcLine: LyricsLineModel = LyricsLineModel()
                     lrcLine.lyricsSentence = lyricsSentence
                     lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
-                    let currentCount: Int = lyrics.count
+                    let currentCount: Int = tempLyrics.count
                     var j: Int = 0
                     while j < currentCount {
-                        if lrcLine.msecPosition < lyrics[j].msecPosition {
-                            lyrics.insert(lrcLine, atIndex: j)
+                        if lrcLine.msecPosition < tempLyrics[j].msecPosition {
+                            tempLyrics.insert(lrcLine, atIndex: j)
                             break
                         }
                         j += 1
                     }
                     if j == currentCount {
-                        lyrics.append(lrcLine)
+                        tempLyrics.append(lrcLine)
                     }
                 }
             }
@@ -94,23 +94,23 @@ class LrcParser: NSObject {
                     let colonRange: NSRange = idTag.rangeOfString(":")
                     let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
                     if idStr.stringByReplacingOccurrencesOfString(" ", withString: "") != "offset" {
-                        idTags.append(idTag as String)
+                        tempIDTags.append(idTag as String)
                         continue
                     }
                     else {
-                        let delayStr: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1))
-                        timeDly = (delayStr as NSString).integerValue
+                        let idContent: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1))
+                        timeDly = (idContent as NSString).integerValue
                     }
                 }
             }
         }
+        lyrics = tempLyrics
+        idTags = tempIDTags
     }
     
     func parseForLyrics(lrcContents: String) {
-        lyrics.removeAll()
-        idTags.removeAll()
-        timeDly = 0
-        
+        cleanCache()
+        var tempLyrics = [LyricsLineModel]()
         let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
         let lrcParagraphs: [String] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
         
@@ -124,21 +124,22 @@ class LrcParser: NSObject {
                     let lrcLine: LyricsLineModel = LyricsLineModel()
                     lrcLine.lyricsSentence = lyricsSentence
                     lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
-                    let currentCount: Int = lyrics.count
+                    let currentCount: Int = tempLyrics.count
                     var j: Int = 0
                     while j < currentCount {
-                        if lrcLine.msecPosition < lyrics[j].msecPosition {
-                            lyrics.insert(lrcLine, atIndex: j)
+                        if lrcLine.msecPosition < tempLyrics[j].msecPosition {
+                            tempLyrics.insert(lrcLine, atIndex: j)
                             break
                         }
                         j += 1
                     }
                     if j == currentCount {
-                        lyrics.append(lrcLine)
+                        tempLyrics.append(lrcLine)
                     }
                 }
             }
         }
+        lyrics = tempLyrics
     }
     
     func cleanCache() {

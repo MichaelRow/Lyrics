@@ -9,7 +9,6 @@
 "PATH_IS_NOT_DIR" = "預設的Lrc歌詞儲存路徑不是資料夾，\n在這種情況下，歌詞檔案不會被儲存到本地。";
 "OPEN_PREFS" = "開啟偏好設定並重設路徑";
 "IGNORE" = "忽略";
-"IGNORE" = "忽略";
 "CHANGE_UNSAVED"="更改未儲存";
 "DISGARDS_LEAVE"="您確定放棄儲存並離開當前介面?";
 "APPLY_LEAVE"="應用並離開";
@@ -23,6 +22,9 @@
 "UNSUPPORTED_ENCODING"="不支援的文字編碼";
 "ONLY_UTF8"="LyricsX僅支援UTF-8文字編碼，在後續版本中將支援更多編碼，盡請期待。";
 "OK"="瞭解";
+"RESET_FILTER"="重置過濾列表";
+"RESET_CONFIRM"="您確定要重置過濾列表中的關鍵字?";
+"RESET"="重置";
 
 // Prefs Toolbar Identifier
 "GENERAL"="通用";
@@ -31,6 +33,7 @@
 "SHORTCUT"="快捷鍵";
 "DONATE"="捐贈";
 "PRESET"="預設";
+"FILTER"="歌詞過濾";
 
 // Preset Prefs
 "UNTITLED_PRESET"="未命名預設";
@@ -67,3 +70,6 @@
 
 // About Window
 "EULA"="許可協議";
+
+// Other
+"NEW_KEYWORD"="*新關鍵字*";

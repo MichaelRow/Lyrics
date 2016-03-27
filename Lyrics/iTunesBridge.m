@@ -48,6 +48,8 @@
             }
             else {
                 LrcParser *parser = [[LrcParser alloc] init];
+                LrcFilter *filter = [[LrcFilter alloc] init];
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                 for (iTunesTrack *track in allTracks) {
                     if (![[track.lyrics stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
                         continue;
@@ -61,6 +63,9 @@
                     }
                     NSMutableString *lyrics = [[NSMutableString alloc] init];
                     for (LyricsLineModel *lrcLine in parser.lyrics) {
+                        if ([userDefaults boolForKey:@"LyricsEnableFilter"] && ![filter filter:lrcLine.lyricsSentence]) {
+                            continue;
+                        }
                         [lyrics appendString:lrcLine.lyricsSentence];
                         [lyrics appendString:@"\n"];
                     }

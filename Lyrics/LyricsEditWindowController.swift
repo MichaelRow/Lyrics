@@ -82,6 +82,7 @@ class LyricsEditWindowController: NSWindowController {
         for str in parser.idTags {
             newLyrics.appendContentsOf(str + "\n")
         }
+        newLyrics.appendContentsOf("[offset:\(parser.timeDly)]\n")
         for line in parser.lyrics {
             newLyrics.appendContentsOf(line.timeTag + operationToString(line.lyricsSentence) + "\n")
         }

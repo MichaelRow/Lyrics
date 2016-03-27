@@ -24,6 +24,9 @@
 "UNSUPPORTED_ENCODING"="不支持的文字编码";
 "ONLY_UTF8"="LyricsX仅支持UTF-8文字编码，在后续版本中将支持更多编码，尽请期待。";
 "OK"="了解";
+"RESET_FILTER"="重置过滤列表";
+"RESET_CONFIRM"="您确定要重置过滤列表中的关键字?";
+"RESET"="重置";
 
 // Prefs Toolbar Identifier
 "GENERAL"="通用";
@@ -39,6 +42,7 @@
 "PRESET_EXISTS"="已存在同名预设";
 "INVALID_PRESET"="无效的预设";
 "PRESET_LOADED"="预设已载入";
+"FILTER"="歌词过滤";
 
 // TextPreview
 "PREVIEW_TEXT"="歌词效果预览";
@@ -68,3 +72,6 @@
 
 // About Window
 "EULA"="许可协议";
+
+// Other
+"NEW_KEYWORD"="*新关键字*";
