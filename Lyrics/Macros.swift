@@ -61,6 +61,7 @@ let LyricsYOffset:String="LyricsYOffset"
 let LyricsDirectFilter:String="LyricsDirectFilter"
 let LyricsConditionalFilter:String="LyricsConditionalFilter"
 let LyricsEnableFilter:String="LyricsEnableFilter"
+let LyricsEnableSmartFilter:String="LyricsEnableSmartFilter"
 
 //Shortcut
 let ShortcutLyricsModeSwitch:String="ShortcutLyricsModeSwitch"

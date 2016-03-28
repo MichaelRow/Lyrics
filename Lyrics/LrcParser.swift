@@ -151,7 +151,8 @@ class LrcParser: NSObject {
         var tempLyrics = [LyricsLineModel]()
         var tempIDTags = [String]()
         var tempTimeDly: Int = 0
-        var titleAndAlbum = [String]()
+        var title = String()
+        var album = String()
         var otherIDInfos = [String]()
         let colons = [":","：","∶"]
         
@@ -198,10 +199,12 @@ class LrcParser: NSObject {
                     }
                     else {
                         tempIDTags.append(idTag as String)
-                        if idStr == "al" || idStr == "ti" {
-                            titleAndAlbum.append(idContent)
-                        }
-                        else {
+                        switch idStr {
+                        case "ti":
+                            title = idContent
+                        case "al":
+                            album = idContent
+                        default:
                             otherIDInfos.append(idContent)
                         }
                     }
@@ -215,20 +218,33 @@ class LrcParser: NSObject {
         var index: Int = 0
         MainLoop: while index < tempLyrics.count {
             let line = tempLyrics[index].lyricsSentence.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
-            for filter in titleAndAlbum {
-                if line == filter && index < 8 {
+            if userDefaults.boolForKey(LyricsEnableSmartFilter) {
+                let hasTitle: Bool = line.rangeOfString(title) != nil
+                let hasAlbum: Bool = line.rangeOfString(album) != nil
+                let hasSymbol: Bool = line.rangeOfString("「") != nil
+                
+                if (hasAlbum || hasTitle) && index < 5 {
                     tempLyrics.removeAtIndex(index)
                     continue MainLoop
                 }
-                else if line.rangeOfString(filter) != nil && line.rangeOfString("「") != nil {
+                
+                if hasTitle && hasAlbum {
                     tempLyrics.removeAtIndex(index)
                     continue MainLoop
                 }
-            }
-            for filter in otherIDInfos {
-                if line.rangeOfString(filter) != nil {
-                    tempLyrics.removeAtIndex(index)
-                    continue MainLoop
+                
+                if hasSymbol {
+                    if hasTitle || hasAlbum {
+                        tempLyrics.removeAtIndex(index)
+                        continue MainLoop
+                    }
+                }
+                
+                for filter in otherIDInfos {
+                    if line.rangeOfString(filter) != nil {
+                        tempLyrics.removeAtIndex(index)
+                        continue MainLoop
+                    }
                 }
             }
             for filter in directFilter {

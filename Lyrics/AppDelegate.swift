@@ -63,6 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsDirectFilter : directFilter,
             LyricsConditionalFilter : conditionalFilter,
             LyricsEnableFilter : NSNumber(bool: false),
+            LyricsEnableSmartFilter : NSNumber(bool: true)
         ]
         
         NSUserDefaults.standardUserDefaults().registerDefaults(userDefaults)

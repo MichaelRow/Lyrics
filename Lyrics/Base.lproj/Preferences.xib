@@ -1077,11 +1077,11 @@ DQ
             </connections>
         </popover>
         <customView id="br6-UQ-beu" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="398" height="266"/>
+            <rect key="frame" x="0.0" y="0.0" width="398" height="290"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button id="Mus-xI-ufB">
-                    <rect key="frame" x="19" y="230" width="131" height="18"/>
+                    <rect key="frame" x="19" y="254" width="131" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Enable lyrics filter" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="okA-6s-moD">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1096,7 +1096,7 @@ DQ
                     </connections>
                 </button>
                 <box autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" id="Fa4-UG-48v">
-                    <rect key="frame" x="17" y="11" width="363" height="214"/>
+                    <rect key="frame" x="17" y="12" width="363" height="214"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="Hcj-NH-RJ0">
                         <rect key="frame" x="1" y="1" width="361" height="212"/>
@@ -1293,8 +1293,24 @@ DQ
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
+                <button id="R3D-uS-GF7">
+                    <rect key="frame" x="19" y="230" width="133" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Enable smart filter" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="j3c-kf-mht">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsEnableFilter" id="Fys-AH-oii"/>
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsEnableSmartFilter" id="EGK-fx-GBi">
+                            <dictionary key="options">
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
             </subviews>
-            <point key="canvasLocation" x="1240" y="221"/>
+            <point key="canvasLocation" x="1240" y="233"/>
         </customView>
         <customView id="saB-ui-pbt">
             <rect key="frame" x="0.0" y="0.0" width="319" height="121"/>
@@ -1311,7 +1327,7 @@ DQ
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="1258.5" y="485.5"/>
+            <point key="canvasLocation" x="1258.5" y="520.5"/>
         </customView>
     </objects>
     <resources>

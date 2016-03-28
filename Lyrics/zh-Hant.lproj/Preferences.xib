@@ -1081,11 +1081,11 @@ DQ
             </connections>
         </popover>
         <customView id="FSa-aF-ZaP" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="398" height="266"/>
+            <rect key="frame" x="0.0" y="0.0" width="398" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button id="d7A-Tv-wMO">
-                    <rect key="frame" x="19" y="230" width="107" height="18"/>
+                    <rect key="frame" x="19" y="264" width="107" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="啟用歌詞過濾" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="oQH-KS-HmW">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1100,7 +1100,7 @@ DQ
                     </connections>
                 </button>
                 <box autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" id="PUg-mr-O8q">
-                    <rect key="frame" x="17" y="11" width="363" height="214"/>
+                    <rect key="frame" x="17" y="16" width="363" height="214"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="nSg-q6-ncS">
                         <rect key="frame" x="1" y="1" width="361" height="212"/>
@@ -1297,25 +1297,41 @@ DQ
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
+                <button id="tuc-eW-vQl">
+                    <rect key="frame" x="19" y="240" width="282" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="智能过滤歌词中出现的歌曲名、歌手名等信息" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dSv-de-H9b">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" size="13" name=".PingFangSC-Regular"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="UKb-ML-D6F" name="enabled" keyPath="values.LyricsEnableFilter" id="1xK-7Y-VhA"/>
+                        <binding destination="UKb-ML-D6F" name="value" keyPath="values.LyricsEnableSmartFilter" id="t3A-9z-9oe">
+                            <dictionary key="options">
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
             </subviews>
-            <point key="canvasLocation" x="1237" y="213"/>
+            <point key="canvasLocation" x="1237" y="230"/>
         </customView>
         <customView id="9yD-4F-Kon">
-            <rect key="frame" x="0.0" y="0.0" width="282" height="103"/>
+            <rect key="frame" x="0.0" y="0.0" width="282" height="114"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Yu1-Ri-dRg">
-                    <rect key="frame" x="18" y="11" width="246" height="75"/>
+                    <rect key="frame" x="18" y="15" width="246" height="84"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="MMC-lB-zkW">
                         <font key="font" size="11" name=".LucidaGrandeUI"/>
-                        <string key="title">※直接過濾列表：歌詞中出現關鍵字直接過濾該行 ※條件過濾列表：歌詞中出現關鍵字以及各種形式                        冒號則過濾該行 ※過濾的關鍵字中請不要含有空格 ※請在完成增刪改操作後儲存，否則更改不會生效</string>
+                        <string key="title">※直接過濾列表：歌詞中出現關鍵字直接過濾該行 ※條件過濾列表：歌詞中出現關鍵字以及各種形式                        冒號則過濾該行 ※過濾的關鍵字中請不要含有空格 ※字母不區分大小寫 ※請在完成增刪改操作後儲存，否則更改不會生效</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="1237" y="471.5"/>
+            <point key="canvasLocation" x="1237" y="522"/>
         </customView>
     </objects>
     <resources>
