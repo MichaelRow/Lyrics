@@ -39,7 +39,7 @@
     }
 }
 
--(BOOL) setAllLyrics {
+-(BOOL) setAllLyrics: (BOOL)skip {
     @autoreleasepool {
         if (iTunes.playerState == iTunesEPlSPlaying) {
             SBElementArray *allTracks = iTunes.currentPlaylist.tracks;
@@ -50,7 +50,7 @@
                 LrcParser *parser = [[LrcParser alloc] init];
                 NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                 for (iTunesTrack *track in allTracks) {
-                    if (![[track.lyrics stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
+                    if (skip && ![[track.lyrics stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
                         continue;
                     }
                     NSString *title = track.name;

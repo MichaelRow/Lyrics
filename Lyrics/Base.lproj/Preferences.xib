@@ -1313,21 +1313,22 @@ DQ
             <point key="canvasLocation" x="1240" y="233"/>
         </customView>
         <customView id="saB-ui-pbt">
-            <rect key="frame" x="0.0" y="0.0" width="319" height="121"/>
+            <rect key="frame" x="0.0" y="0.0" width="319" height="130"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="kz3-WR-6VP">
-                    <rect key="frame" x="18" y="20" width="275" height="84"/>
+                    <rect key="frame" x="18" y="14" width="275" height="99"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="q7o-1Z-gK3">
                         <font key="font" size="11" name=".LucidaGrandeUI"/>
-                        <string key="title">※ Direct Filter List：Filter lyrics if keyword occured ※ Conditional Filter List：Filter lyrics if both keyword and colon occured ※ Don't type in space when add new keyword ※ Changes will not auto save unless you click Save button</string>
+                        <mutableString key="title">※ Direct Filter List：Filter lyrics if keyword occured ※ Conditional Filter List：Filter lyrics if both keyword and colon occured ※ Don't type in space when add new keyword
+※ Keywords are case insensitive ※ Changes will not auto save unless you click Save button</mutableString>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="1258.5" y="520.5"/>
+            <point key="canvasLocation" x="1258.5" y="525"/>
         </customView>
     </objects>
     <resources>

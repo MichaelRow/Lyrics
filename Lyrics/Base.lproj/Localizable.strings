@@ -27,6 +27,10 @@
 "RESET_FILTER"="Reset Filter Keywords";
 "RESET_CONFIRM"="Do you really want to reset the list?";
 "RESET"="Reset";
+"OVERRIDE_OR_SKIP"="Override or Skip Songs";
+"OVERRIDE_OR_SKIP_INTRO"="Do you want to override or skip songs which already have lyrics?";
+"OVERRIDE"="Override";
+"SKIP"="Skip";
 
 // Prefs Toolbar Identifier
 "GENERAL"="General";

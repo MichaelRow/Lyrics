@@ -27,6 +27,11 @@
 "RESET_FILTER"="重置过滤列表";
 "RESET_CONFIRM"="您确定要重置过滤列表中的关键字?";
 "RESET"="重置";
+"OVERRIDE_OR_SKIP"="覆盖或跳过歌曲";
+"OVERRIDE_OR_SKIP_INTRO"="您想覆盖还是跳过已经含有歌词的歌曲?";
+"OVERRIDE"="覆盖";
+"SKIP"="跳过";
+
 
 // Prefs Toolbar Identifier
 "GENERAL"="通用";

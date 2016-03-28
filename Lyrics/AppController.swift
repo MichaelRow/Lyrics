@@ -396,8 +396,24 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     @IBAction func writeAllLyricsToiTunes(sender: AnyObject?) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            if self.iTunes.setAllLyrics() {
+        let skip: Bool
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString("OVERRIDE_OR_SKIP", comment: "")
+        alert.informativeText = NSLocalizedString("OVERRIDE_OR_SKIP_INTRO", comment: "")
+        alert.addButtonWithTitle(NSLocalizedString("SKIP", comment: ""))
+        alert.addButtonWithTitle(NSLocalizedString("OVERRIDE", comment: ""))
+        alert.addButtonWithTitle(NSLocalizedString("CANCEL", comment: ""))
+        switch alert.runModal() {
+        case NSAlertFirstButtonReturn:
+            skip = true
+        case NSAlertSecondButtonReturn:
+            skip = false
+        default:
+            return
+        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) { () -> Void in
+            if self.iTunes.setAllLyrics(skip) {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
                 })
