@@ -1307,22 +1307,22 @@ DQ
             </connections>
         </arrayController>
         <customView id="dTt-Lt-c8Z">
-            <rect key="frame" x="0.0" y="0.0" width="282" height="116"/>
+            <rect key="frame" x="0.0" y="0.0" width="282" height="99"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="4gG-hT-wRH">
-                    <rect key="frame" x="18" y="15" width="246" height="86"/>
+                    <rect key="frame" x="18" y="14" width="246" height="70"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="Hx4-WY-eYU">
                         <font key="font" size="11" name=".LucidaGrandeUI"/>
                         <string key="title">※直接过滤列表：歌词中出现关键字直接过滤该行 ※条件过滤列表：歌词中出现关键字以及各种形式
-                        冒号则过滤该行 ※过滤的关键字中请不要含有空格 ※字母不区分大小写 ※请在完成增删改操作后保存，否则更改不会生效</string>
+                        冒号则过滤该行 ※字母不区分大小写 ※请在完成增删改操作后保存，否则更改不会生效</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="1221" y="541"/>
+            <point key="canvasLocation" x="1221" y="532.5"/>
         </customView>
         <viewController id="g0s-Sr-nio" userLabel="Popover View Controller">
             <connections>

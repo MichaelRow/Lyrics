@@ -659,10 +659,10 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         var dircetFilterStringArray = [String]()
         var conditionalFilterStringArray = [String]()
         for filterStr in directFilter {
-            dircetFilterStringArray.append(filterStr.keyword)
+            dircetFilterStringArray.append(filterStr.keyword.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString)
         }
         for filterStr in conditionalFilter {
-            conditionalFilterStringArray.append(filterStr.keyword)
+            conditionalFilterStringArray.append(filterStr.keyword.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString)
         }
         let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setObject(dircetFilterStringArray, forKey: LyricsDirectFilter)

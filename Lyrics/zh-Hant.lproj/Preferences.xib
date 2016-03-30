@@ -1317,21 +1317,22 @@ DQ
             <point key="canvasLocation" x="1237" y="230"/>
         </customView>
         <customView id="9yD-4F-Kon">
-            <rect key="frame" x="0.0" y="0.0" width="282" height="114"/>
+            <rect key="frame" x="0.0" y="0.0" width="282" height="99"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Yu1-Ri-dRg">
-                    <rect key="frame" x="18" y="15" width="246" height="84"/>
+                    <rect key="frame" x="18" y="14" width="246" height="70"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="MMC-lB-zkW">
                         <font key="font" size="11" name=".LucidaGrandeUI"/>
-                        <string key="title">※直接過濾列表：歌詞中出現關鍵字直接過濾該行 ※條件過濾列表：歌詞中出現關鍵字以及各種形式                        冒號則過濾該行 ※過濾的關鍵字中請不要含有空格 ※字母不區分大小寫 ※請在完成增刪改操作後儲存，否則更改不會生效</string>
+                        <string key="title">※直接過濾列表：歌詞中出現關鍵字直接過濾該行 ※條件過濾列表：歌詞中出現關鍵字以及各種形式
+                        冒號則過濾該行 ※字母不區分大小寫 ※請在完成增刪改操作後儲存，否則更改不會生效</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="1237" y="522"/>
+            <point key="canvasLocation" x="1237" y="514.5"/>
         </customView>
     </objects>
     <resources>

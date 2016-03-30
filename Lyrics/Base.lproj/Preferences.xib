@@ -1313,22 +1313,22 @@ DQ
             <point key="canvasLocation" x="1240" y="233"/>
         </customView>
         <customView id="saB-ui-pbt">
-            <rect key="frame" x="0.0" y="0.0" width="319" height="130"/>
+            <rect key="frame" x="0.0" y="0.0" width="319" height="114"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="kz3-WR-6VP">
-                    <rect key="frame" x="18" y="14" width="275" height="99"/>
+                    <rect key="frame" x="18" y="13" width="275" height="84"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="q7o-1Z-gK3">
                         <font key="font" size="11" name=".LucidaGrandeUI"/>
-                        <mutableString key="title">※ Direct Filter List：Filter lyrics if keyword occured ※ Conditional Filter List：Filter lyrics if both keyword and colon occured ※ Don't type in space when add new keyword
-※ Keywords are case insensitive ※ Changes will not auto save unless you click Save button</mutableString>
+                        <string key="title">※ Direct Filter List：Filter lyrics if keyword occured ※ Conditional Filter List：Filter lyrics if both keyword and colon occured
+※ Keywords are case insensitive ※ Changes will not auto save unless you click Save button</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="1258.5" y="525"/>
+            <point key="canvasLocation" x="1258.5" y="517"/>
         </customView>
     </objects>
     <resources>

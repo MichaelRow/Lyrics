@@ -194,19 +194,18 @@ class LrcParser: NSObject {
                     let colonRange: NSRange = idTag.rangeOfString(":")
                     let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1)).stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
                     let idContent: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1)).stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
-                    if idStr == "offset" {
+                    switch idStr {
+                    case "offset":
                         tempTimeDly = (idContent as NSString).integerValue
-                    }
-                    else {
+                    case "ti":
                         tempIDTags.append(idTag as String)
-                        switch idStr {
-                        case "ti":
-                            title = idContent
-                        case "al":
-                            album = idContent
-                        default:
-                            otherIDInfos.append(idContent)
-                        }
+                        title = idContent
+                    case "al":
+                        tempIDTags.append(idTag as String)
+                        album = idContent
+                    default:
+                        tempIDTags.append(idTag as String)
+                        otherIDInfos.append(idContent)
                     }
                 }
             }
@@ -221,9 +220,8 @@ class LrcParser: NSObject {
             if userDefaults.boolForKey(LyricsEnableSmartFilter) {
                 let hasTitle: Bool = line.rangeOfString(title) != nil
                 let hasAlbum: Bool = line.rangeOfString(album) != nil
-                let hasSymbol: Bool = line.rangeOfString("「") != nil
                 
-                if (hasAlbum || hasTitle) && index < 5 {
+                if (hasAlbum || hasTitle) && index < 8 {
                     tempLyrics.removeAtIndex(index)
                     continue MainLoop
                 }
@@ -231,13 +229,6 @@ class LrcParser: NSObject {
                 if hasTitle && hasAlbum {
                     tempLyrics.removeAtIndex(index)
                     continue MainLoop
-                }
-                
-                if hasSymbol {
-                    if hasTitle || hasAlbum {
-                        tempLyrics.removeAtIndex(index)
-                        continue MainLoop
-                    }
                 }
                 
                 for filter in otherIDInfos {
