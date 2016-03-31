@@ -82,7 +82,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             alert.addButtonWithTitle(NSLocalizedString("IGNORE", comment: ""))
             let response: NSModalResponse = alert.runModal()
             if response == NSAlertFirstButtonReturn {
-                showPreferences(nil)
+                dispatch_async(dispatch_get_main_queue(), { 
+                    self.showPreferences(nil)
+                })
             }
         }
     
