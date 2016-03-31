@@ -214,33 +214,32 @@ class LrcParser: NSObject {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let directFilter = userDefaults.arrayForKey(LyricsDirectFilter) as! [String]
         let conditionalFilter = userDefaults.arrayForKey(LyricsConditionalFilter) as! [String]
-        var index: Int = 0
-        MainLoop: while index < tempLyrics.count {
+        MainLoop: for index in 0 ..< tempLyrics.count {
             let line = tempLyrics[index].lyricsSentence.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
             if userDefaults.boolForKey(LyricsEnableSmartFilter) {
                 let hasTitle: Bool = line.rangeOfString(title) != nil
                 let hasAlbum: Bool = line.rangeOfString(album) != nil
                 
-                if (hasAlbum || hasTitle) && index < 8 {
-                    tempLyrics.removeAtIndex(index)
+                if (hasAlbum || hasTitle) && index < 9 {
+                    tempLyrics[index].lyricsSentence = ""
                     continue MainLoop
                 }
                 
                 if hasTitle && hasAlbum {
-                    tempLyrics.removeAtIndex(index)
+                    tempLyrics[index].lyricsSentence = ""
                     continue MainLoop
                 }
                 
                 for filter in otherIDInfos {
                     if line.rangeOfString(filter) != nil {
-                        tempLyrics.removeAtIndex(index)
+                        tempLyrics[index].lyricsSentence = ""
                         continue MainLoop
                     }
                 }
             }
             for filter in directFilter {
                 if line.rangeOfString(filter) != nil {
-                    tempLyrics.removeAtIndex(index)
+                    tempLyrics[index].lyricsSentence = ""
                     continue MainLoop
                 }
             }
@@ -248,13 +247,12 @@ class LrcParser: NSObject {
                 if line.rangeOfString(filter) != nil {
                     for aColon in colons {
                         if line.rangeOfString(aColon) != nil {
-                            tempLyrics.removeAtIndex(index)
+                            tempLyrics[index].lyricsSentence = ""
                             continue MainLoop
                         }
                     }
                 }
             }
-            index += 1
         }
         lyrics = tempLyrics
         idTags = tempIDTags

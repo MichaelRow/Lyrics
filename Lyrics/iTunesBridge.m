@@ -65,8 +65,20 @@
                     if (parser.lyrics.count == 0) {
                         continue;
                     }
+                    BOOL hasSpace = NO;
                     NSMutableString *lyrics = [[NSMutableString alloc] init];
                     for (LyricsLineModel *lrcLine in parser.lyrics) {
+                        if ([[lrcLine.lyricsSentence stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
+                            if (hasSpace) {
+                                continue;
+                            }
+                            else {
+                                hasSpace = YES;
+                            }
+                        }
+                        else if (hasSpace) {
+                            hasSpace = NO;
+                        }
                         [lyrics appendString:lrcLine.lyricsSentence];
                         [lyrics appendString:@"\n"];
                     }

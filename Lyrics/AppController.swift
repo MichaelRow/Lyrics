@@ -263,7 +263,19 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             return
         }
         var theLyrics: String = String()
+        var hasSpace: Bool = false
         for lrc in lyricsArray {
+            if lrc.lyricsSentence.stringByReplacingOccurrencesOfString(" ", withString: "") == "" {
+                if hasSpace {
+                    continue
+                }
+                else {
+                    hasSpace = true
+                }
+            }
+            else if hasSpace {
+                hasSpace = false
+            }
             theLyrics.appendContentsOf(lrc.lyricsSentence + "\n")
         }
         let pb = NSPasteboard.generalPasteboard()
@@ -722,7 +734,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         //2.The index of first-line-lyrics which needs to display is "index - 1"
         while index < tempLyricsArray.count {
             if playerPosition < tempLyricsArray[index].msecPosition - timeDly {
-                if index-1 == -1 {
+                if index == 0 {
                     if currentLyrics != nil {
                         currentLyrics = nil
                         if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
@@ -737,8 +749,8 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                     return
                 }
                 else {
-                    var secondLyrics: String!
                     if currentLyrics != tempLyricsArray[index-1].lyricsSentence {
+                        var secondLyrics: String!
                         currentLyrics = tempLyricsArray[index-1].lyricsSentence
                         if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
                             if userDefaults.boolForKey(LyricsTwoLineMode) && userDefaults.integerForKey(LyricsTwoLineModeIndex)==0 && index < tempLyricsArray.count {
