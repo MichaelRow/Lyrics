@@ -215,22 +215,28 @@ class LrcParser: NSObject {
         //               2.歌词中若出现"条件过滤列表"中的关键字以及各种形式冒号则清除该行
         //               3.如果开启智能过滤，则将lrc文件中的ID-Tag内容（包含歌曲名、专辑名、制作者等）作为过滤关键字，
         //                 由于在歌词中嵌入的歌曲信息主要集中在前10行并连续出现，为了防止误过滤（有些歌词本身就含有歌
-        //                 曲名），过滤需要参照上下文。
+        //                 曲名），过滤需要参照上下文，如果上下文有空行则顺延。
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let directFilter = userDefaults.arrayForKey(LyricsDirectFilter) as! [String]
         let conditionalFilter = userDefaults.arrayForKey(LyricsConditionalFilter) as! [String]
         var prevFiltered: Bool = false
-        var prevHasTitleAlbum = false
+        var prevHasTitleAlbum: Bool = false
+        var emptyLine: Int = 0
         MainLoop: for index in 0 ..< tempLyrics.count {
             var currentHasTitleAlbum = false
             let line = tempLyrics[index].lyricsSentence.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
+            if line == "" {
+                emptyLine += 1
+                continue MainLoop
+            }
             if userDefaults.boolForKey(LyricsEnableSmartFilter) {
                 let hasTitle: Bool = (line.rangeOfString(title) != nil) || (title.rangeOfString(line) != nil)
                 let hasAlbum: Bool = (line.rangeOfString(album) != nil) || (album.rangeOfString(line) != nil)
+                let isTitleAlbumSimillar: Bool = (title.rangeOfString(album) != nil) || (album.rangeOfString(title) != nil)
                 
-                if hasTitle && hasAlbum {
+                if hasTitle && hasAlbum && !isTitleAlbumSimillar {
                     if prevHasTitleAlbum {
-                        tempLyrics[index-1].lyricsSentence = ""
+                        tempLyrics[index-1-emptyLine].lyricsSentence = ""
                     }
                     tempLyrics[index].lyricsSentence = ""
                     prevFiltered = true
@@ -240,7 +246,7 @@ class LrcParser: NSObject {
                 for filter in otherIDInfos {
                     if line.rangeOfString(filter) != nil {
                         if prevHasTitleAlbum {
-                            tempLyrics[index-1].lyricsSentence = ""
+                            tempLyrics[index-1-emptyLine].lyricsSentence = ""
                         }
                         tempLyrics[index].lyricsSentence = ""
                         prevFiltered = true
@@ -250,7 +256,7 @@ class LrcParser: NSObject {
                 
                 if index < 10 && (hasAlbum || hasTitle) {
                     if prevHasTitleAlbum {
-                        tempLyrics[index-1].lyricsSentence = ""
+                        tempLyrics[index-1-emptyLine].lyricsSentence = ""
                         tempLyrics[index].lyricsSentence = ""
                         prevFiltered = true
                         continue MainLoop
@@ -268,7 +274,7 @@ class LrcParser: NSObject {
             for filter in directFilter {
                 if line.rangeOfString(filter) != nil {
                     if prevHasTitleAlbum {
-                        tempLyrics[index-1].lyricsSentence = ""
+                        tempLyrics[index-1-emptyLine].lyricsSentence = ""
                     }
                     tempLyrics[index].lyricsSentence = ""
                     prevFiltered = true
@@ -283,7 +289,7 @@ class LrcParser: NSObject {
                     for aColon in colons {
                         if line.rangeOfString(aColon) != nil {
                             if prevHasTitleAlbum {
-                                tempLyrics[index-1].lyricsSentence = ""
+                                tempLyrics[index-1-emptyLine].lyricsSentence = ""
                             }
                             tempLyrics[index].lyricsSentence = ""
                             prevFiltered = true
@@ -297,6 +303,9 @@ class LrcParser: NSObject {
             }
             prevFiltered = false
             prevHasTitleAlbum = currentHasTitleAlbum
+            if line != "" {
+                emptyLine = 0
+            }
         }
         lyrics = tempLyrics
         idTags = tempIDTags
