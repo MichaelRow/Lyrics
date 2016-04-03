@@ -8,6 +8,10 @@
 
 import Cocoa
 
+enum LrcType: Int {
+    case Lyrics, Title, Album, TitleAndAlbum, Other
+}
+
 class LrcParser: NSObject {
     
     var lyrics: [LyricsLineModel]!
@@ -219,11 +223,12 @@ class LrcParser: NSObject {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let directFilter = userDefaults.arrayForKey(LyricsDirectFilter) as! [String]
         let conditionalFilter = userDefaults.arrayForKey(LyricsConditionalFilter) as! [String]
-        var prevFiltered: Bool = false
-        var prevHasTitleAlbum: Bool = false
+        let isTitleAlbumSimillar: Bool = (title.rangeOfString(album) != nil) || (album.rangeOfString(title) != nil)
+        var prevLrcType: LrcType = .Lyrics
         var emptyLine: Int = 0
+        
         MainLoop: for index in 0 ..< tempLyrics.count {
-            var currentHasTitleAlbum = false
+            var currentLrcType: LrcType = .Lyrics
             let line = tempLyrics[index].lyricsSentence.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
             if line == "" {
                 emptyLine += 1
@@ -232,77 +237,88 @@ class LrcParser: NSObject {
             if userDefaults.boolForKey(LyricsEnableSmartFilter) {
                 let hasTitle: Bool = (line.rangeOfString(title) != nil) || (title.rangeOfString(line) != nil)
                 let hasAlbum: Bool = (line.rangeOfString(album) != nil) || (album.rangeOfString(line) != nil)
-                let isTitleAlbumSimillar: Bool = (title.rangeOfString(album) != nil) || (album.rangeOfString(title) != nil)
                 
                 if hasTitle && hasAlbum && !isTitleAlbumSimillar {
-                    if prevHasTitleAlbum {
+                    if prevLrcType == .Title || prevLrcType == .Album {
                         tempLyrics[index-1-emptyLine].lyricsSentence = ""
                     }
                     tempLyrics[index].lyricsSentence = ""
-                    prevFiltered = true
+                    prevLrcType = .TitleAndAlbum
                     continue MainLoop
                 }
                 
                 for filter in otherIDInfos {
                     if line.rangeOfString(filter) != nil {
-                        if prevHasTitleAlbum {
+                        if prevLrcType == .Title || prevLrcType == .Album {
                             tempLyrics[index-1-emptyLine].lyricsSentence = ""
                         }
                         tempLyrics[index].lyricsSentence = ""
-                        prevFiltered = true
+                        prevLrcType = .Other
                         continue MainLoop
                     }
                 }
                 
-                if index < 10 && (hasAlbum || hasTitle) {
-                    if prevHasTitleAlbum {
+                if hasAlbum {
+                    if prevLrcType == .Title {
                         tempLyrics[index-1-emptyLine].lyricsSentence = ""
                         tempLyrics[index].lyricsSentence = ""
-                        prevFiltered = true
+                        prevLrcType = .Album
                         continue MainLoop
                     }
-                    else if prevFiltered {
+                    else if prevLrcType == .Other || prevLrcType == .TitleAndAlbum {
                         tempLyrics[index].lyricsSentence = ""
-                        prevFiltered = true
+                        prevLrcType = .Album
                         continue MainLoop
                     }
                     else {
-                        currentHasTitleAlbum = true
+                        currentLrcType = .Album
+                    }
+                }
+                
+                if hasTitle {
+                    if prevLrcType == .Album {
+                        tempLyrics[index-1-emptyLine].lyricsSentence = ""
+                        tempLyrics[index].lyricsSentence = ""
+                        prevLrcType = .Title
+                        continue MainLoop
+                    }
+                    else if prevLrcType == .Other || prevLrcType == .TitleAndAlbum {
+                        tempLyrics[index].lyricsSentence = ""
+                        prevLrcType = .Title
+                        continue MainLoop
+                    }
+                    else {
+                        currentLrcType = .Title
                     }
                 }
             }
+            
             for filter in directFilter {
                 if line.rangeOfString(filter) != nil {
-                    if prevHasTitleAlbum {
+                    if prevLrcType == .Title || prevLrcType == .Album {
                         tempLyrics[index-1-emptyLine].lyricsSentence = ""
                     }
                     tempLyrics[index].lyricsSentence = ""
-                    prevFiltered = true
-                    if currentHasTitleAlbum {
-                        currentHasTitleAlbum = false
-                    }
+                    prevLrcType = .Other
                     continue MainLoop
                 }
             }
+            
             for filter in conditionalFilter {
                 if line.rangeOfString(filter) != nil {
                     for aColon in colons {
                         if line.rangeOfString(aColon) != nil {
-                            if prevHasTitleAlbum {
+                            if prevLrcType == .Title || prevLrcType == .Album {
                                 tempLyrics[index-1-emptyLine].lyricsSentence = ""
                             }
                             tempLyrics[index].lyricsSentence = ""
-                            prevFiltered = true
-                            if currentHasTitleAlbum {
-                                currentHasTitleAlbum = false
-                            }
+                            prevLrcType = .Other
                             continue MainLoop
                         }
                     }
                 }
             }
-            prevFiltered = false
-            prevHasTitleAlbum = currentHasTitleAlbum
+            prevLrcType = currentLrcType
             if line != "" {
                 emptyLine = 0
             }

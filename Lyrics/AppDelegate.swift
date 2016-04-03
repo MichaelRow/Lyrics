@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         let userSavingPath: NSString = NSSearchPathForDirectoriesInDomains(.DownloadsDirectory, [.UserDomainMask], true).first! 
         
-        let directFilter = ["作詞","作词","作曲","編曲","编曲","収録","収录","歌手","歌曲","制作","歌词","歌詞","製作","翻譯","翻译","插曲","插入歌","lrc","qq","アニメ","pcゲーム","cv","op1","op2","opテマ","ed1","ed2","edテマ","lyricsby","charactersong","soundtrack"]
+        let directFilter = ["作詞","作词","作曲","編曲","编曲","収録","収录","歌手","歌曲","制作","歌词","歌詞","製作","翻譯","翻译","插曲","插入歌","lrc","qq","アニメ","pcゲーム","cv","op1","op2","opテ","ed1","ed2","edテ","ova","lyricsby","charactersong","soundtrack"]
         let conditionalFilter = ["by","歌","唄","曲","作","唱","詞","词","編","编"]
         
         let userDefaults: [String:AnyObject] = [
