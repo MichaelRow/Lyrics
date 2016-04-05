@@ -15,8 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         let userSavingPath: NSString = NSSearchPathForDirectoriesInDomains(.DownloadsDirectory, [.UserDomainMask], true).first! 
         
-        let directFilter = ["作詞","作词","作曲","編曲","编曲","収録","収录","歌手","歌曲","制作","歌词","歌詞","製作","翻譯","翻译","插曲","插入歌","lrc","qq","アニメ","pcゲーム","cv","op1","op2","opテ","ed1","ed2","edテ","ova","lyricsby","charactersong","soundtrack"]
-        let conditionalFilter = ["by","歌","唄","曲","作","唱","詞","词","編","编"]
+        let directFilterData = generateDirectFilterData()
+        let conditionalFilterData = generateConditionalFilterData()
         
         let userDefaults: [String:AnyObject] = [
             //Menu
@@ -60,8 +60,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsYOffset : NSNumber(float: 0),
             
             //Filter Preferences Defaults
-            LyricsDirectFilter : directFilter,
-            LyricsConditionalFilter : conditionalFilter,
+            LyricsDirectFilter : directFilterData,
+            LyricsConditionalFilter : conditionalFilterData,
             LyricsEnableFilter : NSNumber(bool: false),
             LyricsEnableSmartFilter : NSNumber(bool: true)
         ]
@@ -125,5 +125,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    func generateDirectFilterData() -> NSData {
+        let caseInsensitiveStr = ["作詞","作词","作曲","編曲","编曲","収録","収录","歌手","歌曲","制作","歌词","歌詞","製作","翻譯","翻译","插曲","插入歌","lrc","qq","アニメ","cv","lyricsby","charactersong","soundtrack"]
+        let caseSensitiveStr = ["PC","OP","ED","OVA","BGM"]
+        var directFilter = [FilterString]()
+        for str in caseInsensitiveStr {
+            directFilter.append(FilterString(keyword: str, caseSensitive: false))
+        }
+        for str in caseSensitiveStr {
+            directFilter.append(FilterString(keyword: str, caseSensitive: true))
+        }
+        return NSKeyedArchiver.archivedDataWithRootObject(directFilter)
+    }
+    
+    func generateConditionalFilterData() -> NSData {
+        let caseInsensitiveStr = ["by","歌","唄","曲","作","唱","詞","词","編","编"]
+        var conditionalFilter = [FilterString]()
+        for str in caseInsensitiveStr {
+            conditionalFilter.append(FilterString(keyword: str, caseSensitive: false))
+        }
+        return NSKeyedArchiver.archivedDataWithRootObject(conditionalFilter)
+    }
 }
 

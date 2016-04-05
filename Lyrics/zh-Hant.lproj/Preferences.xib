@@ -1081,11 +1081,11 @@ DQ
             </connections>
         </popover>
         <customView id="FSa-aF-ZaP" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="398" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="427" height="325"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button id="d7A-Tv-wMO">
-                    <rect key="frame" x="19" y="264" width="107" height="18"/>
+                    <rect key="frame" x="19" y="289" width="107" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="啟用歌詞過濾" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="oQH-KS-HmW">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1100,14 +1100,14 @@ DQ
                     </connections>
                 </button>
                 <box autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" id="PUg-mr-O8q">
-                    <rect key="frame" x="17" y="16" width="363" height="214"/>
+                    <rect key="frame" x="17" y="16" width="393" height="239"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="nSg-q6-ncS">
-                        <rect key="frame" x="1" y="1" width="361" height="212"/>
+                        <rect key="frame" x="1" y="1" width="391" height="237"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button verticalHuggingPriority="750" id="dcC-3i-OQQ">
-                                <rect key="frame" x="227" y="41" width="31" height="16"/>
+                                <rect key="frame" x="242" y="42" width="31" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8U7-So-yHB">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1119,21 +1119,21 @@ DQ
                                 </connections>
                             </button>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="jUd-zK-TqC">
-                                <rect key="frame" x="20" y="65" width="150" height="135"/>
+                                <rect key="frame" x="20" y="67" width="165" height="135"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" drawsBackground="NO" id="jI2-tQ-CtI">
-                                    <rect key="frame" x="1" y="23" width="148" height="111"/>
+                                    <rect key="frame" x="1" y="0.0" width="163" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" headerView="K25-fN-5yu" id="WzJ-wt-3nr">
-                                            <rect key="frame" x="0.0" y="0.0" width="148" height="111"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="163" height="111"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="145" minWidth="40" maxWidth="1000" id="Zx0-QW-lnq">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="直接過濾列表">
+                                                <tableColumn width="96.8828125" minWidth="40" maxWidth="1000" id="Zx0-QW-lnq">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="關鍵字">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1148,13 +1148,28 @@ DQ
                                                         <binding destination="WdD-ne-SOh" name="value" keyPath="arrangedObjects.keyword" id="j0y-8r-E49"/>
                                                     </connections>
                                                 </tableColumn>
+                                                <tableColumn identifier="" width="60" minWidth="10" maxWidth="3.4028234663852886e+38" id="wDL-ac-HXE">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="區分大小寫">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <buttonCell key="dataCell" type="check" bezelStyle="regularSquare" imagePosition="overlaps" inset="2" id="k1X-X0-GNw">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="WdD-ne-SOh" name="value" keyPath="arrangedObjects.caseSensitive" id="CKK-ta-zUt"/>
+                                                    </connections>
+                                                </tableColumn>
                                             </tableColumns>
                                         </tableView>
                                     </subviews>
                                     <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="JUP-dk-jM8">
-                                    <rect key="frame" x="1" y="118" width="148" height="16"/>
+                                    <rect key="frame" x="1" y="118" width="163" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="GuR-eG-x1F">
@@ -1162,26 +1177,26 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="K25-fN-5yu">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="163" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="FWM-Xw-Z3M">
-                                <rect key="frame" x="191" y="65" width="150" height="135"/>
+                                <rect key="frame" x="206" y="67" width="165" height="135"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" id="ieU-vf-PgT">
-                                    <rect key="frame" x="1" y="23" width="148" height="111"/>
+                                    <rect key="frame" x="1" y="0.0" width="163" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" headerView="hDe-dG-0m4" id="rtc-90-wAn">
-                                            <rect key="frame" x="0.0" y="0.0" width="152" height="19"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="163" height="111"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="149" minWidth="40" maxWidth="1000" id="aRN-6i-Itb">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="條件過濾列表">
+                                                <tableColumn width="92.92578125" minWidth="40" maxWidth="1000" id="aRN-6i-Itb">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="關鍵字">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1196,13 +1211,28 @@ DQ
                                                         <binding destination="bLM-St-LXE" name="value" keyPath="arrangedObjects.keyword" id="hg5-Md-MXc"/>
                                                     </connections>
                                                 </tableColumn>
+                                                <tableColumn identifier="" width="64" minWidth="10" maxWidth="3.4028234663852886e+38" id="AkB-8g-8fA">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title=" 區分大小寫">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <buttonCell key="dataCell" type="check" bezelStyle="regularSquare" imagePosition="overlaps" inset="2" id="EDD-fX-Zee">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="bLM-St-LXE" name="value" keyPath="arrangedObjects.caseSensitive" id="tFe-a9-JmS"/>
+                                                    </connections>
+                                                </tableColumn>
                                             </tableColumns>
                                         </tableView>
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="MB3-XZ-nag">
-                                    <rect key="frame" x="1" y="118" width="148" height="16"/>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="MB3-XZ-nag">
+                                    <rect key="frame" x="1" y="118" width="163" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="OLi-lv-HR7">
@@ -1210,12 +1240,12 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="hDe-dG-0m4">
-                                    <rect key="frame" x="0.0" y="0.0" width="152" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="163" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" id="uEH-ZV-Few">
-                                <rect key="frame" x="19" y="41" width="31" height="16"/>
+                                <rect key="frame" x="19" y="42" width="31" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TF8-dA-Cw7">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1226,7 +1256,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" id="V3m-NY-8r3">
-                                <rect key="frame" x="56" y="41" width="31" height="16"/>
+                                <rect key="frame" x="56" y="42" width="31" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="e0b-9W-Wfn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1238,7 +1268,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" id="YFU-Ip-nVp">
-                                <rect key="frame" x="190" y="41" width="31" height="16"/>
+                                <rect key="frame" x="205" y="42" width="31" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0wA-UT-vKj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1249,7 +1279,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" id="zXq-Ve-jd2">
-                                <rect key="frame" x="185" y="6" width="66" height="32"/>
+                                <rect key="frame" x="200" y="7" width="66" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="還原" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="exd-KM-197">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1260,7 +1290,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" id="bpj-Dh-HEQ">
-                                <rect key="frame" x="14" y="6" width="118" height="32"/>
+                                <rect key="frame" x="14" y="7" width="118" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="重置過濾列表" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OEz-SP-IfC">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1271,7 +1301,7 @@ DQ
                                 </connections>
                             </button>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" id="6Yc-Jj-pxZ">
-                                <rect key="frame" x="318" y="10" width="25" height="25"/>
+                                <rect key="frame" x="348" y="11" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LPO-ry-kYA">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1281,8 +1311,26 @@ DQ
                                     <action selector="showHelp:" target="-2" id="aJv-P1-MMF"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="c3D-Xg-XYu">
+                                <rect key="frame" x="61" y="210" width="82" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="直接過濾列表" id="8FW-tP-FjX">
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="NaC-7Y-L2o">
+                                <rect key="frame" x="247" y="210" width="82" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="條件過濾列表" id="Rns-ac-ZTI">
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <button verticalHuggingPriority="750" id="HtF-fR-ynZ">
-                                <rect key="frame" x="251" y="7" width="66" height="32"/>
+                                <rect key="frame" x="275" y="7" width="66" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="儲存" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="h4W-qi-hKa">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1298,7 +1346,7 @@ DQ
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
                 <button id="tuc-eW-vQl">
-                    <rect key="frame" x="19" y="240" width="282" height="18"/>
+                    <rect key="frame" x="19" y="265" width="282" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="智能过滤歌词中出现的歌曲名、歌手名等信息" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dSv-de-H9b">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1314,7 +1362,7 @@ DQ
                     </connections>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="1237" y="230"/>
+            <point key="canvasLocation" x="1251.5" y="242.5"/>
         </customView>
         <customView id="9yD-4F-Kon">
             <rect key="frame" x="0.0" y="0.0" width="282" height="99"/>
@@ -1326,13 +1374,13 @@ DQ
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="MMC-lB-zkW">
                         <font key="font" size="11" name=".LucidaGrandeUI"/>
                         <string key="title">※直接過濾列表：歌詞中出現關鍵字直接過濾該行 ※條件過濾列表：歌詞中出現關鍵字以及各種形式
-                        冒號則過濾該行 ※字母不區分大小寫 ※請在完成增刪改操作後儲存，否則更改不會生效</string>
+                        冒號則過濾該行 ※請在完成增刪改操作後儲存，否則更改不會生效 ※不建議修改預設的關鍵字</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="1237" y="514.5"/>
+            <point key="canvasLocation" x="1251" y="560.5"/>
         </customView>
     </objects>
     <resources>

@@ -98,7 +98,7 @@ class LrcParser: NSObject {
                     let idTag: NSString = (str as NSString).substringWithRange(matchedRange) as NSString
                     let colonRange: NSRange = idTag.rangeOfString(":")
                     let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
-                    if idStr.stringByReplacingOccurrencesOfString(" ", withString: "") != "offset" {
+                    if idStr.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString != "offset" {
                         tempIDTags.append(idTag as String)
                         continue
                     }
@@ -196,9 +196,9 @@ class LrcParser: NSObject {
                     let matchedRange: NSRange = result.range
                     let idTag: NSString = (str as NSString).substringWithRange(matchedRange) as NSString
                     let colonRange: NSRange = idTag.rangeOfString(":")
-                    let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1)).stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
-                    let idContent: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1)).stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
-                    switch idStr {
+                    let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1)).stringByReplacingOccurrencesOfString(" ", withString: "")
+                    let idContent: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1)).stringByReplacingOccurrencesOfString(" ", withString: "")
+                    switch idStr.lowercaseString {
                     case "offset":
                         tempTimeDly = (idContent as NSString).integerValue
                     case "ti":
@@ -221,22 +221,22 @@ class LrcParser: NSObject {
         //                 由于在歌词中嵌入的歌曲信息主要集中在前10行并连续出现，为了防止误过滤（有些歌词本身就含有歌
         //                 曲名），过滤需要参照上下文，如果上下文有空行则顺延。
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        let directFilter = userDefaults.arrayForKey(LyricsDirectFilter) as! [String]
-        let conditionalFilter = userDefaults.arrayForKey(LyricsConditionalFilter) as! [String]
+        let directFilter = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsDirectFilter)!) as! [FilterString]
+        let conditionalFilter = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsConditionalFilter)!) as! [FilterString]
         let isTitleAlbumSimillar: Bool = (title.rangeOfString(album) != nil) || (album.rangeOfString(title) != nil)
         var prevLrcType: LrcType = .Lyrics
         var emptyLine: Int = 0
         
         MainLoop: for index in 0 ..< tempLyrics.count {
             var currentLrcType: LrcType = .Lyrics
-            let line = tempLyrics[index].lyricsSentence.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
+            let line = tempLyrics[index].lyricsSentence.stringByReplacingOccurrencesOfString(" ", withString: "")
             if line == "" {
                 emptyLine += 1
                 continue MainLoop
             }
             if userDefaults.boolForKey(LyricsEnableSmartFilter) {
-                let hasTitle: Bool = (line.rangeOfString(title) != nil) || (title.rangeOfString(line) != nil)
-                let hasAlbum: Bool = (line.rangeOfString(album) != nil) || (album.rangeOfString(line) != nil)
+                let hasTitle: Bool = (line.rangeOfString(title, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (title.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
+                let hasAlbum: Bool = (line.rangeOfString(album, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (album.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
                 
                 if hasTitle && hasAlbum && !isTitleAlbumSimillar {
                     if prevLrcType == .Title || prevLrcType == .Album {
@@ -247,8 +247,8 @@ class LrcParser: NSObject {
                     continue MainLoop
                 }
                 
-                for filter in otherIDInfos {
-                    if line.rangeOfString(filter) != nil {
+                for str in otherIDInfos {
+                    if line.rangeOfString(str, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil {
                         if prevLrcType == .Title || prevLrcType == .Album {
                             tempLyrics[index-1-emptyLine].lyricsSentence = ""
                         }
@@ -294,7 +294,14 @@ class LrcParser: NSObject {
             }
             
             for filter in directFilter {
-                if line.rangeOfString(filter) != nil {
+                let searchResult: Bool
+                if filter.caseSensitive {
+                    searchResult = line.rangeOfString(filter.keyword) != nil
+                }
+                else {
+                    searchResult = line.rangeOfString(filter.keyword, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil
+                }
+                if searchResult {
                     if prevLrcType == .Title || prevLrcType == .Album {
                         tempLyrics[index-1-emptyLine].lyricsSentence = ""
                     }
@@ -305,7 +312,14 @@ class LrcParser: NSObject {
             }
             
             for filter in conditionalFilter {
-                if line.rangeOfString(filter) != nil {
+                let searchResult: Bool
+                if filter.caseSensitive {
+                    searchResult = line.rangeOfString(filter.keyword) != nil
+                }
+                else {
+                    searchResult = line.rangeOfString(filter.keyword, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil
+                }
+                if searchResult {
                     for aColon in colons {
                         if line.rangeOfString(aColon) != nil {
                             if prevLrcType == .Title || prevLrcType == .Album {

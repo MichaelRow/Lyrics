@@ -11,23 +11,29 @@ import Cocoa
 class FilterString: NSObject {
     
     var keyword: String
+    var caseSensitive: Bool
+    
     
     override init() {
         keyword = NSLocalizedString("NEW_KEYWORD", comment: "")
+        caseSensitive = false
         super.init()
     }
     
-    init(keyword: String) {
+    init(keyword: String, caseSensitive: Bool) {
         self.keyword = keyword
+        self.caseSensitive = caseSensitive
         super.init()
     }
     
     init(coder aDecoder: NSCoder) {
         keyword = aDecoder.decodeObjectForKey("keyword") as! String
+        caseSensitive = aDecoder.decodeObjectForKey("caseSensitive") as! Bool
         super.init()
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(keyword, forKey: "keyword")
+        aCoder.encodeObject(caseSensitive, forKey: "caseSensitive")
     }
 }

@@ -605,14 +605,10 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
     func loadFilter() {
         let userDefault = NSUserDefaults.standardUserDefaults()
-        let directFilterStringArray = userDefault.arrayForKey(LyricsDirectFilter) as! [String]
-        let conditionalFilterStringArray = userDefault.arrayForKey(LyricsConditionalFilter) as! [String]
-        for str in directFilterStringArray {
-            directFilter.append(FilterString(keyword: str))
-        }
-        for str in conditionalFilterStringArray {
-            conditionalFilter.append(FilterString(keyword: str))
-        }
+        let directFilterData = userDefault.dataForKey(LyricsDirectFilter)!
+        let conditionalFilterData = userDefault.dataForKey(LyricsConditionalFilter)!
+        directFilter = NSKeyedUnarchiver.unarchiveObjectWithData(directFilterData) as! [FilterString]
+        conditionalFilter = NSKeyedUnarchiver.unarchiveObjectWithData(conditionalFilterData) as! [FilterString]
     }
     
     @IBAction func addKeywordForDirectFilterList(sender: AnyObject) {
@@ -656,17 +652,17 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     }
     
     @IBAction func saveFilterKeyword(sender: AnyObject) {
-        var dircetFilterStringArray = [String]()
-        var conditionalFilterStringArray = [String]()
-        for filterStr in directFilter {
-            dircetFilterStringArray.append(filterStr.keyword.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString)
+        for filter in directFilter {
+            filter.keyword = filter.keyword.stringByReplacingOccurrencesOfString(" ", withString: "")
         }
-        for filterStr in conditionalFilter {
-            conditionalFilterStringArray.append(filterStr.keyword.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString)
+        for filter in conditionalFilter {
+            filter.keyword = filter.keyword.stringByReplacingOccurrencesOfString(" ", withString: "")
         }
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setObject(dircetFilterStringArray, forKey: LyricsDirectFilter)
-        userDefaults.setObject(conditionalFilterStringArray, forKey: LyricsConditionalFilter)
+        let directFilterData = NSKeyedArchiver.archivedDataWithRootObject(directFilter)
+        let conditionalFilterData = NSKeyedArchiver.archivedDataWithRootObject(conditionalFilter)
+        userDefaults.setObject(directFilterData, forKey: LyricsDirectFilter)
+        userDefaults.setObject(conditionalFilterData, forKey: LyricsConditionalFilter)
     }
     
     @IBAction func showHelp(sender: NSButton) {
