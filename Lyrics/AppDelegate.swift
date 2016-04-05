@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let directFilterData = generateDirectFilterData()
         let conditionalFilterData = generateConditionalFilterData()
         
-        let userDefaults: [String:AnyObject] = [
+        let registerDefaultsDic: [String:AnyObject] = [
             //Menu
             LyricsDesktopLyricsEnabled : NSNumber(bool: true),
             LyricsMenuBarLyricsEnabled : NSNumber(bool: false),
@@ -66,7 +66,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsEnableSmartFilter : NSNumber(bool: true)
         ]
         
-        NSUserDefaults.standardUserDefaults().registerDefaults(userDefaults)
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        //早期版本的过滤数据是采用[String]保存，新版本使用NSData，如果不是NSData则重置
+        userDefaults.registerDefaults(registerDefaultsDic)
+        if !userDefaults.objectForKey(LyricsDirectFilter)!.isKindOfClass(NSData) {
+            userDefaults.removeObjectForKey(LyricsDirectFilter)
+        }
+        if !userDefaults.objectForKey(LyricsConditionalFilter)!.isKindOfClass(NSData) {
+            userDefaults.removeObjectForKey(LyricsConditionalFilter)
+        }
         
         NSColorPanel.sharedColorPanel().showsAlpha = true
         
@@ -87,7 +95,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         //Check if login item hasn't be enabled
         let identifier: String = "Eru.LyricsX-Helper"
-        if NSUserDefaults.standardUserDefaults().boolForKey(LyricsAutoLaunches) {
+        if userDefaults.boolForKey(LyricsAutoLaunches) {
             if !SMLoginItemSetEnabled(identifier, true) {
                 NSLog("Failed to enable login item")
             }
