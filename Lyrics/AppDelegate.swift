@@ -134,7 +134,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func generateDirectFilterData() -> NSData {
-        let caseInsensitiveStr = ["作詞","作词","作曲","編曲","编曲","収録","収录","歌手","歌曲","制作","歌词","歌詞","製作","翻譯","翻译","插曲","插入歌","lrc","qq","アニメ","cv","lyricsby","charactersong","soundtrack"]
+        let caseInsensitiveStr = ["作詞","作词","作曲","編曲","编曲","収録","收录","演唱","歌手","歌曲","制作","製作","歌词","歌詞","翻譯","翻译","插曲","插入歌","主题歌","主題歌","片頭曲","片头曲","片尾曲","Lrc","QQ","アニメ","CV","LyricsBy","CharacterSong","SoundTrack"]
         let caseSensitiveStr = ["PC","OP","ED","OVA","BGM"]
         var directFilter = [FilterString]()
         for str in caseInsensitiveStr {
