@@ -206,7 +206,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             menuBarLyrics = nil
         } else {
             menuBarLyrics = MenuBarLyrics()
-            menuBarLyrics.displayLyrics(currentLyrics)
+            dispatch_async(dispatch_get_main_queue(), { 
+                self.menuBarLyrics.displayLyrics(self.currentLyrics)
+            })
         }
     }
     
@@ -278,7 +280,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             else if hasSpace {
                 hasSpace = false
             }
-            theLyrics.appendContentsOf(lrc.lyricsSentence + "\n")
+            if lrc.enabled {
+                theLyrics.appendContentsOf(lrc.lyricsSentence + "\n")
+            }
         }
         let pb = NSPasteboard.generalPasteboard()
         pb.clearContents()
@@ -649,7 +653,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         
         if userDefaults.boolForKey(LyricsEnableFilter) {
-            lrcParser.parseWithFilter(lrcToParse)
+            lrcParser.parseWithFilter(lrcToParse, iTunesTitle: currentSongTitle, iTunesAlbum: iTunes.currentAlbum())
         }
         else {
             lrcParser.regularParse(lrcToParse)
@@ -745,13 +749,30 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                             })
                         }
                         if menuBarLyrics != nil {
-                            menuBarLyrics.displayLyrics(nil)
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.menuBarLyrics.displayLyrics(nil)
+                            })
                         }
                     }
                     return
                 }
                 else {
-                    if currentLyrics != tempLyricsArray[index-1].lyricsSentence {
+                    if !tempLyricsArray[index-1].enabled {
+                        if currentLyrics != nil {
+                            currentLyrics = nil
+                            if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                                })
+                            }
+                            if menuBarLyrics != nil {
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    self.menuBarLyrics.displayLyrics(nil)
+                                })
+                            }
+                        }
+                    }
+                    else if currentLyrics != tempLyricsArray[index-1].lyricsSentence {
                         var secondLyrics: String!
                         currentLyrics = tempLyricsArray[index-1].lyricsSentence
                         if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
@@ -765,7 +786,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                             })
                         }
                         if menuBarLyrics != nil {
-                            menuBarLyrics.displayLyrics(currentLyrics)
+                            dispatch_async(dispatch_get_main_queue(), { 
+                                self.menuBarLyrics.displayLyrics(self.currentLyrics)
+                            })
                         }
                     }
                     return
@@ -774,7 +797,22 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             index += 1
         }
         if index == tempLyricsArray.count && tempLyricsArray.count>0 {
-            if currentLyrics != tempLyricsArray[tempLyricsArray.count - 1].lyricsSentence {
+            if !tempLyricsArray[tempLyricsArray.count - 1].enabled {
+                if currentLyrics != nil {
+                    currentLyrics = nil
+                    if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                        })
+                    }
+                    if menuBarLyrics != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.menuBarLyrics.displayLyrics(nil)
+                        })
+                    }
+                }
+            }
+            else if currentLyrics != tempLyricsArray[tempLyricsArray.count - 1].lyricsSentence {
                 currentLyrics = tempLyricsArray[tempLyricsArray.count - 1].lyricsSentence
                 if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -782,7 +820,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                     })
                 }
                 if menuBarLyrics != nil {
-                    menuBarLyrics.displayLyrics(currentLyrics)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.menuBarLyrics.displayLyrics(self.currentLyrics)
+                    })
                 }
             }
         }
@@ -1042,13 +1082,16 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             userDefaults.setBool(false, forKey: LyricsDesktopLyricsEnabled)
             userDefaults.setBool(true, forKey: LyricsMenuBarLyricsEnabled)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("MENU_BAR_ON", comment: ""))
-            lyricsWindow.displayLyrics(nil, secondLyrics: nil)
             menuBarLyrics = MenuBarLyrics()
-            menuBarLyrics.displayLyrics(currentLyrics)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                self.menuBarLyrics.displayLyrics(self.currentLyrics)
+            })
         }
         else {
             userDefaults.setBool(true, forKey: LyricsDesktopLyricsEnabled)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("BOTH_ON", comment: ""))
+            // Force update both
             currentLyrics = nil
         }
     }

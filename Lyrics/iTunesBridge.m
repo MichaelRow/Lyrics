@@ -57,7 +57,7 @@
                     NSString *artist = track.artist;
                     NSString *lrcContents = [[AppController sharedController] readLocalLyrics:title theArtist:artist];
                     if ([userDefaults boolForKey:@"LyricsEnableFilter"]) {
-                        [parser parseWithFilter:lrcContents];
+                        [parser parseWithFilter:lrcContents iTunesTitle:nil iTunesAlbum:nil];
                     }
                     else {
                         [parser parseForLyrics:lrcContents];
@@ -79,8 +79,10 @@
                         else if (hasSpace) {
                             hasSpace = NO;
                         }
-                        [lyrics appendString:lrcLine.lyricsSentence];
-                        [lyrics appendString:@"\n"];
+                        if (lrcLine.enabled) {
+                            [lyrics appendString:lrcLine.lyricsSentence];
+                            [lyrics appendString:@"\n"];
+                        }
                     }
                     track.lyrics = lyrics;
                 }
@@ -138,6 +140,16 @@
         } else {
             return nil;
         }
+    }
+}
+
+-(NSString *) currentAlbum {
+    @autoreleasepool {
+        NSString *album = iTunes.currentTrack.album;
+        if (!album) {
+            album = @"";
+        }
+        return album;
     }
 }
 

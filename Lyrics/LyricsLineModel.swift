@@ -10,11 +10,19 @@ import Cocoa
 
 class LyricsLineModel: NSObject {
     
-    var lyricsSentence: String!
+    var lyricsSentence: String
+    var enabled: Bool
     
-    private(set) var msecPosition: Int!
+    private(set) var msecPosition: Int
+    private(set) var timeTag: String
     
-    private(set) var timeTag: String!
+    override init() {
+        lyricsSentence = String()
+        enabled = true
+        msecPosition = 0
+        timeTag = "[00:00.000]"
+        super.init()
+    }
     
     func setMsecPositionWithTimeTag (theTimeTag: NSString) {
         self.timeTag = theTimeTag as String
