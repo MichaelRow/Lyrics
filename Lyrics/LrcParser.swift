@@ -9,7 +9,7 @@
 import Cocoa
 
 enum LrcType: Int {
-    case Lyrics, Title, Album, TitleAndAlbum, Other
+    case Lyrics, Title, Album, TitleAndAlbum, TitleAndAlbumSimillar, Other
 }
 
 class LrcParser: NSObject {
@@ -219,7 +219,9 @@ class LrcParser: NSObject {
         //               2.歌词中若出现"条件过滤列表"中的关键字以及各种形式冒号则清除该行
         //               3.如果开启智能过滤，则将lrc文件中的ID-Tag内容（包含歌曲名、专辑名、制作者等）作为过滤关键字，
         //                 由于在歌词中嵌入的歌曲信息主要集中在前10行并连续出现，为了防止误过滤（有些歌词本身就含有歌
-        //                 曲名），过滤需要参照上下文，如果上下文有空行则顺延。
+        //                 曲名），过滤需要参照上下文，如果上下文有空行则顺延。如果连续出现歌曲名或者专辑名则认为是歌词
+        //                 本身有该字符串，比如歌曲名是"You"，歌词为"You are great"，如果歌词大于等于歌曲名的5倍也认
+        //                 为歌词本身有歌曲名。
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let directFilter = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsDirectFilter)!) as! [FilterString]
         let conditionalFilter = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsConditionalFilter)!) as! [FilterString]
@@ -234,6 +236,7 @@ class LrcParser: NSObject {
         let isTitleAlbumSimillar: Bool = isIDTagTitleAlbumSimillar || isiTunesTitleAlbumSimillar
         var prevLrcType: LrcType = .Lyrics
         var emptyLine: Int = 0
+        var lastTitleAlbumSimillarIdx = -1
         
         MainLoop: for index in 0 ..< tempLyrics.count {
             var currentLrcType: LrcType = .Lyrics
@@ -242,84 +245,6 @@ class LrcParser: NSObject {
                 emptyLine += 1
                 continue MainLoop
             }
-            if userDefaults.boolForKey(LyricsEnableSmartFilter) {
-                
-                let hasIDTagTitle: Bool = (line.rangeOfString(title, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (title.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
-                let hasiTunesTitle: Bool
-                if iTunesTitle == nil {
-                    hasiTunesTitle = false
-                }
-                else {
-                    hasiTunesTitle = (line.rangeOfString(iTunesTitle!, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (iTunesTitle!.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
-                }
-                
-                let hasIDTagAlbum: Bool = (line.rangeOfString(album, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (album.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
-                let hasiTunesAlbum: Bool
-                if iTunesAlbum == nil {
-                    hasiTunesAlbum = false
-                }
-                else {
-                    hasiTunesAlbum = (line.rangeOfString(iTunesAlbum!, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (iTunesAlbum!.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
-                }
-                
-                let hasTitle: Bool = hasIDTagTitle || hasiTunesTitle
-                let hasAlbum: Bool = hasIDTagAlbum || hasiTunesAlbum
-                
-                if hasTitle && hasAlbum && !isTitleAlbumSimillar {
-                    if prevLrcType == .Title || prevLrcType == .Album {
-                        tempLyrics[index-1-emptyLine].enabled = false
-                    }
-                    tempLyrics[index].enabled = false
-                    prevLrcType = .TitleAndAlbum
-                    continue MainLoop
-                }
-                
-                for str in otherIDInfos {
-                    if line.rangeOfString(str, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil {
-                        if prevLrcType == .Title || prevLrcType == .Album {
-                            tempLyrics[index-1-emptyLine].enabled = false
-                        }
-                        tempLyrics[index].enabled = false
-                        prevLrcType = .Other
-                        continue MainLoop
-                    }
-                }
-                
-                if hasAlbum {
-                    if prevLrcType == .Title {
-                        tempLyrics[index-1-emptyLine].enabled = false
-                        tempLyrics[index].enabled = false
-                        prevLrcType = .Album
-                        continue MainLoop
-                    }
-                    else if prevLrcType == .Other || prevLrcType == .TitleAndAlbum {
-                        tempLyrics[index].enabled = false
-                        prevLrcType = .Album
-                        continue MainLoop
-                    }
-                    else {
-                        currentLrcType = .Album
-                    }
-                }
-                
-                if hasTitle {
-                    if prevLrcType == .Album {
-                        tempLyrics[index-1-emptyLine].enabled = false
-                        tempLyrics[index].enabled = false
-                        prevLrcType = .Title
-                        continue MainLoop
-                    }
-                    else if prevLrcType == .Other || prevLrcType == .TitleAndAlbum {
-                        tempLyrics[index].enabled = false
-                        prevLrcType = .Title
-                        continue MainLoop
-                    }
-                    else {
-                        currentLrcType = .Title
-                    }
-                }
-            }
-            
             for filter in directFilter {
                 let searchResult: Bool
                 if filter.caseSensitive {
@@ -330,6 +255,13 @@ class LrcParser: NSObject {
                 }
                 if searchResult {
                     if prevLrcType == .Title || prevLrcType == .Album {
+                        tempLyrics[index-1-emptyLine].enabled = false
+                    }
+                    else if prevLrcType == .TitleAndAlbumSimillar {
+                        if lastTitleAlbumSimillarIdx != -1 {
+                            tempLyrics[lastTitleAlbumSimillarIdx].enabled = false
+                            lastTitleAlbumSimillarIdx = -1
+                        }
                         tempLyrics[index-1-emptyLine].enabled = false
                     }
                     tempLyrics[index].enabled = false
@@ -352,12 +284,165 @@ class LrcParser: NSObject {
                             if prevLrcType == .Title || prevLrcType == .Album {
                                 tempLyrics[index-1-emptyLine].enabled = false
                             }
+                            else if prevLrcType == .TitleAndAlbumSimillar {
+                                if lastTitleAlbumSimillarIdx != -1 {
+                                    tempLyrics[lastTitleAlbumSimillarIdx].enabled = false
+                                    lastTitleAlbumSimillarIdx = -1
+                                }
+                                tempLyrics[index-1-emptyLine].enabled = false
+                            }
                             tempLyrics[index].enabled = false
                             prevLrcType = .Other
                             continue MainLoop
                         }
                     }
                 }
+            }
+            
+            if userDefaults.boolForKey(LyricsEnableSmartFilter) {
+                var ignoreTitle: Bool = false
+                var ignoreAlbum: Bool = false
+                
+                let hasIDTagTitle: Bool = (line.rangeOfString(title, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (title.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
+                
+                if hasIDTagTitle {
+                    if line.characters.count/title.characters.count > 4 {
+                        ignoreTitle = true
+                    }
+                }
+                
+                let hasIDTagAlbum: Bool = (line.rangeOfString(album, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (album.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
+                
+                if hasIDTagAlbum {
+                    if line.characters.count/album.characters.count > 4 {
+                        ignoreAlbum = true
+                    }
+                }
+                
+                let hasiTunesTitle: Bool
+                if iTunesTitle == nil {
+                    hasiTunesTitle = false
+                }
+                else {
+                    hasiTunesTitle = (line.rangeOfString(iTunesTitle!, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (iTunesTitle!.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
+                    if !ignoreTitle && hasiTunesTitle {
+                        if line.characters.count/iTunesTitle!.characters.count > 4 {
+                            ignoreTitle = true
+                        }
+                    }
+                }
+                
+                let hasiTunesAlbum: Bool
+                if iTunesAlbum == nil {
+                    hasiTunesAlbum = false
+                }
+                else {
+                    hasiTunesAlbum = (line.rangeOfString(iTunesAlbum!, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (iTunesAlbum!.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
+                    if !ignoreAlbum && hasiTunesAlbum {
+                        if line.characters.count/iTunesAlbum!.characters.count > 4 {
+                            ignoreAlbum = true
+                        }
+                    }
+                }
+                
+                let hasTitle: Bool = hasIDTagTitle || hasiTunesTitle
+                let hasAlbum: Bool = hasIDTagAlbum || hasiTunesAlbum
+                
+                for str in otherIDInfos {
+                    if line.rangeOfString(str, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil {
+                        if prevLrcType == .Title || prevLrcType == .Album {
+                            tempLyrics[index-1-emptyLine].enabled = false
+                        }
+                        else if prevLrcType == .TitleAndAlbumSimillar {
+                            if lastTitleAlbumSimillarIdx != -1 {
+                                tempLyrics[lastTitleAlbumSimillarIdx].enabled = false
+                                lastTitleAlbumSimillarIdx = -1
+                            }
+                            tempLyrics[index-1-emptyLine].enabled = false
+                        }
+                        tempLyrics[index].enabled = false
+                        prevLrcType = .Other
+                        continue MainLoop
+                    }
+                }
+                
+                if hasTitle && hasAlbum {
+                    if isTitleAlbumSimillar {
+                        if !ignoreTitle && !ignoreAlbum {
+                            currentLrcType = .TitleAndAlbumSimillar
+                            if prevLrcType == .TitleAndAlbumSimillar {
+                                if lastTitleAlbumSimillarIdx == -1 {
+                                    lastTitleAlbumSimillarIdx = index-1-emptyLine
+                                }
+                                else {
+                                    currentLrcType = .Lyrics
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        if prevLrcType == .Title || prevLrcType == .Album {
+                            tempLyrics[index-1-emptyLine].enabled = false
+                        }
+                        tempLyrics[index].enabled = false
+                        prevLrcType = .TitleAndAlbum
+                        continue MainLoop
+                    }
+                }
+                else if hasAlbum && !ignoreAlbum {
+                    if prevLrcType == .Title {
+                        tempLyrics[index-1-emptyLine].enabled = false
+                        tempLyrics[index].enabled = false
+                        prevLrcType = .Album
+                        continue MainLoop
+                    }
+                    else if prevLrcType == .Other || prevLrcType == .TitleAndAlbum {
+                        tempLyrics[index].enabled = false
+                        prevLrcType = .Album
+                        continue MainLoop
+                    }
+                    else if prevLrcType == .TitleAndAlbumSimillar {
+                        if lastTitleAlbumSimillarIdx == -1 {
+                            tempLyrics[index-1-emptyLine].enabled = false
+                            tempLyrics[index].enabled = false
+                        }
+                        else {
+                            currentLrcType = .Lyrics
+                        }
+                    }
+                    else {
+                        currentLrcType = .Album
+                    }
+                }
+                else if hasTitle && !ignoreTitle {
+                    if prevLrcType == .Album {
+                        tempLyrics[index-1-emptyLine].enabled = false
+                        tempLyrics[index].enabled = false
+                        prevLrcType = .Title
+                        continue MainLoop
+                    }
+                    else if prevLrcType == .Other || prevLrcType == .TitleAndAlbum {
+                        tempLyrics[index].enabled = false
+                        prevLrcType = .Title
+                        continue MainLoop
+                    }
+                    else if prevLrcType == .TitleAndAlbumSimillar {
+                        if lastTitleAlbumSimillarIdx == -1 {
+                            tempLyrics[index-1-emptyLine].enabled = false
+                            tempLyrics[index].enabled = false
+                        }
+                        else {
+                            currentLrcType = .Lyrics
+                        }
+                    }
+                    else {
+                        currentLrcType = .Title
+                    }
+                }
+            }
+            
+            if currentLrcType == .Lyrics && lastTitleAlbumSimillarIdx != -1 {
+                lastTitleAlbumSimillarIdx = -1
             }
             prevLrcType = currentLrcType
             if line != "" {
