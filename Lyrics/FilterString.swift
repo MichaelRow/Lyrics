@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class FilterString: NSObject {
+class FilterString: NSObject, NSCoding {
     
     var keyword: String
     var caseSensitive: Bool
@@ -26,7 +26,7 @@ class FilterString: NSObject {
         super.init()
     }
     
-    init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         keyword = aDecoder.decodeObjectForKey("keyword") as! String
         caseSensitive = aDecoder.decodeObjectForKey("caseSensitive") as! Bool
         super.init()
