@@ -27,13 +27,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="449" height="505"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <scrollView ambiguous="YES" misplaced="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJl-Am-Wtk">
+                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJl-Am-Wtk">
                         <rect key="frame" x="20" y="39" width="392" height="430"/>
-                        <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="M7e-zw-shG">
+                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="M7e-zw-shG">
                             <rect key="frame" x="1" y="1" width="390" height="428"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView ambiguous="YES" drawsBackground="NO" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="DdJ-zl-cNn" customClass="LyricsEditView" customModule="LyricsX" customModuleProvider="target">
+                                <textView drawsBackground="NO" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="DdJ-zl-cNn" customClass="LyricsEditView" customModule="LyricsX" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="428"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,13 +59,13 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <box hidden="YES" autoresizesSubviews="NO" ambiguous="YES" misplaced="YES" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="NwA-1M-tbM">
+                    <box hidden="YES" autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="NwA-1M-tbM">
                         <rect key="frame" x="20" y="474" width="421" height="24"/>
                         <view key="contentView" id="pGQ-90-WIV">
                             <rect key="frame" x="0.0" y="0.0" width="421" height="24"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQf-Zx-J8u">
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SQf-Zx-J8u">
                                     <rect key="frame" x="-2" y="4" width="55" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="51" id="P2v-vg-tGe"/>
@@ -76,8 +76,8 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u1Z-M9-ZNQ">
-                                    <rect key="frame" x="105" y="2" width="34" height="22"/>
+                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u1Z-M9-ZNQ">
+                                    <rect key="frame" x="105" y="1" width="34" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="34" id="KGD-Qi-G9x"/>
                                     </constraints>
@@ -90,8 +90,8 @@
                                         <outlet property="nextKeyView" destination="DdJ-zl-cNn" id="R0a-8Y-gBs"/>
                                     </connections>
                                 </textField>
-                                <popUpButton verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tb3-4w-a6f">
-                                    <rect key="frame" x="152" y="0.0" width="145" height="26"/>
+                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tb3-4w-a6f">
+                                    <rect key="frame" x="152" y="-1" width="145" height="26"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="140" id="LTc-zt-6Ls"/>
                                     </constraints>
@@ -116,8 +116,8 @@
                                         </menu>
                                     </popUpButtonCell>
                                 </popUpButton>
-                                <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IVJ-ss-mLs">
-                                    <rect key="frame" x="58" y="2" width="34" height="22"/>
+                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IVJ-ss-mLs">
+                                    <rect key="frame" x="58" y="1" width="34" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="34" id="tBU-Lt-ZBF"/>
                                     </constraints>
@@ -130,8 +130,8 @@
                                         <outlet property="nextKeyView" destination="u1Z-M9-ZNQ" id="FTG-Ai-AEA"/>
                                     </connections>
                                 </textField>
-                                <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W3G-Yx-Pgh">
-                                    <rect key="frame" x="303" y="3" width="84" height="19"/>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W3G-Yx-Pgh">
+                                    <rect key="frame" x="303" y="2" width="84" height="19"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="84" id="r9d-ui-AqD"/>
                                     </constraints>
@@ -143,7 +143,7 @@
                                         <action selector="applyOperation:" target="-2" id="ILy-J7-6eu"/>
                                     </connections>
                                 </button>
-                                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVe-nj-BY5">
+                                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FVe-nj-BY5">
                                     <rect key="frame" x="397" y="-1" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="21" id="HSm-wm-2o1"/>
@@ -159,21 +159,28 @@
                             </subviews>
                             <constraints>
                                 <constraint firstItem="W3G-Yx-Pgh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tb3-4w-a6f" secondAttribute="trailing" constant="9" id="5E1-IF-yZk"/>
+                                <constraint firstItem="tb3-4w-a6f" firstAttribute="centerY" secondItem="pGQ-90-WIV" secondAttribute="centerY" id="5jN-wb-Q6M"/>
+                                <constraint firstItem="IVJ-ss-mLs" firstAttribute="centerY" secondItem="pGQ-90-WIV" secondAttribute="centerY" id="99K-En-ISq"/>
                                 <constraint firstItem="IVJ-ss-mLs" firstAttribute="leading" secondItem="SQf-Zx-J8u" secondAttribute="trailing" constant="7" id="AtB-IB-IOe"/>
                                 <constraint firstItem="u1Z-M9-ZNQ" firstAttribute="leading" secondItem="IVJ-ss-mLs" secondAttribute="trailing" constant="13" id="Cae-4V-M7n"/>
                                 <constraint firstItem="tb3-4w-a6f" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="u1Z-M9-ZNQ" secondAttribute="trailing" constant="15" id="K1D-U8-TCk"/>
+                                <constraint firstItem="FVe-nj-BY5" firstAttribute="centerY" secondItem="pGQ-90-WIV" secondAttribute="centerY" id="SkA-hv-Aeb"/>
                                 <constraint firstItem="SQf-Zx-J8u" firstAttribute="leading" secondItem="pGQ-90-WIV" secondAttribute="leading" id="SoZ-ci-74z"/>
                                 <constraint firstAttribute="trailing" secondItem="FVe-nj-BY5" secondAttribute="trailing" constant="1" id="dsz-Tm-8x0"/>
                                 <constraint firstItem="FVe-nj-BY5" firstAttribute="leading" secondItem="W3G-Yx-Pgh" secondAttribute="trailing" constant="12" id="nGd-Tx-Vyz"/>
+                                <constraint firstItem="SQf-Zx-J8u" firstAttribute="centerY" secondItem="pGQ-90-WIV" secondAttribute="centerY" id="phv-ed-d3e"/>
+                                <constraint firstItem="u1Z-M9-ZNQ" firstAttribute="centerY" secondItem="pGQ-90-WIV" secondAttribute="centerY" id="tVI-rj-xOa"/>
+                                <constraint firstItem="W3G-Yx-Pgh" firstAttribute="centerY" secondItem="pGQ-90-WIV" secondAttribute="centerY" id="z0L-kB-2aN"/>
                             </constraints>
                         </view>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="421" id="9FZ-9Z-2N6"/>
+                            <constraint firstAttribute="height" constant="24" placeholder="YES" id="TDy-p1-a3N"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
-                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CAp-Ei-A4Y">
+                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CAp-Ei-A4Y">
                         <rect key="frame" x="415" y="445" width="29" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="nZY-so-jW1"/>
