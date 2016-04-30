@@ -64,6 +64,8 @@ let LyricsEnableFilter:String="LyricsEnableFilter"
 let LyricsEnableSmartFilter:String="LyricsEnableSmartFilter"
 
 //Shortcut
+let ShortcutOffsetIncr:String="ShortcutOffsetIncr"
+let ShortcutOffsetDecr:String="ShortcutOffsetDecr"
 let ShortcutLyricsModeSwitch:String="ShortcutLyricsModeSwitch"
 let ShortcutDesktopMenubarSwitch:String="ShortcutDesktopMenubarSwitch"
 let ShortcutOpenLrcSeeker:String="ShortcutOpenLrcSeeker"

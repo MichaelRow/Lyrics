@@ -36,6 +36,8 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     var bgHeightIncreasement: Float = 0
     var lyricsYOffset: Float = 0
     //Shortcuts
+    @IBOutlet private weak var offsetIncrShortcut: MASShortcutView!
+    @IBOutlet private weak var offsetDecrShortcut: MASShortcutView!
     @IBOutlet private weak var lyricsModeSwitchShortcut: MASShortcutView!
     @IBOutlet private weak var desktopMenubarSwitchShortcut: MASShortcutView!
     @IBOutlet private weak var lrcSeekerShortcut: MASShortcutView!
@@ -73,6 +75,8 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         savingPathPopUp.itemAtIndex(1)?.title = (userSavingPath as NSString).lastPathComponent
         
         reflashFontAndColorPrefs()
+        setupShortcuts()
+        reflashPreset(nil)
         loadFilter()
     }
     
@@ -307,7 +311,15 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
     func setupShortcuts() {
         let appController = AppController.sharedController
-        // User shortcuts
+        
+        offsetIncrShortcut.associatedUserDefaultsKey = ShortcutOffsetIncr
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOffsetIncr) { 
+            appController.increaseTimeDly()
+        }
+        offsetDecrShortcut.associatedUserDefaultsKey = ShortcutOffsetDecr
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOffsetDecr) {
+            appController.decreaseTimeDly()
+        }
         lyricsModeSwitchShortcut.associatedUserDefaultsKey = ShortcutLyricsModeSwitch
         MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutLyricsModeSwitch) { () -> Void in
             let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -339,15 +351,6 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         writeLrcToiTunesShortcut.associatedUserDefaultsKey = ShortcutWriteLrcToiTunes
         MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutWriteLrcToiTunes) { () -> Void in
             appController.writeLyricsToiTunes(nil)
-        }
-        // Hard-Coded shortcuts
-        let offsetIncr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Equal), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
-        MASShortcutMonitor.sharedMonitor().registerShortcut(offsetIncr) { () -> Void in
-            appController.increaseTimeDly()
-        }
-        let offsetDecr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Minus), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
-        MASShortcutMonitor.sharedMonitor().registerShortcut(offsetDecr) { () -> Void in
-            appController.decreaseTimeDly()
         }
     }
     

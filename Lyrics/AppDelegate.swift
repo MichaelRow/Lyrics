@@ -15,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         let userSavingPath: NSString = NSSearchPathForDirectoriesInDomains(.DownloadsDirectory, [.UserDomainMask], true).first! 
         
+        // Filter
         let directFilterData = generateDirectFilterData()
         let conditionalFilterData = generateConditionalFilterData()
         
@@ -76,7 +77,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             userDefaults.removeObjectForKey(LyricsConditionalFilter)
         }
         
-        NSColorPanel.sharedColorPanel().showsAlpha = true
+        // Default shortcuts
+        let offsetIncr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Equal), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
+        let offsetDecr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Minus), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
+        let defaultShortcuts = [ShortcutOffsetIncr : offsetIncr,
+                                ShortcutOffsetDecr : offsetDecr]
+        MASShortcutBinder.sharedBinder().registerDefaultShortcuts(defaultShortcuts)
         
         let lyricsXHelpers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LyricsX-Helper")
         for helper in lyricsXHelpers {
@@ -89,8 +95,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Force Prefs to load and setup shortcuts,etc
         let prefs = AppPrefsWindowController.sharedPrefsWindowController
         prefs.showWindow(nil)
-        prefs.setupShortcuts()
-        prefs.reflashPreset(nil)
         prefs.window?.close()
         
         //Check if login item hasn't be enabled
@@ -100,6 +104,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 NSLog("Failed to enable login item")
             }
         }
+        
+        NSColorPanel.sharedColorPanel().showsAlpha = true
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
