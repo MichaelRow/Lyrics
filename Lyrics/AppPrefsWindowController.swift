@@ -75,7 +75,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         savingPathPopUp.itemAtIndex(1)?.title = (userSavingPath as NSString).lastPathComponent
         
         reflashFontAndColorPrefs()
-        setupShortcuts()
+        bindShortcutViewToKey()
         reflashPreset(nil)
         loadFilter()
     }
@@ -309,49 +309,16 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
 // MARK: - Shortcut Prefs
     
-    func setupShortcuts() {
-        let appController = AppController.sharedController
-        
+    func bindShortcutViewToKey() {
         offsetIncrShortcut.associatedUserDefaultsKey = ShortcutOffsetIncr
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOffsetIncr) { 
-            appController.increaseTimeDly()
-        }
         offsetDecrShortcut.associatedUserDefaultsKey = ShortcutOffsetDecr
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOffsetDecr) {
-            appController.decreaseTimeDly()
-        }
         lyricsModeSwitchShortcut.associatedUserDefaultsKey = ShortcutLyricsModeSwitch
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutLyricsModeSwitch) { () -> Void in
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setBool(!userDefaults.boolForKey(LyricsIsVerticalLyrics), forKey: LyricsIsVerticalLyrics)
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                DesktopLyricsController.sharedController.reflash()
-            })
-        }
         desktopMenubarSwitchShortcut.associatedUserDefaultsKey = ShortcutDesktopMenubarSwitch
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutDesktopMenubarSwitch) { () -> Void in
-            appController.switchDesktopMenuBarMode()
-        }
         lrcSeekerShortcut.associatedUserDefaultsKey = ShortcutOpenLrcSeeker
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOpenLrcSeeker) { () -> Void in
-            appController.searchLyricsAndArtworks(nil)
-        }
         copyLrcToPbShortcut.associatedUserDefaultsKey = ShortcutCopyLrcToPb
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutCopyLrcToPb) { () -> Void in
-            appController.copyLyricsToPb(nil)
-        }
         editLrcShortcut.associatedUserDefaultsKey = ShortcutEditLrc
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutEditLrc) { () -> Void in
-            appController.editLyrics(nil)
-        }
         makeLrcShortcut.associatedUserDefaultsKey = ShortcutMakeLrc
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutMakeLrc) { () -> Void in
-            appController.makeLrc(nil)
-        }
         writeLrcToiTunesShortcut.associatedUserDefaultsKey = ShortcutWriteLrcToiTunes
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutWriteLrcToiTunes) { () -> Void in
-            appController.writeLyricsToiTunes(nil)
-        }
     }
     
     private func endRecordShortcut() {

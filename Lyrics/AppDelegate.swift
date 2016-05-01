@@ -77,13 +77,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             userDefaults.removeObjectForKey(LyricsConditionalFilter)
         }
         
-        // Default shortcuts
-        let offsetIncr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Equal), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
-        let offsetDecr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Minus), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
-        let defaultShortcuts = [ShortcutOffsetIncr : offsetIncr,
-                                ShortcutOffsetDecr : offsetDecr]
-        MASShortcutBinder.sharedBinder().registerDefaultShortcuts(defaultShortcuts)
-        
         let lyricsXHelpers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LyricsX-Helper")
         for helper in lyricsXHelpers {
             helper.forceTerminate()
@@ -92,7 +85,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Force singleton to init
         AppController.sharedController
         
-        // Force Prefs to load and setup shortcuts,etc
+        // Force Prefs to load presets
         let prefs = AppPrefsWindowController.sharedPrefsWindowController
         prefs.showWindow(nil)
         prefs.window?.close()
@@ -139,7 +132,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func generateDirectFilterData() -> NSData {
+    private func generateDirectFilterData() -> NSData {
         let caseInsensitiveStr = ["作詞","作词","作曲","編曲","编曲","収録","收录","演唱","歌手","歌曲","制作","製作","歌词","歌詞","翻譯","翻译","插曲","插入歌","主题歌","主題歌","片頭曲","片头曲","片尾曲","Lrc","QQ","アニメ","CV","LyricsBy","CharacterSong","SoundTrack"]
         let caseSensitiveStr = ["PC","OP","ED","OVA","BGM"]
         var directFilter = [FilterString]()
@@ -152,7 +145,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return NSKeyedArchiver.archivedDataWithRootObject(directFilter)
     }
     
-    func generateConditionalFilterData() -> NSData {
+    private func generateConditionalFilterData() -> NSData {
         let caseInsensitiveStr = ["by","歌","唄","曲","作","唱","詞","词","編","编"]
         var conditionalFilter = [FilterString]()
         for str in caseInsensitiveStr {

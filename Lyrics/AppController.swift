@@ -65,29 +65,81 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         lrcSourceHandleQueue.maxConcurrentOperationCount = 1
         
         NSBundle(forClass: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
-        setupStatusItem()
         
+        // init desktop lyrics and menu lyrics
         lyricsWindow = DesktopLyricsController.sharedController
         lyricsWindow.showWindow(nil)
-        
         if userDefaults.boolForKey(LyricsMenuBarLyricsEnabled) {
             menuBarLyrics = MenuBarLyrics()
         }
-        // check lrc saving path
-        if !userDefaults.boolForKey(LyricsDisableAllAlert) && !checkSavingPath() {
-            let alert: NSAlert = NSAlert()
-            alert.messageText = NSLocalizedString("ERROR_OCCUR", comment: "")
-            alert.informativeText = NSLocalizedString("PATH_IS_NOT_DIR", comment: "")
-            alert.addButtonWithTitle(NSLocalizedString("OPEN_PREFS", comment: ""))
-            alert.addButtonWithTitle(NSLocalizedString("IGNORE", comment: ""))
-            let response: NSModalResponse = alert.runModal()
-            if response == NSAlertFirstButtonReturn {
-                dispatch_async(dispatch_get_main_queue(), { 
-                    self.showPreferences(nil)
-                })
-            }
+        
+        setupStatusItem()
+        checkLrcSavingPath()
+        setupShortcuts()
+        addNotificationObserver()
+        trackingStatusInitiation()
+    }
+    
+    deinit {
+        NSStatusBar.systemStatusBar().removeStatusItem(statusItem)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    private func setupStatusItem() {
+        let icon:NSImage = NSImage(named: "status_icon")!
+        icon.template = true
+        statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
+        statusItem.menu = statusBarMenu
+        if #available(OSX 10.10, *) {
+            statusItem.button?.image = icon
+        } else {
+            statusItem.image = icon
+            statusItem.highlightMode = true
         }
     
+        delayMenuItem.view = lyricsDelayView
+        lyricsDelayView.autoresizingMask = [.ViewWidthSizable]
+    }
+    
+    private func checkLrcSavingPath() {
+        if !userDefaults.boolForKey(LyricsDisableAllAlert) {
+            let savingPath: String
+            if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
+                savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+            } else {
+                savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
+            }
+            
+            let fm: NSFileManager = NSFileManager.defaultManager()
+            var isDir: ObjCBool = true
+            if fm.fileExistsAtPath(savingPath, isDirectory: &isDir) {
+                //歌词保存路径是非文件夹，弹出警示
+                if !isDir {
+                    let alert: NSAlert = NSAlert()
+                    alert.messageText = NSLocalizedString("ERROR_OCCUR", comment: "")
+                    alert.informativeText = NSLocalizedString("PATH_IS_NOT_DIR", comment: "")
+                    alert.addButtonWithTitle(NSLocalizedString("OPEN_PREFS", comment: ""))
+                    alert.addButtonWithTitle(NSLocalizedString("IGNORE", comment: ""))
+                    let response: NSModalResponse = alert.runModal()
+                    if response == NSAlertFirstButtonReturn {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.showPreferences(nil)
+                        })
+                    }
+                }
+            } else {
+                //歌词保存路径没有文件夹，创建一个
+                do {
+                    try fm.createDirectoryAtPath(savingPath, withIntermediateDirectories: true, attributes: nil)
+                } catch let theError as NSError{
+                    NSLog("%@", theError.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private func addNotificationObserver() {
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(lrcLoadingCompleted(_:)), name: LrcLoadedNotification, object: nil)
         nc.addObserver(self, selector: #selector(handleUserEditLyrics(_:)), name: LyricsUserEditLyricsNotification, object: nil)
@@ -96,7 +148,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         let ndc = NSDistributedNotificationCenter.defaultCenter()
         ndc.addObserver(self, selector: #selector(iTunesPlayerInfoChanged(_:)), name: "com.apple.iTunes.playerInfo", object: nil)
         ndc.addObserver(self, selector: #selector(handleExtenalLyricsEvent(_:)), name: "ExtenalLyricsEvent", object: nil)
-        
+    }
+    
+    private func trackingStatusInitiation() {
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
             currentSongID = iTunes.currentPersistentID()
@@ -129,50 +183,96 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
-    deinit {
-        NSStatusBar.systemStatusBar().removeStatusItem(statusItem)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-        NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
-    }
+// MARK: - Shortcut Events
     
-    private func setupStatusItem() {
-        let icon:NSImage = NSImage(named: "status_icon")!
-        icon.template = true
-        statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
-        statusItem.menu = statusBarMenu
-        if #available(OSX 10.10, *) {
-            statusItem.button?.image = icon
-        } else {
-            statusItem.image = icon
-            statusItem.highlightMode = true
-        }
-    
-        delayMenuItem.view = lyricsDelayView
-        lyricsDelayView.autoresizingMask = [.ViewWidthSizable]
-    }
-    
-    private func checkSavingPath() -> Bool{
-        let savingPath: String
-        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
-            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-        } else {
-            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
-        }
-        let fm: NSFileManager = NSFileManager.defaultManager()
+    func setupShortcuts() {
+        // Default shortcuts
+        let offsetIncr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Equal), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
+        let offsetDecr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Minus), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
+        let defaultShortcuts = [ShortcutOffsetIncr : offsetIncr,
+                                ShortcutOffsetDecr : offsetDecr]
+        MASShortcutBinder.sharedBinder().registerDefaultShortcuts(defaultShortcuts)
         
-        var isDir: ObjCBool = false
-        if fm.fileExistsAtPath(savingPath, isDirectory: &isDir) {
-            if !isDir {
-                return false
-            }
-        } else {
-            do {
-                try fm.createDirectoryAtPath(savingPath, withIntermediateDirectories: true, attributes: nil)
-            } catch let theError as NSError{
-                NSLog("%@", theError.localizedDescription)
-            }
+        //Bind actions to User Default keys
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOffsetIncr) {
+            self.increaseTimeDly()
         }
-        return true
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOffsetDecr) {
+            self.decreaseTimeDly()
+        }
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutLyricsModeSwitch) { () -> Void in
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setBool(!userDefaults.boolForKey(LyricsIsVerticalLyrics), forKey: LyricsIsVerticalLyrics)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DesktopLyricsController.sharedController.reflash()
+            })
+        }
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutDesktopMenubarSwitch) { () -> Void in
+            self.switchDesktopMenuBarMode()
+        }
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOpenLrcSeeker) { () -> Void in
+            self.searchLyricsAndArtworks(nil)
+        }
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutCopyLrcToPb) { () -> Void in
+            self.copyLyricsToPb(nil)
+        }
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutEditLrc) { () -> Void in
+            self.editLyrics(nil)
+        }
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutMakeLrc) { () -> Void in
+            self.makeLrc(nil)
+        }
+        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutWriteLrcToiTunes) { () -> Void in
+            self.writeLyricsToiTunes(nil)
+        }
+    }
+    
+    func increaseTimeDly() {
+        self.willChangeValueForKey("timeDly")
+        timeDly += 100
+        if timeDly > 10000 {
+            timeDly = 10000
+        }
+        self.didChangeValueForKey("timeDly")
+        let message: String = String(format: NSLocalizedString("OFFSET", comment: ""), timeDly)
+        MessageWindowController.sharedMsgWindow.displayMessage(message)
+    }
+    
+    func decreaseTimeDly() {
+        self.willChangeValueForKey("timeDly")
+        timeDly -= 100
+        if timeDly < -10000 {
+            timeDly = -10000
+        }
+        self.didChangeValueForKey("timeDly")
+        let message: String = String(format: NSLocalizedString("OFFSET", comment: ""), timeDly)
+        MessageWindowController.sharedMsgWindow.displayMessage(message)
+    }
+    
+    func switchDesktopMenuBarMode() {
+        let isDesktopLyricsOn = userDefaults.boolForKey(LyricsDesktopLyricsEnabled)
+        let isMenuBarLyricsOn = userDefaults.boolForKey(LyricsMenuBarLyricsEnabled)
+        if isDesktopLyricsOn && isMenuBarLyricsOn {
+            userDefaults.setBool(false, forKey: LyricsMenuBarLyricsEnabled)
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("DESKTOP_ON", comment: ""))
+            menuBarLyrics = nil
+        }
+        else if isDesktopLyricsOn && !isMenuBarLyricsOn {
+            userDefaults.setBool(false, forKey: LyricsDesktopLyricsEnabled)
+            userDefaults.setBool(true, forKey: LyricsMenuBarLyricsEnabled)
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("MENU_BAR_ON", comment: ""))
+            menuBarLyrics = MenuBarLyrics()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
+                self.menuBarLyrics.displayLyrics(self.currentLyrics)
+            })
+        }
+        else {
+            userDefaults.setBool(true, forKey: LyricsDesktopLyricsEnabled)
+            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("BOTH_ON", comment: ""))
+            // Force update both
+            currentLyrics = nil
+        }
     }
     
 // MARK: - Interface Methods
@@ -1043,56 +1143,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 parseCurrentLrc(lyricsContents)
             }
             saveLrcToLocal(lyricsContents, songTitle: songTitle, artist: artist)
-        }
-    }
-    
-// MARK: - Shortcut Events
-    
-    func increaseTimeDly() {
-        self.willChangeValueForKey("timeDly")
-        timeDly += 100
-        if timeDly > 10000 {
-            timeDly = 10000
-        }
-        self.didChangeValueForKey("timeDly")
-        let message: String = String(format: NSLocalizedString("OFFSET", comment: ""), timeDly)
-        MessageWindowController.sharedMsgWindow.displayMessage(message)
-    }
-    
-    func decreaseTimeDly() {
-        self.willChangeValueForKey("timeDly")
-        timeDly -= 100
-        if timeDly < -10000 {
-            timeDly = -10000
-        }
-        self.didChangeValueForKey("timeDly")
-        let message: String = String(format: NSLocalizedString("OFFSET", comment: ""), timeDly)
-        MessageWindowController.sharedMsgWindow.displayMessage(message)
-    }
-    
-    func switchDesktopMenuBarMode() {
-        let isDesktopLyricsOn = userDefaults.boolForKey(LyricsDesktopLyricsEnabled)
-        let isMenuBarLyricsOn = userDefaults.boolForKey(LyricsMenuBarLyricsEnabled)
-        if isDesktopLyricsOn && isMenuBarLyricsOn {
-            userDefaults.setBool(false, forKey: LyricsMenuBarLyricsEnabled)
-            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("DESKTOP_ON", comment: ""))
-            menuBarLyrics = nil
-        }
-        else if isDesktopLyricsOn && !isMenuBarLyricsOn {
-            userDefaults.setBool(false, forKey: LyricsDesktopLyricsEnabled)
-            userDefaults.setBool(true, forKey: LyricsMenuBarLyricsEnabled)
-            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("MENU_BAR_ON", comment: ""))
-            menuBarLyrics = MenuBarLyrics()
-            dispatch_async(dispatch_get_main_queue(), {
-                self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
-                self.menuBarLyrics.displayLyrics(self.currentLyrics)
-            })
-        }
-        else {
-            userDefaults.setBool(true, forKey: LyricsDesktopLyricsEnabled)
-            MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("BOTH_ON", comment: ""))
-            // Force update both
-            currentLyrics = nil
         }
     }
     
