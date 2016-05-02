@@ -18,7 +18,7 @@ func convertToTC(input: String) -> String {
     return convertToChineseUsingProfile(profilePath,inputStr: input)
 }
 
-func convertToTC_Taiwan(input: String) -> String {
+func convertToTC_TW(input: String) -> String {
     let profilePath: NSString = NSBundle.mainBundle().pathForResource("s2tw", ofType: "json")!
     return convertToChineseUsingProfile(profilePath,inputStr: input)
 }

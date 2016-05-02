@@ -165,8 +165,6 @@
 		768BCB1F1BF1C62000D6F5EB /* libopencc.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.2.dylib; sourceTree = "<group>"; };
 		768BCB201BF1C62000D6F5EB /* libopencc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencc.dylib; sourceTree = "<group>"; };
 		768BCB271BF1C69D00D6F5EB /* opencc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opencc.h; sourceTree = "<group>"; };
-		768BCB281BF1C6E700D6F5EB /* Export.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Export.hpp; sourceTree = "<group>"; };
-		768BCB291BF1C6E700D6F5EB /* SimpleConverter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SimpleConverter.hpp; sourceTree = "<group>"; };
 		768BCB2A1BF1C74400D6F5EB /* HKVariants.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = HKVariants.ocd; sourceTree = "<group>"; };
 		768BCB2B1BF1C74400D6F5EB /* HKVariantsPhrases.ocd */ = {isa = PBXFileReference; lastKnownFileType = file; path = HKVariantsPhrases.ocd; sourceTree = "<group>"; };
 		768BCB2C1BF1C74400D6F5EB /* s2hk.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = s2hk.json; sourceTree = "<group>"; };
@@ -365,8 +363,6 @@
 			children = (
 				7642B9061BF488AB00D68FE9 /* iTunes.h */,
 				768BCB271BF1C69D00D6F5EB /* opencc.h */,
-				768BCB281BF1C6E700D6F5EB /* Export.hpp */,
-				768BCB291BF1C6E700D6F5EB /* SimpleConverter.hpp */,
 				765B7F8A1C2E3B320066F2B4 /* NSStatusBar+NSStatusBar_Private.h */,
 				768BCAE51BF1866400D6F5EB /* Lyrics-Bridging-Header.h */,
 				76D060681C02E997000DA86C /* Lyrics-Prefix.pch */,

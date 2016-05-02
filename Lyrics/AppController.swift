@@ -741,7 +741,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             case 1:
                 lrcToParse = convertToTC(lrcContents)
             case 2:
-                lrcToParse = convertToTC_Taiwan(lrcContents)
+                lrcToParse = convertToTC_TW(lrcContents)
             case 3:
                 lrcToParse = convertToTC_HK(lrcContents)
             default:
