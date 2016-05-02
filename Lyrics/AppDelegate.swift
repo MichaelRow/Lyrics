@@ -51,12 +51,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             //Font and Color Preferences Defaults
             LyricsFontName : "HannotateSC-W7",
-            LyricsFontSize : NSNumber(float: 36),
+            LyricsFontSize : NSNumber(float: 26),
             LyricsShadowModeEnable : NSNumber(bool: true),
             LyricsTextColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.whiteColor()),
             LyricsBackgroundColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor(calibratedWhite: 0, alpha: 0.5)),
             LyricsShadowColor : NSKeyedArchiver.archivedDataWithRootObject(NSColor.orangeColor()),
-            LyricsShadowRadius : NSNumber(float: 4),
+            LyricsShadowRadius : NSNumber(float: 2),
             LyricsBgHeightINCR : NSNumber(float: 0),
             LyricsYOffset : NSNumber(float: 0),
             
