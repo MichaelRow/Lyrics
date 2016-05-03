@@ -8,9 +8,8 @@
 
 // Alert
 "ERROR_OCCUR"="An error occured";
-"PATH_IS_NOT_DIR"="The default path which used to save lrc files is not a directory.\nIn this case no lrc can be saved.";
-"OPEN_PREFS"="Open Preferences and Set";
-"IGNORE"="Ignore";
+"PATH_IS_NOT_DIR"="The custom path which used to save lrc files is not a directory.\nNow the path is reset to default, and you can open preferences panel to set a new one.";
+"OPEN_PREFS"="Open Preferences";
 "CHANGE_UNSAVED"="Changes unsaved";
 "DISGARDS_LEAVE"="Do you really want to disgards all the changes and leave?";
 "APPLY_LEAVE"="Apply and Leave";

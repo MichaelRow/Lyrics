@@ -116,11 +116,12 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             if fm.fileExistsAtPath(savingPath, isDirectory: &isDir) {
                 //歌词保存路径是非文件夹，弹出警示
                 if !isDir {
+                    userDefaults.removeObjectForKey(LyricsUserSavingPath)
+                    userDefaults.removeObjectForKey(LyricsSavingPathPopUpIndex)
                     let alert: NSAlert = NSAlert()
                     alert.messageText = NSLocalizedString("ERROR_OCCUR", comment: "")
                     alert.informativeText = NSLocalizedString("PATH_IS_NOT_DIR", comment: "")
                     alert.addButtonWithTitle(NSLocalizedString("OPEN_PREFS", comment: ""))
-                    alert.addButtonWithTitle(NSLocalizedString("IGNORE", comment: ""))
                     let response: NSModalResponse = alert.runModal()
                     if response == NSAlertFirstButtonReturn {
                         dispatch_async(dispatch_get_main_queue(), {

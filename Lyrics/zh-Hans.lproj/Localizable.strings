@@ -8,9 +8,8 @@
 
 // Alert
 "ERROR_OCCUR" = "运行过程中出现错误";
-"PATH_IS_NOT_DIR" = "默认的Lrc歌词保存路径不是文件夹，\n在这种情况下，歌词文件不会被保存到本地。";
-"OPEN_PREFS" = "打开偏好设置并重设路径";
-"IGNORE" = "忽略";
+"PATH_IS_NOT_DIR" = "默认的Lrc歌词保存路径不是文件夹，\n现已重置为默认路径，您也可以打开偏好设置来设置一个新的路径。";
+"OPEN_PREFS" = "打开偏好设置";
 "CHANGE_UNSAVED"="更改未保存";
 "DISGARDS_LEAVE"="您确定放弃保存并离开当前界面?";
 "APPLY_LEAVE"="应用并离开";
