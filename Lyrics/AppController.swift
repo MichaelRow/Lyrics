@@ -48,7 +48,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     private var timer: NSTimer!
     
 // MARK: - Init & deinit
-    override init() {
+    override private init() {
         super.init()
         iTunes = iTunesBridge()
         lrcParser = LrcParser()
@@ -186,7 +186,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
 // MARK: - Shortcut Events
     
-    func setupShortcuts() {
+    private func setupShortcuts() {
         // Default shortcuts
         let offsetIncr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Equal), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
         let offsetDecr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Minus), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
@@ -228,7 +228,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
-    func increaseTimeDly() {
+    private func increaseTimeDly() {
         self.willChangeValueForKey("timeDly")
         timeDly += 100
         if timeDly > 10000 {
@@ -239,7 +239,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         MessageWindowController.sharedMsgWindow.displayMessage(message)
     }
     
-    func decreaseTimeDly() {
+    private func decreaseTimeDly() {
         self.willChangeValueForKey("timeDly")
         timeDly -= 100
         if timeDly < -10000 {
@@ -250,7 +250,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         MessageWindowController.sharedMsgWindow.displayMessage(message)
     }
     
-    func switchDesktopMenuBarMode() {
+    private func switchDesktopMenuBarMode() {
         let isDesktopLyricsOn = userDefaults.boolForKey(LyricsDesktopLyricsEnabled)
         let isMenuBarLyricsOn = userDefaults.boolForKey(LyricsMenuBarLyricsEnabled)
         if isDesktopLyricsOn && isMenuBarLyricsOn {

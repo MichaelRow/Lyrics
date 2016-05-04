@@ -960,7 +960,7 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="207" width="334" height="87"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
-            <view key="contentView" id="u69-se-XrG">
+            <view key="contentView" id="u69-se-XrG" customClass="ClickView" customModule="LyricsX" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="334" height="87"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>

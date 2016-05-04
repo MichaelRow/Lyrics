@@ -39,7 +39,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
     private var isRotated: Bool = false
     private var verticalStyle: Int = 0
     
-    convenience init() {
+    convenience private init() {
         NSLog("Init Lyrics window")
         let lyricsWindow = NSWindow(contentRect: NSMakeRect(0, 0, 100, 100), styleMask: NSBorderlessWindowMask|NSTexturedBackgroundWindowMask, backing: NSBackingStoreType.Buffered, defer: false)
         self.init(window: lyricsWindow)
