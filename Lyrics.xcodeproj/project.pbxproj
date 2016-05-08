@@ -61,7 +61,6 @@
 		76C5115F1BEC6F8F0095F510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76C5115E1BEC6F8F0095F510 /* Assets.xcassets */; };
 		76C511621BEC6F8F0095F510 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C511601BEC6F8F0095F510 /* MainMenu.xib */; };
 		76C511781BEC6FD50095F510 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C511771BEC6FD50095F510 /* Macros.swift */; };
-		76C590C61C7E050B004564D9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C590C51C7E050B004564D9 /* IOKit.framework */; };
 		76CE31821CA6BC8F00F1497B /* FilterString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CE31811CA6BC8F00F1497B /* FilterString.swift */; };
 		76D060451C02B8D8000DA86C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D060441C02B8D8000DA86C /* AppDelegate.swift */; };
 		76D060471C02B8D9000DA86C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D060461C02B8D9000DA86C /* Assets.xcassets */; };
@@ -191,7 +190,6 @@
 		76C511611BEC6F8F0095F510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		76C511631BEC6F8F0095F510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76C511771BEC6FD50095F510 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
-		76C590C51C7E050B004564D9 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		76CE31811CA6BC8F00F1497B /* FilterString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterString.swift; sourceTree = "<group>"; };
 		76D060421C02B8D8000DA86C /* LyricsX Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LyricsX Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D060441C02B8D8000DA86C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76C590C61C7E050B004564D9 /* IOKit.framework in Frameworks */,
 				7633A2FF1C202F9500D58360 /* CoreGraphics.framework in Frameworks */,
 				76D0605E1C02B930000DA86C /* ServiceManagement.framework in Frameworks */,
 				768BCAE41BF185AD00D6F5EB /* ScriptingBridge.framework in Frameworks */,
@@ -349,7 +346,6 @@
 				768BCB1F1BF1C62000D6F5EB /* libopencc.2.dylib */,
 				768BCB201BF1C62000D6F5EB /* libopencc.dylib */,
 				763763C71C292754003EB0B5 /* MASShortcut.framework */,
-				76C590C51C7E050B004564D9 /* IOKit.framework */,
 				7633A2FE1C202F9500D58360 /* CoreGraphics.framework */,
 				76D0605D1C02B930000DA86C /* ServiceManagement.framework */,
 				768BCAE31BF185AD00D6F5EB /* ScriptingBridge.framework */,
