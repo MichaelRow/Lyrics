@@ -60,7 +60,7 @@
 		76C5115D1BEC6F8F0095F510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5115C1BEC6F8F0095F510 /* AppDelegate.swift */; };
 		76C5115F1BEC6F8F0095F510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76C5115E1BEC6F8F0095F510 /* Assets.xcassets */; };
 		76C511621BEC6F8F0095F510 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C511601BEC6F8F0095F510 /* MainMenu.xib */; };
-		76C511781BEC6FD50095F510 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C511771BEC6FD50095F510 /* Macros.swift */; };
+		76C511781BEC6FD50095F510 /* GlobalConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C511771BEC6FD50095F510 /* GlobalConst.swift */; };
 		76CE31821CA6BC8F00F1497B /* FilterString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CE31811CA6BC8F00F1497B /* FilterString.swift */; };
 		76D060451C02B8D8000DA86C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D060441C02B8D8000DA86C /* AppDelegate.swift */; };
 		76D060471C02B8D9000DA86C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D060461C02B8D9000DA86C /* Assets.xcassets */; };
@@ -189,7 +189,7 @@
 		76C5115E1BEC6F8F0095F510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76C511611BEC6F8F0095F510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		76C511631BEC6F8F0095F510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76C511771BEC6FD50095F510 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
+		76C511771BEC6FD50095F510 /* GlobalConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConst.swift; sourceTree = "<group>"; };
 		76CE31811CA6BC8F00F1497B /* FilterString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterString.swift; sourceTree = "<group>"; };
 		76D060421C02B8D8000DA86C /* LyricsX Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LyricsX Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D060441C02B8D8000DA86C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -404,7 +404,7 @@
 				76CE31811CA6BC8F00F1497B /* FilterString.swift */,
 				76251C691CA5336D00B9F049 /* LrcParser.swift */,
 				768BCB421BF1C84B00D6F5EB /* ChineseConverter.swift */,
-				76C511771BEC6FD50095F510 /* Macros.swift */,
+				76C511771BEC6FD50095F510 /* GlobalConst.swift */,
 				764334911BF95ECF00C4B740 /* iTunesBridge.h */,
 				764334921BF95ECF00C4B740 /* iTunesBridge.m */,
 			);
@@ -601,7 +601,7 @@
 				760A018B1C01A36700015C62 /* XMLParserForQianQian.m in Sources */,
 				769AFC401C29A9C600215A6D /* MessageWindowController.swift in Sources */,
 				768203AF1C2B6FA900DB93F0 /* MenuBarLyrics.swift in Sources */,
-				76C511781BEC6FD50095F510 /* Macros.swift in Sources */,
+				76C511781BEC6FD50095F510 /* GlobalConst.swift in Sources */,
 				768BCB431BF1C84B00D6F5EB /* ChineseConverter.swift in Sources */,
 				764B0A841C30D1600048419B /* XMLParserForQQ.swift in Sources */,
 				76C5115D1BEC6F8F0095F510 /* AppDelegate.swift in Sources */,

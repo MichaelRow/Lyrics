@@ -223,8 +223,8 @@ class LrcParser: NSObject {
         //                 本身有该字符串，比如歌曲名是"You"，歌词为"You are great"，如果歌词大于等于歌曲名的5倍也认
         //                 为歌词本身有歌曲名。
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        let directFilter = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsDirectFilter)!) as! [FilterString]
-        let conditionalFilter = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsConditionalFilter)!) as! [FilterString]
+        let directFilter = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsDirectFilterKey)!) as! [FilterString]
+        let conditionalFilter = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsConditionalFilterKey)!) as! [FilterString]
         let isIDTagTitleAlbumSimillar: Bool = (title.rangeOfString(album) != nil) || (album.rangeOfString(title) != nil)
         let isiTunesTitleAlbumSimillar: Bool
         if iTunesTitle != nil && iTunesAlbum != nil {

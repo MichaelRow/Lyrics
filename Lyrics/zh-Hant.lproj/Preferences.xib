@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
         <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
@@ -1097,7 +1097,7 @@ DQ
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8U7-So-yHB">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="miniSystemBold"/>
+                                    <font key="font" metaFont="systemBold" size="10"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="remove:" target="bLM-St-LXE" id="N6e-E8-Zwc"/>
@@ -1235,7 +1235,7 @@ DQ
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TF8-dA-Cw7">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="miniSystemBold"/>
+                                    <font key="font" metaFont="systemBold" size="11"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="addKeywordForDirectFilterList:" target="-2" id="VG2-GT-E2w"/>
@@ -1246,7 +1246,7 @@ DQ
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="e0b-9W-Wfn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="miniSystemBold"/>
+                                    <font key="font" metaFont="systemBold" size="11"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="remove:" target="WdD-ne-SOh" id="Xoj-S6-atA"/>
@@ -1258,7 +1258,7 @@ DQ
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0wA-UT-vKj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="miniSystemBold"/>
+                                    <font key="font" metaFont="systemBold" size="11"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="addKeywordForConditionalFilterList:" target="-2" id="QVH-kY-XT2"/>
@@ -1351,22 +1351,20 @@ DQ
             <point key="canvasLocation" x="1251.5" y="242.5"/>
         </customView>
         <customView id="9yD-4F-Kon">
-            <rect key="frame" x="0.0" y="0.0" width="282" height="99"/>
+            <rect key="frame" x="0.0" y="0.0" width="317" height="84"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Yu1-Ri-dRg">
-                    <rect key="frame" x="18" y="14" width="246" height="70"/>
+                    <rect key="frame" x="18" y="14" width="281" height="56"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="MMC-lB-zkW">
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="※直接過濾列表：歌詞中出現關鍵字直接過濾該行 ※條件過濾列表：歌詞中出現關鍵字以及冒號則過濾該行 ※請在完成增刪改操作後儲存，否則更改不會生效 ※不建議修改預設的關鍵字" id="MMC-lB-zkW">
                         <font key="font" size="11" name=".LucidaGrandeUI"/>
-                        <string key="title">※直接過濾列表：歌詞中出現關鍵字直接過濾該行 ※條件過濾列表：歌詞中出現關鍵字以及各種形式
-                        冒號則過濾該行 ※請在完成增刪改操作後儲存，否則更改不會生效 ※不建議修改預設的關鍵字</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="1251" y="560.5"/>
+            <point key="canvasLocation" x="1268.5" y="553"/>
         </customView>
     </objects>
     <resources>

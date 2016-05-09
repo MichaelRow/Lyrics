@@ -1,5 +1,5 @@
 //
-//  Macros.swift
+//  GlobalConst.swift
 //  Lyrics
 //
 //  Created by Eru on 15/11/6.
@@ -58,8 +58,8 @@ let LyricsBgHeightINCR:String="LyricsBgHeightINCR"
 let LyricsYOffset:String="LyricsYOffset"
 
 //Filter Preferences Defaults
-let LyricsDirectFilter:String="LyricsDirectFilter"
-let LyricsConditionalFilter:String="LyricsConditionalFilter"
+let LyricsDirectFilterKey:String="LyricsDirectFilterKey"
+let LyricsConditionalFilterKey:String="LyricsConditionalFilterKey"
 let LyricsEnableFilter:String="LyricsEnableFilter"
 let LyricsEnableSmartFilter:String="LyricsEnableSmartFilter"
 

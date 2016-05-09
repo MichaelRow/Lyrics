@@ -61,21 +61,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             LyricsYOffset : NSNumber(float: 0),
             
             //Filter Preferences Defaults
-            LyricsDirectFilter : directFilterData,
-            LyricsConditionalFilter : conditionalFilterData,
+            LyricsDirectFilterKey : directFilterData,
+            LyricsConditionalFilterKey : conditionalFilterData,
             LyricsEnableFilter : NSNumber(bool: false),
             LyricsEnableSmartFilter : NSNumber(bool: true)
         ]
         
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        //早期版本的过滤数据是采用[String]保存，新版本使用NSData，如果不是NSData则重置
+
         userDefaults.registerDefaults(registerDefaultsDic)
-        if !userDefaults.objectForKey(LyricsDirectFilter)!.isKindOfClass(NSData) {
-            userDefaults.removeObjectForKey(LyricsDirectFilter)
-        }
-        if !userDefaults.objectForKey(LyricsConditionalFilter)!.isKindOfClass(NSData) {
-            userDefaults.removeObjectForKey(LyricsConditionalFilter)
-        }
         
         let lyricsXHelpers = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.LyricsX-Helper")
         for helper in lyricsXHelpers {

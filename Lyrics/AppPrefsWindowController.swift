@@ -575,8 +575,8 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
     func loadFilter() {
         let userDefault = NSUserDefaults.standardUserDefaults()
-        let directFilterData = userDefault.dataForKey(LyricsDirectFilter)!
-        let conditionalFilterData = userDefault.dataForKey(LyricsConditionalFilter)!
+        let directFilterData = userDefault.dataForKey(LyricsDirectFilterKey)!
+        let conditionalFilterData = userDefault.dataForKey(LyricsConditionalFilterKey)!
         directFilter = NSKeyedUnarchiver.unarchiveObjectWithData(directFilterData) as! [FilterString]
         conditionalFilter = NSKeyedUnarchiver.unarchiveObjectWithData(conditionalFilterData) as! [FilterString]
     }
@@ -606,8 +606,8 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         alert.beginSheetModalForWindow(self.window!) { (response) in
             if response == NSAlertFirstButtonReturn {
                 let userDefaults = NSUserDefaults.standardUserDefaults()
-                userDefaults.removeObjectForKey(LyricsDirectFilter)
-                userDefaults.removeObjectForKey(LyricsConditionalFilter)
+                userDefaults.removeObjectForKey(LyricsDirectFilterKey)
+                userDefaults.removeObjectForKey(LyricsConditionalFilterKey)
                 self.directFilter.removeAll()
                 self.conditionalFilter.removeAll()
                 self.loadFilter()
@@ -631,8 +631,8 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let directFilterData = NSKeyedArchiver.archivedDataWithRootObject(directFilter)
         let conditionalFilterData = NSKeyedArchiver.archivedDataWithRootObject(conditionalFilter)
-        userDefaults.setObject(directFilterData, forKey: LyricsDirectFilter)
-        userDefaults.setObject(conditionalFilterData, forKey: LyricsConditionalFilter)
+        userDefaults.setObject(directFilterData, forKey: LyricsDirectFilterKey)
+        userDefaults.setObject(conditionalFilterData, forKey: LyricsConditionalFilterKey)
     }
     
     @IBAction func showHelp(sender: NSButton) {
