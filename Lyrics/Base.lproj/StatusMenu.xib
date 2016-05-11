@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AppController" customModule="LyricsX" customModuleProvider="target">
@@ -263,19 +263,39 @@
             <point key="canvasLocation" x="332" y="211.5"/>
         </menu>
         <customView id="3Jx-vU-QNM" userLabel="Lyrics Delay View">
-            <rect key="frame" x="0.0" y="0.0" width="237" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="245" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q88-EF-ohR">
-                    <rect key="frame" x="18" y="6" width="92" height="17"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q88-EF-ohR">
+                    <rect key="frame" x="18" y="6" width="85" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lyrics Offset:" id="03a-uH-jAo">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hod-ZB-daW">
-                    <rect key="frame" x="109" y="5" width="61" height="19"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QQX-LU-OA2">
+                    <rect key="frame" x="210" y="6" width="22" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ms" id="htP-HY-Y99">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lUm-Ay-pgl">
+                    <rect key="frame" x="191" y="1" width="19" height="27"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" increment="100" minValue="-10000" maxValue="10000" id="beX-Hj-1Ng"/>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.timeDly" id="RUR-nb-r1Q">
+                            <dictionary key="options">
+                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </stepper>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hod-ZB-daW">
+                    <rect key="frame" x="106" y="6" width="83" height="19"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="Xwr-CI-ndX">
                         <numberFormatter key="formatter" formatterBehavior="custom10_4" usesGroupingSeparator="NO" lenient="YES" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" nilSymbol="nil" id="ZW5-md-eUU">
                             <real key="minimum" value="-10000"/>
@@ -295,28 +315,19 @@
                         </binding>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQX-LU-OA2">
-                    <rect key="frame" x="197" y="6" width="22" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ms" id="htP-HY-Y99">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lUm-Ay-pgl">
-                    <rect key="frame" x="175" y="1" width="19" height="27"/>
-                    <stepperCell key="cell" continuous="YES" alignment="left" increment="100" minValue="-10000" maxValue="10000" id="beX-Hj-1Ng"/>
-                    <connections>
-                        <binding destination="-2" name="value" keyPath="self.timeDly" id="RUR-nb-r1Q">
-                            <dictionary key="options">
-                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                <bool key="NSValidatesImmediately" value="YES"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </stepper>
             </subviews>
-            <point key="canvasLocation" x="332.5" y="402"/>
+            <constraints>
+                <constraint firstItem="QQX-LU-OA2" firstAttribute="leading" secondItem="lUm-Ay-pgl" secondAttribute="trailing" constant="5" id="011-0N-4gh"/>
+                <constraint firstAttribute="trailing" secondItem="QQX-LU-OA2" secondAttribute="trailing" constant="15" id="70c-ev-L8V"/>
+                <constraint firstItem="q88-EF-ohR" firstAttribute="leading" secondItem="3Jx-vU-QNM" secondAttribute="leading" constant="20" id="DnV-HB-B84"/>
+                <constraint firstItem="QQX-LU-OA2" firstAttribute="centerY" secondItem="3Jx-vU-QNM" secondAttribute="centerY" id="LP7-sC-MWz"/>
+                <constraint firstItem="Hod-ZB-daW" firstAttribute="leading" secondItem="q88-EF-ohR" secondAttribute="trailing" constant="5" id="hy1-mo-ZrC"/>
+                <constraint firstItem="lUm-Ay-pgl" firstAttribute="centerY" secondItem="3Jx-vU-QNM" secondAttribute="centerY" id="jFW-I8-gXH"/>
+                <constraint firstItem="lUm-Ay-pgl" firstAttribute="leading" secondItem="Hod-ZB-daW" secondAttribute="trailing" constant="5" id="lC9-iB-LtB"/>
+                <constraint firstItem="Hod-ZB-daW" firstAttribute="centerY" secondItem="3Jx-vU-QNM" secondAttribute="centerY" id="vUu-fL-IsW"/>
+                <constraint firstItem="q88-EF-ohR" firstAttribute="centerY" secondItem="3Jx-vU-QNM" secondAttribute="centerY" id="wGc-Uz-pn7"/>
+            </constraints>
+            <point key="canvasLocation" x="336.5" y="402"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="Ppe-ZY-ULn"/>
     </objects>

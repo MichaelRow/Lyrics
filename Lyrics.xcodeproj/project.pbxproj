@@ -143,6 +143,8 @@
 		764334921BF95ECF00C4B740 /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
 		764B0A811C30D1600048419B /* QQMusic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQMusic.swift; sourceTree = "<group>"; };
 		764B0A821C30D1600048419B /* XMLParserForQQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLParserForQQ.swift; sourceTree = "<group>"; };
+		76576DD31CE3440F00817291 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/StatusMenu.strings"; sourceTree = "<group>"; };
+		76576DD41CE3441700817291 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/StatusMenu.strings"; sourceTree = "<group>"; };
 		765B7F8A1C2E3B320066F2B4 /* NSStatusBar+NSStatusBar_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStatusBar+NSStatusBar_Private.h"; sourceTree = "<group>"; };
 		7660C5011BF05471002E3204 /* DesktopLyricsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesktopLyricsController.swift; sourceTree = "<group>"; };
 		766D670B1C03530D00B5405B /* LyricsX Helper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LyricsX Helper-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -150,8 +152,6 @@
 		766D670D1C03530E00B5405B /* iTunesBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridge.h; sourceTree = "<group>"; };
 		766D670E1C03530E00B5405B /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
 		766F03C41C049372003F4790 /* LyricsEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsEditView.swift; sourceTree = "<group>"; };
-		7678A9FC1BFF475900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/StatusMenu.xib"; sourceTree = "<group>"; };
-		7678A9FD1BFF475D00FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/StatusMenu.xib"; sourceTree = "<group>"; };
 		7678AA071BFF526700FE848C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7678AA091BFF552700FE848C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7678AA0A1BFF552900FE848C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -646,8 +646,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				7642B9031BF4709300D68FE9 /* Base */,
-				7678A9FC1BFF475900FE848C /* zh-Hant */,
-				7678A9FD1BFF475D00FE848C /* zh-Hans */,
+				76576DD31CE3440F00817291 /* zh-Hans */,
+				76576DD41CE3441700817291 /* zh-Hant */,
 			);
 			name = StatusMenu.xib;
 			sourceTree = "<group>";

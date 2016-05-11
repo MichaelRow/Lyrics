@@ -279,7 +279,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
 // MARK: - Interface Methods
     
     @IBAction func handleWorkSpaceChange(sender:AnyObject?) {
-        //before finding the way to detect full screen, user should adjust lyrics by selves
+        //before finding the way to detect full screen, user should adjust lyrics by self
         lyricsWindow.isFullScreen = !lyricsWindow.isFullScreen
         if lyricsWindow.isFullScreen {
             lyricsHeightMenuItem.title = NSLocalizedString("HIGHER_LYRICS", comment: "")
@@ -297,7 +297,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
             })
         } else {
-            //Force lyrics to show(handlePositionChange: method will update it if lyrics changed.)
+            //Force lyrics to show(handlePositionChange method will update it if lyrics changed.)
             currentLyrics = nil
         }
     }

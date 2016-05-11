@@ -1,0 +1,117 @@
+
+/* Class = "NSTextFieldCell"; title = "歌詞偏移:"; ObjectID = "03a-uH-jAo"; */
+"03a-uH-jAo.title" = "歌詞偏移(正值提前):";
+
+/* Class = "NSMenu"; title = "歌詞"; ObjectID = "0NF-uT-60C"; */
+"0NF-uT-60C.title" = "歌詞";
+
+/* Class = "NSMenuItem"; title = "將所有歌詞寫入iTunes"; ObjectID = "0bi-X3-hct"; */
+"0bi-X3-hct.title" = "將所有歌詞寫入iTunes";
+
+/* Class = "NSMenuItem"; title = "合併Lrc (beta)..."; ObjectID = "1Rp-Wl-S09"; */
+"1Rp-Wl-S09.title" = "合併Lrc (beta)...";
+
+/* Class = "NSMenuItem"; title = "預設"; ObjectID = "2lK-fX-158"; */
+"2lK-fX-158.title" = "預設";
+
+/* Class = "NSMenuItem"; ibShadowedToolTip = "Needs Auto Layout and Horizontal mode enabled"; ObjectID = "3ij-j4-VJE"; */
+"3ij-j4-VJE.ibShadowedToolTip" = "Needs Auto Layout and Horizontal mode enabled";
+
+/* Class = "NSMenuItem"; title = "降低歌詞位置"; ObjectID = "3ij-j4-VJE"; */
+"3ij-j4-VJE.title" = "降低歌詞位置";
+
+/* Class = "NSMenu"; title = "顯示"; ObjectID = "4w7-Ti-lTI"; */
+"4w7-Ti-lTI.title" = "顯示";
+
+/* Class = "NSMenuItem"; title = "啟用選單欄歌詞"; ObjectID = "7Hh-zl-12C"; */
+"7Hh-zl-12C.title" = "啟用選單欄歌詞";
+
+/* Class = "NSMenuItem"; title = "將歌詞寫入iTunes"; ObjectID = "9IB-fJ-7CD"; */
+"9IB-fJ-7CD.title" = "將歌詞寫入iTunes";
+
+/* Class = "NSMenuItem"; title = "從iTunes匯出專輯封面..."; ObjectID = "Czc-V7-Kvq"; */
+"Czc-V7-Kvq.title" = "從iTunes匯出專輯封面...";
+
+/* Class = "NSMenuItem"; title = "Lyrics Delay Setter"; ObjectID = "ENJ-eO-aCa"; */
+"ENJ-eO-aCa.title" = "Lyrics Delay Setter";
+
+/* Class = "NSMenuItem"; title = "拷貝歌詞(帶標籤)到剪貼簿"; ObjectID = "Ej4-Uf-FPV"; */
+"Ej4-Uf-FPV.title" = "拷貝歌詞(帶標籤)到剪貼簿";
+
+/* Class = "NSMenuItem"; title = "啟用桌面歌詞"; ObjectID = "Hjn-DG-9By"; */
+"Hjn-DG-9By.title" = "啟用桌面歌詞";
+
+/* Class = "NSMenuItem"; title = "偏好設定..."; ObjectID = "Hpk-pw-fAI"; */
+"Hpk-pw-fAI.title" = "偏好設定...";
+
+/* Class = "BindingConnection"; ibShadowedIsNilPlaceholder = "0"; ObjectID = "KgN-fW-kct"; */
+"KgN-fW-kct.ibShadowedIsNilPlaceholder" = "0";
+
+/* Class = "NSMenuItem"; title = "製作歌詞..."; ObjectID = "Kxk-N2-7Jt"; */
+"Kxk-N2-7Jt.title" = "製作歌詞...";
+
+/* Class = "NSMenuItem"; title = "匯入Lrc歌詞檔案..."; ObjectID = "M13-bN-2sa"; */
+"M13-bN-2sa.title" = "匯入Lrc歌詞檔案...";
+
+/* Class = "NSMenuItem"; title = "歌詞"; ObjectID = "Mfq-Dd-Wzf"; */
+"Mfq-Dd-Wzf.title" = "歌詞";
+
+/* Class = "NSMenuItem"; title = "關於 LyricsX..."; ObjectID = "QoB-2y-8a4"; */
+"QoB-2y-8a4.title" = "關於 LyricsX...";
+
+/* Class = "NSMenuItem"; title = "檢查更新..."; ObjectID = "R96-lC-i2Q"; */
+"R96-lC-i2Q.title" = "檢查更新...";
+
+/* Class = "NSMenuItem"; title = "退出 LyricsX"; ObjectID = "V6J-Hi-T0z"; */
+"V6J-Hi-T0z.title" = "退出 LyricsX";
+
+/* Class = "NSMenuItem"; ibShadowedToolTip = "Only Auto Layout"; ObjectID = "WWe-QG-SLQ"; */
+"WWe-QG-SLQ.ibShadowedToolTip" = "Only Auto Layout";
+
+/* Class = "NSMenuItem"; title = "使用縱向歌詞模式 (beta)"; ObjectID = "WWe-QG-SLQ"; */
+"WWe-QG-SLQ.title" = "使用縱向歌詞模式 (beta)";
+
+/* Class = "NSMenuItem"; title = "使用固定佈局"; ObjectID = "YjJ-Pr-EK5"; */
+"YjJ-Pr-EK5.title" = "使用固定佈局";
+
+/* Class = "NSMenuItem"; title = "搜尋歌詞與專輯封面..."; ObjectID = "a7O-Hu-mob"; */
+"a7O-Hu-mob.title" = "搜尋歌詞與專輯封面...";
+
+/* Class = "NSMenuItem"; title = "編輯歌詞..."; ObjectID = "aHI-5b-EXH"; */
+"aHI-5b-EXH.title" = "編輯歌詞...";
+
+/* Class = "NSMenuItem"; title = "(空)"; ObjectID = "cB6-FH-qcX"; */
+"cB6-FH-qcX.title" = "(空)";
+
+/* Class = "NSMenuItem"; title = "使用自動佈局"; ObjectID = "dzL-85-R9K"; */
+"dzL-85-R9K.title" = "使用自動佈局";
+
+/* Class = "NSMenuItem"; title = "錯誤的歌詞"; ObjectID = "ed7-VT-i2J"; */
+"ed7-VT-i2J.title" = "錯誤的歌詞";
+
+/* Class = "NSMenuItem"; title = "匯出Lrc歌詞檔案..."; ObjectID = "gbo-B5-Rdc"; */
+"gbo-B5-Rdc.title" = "匯出Lrc歌詞檔案...";
+
+/* Class = "NSMenuItem"; title = "拷貝歌詞到剪貼簿"; ObjectID = "hA5-FO-Nk2"; */
+"hA5-FO-Nk2.title" = "拷貝歌詞到剪貼簿";
+
+/* Class = "NSTextFieldCell"; title = "ms"; ObjectID = "htP-HY-Y99"; */
+"htP-HY-Y99.title" = "ms";
+
+/* Class = "NSMenuItem"; ibShadowedToolTip = "Only Auto Layout"; ObjectID = "mdB-hQ-Zqo"; */
+"mdB-hQ-Zqo.ibShadowedToolTip" = "Only Auto Layout";
+
+/* Class = "NSMenuItem"; title = "使用橫向歌詞模式"; ObjectID = "mdB-hQ-Zqo"; */
+"mdB-hQ-Zqo.title" = "使用橫向歌詞模式";
+
+/* Class = "NSMenuItem"; title = "鎖定歌詞懸浮窗"; ObjectID = "pjL-Kc-VQi"; */
+"pjL-Kc-VQi.title" = "鎖定歌詞懸浮窗";
+
+/* Class = "NSMenuItem"; title = "顯示"; ObjectID = "sKI-1T-o2D"; */
+"sKI-1T-o2D.title" = "顯示";
+
+/* Class = "NSMenu"; title = "預設"; ObjectID = "wMI-On-bIv"; */
+"wMI-On-bIv.title" = "預設";
+
+/* Class = "NSMenuItem"; title = "捐贈..."; ObjectID = "xF9-cS-i7i"; */
+"xF9-cS-i7i.title" = "捐贈...";
