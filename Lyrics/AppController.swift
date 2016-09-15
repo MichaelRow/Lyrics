@@ -47,6 +47,10 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     fileprivate var userDefaults: UserDefaults!
     fileprivate var timer: Timer!
 
+    static func initSharedAppController() {
+        _ = self.sharedController
+    }
+
 // MARK: - Init & deinit
     override fileprivate init() {
         super.init()

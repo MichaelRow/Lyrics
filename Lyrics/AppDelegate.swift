@@ -76,8 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             helper.forceTerminate()
         }
         
-        // Force singleton to init
-        AppController.sharedController
+        AppController.initSharedAppController()
         
         // Force Prefs to load presets
         let prefs = AppPrefsWindowController.sharedPrefsWindowController
