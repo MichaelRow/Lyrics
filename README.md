@@ -71,8 +71,8 @@ Swift-based iTunes/Vox plug-in app to display lyrics on the desktop.
 
 ###Build Requirement
 * Mac OS X 10.11 (El Capitan) or higher.
-* Xcode 7.0 or higher.
-(Swift 2.2 is only available on Xcode 7.3 and later.)
+* Xcode 8.0 or higher.
+(Swift 3 is only available on Xcode 8 and later.)
 
 ###Third Party Library & Frameworks
 * [OpenCC](https://github.com/BYVoid/OpenCC)
