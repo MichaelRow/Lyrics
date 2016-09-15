@@ -12,26 +12,26 @@ import ScriptingBridge
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    var timer:NSTimer!
+    var timer:Timer!
     var launchType:Int!
     var shouldWaitForiTunesQuit:Bool = false
     let iTunes: iTunesBridge = iTunesBridge()
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        let lyrics = NSRunningApplication.runningApplicationsWithBundleIdentifier("Eru.Lyrics")
+        let lyrics = NSRunningApplication.runningApplications(withBundleIdentifier: "Eru.Lyrics")
         if lyrics.count > 0 {
             NSApp.terminate(nil)
         }
 
-        let lyricsXDefaults: NSUserDefaults = NSUserDefaults.init(suiteName: "Eru.Lyrics")!
-        let returnedObj = lyricsXDefaults.objectForKey("LyricsLaunchTpyePopUpIndex");
+        let lyricsXDefaults: UserDefaults = UserDefaults.init(suiteName: "Eru.Lyrics")!
+        let returnedObj = lyricsXDefaults.object(forKey: "LyricsLaunchTpyePopUpIndex");
         
         if returnedObj == nil {
             // nil when key not found (register defaults)
             launchType = 2
         } else {
-            launchType = (returnedObj as! NSNumber).integerValue
+            launchType = (returnedObj as! NSNumber).intValue
         }
         switch launchType {
         case 0:
@@ -41,7 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //launches with iTunes
             if iTunes.running() {
                 shouldWaitForiTunesQuit = true
-                NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: "handleiTunesEvent:", name: "com.apple.iTunes.playerInfo", object: nil)
+                DistributedNotificationCenter.default().addObserver(self, selector: #selector(handleiTunesEvent(_:)), name: NSNotification.Name(rawValue: "com.apple.iTunes.playerInfo"), object: nil)
             } else {
                 waitForiTunesLaunch()
             }
@@ -50,29 +50,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if iTunes.running() {
                 shouldWaitForiTunesQuit = true
             }
-            NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: "handleiTunesEvent:", name: "com.apple.iTunes.playerInfo", object: nil)
+            DistributedNotificationCenter.default().addObserver(self, selector: #selector(handleiTunesEvent(_:)), name: NSNotification.Name(rawValue: "com.apple.iTunes.playerInfo"), object: nil)
         default:
             break
         }
     }
     
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
-        NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
+        DistributedNotificationCenter.default().removeObserver(self)
     }
     
     
     func launchLyricsXAndQuit() {
-        var pathComponents: NSArray = (NSBundle.mainBundle().bundlePath as NSString).pathComponents
-        pathComponents = pathComponents.subarrayWithRange(NSMakeRange(0, pathComponents.count-4))
-        let path = NSString.pathWithComponents(pathComponents as! [String])
-        NSWorkspace.sharedWorkspace().launchApplication(path)
+        var pathComponents: NSArray = (Bundle.main.bundlePath as NSString).pathComponents as NSArray
+        pathComponents = pathComponents.subarray(with: NSMakeRange(0, pathComponents.count-4)) as NSArray
+        let path = NSString.path(withComponents: pathComponents as! [String])
+        NSWorkspace.shared().launchApplication(path)
         NSApp.terminate(nil)
     }
     
     
-    func handleiTunesEvent (n: NSNotification) {
+    func handleiTunesEvent (_ n: Notification) {
         if !shouldWaitForiTunesQuit && launchType == 2 && n.userInfo!["Player State"] as! String == "Playing" {
             launchLyricsXAndQuit();
         } else if shouldWaitForiTunesQuit {
@@ -82,7 +82,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     timer.invalidate()
                     timer = nil
                 }
-                timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "checkiTunesQuit", userInfo: nil, repeats: false)
+                timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(AppDelegate.checkiTunesQuit), userInfo: nil, repeats: false)
             }
         }
     }
@@ -103,7 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func waitForiTunesLaunch() {
         while !iTunes.running() {
-            NSThread.sleepForTimeInterval(1.5)
+            Thread.sleep(forTimeInterval: 1.5)
         }
         launchLyricsXAndQuit()
     }
