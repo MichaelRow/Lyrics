@@ -8,31 +8,31 @@
 
 import Cocoa
 
-func convertToSC(input: String) -> String {
-    let profilePath: NSString = NSBundle.mainBundle().pathForResource("t2s", ofType: "json")!
-    return convertToChineseUsingProfile(profilePath,inputStr: input)
+func convertToSC(_ input: String) -> String {
+    let profilePath: NSString = Bundle.main.path(forResource: "t2s", ofType: "json")! as NSString
+    return convertToChineseUsingProfile(profilePath,inputStr: input as NSString)
 }
 
-func convertToTC(input: String) -> String {
-    let profilePath: NSString = NSBundle.mainBundle().pathForResource("s2t", ofType: "json")!
-    return convertToChineseUsingProfile(profilePath,inputStr: input)
+func convertToTC(_ input: String) -> String {
+    let profilePath: NSString = Bundle.main.path(forResource: "s2t", ofType: "json")! as NSString
+    return convertToChineseUsingProfile(profilePath,inputStr: input as NSString)
 }
 
-func convertToTC_TW(input: String) -> String {
-    let profilePath: NSString = NSBundle.mainBundle().pathForResource("s2tw", ofType: "json")!
-    return convertToChineseUsingProfile(profilePath,inputStr: input)
+func convertToTC_TW(_ input: String) -> String {
+    let profilePath: NSString = Bundle.main.path(forResource: "s2tw", ofType: "json")! as NSString
+    return convertToChineseUsingProfile(profilePath,inputStr: input as NSString)
 }
 
-func convertToTC_HK(input: String) -> String {
-    let profilePath: NSString = NSBundle.mainBundle().pathForResource("s2hk", ofType: "json")!
-    return convertToChineseUsingProfile(profilePath,inputStr: input)
+func convertToTC_HK(_ input: String) -> String {
+    let profilePath: NSString = Bundle.main.path(forResource: "s2hk", ofType: "json")! as NSString
+    return convertToChineseUsingProfile(profilePath,inputStr: input as NSString)
 }
 
-private func convertToChineseUsingProfile(profile: NSString, inputStr: NSString) -> String {
-    let cc: opencc_t = opencc_open(profile.UTF8String)
-    let cInput: UnsafePointer<Int8> = inputStr.UTF8String
+private func convertToChineseUsingProfile(_ profile: NSString, inputStr: NSString) -> String {
+    let cc: opencc_t = opencc_open(profile.utf8String)
+    let cInput: UnsafePointer<Int8> = inputStr.utf8String!
     let cOutputStr: UnsafeMutablePointer<Int8> = opencc_convert_utf8(cc, cInput, Int(strlen(cInput)))
-    let outputStr: String? = String.fromCString(cOutputStr)
+    let outputStr: String? = String(cString: cOutputStr)
     opencc_convert_utf8_free(cOutputStr)
     opencc_close(cc)
     if outputStr == nil {

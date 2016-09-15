@@ -27,13 +27,17 @@ class FilterString: NSObject, NSCoding {
     }
     
     required init(coder aDecoder: NSCoder) {
-        keyword = aDecoder.decodeObjectForKey("keyword") as! String
-        caseSensitive = aDecoder.decodeObjectForKey("caseSensitive") as! Bool
+        keyword = aDecoder.decodeObject(forKey: "keyword") as! String
+        if let aCaseSensitive = aDecoder.decodeObject(forKey: "caseSensitive") {
+            caseSensitive = aCaseSensitive as! Bool
+        } else {
+            caseSensitive = false
+        }
         super.init()
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(keyword, forKey: "keyword")
-        aCoder.encodeObject(caseSensitive, forKey: "caseSensitive")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(keyword, forKey: "keyword")
+        aCoder.encode(NSNumber(value:caseSensitive), forKey: "caseSensitive")
     }
 }

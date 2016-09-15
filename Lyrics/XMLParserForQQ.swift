@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class XMLParserForQQ: NSObject, NSXMLParserDelegate {
+class XMLParserForQQ: NSObject, XMLParserDelegate {
     
     var lrcContents: String
     
@@ -17,8 +17,8 @@ class XMLParserForQQ: NSObject, NSXMLParserDelegate {
         super.init()
     }
     
-    func stringWithData(data:NSData) -> String? {
-        let parser = NSXMLParser(data: data)
+    func stringWithData(_ data:Data) -> String? {
+        let parser = XMLParser(data: data)
         parser.delegate = self
         let success: Bool = parser.parse()
         if !success {
@@ -27,10 +27,10 @@ class XMLParserForQQ: NSObject, NSXMLParserDelegate {
         return lrcContents
     }
     
-    func parser(parser: NSXMLParser, foundCDATA CDATABlock: NSData) {
-        let str = String(data: CDATABlock, encoding: NSUTF8StringEncoding)
+    func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {
+        let str = String(data: CDATABlock, encoding: String.Encoding.utf8)
         if str != nil {
-            lrcContents.appendContentsOf(str!)
+            lrcContents.append(str!)
         }
     }
     

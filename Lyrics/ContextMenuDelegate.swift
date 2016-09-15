@@ -9,5 +9,5 @@
 import Cocoa
 
 protocol ContextMenuDelegate {
-    func tableView(aTableView: NSTableView, menuForRows rows: NSIndexSet) -> NSMenu
+    func tableView(_ aTableView: NSTableView, menuForRows rows: IndexSet) -> NSMenu
 }

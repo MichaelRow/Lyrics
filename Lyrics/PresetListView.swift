@@ -10,35 +10,35 @@ import Cocoa
 
 class PresetListView: NSTableView {
 
-    override func menuForEvent(event: NSEvent) -> NSMenu? {
-        if event.type != NSEventType.RightMouseDown {
-            return super.menuForEvent(event)
+    override func menu(for event: NSEvent) -> NSMenu? {
+        if event.type != NSEventType.rightMouseDown {
+            return super.menu(for: event)
         }
-        let location: NSPoint = self.convertPoint(event.locationInWindow, fromView: nil)
-        let row: Int = self.rowAtPoint(location)
+        let location: NSPoint = self.convert(event.locationInWindow, from: nil)
+        let row: Int = self.row(at: location)
         if row < 0 {
             self.deselectAll(nil)
-            return super.menuForEvent(event)
+            return super.menu(for: event)
         }
-        var selected: NSIndexSet = self.selectedRowIndexes
-        if !selectedRowIndexes.containsIndex(row) {
-            selected = NSIndexSet(index: row)
+        var selected: IndexSet = self.selectedRowIndexes
+        if !selectedRowIndexes.contains(row) {
+            selected = IndexSet(integer: row)
             self.selectRowIndexes(selected, byExtendingSelection: false)
         }
-        if self.delegate() is ContextMenuDelegate {
-            return (self.delegate() as! ContextMenuDelegate).tableView(self, menuForRows: selected)
+        if self.delegate is ContextMenuDelegate {
+            return (self.delegate as! ContextMenuDelegate).tableView(self, menuForRows: selected)
         }
         else {
-            return super.menuForEvent(event)
+            return super.menu(for: event)
         }
     }
     
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         // delete key
         if theEvent.keyCode == 0x33 {
             AppPrefsWindowController.sharedPrefsWindowController.removePreset(nil)
         } else {
-            super.keyDown(theEvent)
+            super.keyDown(with: theEvent)
         }
     }
     

@@ -15,19 +15,19 @@ class MenuBarLyrics: NSObject {
     
     override init() {
         attrs = [NSFontNameAttribute : NSFont(name: "HiraginoSansGB-W3", size: 15)!,
-                 NSForegroundColorAttributeName : NSColor.blackColor()]
+                 NSForegroundColorAttributeName : NSColor.black]
         super.init()
-        statusItem = NSStatusBar.systemStatusBar()._statusItemWithLength(0, withPriority: 0)
+        statusItem = NSStatusBar.system()._statusItem(withLength: 0, withPriority: 0)
         statusItem.length = NSVariableStatusItemLength
         statusItem.highlightMode = false
     }
     
     deinit {
-        NSStatusBar.systemStatusBar().removeStatusItem(statusItem)
+        NSStatusBar.system().removeStatusItem(statusItem)
         NSLog("Deint StatusBarLyrics")
     }
     
-    func displayLyrics(lyrics: String?) {
+    func displayLyrics(_ lyrics: String?) {
         if #available(OSX 10.10, *) {
             if lyrics == nil {
                 statusItem.button?.title = ""

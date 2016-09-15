@@ -13,44 +13,44 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     
     static let sharedPrefsWindowController = AppPrefsWindowController(windowNibName:"Preferences")
     
-    @IBOutlet private var generalPrefsView: ClickView!
-    @IBOutlet private var lyricsPrefsView: NSView!
-    @IBOutlet private var fontAndColorPrefsView: ClickView!
-    @IBOutlet private var shortcutPrefsView: NSView!
-    @IBOutlet private var presetPrefsView: ClickView!
-    @IBOutlet private var filterPrefsView: ClickView!
+    @IBOutlet fileprivate var generalPrefsView: ClickView!
+    @IBOutlet fileprivate var lyricsPrefsView: NSView!
+    @IBOutlet fileprivate var fontAndColorPrefsView: ClickView!
+    @IBOutlet fileprivate var shortcutPrefsView: NSView!
+    @IBOutlet fileprivate var presetPrefsView: ClickView!
+    @IBOutlet fileprivate var filterPrefsView: ClickView!
     //General
-    @IBOutlet private weak var savingPathPopUp: NSPopUpButton!
+    @IBOutlet fileprivate weak var savingPathPopUp: NSPopUpButton!
     //Font & Color
-    @IBOutlet private weak var textPreview: TextPreview!
-    @IBOutlet private weak var fontDisplayText: NSTextField!
-    @IBOutlet private weak var textColor: NSColorWell!
-    @IBOutlet private weak var bkColor: NSColorWell!
-    @IBOutlet private weak var shadowColor: NSColorWell!
-    @IBOutlet private weak var revertButton: NSButton!
-    @IBOutlet private weak var applyButton: NSButton!
-    private var hasFontAndColorChange: Bool = false
-    private var font: NSFont!
+    @IBOutlet fileprivate weak var textPreview: TextPreview!
+    @IBOutlet fileprivate weak var fontDisplayText: NSTextField!
+    @IBOutlet fileprivate weak var textColor: NSColorWell!
+    @IBOutlet fileprivate weak var bkColor: NSColorWell!
+    @IBOutlet fileprivate weak var shadowColor: NSColorWell!
+    @IBOutlet fileprivate weak var revertButton: NSButton!
+    @IBOutlet fileprivate weak var applyButton: NSButton!
+    fileprivate var hasFontAndColorChange: Bool = false
+    fileprivate var font: NSFont!
     var shadowModeEnabled: Bool = false
     var shadowRadius: Float = 0
     var bgHeightIncreasement: Float = 0
     var lyricsYOffset: Float = 0
     //Shortcuts
-    @IBOutlet private weak var offsetIncrShortcut: MASShortcutView!
-    @IBOutlet private weak var offsetDecrShortcut: MASShortcutView!
-    @IBOutlet private weak var lyricsModeSwitchShortcut: MASShortcutView!
-    @IBOutlet private weak var desktopMenubarSwitchShortcut: MASShortcutView!
-    @IBOutlet private weak var lrcSeekerShortcut: MASShortcutView!
-    @IBOutlet private weak var copyLrcToPbShortcut: MASShortcutView!
-    @IBOutlet private weak var editLrcShortcut: MASShortcutView!
-    @IBOutlet private weak var makeLrcShortcut: MASShortcutView!
-    @IBOutlet private weak var writeLrcToiTunesShortcut: MASShortcutView!
+    @IBOutlet fileprivate weak var offsetIncrShortcut: MASShortcutView!
+    @IBOutlet fileprivate weak var offsetDecrShortcut: MASShortcutView!
+    @IBOutlet fileprivate weak var lyricsModeSwitchShortcut: MASShortcutView!
+    @IBOutlet fileprivate weak var desktopMenubarSwitchShortcut: MASShortcutView!
+    @IBOutlet fileprivate weak var lrcSeekerShortcut: MASShortcutView!
+    @IBOutlet fileprivate weak var copyLrcToPbShortcut: MASShortcutView!
+    @IBOutlet fileprivate weak var editLrcShortcut: MASShortcutView!
+    @IBOutlet fileprivate weak var makeLrcShortcut: MASShortcutView!
+    @IBOutlet fileprivate weak var writeLrcToiTunesShortcut: MASShortcutView!
     //Preset
-    var presets: [String]!
+    var presets = [String]()
     @IBOutlet weak var presetListView: PresetListView!
-    @IBOutlet private var tableMenu: NSMenu!
-    @IBOutlet private var dialog: NSWindow!
-    @IBOutlet private var presetNameTF: NSTextField!
+    @IBOutlet fileprivate var tableMenu: NSMenu!
+    @IBOutlet fileprivate var dialog: NSWindow!
+    @IBOutlet fileprivate var presetNameTF: NSTextField!
     //Filter
     dynamic var directFilter = [FilterString]()
     dynamic var conditionalFilter = [FilterString]()
@@ -62,17 +62,16 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        presets = [String]()
         
         self.window?.delegate = self
         hasFontAndColorChange = false
         
         //Pop up button and font is hard to bind to NSUserDefaultsController, do it by self
-        let defaultSavingPath: String = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-        let userSavingPath: String = NSUserDefaults.standardUserDefaults().stringForKey(LyricsUserSavingPath)!
-        savingPathPopUp.itemAtIndex(0)?.toolTip = defaultSavingPath
-        savingPathPopUp.itemAtIndex(1)?.toolTip = userSavingPath
-        savingPathPopUp.itemAtIndex(1)?.title = (userSavingPath as NSString).lastPathComponent
+        let defaultSavingPath: String = NSSearchPathForDirectoriesInDomains(.musicDirectory, [.userDomainMask], true).first! + "/LyricsX"
+        let userSavingPath: String = UserDefaults.standard.string(forKey: LyricsUserSavingPath)!
+        savingPathPopUp.item(at: 0)?.toolTip = defaultSavingPath
+        savingPathPopUp.item(at: 1)?.toolTip = userSavingPath
+        savingPathPopUp.item(at: 1)?.title = (userSavingPath as NSString).lastPathComponent
         
         reflashFontAndColorPrefs()
         bindShortcutViewToKey()
@@ -81,15 +80,15 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
     }
     
     override func setupToolbar () {
-        self.addView(generalPrefsView, label: NSLocalizedString("GENERAL", comment: ""), image: NSImage(named: NSImageNamePreferencesGeneral))
-        self.addView(lyricsPrefsView, label: NSLocalizedString("LYRICS", comment: ""), image: NSImage(named: "lyrics_icon"))
-        self.addView(fontAndColorPrefsView, label: NSLocalizedString("FONT_COLOR", comment: ""), image: NSImage(named: "font_Color_icon"))
-        self.addView(shortcutPrefsView, label: NSLocalizedString("SHORTCUT", comment: ""), image: NSImage(named: "shortcut"))
-        self.addView(presetPrefsView, label: NSLocalizedString("PRESET", comment: ""), image: NSImage(named: NSImageNameAdvanced))
-        self.addView(filterPrefsView, label: NSLocalizedString("FILTER", comment: ""), image: NSImage(named:"Delete"))
+        self.add(generalPrefsView, label: NSLocalizedString("GENERAL", comment: ""), image: NSImage(named: NSImageNamePreferencesGeneral))
+        self.add(lyricsPrefsView, label: NSLocalizedString("LYRICS", comment: ""), image: NSImage(named: "lyrics_icon"))
+        self.add(fontAndColorPrefsView, label: NSLocalizedString("FONT_COLOR", comment: ""), image: NSImage(named: "font_Color_icon"))
+        self.add(shortcutPrefsView, label: NSLocalizedString("SHORTCUT", comment: ""), image: NSImage(named: "shortcut"))
+        self.add(presetPrefsView, label: NSLocalizedString("PRESET", comment: ""), image: NSImage(named: NSImageNameAdvanced))
+        self.add(filterPrefsView, label: NSLocalizedString("FILTER", comment: ""), image: NSImage(named:"Delete"))
     }
     
-    override func displayViewForIdentifier(identifier: String, animate: Bool) {
+    override func displayView(forIdentifier identifier: String, animate: Bool) {
         //If uncommited value exists, there must be a NSTextField object which is 
         //First responder. And if the value is invalid, invoke NSNumber formatter
         //by resigning the first responder.
@@ -107,8 +106,8 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                     fontAndColorAlert(identifier)
                     return
                 } else {
-                    NSFontPanel.sharedFontPanel().orderOut(nil)
-                    NSColorPanel.sharedColorPanel().orderOut(nil)
+                    NSFontPanel.shared().orderOut(nil)
+                    NSColorPanel.shared().orderOut(nil)
                 }
             }
         }
@@ -116,111 +115,111 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
             endRecordShortcut()
         }
         self.window?.makeFirstResponder(nil)
-        super.displayViewForIdentifier(identifier, animate: animate)
+        super.displayView(forIdentifier: identifier, animate: animate)
     }
     
 // MARK: - General Prefs
     
-    @IBAction private func changeLrcSavingPath(sender: AnyObject) {
+    @IBAction fileprivate func changeLrcSavingPath(_ sender: AnyObject) {
         let openPanel = NSOpenPanel()
         openPanel.canChooseFiles = false
         openPanel.canChooseDirectories = true
-        openPanel.beginSheetModalForWindow(self.window!) { (result) -> Void in
+        openPanel.beginSheetModal(for: self.window!) { (result) -> Void in
             if result == NSFileHandlingPanelOKButton {
-                let newPath: String = (openPanel.URL?.path)!
-                let userDefaults = NSUserDefaults.standardUserDefaults()
-                userDefaults.setObject(newPath, forKey: LyricsUserSavingPath)
-                userDefaults.setObject(NSNumber(integer: 1), forKey: LyricsSavingPathPopUpIndex)
-                self.savingPathPopUp.itemAtIndex(1)?.title = (newPath as NSString).lastPathComponent
-                self.savingPathPopUp.itemAtIndex(1)?.toolTip = newPath
+                let newPath: String = (openPanel.url?.path)!
+                let userDefaults = UserDefaults.standard
+                userDefaults.set(newPath, forKey: LyricsUserSavingPath)
+                userDefaults.set(NSNumber(value: 1 as Int), forKey: LyricsSavingPathPopUpIndex)
+                self.savingPathPopUp.item(at: 1)?.title = (newPath as NSString).lastPathComponent
+                self.savingPathPopUp.item(at: 1)?.toolTip = newPath
             }
         }
     }
     
-    @IBAction private func enableLoginItem(sender: AnyObject) {
+    @IBAction fileprivate func enableLoginItem(_ sender: AnyObject) {
         let identifier: String = "Eru.LyricsX-Helper"
         if (sender as! NSButton).state == NSOnState {
-            if !SMLoginItemSetEnabled(identifier, true) {
+            if !SMLoginItemSetEnabled(identifier as CFString, true) {
                 NSLog("Failed to enable login item")
             }
         } else {
-            if !SMLoginItemSetEnabled(identifier, false) {
+            if !SMLoginItemSetEnabled(identifier as CFString, false) {
                 NSLog("Failed to disable login item")
             }
         }
     }
     
-    @IBAction func reflashLyrics(sender: AnyObject) {
+    @IBAction func reflashLyrics(_ sender: AnyObject) {
         DesktopLyricsController.sharedController.reflash()
     }
     
 // MARK: - Lyrics Prefs
     
-    @IBAction func disableLyricsWhenSnapshot(sender: AnyObject) {
+    @IBAction func disableLyricsWhenSnapshot(_ sender: AnyObject) {
         if (sender as! NSButton).state == NSOnState {
-            DesktopLyricsController.sharedController.window!.sharingType = .None
+            DesktopLyricsController.sharedController.window!.sharingType = .none
         } else {
-            DesktopLyricsController.sharedController.window!.sharingType = .ReadOnly
+            DesktopLyricsController.sharedController.window!.sharingType = .readOnly
         }
     }
     
-    @IBAction func lyricsCanJoinAllDesktop(sender: AnyObject) {
+    @IBAction func lyricsCanJoinAllDesktop(_ sender: AnyObject) {
         if (sender as! NSButton).state == NSOnState {
-            DesktopLyricsController.sharedController.window!.collectionBehavior = .CanJoinAllSpaces
+            DesktopLyricsController.sharedController.window!.collectionBehavior = .canJoinAllSpaces
         } else {
-            DesktopLyricsController.sharedController.window!.collectionBehavior = .Default
+            DesktopLyricsController.sharedController.window!.collectionBehavior = NSWindowCollectionBehavior()
         }
     }
     
 // MARK: - Font and Color Prefs
     
-    private func reflashFontAndColorPrefs () {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        font = NSFont(name: userDefaults.stringForKey(LyricsFontName)!, size: CGFloat(userDefaults.floatForKey(LyricsFontSize)))!
+    fileprivate func reflashFontAndColorPrefs () {
+        let userDefaults = UserDefaults.standard
+        font = NSFont(name: userDefaults.string(forKey: LyricsFontName)!, size: CGFloat(userDefaults.float(forKey: LyricsFontSize)))!
         fontDisplayText.stringValue = String(format: "%@ (%.1f)", font.displayName!,font.pointSize)
         
-        self.setValue(userDefaults.boolForKey(LyricsShadowModeEnable), forKey: "shadowModeEnabled")
-        self.setValue(userDefaults.floatForKey(LyricsShadowRadius), forKey: "shadowRadius")
-        self.setValue(userDefaults.floatForKey(LyricsBgHeightINCR), forKey: "bgHeightIncreasement")
-        self.setValue(userDefaults.floatForKey(LyricsYOffset), forKey: "lyricsYOffset")
-        textColor.color = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsTextColor)!)! as! NSColor
-        bkColor.color = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsBackgroundColor)!)! as! NSColor
-        shadowColor.color = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsShadowColor)!)! as! NSColor
+        self.setValue(userDefaults.bool(forKey: LyricsShadowModeEnable), forKey: "shadowModeEnabled")
+        self.setValue(userDefaults.float(forKey: LyricsShadowRadius), forKey: "shadowRadius")
+        self.setValue(userDefaults.float(forKey: LyricsBgHeightINCR), forKey: "bgHeightIncreasement")
+        self.setValue(userDefaults.float(forKey: LyricsYOffset), forKey: "lyricsYOffset")
+        textColor.color = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.data(forKey: LyricsTextColor)!)! as! NSColor
+        bkColor.color = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.data(forKey: LyricsBackgroundColor)!)! as! NSColor
+        shadowColor.color = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.data(forKey: LyricsShadowColor)!)! as! NSColor
         textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, heightInrc:bgHeightIncreasement, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: shadowRadius, yOffset:lyricsYOffset)
     }
     
-    @IBAction private func fontAndColorChanged(sender: AnyObject?) {
+    @IBAction fileprivate func fontAndColorChanged(_ sender: AnyObject?) {
         if !hasFontAndColorChange {
-            revertButton.enabled = true
-            applyButton.enabled = true
+            revertButton.isEnabled = true
+            applyButton.isEnabled = true
         }
         hasFontAndColorChange = true
         textPreview.setAttributs(font, textColor:textColor.color, bkColor: bkColor.color, heightInrc:bgHeightIncreasement, enableShadow: shadowModeEnabled, shadowColor: shadowColor.color, shadowRadius: shadowRadius, yOffset:lyricsYOffset)
     }
     
-    @IBAction private func applyFontAndColorChanges(sender: AnyObject?) {
+    @IBAction fileprivate func applyFontAndColorChanges(_ sender: AnyObject?) {
         if !canResignFirstResponder() {
             self.window?.makeFirstResponder(nil)
             return
         }
         self.window?.makeFirstResponder(nil)
         hasFontAndColorChange = false
-        revertButton.enabled = false
-        applyButton.enabled = false
-        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setObject(font.fontName, forKey: LyricsFontName)
-        userDefaults.setFloat(Float(font.pointSize), forKey: LyricsFontSize)
-        userDefaults.setFloat(shadowRadius, forKey: LyricsShadowRadius)
-        userDefaults.setFloat(bgHeightIncreasement, forKey: LyricsBgHeightINCR)
-        userDefaults.setFloat(lyricsYOffset, forKey: LyricsYOffset)
-        userDefaults.setBool(shadowModeEnabled, forKey: LyricsShadowModeEnable)
-        userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(textColor.color), forKey: LyricsTextColor)
-        userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(bkColor.color), forKey: LyricsBackgroundColor)
-        userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(shadowColor.color), forKey: LyricsShadowColor)
+        revertButton.isEnabled = false
+        applyButton.isEnabled = false
+        let userDefaults: UserDefaults = UserDefaults.standard
+        userDefaults.set(font.fontName, forKey: LyricsFontName)
+        userDefaults.set(Float(font.pointSize), forKey: LyricsFontSize)
+        userDefaults.set(shadowRadius, forKey: LyricsShadowRadius)
+        userDefaults.set(bgHeightIncreasement, forKey: LyricsBgHeightINCR)
+        userDefaults.set(lyricsYOffset, forKey: LyricsYOffset)
+        userDefaults.set(shadowModeEnabled, forKey: LyricsShadowModeEnable)
+        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: textColor.color), forKey: LyricsTextColor)
+        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: bkColor.color), forKey: LyricsBackgroundColor)
+        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: shadowColor.color), forKey: LyricsShadowColor)
         DesktopLyricsController.sharedController.handleAttributesUpdate()
     }
     
-    @IBAction private func revertFontAndColorChanges(sender: AnyObject?) {
+    @IBAction fileprivate func revertFontAndColorChanges(_ sender: AnyObject?) {
         // If current value is invalid, set one before reverting
         if !canResignFirstResponder() {
             let textView = self.window?.firstResponder as! NSTextView
@@ -228,43 +227,43 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         }
         self.window?.makeFirstResponder(nil)
         hasFontAndColorChange = false
-        revertButton.enabled = false
-        applyButton.enabled = false
+        revertButton.isEnabled = false
+        applyButton.isEnabled = false
         reflashFontAndColorPrefs()
     }
     
-    override func changeFont(sender: AnyObject?) {
-        font = (sender?.convertFont(font))!
+    override func changeFont(_ sender: Any?) {
+        font = (sender as! NSFontManager).convert(font)
         fontDisplayText.stringValue = String(format: "%@ (%.1f)", font.displayName!,font.pointSize)
         fontAndColorChanged(nil)
     }
     
-    override func validModesForFontPanel(fontPanel: NSFontPanel) -> Int {
+    override func validModesForFontPanel(_ fontPanel: NSFontPanel) -> Int {
         return Int(NSFontPanelSizeModeMask | NSFontPanelCollectionModeMask | NSFontPanelFaceModeMask)
     }
     
-    @IBAction func showFontPanel(sender: AnyObject) {
-        let fontManger: NSFontManager = NSFontManager.sharedFontManager()
-        let fontPanel: NSFontPanel = NSFontPanel.sharedFontPanel()
+    @IBAction func showFontPanel(_ sender: AnyObject) {
+        let fontManger: NSFontManager = NSFontManager.shared()
+        let fontPanel: NSFontPanel = NSFontPanel.shared()
         fontManger.target = self
         fontManger.setSelectedFont(font, isMultiple: false)
         fontPanel.makeKeyAndOrderFront(self)
         fontPanel.delegate = self
     }
     
-    private func canResignFirstResponder() -> Bool {
+    fileprivate func canResignFirstResponder() -> Bool {
         let currentResponder = self.window?.firstResponder
-        if currentResponder != nil && currentResponder!.isKindOfClass(NSTextView) {
+        if currentResponder != nil && currentResponder!.isKind(of: NSTextView.self) {
             let textField: NSTextField? = (currentResponder as! NSTextView).superview?.superview as? NSTextField
             if textField == nil {
                 return true
             }
-            let formatter = textField!.formatter as? NSNumberFormatter
+            let formatter = textField!.formatter as? NumberFormatter
             if formatter == nil {
                 return true
             }
             let stringValue: String = (currentResponder as! NSTextView).string!
-            if formatter!.numberFromString(stringValue) == nil {
+            if formatter!.number(from: stringValue) == nil {
                 return false
             }
             else {
@@ -276,15 +275,15 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         }
     }
     
-    private func fontAndColorAlert(identifier: String!) {
+    fileprivate func fontAndColorAlert(_ identifier: String!) {
         // identifier nil means window is about to close
         let alert: NSAlert = NSAlert()
         alert.messageText = NSLocalizedString("CHANGE_UNSAVED", comment: "")
         alert.informativeText = NSLocalizedString("DISGARDS_LEAVE", comment: "")
-        alert.addButtonWithTitle(NSLocalizedString("APPLY_LEAVE", comment: ""))
-        alert.addButtonWithTitle(NSLocalizedString("REVERT_LEAVE", comment: ""))
-        alert.addButtonWithTitle(NSLocalizedString("CANCEL", comment: ""))
-        alert.beginSheetModalForWindow(self.window!, completionHandler: { (response) -> Void in
+        alert.addButton(withTitle: NSLocalizedString("APPLY_LEAVE", comment: ""))
+        alert.addButton(withTitle: NSLocalizedString("REVERT_LEAVE", comment: ""))
+        alert.addButton(withTitle: NSLocalizedString("CANCEL", comment: ""))
+        alert.beginSheetModal(for: self.window!, completionHandler: { (response) -> Void in
             if response != NSAlertThirdButtonReturn {
                 if response == NSAlertFirstButtonReturn {
                     self.applyFontAndColorChanges(nil)
@@ -292,12 +291,12 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                     self.revertFontAndColorChanges(nil)
                 }
                 if identifier != nil {
-                    NSFontPanel.sharedFontPanel().orderOut(nil)
-                    NSColorPanel.sharedColorPanel().orderOut(nil)
-                    self.displayViewForIdentifier(identifier,animate: false)
+                    NSFontPanel.shared().orderOut(nil)
+                    NSColorPanel.shared().orderOut(nil)
+                    self.displayView(forIdentifier: identifier,animate: false)
                 } else {
-                    NSFontPanel.sharedFontPanel().orderOut(nil)
-                    NSColorPanel.sharedColorPanel().orderOut(nil)
+                    NSFontPanel.shared().orderOut(nil)
+                    NSColorPanel.shared().orderOut(nil)
                     self.window?.orderOut(nil)
                 }
             }
@@ -321,41 +320,41 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         writeLrcToiTunesShortcut.associatedUserDefaultsKey = ShortcutWriteLrcToiTunes
     }
     
-    private func endRecordShortcut() {
-        if lyricsModeSwitchShortcut.recording {
-            lyricsModeSwitchShortcut.recording = false
+    fileprivate func endRecordShortcut() {
+        if lyricsModeSwitchShortcut.isRecording {
+            lyricsModeSwitchShortcut.isRecording = false
         }
-        if desktopMenubarSwitchShortcut.recording {
-            desktopMenubarSwitchShortcut.recording = false
+        if desktopMenubarSwitchShortcut.isRecording {
+            desktopMenubarSwitchShortcut.isRecording = false
         }
-        if lrcSeekerShortcut.recording {
-            lrcSeekerShortcut.recording = false
+        if lrcSeekerShortcut.isRecording {
+            lrcSeekerShortcut.isRecording = false
         }
-        if copyLrcToPbShortcut.recording {
-            copyLrcToPbShortcut.recording = false
+        if copyLrcToPbShortcut.isRecording {
+            copyLrcToPbShortcut.isRecording = false
         }
-        if editLrcShortcut.recording {
-            editLrcShortcut.recording = false
+        if editLrcShortcut.isRecording {
+            editLrcShortcut.isRecording = false
         }
-        if makeLrcShortcut.recording {
-            makeLrcShortcut.recording = false
+        if makeLrcShortcut.isRecording {
+            makeLrcShortcut.isRecording = false
         }
-        if writeLrcToiTunesShortcut.recording {
-            writeLrcToiTunesShortcut.recording = false
+        if writeLrcToiTunesShortcut.isRecording {
+            writeLrcToiTunesShortcut.isRecording = false
         }
     }
     
 // MARK: - Preset Prefs
     
-    @IBAction func reflashPreset(sender: AnyObject?) {
+    @IBAction func reflashPreset(_ sender: AnyObject?) {
         presets.removeAll()
-        let fm = NSFileManager.defaultManager()
-        let libraryPath: String = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-        var isDir: ObjCBool = true
-        var hasDir: Bool = fm.fileExistsAtPath(libraryPath, isDirectory: &isDir)
-        if !isDir {
+        let fm = FileManager.default
+        let libraryPath: String = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, [.userDomainMask], true).first! + "/LyricsX"
+        var isDir = ObjCBool(true)
+        var hasDir: Bool = fm.fileExists(atPath: libraryPath, isDirectory: &isDir)
+        if !isDir.boolValue {
             do {
-                try fm.removeItemAtPath(libraryPath)
+                try fm.removeItem(atPath: libraryPath)
             } catch let theError as NSError {
                 NSLog("%@", theError.localizedDescription)
                 return
@@ -364,7 +363,7 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         }
         if !hasDir {
             do {
-                try fm.createDirectoryAtPath(libraryPath, withIntermediateDirectories: true, attributes: nil)
+                try fm.createDirectory(atPath: libraryPath, withIntermediateDirectories: true, attributes: nil)
             } catch let theError as NSError {
                 NSLog("%@", theError.localizedDescription)
                 return
@@ -372,35 +371,35 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         }
         let files: [String]
         do {
-            files = try fm.contentsOfDirectoryAtPath(libraryPath)
+            files = try fm.contentsOfDirectory(atPath: libraryPath)
         } catch let theError as NSError {
             NSLog("%@", theError.localizedDescription)
             return
         }
         for file in files {
             if (file as NSString).pathExtension == "lxconfig" {
-                presets.append((file as NSString).stringByDeletingPathExtension)
+                presets.append((file as NSString).deletingPathExtension)
             }
         }
         presetListView.reloadData()
-        NSNotificationCenter.defaultCenter().postNotificationName(LyricsPresetDidChangedNotification, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: LyricsPresetDidChangedNotification), object: nil)
     }
     
-    @IBAction func applyPreset(sender: AnyObject?) {
+    @IBAction func applyPreset(_ sender: AnyObject?) {
         let selectedRow: Int = presetListView.selectedRow
         if selectedRow == -1 {
             return
         }
-        let libraryPath: NSString = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-        let savingPath = libraryPath.stringByAppendingPathComponent(presets[selectedRow] + ".lxconfig")
+        let libraryPath: NSString = (NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, [.userDomainMask], true).first! + "/LyricsX") as NSString
+        let savingPath = libraryPath.appendingPathComponent(presets[selectedRow] + ".lxconfig")
         let dic = NSDictionary(contentsOfFile: savingPath)
         if dic == nil {
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("INVALID_PRESET", comment: ""))
             return
         }
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = UserDefaults.standard
         for (key,value) in dic! {
-            userDefaults.setObject(value, forKey: key as! String)
+            userDefaults.set(value, forKey: key as! String)
         }
         reflashFontAndColorPrefs()
         DesktopLyricsController.sharedController.handleAttributesUpdate()
@@ -409,96 +408,96 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("PRESET_LOADED", comment: ""))
     }
     
-    @IBAction private func addPreset(sender: AnyObject?) {
+    @IBAction fileprivate func addPreset(_ sender: AnyObject?) {
         presetNameTF.stringValue = NSLocalizedString("UNTITLED_PRESET", comment: "")
         presetNameTF.selectText(nil)
         self.window!.beginSheet(dialog) { (response) -> Void in
             if response == NSModalResponseOK {
-                let savingPath: String = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX/" + self.presetNameTF.stringValue + ".lxconfig"
-                let userDefaults = NSUserDefaults.standardUserDefaults()
+                let savingPath: String = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, [.userDomainMask], true).first! + "/LyricsX/" + self.presetNameTF.stringValue + ".lxconfig"
+                let userDefaults = UserDefaults.standard
                 let settings: [String:AnyObject] = [
-                    LyricsUseAutoLayout : userDefaults.objectForKey(LyricsUseAutoLayout)!,
-                    LyricsHeightFromDockToLyrics : userDefaults.objectForKey(LyricsHeightFromDockToLyrics)!,
-                    LyricsConstWidth : userDefaults.objectForKey(LyricsConstWidth)!,
-                    LyricsConstHeight: userDefaults.objectForKey(LyricsConstHeight)!,
-                    LyricsIsVerticalLyrics : userDefaults.objectForKey(LyricsIsVerticalLyrics)!,
-                    LyricsVerticalLyricsPosition: userDefaults.objectForKey(LyricsVerticalLyricsPosition)!,
-                    LyricsTwoLineMode : userDefaults.objectForKey(LyricsTwoLineMode)!,
-                    LyricsTwoLineModeIndex : userDefaults.objectForKey(LyricsTwoLineModeIndex)!,
-                    LyricsDisplayInAllSpaces : userDefaults.objectForKey(LyricsDisplayInAllSpaces)!,
-                    LyricsFontName : userDefaults.objectForKey(LyricsFontName)!,
-                    LyricsFontSize : userDefaults.objectForKey(LyricsFontSize)!,
-                    LyricsShadowModeEnable : userDefaults.objectForKey(LyricsShadowModeEnable)!,
-                    LyricsTextColor : userDefaults.objectForKey(LyricsTextColor)!,
-                    LyricsBackgroundColor : userDefaults.objectForKey(LyricsBackgroundColor)!,
-                    LyricsShadowColor : userDefaults.objectForKey(LyricsShadowColor)!,
-                    LyricsShadowRadius : userDefaults.objectForKey(LyricsShadowRadius)!,
-                    LyricsBgHeightINCR : userDefaults.objectForKey(LyricsBgHeightINCR)!,
-                    LyricsYOffset : userDefaults.objectForKey(LyricsYOffset)!
+                    LyricsUseAutoLayout : userDefaults.object(forKey: LyricsUseAutoLayout)! as AnyObject,
+                    LyricsHeightFromDockToLyrics : userDefaults.object(forKey: LyricsHeightFromDockToLyrics)! as AnyObject,
+                    LyricsConstWidth : userDefaults.object(forKey: LyricsConstWidth)! as AnyObject,
+                    LyricsConstHeight: userDefaults.object(forKey: LyricsConstHeight)! as AnyObject,
+                    LyricsIsVerticalLyrics : userDefaults.object(forKey: LyricsIsVerticalLyrics)! as AnyObject,
+                    LyricsVerticalLyricsPosition: userDefaults.object(forKey: LyricsVerticalLyricsPosition)! as AnyObject,
+                    LyricsTwoLineMode : userDefaults.object(forKey: LyricsTwoLineMode)! as AnyObject,
+                    LyricsTwoLineModeIndex : userDefaults.object(forKey: LyricsTwoLineModeIndex)! as AnyObject,
+                    LyricsDisplayInAllSpaces : userDefaults.object(forKey: LyricsDisplayInAllSpaces)! as AnyObject,
+                    LyricsFontName : userDefaults.object(forKey: LyricsFontName)! as AnyObject,
+                    LyricsFontSize : userDefaults.object(forKey: LyricsFontSize)! as AnyObject,
+                    LyricsShadowModeEnable : userDefaults.object(forKey: LyricsShadowModeEnable)! as AnyObject,
+                    LyricsTextColor : userDefaults.object(forKey: LyricsTextColor)! as AnyObject,
+                    LyricsBackgroundColor : userDefaults.object(forKey: LyricsBackgroundColor)! as AnyObject,
+                    LyricsShadowColor : userDefaults.object(forKey: LyricsShadowColor)! as AnyObject,
+                    LyricsShadowRadius : userDefaults.object(forKey: LyricsShadowRadius)! as AnyObject,
+                    LyricsBgHeightINCR : userDefaults.object(forKey: LyricsBgHeightINCR)! as AnyObject,
+                    LyricsYOffset : userDefaults.object(forKey: LyricsYOffset)! as AnyObject
                 ]
-                (settings as NSDictionary).writeToFile(savingPath, atomically: false)
+                (settings as NSDictionary).write(toFile: savingPath, atomically: false)
                 self.presets.append(self.presetNameTF.stringValue)
                 self.presetListView.reloadData()
-                NSNotificationCenter.defaultCenter().postNotificationName(LyricsPresetDidChangedNotification, object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: LyricsPresetDidChangedNotification), object: nil)
             }
         }
     }
     
-    @IBAction private func importPreset(sender: AnyObject?) {
+    @IBAction fileprivate func importPreset(_ sender: AnyObject?) {
         let panel = NSOpenPanel()
         panel.allowedFileTypes = ["lxconfig"]
-        panel.extensionHidden = false
-        panel.beginSheetModalForWindow(self.window!) { (response) -> Void in
+        panel.isExtensionHidden = false
+        panel.beginSheetModal(for: self.window!) { (response) -> Void in
             if response == NSFileHandlingPanelOKButton {
-                let libraryPath: NSString = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-                var presetName: String = panel.URL!.URLByDeletingPathExtension!.lastPathComponent!
-                var fileSavingPath: String = libraryPath.stringByAppendingPathComponent(panel.URL!.lastPathComponent!)
-                let fm = NSFileManager.defaultManager()
-                if fm.fileExistsAtPath(fileSavingPath) {
+                let libraryPath: NSString = (NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, [.userDomainMask], true).first! + "/LyricsX") as NSString
+                var presetName: String = panel.url!.deletingPathExtension().lastPathComponent
+                var fileSavingPath: String = libraryPath.appendingPathComponent(panel.url!.lastPathComponent)
+                let fm = FileManager.default
+                if fm.fileExists(atPath: fileSavingPath) {
                     var i: Int = 0
                     repeat {
                         i += 1
-                        fileSavingPath = libraryPath.stringByAppendingPathComponent(presetName + " \(i).lxconfig")
-                    } while !fm.fileExistsAtPath(fileSavingPath)
+                        fileSavingPath = libraryPath.appendingPathComponent(presetName + " \(i).lxconfig")
+                    } while !fm.fileExists(atPath: fileSavingPath)
                     presetName = presetName + " \(i)"
                 }
                 do {
-                    try fm.copyItemAtPath(panel.URL!.path!, toPath: fileSavingPath)
+                    try fm.copyItem(atPath: panel.url!.path, toPath: fileSavingPath)
                 } catch let theError as NSError {
                     NSLog("%@", theError.localizedDescription)
                     return
                 }
                 self.presets.append(presetName)
                 self.presetListView.reloadData()
-                NSNotificationCenter.defaultCenter().postNotificationName(LyricsPresetDidChangedNotification, object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: LyricsPresetDidChangedNotification), object: nil)
             }
         }
     }
     
-    @IBAction private func exportPreset(sender: AnyObject?) {
+    @IBAction fileprivate func exportPreset(_ sender: AnyObject?) {
         let selectedRow = presetListView.selectedRow
         if selectedRow == -1 {
             return
         }
         let panel = NSSavePanel()
         panel.allowedFileTypes = ["lxconfig"]
-        panel.extensionHidden = true
+        panel.isExtensionHidden = true
         panel.nameFieldStringValue = presets[selectedRow] + ".lxconfig"
-        panel.beginSheetModalForWindow(self.window!) { (response) -> Void in
+        panel.beginSheetModal(for: self.window!) { (response) -> Void in
             if response == NSFileHandlingPanelOKButton {
-                let libraryPath: NSString = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-                let presetPath = libraryPath.stringByAppendingPathComponent(self.presets[selectedRow] + ".lxconfig")
-                let fm = NSFileManager.defaultManager()
-                if fm.fileExistsAtPath(panel.URL!.path!) {
+                let libraryPath: NSString = (NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, [.userDomainMask], true).first! + "/LyricsX") as NSString
+                let presetPath = libraryPath.appendingPathComponent(self.presets[selectedRow] + ".lxconfig")
+                let fm = FileManager.default
+                if fm.fileExists(atPath: panel.url!.path) {
                     do {
-                        try fm.removeItemAtURL(panel.URL!)
+                        try fm.removeItem(at: panel.url!)
                     } catch let theError as NSError {
                         NSLog("%@", theError.localizedDescription)
                         return
                     }
                 }
                 do {
-                    try fm.copyItemAtPath(presetPath, toPath: panel.URL!.path!)
+                    try fm.copyItem(atPath: presetPath, toPath: panel.url!.path)
                 } catch let theError as NSError {
                     NSLog("%@", theError.localizedDescription)
                     return
@@ -507,25 +506,25 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         }
     }
     
-    @IBAction func removePreset(sender: AnyObject?) {
+    @IBAction func removePreset(_ sender: AnyObject?) {
         let selectedRow: Int = presetListView.selectedRow
         if selectedRow == -1 {
             return
         }
-        let libraryPath: String = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX"
-        let presetPath: String = (libraryPath as NSString).stringByAppendingPathComponent(presets[selectedRow] + ".lxconfig")
+        let libraryPath: String = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, [.userDomainMask], true).first! + "/LyricsX"
+        let presetPath: String = (libraryPath as NSString).appendingPathComponent(presets[selectedRow] + ".lxconfig")
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(presetPath)
+            try FileManager.default.removeItem(atPath: presetPath)
         } catch let theError as NSError {
             NSLog("%@", theError.localizedDescription)
             return
         }
-        presets.removeAtIndex(selectedRow)
+        presets.remove(at: selectedRow)
         presetListView.reloadData()
-        NSNotificationCenter.defaultCenter().postNotificationName(LyricsPresetDidChangedNotification, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: LyricsPresetDidChangedNotification), object: nil)
     }
     
-    @IBAction private func renamePreset(sender: AnyObject) {
+    @IBAction fileprivate func renamePreset(_ sender: AnyObject) {
         let selectedRow: Int = presetListView.selectedRow
         if selectedRow == -1 {
             return
@@ -535,24 +534,24 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         presetNameTF.selectText(nil)
         self.window?.beginSheet(dialog, completionHandler: { (response) -> Void in
             if response == NSModalResponseOK {
-                let libraryPath: NSString = (NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, [.UserDomainMask], true).first! + "/LyricsX") as NSString
-                let oldPath = libraryPath.stringByAppendingPathComponent(oldName + ".lxconfig")
-                let newPath = libraryPath.stringByAppendingPathComponent(self.presetNameTF.stringValue + ".lxconfig")
+                let libraryPath: NSString = (NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, [.userDomainMask], true).first! + "/LyricsX") as NSString
+                let oldPath = libraryPath.appendingPathComponent(oldName + ".lxconfig")
+                let newPath = libraryPath.appendingPathComponent(self.presetNameTF.stringValue + ".lxconfig")
                 do {
-                    try NSFileManager.defaultManager().moveItemAtPath(oldPath, toPath: newPath)
+                    try FileManager.default.moveItem(atPath: oldPath, toPath: newPath)
                 } catch let theError as NSError {
                     NSLog("%@", theError.localizedDescription)
                     return
                 }
                 self.presets[selectedRow] = self.presetNameTF.stringValue
                 self.presetListView.reloadData()
-                NSNotificationCenter.defaultCenter().postNotificationName(LyricsPresetDidChangedNotification, object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: LyricsPresetDidChangedNotification), object: nil)
             }
         })
     }
     
-    @IBAction private func confirmPrestName(sender: AnyObject) {
-        if presetNameTF.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "") == "" {
+    @IBAction fileprivate func confirmPrestName(_ sender: AnyObject) {
+        if presetNameTF.stringValue.replacingOccurrences(of: " ", with: "") == "" {
             NSBeep()
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("EMPTY_NAME", comment: ""))
             return
@@ -567,81 +566,81 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
         self.window!.endSheet(dialog, returnCode: NSModalResponseOK)
     }
 
-    @IBAction private func cancelChangePresetName(sender: AnyObject) {
+    @IBAction fileprivate func cancelChangePresetName(_ sender: AnyObject) {
         self.window!.endSheet(dialog, returnCode: NSModalResponseCancel)
     }
     
 // MARK: - Filter Prefs   
     
     func loadFilter() {
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        let directFilterData = userDefault.dataForKey(LyricsDirectFilterKey)!
-        let conditionalFilterData = userDefault.dataForKey(LyricsConditionalFilterKey)!
-        directFilter = NSKeyedUnarchiver.unarchiveObjectWithData(directFilterData) as! [FilterString]
-        conditionalFilter = NSKeyedUnarchiver.unarchiveObjectWithData(conditionalFilterData) as! [FilterString]
+        let userDefault = UserDefaults.standard
+        let directFilterData = userDefault.data(forKey: LyricsDirectFilterKey)!
+        let conditionalFilterData = userDefault.data(forKey: LyricsConditionalFilterKey)!
+        directFilter = NSKeyedUnarchiver.unarchiveObject(with: directFilterData) as! [FilterString]
+        conditionalFilter = NSKeyedUnarchiver.unarchiveObject(with: conditionalFilterData) as! [FilterString]
     }
     
-    @IBAction func addKeywordForDirectFilterList(sender: AnyObject) {
+    @IBAction func addKeywordForDirectFilterList(_ sender: AnyObject) {
         directFilter.append(FilterString())
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             self.directFilterList.scrollRowToVisible(self.directFilter.count - 1)
-            self.directFilterList.editColumn(0, row: self.directFilter.count - 1, withEvent: nil, select: true)
+            self.directFilterList.editColumn(0, row: self.directFilter.count - 1, with: nil, select: true)
         }
     }
     
-    @IBAction func addKeywordForConditionalFilterList(sender: AnyObject) {
+    @IBAction func addKeywordForConditionalFilterList(_ sender: AnyObject) {
         conditionalFilter.append(FilterString())
-        dispatch_async(dispatch_get_main_queue()) { 
+        DispatchQueue.main.async { 
             self.conditionalFilterList.scrollRowToVisible(self.conditionalFilter.count - 1)
-            self.conditionalFilterList.editColumn(0, row: self.conditionalFilter.count - 1, withEvent: nil, select: true)
+            self.conditionalFilterList.editColumn(0, row: self.conditionalFilter.count - 1, with: nil, select: true)
         }
     }
     
-    @IBAction func resetFilterList(sender: AnyObject) {
+    @IBAction func resetFilterList(_ sender: AnyObject) {
         let alert: NSAlert = NSAlert()
         alert.messageText = NSLocalizedString("RESET_FILTER", comment: "")
         alert.informativeText = NSLocalizedString("RESET_CONFIRM", comment: "")
-        alert.addButtonWithTitle(NSLocalizedString("RESET", comment: ""))
-        alert.addButtonWithTitle(NSLocalizedString("CANCEL", comment: ""))
-        alert.beginSheetModalForWindow(self.window!) { (response) in
+        alert.addButton(withTitle: NSLocalizedString("RESET", comment: ""))
+        alert.addButton(withTitle: NSLocalizedString("CANCEL", comment: ""))
+        alert.beginSheetModal(for: self.window!, completionHandler: { (response) in
             if response == NSAlertFirstButtonReturn {
-                let userDefaults = NSUserDefaults.standardUserDefaults()
-                userDefaults.removeObjectForKey(LyricsDirectFilterKey)
-                userDefaults.removeObjectForKey(LyricsConditionalFilterKey)
+                let userDefaults = UserDefaults.standard
+                userDefaults.removeObject(forKey: LyricsDirectFilterKey)
+                userDefaults.removeObject(forKey: LyricsConditionalFilterKey)
                 self.directFilter.removeAll()
                 self.conditionalFilter.removeAll()
                 self.loadFilter()
             }
-        }
+        }) 
     }
     
-    @IBAction func revertFilterKeyword(sender: AnyObject) {
+    @IBAction func revertFilterKeyword(_ sender: AnyObject) {
         self.directFilter.removeAll()
         self.conditionalFilter.removeAll()
         self.loadFilter()
     }
     
-    @IBAction func saveFilterKeyword(sender: AnyObject) {
+    @IBAction func saveFilterKeyword(_ sender: AnyObject) {
         for filter in directFilter {
-            filter.keyword = filter.keyword.stringByReplacingOccurrencesOfString(" ", withString: "")
+            filter.keyword = filter.keyword.replacingOccurrences(of: " ", with: "")
         }
         for filter in conditionalFilter {
-            filter.keyword = filter.keyword.stringByReplacingOccurrencesOfString(" ", withString: "")
+            filter.keyword = filter.keyword.replacingOccurrences(of: " ", with: "")
         }
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let directFilterData = NSKeyedArchiver.archivedDataWithRootObject(directFilter)
-        let conditionalFilterData = NSKeyedArchiver.archivedDataWithRootObject(conditionalFilter)
-        userDefaults.setObject(directFilterData, forKey: LyricsDirectFilterKey)
-        userDefaults.setObject(conditionalFilterData, forKey: LyricsConditionalFilterKey)
+        let userDefaults = UserDefaults.standard
+        let directFilterData = NSKeyedArchiver.archivedData(withRootObject: directFilter)
+        let conditionalFilterData = NSKeyedArchiver.archivedData(withRootObject: conditionalFilter)
+        userDefaults.set(directFilterData, forKey: LyricsDirectFilterKey)
+        userDefaults.set(conditionalFilterData, forKey: LyricsConditionalFilterKey)
     }
     
-    @IBAction func showHelp(sender: NSButton) {
-        helpPopover.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: .MaxY)
+    @IBAction func showHelp(_ sender: NSButton) {
+        helpPopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
     }
 
 // MARK: - NSWindow & NSTextField Delegate
 
-    func windowShouldClose(sender: AnyObject) -> Bool {
+    func windowShouldClose(_ sender: Any) -> Bool {
         if !canResignFirstResponder() {
             self.window?.makeFirstResponder(nil)
             return false
@@ -651,29 +650,29 @@ class AppPrefsWindowController: DBPrefsWindowController, NSWindowDelegate, Conte
                 fontAndColorAlert(nil)
                 return false
             } else {
-                NSFontPanel.sharedFontPanel().orderOut(nil)
-                NSColorPanel.sharedColorPanel().orderOut(nil)
+                NSFontPanel.shared().orderOut(nil)
+                NSColorPanel.shared().orderOut(nil)
                 return true
             }
         }
         return true
     }
     
-    override func controlTextDidChange(obj: NSNotification) {
+    override func controlTextDidChange(_ obj: Notification) {
         fontAndColorChanged(nil)
     }
     
 // MARK: - NSTableView Delegate & ContextMenuDelegate
     
-    func numberOfRowsInTableView(aTableView: NSTableView) -> Int {
+    func numberOfRowsInTableView(_ aTableView: NSTableView) -> Int {
         return presets.count
     }
     
-    func tableView(aTableView: NSTableView, objectValueForTableColumn aTableColumn: NSTableColumn, row rowIndex: Int) -> AnyObject? {
-        return presets[rowIndex]
+    func tableView(_ aTableView: NSTableView, objectValueForTableColumn aTableColumn: NSTableColumn, row rowIndex: Int) -> AnyObject? {
+        return presets[rowIndex] as AnyObject?
     }
     
-    func tableView(aTableView: NSTableView, menuForRows rows: NSIndexSet) -> NSMenu {
+    func tableView(_ aTableView: NSTableView, menuForRows rows: IndexSet) -> NSMenu {
         self.window?.makeFirstResponder(self.presetListView)
         return tableMenu
     }

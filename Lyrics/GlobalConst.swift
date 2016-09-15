@@ -10,7 +10,7 @@ import Foundation
 
 //disable NSLog all over the codes in release builds
 #if !DEBUG
-    func NSLog(format: String, _ args: CVarArgType...) {}
+    func NSLog(_ format: String, _ args: CVarArg...) {}
 #endif
 
 //Notifications

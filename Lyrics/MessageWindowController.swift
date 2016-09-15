@@ -15,20 +15,20 @@ class MessageWindowController: NSWindowController {
     var msgText: CATextLayer!
     var attrs: [String:AnyObject]!
     var isOrderFront: Bool = false
-    var timer: NSTimer!
+    var timer: Timer!
 
     convenience init() {
         NSLog("Init MessageWindow")
-        let win = NSWindow(contentRect: NSZeroRect, styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.Buffered, defer: false)
+        let win = NSWindow(contentRect: NSZeroRect, styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.buffered, defer: false)
         self.init(window: win)
-        self.window?.opaque = false
+        self.window?.isOpaque = false
         self.window?.hasShadow = false
         self.window?.ignoresMouseEvents = true
-        self.window?.level = Int(CGWindowLevelForKey(.FloatingWindowLevelKey))
-        self.window?.backgroundColor = NSColor.clearColor()
+        self.window?.level = Int(CGWindowLevelForKey(.floatingWindow))
+        self.window?.backgroundColor = NSColor.clear
         self.window?.contentView?.layer = CALayer()
         self.window?.contentView?.wantsLayer = true
-        self.window?.contentView?.layer?.backgroundColor = NSColor(calibratedWhite: 0, alpha: 0.65).CGColor
+        self.window?.contentView?.layer?.backgroundColor = NSColor(calibratedWhite: 0, alpha: 0.65).cgColor
         self.window?.contentView?.layer?.cornerRadius = 15
         
         msgText = CATextLayer()
@@ -37,7 +37,7 @@ class MessageWindowController: NSWindowController {
         msgText.alignmentMode = kCAAlignmentCenter
         msgText.font = NSFont(name: "HiraginoSansGB-W6", size: 20)
         msgText.fontSize = 20
-        msgText.foregroundColor = NSColor.whiteColor().CGColor
+        msgText.foregroundColor = NSColor.white.cgColor
         msgText.speed = 12
         self.window?.contentView?.layer?.addSublayer(msgText)
         
@@ -45,10 +45,10 @@ class MessageWindowController: NSWindowController {
         self.window?.orderOut(nil)
     }
     
-    func displayMessage(msgStr: String) {
+    func displayMessage(_ msgStr: String) {
         let attributedStr = NSAttributedString(string: msgStr, attributes: attrs)
         let size = attributedStr.size()
-        let screenFrame = NSScreen.mainScreen()?.visibleFrame
+        let screenFrame = NSScreen.main()?.visibleFrame
         let x: CGFloat = (screenFrame?.size.width)! + (screenFrame?.origin.x)! - (size.width+100)
         let y: CGFloat = (screenFrame?.size.height)! + (screenFrame?.origin.y)! - (size.height+60)
         self.window!.setFrame(NSMakeRect(x, y, size.width + 30, size.height + 30), display: true)
@@ -64,12 +64,12 @@ class MessageWindowController: NSWindowController {
             timer.invalidate()
             timer = nil
         }
-        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(fadeOut), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(fadeOut), userInfo: nil, repeats: false)
     }
     
     func fadeOut() {
-        let delay: NSTimeInterval = NSAnimationContext.currentContext().duration + 0.1
-        self.window!.performSelector(#selector(NSWindow.orderOut(_:)), withObject: nil, afterDelay: delay)
+        let delay: TimeInterval = NSAnimationContext.current().duration + 0.1
+        self.window!.perform(#selector(NSWindow.orderOut(_:)), with: nil, afterDelay: delay)
         self.window!.animator().alphaValue = 0
         msgText.string = ""
         isOrderFront = false

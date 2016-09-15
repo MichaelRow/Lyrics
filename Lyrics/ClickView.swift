@@ -11,8 +11,8 @@ import Cocoa
 // This subclass is used to make NSTextField, NSTableView, etc resign first responder
 
 class ClickView: NSView {
-    override func mouseDown(theEvent: NSEvent) {
+    override func mouseDown(with theEvent: NSEvent) {
         self.window?.makeFirstResponder(nil)
-        super.mouseDown(theEvent)
+        super.mouseDown(with: theEvent)
     }
 }

@@ -9,7 +9,7 @@
 import Cocoa
 
 enum LrcType: Int {
-    case Lyrics, Title, Album, TitleAndAlbum, TitleAndAlbumSimillar, Other
+    case lyrics, title, album, titleAndAlbum, titleAndAlbumSimillar, other
 }
 
 class LrcParser: NSObject {
@@ -17,8 +17,8 @@ class LrcParser: NSObject {
     var lyrics: [LyricsLineModel]!
     var idTags: [String]!
     var timeDly: Int = 0
-    private var regexForTimeTag: NSRegularExpression!
-    private var regexForIDTag: NSRegularExpression!
+    fileprivate var regexForTimeTag: NSRegularExpression!
+    fileprivate var regexForIDTag: NSRegularExpression!
     
     override init() {
         super.init()
@@ -40,13 +40,13 @@ class LrcParser: NSObject {
         }
     }
     
-    func testLrc(lrcContents: String) -> Bool {
+    func testLrc(_ lrcContents: String) -> Bool {
         // test whether the string is lrc
-        let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
-        let lrcParagraphs: [String] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
+        let newLineCharSet: CharacterSet = CharacterSet.newlines
+        let lrcParagraphs: [String] = lrcContents.components(separatedBy: newLineCharSet)
         var numberOfMatched: Int = 0
         for str in lrcParagraphs {
-            numberOfMatched = regexForTimeTag.numberOfMatchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
+            numberOfMatched = regexForTimeTag.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.characters.count))
             if numberOfMatched > 0 {
                 return true
             }
@@ -54,31 +54,31 @@ class LrcParser: NSObject {
         return false
     }
     
-    func regularParse(lrcContents: String) {
+    func regularParse(_ lrcContents: String) {
         NSLog("Start to Parse lrc")
         cleanCache()
         
         var tempLyrics = [LyricsLineModel]()
         var tempIDTags = [String]()
         var tempTimeDly: Int = 0
-        let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
-        let lrcParagraphs: [String] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
+        let newLineCharSet: CharacterSet = CharacterSet.newlines
+        let lrcParagraphs: [String] = lrcContents.components(separatedBy: newLineCharSet)
         
         for str in lrcParagraphs {
-            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
+            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matches(in: str, options: [], range: NSMakeRange(0, str.characters.count))
             if timeTagsMatched.count > 0 {
                 let index: Int = timeTagsMatched.last!.range.location + timeTagsMatched.last!.range.length
-                let lyricsSentence: String = str.substringFromIndex(str.startIndex.advancedBy(index))
+                let lyricsSentence: String = str.substring(from: str.characters.index(str.startIndex, offsetBy: index))
                 for result in timeTagsMatched {
                     let matchedRange: NSRange = result.range
                     let lrcLine: LyricsLineModel = LyricsLineModel()
                     lrcLine.lyricsSentence = lyricsSentence
-                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
+                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substring(with: matchedRange) as NSString)
                     let currentCount: Int = tempLyrics.count
                     var j: Int = 0
                     while j < currentCount {
                         if lrcLine.msecPosition < tempLyrics[j].msecPosition {
-                            tempLyrics.insert(lrcLine, atIndex: j)
+                            tempLyrics.insert(lrcLine, at: j)
                             break
                         }
                         j += 1
@@ -89,21 +89,21 @@ class LrcParser: NSObject {
                 }
             }
             else {
-                let idTagsMatched: [NSTextCheckingResult] = regexForIDTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
+                let idTagsMatched: [NSTextCheckingResult] = regexForIDTag.matches(in: str, options: [], range: NSMakeRange(0, str.characters.count))
                 if idTagsMatched.count == 0 {
                     continue
                 }
                 for result in idTagsMatched {
                     let matchedRange: NSRange = result.range
-                    let idTag: NSString = (str as NSString).substringWithRange(matchedRange) as NSString
-                    let colonRange: NSRange = idTag.rangeOfString(":")
-                    let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1))
-                    if idStr.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString != "offset" {
+                    let idTag: NSString = (str as NSString).substring(with: matchedRange) as NSString
+                    let colonRange: NSRange = idTag.range(of: ":")
+                    let idStr: String = idTag.substring(with: NSMakeRange(1, colonRange.location-1))
+                    if idStr.replacingOccurrences(of: " ", with: "").lowercased() != "offset" {
                         tempIDTags.append(idTag as String)
                         continue
                     }
                     else {
-                        let idContent: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1))
+                        let idContent: String = idTag.substring(with: NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1))
                         tempTimeDly = (idContent as NSString).integerValue
                     }
                 }
@@ -114,27 +114,27 @@ class LrcParser: NSObject {
         timeDly = tempTimeDly
     }
     
-    func parseForLyrics(lrcContents: String) {
+    func parseForLyrics(_ lrcContents: String) {
         cleanCache()
         var tempLyrics = [LyricsLineModel]()
-        let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
-        let lrcParagraphs: [String] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
+        let newLineCharSet: CharacterSet = CharacterSet.newlines
+        let lrcParagraphs: [String] = lrcContents.components(separatedBy: newLineCharSet)
         
         for str in lrcParagraphs {
-            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
+            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matches(in: str, options: [], range: NSMakeRange(0, str.characters.count))
             if timeTagsMatched.count > 0 {
                 let index: Int = timeTagsMatched.last!.range.location + timeTagsMatched.last!.range.length
-                let lyricsSentence: String = str.substringFromIndex(str.startIndex.advancedBy(index))
+                let lyricsSentence: String = str.substring(from: str.characters.index(str.startIndex, offsetBy: index))
                 for result in timeTagsMatched {
                     let matchedRange: NSRange = result.range
                     let lrcLine: LyricsLineModel = LyricsLineModel()
                     lrcLine.lyricsSentence = lyricsSentence
-                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
+                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substring(with: matchedRange) as NSString)
                     let currentCount: Int = tempLyrics.count
                     var j: Int = 0
                     while j < currentCount {
                         if lrcLine.msecPosition < tempLyrics[j].msecPosition {
-                            tempLyrics.insert(lrcLine, atIndex: j)
+                            tempLyrics.insert(lrcLine, at: j)
                             break
                         }
                         j += 1
@@ -148,7 +148,7 @@ class LrcParser: NSObject {
         lyrics = tempLyrics
     }
     
-    func parseWithFilter(lrcContents: String, iTunesTitle: String?, iTunesAlbum: String?) {
+    func parseWithFilter(_ lrcContents: String, iTunesTitle: String?, iTunesAlbum: String?) {
         NSLog("Start to Parse lrc")
         cleanCache()
         
@@ -160,24 +160,24 @@ class LrcParser: NSObject {
         var otherIDInfos = [String]()
         let colons = [":","：","∶"]
         
-        let newLineCharSet: NSCharacterSet = NSCharacterSet.newlineCharacterSet()
-        let lrcParagraphs: [String] = lrcContents.componentsSeparatedByCharactersInSet(newLineCharSet)
+        let newLineCharSet: CharacterSet = CharacterSet.newlines
+        let lrcParagraphs: [String] = lrcContents.components(separatedBy: newLineCharSet)
         
         for str in lrcParagraphs {
-            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
+            let timeTagsMatched: [NSTextCheckingResult] = regexForTimeTag.matches(in: str, options: [], range: NSMakeRange(0, str.characters.count))
             if timeTagsMatched.count > 0 {
                 let index: Int = timeTagsMatched.last!.range.location + timeTagsMatched.last!.range.length
-                let lyricsSentence: String = str.substringFromIndex(str.startIndex.advancedBy(index))
+                let lyricsSentence: String = str.substring(from: str.characters.index(str.startIndex, offsetBy: index))
                 for result in timeTagsMatched {
                     let matchedRange: NSRange = result.range
                     let lrcLine: LyricsLineModel = LyricsLineModel()
                     lrcLine.lyricsSentence = lyricsSentence
-                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substringWithRange(matchedRange))
+                    lrcLine.setMsecPositionWithTimeTag((str as NSString).substring(with: matchedRange) as NSString)
                     let currentCount: Int = tempLyrics.count
                     var j: Int = 0
                     while j < currentCount {
                         if lrcLine.msecPosition < tempLyrics[j].msecPosition {
-                            tempLyrics.insert(lrcLine, atIndex: j)
+                            tempLyrics.insert(lrcLine, at: j)
                             break
                         }
                         j += 1
@@ -188,17 +188,17 @@ class LrcParser: NSObject {
                 }
             }
             else {
-                let idTagsMatched: [NSTextCheckingResult] = regexForIDTag.matchesInString(str, options: [], range: NSMakeRange(0, str.characters.count))
+                let idTagsMatched: [NSTextCheckingResult] = regexForIDTag.matches(in: str, options: [], range: NSMakeRange(0, str.characters.count))
                 if idTagsMatched.count == 0 {
                     continue
                 }
                 for result in idTagsMatched {
                     let matchedRange: NSRange = result.range
-                    let idTag: NSString = (str as NSString).substringWithRange(matchedRange) as NSString
-                    let colonRange: NSRange = idTag.rangeOfString(":")
-                    let idStr: String = idTag.substringWithRange(NSMakeRange(1, colonRange.location-1)).stringByReplacingOccurrencesOfString(" ", withString: "")
-                    let idContent: String = idTag.substringWithRange(NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1)).stringByReplacingOccurrencesOfString(" ", withString: "")
-                    switch idStr.lowercaseString {
+                    let idTag: NSString = (str as NSString).substring(with: matchedRange) as NSString
+                    let colonRange: NSRange = idTag.range(of: ":")
+                    let idStr: String = idTag.substring(with: NSMakeRange(1, colonRange.location-1)).replacingOccurrences(of: " ", with: "")
+                    let idContent: String = idTag.substring(with: NSMakeRange(colonRange.location+1, idTag.length-colonRange.length-colonRange.location-1)).replacingOccurrences(of: " ", with: "")
+                    switch idStr.lowercased() {
                     case "offset":
                         tempTimeDly = (idContent as NSString).integerValue
                     case "ti":
@@ -222,25 +222,25 @@ class LrcParser: NSObject {
         //                 曲名），过滤需要参照上下文，如果上下文有空行则顺延。如果连续出现歌曲名或者专辑名则认为是歌词
         //                 本身有该字符串，比如歌曲名是"You"，歌词为"You are great"，如果歌词大于等于歌曲名的5倍也认
         //                 为歌词本身有歌曲名。
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let directFilter = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsDirectFilterKey)!) as! [FilterString]
-        let conditionalFilter = NSKeyedUnarchiver.unarchiveObjectWithData(userDefaults.dataForKey(LyricsConditionalFilterKey)!) as! [FilterString]
-        let isIDTagTitleAlbumSimillar: Bool = (title.rangeOfString(album) != nil) || (album.rangeOfString(title) != nil)
+        let userDefaults = UserDefaults.standard
+        let directFilter = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.data(forKey: LyricsDirectFilterKey)!) as! [FilterString]
+        let conditionalFilter = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.data(forKey: LyricsConditionalFilterKey)!) as! [FilterString]
+        let isIDTagTitleAlbumSimillar: Bool = (title.range(of: album) != nil) || (album.range(of: title) != nil)
         let isiTunesTitleAlbumSimillar: Bool
         if iTunesTitle != nil && iTunesAlbum != nil {
-            isiTunesTitleAlbumSimillar = (iTunesTitle!.rangeOfString(iTunesAlbum!) != nil) || (iTunesAlbum!.rangeOfString(iTunesTitle!) != nil)
+            isiTunesTitleAlbumSimillar = (iTunesTitle!.range(of: iTunesAlbum!) != nil) || (iTunesAlbum!.range(of: iTunesTitle!) != nil)
         }
         else {
             isiTunesTitleAlbumSimillar = false
         }
         let isTitleAlbumSimillar: Bool = isIDTagTitleAlbumSimillar || isiTunesTitleAlbumSimillar
-        var prevLrcType: LrcType = .Lyrics
+        var prevLrcType: LrcType = .lyrics
         var emptyLine: Int = 0
         var lastTitleAlbumSimillarIdx = -1
         
         MainLoop: for index in 0 ..< tempLyrics.count {
-            var currentLrcType: LrcType = .Lyrics
-            let line = tempLyrics[index].lyricsSentence.stringByReplacingOccurrencesOfString(" ", withString: "")
+            var currentLrcType: LrcType = .lyrics
+            let line = tempLyrics[index].lyricsSentence.replacingOccurrences(of: " ", with: "")
             if line == "" {
                 emptyLine += 1
                 continue MainLoop
@@ -248,16 +248,16 @@ class LrcParser: NSObject {
             for filter in directFilter {
                 let searchResult: Bool
                 if filter.caseSensitive {
-                    searchResult = line.rangeOfString(filter.keyword) != nil
+                    searchResult = line.range(of: filter.keyword) != nil
                 }
                 else {
-                    searchResult = line.rangeOfString(filter.keyword, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil
+                    searchResult = line.range(of: filter.keyword, options: [.caseInsensitive], range: nil, locale: nil) != nil
                 }
                 if searchResult {
-                    if prevLrcType == .Title || prevLrcType == .Album {
+                    if prevLrcType == .title || prevLrcType == .album {
                         tempLyrics[index-1-emptyLine].enabled = false
                     }
-                    else if prevLrcType == .TitleAndAlbumSimillar {
+                    else if prevLrcType == .titleAndAlbumSimillar {
                         if lastTitleAlbumSimillarIdx != -1 {
                             tempLyrics[lastTitleAlbumSimillarIdx].enabled = false
                             lastTitleAlbumSimillarIdx = -1
@@ -265,7 +265,7 @@ class LrcParser: NSObject {
                         tempLyrics[index-1-emptyLine].enabled = false
                     }
                     tempLyrics[index].enabled = false
-                    prevLrcType = .Other
+                    prevLrcType = .other
                     continue MainLoop
                 }
             }
@@ -273,18 +273,18 @@ class LrcParser: NSObject {
             for filter in conditionalFilter {
                 let searchResult: Bool
                 if filter.caseSensitive {
-                    searchResult = line.rangeOfString(filter.keyword) != nil
+                    searchResult = line.range(of: filter.keyword) != nil
                 }
                 else {
-                    searchResult = line.rangeOfString(filter.keyword, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil
+                    searchResult = line.range(of: filter.keyword, options: [.caseInsensitive], range: nil, locale: nil) != nil
                 }
                 if searchResult {
                     for aColon in colons {
-                        if line.rangeOfString(aColon) != nil {
-                            if prevLrcType == .Title || prevLrcType == .Album {
+                        if line.range(of: aColon) != nil {
+                            if prevLrcType == .title || prevLrcType == .album {
                                 tempLyrics[index-1-emptyLine].enabled = false
                             }
-                            else if prevLrcType == .TitleAndAlbumSimillar {
+                            else if prevLrcType == .titleAndAlbumSimillar {
                                 if lastTitleAlbumSimillarIdx != -1 {
                                     tempLyrics[lastTitleAlbumSimillarIdx].enabled = false
                                     lastTitleAlbumSimillarIdx = -1
@@ -292,18 +292,18 @@ class LrcParser: NSObject {
                                 tempLyrics[index-1-emptyLine].enabled = false
                             }
                             tempLyrics[index].enabled = false
-                            prevLrcType = .Other
+                            prevLrcType = .other
                             continue MainLoop
                         }
                     }
                 }
             }
             
-            if userDefaults.boolForKey(LyricsEnableSmartFilter) {
+            if userDefaults.bool(forKey: LyricsEnableSmartFilter) {
                 var ignoreTitle: Bool = false
                 var ignoreAlbum: Bool = false
                 
-                let hasIDTagTitle: Bool = (line.rangeOfString(title, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (title.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
+                let hasIDTagTitle: Bool = (line.range(of: title, options: [.caseInsensitive], range: nil, locale: nil) != nil) || (title.range(of: line, options: [.caseInsensitive], range: nil, locale: nil) != nil)
                 
                 if hasIDTagTitle {
                     if line.characters.count/title.characters.count > 4 {
@@ -311,7 +311,7 @@ class LrcParser: NSObject {
                     }
                 }
                 
-                let hasIDTagAlbum: Bool = (line.rangeOfString(album, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (album.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
+                let hasIDTagAlbum: Bool = (line.range(of: album, options: [.caseInsensitive], range: nil, locale: nil) != nil) || (album.range(of: line, options: [.caseInsensitive], range: nil, locale: nil) != nil)
                 
                 if hasIDTagAlbum {
                     if line.characters.count/album.characters.count > 4 {
@@ -324,7 +324,7 @@ class LrcParser: NSObject {
                     hasiTunesTitle = false
                 }
                 else {
-                    hasiTunesTitle = (line.rangeOfString(iTunesTitle!, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (iTunesTitle!.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
+                    hasiTunesTitle = (line.range(of: iTunesTitle!, options: [.caseInsensitive], range: nil, locale: nil) != nil) || (iTunesTitle!.range(of: line, options: [.caseInsensitive], range: nil, locale: nil) != nil)
                     if !ignoreTitle && hasiTunesTitle {
                         if line.characters.count/iTunesTitle!.characters.count > 4 {
                             ignoreTitle = true
@@ -337,7 +337,7 @@ class LrcParser: NSObject {
                     hasiTunesAlbum = false
                 }
                 else {
-                    hasiTunesAlbum = (line.rangeOfString(iTunesAlbum!, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil) || (iTunesAlbum!.rangeOfString(line, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil)
+                    hasiTunesAlbum = (line.range(of: iTunesAlbum!, options: [.caseInsensitive], range: nil, locale: nil) != nil) || (iTunesAlbum!.range(of: line, options: [.caseInsensitive], range: nil, locale: nil) != nil)
                     if !ignoreAlbum && hasiTunesAlbum {
                         if line.characters.count/iTunesAlbum!.characters.count > 4 {
                             ignoreAlbum = true
@@ -349,11 +349,11 @@ class LrcParser: NSObject {
                 let hasAlbum: Bool = hasIDTagAlbum || hasiTunesAlbum
                 
                 for str in otherIDInfos {
-                    if line.rangeOfString(str, options: [.CaseInsensitiveSearch], range: nil, locale: nil) != nil {
-                        if prevLrcType == .Title || prevLrcType == .Album {
+                    if line.range(of: str, options: [.caseInsensitive], range: nil, locale: nil) != nil {
+                        if prevLrcType == .title || prevLrcType == .album {
                             tempLyrics[index-1-emptyLine].enabled = false
                         }
-                        else if prevLrcType == .TitleAndAlbumSimillar {
+                        else if prevLrcType == .titleAndAlbumSimillar {
                             if lastTitleAlbumSimillarIdx != -1 {
                                 tempLyrics[lastTitleAlbumSimillarIdx].enabled = false
                                 lastTitleAlbumSimillarIdx = -1
@@ -361,7 +361,7 @@ class LrcParser: NSObject {
                             tempLyrics[index-1-emptyLine].enabled = false
                         }
                         tempLyrics[index].enabled = false
-                        prevLrcType = .Other
+                        prevLrcType = .other
                         continue MainLoop
                     }
                 }
@@ -369,79 +369,79 @@ class LrcParser: NSObject {
                 if hasTitle && hasAlbum {
                     if isTitleAlbumSimillar {
                         if !ignoreTitle && !ignoreAlbum {
-                            currentLrcType = .TitleAndAlbumSimillar
-                            if prevLrcType == .TitleAndAlbumSimillar {
+                            currentLrcType = .titleAndAlbumSimillar
+                            if prevLrcType == .titleAndAlbumSimillar {
                                 if lastTitleAlbumSimillarIdx == -1 {
                                     lastTitleAlbumSimillarIdx = index-1-emptyLine
                                 }
                                 else {
-                                    currentLrcType = .Lyrics
+                                    currentLrcType = .lyrics
                                 }
                             }
                         }
                     }
                     else {
-                        if prevLrcType == .Title || prevLrcType == .Album {
+                        if prevLrcType == .title || prevLrcType == .album {
                             tempLyrics[index-1-emptyLine].enabled = false
                         }
                         tempLyrics[index].enabled = false
-                        prevLrcType = .TitleAndAlbum
+                        prevLrcType = .titleAndAlbum
                         continue MainLoop
                     }
                 }
                 else if hasAlbum && !ignoreAlbum {
-                    if prevLrcType == .Title {
+                    if prevLrcType == .title {
                         tempLyrics[index-1-emptyLine].enabled = false
                         tempLyrics[index].enabled = false
-                        prevLrcType = .Album
+                        prevLrcType = .album
                         continue MainLoop
                     }
-                    else if prevLrcType == .Other || prevLrcType == .TitleAndAlbum {
+                    else if prevLrcType == .other || prevLrcType == .titleAndAlbum {
                         tempLyrics[index].enabled = false
-                        prevLrcType = .Album
+                        prevLrcType = .album
                         continue MainLoop
                     }
-                    else if prevLrcType == .TitleAndAlbumSimillar {
+                    else if prevLrcType == .titleAndAlbumSimillar {
                         if lastTitleAlbumSimillarIdx == -1 {
                             tempLyrics[index-1-emptyLine].enabled = false
                             tempLyrics[index].enabled = false
                         }
                         else {
-                            currentLrcType = .Lyrics
+                            currentLrcType = .lyrics
                         }
                     }
                     else {
-                        currentLrcType = .Album
+                        currentLrcType = .album
                     }
                 }
                 else if hasTitle && !ignoreTitle {
-                    if prevLrcType == .Album {
+                    if prevLrcType == .album {
                         tempLyrics[index-1-emptyLine].enabled = false
                         tempLyrics[index].enabled = false
-                        prevLrcType = .Title
+                        prevLrcType = .title
                         continue MainLoop
                     }
-                    else if prevLrcType == .Other || prevLrcType == .TitleAndAlbum {
+                    else if prevLrcType == .other || prevLrcType == .titleAndAlbum {
                         tempLyrics[index].enabled = false
-                        prevLrcType = .Title
+                        prevLrcType = .title
                         continue MainLoop
                     }
-                    else if prevLrcType == .TitleAndAlbumSimillar {
+                    else if prevLrcType == .titleAndAlbumSimillar {
                         if lastTitleAlbumSimillarIdx == -1 {
                             tempLyrics[index-1-emptyLine].enabled = false
                             tempLyrics[index].enabled = false
                         }
                         else {
-                            currentLrcType = .Lyrics
+                            currentLrcType = .lyrics
                         }
                     }
                     else {
-                        currentLrcType = .Title
+                        currentLrcType = .title
                     }
                 }
             }
             
-            if currentLrcType == .Lyrics && lastTitleAlbumSimillarIdx != -1 {
+            if currentLrcType == .lyrics && lastTitleAlbumSimillarIdx != -1 {
                 lastTitleAlbumSimillarIdx = -1
             }
             prevLrcType = currentLrcType

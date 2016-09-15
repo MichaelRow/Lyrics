@@ -41,7 +41,7 @@ class AboutWindowController: NSWindowController {
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        self.window?.backgroundColor = NSColor.whiteColor()
+        self.window?.backgroundColor = NSColor.white
         appName.stringValue = valueFromInfoDict("CFBundleName")
         let version = valueFromInfoDict("CFBundleVersion")
         let shortVersion = valueFromInfoDict("CFBundleShortVersionString")
@@ -52,27 +52,27 @@ class AboutWindowController: NSWindowController {
             appVersion.stringValue = "Version \(shortVersion) (Build \(version))"
         }
         let font:NSFont? = NSFont(name: "HelveticaNeue", size: 11.0)
-        let color:NSColor? = NSColor.grayColor()
+        let color:NSColor? = NSColor.gray
         let attribs:[String:AnyObject] = [NSForegroundColorAttributeName:color!,
             NSFontAttributeName:font!]
         appCopyright = NSAttributedString(string: valueFromInfoDict("NSHumanReadableCopyright"), attributes:attribs)
-        if let creditsRTF = NSBundle.mainBundle().pathForResource("Credits", ofType: "rtf") {
+        if let creditsRTF = Bundle.main.path(forResource: "Credits", ofType: "rtf") {
             appCredits = NSAttributedString(path: creditsRTF, documentAttributes: nil)!
         }
-        if let eulaRTF = NSBundle.mainBundle().pathForResource("EULA", ofType: "rtf") {
+        if let eulaRTF = Bundle.main.path(forResource: "EULA", ofType: "rtf") {
             appEULA = NSAttributedString(path: eulaRTF, documentAttributes: nil)!
         }
         textView.textStorage?.setAttributedString(self.appCopyright)
         scrollView.documentView = textView
     }
     
-    override func showWindow(sender: AnyObject?) {
+    override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
         self.window?.makeKeyAndOrderFront(nil)
-        NSApp.activateIgnoringOtherApps(true)
+        NSApp.activate(ignoringOtherApps: true)
     }
     
-    @IBAction func switchTextView(sender: AnyObject) {
+    @IBAction func switchTextView(_ sender: AnyObject) {
         if scrollView.documentView!.isEqual(donateView) {
             scrollView.documentView = textView
         }
@@ -110,11 +110,11 @@ class AboutWindowController: NSWindowController {
         }
     }
     
-    @IBAction func showDonate(sender: AnyObject?) {
+    @IBAction func showDonate(_ sender: AnyObject?) {
         if scrollView.documentView!.isEqual(textView) {
             scrollView.documentView = donateView
             let newScrollOrigin: NSPoint = NSMakePoint(0, NSMaxY(scrollView.documentView!.frame)-NSHeight(scrollView.contentView.bounds))
-            scrollView.documentView?.scrollPoint(newScrollOrigin)
+            scrollView.documentView?.scroll(newScrollOrigin)
         }
         if !windowState {
             var oldFrame:NSRect = self.window!.frame
@@ -126,8 +126,8 @@ class AboutWindowController: NSWindowController {
     }
     
     //Private & Delegate
-    private func valueFromInfoDict(string:String) -> String {
-        let dictionary = NSBundle.mainBundle().infoDictionary!
+    fileprivate func valueFromInfoDict(_ string:String) -> String {
+        let dictionary = Bundle.main.infoDictionary!
         let result = dictionary[string]
         if result == nil {
             return ""
@@ -137,7 +137,7 @@ class AboutWindowController: NSWindowController {
         }
     }
     
-    func windowShouldClose(sender: AnyObject) -> Bool {
+    func windowShouldClose(_ sender: AnyObject) -> Bool {
         //reset scrollview's content
         if windowState {
             var oldFrame:NSRect = self.window!.frame

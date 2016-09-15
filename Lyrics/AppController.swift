@@ -24,31 +24,31 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     var timeDlyInFile: Int = 0
     var lockFloatingWindow: Bool = false
     
-    private var isTrackingRunning: Bool = false
-    private var hasDiglossiaLrc: Bool = false
-    private var lyricsWindow: DesktopLyricsController!
-    private var menuBarLyrics: MenuBarLyrics!
-    private var statusItem: NSStatusItem!
-    private var lyricsArray: [LyricsLineModel]!
-    private var idTagsArray: [String]!
-    private var iTunes: iTunesBridge!
-    private var currentLyrics: String!
-    private var currentSongID: String!
-    private var currentSongTitle: String!
-    private var currentArtist: String!
-    private var lrcParser: LrcParser!
-    private var songList: [SongInfos]!
-    private var qianqian: QianQian!
-    private var xiami: Xiami!
-    private var ttpod: TTPod!
-    private var geciMe: GeCiMe!
-    private var qqMusic: QQMusic!
-    private var lrcSourceHandleQueue: NSOperationQueue!
-    private var userDefaults: NSUserDefaults!
-    private var timer: NSTimer!
-    
+    fileprivate var isTrackingRunning: Bool = false
+    fileprivate var hasDiglossiaLrc: Bool = false
+    fileprivate var lyricsWindow: DesktopLyricsController!
+    fileprivate var menuBarLyrics: MenuBarLyrics!
+    fileprivate var statusItem: NSStatusItem!
+    fileprivate var lyricsArray: [LyricsLineModel]!
+    fileprivate var idTagsArray: [String]!
+    fileprivate var iTunes: iTunesBridge!
+    fileprivate var currentLyrics: String!
+    fileprivate var currentSongID: String!
+    fileprivate var currentSongTitle: String!
+    fileprivate var currentArtist: String!
+    fileprivate var lrcParser: LrcParser!
+    fileprivate var songList: [SongInfos]!
+    fileprivate var qianqian: QianQian!
+    fileprivate var xiami: Xiami!
+    fileprivate var ttpod: TTPod!
+    fileprivate var geciMe: GeCiMe!
+    fileprivate var qqMusic: QQMusic!
+    fileprivate var lrcSourceHandleQueue: OperationQueue!
+    fileprivate var userDefaults: UserDefaults!
+    fileprivate var timer: Timer!
+
 // MARK: - Init & deinit
-    override private init() {
+    override fileprivate init() {
         super.init()
         iTunes = iTunesBridge()
         lrcParser = LrcParser()
@@ -60,16 +60,16 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         ttpod = TTPod()
         geciMe = GeCiMe()
         qqMusic = QQMusic()
-        userDefaults = NSUserDefaults.standardUserDefaults()
-        lrcSourceHandleQueue = NSOperationQueue()
+        userDefaults = UserDefaults.standard
+        lrcSourceHandleQueue = OperationQueue()
         lrcSourceHandleQueue.maxConcurrentOperationCount = 1
         
-        NSBundle(forClass: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
+        Bundle(for: object_getClass(self)).loadNibNamed("StatusMenu", owner: self, topLevelObjects: nil)
         
         // init desktop lyrics and menu lyrics
         lyricsWindow = DesktopLyricsController.sharedController
         lyricsWindow.showWindow(nil)
-        if userDefaults.boolForKey(LyricsMenuBarLyricsEnabled) {
+        if userDefaults.bool(forKey: LyricsMenuBarLyricsEnabled) {
             menuBarLyrics = MenuBarLyrics()
         }
         
@@ -81,15 +81,15 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     deinit {
-        NSStatusBar.systemStatusBar().removeStatusItem(statusItem)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-        NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
+        NSStatusBar.system().removeStatusItem(statusItem)
+        NotificationCenter.default.removeObserver(self)
+        DistributedNotificationCenter.default().removeObserver(self)
     }
     
-    private func setupStatusItem() {
+    fileprivate func setupStatusItem() {
         let icon:NSImage = NSImage(named: "status_icon")!
-        icon.template = true
-        statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
+        icon.isTemplate = true
+        statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
         statusItem.menu = statusBarMenu
         if #available(OSX 10.10, *) {
             statusItem.button?.image = icon
@@ -99,32 +99,32 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     
         delayMenuItem.view = lyricsDelayView
-        lyricsDelayView.autoresizingMask = [.ViewWidthSizable]
+        lyricsDelayView.autoresizingMask = [.viewWidthSizable]
     }
     
-    private func checkLrcSavingPath() {
-        if !userDefaults.boolForKey(LyricsDisableAllAlert) {
+    fileprivate func checkLrcSavingPath() {
+        if !userDefaults.bool(forKey: LyricsDisableAllAlert) {
             let savingPath: String
-            if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
-                savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+            if userDefaults.integer(forKey: LyricsSavingPathPopUpIndex) == 0 {
+                savingPath = NSSearchPathForDirectoriesInDomains(.musicDirectory, [.userDomainMask], true).first! + "/LyricsX"
             } else {
-                savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
+                savingPath = userDefaults.string(forKey: LyricsUserSavingPath)!
             }
             
-            let fm: NSFileManager = NSFileManager.defaultManager()
-            var isDir: ObjCBool = true
-            if fm.fileExistsAtPath(savingPath, isDirectory: &isDir) {
+            let fm: FileManager = FileManager.default
+            var isDir = ObjCBool(true)
+            if fm.fileExists(atPath: savingPath, isDirectory: &isDir) {
                 //歌词保存路径是非文件夹，弹出警示
-                if !isDir {
-                    userDefaults.removeObjectForKey(LyricsUserSavingPath)
-                    userDefaults.removeObjectForKey(LyricsSavingPathPopUpIndex)
+                if !isDir.boolValue {
+                    userDefaults.removeObject(forKey: LyricsUserSavingPath)
+                    userDefaults.removeObject(forKey: LyricsSavingPathPopUpIndex)
                     let alert: NSAlert = NSAlert()
                     alert.messageText = NSLocalizedString("ERROR_OCCUR", comment: "")
                     alert.informativeText = NSLocalizedString("PATH_IS_NOT_DIR", comment: "")
-                    alert.addButtonWithTitle(NSLocalizedString("OPEN_PREFS", comment: ""))
+                    alert.addButton(withTitle: NSLocalizedString("OPEN_PREFS", comment: ""))
                     let response: NSModalResponse = alert.runModal()
                     if response == NSAlertFirstButtonReturn {
-                        dispatch_async(dispatch_get_main_queue(), {
+                        DispatchQueue.main.async(execute: {
                             self.showPreferences(nil)
                         })
                     }
@@ -132,7 +132,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             } else {
                 //歌词保存路径没有文件夹，创建一个
                 do {
-                    try fm.createDirectoryAtPath(savingPath, withIntermediateDirectories: true, attributes: nil)
+                    try fm.createDirectory(atPath: savingPath, withIntermediateDirectories: true, attributes: nil)
                 } catch let theError as NSError{
                     NSLog("%@", theError.localizedDescription)
                 }
@@ -140,18 +140,18 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
-    private func addNotificationObserver() {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: #selector(lrcLoadingCompleted(_:)), name: LrcLoadedNotification, object: nil)
-        nc.addObserver(self, selector: #selector(handleUserEditLyrics(_:)), name: LyricsUserEditLyricsNotification, object: nil)
-        nc.addObserver(self, selector: #selector(handlePresetDidChanged), name: LyricsPresetDidChangedNotification, object: nil)
+    fileprivate func addNotificationObserver() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(lrcLoadingCompleted(_:)), name: NSNotification.Name.LrcLoaded, object: nil)
+        nc.addObserver(self, selector: #selector(handleUserEditLyrics(_:)), name: NSNotification.Name(rawValue: LyricsUserEditLyricsNotification), object: nil)
+        nc.addObserver(self, selector: #selector(handlePresetDidChanged), name: NSNotification.Name(rawValue: LyricsPresetDidChangedNotification), object: nil)
         
-        let ndc = NSDistributedNotificationCenter.defaultCenter()
-        ndc.addObserver(self, selector: #selector(iTunesPlayerInfoChanged(_:)), name: "com.apple.iTunes.playerInfo", object: nil)
-        ndc.addObserver(self, selector: #selector(handleExtenalLyricsEvent(_:)), name: "ExtenalLyricsEvent", object: nil)
+        let ndc = DistributedNotificationCenter.default()
+        ndc.addObserver(self, selector: #selector(iTunesPlayerInfoChanged(_:)), name: NSNotification.Name(rawValue: "com.apple.iTunes.playerInfo"), object: nil)
+        ndc.addObserver(self, selector: #selector(handleExtenalLyricsEvent(_:)), name: NSNotification.Name(rawValue: "ExtenalLyricsEvent"), object: nil)
     }
     
-    private func trackingStatusInitiation() {
+    fileprivate func trackingStatusInitiation() {
         currentLyrics = "LyricsX"
         if iTunes.running() && iTunes.playing() {
             currentSongID = iTunes.currentPersistentID()
@@ -166,13 +166,13 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 iTunes.play()
             }
             else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+                DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { () -> Void in
                     self.handleSongChange()
                 }
                 
                 NSLog("Create new iTunesTrackingThead")
                 isTrackingRunning = true
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+                DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { () -> Void in
                     self.iTunesTrackingThread()
                 }
             }
@@ -186,90 +186,90 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
 // MARK: - Shortcut Events
     
-    private func setupShortcuts() {
+    fileprivate func setupShortcuts() {
         // Default shortcuts
-        let offsetIncr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Equal), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
-        let offsetDecr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Minus), modifierFlags: NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.AlternateKeyMask.rawValue)
+        let offsetIncr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Equal), modifierFlags: NSEventModifierFlags.command.rawValue | NSEventModifierFlags.option.rawValue)
+        let offsetDecr: MASShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_Minus), modifierFlags: NSEventModifierFlags.command.rawValue | NSEventModifierFlags.option.rawValue)
         let defaultShortcuts = [ShortcutOffsetIncr : offsetIncr,
                                 ShortcutOffsetDecr : offsetDecr]
-        MASShortcutBinder.sharedBinder().registerDefaultShortcuts(defaultShortcuts)
+        MASShortcutBinder.shared().registerDefaultShortcuts(defaultShortcuts)
         
         //Bind actions to User Default keys
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOffsetIncr) {
+        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: ShortcutOffsetIncr) {
             self.increaseTimeDly()
         }
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOffsetDecr) {
+        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: ShortcutOffsetDecr) {
             self.decreaseTimeDly()
         }
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutLyricsModeSwitch) { () -> Void in
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setBool(!userDefaults.boolForKey(LyricsIsVerticalLyrics), forKey: LyricsIsVerticalLyrics)
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: ShortcutLyricsModeSwitch) { () -> Void in
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(!userDefaults.bool(forKey: LyricsIsVerticalLyrics), forKey: LyricsIsVerticalLyrics)
+            DispatchQueue.main.async(execute: { () -> Void in
                 DesktopLyricsController.sharedController.reflash()
             })
         }
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutDesktopMenubarSwitch) { () -> Void in
+        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: ShortcutDesktopMenubarSwitch) { () -> Void in
             self.switchDesktopMenuBarMode()
         }
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutOpenLrcSeeker) { () -> Void in
+        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: ShortcutOpenLrcSeeker) { () -> Void in
             self.searchLyricsAndArtworks(nil)
         }
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutCopyLrcToPb) { () -> Void in
+        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: ShortcutCopyLrcToPb) { () -> Void in
             self.copyLyricsToPb(nil)
         }
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutEditLrc) { () -> Void in
+        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: ShortcutEditLrc) { () -> Void in
             self.editLyrics(nil)
         }
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutMakeLrc) { () -> Void in
+        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: ShortcutMakeLrc) { () -> Void in
             self.makeLrc(nil)
         }
-        MASShortcutBinder.sharedBinder().bindShortcutWithDefaultsKey(ShortcutWriteLrcToiTunes) { () -> Void in
+        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: ShortcutWriteLrcToiTunes) { () -> Void in
             self.writeLyricsToiTunes(nil)
         }
     }
     
-    private func increaseTimeDly() {
-        self.willChangeValueForKey("timeDly")
+    fileprivate func increaseTimeDly() {
+        self.willChangeValue(forKey: "timeDly")
         timeDly += 100
         if timeDly > 10000 {
             timeDly = 10000
         }
-        self.didChangeValueForKey("timeDly")
+        self.didChangeValue(forKey: "timeDly")
         let message: String = String(format: NSLocalizedString("OFFSET", comment: ""), timeDly)
         MessageWindowController.sharedMsgWindow.displayMessage(message)
     }
     
-    private func decreaseTimeDly() {
-        self.willChangeValueForKey("timeDly")
+    fileprivate func decreaseTimeDly() {
+        self.willChangeValue(forKey: "timeDly")
         timeDly -= 100
         if timeDly < -10000 {
             timeDly = -10000
         }
-        self.didChangeValueForKey("timeDly")
+        self.didChangeValue(forKey: "timeDly")
         let message: String = String(format: NSLocalizedString("OFFSET", comment: ""), timeDly)
         MessageWindowController.sharedMsgWindow.displayMessage(message)
     }
     
-    private func switchDesktopMenuBarMode() {
-        let isDesktopLyricsOn = userDefaults.boolForKey(LyricsDesktopLyricsEnabled)
-        let isMenuBarLyricsOn = userDefaults.boolForKey(LyricsMenuBarLyricsEnabled)
+    fileprivate func switchDesktopMenuBarMode() {
+        let isDesktopLyricsOn = userDefaults.bool(forKey: LyricsDesktopLyricsEnabled)
+        let isMenuBarLyricsOn = userDefaults.bool(forKey: LyricsMenuBarLyricsEnabled)
         if isDesktopLyricsOn && isMenuBarLyricsOn {
-            userDefaults.setBool(false, forKey: LyricsMenuBarLyricsEnabled)
+            userDefaults.set(false, forKey: LyricsMenuBarLyricsEnabled)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("DESKTOP_ON", comment: ""))
             menuBarLyrics = nil
         }
         else if isDesktopLyricsOn && !isMenuBarLyricsOn {
-            userDefaults.setBool(false, forKey: LyricsDesktopLyricsEnabled)
-            userDefaults.setBool(true, forKey: LyricsMenuBarLyricsEnabled)
+            userDefaults.set(false, forKey: LyricsDesktopLyricsEnabled)
+            userDefaults.set(true, forKey: LyricsMenuBarLyricsEnabled)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("MENU_BAR_ON", comment: ""))
             menuBarLyrics = MenuBarLyrics()
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                 self.menuBarLyrics.displayLyrics(self.currentLyrics)
             })
         }
         else {
-            userDefaults.setBool(true, forKey: LyricsDesktopLyricsEnabled)
+            userDefaults.set(true, forKey: LyricsDesktopLyricsEnabled)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("BOTH_ON", comment: ""))
             // Force update both
             currentLyrics = nil
@@ -278,7 +278,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
 // MARK: - Interface Methods
     
-    @IBAction func handleWorkSpaceChange(sender:AnyObject?) {
+    @IBAction func handleWorkSpaceChange(_ sender:AnyObject?) {
         //before finding the way to detect full screen, user should adjust lyrics by self
         lyricsWindow.isFullScreen = !lyricsWindow.isFullScreen
         if lyricsWindow.isFullScreen {
@@ -286,14 +286,14 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         } else {
             lyricsHeightMenuItem.title = NSLocalizedString("LOWER_LYRICS", comment: "")
         }
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             self.lyricsWindow.reflash()
         }
     }
     
-    @IBAction func enableDesktopLyrics(sender:AnyObject?) {
+    @IBAction func enableDesktopLyrics(_ sender:AnyObject?) {
         if (sender as! NSMenuItem).state == NSOnState {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
             })
         } else {
@@ -302,48 +302,48 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
-    @IBAction func enableMenuBarLyrics(sender:AnyObject?) {
+    @IBAction func enableMenuBarLyrics(_ sender:AnyObject?) {
         if (sender as! NSMenuItem).state == NSOnState {
             menuBarLyrics = nil
         } else {
             menuBarLyrics = MenuBarLyrics()
-            dispatch_async(dispatch_get_main_queue(), { 
+            DispatchQueue.main.async(execute: { 
                 self.menuBarLyrics.displayLyrics(self.currentLyrics)
             })
         }
     }
     
-    @IBAction func changeLyricsMode(sender:AnyObject?) {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+    @IBAction func changeLyricsMode(_ sender:AnyObject?) {
+        DispatchQueue.main.async { () -> Void in
             self.lyricsWindow.reflash()
         }
     }
     
-    @IBAction func showAboutWindow(sender: AnyObject?) {
+    @IBAction func showAboutWindow(_ sender: AnyObject?) {
         AboutWindowController.sharedController.showWindow(nil)
     }
     
-    @IBAction func showDonate(sender: AnyObject?) {
+    @IBAction func showDonate(_ sender: AnyObject?) {
         let windowController = AboutWindowController.sharedController
         windowController.showWindow(nil)
         windowController.showDonate(nil)
     }
     
-    @IBAction func showPreferences(sender:AnyObject?) {
+    @IBAction func showPreferences(_ sender:AnyObject?) {
         let prefs = AppPrefsWindowController.sharedPrefsWindowController
-        if !(prefs.window?.visible)! {
+        if !(prefs.window?.isVisible)! {
             prefs.showWindow(nil)
         }
         prefs.window?.makeKeyAndOrderFront(nil)
-        NSApp.activateIgnoringOtherApps(true)
+        NSApp.activate(ignoringOtherApps: true)
     }
     
-    @IBAction func checkForUpdate(sender: AnyObject) {
-        NSWorkspace.sharedWorkspace().openURL(NSURL(string: "https://github.com/MichaelRow/Lyrics/releases")!)
+    @IBAction func checkForUpdate(_ sender: AnyObject) {
+        NSWorkspace.shared().open(URL(string: "https://github.com/MichaelRow/Lyrics/releases")!)
     }
     
-    @IBAction func exportArtwork(sender: AnyObject) {
-        let artworkData: NSData? = iTunes.artwork()
+    @IBAction func exportArtwork(_ sender: AnyObject) {
+        let artworkData: Data? = iTunes.artwork()
         if artworkData == nil {
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("NO_ARTWORK", comment: ""))
             return
@@ -351,18 +351,18 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         let panel = NSSavePanel()
         panel.allowedFileTypes = ["png",  "jpg", "jpf", "bmp", "gif", "tiff"]
         panel.nameFieldStringValue = currentSongTitle + " - " + currentArtist
-        panel.extensionHidden = true
+        panel.isExtensionHidden = true
         if panel.runModal() == NSFileHandlingPanelOKButton {
-            artworkData!.writeToURL(panel.URL!, atomically: false)
+            try? artworkData!.write(to: panel.url!, options: [])
         }
     }
     
-    @IBAction func searchLyricsAndArtworks(sender: AnyObject?) {
-        let appPath = NSBundle.mainBundle().bundlePath + "/Contents/Library/LrcSeeker.app"
-        NSWorkspace.sharedWorkspace().launchApplication(appPath)
+    @IBAction func searchLyricsAndArtworks(_ sender: AnyObject?) {
+        let appPath = Bundle.main.bundlePath + "/Contents/Library/LrcSeeker.app"
+        NSWorkspace.shared().launchApplication(appPath)
     }
     
-    @IBAction func copyLyricsToPb(sender: AnyObject?) {
+    @IBAction func copyLyricsToPb(_ sender: AnyObject?) {
         if lyricsArray.count == 0 {
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
             return
@@ -370,7 +370,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         var theLyrics: String = String()
         var hasSpace: Bool = false
         for lrc in lyricsArray {
-            if lrc.lyricsSentence.stringByReplacingOccurrencesOfString(" ", withString: "") == "" {
+            if lrc.lyricsSentence.replacingOccurrences(of: " ", with: "") == "" {
                 if hasSpace {
                     continue
                 }
@@ -382,80 +382,80 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 hasSpace = false
             }
             if lrc.enabled {
-                theLyrics.appendContentsOf(lrc.lyricsSentence + "\n")
+                theLyrics.append(lrc.lyricsSentence + "\n")
             }
         }
-        let pb = NSPasteboard.generalPasteboard()
+        let pb = NSPasteboard.general()
         pb.clearContents()
-        pb.writeObjects([theLyrics])
+        pb.writeObjects([theLyrics as NSPasteboardWriting])
         MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("COPYED_TO_PB", comment: ""))
     }
     
-    @IBAction func copyLyricsWithTagsToPb(sender: AnyObject) {
+    @IBAction func copyLyricsWithTagsToPb(_ sender: AnyObject) {
         let lrcContents = readLocalLyrics(currentSongTitle, theArtist: currentArtist)
         if lrcContents != nil && lrcContents != "" {
-            let pb = NSPasteboard.generalPasteboard()
+            let pb = NSPasteboard.general()
             pb.clearContents()
-            pb.writeObjects([lrcContents!])
+            pb.writeObjects([lrcContents! as NSPasteboardWriting])
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("COPYED_TO_PB", comment: ""))
         } else {
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
         }
     }
     
-    @IBAction func makeLrc(sender: AnyObject?) {
-        let appPath = NSBundle.mainBundle().bundlePath + "/Contents/Library/LrcMaker.app"
-        NSWorkspace.sharedWorkspace().launchApplication(appPath)
+    @IBAction func makeLrc(_ sender: AnyObject?) {
+        let appPath = Bundle.main.bundlePath + "/Contents/Library/LrcMaker.app"
+        NSWorkspace.shared().launchApplication(appPath)
     }
     
-    @IBAction func mergeLrc(sender: AnyObject) {
-        let appPath = NSBundle.mainBundle().bundlePath + "/Contents/Library/LrcMerger.app"
-        NSWorkspace.sharedWorkspace().launchApplication(appPath)
+    @IBAction func mergeLrc(_ sender: AnyObject) {
+        let appPath = Bundle.main.bundlePath + "/Contents/Library/LrcMerger.app"
+        NSWorkspace.shared().launchApplication(appPath)
     }
     
-    @IBAction func editLyrics(sender: AnyObject?) {
+    @IBAction func editLyrics(_ sender: AnyObject?) {
         var lrcContents = readLocalLyrics(currentSongTitle, theArtist: currentArtist)
         if lrcContents == nil {
             lrcContents = ""
         }
         let windowController = LyricsEditWindowController.sharedController
         windowController.setLyricsContents(lrcContents!, songID: currentSongID, songTitle: currentSongTitle, andArtist: currentArtist)
-        if !windowController.window!.visible {
+        if !windowController.window!.isVisible {
             windowController.showWindow(nil)
         }
         windowController.window!.makeKeyAndOrderFront(nil)
-        NSApp.activateIgnoringOtherApps(true)
+        NSApp.activate(ignoringOtherApps: true)
     }
     
-    @IBAction func importLrcFile(sender: AnyObject) {
+    @IBAction func importLrcFile(_ sender: AnyObject) {
         let songTitle: String = currentSongTitle
         let artist: String = currentArtist
         let songID: String = currentSongID
         let panel: NSOpenPanel = NSOpenPanel()
         panel.allowedFileTypes = ["lrc", "txt"]
-        panel.extensionHidden = false
+        panel.isExtensionHidden = false
         if panel.runModal() == NSFileHandlingPanelOKButton {
             let lrcContents: String!
             do {
-                lrcContents = try String(contentsOfURL: panel.URL!, encoding: NSUTF8StringEncoding)
+                lrcContents = try String(contentsOf: panel.url!, encoding: String.Encoding.utf8)
 
             } catch let theError as NSError {
                 lrcContents = nil
                 NSLog("%@", theError.localizedDescription)
                 
                 // Error must be the text encoding thing.
-                if !userDefaults.boolForKey(LyricsDisableAllAlert) {
+                if !userDefaults.bool(forKey: LyricsDisableAllAlert) {
                     let alert: NSAlert = NSAlert()
                     alert.messageText = NSLocalizedString("UNSUPPORTED_ENCODING", comment: "")
                     alert.informativeText = NSLocalizedString("ONLY_UTF8", comment: "")
-                    alert.addButtonWithTitle(NSLocalizedString("OK", comment: ""))
+                    alert.addButton(withTitle: NSLocalizedString("OK", comment: ""))
                     alert.runModal()
                 }
                 return
             }
             if lrcContents != nil && lrcParser.testLrc(lrcContents) {
                 lrcSourceHandleQueue.cancelAllOperations()
-                lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
+                lrcSourceHandleQueue.addOperation({ () -> Void in
                     //make the current lrc the better one so that it can't be replaced.
                     if songID == self.currentSongID {
                         self.parseCurrentLrc(lrcContents)
@@ -467,61 +467,61 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
-    @IBAction func exportLrcFile(sender: AnyObject) {
+    @IBAction func exportLrcFile(_ sender: AnyObject) {
         let savingPath: String
-        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
-            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+        if userDefaults.integer(forKey: LyricsSavingPathPopUpIndex) == 0 {
+            savingPath = NSSearchPathForDirectoriesInDomains(.musicDirectory, [.userDomainMask], true).first! + "/LyricsX"
         } else {
-            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
+            savingPath = userDefaults.string(forKey: LyricsUserSavingPath)!
         }
-        let songTitle:String = currentSongTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let artist:String = currentArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let lrcFilePath = (savingPath as NSString).stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
+        let songTitle:String = currentSongTitle.replacingOccurrences(of: "/", with: "&")
+        let artist:String = currentArtist.replacingOccurrences(of: "/", with: "&")
+        let lrcFilePath = (savingPath as NSString).appendingPathComponent("\(songTitle) - \(artist).lrc")
         
         let panel: NSSavePanel = NSSavePanel()
         panel.allowedFileTypes = ["lrc","txt"]
         panel.nameFieldStringValue = (lrcFilePath as NSString).lastPathComponent
-        panel.extensionHidden = false
+        panel.isExtensionHidden = false
         
         if panel.runModal() == NSFileHandlingPanelOKButton {
-            let fm = NSFileManager.defaultManager()
-            if fm.fileExistsAtPath(panel.URL!.path!) {
+            let fm = FileManager.default
+            if fm.fileExists(atPath: panel.url!.path) {
                 do {
-                    try fm.removeItemAtURL(panel.URL!)
+                    try fm.removeItem(at: panel.url!)
                 } catch let theError as NSError {
                     NSLog("%@", theError.localizedDescription)
                 }
             }
             do {
-                try fm.copyItemAtPath(lrcFilePath, toPath: panel.URL!.path!)
+                try fm.copyItem(atPath: lrcFilePath, toPath: panel.url!.path)
             } catch let theError as NSError {
                 NSLog("%@", theError.localizedDescription)
             }
         }
     }
     
-    @IBAction func writeLyricsToiTunes(sender: AnyObject?) {
+    @IBAction func writeLyricsToiTunes(_ sender: AnyObject?) {
         if lyricsArray.count == 0 {
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
             return
         } else {
             var theLyrics: String = String()
             for lrc in lyricsArray {
-                theLyrics.appendContentsOf(lrc.lyricsSentence + "\n")
+                theLyrics.append(lrc.lyricsSentence + "\n")
             }
             iTunes.setLyrics(theLyrics)
             MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
         }
     }
     
-    @IBAction func writeAllLyricsToiTunes(sender: AnyObject?) {
+    @IBAction func writeAllLyricsToiTunes(_ sender: AnyObject?) {
         let skip: Bool
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("OVERRIDE_OR_SKIP", comment: "")
         alert.informativeText = NSLocalizedString("OVERRIDE_OR_SKIP_INTRO", comment: "")
-        alert.addButtonWithTitle(NSLocalizedString("SKIP", comment: ""))
-        alert.addButtonWithTitle(NSLocalizedString("OVERRIDE", comment: ""))
-        alert.addButtonWithTitle(NSLocalizedString("CANCEL", comment: ""))
+        alert.addButton(withTitle: NSLocalizedString("SKIP", comment: ""))
+        alert.addButton(withTitle: NSLocalizedString("OVERRIDE", comment: ""))
+        alert.addButton(withTitle: NSLocalizedString("CANCEL", comment: ""))
         switch alert.runModal() {
         case NSAlertFirstButtonReturn:
             skip = true
@@ -531,30 +531,30 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             return
         }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) { () -> Void in
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.low).async { () -> Void in
             if self.iTunes.setAllLyrics(skip) {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("WROTE_TO_ITUNES", comment: ""))
                 })
             }
             else {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     MessageWindowController.sharedMsgWindow.displayMessage(NSLocalizedString("OPERATION_FAILED", comment: ""))
                 })
             }
         }
     }
     
-    @IBAction func wrongLyrics(sender: AnyObject) {
+    @IBAction func wrongLyrics(_ sender: AnyObject) {
         let songID = currentSongID
         let songTitle = currentSongTitle
         let artist = currentArtist
-        if !userDefaults.boolForKey(LyricsDisableAllAlert) {
+        if !userDefaults.bool(forKey: LyricsDisableAllAlert) {
             let alert: NSAlert = NSAlert()
             alert.messageText = NSLocalizedString("CONFIRM_MARK_WRONG", comment: "")
             alert.informativeText = NSLocalizedString("CANT_UNDONE", comment: "")
-            alert.addButtonWithTitle(NSLocalizedString("CANCEL", comment: ""))
-            alert.addButtonWithTitle(NSLocalizedString("MARK", comment: ""))
+            alert.addButton(withTitle: NSLocalizedString("CANCEL", comment: ""))
+            alert.addButton(withTitle: NSLocalizedString("MARK", comment: ""))
             let response: NSModalResponse = alert.runModal()
             if response == NSAlertFirstButtonReturn {
                 return
@@ -564,43 +564,43 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         if songID == currentSongID {
             lyricsArray.removeAll()
             currentLyrics = nil
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            DispatchQueue.main.async { () -> Void in
                 self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
             }
         }
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
-            self.saveLrcToLocal(wrongLyricsTag, songTitle: songTitle, artist: artist)
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { 
+            self.saveLrcToLocal(wrongLyricsTag, songTitle: songTitle!, artist: artist!)
         }
     }
 
-    @IBAction func setAutoLayout(sender: AnyObject?) {
+    @IBAction func setAutoLayout(_ sender: AnyObject?) {
         //Action triggers before NSUserDefaults, so, delay 0.1s 
-        if !userDefaults.boolForKey(LyricsUseAutoLayout) {
+        if !userDefaults.bool(forKey: LyricsUseAutoLayout) {
             lyricsWindow.storeWindowSize()
         }
-        lyricsWindow.performSelector(#selector(DesktopLyricsController.checkAutoLayout), withObject: nil, afterDelay: 0.1)
+        lyricsWindow.perform(#selector(DesktopLyricsController.checkAutoLayout), with: nil, afterDelay: 0.1)
     }
     
-    @IBAction func lockLyricsFloatingWindow(sender: AnyObject?) {
+    @IBAction func lockLyricsFloatingWindow(_ sender: AnyObject?) {
         lockFloatingWindow = !lockFloatingWindow
         lyricsWindow.window?.ignoresMouseEvents = lockFloatingWindow
     }
     
-    func setPresetByMenu(sender: AnyObject?) {
+    func setPresetByMenu(_ sender: AnyObject?) {
         if sender is NSMenuItem {
-            let index: Int = presetMenuItem.submenu!.indexOfItem(sender as! NSMenuItem)
+            let index: Int = presetMenuItem.submenu!.index(of: sender as! NSMenuItem)
             if index == -1 {
                 return
             }
             let prefs = AppPrefsWindowController.sharedPrefsWindowController
-            prefs.presetListView.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
+            prefs.presetListView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
             prefs.applyPreset(nil)
         }
     }
     
 // MARK: - iTunes Events
     
-    private func iTunesTrackingThread() {
+    fileprivate func iTunesTrackingThread() {
         // side node: iTunes update playerPosition once per second.
         var iTunesPosition: Int = 0
         var currentPosition: Int = 0
@@ -611,16 +611,16 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 if (currentPosition < iTunesPosition) || ((currentPosition / 1000) != (iTunesPosition / 1000) && currentPosition % 1000 < 850) {
                     currentPosition = iTunesPosition
                 }
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: { () -> Void in
                     self.handlePositionChange(iTunesPosition)
                 })
             }
-            NSThread.sleepForTimeInterval(0.15)
+            Thread.sleep(forTimeInterval: 0.15)
             currentPosition += 150
         }
-        if userDefaults.boolForKey(LyricsDisabledWhenPaused) {
+        if userDefaults.bool(forKey: LyricsDisabledWhenPaused) {
             self.currentLyrics = nil
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                 if self.menuBarLyrics != nil {
                     self.menuBarLyrics.displayLyrics(nil)
@@ -632,21 +632,21 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     }
     
     
-    func iTunesPlayerInfoChanged (n:NSNotification) {
-        let userInfo = n.userInfo
+    func iTunesPlayerInfoChanged (_ n:Notification) {
+        let userInfo = (n as NSNotification).userInfo
         if userInfo == nil {
             return
         }
         else {
             if userInfo!["Player State"] as! String == "Paused" {
                 NSLog("iTunes Paused")
-                if userDefaults.boolForKey(LyricsQuitWithITunes) {
+                if userDefaults.bool(forKey: LyricsQuitWithITunes) {
                     // iTunes would paused before it quitted, so we should check whether iTunes is running
                     // seconds later when playing or paused.
                     if timer != nil {
                         timer.invalidate()
                     }
-                    timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(terminate), userInfo: nil, repeats: false)
+                    timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(terminate), userInfo: nil, repeats: false)
                 }
                 return
             }
@@ -655,7 +655,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 if !isTrackingRunning {
                     NSLog("Create new iTunesTrackingThead")
                     isTrackingRunning = true
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+                    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { () -> Void in
                         self.iTunesTrackingThread()
                     }
                 }
@@ -669,7 +669,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 if timer != nil {
                     timer.invalidate()
                 }
-                timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(terminate), userInfo: nil, repeats: false)
+                timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(terminate), userInfo: nil, repeats: false)
                 return
             }
             
@@ -717,7 +717,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 currentArtist = artist
                 if currentSongID != "" {
                     NSLog("Song Changed to: %@",currentSongTitle)
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: { () -> Void in
                         self.handleSongChange()
                     })
                 } else {
@@ -729,14 +729,14 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
 
 // MARK: - Lrc Methods
     
-    private func parseCurrentLrc(lrcContents: String) {
+    fileprivate func parseCurrentLrc(_ lrcContents: String) {
         lyricsArray.removeAll()
         idTagsArray.removeAll()
         let lrcToParse: String
         
         // whether convert Chinese type
-        if userDefaults.boolForKey(LyricsAutoConvertChinese) {
-            switch userDefaults.integerForKey(LyricsChineseTypeIndex) {
+        if userDefaults.bool(forKey: LyricsAutoConvertChinese) {
+            switch userDefaults.integer(forKey: LyricsChineseTypeIndex) {
             case 0:
                 lrcToParse = convertToSC(lrcContents)
             case 1:
@@ -753,7 +753,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             lrcToParse = lrcContents
         }
         
-        if userDefaults.boolForKey(LyricsEnableFilter) {
+        if userDefaults.bool(forKey: LyricsEnableFilter) {
             lrcParser.parseWithFilter(lrcToParse, iTunesTitle: currentSongTitle, iTunesAlbum: iTunes.currentAlbum())
         }
         else {
@@ -766,62 +766,62 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         lrcParser.cleanCache()
     }
 
-    private func saveLrcToLocal (lyricsContents: String, songTitle: String, artist: String) {
+    fileprivate func saveLrcToLocal (_ lyricsContents: String, songTitle: String, artist: String) {
         let savingPath: String
-        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
-            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+        if userDefaults.integer(forKey: LyricsSavingPathPopUpIndex) == 0 {
+            savingPath = NSSearchPathForDirectoriesInDomains(.musicDirectory, [.userDomainMask], true).first! + "/LyricsX"
         } else {
-            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
+            savingPath = userDefaults.string(forKey: LyricsUserSavingPath)!
         }
-        let fm: NSFileManager = NSFileManager.defaultManager()
+        let fm: FileManager = FileManager.default
         
-        var isDir: ObjCBool = false
-        if fm.fileExistsAtPath(savingPath, isDirectory: &isDir) {
-            if !isDir {
+        var isDir = ObjCBool(false)
+        if fm.fileExists(atPath: savingPath, isDirectory: &isDir) {
+            if !isDir.boolValue {
                 return
             }
         } else {
             do {
-                try fm.createDirectoryAtPath(savingPath, withIntermediateDirectories: true, attributes: nil)
+                try fm.createDirectory(atPath: savingPath, withIntermediateDirectories: true, attributes: nil)
             } catch let theError as NSError{
                 NSLog("%@", theError.localizedDescription)
                 return
             }
         }
         
-        let titleForSaving = songTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let artistForSaving = artist.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let lrcFilePath = (savingPath as NSString).stringByAppendingPathComponent("\(titleForSaving) - \(artistForSaving).lrc")
+        let titleForSaving = songTitle.replacingOccurrences(of: "/", with: "&")
+        let artistForSaving = artist.replacingOccurrences(of: "/", with: "&")
+        let lrcFilePath = (savingPath as NSString).appendingPathComponent("\(titleForSaving) - \(artistForSaving).lrc")
         
-        if fm.fileExistsAtPath(lrcFilePath) {
+        if fm.fileExists(atPath: lrcFilePath) {
             do {
-                try fm.removeItemAtPath(lrcFilePath)
+                try fm.removeItem(atPath: lrcFilePath)
             } catch let theError as NSError {
                 NSLog("%@", theError.localizedDescription)
                 return
             }
         }
         do {
-            try lyricsContents.writeToFile(lrcFilePath, atomically: false, encoding: NSUTF8StringEncoding)
+            try lyricsContents.write(toFile: lrcFilePath, atomically: false, encoding: String.Encoding.utf8)
         } catch let theError as NSError {
             NSLog("%@", theError.localizedDescription)
         }
     }
     
-    func readLocalLyrics(theTitle: String, theArtist: String) -> String? {
+    func readLocalLyrics(_ theTitle: String, theArtist: String) -> String? {
         let savingPath: String
-        if userDefaults.integerForKey(LyricsSavingPathPopUpIndex) == 0 {
-            savingPath = NSSearchPathForDirectoriesInDomains(.MusicDirectory, [.UserDomainMask], true).first! + "/LyricsX"
+        if userDefaults.integer(forKey: LyricsSavingPathPopUpIndex) == 0 {
+            savingPath = NSSearchPathForDirectoriesInDomains(.musicDirectory, [.userDomainMask], true).first! + "/LyricsX"
         } else {
-            savingPath = userDefaults.stringForKey(LyricsUserSavingPath)!
+            savingPath = userDefaults.string(forKey: LyricsUserSavingPath)!
         }
-        let songTitle: String = theTitle.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let artist: String = theArtist.stringByReplacingOccurrencesOfString("/", withString: "&")
-        let lrcFilePath = (savingPath as NSString).stringByAppendingPathComponent("\(songTitle) - \(artist).lrc")
-        if  NSFileManager.defaultManager().fileExistsAtPath(lrcFilePath) {
+        let songTitle: String = theTitle.replacingOccurrences(of: "/", with: "&")
+        let artist: String = theArtist.replacingOccurrences(of: "/", with: "&")
+        let lrcFilePath = (savingPath as NSString).appendingPathComponent("\(songTitle) - \(artist).lrc")
+        if  FileManager.default.fileExists(atPath: lrcFilePath) {
             let lrcContents: String?
             do {
-                lrcContents = try String(contentsOfFile: lrcFilePath, encoding: NSUTF8StringEncoding)
+                lrcContents = try String(contentsOfFile: lrcFilePath, encoding: String.Encoding.utf8)
             } catch {
                 lrcContents = nil
                 NSLog("Failed to load lrc")
@@ -834,23 +834,23 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
 
 // MARK: - Handle Events
     
-    func handlePositionChange (playerPosition: Int) {
+    func handlePositionChange (_ playerPosition: Int) {
         let tempLyricsArray = lyricsArray
         var index: Int = 0
         //1.Find the first lyrics which time position is larger than current position, and its index is "index"
         //2.The index of first-line-lyrics which needs to display is "index - 1"
-        while index < tempLyricsArray.count {
-            if playerPosition < tempLyricsArray[index].msecPosition - timeDly {
+        while index < (tempLyricsArray?.count)! {
+            if playerPosition < (tempLyricsArray?[index].msecPosition)! - timeDly {
                 if index == 0 {
                     if currentLyrics != nil {
                         currentLyrics = nil
-                        if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
-                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if userDefaults.bool(forKey: LyricsDesktopLyricsEnabled) {
+                            DispatchQueue.main.async(execute: { () -> Void in
                                 self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                             })
                         }
                         if menuBarLyrics != nil {
-                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            DispatchQueue.main.async(execute: { () -> Void in
                                 self.menuBarLyrics.displayLyrics(nil)
                             })
                         }
@@ -858,36 +858,36 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                     return
                 }
                 else {
-                    if !tempLyricsArray[index-1].enabled {
+                    if !(tempLyricsArray?[index-1].enabled)! {
                         if currentLyrics != nil {
                             currentLyrics = nil
-                            if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            if userDefaults.bool(forKey: LyricsDesktopLyricsEnabled) {
+                                DispatchQueue.main.async(execute: { () -> Void in
                                     self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                                 })
                             }
                             if menuBarLyrics != nil {
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                DispatchQueue.main.async(execute: { () -> Void in
                                     self.menuBarLyrics.displayLyrics(nil)
                                 })
                             }
                         }
                     }
-                    else if currentLyrics != tempLyricsArray[index-1].lyricsSentence {
+                    else if currentLyrics != tempLyricsArray?[index-1].lyricsSentence {
                         var secondLyrics: String!
-                        currentLyrics = tempLyricsArray[index-1].lyricsSentence
-                        if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
-                            if userDefaults.boolForKey(LyricsTwoLineMode) && userDefaults.integerForKey(LyricsTwoLineModeIndex)==0 && index < tempLyricsArray.count {
-                                if tempLyricsArray[index].lyricsSentence != "" {
-                                    secondLyrics = tempLyricsArray[index].lyricsSentence
+                        currentLyrics = tempLyricsArray?[index-1].lyricsSentence
+                        if userDefaults.bool(forKey: LyricsDesktopLyricsEnabled) {
+                            if userDefaults.bool(forKey: LyricsTwoLineMode) && userDefaults.integer(forKey: LyricsTwoLineModeIndex)==0 && index < (tempLyricsArray?.count)! {
+                                if tempLyricsArray?[index].lyricsSentence != "" {
+                                    secondLyrics = tempLyricsArray?[index].lyricsSentence
                                 }
                             }
-                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            DispatchQueue.main.async(execute: { () -> Void in
                                 self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: secondLyrics)
                             })
                         }
                         if menuBarLyrics != nil {
-                            dispatch_async(dispatch_get_main_queue(), { 
+                            DispatchQueue.main.async(execute: { 
                                 self.menuBarLyrics.displayLyrics(self.currentLyrics)
                             })
                         }
@@ -897,31 +897,31 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             }
             index += 1
         }
-        if index == tempLyricsArray.count && tempLyricsArray.count>0 {
-            if !tempLyricsArray[tempLyricsArray.count - 1].enabled {
+        if index == (tempLyricsArray?.count)! && (tempLyricsArray?.count)!>0 {
+            if !(tempLyricsArray?[(tempLyricsArray?.count)! - 1].enabled)! {
                 if currentLyrics != nil {
                     currentLyrics = nil
-                    if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    if userDefaults.bool(forKey: LyricsDesktopLyricsEnabled) {
+                        DispatchQueue.main.async(execute: { () -> Void in
                             self.lyricsWindow.displayLyrics(nil, secondLyrics: nil)
                         })
                     }
                     if menuBarLyrics != nil {
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        DispatchQueue.main.async(execute: { () -> Void in
                             self.menuBarLyrics.displayLyrics(nil)
                         })
                     }
                 }
             }
-            else if currentLyrics != tempLyricsArray[tempLyricsArray.count - 1].lyricsSentence {
-                currentLyrics = tempLyricsArray[tempLyricsArray.count - 1].lyricsSentence
-                if userDefaults.boolForKey(LyricsDesktopLyricsEnabled) {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            else if currentLyrics != tempLyricsArray?[(tempLyricsArray?.count)! - 1].lyricsSentence {
+                currentLyrics = tempLyricsArray?[(tempLyricsArray?.count)! - 1].lyricsSentence
+                if userDefaults.bool(forKey: LyricsDesktopLyricsEnabled) {
+                    DispatchQueue.main.async(execute: { () -> Void in
                         self.lyricsWindow.displayLyrics(self.currentLyrics, secondLyrics: nil)
                     })
                 }
                 if menuBarLyrics != nil {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         self.menuBarLyrics.displayLyrics(self.currentLyrics)
                     })
                 }
@@ -959,14 +959,14 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         qqMusic.getLyricsWithTitle(loadingTitle, artist: loadingArtist, songID: loadingSongID, titleForSearching: titleForSearching, andArtistForSearching: artistForSearching)
     }
     
-    func handleUserEditLyrics(n: NSNotification) {
-        let userInfo: [NSObject:AnyObject] = n.userInfo!
+    func handleUserEditLyrics(_ n: Notification) {
+        let userInfo: [AnyHashable: Any] = (n as NSNotification).userInfo!
         let lyrics: String = LyricsEditWindowController.sharedController.textView.string!
         
         if lrcParser.testLrc(lyrics) {
             //User lrc has the highest priority level
             lrcSourceHandleQueue.cancelAllOperations()
-            lrcSourceHandleQueue.addOperationWithBlock { () -> Void in
+            lrcSourceHandleQueue.addOperation { () -> Void in
                 if (userInfo["SongID"] as! String) == self.currentSongID {
                     //make the current lrc the better one so that it can't be replaced.
                     self.hasDiglossiaLrc = true
@@ -977,21 +977,21 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
     }
     
-    func handleExtenalLyricsEvent (n:NSNotification) {
-        let userInfo = n.userInfo
+    func handleExtenalLyricsEvent (_ n:Notification) {
+        let userInfo = (n as NSNotification).userInfo
         
         //no playing track?
         if currentSongID == "" {
             let notification: NSUserNotification = NSUserNotification()
             notification.title = NSLocalizedString("NO_PLAYING_TRACK", comment: "")
             notification.informativeText = String(format: NSLocalizedString("IGNORE_LYRICS", comment: ""), userInfo!["Sender"] as! String)
-            NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+            NSUserNotificationCenter.default.deliver(notification)
             return
         }
         MessageWindowController.sharedMsgWindow.displayMessage(String(format: NSLocalizedString("RECIEVE_LYRICS", comment: ""), userInfo!["Sender"] as! String))
         //User lrc has the highest priority level
         lrcSourceHandleQueue.cancelAllOperations()
-        lrcSourceHandleQueue.addOperationWithBlock { () -> Void in
+        lrcSourceHandleQueue.addOperation { () -> Void in
             let lyricsContents: String = userInfo!["LyricsContents"] as! String
             if self.lrcParser.testLrc(lyricsContents) {
                 self.parseCurrentLrc(lyricsContents)
@@ -1009,17 +1009,17 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         }
         var theLyrics: String = String()
         for idtag in idTagsArray {
-            theLyrics.appendContentsOf(idtag + "\n")
+            theLyrics.append(idtag + "\n")
         }
-        theLyrics.appendContentsOf("[offset:\(timeDly)]\n")
+        theLyrics.append("[offset:\(timeDly)]\n")
         for lrc in lyricsArray {
-            theLyrics.appendContentsOf(lrc.timeTag + lrc.lyricsSentence + "\n")
+            theLyrics.append(lrc.timeTag + lrc.lyricsSentence + "\n")
         }
         if lyricsArray.count > 0 {
-            theLyrics.removeAtIndex(theLyrics.endIndex.advancedBy(-1))
+            theLyrics.remove(at: theLyrics.characters.index(theLyrics.endIndex, offsetBy: -1))
         }
         NSLog("Writing the time delay to file")
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { 
             self.saveLrcToLocal(theLyrics, songTitle: self.currentSongTitle, artist: self.currentArtist)
         }
     }
@@ -1028,7 +1028,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         presetMenuItem.submenu?.removeAllItems()
         let prefs = AppPrefsWindowController.sharedPrefsWindowController
         if prefs.presets.count == 0 {
-            presetMenuItem.submenu?.addItemWithTitle(NSLocalizedString("EMPTY", comment: ""), action: nil, keyEquivalent: "")
+            presetMenuItem.submenu?.addItem(withTitle: NSLocalizedString("EMPTY", comment: ""), action: nil, keyEquivalent: "")
             return
         }
         for preset in prefs.presets {
@@ -1042,10 +1042,10 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
 // MARK: - Lyrics Source Loading Completion
 
-    func lrcLoadingCompleted(n: NSNotification) {
+    func lrcLoadingCompleted(_ n: Notification) {
         // we should run the handle thread one by one in the queue of maxConcurrentOperationCount =1
-        let userInfo = n.userInfo
-        let source: Int = userInfo!["source"]!.integerValue
+        let userInfo = (n as NSNotification).userInfo
+        let source: Int = (userInfo!["source"]! as AnyObject).intValue
         let songTitle: String = userInfo!["title"] as! String
         let artist: String = userInfo!["artist"] as! String
         let songID: String = userInfo!["songID"] as! String
@@ -1070,17 +1070,17 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
             return;
         }
         if serverLrcs.count > 0 {
-            lrcSourceHandleQueue.addOperationWithBlock({ () -> Void in
+            lrcSourceHandleQueue.addOperation({ () -> Void in
                 self.handleLrcURLDownloaded(serverLrcs, songTitle: songTitle, artist: artist, songID: songID)
             })
         }
     }
     
     
-    private func handleLrcURLDownloaded(serverLrcs: [SongInfos], songTitle:String, artist:String, songID:String) {
+    fileprivate func handleLrcURLDownloaded(_ serverLrcs: [SongInfos], songTitle:String, artist:String, songID:String) {
         // alread has lyrics, check if user needs a better one.
         if lyricsArray.count > 0 {
-            if userDefaults.boolForKey(LyricsSearchForDiglossiaLrc) {
+            if userDefaults.bool(forKey: LyricsSearchForDiglossiaLrc) {
                 if hasDiglossiaLrc {
                     return
                 }
@@ -1097,7 +1097,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 }
                 else if lrc.lyricURL != nil {
                     do {
-                        lyricsContents = try String(contentsOfURL: NSURL(string: lrc.lyricURL)!, encoding: NSUTF8StringEncoding)
+                        lyricsContents = try String(contentsOf: URL(string: lrc.lyricURL)!, encoding: String.Encoding.utf8)
                     } catch let theError as NSError{
                         NSLog("%@", theError.localizedDescription)
                         lyricsContents = nil
@@ -1123,7 +1123,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 }
                 else if lrc.lyricURL != nil {
                     do {
-                        lyricsContents = try String(contentsOfURL: NSURL(string: lrc.lyricURL)!, encoding: NSUTF8StringEncoding)
+                        lyricsContents = try String(contentsOf: URL(string: lrc.lyricURL)!, encoding: String.Encoding.utf8)
                     } catch let theError as NSError{
                         NSLog("%@", theError.localizedDescription)
                         lyricsContents = nil
@@ -1151,18 +1151,18 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
     func terminate() {
         if !iTunes.running() {
-            NSApplication.sharedApplication().terminate(nil)
+            NSApplication.shared().terminate(nil)
         }
     }
     
-    private func isDiglossiaLrc(serverSongTitle: String) -> Bool {
-        if serverSongTitle.rangeOfString("中") != nil || serverSongTitle.rangeOfString("对照") != nil || serverSongTitle.rangeOfString("双") != nil {
+    fileprivate func isDiglossiaLrc(_ serverSongTitle: String) -> Bool {
+        if serverSongTitle.range(of: "中") != nil || serverSongTitle.range(of: "对照") != nil || serverSongTitle.range(of: "双") != nil {
             return true
         }
         return false
     }
     
-    private func delSpecificSymbol(input: String) -> String {
+    fileprivate func delSpecificSymbol(_ input: String) -> String {
         let specificSymbol: [String] = [
             ",", ".", "'", "\"", "`", "~", "!", "@", "#", "$", "%", "^", "&", "＆", "*", "(", ")", "（", "）", "，",
             "。", "“", "”", "‘", "’", "?", "？", "！", "/", "[", "]", "{", "}", "<", ">", "=", "-", "+", "×",
@@ -1170,7 +1170,7 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
         ]
         var output: String = input
         for symbol in specificSymbol {
-            output = output.stringByReplacingOccurrencesOfString(symbol, withString: " ")
+            output = output.replacingOccurrences(of: symbol, with: " ")
         }
         return output
     }
