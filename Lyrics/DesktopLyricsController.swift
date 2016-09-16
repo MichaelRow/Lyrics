@@ -303,12 +303,10 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
             var size2nd:NSSize = secondLyrics!.size(withAttributes: attrs)
             size2nd.width = size2nd.width+50
             size2nd.height = size2nd.height*0.9
-            secondLyricsLayer.string = secondLyrics
             
             var size1st:NSSize = firstLyrics!.size(withAttributes: attrs)
             size1st.width = size1st.width+50
             size1st.height = size1st.height*0.9
-            firstLyricsLayer.string = firstLyrics
             
             var width: CGFloat
             var height: CGFloat
