@@ -1101,7 +1101,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 }
                 else if lrc.lyricURL != nil {
                     do {
-                        lyricsContents = try String(contentsOf: URL(string: lrc.lyricURL)!, encoding: String.Encoding.utf8)
+                        if let downloadURL = URL(string: lrc.lyricURL) {
+                            lyricsContents = try String(contentsOf: downloadURL, encoding: String.Encoding.utf8)
+                        }
                     } catch let theError as NSError{
                         NSLog("%@", theError.localizedDescription)
                         lyricsContents = nil
@@ -1127,7 +1129,9 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
                 }
                 else if lrc.lyricURL != nil {
                     do {
-                        lyricsContents = try String(contentsOf: URL(string: lrc.lyricURL)!, encoding: String.Encoding.utf8)
+                        if let downloadURL = URL(string: lrc.lyricURL) {
+                            lyricsContents = try String(contentsOf: downloadURL, encoding: String.Encoding.utf8)
+                        }
                     } catch let theError as NSError{
                         NSLog("%@", theError.localizedDescription)
                         lyricsContents = nil

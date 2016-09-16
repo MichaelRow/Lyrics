@@ -55,7 +55,12 @@ class QQMusic: NSObject {
                 }
                 let lrcCode: String = fStr.substring(to: theRange!.lowerBound)
                 let lrcXMLURL: String = "http://music.qq.com/miniportal/static/lyric/\((lrcCode as NSString).integerValue%100)/\(lrcCode).xml"
-                let lrcData: Data? = try? Data(contentsOf: URL(string: lrcXMLURL)!)
+                let lrcData: Data?
+                if let downloadURL = URL(string: lrcXMLURL) {
+                    lrcData = try? Data(contentsOf: downloadURL)
+                } else {
+                    lrcData = nil
+                }
                 if lrcData == nil {
                     continue
                 } else {
