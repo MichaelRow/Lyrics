@@ -82,7 +82,7 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
         setAttributes()
         setScreenResolution()
         checkAutoLayout()
-        displayLyrics("LyricsX", secondLyrics: nil)
+        displayLyrics("", secondLyrics: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleScreenResolutionChange), name: NSNotification.Name.NSApplicationDidChangeScreenParameters, object: nil)
     }
