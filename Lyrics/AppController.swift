@@ -282,19 +282,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     
 // MARK: - Interface Methods
     
-    @IBAction func handleWorkSpaceChange(_ sender:AnyObject?) {
-        //before finding the way to detect full screen, user should adjust lyrics by self
-        lyricsWindow.isFullScreen = !lyricsWindow.isFullScreen
-        if lyricsWindow.isFullScreen {
-            lyricsHeightMenuItem.title = NSLocalizedString("HIGHER_LYRICS", comment: "")
-        } else {
-            lyricsHeightMenuItem.title = NSLocalizedString("LOWER_LYRICS", comment: "")
-        }
-        DispatchQueue.main.async { () -> Void in
-            self.lyricsWindow.reflash()
-        }
-    }
-    
     @IBAction func enableDesktopLyrics(_ sender:AnyObject?) {
         if (sender as! NSMenuItem).state == NSOnState {
             DispatchQueue.main.async(execute: { () -> Void in
