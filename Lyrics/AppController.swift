@@ -17,7 +17,6 @@ class AppController: NSObject, NSUserNotificationCenterDelegate {
     @IBOutlet weak var statusBarMenu: NSMenu!
     @IBOutlet weak var lyricsDelayView: NSView!
     @IBOutlet weak var delayMenuItem: NSMenuItem!
-    @IBOutlet weak var lyricsHeightMenuItem: NSMenuItem!
     @IBOutlet weak var presetMenuItem: NSMenuItem!
     
     var timeDly: Int = 0
