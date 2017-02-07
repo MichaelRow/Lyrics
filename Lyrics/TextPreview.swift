@@ -44,6 +44,7 @@ class TextPreview: NSView {
         textLayer.anchorPoint = NSZeroPoint
         textLayer.position = NSZeroPoint
         textLayer.alignmentMode = kCAAlignmentCenter
+        textLayer.contentsScale = NSScreen.main()!.backingScaleFactor
         bkLayer.addSublayer(textLayer)
     }
     

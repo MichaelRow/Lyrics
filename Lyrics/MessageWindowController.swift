@@ -39,6 +39,7 @@ class MessageWindowController: NSWindowController {
         msgText.fontSize = 20
         msgText.foregroundColor = NSColor.white.cgColor
         msgText.speed = 12
+        msgText.contentsScale = NSScreen.main()!.backingScaleFactor
         self.window?.contentView?.layer?.addSublayer(msgText)
         
         attrs = [NSFontAttributeName : NSFont(name: "HiraginoSansGB-W6", size: 20)!]

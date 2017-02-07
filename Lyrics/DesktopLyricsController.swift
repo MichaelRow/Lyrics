@@ -85,6 +85,15 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
         displayLyrics("LyricsX", secondLyrics: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleScreenResolutionChange), name: NSNotification.Name.NSApplicationDidChangeScreenParameters, object: nil)
+        
+        let handleWorkspaceDidChande: (Notification) -> Void = {_ in 
+            if let fs = self.detectFullScreen() {
+                self.isFullScreen = fs
+                self.reflash()
+            }
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSApplicationDidFinishLaunching, object: nil, queue: nil, using: handleWorkspaceDidChande)
+        NSWorkspace.shared().notificationCenter.addObserver(forName: NSNotification.Name.NSWorkspaceActiveSpaceDidChange, object: nil, queue: nil, using: handleWorkspaceDidChande)
     }
     
     deinit {
@@ -678,6 +687,21 @@ class DesktopLyricsController: NSWindowController, NSWindowDelegate {
         let position = self.window!.frame
         userDefaults.set(Float(position.width), forKey: LyricsConstWidth)
         userDefaults.set(Float(position.height), forKey: LyricsConstHeight)
+    }
+    
+    func detectFullScreen() -> Bool? {
+        guard let windows = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [Any] else {
+            return nil
+        }
+        for window in windows {
+            guard let windowDict = window as? Dictionary<String, Any> else {
+                return nil
+            }
+            if windowDict["kCGWindowOwnerName"] as? String == "Window Server", windowDict["kCGWindowName"] as? String == "Menubar" {
+                return false
+            }
+        }
+        return true
     }
     
 //MARK: - Delegate
