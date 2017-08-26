@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class TrackerManager: NSObject {
+class TrackerManager {
 
     enum Priority: Int {
         case Low     = 1
@@ -20,10 +20,9 @@ class TrackerManager: NSObject {
     fileprivate var trackers: [Tracker]
     fileprivate var trackerPriority: [PlayerName : Priority]
     
-    override init() {
+    init() {
         trackerPriority = Dictionary()
         trackers = []
-        super.init()
     }
 
 //MARK: Public

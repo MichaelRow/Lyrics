@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Layout: NSObject {
+class Layout {
     
     fileprivate var attributedString: NSAttributedString
     
@@ -22,15 +22,13 @@ class Layout: NSObject {
     
     fileprivate(set) var glyphFrames: [CGRect]
     
-    override init() {
+    init() {
         displayMode = .Horizontal
         attributedString = NSAttributedString()
         drawingBounds = CGRect()
         line = CTLineData()
         lineFrame = CGRect()
         glyphFrames = []
-        
-        super.init()
     }
     
     func config(with attrString: NSAttributedString, displayMode mode: LyricsDisplayView.DisplayMode, drawingBounds bounds: CGRect) {

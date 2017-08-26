@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class StatusMenuController: NSObject {
+class StatusMenuController {
     
     private var statusItem: NSStatusItem?
     
@@ -18,9 +18,8 @@ class StatusMenuController: NSObject {
     @IBOutlet weak var delayMenuItem: NSMenuItem!
     @IBOutlet weak var lyricDelayView: NSView!
     
-    override init() {
+    init() {
         
-        super.init()
     }
     
     func setupStatusMenu() {

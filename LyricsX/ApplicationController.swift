@@ -8,14 +8,14 @@
 
 import Cocoa
 
-class ApplicationController: NSObject, LyricsManagerDelegate {
+class ApplicationController: LyricsManagerDelegate {
 
     private var statusMenu: StatusMenuController
     private var tracker: TrackerManager
     
     let manager = LyricsManager()
     
-    override init() {
+    init() {
         // code for test
         statusMenu = StatusMenuController()
         statusMenu.setupStatusMenu()
@@ -23,7 +23,6 @@ class ApplicationController: NSObject, LyricsManagerDelegate {
         tracker.add(player: .iTunes, priority: .High, shouldStart: true)
         tracker.add(player: .VOX, priority: .High, shouldStart: true)
 
-        super.init()
         
         manager.delegate = self
         let info = SongBasicInfo(title: "only my railgun", artist: "fripside", album: nil, duration: 257000)

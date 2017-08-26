@@ -16,7 +16,7 @@ enum GlyphType {
     case Down
 }
 
-class CTGlyphData: NSObject {
+class CTGlyphData {
 
     /// 字形
     var glyph: CGGlyph
@@ -52,8 +52,5 @@ class CTGlyphData: NSObject {
         } else {
             verticalType = .Left
         }
-        
-        super.init()
     }
-    
 }

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class CTLineData: NSObject {
+class CTLineData {
     
     /// run中的最大ascent
     fileprivate(set) var maxRunAscent: CGFloat
@@ -25,14 +25,12 @@ class CTLineData: NSObject {
     /// Core Text 原始行对象
     fileprivate var line: CTLine?
     
-    override init() {
+    init() {
         originalBounds = CGRect()
         maxRunAscent = 0
         maxRunDescent = 0
         runDatas = []
         originalBounds = CGRect()
-        
-        super.init()
     }
     
     

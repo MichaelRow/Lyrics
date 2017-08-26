@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class CTRunData: NSObject {
+class CTRunData {
     
     fileprivate var run: CTRun?
     
@@ -28,7 +28,7 @@ class CTRunData: NSObject {
     
     fileprivate(set) var rawString: String
     
-    override init() {
+    init() {
         glyphs = []
         glyphDatas = [CTGlyphData]()
         font = NSFont.systemFont(ofSize: 14)
@@ -37,8 +37,6 @@ class CTRunData: NSObject {
         descent = CTFontGetDescent(font)
         color = NSColor.black
         rawString = String()
-        
-        super.init()
     }
     
     func config(with run: CTRun, rawString: String) {

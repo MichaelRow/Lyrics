@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PlayerStatusDelegate: NSObjectProtocol {
+protocol PlayerStatusDelegate: class {
     
     /// 播放器当前播放中的歌曲变化
     ///
