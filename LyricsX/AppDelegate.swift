@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let appController = ApplicationController()
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        UserDefaults.standard.setRegister()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

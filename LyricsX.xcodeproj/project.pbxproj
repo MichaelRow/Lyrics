@@ -94,6 +94,7 @@
 		76CBB6D11F4A57FC00E62775 /* LyricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CBB6CF1F4A57FC00E62775 /* LyricsViewController.swift */; };
 		76D681A91F079B3900BC7A5A /* QianqianSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D681A81F079B3900BC7A5A /* QianqianSource.swift */; };
 		76D681AC1F07A51400BC7A5A /* QianqianDecrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D681AB1F07A51400BC7A5A /* QianqianDecrypt.m */; };
+		76FDABA51F51C26C00C43B46 /* UserDefaults+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FDABA41F51C26C00C43B46 /* UserDefaults+Register.swift */; };
 		F43E53BE1F43A90D00E6EBD5 /* DefaultIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43E53BD1F43A90D00E6EBD5 /* DefaultIterator.swift */; };
 		F444A10F1F40883A0034F933 /* LyricsEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444A10E1F40883A0034F933 /* LyricsEncoder.swift */; };
 		F444A1111F408C550034F933 /* LyricsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444A1101F408C550034F933 /* LyricsType.swift */; };
@@ -213,6 +214,7 @@
 		76D681A81F079B3900BC7A5A /* QianqianSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QianqianSource.swift; sourceTree = "<group>"; };
 		76D681AA1F07A51400BC7A5A /* QianqianDecrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QianqianDecrypt.h; sourceTree = "<group>"; };
 		76D681AB1F07A51400BC7A5A /* QianqianDecrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianqianDecrypt.m; sourceTree = "<group>"; };
+		76FDABA41F51C26C00C43B46 /* UserDefaults+Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Register.swift"; sourceTree = "<group>"; };
 		7B1759DDDBC494A1109B8C6F /* Pods-LyricsX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyricsX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LyricsX/Pods-LyricsX.debug.xcconfig"; sourceTree = "<group>"; };
 		8D61D9E107FE3ED1061E6DAC /* Pods-LyricsX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyricsX.release.xcconfig"; path = "Pods/Target Support Files/Pods-LyricsX/Pods-LyricsX.release.xcconfig"; sourceTree = "<group>"; };
 		BE0B0166844B5C9643D32AEA /* Pods_LyricsX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LyricsX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -250,6 +252,7 @@
 				08DA3DBF1F3E839F001AB6BC /* Identiferable.swift */,
 				0832B3681F3E93B800D6A771 /* PreferenceKey.swift */,
 				0832B3661F3E8EAF00D6A771 /* UserDefaults+Subscript.swift */,
+				76FDABA41F51C26C00C43B46 /* UserDefaults+Register.swift */,
 			);
 			name = UserDefaultSettable;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 				760859471F0C65E9005B29CF /* QQSource.swift in Sources */,
 				762997FA1F3155A1007466C2 /* KrcDecoder.swift in Sources */,
 				76A1E5A51E7EA2F800B24C93 /* AppDelegate.swift in Sources */,
+				76FDABA51F51C26C00C43B46 /* UserDefaults+Register.swift in Sources */,
 				76A1E5BB1E7EA3F100B24C93 /* StatusMenuController+Display.swift in Sources */,
 				76B93A421F07D1AB00B5B6C2 /* QianqianWebLyrics.swift in Sources */,
 				76B93A471F0879DB00B5B6C2 /* XiamiXMLParser.swift in Sources */,
