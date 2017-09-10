@@ -136,8 +136,8 @@ class LyricsManager {
         var totoal = 0.0
         var match = 0.0
         
-        let downloadTrans = true//UserDefaults.standard[LyricSetting.downloadTranslation]
-        let downloadWordBase = true//UserDefaults.standard[LyricSetting.downloadWordBase]
+        let downloadTrans = UserDefaults.standard[LyricSetting.downloadTranslation]
+        let downloadWordBase = UserDefaults.standard[LyricSetting.downloadWordBase]
         let count = 2.0;
         
         var lyricsTrans = false

@@ -1,5 +1,5 @@
 //
-//  LyricsInfo.swift
+//  MetaData.swift
 //  LyricsX
 //
 //  Created by Michael Row on 2017/8/6.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LyricsInfo {
+struct MetaData {
     
     ///歌名 Tag: ti
     private(set) var title: String?

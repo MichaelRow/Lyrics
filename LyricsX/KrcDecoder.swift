@@ -31,7 +31,7 @@ final class KrcDecoder: LyricsDecoder {
     
         guard let decrypt = KugouDecrypt.decrypt(base64: text) else { return nil }  
         var lines = [LyricsLine]()
-        var info = LyricsInfo()
+        var info = MetaData()
         //解析
         let paragraphs = decrypt.components(separatedBy: CharacterSet.newlines)
         for krcLine in paragraphs {

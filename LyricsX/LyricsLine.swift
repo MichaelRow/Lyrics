@@ -80,9 +80,14 @@ struct LyricsLine {
         translations[language] = translation
     }
     
-    mutating func set(romaji: String, at wordIndex: Int) {
-        guard words != nil else { return }
-        words![wordIndex].romaji = romaji
+    mutating func set(romajis: [String]) {
+        guard
+            words != nil,
+            words!.count == romajis.count
+            else { return }
+        for index in 0 ..< words!.count {
+            words![index].romaji = romajis[index]
+        }
     }
     
     func isInRange(position: Int) -> Bool {

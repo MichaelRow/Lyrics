@@ -30,7 +30,7 @@ final class KLyricDecoder: LyricsDecoder {
     func decode(_ text: String) -> Lyrics? {
         
         var lines = [LyricsLine]()
-        var info = LyricsInfo()
+        var info = MetaData()
         
         //解析
         let paragraphs = text.components(separatedBy: CharacterSet.newlines)

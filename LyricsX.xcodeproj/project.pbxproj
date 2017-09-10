@@ -23,7 +23,7 @@
 		08C957C11F3E9B8E000300A2 /* GeneralSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C957C01F3E9B8E000300A2 /* GeneralSetting.swift */; };
 		08DA3DBE1F3E7AE4001AB6BC /* LyricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA3DBD1F3E7AE4001AB6BC /* LyricsManager.swift */; };
 		08DA3DC01F3E839F001AB6BC /* Identiferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA3DBF1F3E839F001AB6BC /* Identiferable.swift */; };
-		08F72AC61F36F95F0053429A /* LyricsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F72AC51F36F95F0053429A /* LyricsInfo.swift */; };
+		08F72AC61F36F95F0053429A /* MetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F72AC51F36F95F0053429A /* MetaData.swift */; };
 		760726251F4F9AED008308D0 /* LyricsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760726241F4F9AED008308D0 /* LyricsViewController.xib */; };
 		7608593B1F0B1512005B29CF /* GecimiSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7608593A1F0B1512005B29CF /* GecimiSource.swift */; };
 		7608593D1F0B173E005B29CF /* GecimiWebLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7608593C1F0B173E005B29CF /* GecimiWebLyrics.swift */; };
@@ -41,6 +41,7 @@
 		76332A5C1F10B02C00590DD6 /* Lyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76332A5B1F10B02C00590DD6 /* Lyrics.swift */; };
 		76332A5E1F10DB5E00590DD6 /* LyricsLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76332A5D1F10DB5E00590DD6 /* LyricsLine.swift */; };
 		76332A681F11D4A400590DD6 /* LyricsWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76332A671F11D4A400590DD6 /* LyricsWord.swift */; };
+		7641DAB91F52448500BBC52A /* LyricsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641DAB81F52448500BBC52A /* LyricsPicker.swift */; };
 		76441B9F1F0F07C700DF284F /* NetEaseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76441B9E1F0F07C700DF284F /* NetEaseSource.swift */; };
 		76441BA11F0FB6EF00DF284F /* NetEaseWebLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76441BA01F0FB6EF00DF284F /* NetEaseWebLyrics.swift */; };
 		76485BA11F0E8E6C00B1EC22 /* String+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76485BA01F0E8E6C00B1EC22 /* String+Custom.swift */; };
@@ -132,7 +133,7 @@
 		08DA3DBD1F3E7AE4001AB6BC /* LyricsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsManager.swift; sourceTree = "<group>"; };
 		08DA3DBF1F3E839F001AB6BC /* Identiferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identiferable.swift; sourceTree = "<group>"; };
 		08F340381F35BB2F005177A7 /* OpenCC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenCC.framework; sourceTree = "<group>"; };
-		08F72AC51F36F95F0053429A /* LyricsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsInfo.swift; sourceTree = "<group>"; };
+		08F72AC51F36F95F0053429A /* MetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaData.swift; sourceTree = "<group>"; };
 		760726241F4F9AED008308D0 /* LyricsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LyricsViewController.xib; sourceTree = "<group>"; };
 		7608593A1F0B1512005B29CF /* GecimiSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GecimiSource.swift; sourceTree = "<group>"; };
 		7608593C1F0B173E005B29CF /* GecimiWebLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GecimiWebLyrics.swift; sourceTree = "<group>"; };
@@ -150,6 +151,7 @@
 		76332A5B1F10B02C00590DD6 /* Lyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lyrics.swift; sourceTree = "<group>"; };
 		76332A5D1F10DB5E00590DD6 /* LyricsLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsLine.swift; sourceTree = "<group>"; };
 		76332A671F11D4A400590DD6 /* LyricsWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsWord.swift; sourceTree = "<group>"; };
+		7641DAB81F52448500BBC52A /* LyricsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPicker.swift; sourceTree = "<group>"; };
 		76441B9E1F0F07C700DF284F /* NetEaseSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetEaseSource.swift; sourceTree = "<group>"; };
 		76441BA01F0FB6EF00DF284F /* NetEaseWebLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetEaseWebLyrics.swift; sourceTree = "<group>"; };
 		76485BA01F0E8E6C00B1EC22 /* String+Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Custom.swift"; sourceTree = "<group>"; };
@@ -380,7 +382,7 @@
 				76332A5B1F10B02C00590DD6 /* Lyrics.swift */,
 				76332A5D1F10DB5E00590DD6 /* LyricsLine.swift */,
 				76332A671F11D4A400590DD6 /* LyricsWord.swift */,
-				08F72AC51F36F95F0053429A /* LyricsInfo.swift */,
+				08F72AC51F36F95F0053429A /* MetaData.swift */,
 			);
 			name = Lyrics;
 			sourceTree = "<group>";
@@ -614,6 +616,7 @@
 			isa = PBXGroup;
 			children = (
 				08DA3DBD1F3E7AE4001AB6BC /* LyricsManager.swift */,
+				7641DAB81F52448500BBC52A /* LyricsPicker.swift */,
 				F4EEBF2F1F43B2EA008DD366 /* LyricsManagerDelegate.swift */,
 			);
 			name = Manager;
@@ -742,7 +745,7 @@
 				08DA3DC01F3E839F001AB6BC /* Identiferable.swift in Sources */,
 				76B93A4B1F09BFFF00B5B6C2 /* WebLyricsList.swift in Sources */,
 				76D681A91F079B3900BC7A5A /* QianqianSource.swift in Sources */,
-				08F72AC61F36F95F0053429A /* LyricsInfo.swift in Sources */,
+				08F72AC61F36F95F0053429A /* MetaData.swift in Sources */,
 				760859431F0BEF58005B29CF /* TTPodWebLyrics.swift in Sources */,
 				765E79951E802CE700CEDFDE /* PrefsWindowController.swift in Sources */,
 				760859491F0C6994005B29CF /* QQXMLParser.swift in Sources */,
@@ -773,6 +776,7 @@
 				F444A10F1F40883A0034F933 /* LyricsEncoder.swift in Sources */,
 				766D99A21F30BD0300820D27 /* CTRunData.swift in Sources */,
 				762997F21F315503007466C2 /* LrcEncoder.swift in Sources */,
+				7641DAB91F52448500BBC52A /* LyricsPicker.swift in Sources */,
 				0832B3671F3E8EAF00D6A771 /* UserDefaults+Subscript.swift in Sources */,
 				76485BA11F0E8E6C00B1EC22 /* String+Custom.swift in Sources */,
 				766D999F1F30BD0300820D27 /* LyricsDisplayView.swift in Sources */,
@@ -820,7 +824,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -876,7 +880,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -902,6 +906,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = V7RJA6U5A6;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -932,6 +937,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = V7RJA6U5A6;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -8,23 +8,23 @@
 
 import Cocoa
 
-/// 歌词的原子组成
-enum BaseUnitType {
-    case Word
-    case Line
-}
-
 struct Lyrics {
+    
+    /// 歌词的原子组成
+    enum BaseUnitType {
+        case Word
+        case Line
+    }
     
     private(set) var lines: [LyricsLine]
     
     private(set) var type: BaseUnitType
     
-    private(set) var info: LyricsInfo
+    private(set) var info: MetaData
     
     var translationLanguages: Set<Language>
     
-    init(lines: [LyricsLine], type: BaseUnitType, info: LyricsInfo) {
+    init(lines: [LyricsLine], type: BaseUnitType, info: MetaData) {
         self.lines = lines
         self.type = type
         self.info = info
@@ -55,7 +55,7 @@ struct Lyrics {
         let wordCount = lines[lineIndex].words!.count
         for romajiIndex in 0 ..< romajis.count {
             guard romajiIndex < wordCount else { break }
-            lines[lineIndex].set(romaji: romajis[romajiIndex], at: romajiIndex)
+            lines[lineIndex].set(romajis: romajis)
         }
     }
 }

@@ -29,7 +29,7 @@ final class LrcDecoder: LyricsDecoder {
         let timeDic = parseResult.timeTrack
         let tagInfo = parseResult.infos
         let sortedTime = timeDic.keys.sorted { $0 < $1 }
-        var info = LyricsInfo()
+        var info = MetaData()
         var lines = [LyricsLine]()
         
         guard timeDic.count > 0 else { return nil }

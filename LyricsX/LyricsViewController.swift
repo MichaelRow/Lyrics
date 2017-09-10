@@ -33,7 +33,6 @@ class LyricsViewController: NSViewController {
     /// 锁定
     lazy var lockBtn = NSButton()
     
-    
     /// 歌词绘制视图
     lazy var lyricsView = LyricsDisplayView()
     
