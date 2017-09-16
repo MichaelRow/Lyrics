@@ -1,6 +1,0 @@
-framework module OpenCC {
-  umbrella header "OpenCC.h"
-
-  export *
-  module * { export * }
-}

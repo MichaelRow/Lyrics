@@ -8,7 +8,7 @@
 
 import Cocoa
 import Alamofire
-import OpenCC
+import OpenCCSwift
 
 /// 千千静听(电信)
 private let QianqianSearchURLCT = "http://ttlrcct.qianqian.com/dll/lyricsvr.dll?sh?Artist=%@&Title=%@&Flags=0"
@@ -39,13 +39,13 @@ class QianqianSource:LyricsSource {
         
         stopSearch()
         
-        let titleSC_NoSpace = ChineseConverter.convertString(toSC: info.title).replacingOccurrences(of: " ", with: "")
-        let artistSC_NoSpace = ChineseConverter.convertString(toSC: info.artist).replacingOccurrences(of: " ", with: "")
+        guard let coverter = ChineseConverter(Simplize.default) else { return }
+        let titleSC_NoSpace = coverter.convert(string: info.title).replacingOccurrences(of: " ", with: "")
+        let artistSC_NoSpace = coverter.convert(string: info.artist).replacingOccurrences(of: " ", with: "")
         
-        guard
-            let hexTitle = QianqianDecrypt.hexEncodedString(titleSC_NoSpace),
-            let hexArtist = QianqianDecrypt.hexEncodedString(artistSC_NoSpace)
-            else { return }
+        guard let hexTitle = QianqianDecrypt.hexEncodedString(titleSC_NoSpace),
+              let hexArtist = QianqianDecrypt.hexEncodedString(artistSC_NoSpace)
+        else { return }
         
         let url = String(format: searchURL, hexArtist, hexTitle)
         
