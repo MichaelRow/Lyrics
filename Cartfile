@@ -1,5 +1,7 @@
 github "SnapKit/SnapKit"
 github "rs/SDWebImage"
-github "Alamofire/Alamofire" ~> 4.5.1
+github "Alamofire/Alamofire"
 github "MichaelRow/MusicPlayer"
 github "MichaelRow/OpenCC"
+github "MichaelRow/LyricsService"
+github "MichaelRow/PrefsWindowController"

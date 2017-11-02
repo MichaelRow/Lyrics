@@ -8,13 +8,14 @@
 
 import Cocoa
 import MusicPlayer
+import LyricsService
 
-class ApplicationController: LyricsManagerDelegate, MusicPlayerManagerDelegate {
+class ApplicationController: MusicPlayerManagerDelegate {
 
     private var statusMenu: StatusMenuController
     private var tracker: MusicPlayerManager
     
-    let manager = LyricsManager()
+    let manager = LyricsSourceManager()
     
     init() {
         // code for test
@@ -22,23 +23,16 @@ class ApplicationController: LyricsManagerDelegate, MusicPlayerManagerDelegate {
         statusMenu.setupStatusMenu()
         
         tracker = MusicPlayerManager()
-        tracker.add(musicPlayers: [.iTunes, .spotify, .vox])
         tracker.delegate = self
+        tracker.add(musicPlayers: [.iTunes, .spotify, .vox])
         
-        manager.delegate = self
-        let info = SongBasicInfo(title: "only my railgun", artist: "fripside", album: nil, duration: 257000)
-        manager.add(source: .Gecimi)
-        manager.add(source: .QQMusic)
-        manager.add(source: .Kugou)
-        manager.add(source: .Qianqian)
-        manager.add(source: .NetEase)
-        manager.add(source: .TTPod)
-        manager.add(source: .Xiami)
-        manager.startSearch(info: info)
-    }
-    
-    func lyricsManager(_ manager: LyricsManager, didUpdate lyrics: Lyrics) {
-        print(lyrics)
+        let info = SearchInfo(title:"only my railgun", artist:"fripside", duration:257000)
+        manager.add(sourceNames: [.Gecimi,.Kugou,.NetEase,.Qianqian,.QQMusic,.TTPod,.Xiami])
+        manager.searchLyrics(with: info, inProgress: { (lyrics) in
+            print(lyrics.lyricsValue)
+        }) { (allLyrics, error) in
+            print(allLyrics.count)
+        }
     }
     
     func manager(_ manager: MusicPlayerManager, trackingPlayer player: MusicPlayer, didChangeTrack track: MusicTrack, atPosition position: TimeInterval) {
@@ -46,18 +40,7 @@ class ApplicationController: LyricsManagerDelegate, MusicPlayerManagerDelegate {
     }
     
     func manager(_ manager: MusicPlayerManager, trackingPlayer player: MusicPlayer, playbackStateChanged playbackState: MusicPlaybackState, atPosition position: TimeInterval) {
-        switch playbackState {
-        case .paused:
-            print(player.name.rawValue + " paused")
-        case .playing:
-            print(player.name.rawValue + " playing")
-        case .fastForwarding:
-            print(player.name.rawValue + " forward")
-        case .rewinding:
-            print(player.name.rawValue + " rewind")
-        case .stopped:
-            print(player.name.rawValue + " stopped")
-        }
+        print("\(player.name.rawValue) \(playbackState)")
     }
     
     func manager(_ manager: MusicPlayerManager, trackingPlayerDidQuit player: MusicPlayer) {
